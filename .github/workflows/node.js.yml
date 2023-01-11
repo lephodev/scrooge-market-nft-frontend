@@ -20,13 +20,14 @@ jobs:
 #       with:
 #         node-version: ${{ matrix.node-version }}
 #         cache: 'npm'
-    - run: npm install
-    - run: CI= npm run build
+#     - run: npm install
+#     - run: CI= npm run build
+    - run: mkdir -p build/test && ls
     - name: Deploy to ec2
       uses: easingthemes/ssh-deploy@main
       env:
           SSH_PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }}
-          SOURCE: "./build"
+          SOURCE: "build"
           REMOTE_HOST: ${ { secrets.HOST_DNS }}
           REMOTE_USER: ${ { secrets.USERNAME }}
           TARGET: ${ { secrets.TARGET_DIR }}
