@@ -19,6 +19,7 @@ jobs:
       uses: actions/setup-node@v3
 
     - run: npm install
+    - run: rm -rf /home/ubuntu/frontend/build
     - run: CI= npm run build
     - name: Deploy to ec2
       uses: easingthemes/ssh-deploy@main
