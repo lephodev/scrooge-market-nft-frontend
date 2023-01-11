@@ -22,3 +22,11 @@ jobs:
 #         cache: 'npm'
     - run: npm install
     - run: npm run build
+    - name: Deploy to ec2
+      uses: easingthemes/ssh-deploy@main
+      env:
+          SSH_PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }}
+          SOURCE: "./build"
+          REMOTE_HOST: ${ { secrets.HOST_DNS }}
+          REMOTE_USER: ${ { secrets.USERNAME }}
+          TARGET: ${ { secrets.TARGET_DIR }}
