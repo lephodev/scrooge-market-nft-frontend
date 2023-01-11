@@ -21,7 +21,7 @@ jobs:
 #         node-version: ${{ matrix.node-version }}
 #         cache: 'npm'
     - run: npm install
-    - run: npm run build
+    - run: CI= npm run build
     - name: Deploy to ec2
       uses: easingthemes/ssh-deploy@main
       env:
