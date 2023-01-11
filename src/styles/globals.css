@@ -1,0 +1,524 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: #f8d761;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+body {
+  color: #e7e8e8;
+  background: #000;
+}
+.pink{
+  color: #D2042D;
+}
+.red{
+  color: #D30101;
+}
+.gold{
+  color: #f8d761;
+}
+.green{
+  color: #5EE47E;
+}
+.teal{
+  color: #41ead4;
+}
+.yellow{
+  color: #e7c975;
+}
+.font-martian{
+  font-family: 'Martian Mono';
+}
+.header-nav-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px 20px;
+}
+.header-nav-menu{
+  width: 70%;
+}
+.header-nav-container ul{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style: none;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+.header-nav-menu a{
+  font-family: 'Martian Mono';
+  color: #D2042D;
+  border: 2px solid #000;
+  padding: 10px;
+  font-weight: bold;
+}
+.header-nav-menu a:hover{
+  background-color: #e7c975;
+}
+.menu-logo-img{
+  width: 50px;
+}
+.loading-img-div{
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.loading-img{
+  width: 200px;
+}
+.switch-network-div{
+  text-align: center;
+  font-family: 'Martian Mono';
+  font-weight: bold;
+  color: #e7c975;
+  border: 3px solid #e7c975;
+  background-color: #D2042D;
+  border-radius: 5px;
+  padding: 40px;
+}
+.footer-div{
+  text-align: center;
+  margin: 30px 0;
+}
+.connect-wallet-header{
+  width: 225px;
+  border: 2px solid #D2042D;
+  border-radius: 10px;
+}
+.wallet-icon-img{
+  height: 50px;
+  width: 50px;
+}
+.wallet-icon-img:hover{
+  transform: rotate(-20deg);
+}
+.connect-wallet-div{
+  margin: 30px auto;
+  width: 250px;
+  border: 2px solid #D2042D;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+.bordered-section{
+  margin: 20px auto;
+  padding: 15px;
+  width: 85%;
+  border: 3px solid #D2042D;
+  border-radius: 5px;
+  background-color: #1b2129;
+}
+.pageTitle{
+  text-align: center;
+  margin-bottom: 50px;
+  color: #e7c975;
+  text-shadow: 2px 2px #D2042D;
+  text-transform: uppercase;
+}
+.subheader-btn{
+  margin: 30px;
+  background-color: #000;
+  padding: 20px 30px;
+  border: 2px solid #e7c975;
+  border-radius: 5px;
+  color: #5EE47E;
+  font-family: 'Martian Mono';
+  font-weight: bold;
+}
+.subheader-btn:hover{
+  background-color: #000;
+  color: #D2042D;
+  cursor: pointer;
+}
+.card-img{
+  width: 100px;
+  height: 100px;
+  margin: 15px 0 0 0;
+  border-radius: 5px;
+}
+.card-img:hover{
+  transform: rotate(-20deg);
+}
+.flex-row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 80px;
+}
+.nft-home-sell-div{
+  margin: 20px auto;
+  padding: 15px;
+  width: 85%;
+  border: 3px solid #D2042D;
+  border-radius: 5px;
+  background-color: #1b2129;
+}
+.nft-home-sell-title{
+  text-align: center;
+  margin-bottom: 50px;
+  color: #e7c975;
+  text-shadow: 2px 2px #D2042D;
+  text-transform: uppercase;
+}
+.nft-home-sell-more{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nft-home-sell-more-btn{
+  background-color: #000;
+  padding: 10px 20px;
+  border: 2px solid #e7c975;
+  border-radius: 5px;
+  margin-top: 15px;
+  color: #5EE47E;
+  font-family: 'Martian Mono';
+  font-weight: bold;
+}
+.nft-home-sell-more-btn:hover{
+  background-color: #000;
+  color: #D2042D;
+  cursor: pointer;
+}
+.nft-home-sell-card{
+  padding: 10px;
+  margin: 10px 15px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Martian Mono';
+  color: #e7c975;
+  width:16%;
+}
+.nft-home-sell-details{
+  text-align: center;
+}
+.contact-div{
+  padding: 50px;
+  margin: 30px 0;
+  background-color: #1b2129;
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+  font-family: 'Martian Mono';
+}
+.full-page-container{
+  min-width: 100%;
+  background-color: #1b2129;
+  padding: 20px 30px;
+  border: 6px solid #e7c975;
+  border-radius: 10px;
+  font-family: 'Martian Mono';
+}
+.modal-popup{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  height: 100%;
+}
+.modal-header{
+  font-family: 'Martian Mono';
+  color: #e7c975;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 22px;
+}
+.modal-popup input{
+  padding: 15px;
+  border: 2px solid #e7c975;
+  font-size: 20px;
+  color: #fff;
+}
+.modal-popup-btn{
+  margin-top: 30px;
+  padding: 15px 30px !important;
+  font-family: 'Martian Mono';
+  font-size: 20px;
+  color: #e7c975;
+  background-color: #000;
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.modal-popup-btn:hover{
+  background-color: #D2042D;
+  border: 2px solid #e7c975;
+  border-radius: 5px;
+}
+.connect-wallet-inline{
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+}
+.connect-wallet-inline:hover{
+  border: 2px solid #e7c975;
+}
+.nft-token-row-div{
+  width: 100%;
+}
+.nft-token-row-card{
+  width: 100%;
+  border: 6px solid #D2042D;
+  border-radius: 5px;
+  padding: 20px 50px;
+  margin: 15px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.green-border-6px{
+  border: 6px solid #5EE47E !important;
+}
+.pink-border-6px{
+  border: 6px solid #ff206e !important;
+}
+.blue-border-6px{
+  border: 6px solid #3a86ff !important;
+}
+.nft-token-row-card-image{
+  width: 20%;
+}
+.nft-token-row-desc{
+  width: 50%;
+}
+.nft-token-row-details{
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: .9;
+}
+.nft-token-row-name{
+  font-size: 26px;
+  color: #e7c975;
+}
+.nft-token-row-sale{
+  text-align: center;
+  line-height: 2;
+  font-size: 26px;
+  color: #5EE47E;
+  text-shadow: 1px 1px #D2042D;
+}
+.sale-badge-img{
+  width: 140px;
+}
+.qty-badge{
+  border-radius: 100%;
+  background-color: #0dff00;
+  width: 30px;
+  height: 30px;
+  color: #D2042D;
+}
+.bottom-row-btns-div{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.erc721Card{
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+  background-color: #1b2129;
+  padding: 30px;
+  margin: 10px 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Martian Mono';
+  color: #fff;
+  width:100%;
+  line-height: 1.5;
+}
+.erc721Card-name{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 24px;
+  line-height: 1;
+}
+.erc721Card-image{
+  border: 3px solid #e7c975;
+  margin: 0 15px;
+  border-radius: 5px;
+}
+.erc721Card-image:hover{
+  border: 3px solid #D2042D;
+  transform: rotate(-10deg);
+}
+.erc721Card-details{
+  padding-left: 15px;
+  width: 30%;
+}
+.erc721Card-col-title{
+  font-size: 24px;
+  color: #D2042D;
+  background-color: #e7c975;
+  padding: 4px 8px;
+}
+.erc721Card-3rd-col{
+  padding-left: 15px;
+  width: 30%;
+}
+.erc721Card-4th-col{
+  width: 15%;
+}
+.erc721Card-rarity-subsection{
+  
+}
+.rarity-pct-1{
+  color: rgb(245, 168, 168);
+}
+.rarity-pct-2{
+  color: rgb(248, 135, 135);
+}
+.rarity-pct-3{
+  color: rgb(250, 63, 209);
+}
+.rarity-pct-4{
+  color: rgb(86, 250, 174);
+}
+.rarity-pct-6{
+  background: linear-gradient(270deg, #ff0000, #0dff00, #f9ff00, #00b9ff);
+    background-size: 800% 800%;
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+.rarity-pct-5{
+  background: #FF0000;
+background: linear-gradient(to left, #FF0000 0%, #ffff00 50%, #FF0000 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+font-weight: bold;
+}
+.erc1155Card{
+  padding: 20px;
+  margin: 10px 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: 'Martian Mono';
+  color: #e7c975;
+  width:40%;
+}
+.erc1155-buy-btn{
+  background-color: #D2042D;
+  padding: 10px 20px;
+  border: 2px solid #e7c975;
+  border-radius: 5px;
+  margin-top: 15px;
+  color: #e7c975;
+  font-family: 'Martian Mono';
+  font-weight: bold;
+}
+.erc1155-buy-btn:hover{
+  background-color: #000;
+  border: 2px solid #e7c975;
+  color: #5EE47E;
+  cursor: pointer;
+}
+.erc1155Card-details{
+}
+.erc1155-price{
+  color: #5EE47E;
+}
+.create-listing-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  font-size: 22px;
+  width: 50%;
+  line-height: 2.5;
+}
+.create-listing-form input, select{
+  margin-left: 25px;
+  padding: 5px;
+}
+.submit-btn{
+  margin-top: 45px;
+  padding: 15px 30px !important;
+  font-family: 'Martian Mono';
+  font-size: 24px;
+  background-color: #000;
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+}
+.submit-btn:hover{
+  cursor: pointer;
+  background-color: #D2042D;
+  border: 2px solid #e7c975;
+  border-radius: 5px;
+}
+.prizes-card{
+  padding: 30px;
+  border: 2px solid #ffffff;
+  text-align: center;
+  align-items: center;
+  font-family: 'Martian Mono';
+  color: #ffffff;
+}
+.prizes_container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.prizes-chip-count{
+  text-align: center;
+  margin-bottom: 55px;
+  color:#0dff00;
+  font-family: 'Martian Mono';
+  font-size: 26px;
+}
+.prize-name{
+  font-size: 26px;
+  color: #e7c975;
+}
+.prize-cost{
+  color:#0dff00;
+}
