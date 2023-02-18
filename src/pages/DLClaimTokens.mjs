@@ -20,7 +20,7 @@ export default function DLClaimTokens() {
     if(address){
       try {
         console.log("start address: ", address);
-        const userRes = await Axios.get(`http://localhost:9001/api/getWalletDLBalance/${address}`).then((res) =>{ 
+        const userRes = await Axios.get(`https://34.237.237.45:9001/api/getWalletDLBalance/${address}`).then((res) =>{ 
           console.log('DLgate2: ',res);
           if (typeof res.data.balance != undefined) {
             console.log('Has DL2');

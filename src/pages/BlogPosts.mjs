@@ -9,13 +9,13 @@ function BlogPosts() {
     let history = useNavigate();
     
     useEffect(()=>{
-    Axios.get("http://localhost:3002/api/get").then((data)=>{
+    Axios.get("https://34.237.237.45:3002/api/get").then((data)=>{
     setPostList(data.data)
     });
     },[])
     
     const LikePost = (id) => {
-    Axios.post(`http://localhost:3002/api/like/${id}`).then((response)=>{
+    Axios.post(`https://34.237.237.45:3002/api/like/${id}`).then((response)=>{
     alert("you liked a post")
     })
     }

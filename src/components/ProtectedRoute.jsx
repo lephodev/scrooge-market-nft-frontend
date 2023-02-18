@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo, useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import Axios from "axios";
-import getUserCookie from "../config/cookie.mjs";
+import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
 export const AuthContext = createContext();
 
 export const AuthProvider = function({ user, children }) {
@@ -43,7 +43,7 @@ export const ProtectedRoute = ({ children }) => {
 
   async function checkToken() {
     //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-    let access_token = getUserCookie();
+    let access_token = getUserCookieProd();
    
     if (access_token){
       try {

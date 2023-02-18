@@ -8,7 +8,7 @@ const [title,setTitle] = useState("");
 const [text,setText] = useState("");
 
 const submitPost = () => {
-Axios.post('http://localhost:3002/api/create', {userName: userName, title: title, text:text})
+Axios.post('https://34.237.237.45:3002/api/create', {userName: userName, title: title, text:text})
 }
 
     return (

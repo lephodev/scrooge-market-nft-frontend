@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Navigate, useNavigate } from "react-router-dom";
 import { useReward } from 'react-rewards';
-import getUserCookie from "../config/cookie.mjs";
+import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
 
 function RedeemPrizes() {
     const { reward, isAnimating } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
@@ -51,7 +51,7 @@ function RedeemPrizes() {
     const [user, setUser]=useState([]);
     async function checkToken() {
         //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-        let access_token = getUserCookie();
+        let access_token = getUserCookieProd();
         if (access_token){
             try {
             const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
@@ -81,7 +81,7 @@ function RedeemPrizes() {
     async function getPrizes(){
         setPrizesLoading(true);
         if(prizes.length < 2){
-            Axios.get(`http://localhost:9001/api/getPrizes`).then((data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/getPrizes`).then((data)=>{
                 if(prizes.length < 2){
                     setPrizes(data.data);
                     setPrizesLoading(false);
@@ -164,7 +164,7 @@ function RedeemPrizes() {
     const RedeemPrize = async (prize_id) => {
         setRedeemLoading(true);
         user_id = user[0];
-        Axios.get(`http://localhost:9001/api/redeemPrize/${address}/${user_id}/${prize_id}`).then((data)=>{
+        Axios.get(`https://34.237.237.45:9001/api/redeemPrize/${address}/${user_id}/${prize_id}`).then((data)=>{
             
             setRedeemLoading(false);
             if(data.data === 'Balance Unacceptable') {

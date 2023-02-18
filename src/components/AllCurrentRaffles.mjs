@@ -23,11 +23,11 @@ export default function AllCurrentRaffles(){
 
     const handlePurchase = async (amt, item_id) => {
         try {
-            const initEntryPurchase = await Axios.get(`http://localhost:9001/api/initEntryPurchase/${user[0]}/${address}/${amt}/${item_id}`).then(async (data)=>{
+            const initEntryPurchase = await Axios.get(`https://34.237.237.45:9001/api/initEntryPurchase/${user[0]}/${address}/${amt}/${item_id}`).then(async (data)=>{
                 const price = (amt/currentPriceOG).toFixed(0);
                 const purchase = await sdk.wallet.transfer("0xEcc9A9EFB21e71c2a794DEb28CA512dD05363a45", .5, "0xe9e7cea3dedca5984780bafc599bd69add087d56");
                 //console.log('purchase: ', purchase); //${purchase.receipt.transactionHash}
-                const finalizeEntryPurchase = await Axios.get(`http://localhost:9001/api/finalizeEntryPurchase/${user[0]}/${address}/${amt}/${data.data}/${purchase.receipt.transactionHash}`).then(async (resp)=>{
+                const finalizeEntryPurchase = await Axios.get(`https://34.237.237.45:9001/api/finalizeEntryPurchase/${user[0]}/${address}/${amt}/${data.data}/${purchase.receipt.transactionHash}`).then(async (resp)=>{
                     if (resp.data >= 1){
                         toast('Purchase successful! You bought ' + resp.data + ' tickets!');
                     } else {
@@ -47,7 +47,7 @@ export default function AllCurrentRaffles(){
         setData('');
         const base64data = Buffer.from('Product 1').toString('base64');
         try {
-            Axios.get(`http://localhost:9001/api/encrypt/${base64data}`).then(async (data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/encrypt/${base64data}`).then(async (data)=>{
                 //console.log("encrypt: ", data.data);
                 encrypted = data.data;
                 setData(data.data);
@@ -65,7 +65,7 @@ export default function AllCurrentRaffles(){
         //setData('');
         //const base64data = Buffer.from(data).toString('base64');
         try {
-            Axios.get(`http://localhost:9001/api/decrypt/${data}`).then(async (data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/decrypt/${data}`).then(async (data)=>{
                 //console.log("decrypt: ", data.data);
                 encrypted = data.data;
                 setData(data.data);
@@ -80,7 +80,7 @@ export default function AllCurrentRaffles(){
 
     async function getCurrentRaffles() {
         try {
-            Axios.get(`http://localhost:9001/api/getCurrentRaffles/0/0`).then(async (data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/getCurrentRaffles/0/0`).then(async (data)=>{
                 setRaffles(data.data);
                 return data.data;
             });
@@ -91,7 +91,7 @@ export default function AllCurrentRaffles(){
 
     async function getItems() {
         try {
-            Axios.get(`http://localhost:9001/api/getItems/entry`).then(async (data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/getItems/entry`).then(async (data)=>{
                 setItems(data.data);
                 return data.data;
             });
@@ -102,7 +102,7 @@ export default function AllCurrentRaffles(){
 
     async function enterRaffle(raffle_id) {
         try {
-            Axios.get(`http://localhost:9001/api/enterRaffle/${raffle_id}/${user[0]}/${address}`).then(async (data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/enterRaffle/${raffle_id}/${user[0]}/${address}`).then(async (data)=>{
                 toast(data.data);
                 return data.data;
             });
@@ -115,7 +115,7 @@ export default function AllCurrentRaffles(){
         const initUser = await getCheckToken().then((res)=>{
             setUser([res.data.user.id, res.data.user.username, res.data.user.firstName, res.data.user.lastName, res.data.user.profile, res.data.user.ticket, res.data.user.wallet]);
             try {
-                Axios.get(`http://localhost:9001/api/getUserRaffleTickets/${res.data.user.id}`).then(async (data)=>{
+                Axios.get(`https://34.237.237.45:9001/api/getUserRaffleTickets/${res.data.user.id}`).then(async (data)=>{
                     setUserRaffleTickets(data.data.tickets);
                     return data.data;
                 });

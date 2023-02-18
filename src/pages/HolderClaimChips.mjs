@@ -11,7 +11,7 @@ import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import Cookies from 'js-cookie';
 import { Navigate, useNavigate } from "react-router-dom";
 import { useReward } from 'react-rewards';
-import getUserCookie from "../config/cookie.mjs";
+import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 
 function HolderClaimChips() {
@@ -21,7 +21,7 @@ function HolderClaimChips() {
   const { reward, isAnimating } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
   async function checkToken() {
     //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-    let access_token = getUserCookie();
+    let access_token = getUserCookieProd();
     if (access_token){
       try {
         const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
@@ -65,7 +65,7 @@ function HolderClaimChips() {
     
     async function getNextClaimDate(){
       if(user_id){
-        Axios.get(`http://localhost:9001/api/getNextClaimDate/${address}/holder/${user_id}/0`).then((data)=>{
+        Axios.get(`https://34.237.237.45:9001/api/getNextClaimDate/${address}/holder/${user_id}/0`).then((data)=>{
           setNextClaimDate(data.data);
           return nextClaimDate;
           });
@@ -95,7 +95,7 @@ function HolderClaimChips() {
       setBuyLoading(true);
       user_id = user[0];
       try {
-        Axios.get(`http://localhost:9001/api/claimHolderTokens/${address}/${user_id}`).then(async (data)=>{
+        Axios.get(`https://34.237.237.45:9001/api/claimHolderTokens/${address}/${user_id}`).then(async (data)=>{
           notify('Tokens Claimed: '+data.data);
           setBuyLoading(false);
           reward();
@@ -125,7 +125,7 @@ useEffect(() => {
   checkToken();
   getCoinGeckoData();
   if(address && !isMismatched){
-    Axios.get(`http://localhost:9001/api/getOGBalance/${address}`).then((data)=>{
+    Axios.get(`https://34.237.237.45:9001/api/getOGBalance/${address}`).then((data)=>{
         setOGBalance(data.data);
         }).then(()=>{
           zzz();

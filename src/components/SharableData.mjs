@@ -38,7 +38,7 @@ import {
 } from "react-share";
 import getAffiliateUser from '../scripts/getAffilateUser.mjs';
 import {createAffiliateUser} from '../scripts/getAffilateUser.mjs';
-import getUserCookie from '../config/cookie.mjs';
+import {getUserCookie, getUserCookieProd} from '../config/cookie.mjs';
 
 
 
@@ -57,7 +57,7 @@ export default function SharableData(){
       }; 
     async function checkToken() {
         //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-        let access_token = getUserCookie();
+        let access_token = getUserCookieProd();
         if (access_token){
         try {
             const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
@@ -89,7 +89,7 @@ export default function SharableData(){
     const [randomMessage, setRandomMessage]=useState([]);
     const getMessages = () => {
         try {
-            Axios.get(`http://localhost:9001/api/getSharableMessages`).then((data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/getSharableMessages`).then((data)=>{
                 setAllMessages(data.data);  
                 setMessages(data.data);  
             });
@@ -100,7 +100,7 @@ export default function SharableData(){
 
     /*const sendEmail = () => {
         try {
-            Axios.get(`http://localhost:9001/api/sendEmail/bradyllewis@gmail.com/ScroogeSubject/WelcomeToTheJungle`).then((data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/sendEmail/bradyllewis@gmail.com/ScroogeSubject/WelcomeToTheJungle`).then((data)=>{
                 //console.log("send email data: ", data.data);
             });
         } catch (err) {
@@ -112,7 +112,7 @@ export default function SharableData(){
         const uri = 'https://mozilla.org/?x=шеллы';
         const encoded = encodeURIComponent(uri);
         try {
-            Axios.get(`http://localhost:9001/api/getShortLink/${encoded}`).then((data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/getShortLink/${encoded}`).then((data)=>{
                 //console.log("short link: ", data.data);
                 return data.data;
             });
@@ -169,7 +169,7 @@ export default function SharableData(){
         setAIMessage([]);
         const prompt = "Give me a tweet about Scrooge Casino, an online casino where you can win awesome prizes playing live poker, blackjack, slots, and other games.";
         try {
-            Axios.get(`http://localhost:9001/api/getAIMessage/${prompt}/${user[0]}/message`).then((data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/getAIMessage/${prompt}/${user[0]}/message`).then((data)=>{
                 //console.log("getAIMessage: ", data.data);
                 affUser.ai_tickets = affUser.ai_tickets - 1;
                 //setAIMessage(data.data);

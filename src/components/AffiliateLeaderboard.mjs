@@ -15,7 +15,7 @@ export default function AffiliateLeaderboard(){
 
     async function getAffLeadersByCount(limit=10, days=0) {
         try {
-            Axios.get(`http://localhost:9001/api/getAffLeadersByCount/${limit}/${days}`).then((data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/getAffLeadersByCount/${limit}/${days}`).then((data)=>{
                 //console.log("getAffLeadersByCount: ", data.data);
                 setLeaderboardByCount(data.data);
                 return data.data;
@@ -27,7 +27,7 @@ export default function AffiliateLeaderboard(){
 
     async function getAffLeadersByTokens(limit=10, days=0) {
         try {
-            Axios.get(`http://localhost:9001/api/getAffLeadersByTokens/${limit}/${days}`).then((data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/getAffLeadersByTokens/${limit}/${days}`).then((data)=>{
                 //console.log("getAffLeadersByTokens: ", data.data);
                 setLeaderboardByTokens(data.data);
                 return data.data;
@@ -39,7 +39,7 @@ export default function AffiliateLeaderboard(){
 
     async function getAffLeadersHottestNewcomers(limit=10, days=7) {
         try {
-            Axios.get(`http://localhost:9001/api/getAffLeadersByTokens/${limit}/${days}`).then((data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/getAffLeadersByTokens/${limit}/${days}`).then((data)=>{
                 //console.log("getAffLeadersByTokens: ", data.data);
                 setLeaderboardHottestNewcomers(data.data);
                 return data.data;
@@ -51,7 +51,7 @@ export default function AffiliateLeaderboard(){
 
     async function getAffLeadersMonthlyMovers(limit=10, days=30) {
         try {
-            Axios.get(`http://localhost:9001/api/getAffLeadersByTokens/${limit}/${days}`).then((data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/getAffLeadersByTokens/${limit}/${days}`).then((data)=>{
                 //console.log("getAffLeadersByTokens: ", data.data);
                 setLeaderboardMonthlyMovers(data.data);
                 return data.data;
@@ -66,7 +66,7 @@ export default function AffiliateLeaderboard(){
 
     async function getAffLeadersTopSales(type='order', limit=10, days=0) {
         try {
-            Axios.get(`http://localhost:9001/api/getAffLeadersByType/${type}/${limit}/${days}`).then((data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/getAffLeadersByType/${type}/${limit}/${days}`).then((data)=>{
                 //console.log("getAffLeadersByTokens: ", data.data);
                 setLeaderboardTopSales(data.data);
                 return data.data;
@@ -78,7 +78,7 @@ export default function AffiliateLeaderboard(){
 
     async function getAffLeadersTopRegisters(type='register', limit=10, days=0) {
         try {
-            Axios.get(`http://localhost:9001/api/getAffLeadersByType/${type}/${limit}/${days}`).then((data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/getAffLeadersByType/${type}/${limit}/${days}`).then((data)=>{
                 //console.log("getAffLeadersByTokens: ", data.data);
                 setLeaderboardTopRegisters(data.data);
                 return data.data;
