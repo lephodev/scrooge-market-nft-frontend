@@ -6,7 +6,7 @@ export function getUserCookie() {
 }
 
 export function getUserCookieProd() {
-    let access_token = Cookies.get('token', { domain: 'https://scrooge.casino' });
+    let access_token = Cookies.get('token', {domain: 'scrooge.casino'});
     console.log('access_token', access_token);
     if (access_token) {
         return access_token;
