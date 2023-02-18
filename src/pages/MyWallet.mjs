@@ -14,6 +14,7 @@ import ClaimOGPending from "../components/claimOGPending.mjs";
 import { TwitterShareButton, TwitterIcon } from "react-share";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {getCheckToken} from '../scripts/checkToken.mjs';
 import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
 
 export default function MyWallet() {
