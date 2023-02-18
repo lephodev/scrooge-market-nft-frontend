@@ -2,14 +2,15 @@ import React,{useState,useEffect} from 'react';
 import { useContract, ThirdwebNftMedia, useActiveListings, ConnectWallet } from "@thirdweb-dev/react";
 import { useNavigate } from "react-router-dom";
 import LoadingGif from '../images/loading1.gif';
+import LoadingPoker from '../images/scroogeHatLogo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function ShowCasinoTokenNFTs() {
     const [buyloading,setBuyloading]=useState(false);
     function notify(message) {
-        toast(message);
-    } 
+        toast.success('🎩 '+message);
+      };
     let navigate = useNavigate(); 
     const routeChange = () =>{ 
       let path = `/nft-tokens`; 
@@ -39,20 +40,31 @@ export default function ShowCasinoTokenNFTs() {
         
   return (
     <div>
-        <ToastContainer 
-                position='top-center'
-                autoClose={4000}
-                />
-        {buyloading ? (<div className="loading-img-div">
-          <img className="loading-img" src={LoadingGif} alt="Loading..." />
-        </div>) : (<></>)}
+        <ToastContainer
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        />
+        {buyloading ? (<div className="pageImgContainer">
+                    <img src={LoadingPoker} alt="game" className="imageAnimation" />
+                    <div className='loading-txt pulse'>
+                        PURCHASING...
+                    </div>
+                </div>) : (<></>)}
         <div className="nft-home-sell-title">
             <h1>Scrooge Casino NFT Token Packages</h1>
         </div>
         
       {loadingListings ? (
         <div className="loading-img-div">
-        <img className="loading-img" src={LoadingGif} alt="Loading..." />
+        <img src={LoadingPoker} alt="game" className="imageAnimation" />
       </div>
       ) : (
         <div className="flex-row nft-home-sell-div">

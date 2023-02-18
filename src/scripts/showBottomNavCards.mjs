@@ -15,7 +15,7 @@ export default function ShowBottomNavCards() {
           </Link>
 
           
-          <a href="https://scrooge.casino" className="card" rel="noreferrer">
+          <a href="https://scrooge.casino" className="card" target="_blank" rel="noreferrer">
             <h2>VISIT THE CASINO &rarr;</h2>
             <p>
               Have everything you need? Head on over to Scrooge Casino to get the party started.

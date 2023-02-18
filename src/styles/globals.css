@@ -2,7 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
@@ -32,16 +32,16 @@ body {
   color: #f8d761;
 }
 .green{
-  color: #5EE47E;
+  color: #0dff00;
 }
 .teal{
   color: #41ead4;
 }
 .yellow{
-  color: #e7c975;
+  color: #FBFF12;
 }
 .font-martian{
-  font-family: 'Martian Mono';
+  font-family: 'Poppins';
 }
 .header-nav-container{
   display: flex;
@@ -62,42 +62,25 @@ body {
   font-size: 18px;
 }
 .header-nav-menu a{
-  font-family: 'Martian Mono';
+  font-family: 'Poppins';
   color: #D2042D;
   border: 2px solid #000;
   padding: 10px;
   font-weight: bold;
 }
 .header-nav-menu a:hover{
-  background-color: #e7c975;
+  background-color: #FBFF12;
 }
+.header-nav-logo-div{
+  text-align: center;
+  font-family: 'Unica One';
+
+}
+
 .menu-logo-img{
   width: 50px;
 }
-.loading-img-div{
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
-.loading-img{
-  width: 200px;
-}
-.switch-network-div{
-  text-align: center;
-  font-family: 'Martian Mono';
-  font-weight: bold;
-  color: #e7c975;
-  border: 3px solid #e7c975;
-  background-color: #D2042D;
-  border-radius: 5px;
-  padding: 40px;
-}
-.footer-div{
-  text-align: center;
-  margin: 30px 0;
-}
 .connect-wallet-header{
-  width: 225px;
   border: 2px solid #D2042D;
   border-radius: 10px;
 }
@@ -115,6 +98,321 @@ body {
   border-radius: 10px;
   margin-bottom: 50px;
 }
+.wallet-casino-profile-div{
+  width: 90%;
+  margin: 30px 0 40px 0;
+  padding: 5px 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border: 4px solid #D2042D;
+  border-radius: 10px;
+  background-color: #1b2129;
+  font-family: 'Poppins';
+}
+.wallet-casino-profile-img{
+  width: 150px;
+  border-radius: 100%;
+  border: 5px solid #FBFF12;
+}
+.wallet-casino-profile-details{
+  width: 50%;
+  margin: 0 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-family: 'Poppins';
+  font-weight: bold;
+  color: #fff;
+  font-size: 24px;
+}
+.wallet-casino-profile-username{
+  color: #D2042D;
+  font-size: 32px;
+  text-shadow: 1px 1px #FBFF12;
+}
+.wallet-casino-profile-img-div{
+  display: flex;
+  align-items: center;
+}
+.button-section{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.bottom-margin-100{
+  margin-bottom: 100px;
+}
+.token-small{
+  width: 45px;
+  margin-right: 10px;
+}
+.token-nav{
+  width: 25px;
+  margin-right: 10px;
+  vertical-align:top;
+}
+.token-nav-div{
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+}
+.ticket-small{
+  width: 60px;
+  margin-right: 10px;
+}
+.token-logo{
+  width: 60px;
+  margin-right: 15px;
+  border-radius: 100%;
+}
+.token-ticket-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+.crypto-balance-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  line-height: .08;
+}
+.width-100{
+  width: 100%;
+}
+.crypto-balance-div{
+  width: 30%;
+  margin: 10px 0 10px 0;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: row;
+  border: 4px solid #fff;
+  border-radius: 10px;
+  background-color: #1b2129;
+  font-weight: bold;
+  font-size: 20px;
+}
+.crypto-balance-header{
+  text-align: center;
+  font-weight: bold;
+  font-size: 22px;
+  color: #FBFF12;
+  margin-bottom: 10px;
+}
+.claim-pending-div{
+  text-align: center;
+  font-weight: 200;
+  font-size: 14px;
+  margin-top: 40px;
+}
+.claim-countdown{
+  margin-top: 15px;
+  color: #FBFF12;
+  font-size: 18px;
+}
+.claim-btn{
+  margin-top: 20px;
+  padding: 10px 20px !important;
+  font-family: 'Poppins';
+  font-size: 14px;
+  background-color: #000;
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+.claim-btn:hover{
+  cursor: pointer;
+  background-color: #D2042D;
+  border: 2px solid #FBFF12;
+  border-radius: 5px;
+}
+.daily-reward-bag{
+  width: 100%;
+}
+.daily-reward-bag-div{
+  margin-top: 45px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.daily-rewards-bag-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.next-claim-div{
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+  padding: 20px;
+  width: 50%;
+  margin: 45px auto 0 auto;
+  font-family: 'Poppins';
+  font-size: 24px;
+}
+.header-nav-container-mobile{
+  width: 100%;
+  bottom: 0;
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  padding: 0px 10px;
+  background-color: #D2042D;
+  position:fixed;
+  border-top: 2px solid #FBFF12;
+}
+.header-nav-menu-mobile{
+  width: 100%;
+  max-height: 80px;
+}
+.header-nav-container-mobile ul{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style: none;
+  align-items: center;
+  padding-inline-start: 0px;
+  margin: 8px auto;
+}
+.header-nav-menu-mobile a{
+  padding: 2px;
+}
+.wallet-icon-img-mobile{
+  max-width: 60px;
+                
+                object-fit: contain;
+  border: 5px solid #FBFF12;
+  border-radius: 100%;
+}
+
+.loading-img-div{
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.loading-img{
+  width: 200px;
+}
+.switch-network-div{
+  text-align: center;
+  font-family: 'Poppins';
+  font-weight: bold;
+  color: #FBFF12;
+  border: 3px solid #FBFF12;
+  background-color: #D2042D;
+  border-radius: 5px;
+  padding: 40px;
+}
+.footer-nav{
+  background-color: #1b2129;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 100px 0 0 0;
+  padding: 60px 20px 20px 10px;
+  border-top: 3px solid #FBFF12;
+}
+.footer-inner-div{
+  padding: 0 50px;
+}
+.footer-div{
+  background-color: #1b2129;
+  text-align: center;
+  padding: 30px 0;
+}
+.transaction-div{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  border: 4px solid #D2042D;
+  border-radius: 5px;
+  background-color: #1b2129;
+  padding: 20px;
+  margin: 5px auto 30px auto;
+}
+.transaction-div-title{
+  width: 100%;
+  text-align: center;
+  font-family: 'Poppins';
+  font-size: 26px;
+  padding: 10px 0 30px 0;
+  text-transform: uppercase;
+}
+.transaction-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 22%;
+  height: 325px;
+  line-height: 1.9;
+  padding: 15px;
+  margin: 5px;
+  text-align: center;
+  border: 2px solid #f9ff00;
+  border-radius: 5px;
+  font-family: 'Poppins';
+}
+.transaction-card-coupon-code{
+  margin-top: 15px;
+  font-weight: bold;
+  background-color:#D2042D;
+  padding: 6px;
+}
+.page-nav-header-btns-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: 'Poppins';
+  padding: 20px 0 0 0;
+}
+.page-nav-header-btns-subrow{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px 0 0 0;
+  font-family: 'Poppins';
+}
+.page-nav-header-btn{
+  padding: 10px 5px;
+  margin: 0 10px;
+  font-family: 'Poppins';
+  width: 200px;
+  border: 2px solid #D2042D;
+  background-color: #000000;
+  border-radius: 5px;
+  font-size: 22px;
+}
+.page-nav-header-subbtn{
+  padding: 10px 25px;
+  margin: 0 10px;
+  background-color: #000000;
+  font-family: 'Poppins';
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+}
+.disabled{
+  background-color: #d2042d8c !important;
+  color: #8d8a8a;
+}
+.asterisk-desc{
+  margin-top: 25px;
+  font-size: 14px;
+  color: #D2042D;
+}
 .bordered-section{
   margin: 20px auto;
   padding: 15px;
@@ -122,11 +420,17 @@ body {
   border: 3px solid #D2042D;
   border-radius: 5px;
   background-color: #1b2129;
+  
 }
 .pageTitle{
   text-align: center;
   margin-bottom: 50px;
-  color: #e7c975;
+  color: #FBFF12;
+  text-shadow: 2px 2px #D2042D;
+  text-transform: uppercase;
+}
+.inlineTitle{
+  color: #FBFF12;
   text-shadow: 2px 2px #D2042D;
   text-transform: uppercase;
 }
@@ -134,10 +438,10 @@ body {
   margin: 30px;
   background-color: #000;
   padding: 20px 30px;
-  border: 2px solid #e7c975;
+  border: 2px solid #FBFF12;
   border-radius: 5px;
   color: #5EE47E;
-  font-family: 'Martian Mono';
+  font-family: 'Poppins';
   font-weight: bold;
 }
 .subheader-btn:hover{
@@ -154,12 +458,39 @@ body {
 .card-img:hover{
   transform: rotate(-20deg);
 }
+.raffle-img{
+  width: 200px;
+  height: 200px;
+  margin: 0;
+  border-radius: 5px;
+}
+.raffle-img:hover{
+  transform: rotate(-20deg);
+}
+.raffle-data-box{
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+  padding: 20px;
+  width: 25%;
+}
+.fine-print-txt{
+  text-align: center;
+  font-size: 16px;
+  font-family: 'Poppins';
+}
 .flex-row{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin-bottom: 80px;
+}
+.flex-row-no-margin{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
 }
 .nft-home-sell-div{
   margin: 20px auto;
@@ -172,7 +503,7 @@ body {
 .nft-home-sell-title{
   text-align: center;
   margin-bottom: 50px;
-  color: #e7c975;
+  color: #FBFF12;
   text-shadow: 2px 2px #D2042D;
   text-transform: uppercase;
 }
@@ -184,11 +515,11 @@ body {
 .nft-home-sell-more-btn{
   background-color: #000;
   padding: 10px 20px;
-  border: 2px solid #e7c975;
+  border: 2px solid #FBFF12;
   border-radius: 5px;
   margin-top: 15px;
   color: #5EE47E;
-  font-family: 'Martian Mono';
+  font-family: 'Poppins';
   font-weight: bold;
 }
 .nft-home-sell-more-btn:hover{
@@ -204,8 +535,8 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  font-family: 'Martian Mono';
-  color: #e7c975;
+  font-family: 'Poppins';
+  color: #FBFF12;
   width:16%;
 }
 .nft-home-sell-details{
@@ -217,15 +548,15 @@ body {
   background-color: #1b2129;
   border: 2px solid #D2042D;
   border-radius: 5px;
-  font-family: 'Martian Mono';
+  font-family: 'Poppins';
 }
 .full-page-container{
   min-width: 100%;
   background-color: #1b2129;
   padding: 20px 30px;
-  border: 6px solid #e7c975;
+  border: 6px solid #FBFF12;
   border-radius: 10px;
-  font-family: 'Martian Mono';
+  font-family: 'Poppins';
 }
 .modal-popup{
   display: flex;
@@ -236,24 +567,24 @@ body {
   height: 100%;
 }
 .modal-header{
-  font-family: 'Martian Mono';
-  color: #e7c975;
+  font-family: 'Poppins';
+  color: #FBFF12;
   text-align: center;
   margin-bottom: 25px;
   font-size: 22px;
 }
 .modal-popup input{
   padding: 15px;
-  border: 2px solid #e7c975;
+  border: 2px solid #FBFF12;
   font-size: 20px;
   color: #fff;
 }
 .modal-popup-btn{
   margin-top: 30px;
   padding: 15px 30px !important;
-  font-family: 'Martian Mono';
+  font-family: 'Poppins';
   font-size: 20px;
-  color: #e7c975;
+  color: #FBFF12;
   background-color: #000;
   border: 2px solid #D2042D;
   border-radius: 5px;
@@ -261,15 +592,43 @@ body {
 }
 .modal-popup-btn:hover{
   background-color: #D2042D;
-  border: 2px solid #e7c975;
+  border: 2px solid #FBFF12;
   border-radius: 5px;
 }
+
+.popup-content {
+  margin: auto;
+  background: #1b2129;
+  width: 100%;
+  padding: 5px;
+}
+.popup-arrow {
+  color: #FBFF12;
+}
+[role='tooltip'].popup-content {
+  width: 500px;
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+  color: #D2042D;
+  background: #1b2129;
+  font-family: 'Poppins';
+  text-align: center;
+  border: 2px solid #FBFF12;
+}
+
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+[data-popup='tooltip'].popup-overlay {
+  background: transparent;
+}
+
 .connect-wallet-inline{
   border: 2px solid #D2042D;
   border-radius: 5px;
 }
 .connect-wallet-inline:hover{
-  border: 2px solid #e7c975;
+  border: 2px solid #FBFF12;
 }
 .nft-token-row-div{
   width: 100%;
@@ -284,6 +643,16 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+.nft-token-stripe-badge-div{
+  height: 100%;
+  text-align: center;
+  padding: 0 50px 0 0;
+}
+.stripe-badge-img{
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
 }
 .green-border-6px{
   border: 6px solid #5EE47E !important;
@@ -310,7 +679,7 @@ body {
 }
 .nft-token-row-name{
   font-size: 26px;
-  color: #e7c975;
+  color: #FBFF12;
 }
 .nft-token-row-sale{
   text-align: center;
@@ -346,7 +715,7 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Martian Mono';
+  font-family: 'Poppins';
   color: #fff;
   width:100%;
   line-height: 1.5;
@@ -359,7 +728,7 @@ body {
   line-height: 1;
 }
 .erc721Card-image{
-  border: 3px solid #e7c975;
+  border: 3px solid #FBFF12;
   margin: 0 15px;
   border-radius: 5px;
 }
@@ -374,7 +743,7 @@ body {
 .erc721Card-col-title{
   font-size: 24px;
   color: #D2042D;
-  background-color: #e7c975;
+  background-color: #FBFF12;
   padding: 4px 8px;
 }
 .erc721Card-3rd-col{
@@ -383,6 +752,11 @@ body {
 }
 .erc721Card-4th-col{
   width: 15%;
+  text-align: center;
+  font-size: 16px;
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+  padding: 10px 0;
 }
 .erc721Card-rarity-subsection{
   
@@ -442,23 +816,23 @@ font-weight: bold;
   text-align: center;
   flex-wrap: wrap;
   align-items: center;
-  font-family: 'Martian Mono';
-  color: #e7c975;
+  font-family: 'Poppins';
+  color: #FBFF12;
   width:40%;
 }
 .erc1155-buy-btn{
   background-color: #D2042D;
   padding: 10px 20px;
-  border: 2px solid #e7c975;
+  border: 2px solid #FBFF12;
   border-radius: 5px;
   margin-top: 15px;
-  color: #e7c975;
-  font-family: 'Martian Mono';
+  color: #FBFF12;
+  font-family: 'Poppins';
   font-weight: bold;
 }
 .erc1155-buy-btn:hover{
   background-color: #000;
-  border: 2px solid #e7c975;
+  border: 2px solid #FBFF12;
   color: #5EE47E;
   cursor: pointer;
 }
@@ -470,7 +844,7 @@ font-weight: bold;
 .create-listing-form{
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   font-size: 22px;
   width: 50%;
   line-height: 2.5;
@@ -479,46 +853,1157 @@ font-weight: bold;
   margin-left: 25px;
   padding: 5px;
 }
+.large-header-div{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.large-header-img{
+  width: 70%;
+  margin: 0 auto 35px auto;
+}
+.detecting-dl-img{
+  margin: 100px auto;
+  border: 7px solid #FBFF12;
+  border-radius: 5px;
+  animation: 2s infinite security;
+}
+@keyframes security {
+  0% {
+    border-color: #5EE47E;
+  }
+  25% {
+    border-color: #D2042D;
+  }
+  75% {
+    border-color: #FBFF12;
+  }
+  100% {
+    border-color: #5EE47E;
+  }
+}
+@-webkit-keyframes security {
+  0% {
+    border-color: #5EE47E;
+  }
+  25% {
+    border-color: #D2042D;
+  }
+  75% {
+    border-color: #FBFF12;
+  }
+  100% {
+    border-color: #5EE47E;
+  }
+}
+.white-txt{
+  font-family: 'Poppins';
+  text-transform: uppercase;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.detecting-txt{
+  font-family: 'Poppins';
+  text-transform: uppercase;
+  font-size: 26px;
+  margin-bottom: 40px;
+  animation: 2s infinite text-color;
+}
+@keyframes text-color {
+  0% {
+    color: #5EE47E;
+  }
+  25% {
+    color: #D2042D;
+  }
+  75% {
+    color: #FBFF12;
+  }
+  100% {
+    color: #5EE47E;
+  }
+}
+@-webkit-keyframes text-color {
+  0% {
+    color: #5EE47E;
+  }
+  25% {
+    color: #D2042D;
+  }
+  75% {
+    color: #FBFF12;
+  }
+  100% {
+    color: #5EE47E;
+  }
+}
 .submit-btn{
   margin-top: 45px;
   padding: 15px 30px !important;
-  font-family: 'Martian Mono';
-  font-size: 24px;
+  font-family: 'Poppins';
+  font-size: 22px;
   background-color: #000;
   border: 2px solid #D2042D;
   border-radius: 5px;
 }
 .submit-btn:hover{
   cursor: pointer;
+  color: #fff;
   background-color: #D2042D;
-  border: 2px solid #e7c975;
+}
+.button1{
+  padding: 15px 30px !important;
+  font-family: 'Poppins';
+  font-size: 24px;
+  background-color: #000;
+  border: 2px solid #D2042D;
   border-radius: 5px;
 }
-.prizes-card{
-  padding: 30px;
-  border: 2px solid #ffffff;
+.button1:hover{
+  cursor: pointer;
+  color: #fff;
+  background-color: #D2042D;
+}
+.button2{
+  padding: 15px 30px !important;
+  font-family: 'Poppins';
+  font-size: 20px;
+  background-color: #000;
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+.button2:hover{
+  cursor: pointer;
+  color: #fff;
+  background-color: #D2042D;
+}
+.button3{
+  padding: 15px 30px !important;
+  font-family: 'Poppins';
+  font-size: 20px;
+  background-color: #D2042D;
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+.button3:hover{
+  cursor: pointer;
+  color: #000;
+  border: 2px solid #0dff00;
+  background-color: #0dff00;
+  font-weight: bold;
+}
+.button4{
+  padding: 10px 25px !important;
+  font-size: 30px;
+  font-weight: bolder;
+  background-color: #0dff00;
+  border: 2px solid #0dff00;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-family: 'Poppins';
+  color: #000;
+}
+.button4:hover{
+  cursor: pointer;
+  color: #0dff00;
+  border: 2px solid #0dff00;
+  background-color: #1b2129;
+}
+.button-inline{
+  padding: 5px 10px !important;
+  font-family: 'Poppins';
+  font-size: 16px;
+  background-color: #000;
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+.button-inline:hover{
+  cursor: pointer;
+  color: #fff;
+  background-color: #D2042D;
+}
+.bold{
+  font-weight: bold;
+}
+.feature-overview-div{
+  margin: 0 20%;
+  padding: 20px 20px;
+  background-color: #000;
+  border: 2px solid #FBFF12;
+  border-radius: 5px;
+  font-family: 'Poppins';
+}
+.feature-overview-div1{
+  margin: 0 20%;
+  padding: 20px 20px;
+  background-color: #1b2129;
+  border: 4px solid #0dff00;
+  border-radius: 5px;
+  font-family: 'Poppins';
+}
+.feature-overview-div2{
+  margin: 0 20%;
+  padding: 20px 20px;
+  background-color: #1b2129;
+  border: 4px solid #FBFF12;
+  border-radius: 5px;
+  font-family: 'Poppins';
+}
+.feature-overview-div3{
+  margin: 0 20%;
+  padding: 20px 20px;
+  background-color: #1b2129;
+  border: 4px solid #D2042D;
+  border-radius: 5px;
   text-align: center;
-  align-items: center;
-  font-family: 'Martian Mono';
-  color: #ffffff;
+}
+.feature-overview-block{
+  padding: 20px 20px;
+  background-color: #D2042D;
+  border-radius: 5px;
+  border: 2px solid #D2042D;
+}
+.half-page-menu-wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 50px 10px 50px 15%;
+}
+.half-page-card-menu-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center !important;
+  vertical-align: middle;
+  padding: 0 20px;
+  background-color: #000;
+  width: 40%;
 }
 .prizes_container{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
+}
+.prizes-card{
+  margin: 20px;
+  width: 80%;
+  padding: 40px;
+  border: 4px solid #FBFF12;
+  border-radius: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  align-items: center;
+  font-family: 'Poppins';
+  color: #ffffff;
+  font-size: 20px;
+  background-color: #000;
+}
+.prizes-card:hover{
+  border: 4px solid #FBFF12;
 }
 .prizes-chip-count{
   text-align: center;
-  margin-bottom: 55px;
+  margin-bottom: 25px;
   color:#0dff00;
-  font-family: 'Martian Mono';
+  font-family: 'Poppins';
   font-size: 26px;
+  text-transform: uppercase;
 }
 .prize-name{
-  font-size: 26px;
-  color: #e7c975;
+  font-size: 30px;
+  color: #FFF;
+  margin-bottom: 15px;
+  background-color: #1b2129;
+  padding: 12px 0;
+  border: 2px solid #FBFF12;
+  border-radius: 3px;
 }
 .prize-cost{
   color:#0dff00;
+  font-size: 26px;
+}
+.holder-claim-details{
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.additional-info-div{
+  width: 50%;
+  color: #fff;
+  background-color: #1b2129;
+  font-size: 18px;
+  margin: 15px auto;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  padding: 10px;
+}
+.title{
+  font-weight: bold;
+  font-size: 20px;
+}
+.earn-free-tokens-desc-div{
+  padding: 20px;
+  width: 45%;
+  margin: 20px auto 40px auto;
+  border: 3px solid #f9ff00;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.earn-free-tokens-desc-div-full{
+  padding: 60px;
+  width: 85%;
+  margin: 20px auto 40px auto;
+  border: 3px solid #f9ff00;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.earn-free-tokens-desc-header{
+  text-align: center;
+  font-size: 24px;
+  font-family: 'Poppins';
+}
+.earn-free-tokens-desc{
+  text-align: center;
+  font-family: 'Poppins';
+  margin-bottom: 20px;
+}
+.social-share-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 30px;
+  margin: 8px;
+  border: 2px solid #D2042D;
+  font-size: 20px;
+}
+.social-share-btn{
+  margin-right: 15px;
+  margin-left: 15px;
+}
+.social-share-btn-div{
+  margin-top: 20px;
+}
+.social-share-filter-btn{
+  margin: 0 10px;
+  cursor: pointer;
+  border: 3px solid #1b2129;
+}
+.social-share-filter-btn:hover{
+  border: 3px solid #D2042D;
+  border-radius: 100%;
+}
+.txt-align-center{
+  text-align: center;
+}
+.leaderboard-card-div{
+  width: 45%;
+  margin: 5px auto;
+  padding: 10px 10px 30px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 4px solid #f9ff00;
+  border-radius: 5px;
+  font-size: 18px;
+  text-align: center;
+}
+.leaderboard-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 30px;
+}
+.affiliate-card-div{
+  width: 85%;
+  margin: 5px auto;
+  padding: 30px 50px 10px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 4px solid #f9ff00;
+  border-radius: 5px;
+  font-size: 20px;
+}
+.affiliate-card-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+.daily-reward-card-div{
+  width: 85%;
+  margin: 5px auto;
+  padding: 10px 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border: 4px solid #D2042D;
+  border-radius: 5px;
+  font-size: 20px;
+  color: #888888;
+}
+.pulse {
+  animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+  0% {
+    transform: scale(0.9); /* scaling to 0 */
+  }
+  50% {
+    transform: scale(1.1); /* increasing the size */
+  }
+  100% {
+    transform: scale(0.9); /* seeting back to initial size */
+  }
+}
+
+.teeter {
+  animation: teeter-animation 3s infinite;
+}
+
+@keyframes teeter-animation {
+  
+  0% {
+    transform: rotate(5deg); /* increasing the size */
+  }
+  50% {
+    transform: rotate(-5deg); /* increasing the size */
+  }
+  100% {
+    transform: rotate(5deg); /* increasing the size */
+  }
+}
+
+
+.bg-gray{
+  background-color: #1b2129;
+}
+
+.bg-animated {
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+        -45deg, 
+        rgba(59,173,227,1) 0%, 
+        rgba(87,111,230,1) 25%, 
+        rgba(152,68,183,1) 51%, 
+        rgba(255,53,127,1) 100%
+  );  
+  animation: AnimateBG 5s ease infinite;
+}
+
+@keyframes AnimateBG { 
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.bg-animated2 {
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+        -45deg, 
+        rgb(29, 196, 93) 0%, 
+        rgb(40, 168, 14) 25%, 
+        rgb(15, 155, 15) 51%, 
+        rgb(34, 233, 77) 100%
+  );  
+  animation: AnimateBG 5s ease infinite;
+}
+
+.bg-animated3 {
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+        45deg, 
+        rgb(211, 69, 13) 0%, 
+        rgb(235, 134, 19) 20%, 
+        rgb(241, 8, 8) 71%, 
+        rgb(248, 232, 12) 100%
+  );  
+  animation: AnimateBG 5s ease infinite;
+}
+
+.dl-loader-img{
+  width: 75px;
+  height: 75px;
+}
+.spin {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.page-loader {
+  top: 0%;
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  position:fixed;
+  background: #000000;
+  z-index: 9999999;
+}
+.z1001{
+  z-index: 1001;
+}
+.pageImgContainer {
+  top: 0;
+  left: 0;
+  margin: 0 5%;
+  position: fixed;
+  background: #FBFF12f5;
+  width: 90%;
+  height: 60vh;
+  display: grid;
+  place-content: center;
+  padding: 100px 25px;
+  color:#D2042D;
+  text-shadow: 2px 2px #1b2129;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  border: 4px solid #D2042D;
+  border-radius: 5px;
+  z-index: 1000;
+}
+.pageImgContainer-dl {
+  top: 0;
+  left: 0;
+  margin: 0 5%;
+  position: fixed;
+  width: 90%;
+  height: 60vh;
+  display: grid;
+  place-content: center;
+  padding: 100px 25px;
+  color:#fff;
+  text-shadow: 2px 2px #1b2129;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  border: 4px solid #D2042D;
+  border-radius: 5px;
+  z-index: 1000;
+}
+.social-share-filter-btns-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+.mint-DL-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto 50px auto;
+}
+.min-menu-div{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 15px auto 10px auto;
+  border-top: 2px solid #D2042D;
+  border-bottom: 2px solid #D2042D;
+  border-radius: 5px;
+  padding: 10px;
+}
+.min-menu-btn{
+  background-color: #D2042D;
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+  padding: 10px 30px;
+  margin: 0 20px;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 20px;
+  cursor: pointer;
+}
+.min-menu-btn:hover{
+  background-color: #000000;
+  color: #D2042D;
+}
+.raffles-header-shop-card{
+  background-color: #000;
+  border: 2px solid #D2042D;
+  border-radius: 5px;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 20%;
+  max-width: 20%;
+}
+.raffles-header-shop-div{
+  background-color: #1b2129;
+  border: 4px solid #D2042D;
+  border-radius: 5px;
+  padding: 10px 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 90%;
+}
+.ending-soon{
+  padding: 10px 30px;
+  margin: 15px auto -5px auto;
+  background-color: #1b2129;
+  border: 4px solid #D2042D;
+  border-radius: 5px;
+  width: 30%;
+}
+.close-btn-round-div{
+  margin: 25px 0 -15px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 90%;
+}
+.close-btn-round{
+  padding: 7px 16px;
+  background-color: #1b2129;
+  font-family: 'Poppins';
+  border-radius: 100%;
+  color: #D2042D;
+  border: 2px solid #D2042D;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close-btn-round:hover{
+  background-color: #D2042D;
+  color: #1b2129;
+  font-weight: bold;
+}
+.imageAnimation {
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  animation: spinner5 1s infinite ease-in-out;
+}
+@keyframes spinner5 {
+  from,
+  0% {
+    -moz-transform: rotateY(0);
+    -ms-transform: rotateY(0);
+    transform: rotateY(0);
+    animation-timing-function: ease;
+  }
+  13% {
+    -moz-transform: rotateY(45deg);
+    -ms-transform: rotateY(45deg);
+    transform: rotateY(45deg);
+    animation-timing-function: ease;
+  }
+  26% {
+    -moz-transform: rotateY(90deg);
+    -ms-transform: rotateY(90deg);
+    transform: rotateY(90deg);
+    animation-timing-function: ease;
+  }
+  39% {
+    -moz-transform: rotateY(135deg);
+    -ms-transform: rotateY(135deg);
+    transform: rotateY(135deg);
+    animation-timing-function: ease;
+  }
+  52% {
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    animation-timing-function: ease;
+  }
+  65% {
+    -moz-transform: rotateY(225deg);
+    -ms-transform: rotateY(225deg);
+    transform: rotateY(225deg);
+    animation-timing-function: ease;
+  }
+  78% {
+    -moz-transform: rotateY(270deg);
+    -ms-transform: rotateY(270deg);
+    transform: rotateY(270deg);
+    animation-timing-function: ease;
+  }
+  91% {
+    -moz-transform: rotateY(315deg);
+    -ms-transform: rotateY(315deg);
+    transform: rotateY(315deg);
+    animation-timing-function: ease;
+  }
+  to,
+  100% {
+    -moz-transform: rotateY(360deg);
+    -ms-transform: rotateY(360deg);
+    transform: rotateY(360deg);
+    animation-timing-function: ease;
+  }
+}
+
+.login-page-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 75%;
+  margin: 75px 0;
+  padding: 0 200px 100px 200px;
+  border: 4px solid #D2042D;
+  border-radius: 5px;
+  font-size: 24px;
+  text-align: center;
+}
+.login-page-desc{
+  text-align: center;
+}
+
+@media screen and (max-width: 1240px) and (min-width: 720px) {
+  .header-nav-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+    width: 100%;
+    background-color: #2b333d;
+    border-bottom: 2px solid #D2042D;
+  }
+  .header-nav-menu{
+    display: none;
+  }
+  .header-nav-container-mobile{
+    display: flex;
+  }
+  .wallet-icon-img-mobile{
+    width: 40%;
+    height: 40%;
+  }
+  .wallet-icon-img-mobile{
+    max-width: 135px;
+  }
+  .wallet-casino-profile-div{
+    width: 100%;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    flex-wrap: wrap;
+  }
+  .wallet-casino-profile-img{
+    width: 150px;
+    border-radius: 100%;
+    border: 5px solid #FBFF12;
+  }
+  .wallet-casino-profile-details{
+    width: 100%;
+    margin: 0;
+    flex-direction: column;
+  }
+  .wallet-casino-profile-img-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .balance-column{
+    margin-top: 15px;
+    color: #fff;
+  }
+  .token-ticket-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .crypto-balance-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .crypto-balance-div{
+    width: 100%;
+    margin: 30px 0 0px 0;
+    display: flex;
+    flex-direction: row;
+    border: 4px solid #fff;
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 720px) {
+  .header-nav-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+    width: 100%;
+    background-color: #2b333d;
+    border-bottom: 2px solid #D2042D;
+  }
+  .header-nav-menu{
+    display: none;
+  }
+  .header-nav-container ul{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    list-style: none;
+    text-transform: uppercase;
+    font-size: 18px;
+  }
+  .header-nav-menu a{
+    display: none;
+    font-family: 'Poppins';
+    color: #D2042D;
+    border: 2px solid #000;
+    padding: 15px;
+    font-weight: bold;
+  }
+  .header-nav-menu a:hover{
+    background-color: #FBFF12;
+  }
+  .wallet-icon-img{
+    display: none;
+    height: 50px;
+    width: 50px;
+  }
+  .menu-logo-img{
+    width: 50px;
+  }
+  .footer-nav{
+    background-color: #1b2129;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 100px 0 0 0;
+    padding: 60px 20px 20px 10px;
+    border-top: 3px solid #FBFF12;
+  }
+  .footer-inner-div{
+    padding: 20px 50px;
+  }
+  .footer-div{
+    background-color: #1b2129;
+    text-align: center;
+    padding: 30px 0 200px 0;
+  }
+  .bordered-section{
+    margin: 20px auto;
+    padding: 15px 5px;
+    width: 100%;
+    border: 3px solid #D2042D;
+    border-radius: 5px;
+    background-color: #1b2129;
+  }
+  .full-page-container{
+    min-width: 100%;
+    background-color: #1b2129;
+    padding: 10px 5px;
+    border: 3px solid #FBFF12;
+    border-radius: 10px;
+    font-family: 'Poppins';
+  }
+  .prizes-card{
+    margin: 20px 0;
+    width: 100%;
+    padding: 15px 10px;
+    font-size: 12px;
+  }
+  .prize-cost{
+    color:#0dff00;
+    font-size: 26px;
+  }
+  .prize-name{
+    width: 90%;
+    font-size: 20px;
+    color: #FFF;
+    margin: 0 auto;
+    background-color: #1b2129;
+    padding: 12px 0;
+    border: 2px solid #FBFF12;
+    border-radius: 3px;
+  }
+  .holder-claim-details{
+    font-size: 16px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    font-weight: 200;
+  }
+  .additional-info-div{
+    width: 90%;
+    color: #fff;
+    background-color: #1b2129;
+    font-size: 18px;
+    margin: 15px auto;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .nft-token-stripe-badge-div{
+    width: 100%;
+    margin: 25px auto;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+  .nft-home-sell-div{
+    width: 98%;
+  }
+  .nft-home-sell-more{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .nft-home-sell-more-btn{
+    background-color: #000;
+    padding: 10px 20px;
+    border: 2px solid #FBFF12;
+    border-radius: 5px;
+    margin-top: 15px;
+    color: #5EE47E;
+    font-family: 'Poppins';
+    font-weight: bold;
+  }
+  .flex-row{
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-bottom: 80px;
+  }
+  .flex-row-no-margin{
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .nft-home-sell-card{
+    margin: 10px 0 35px 0;
+    width:100%;
+  }
+  .nft-token-row-card{
+    width: 100%;
+    padding: 20px 10px;
+    margin: 20px 0;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .nft-token-row-card-image{
+    width: 100%;
+  }
+  .nft-token-row-desc{
+    width: 95%;
+    margin-bottom: 20px;
+  }
+  .nft-token-row-details{
+    width: 95%;
+  }
+  .erc1155-price{
+    line-height: normal;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .nft-token-row-sale{
+    text-align: center;
+    line-height: 2;
+    font-size: 26px;
+    margin-top: 40px;
+  }
+  .sale-badge-img{
+    width: 160px;
+  }
+  .erc1155Card{
+    width: 100%;
+    text-align: center;
+    margin: 30px 0;
+  }
+  .collection-header-img{
+    width: 90%;
+  }
+  .header-nav-container-mobile{
+    display: flex;
+  }
+  .wallet-casino-profile-div{
+    width: 100%;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    flex-wrap: wrap;
+  }
+  .wallet-casino-profile-img{
+    width: 150px;
+    border-radius: 100%;
+    border: 5px solid #FBFF12;
+  }
+  .wallet-casino-profile-details{
+    width: 100%;
+    margin: 0;
+    flex-direction: column;
+  }
+  .wallet-casino-profile-img-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .balance-column{
+    margin-top: 15px;
+    color: #fff;
+  }
+  .token-ticket-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .crypto-balance-row{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    line-height: 2;
+  }
+  .crypto-balance-div{
+    width: 100%;
+    margin: 30px 0 0px 0;
+    display: flex;
+    flex-direction: row;
+    border: 4px solid #fff;
+    font-size: 20px;
+  }
+  .affiliate-card-div{
+    width: 98%;
+    margin: 5px auto;
+    padding: 20px;
+    flex-direction: column;
+    font-size: 18px;
+  }
+  .affiliate-card-row{
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+  }
+  .inlineTitle{
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  .daily-reward-card-div{
+    width: 98%;
+    padding: 10px;
+    flex-direction: column;
+    font-size: 14px;
+    color: #888888;
+    text-align: center;
+  }
+  .earn-free-tokens-desc-div, .earn-free-tokens-desc-div-full{
+    width: 98%;
+  }
+  .earn-free-tokens-desc-div-full{
+    padding: 20px;
+  }
+  .social-share-card{
+    padding: 15px 5px;
+    font-size: 16px;
+    text-align: center;
+    margin: 4px;
+  }
+  .social-share-btn-div{
+    margin-top: 25px;
+  }
+  .social-share-filter-btn{
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  .submit-btn{
+    margin-top: 20px;
+  }
+  .erc721Card{
+    padding: 30px 3px;
+    margin: 10px auto;
+    flex-direction: column;
+    width:100%;
+    text-align: center;
+  }
+  .erc721Card-name{
+    flex-direction: column;
+    text-align: center;
+  }
+  .erc721Card-image{
+    margin: 0 auto;
+  }
+  .erc721Card-details{
+    padding-left: 0px;
+    width: 100%;
+    margin-top: 30px;
+    line-height: 1.8;
+  }
+  .erc721Card-col-title{
+    margin-top: 30px;
+  }
+  .erc721Card-3rd-col{
+    padding-left: 0px;
+    width: 100%;
+    margin-top: 30px;
+    line-height: 1.8;
+  }
+  .erc721Card-4th-col{
+    width: 100%;
+    margin-top: 30px;
+    border: none;
+  }
+  .large-header-img{
+    width: 100%;
+    margin: 10px auto 20px auto;
+  }
+  .transaction-div{
+    flex-direction: column;
+    width: 100%;
+    padding: 5px;
+    margin: 5px auto 30px auto;
+  }
+  .transaction-div-title{
+    font-size: 20px;
+  }
+  .transaction-card{
+    flex-direction: column;
+    width: 100%;
+    margin: 5px auto;
+  }
+  .bottom-row-btns-div{
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+  }
+  .subheader-btn{
+    margin: 15px auto;
+    width: 90%;
+    border: 2px solid #D2042D;
+  }
 }

@@ -1,4 +1,4 @@
-{
+[{
   "short_name": "react-typescript-starter",
   "name": "thirdweb starter project with React & TypeScript",
   "icons": [
@@ -22,4 +22,9 @@
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
-}
+},
+{
+  "name": "Gravitec SDK",
+  "gcm_sender_id": "330561634409",
+  "gcm_user_visible_only": true
+}]

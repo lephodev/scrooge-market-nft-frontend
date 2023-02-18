@@ -35,7 +35,7 @@ export default function MarketplaceShowActiveListings() {
       ) : (
         <div className="flex-row">
           {listings.map((listing) => (
-            <div className="erc1155Card">
+            <div className="erc1155Card" key={listing.id}>
                 <div className="erc1155Card-image">
                     <ThirdwebNftMedia
                         key={listing.id}

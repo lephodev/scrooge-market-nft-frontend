@@ -11,14 +11,6 @@ export default function ShowCollection() {
   };
   const { contract } = useContract(addresses[String(selectedChain)]);
   const { data: nfts, isLoading, error } = useNFTs(contract, { start: 0, count: 100 });
-  if(contract){
-    console.log("Contract: ", contract);
-  }
-  
-  if(nfts){
-    console.log("NFTs: ", nfts);
-    console.log("NFT length: ", nfts.length);
-  }
   
   return (
     

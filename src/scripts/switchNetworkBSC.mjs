@@ -1,4 +1,4 @@
-import { useNetwork, ChainId, useNetworkMismatch } from "@thirdweb-dev/react";
+import { useNetwork, ChainId } from "@thirdweb-dev/react";
 
 export default function SwitchNetworkBSC() {
 

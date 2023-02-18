@@ -11,22 +11,36 @@
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Martian Mono">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Unica+One">
     <link rel="stylesheet" href="styles.css">
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    
+    
     <title>Scrooge NFT Marketplace</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GECZMQEE19"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GECZMQEE19');
+</script>
+    <script>
+      // Initialize an agent at application startup, once per page/app.
+      const botdPromise = import('https://openfpcdn.io/botd/v1').then((Botd) => Botd.load())
+      // Get detection results when you need them.
+      botdPromise
+          .then((botd) => botd.detect())
+          .then((result) => console.log(result))
+          .catch((error) => console.error(error))
+  </script>
+    <script src="https://cdn.gravitec.net/storage/0d43dde3056917d01870e890d3912af2/client.js" async></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this awesome app.</noscript>
@@ -42,19 +56,6 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     
-    <script>
-      (function(d, params){
-        var script = d.createElement('script');
-        script.setAttribute('src', 'https://cdn.candu.ai/sdk/latest/candu.umd.js?token=' + params.clientToken);
-        script.onload = function () {
-            Candu.init(params);
-        }
-        d.head.appendChild(script);
-      })(document, {
-        // OPTIONAL: Provide your userId
-        // userId: 'YOUR_USER_ID',
-        clientToken: 'oApT5IKR0R',
-       });
-    </script>
+    
   </body>
 </html>

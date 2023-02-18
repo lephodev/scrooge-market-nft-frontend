@@ -1,20 +1,22 @@
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
-import ShowCollection  from "../scripts/ShowCollection.mjs";
-import GetWalletNFTs from "../scripts/getWalletNFTs.mjs";
-//import GetWalletERC1155NFTs from "./scripts/getWalletERC1155NFTs.mjs";
-import MarketplaceShowActiveListings from "../scripts/marketplaceShowActiveListings.mjs";
+import {useEffect,useState} from 'react';
 import "../styles/Home.css";
-import GetWalletERC1155NFTs from "../scripts/getWalletERC1155NFTs.mjs";
-import ShowCasinoTokenNFTs from "../scripts/showCasinoTokenNFTs.mjs";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
+import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
 import ShowAllTokenNFTs from "../scripts/showAllTokenNFTs.mjs";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import { useNetworkMismatch } from "@thirdweb-dev/react";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 
 export default function NFTTokens() {
+  
   const isMismatched = useNetworkMismatch();
   const address = useAddress();
+  
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="container">
@@ -23,7 +25,6 @@ export default function NFTTokens() {
         <h1 className="title">
           CASINO MARKETPLACE
         </h1>
-       
         <p className="description yellow">
          Get everything you need to be a Scrooge Casino high roller.
         </p>

@@ -1,16 +1,18 @@
-import { useContext } from "react";
-import GetWalletNFTs from "../scripts/getWalletNFTs.mjs";
+import { useContext, useEffect } from "react";
+//import GetWalletNFTs from "../scripts/getWalletNFTs.mjs";
 //import GetWalletERC1155NFTs from "./scripts/getWalletERC1155NFTs.mjs";
 import MarketplaceShowActiveListings from "../scripts/marketplaceShowActiveListings.mjs";
 import "../styles/Home.css";
-import GetWalletERC1155NFTs from "../scripts/getWalletERC1155NFTs.mjs";
-import ShowCasinoTokenNFTs from "../scripts/showCasinoTokenNFTs.mjs";
-import { useAddress, useOwnedNFTs, useContract, useContractRead, ThirdwebNftMedia, useNetwork, ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
+//import GetWalletERC1155NFTs from "../scripts/getWalletERC1155NFTs.mjs";
+//import ShowCasinoTokenNFTs from "../scripts/showCasinoTokenNFTs.mjs";
+import { useAddress, useOwnedNFTs, useContract, useContractRead, ThirdwebNftMedia, useNetwork, ChainId } from "@thirdweb-dev/react";
 import ChainContext from "../context/Chain";
 import ShowCollection from "../scripts/ShowCollection.mjs";
 
 export default function Explore() {
-
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, []);
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   
 
