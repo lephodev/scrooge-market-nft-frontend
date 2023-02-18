@@ -1,12 +1,12 @@
 import { Navigate, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import {useState} from 'react';
-import getUserCookie from "../config/cookie.mjs";
+import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
 
 export async function getCheckToken() {
   let resp;
   let user_id;
-  let access_token = getUserCookie();
+  let access_token = getUserCookieProd();
     if (access_token){
       try {
         const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {

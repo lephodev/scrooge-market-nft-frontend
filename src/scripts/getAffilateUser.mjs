@@ -3,7 +3,7 @@ import Axios from 'axios';
 export default async function getAffiliateUser(user_id) {
     let affilateUser;
     try {
-        await Axios.get(`http://localhost:9001/api/getAffiliateUser/${user_id}`).then((data)=>{
+        await Axios.get(`https://34.237.237.45:9001/api/getAffiliateUser/${user_id}`).then((data)=>{
             affilateUser = data.data;
             //return data.data;
         });
@@ -20,7 +20,7 @@ export async function createAffiliateUser(user_id) {
         let resp;
         try {
             const res = await Axios.get('https://geolocation-db.com/json/');
-            await Axios.get(`http://localhost:9001/api/createAffiliateUser/${user_id}/${res.data.IPv4}`).then((data)=>{
+            await Axios.get(`https://34.237.237.45:9001/api/createAffiliateUser/${user_id}/${res.data.IPv4}`).then((data)=>{
                 //console.log("data: ", data.data); 
                 resp = data.data;
             });

@@ -53,7 +53,7 @@ export default function GetWalletERC1155NFTs() {
       //alert('Your email is '+emailaddress);
       setShowModal(false);
       setBurnLoading(true);
-      Axios.get(`http://localhost:9001/api/verifyEmail/${emailaddress}`).then((data)=>{
+      Axios.get(`https://34.237.237.45:9001/api/verifyEmail/${emailaddress}`).then((data)=>{
           //setNFTBalance(data.data);
           //setBurnLoading(false);
           const username = data.data[0].username;
@@ -77,7 +77,7 @@ export default function GetWalletERC1155NFTs() {
         
                 const result = await contract.erc1155.burnFrom(address, token_id, qty);
                 //console.log("NFT REDEEMED!! Your chips will be added shortly.");
-                Axios.get(`http://localhost:9001/api/redeemTokenNFT/${address}/${token_id}/${user_id}/${qty}`).then((data)=>{
+                Axios.get(`https://34.237.237.45:9001/api/redeemTokenNFT/${address}/${token_id}/${user_id}/${qty}`).then((data)=>{
                   //setNFTBalance(data.data);
                   setBurnLoading(false);
                   notify("You have successfully redeemed your NFT and "+data.data+" chips have been added to your casino account with email address: "+emailaddress+"!");

@@ -14,7 +14,7 @@ import ClaimOGPending from "../components/claimOGPending.mjs";
 import { TwitterShareButton, TwitterIcon } from "react-share";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import getUserCookie from "../config/cookie.mjs";
+import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
 
 export default function MyWallet() {
   
@@ -35,7 +35,7 @@ export default function MyWallet() {
   } 
   /*async function checkToken() {
     //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-    let access_token = getUserCookie();
+    let access_token = getUserCookieProd();
     if (access_token){
       try {
         const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
@@ -47,7 +47,7 @@ export default function MyWallet() {
           if (typeof res.data.user.id !== "undefined") {
               setUser([res.data.user.id, res.data.user.username, res.data.user.firstName, res.data.user.lastName, res.data.user.profile, res.data.user.ticket, res.data.user.wallet]);
               
-              Axios.get(`http://localhost:9001/api/getUserRedeemed/${res.data.user.id}`).then((data)=>{
+              Axios.get(`https://34.237.237.45:9001/api/getUserRedeemed/${res.data.user.id}`).then((data)=>{
                 //console.log('data: ', data);
                   setUserRedeemed(data.data);
                   });
@@ -71,7 +71,7 @@ export default function MyWallet() {
     const initUser = await getCheckToken().then((res)=>{
         setUser([res.data.user.id, res.data.user.username, res.data.user.firstName, res.data.user.lastName, res.data.user.profile, res.data.user.ticket, res.data.user.wallet]);
         try {    
-          Axios.get(`http://localhost:9001/api/getUserRedeemed/${res.data.user.id}`).then((data)=>{
+          Axios.get(`https://34.237.237.45:9001/api/getUserRedeemed/${res.data.user.id}`).then((data)=>{
             //console.log('data: ', data);
               setUserRedeemed(data.data);
             });
@@ -98,7 +98,7 @@ export default function MyWallet() {
   };
 
   const handleMarkRedeemed = (trans_id) => {
-    Axios.get(`http://localhost:9001/api/markMerchCouponRedeemed/${trans_id}/${user[0]}`).then((res)=>{
+    Axios.get(`https://34.237.237.45:9001/api/markMerchCouponRedeemed/${trans_id}/${user[0]}`).then((res)=>{
       //console.log('handle: ', res);
       getUserRedeemed();
     });
@@ -106,7 +106,7 @@ export default function MyWallet() {
 
   const getUserRedeemed = () => {
     //console.log('user: ', user[0]);
-      Axios.get(`http://localhost:9001/api/getUserRedeemed/${user[0]}`).then((data)=>{
+      Axios.get(`https://34.237.237.45:9001/api/getUserRedeemed/${user[0]}`).then((data)=>{
       //console.log('post get data: ', data);
       setUserRedeemed(data.data);
       //console.log('useRed: ',userRedeemed);
@@ -126,7 +126,7 @@ export default function MyWallet() {
       checkToken();
     }
     if(address && !isMismatched && (selectedChain===ChainId.BinanceSmartChainMainnet)){
-      Axios.get(`http://localhost:9001/api/getOGBalance/${address}`).then((data)=>{
+      Axios.get(`https://34.237.237.45:9001/api/getOGBalance/${address}`).then((data)=>{
           setOGBalance(data.data);
           getCoinGeckoDataOG(data.data);
           });

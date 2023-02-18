@@ -20,7 +20,7 @@ export const DLGate = ({ children }) => {
     
     /*console.log('gate address: ', address);
     try {
-      const userRes = await Axios.get(`http://localhost:9001/api/getWalletDLBalance/${address}`).then((res) =>{ 
+      const userRes = await Axios.get(`https://34.237.237.45:9001/api/getWalletDLBalance/${address}`).then((res) =>{ 
         console.log('DLgate: ',res);
         if (res.data >= 0) {
           console.log('Has DL');
@@ -46,7 +46,7 @@ export async function CheckDLOnPage(address) {
   //const navigate = useNavigate();
   //console.log('gate address: ', address);
   try {
-    const userRes = await Axios.get(`http://localhost:9001/api/getWalletDLBalance/${address}`).then((res) =>{ 
+    const userRes = await Axios.get(`https://34.237.237.45:9001/api/getWalletDLBalance/${address}`).then((res) =>{ 
       //console.log('DLgate: ',res);
       //console.log('res.data', res.data);
       if (res.data >= 0) {

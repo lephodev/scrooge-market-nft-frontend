@@ -10,7 +10,7 @@ import Countdown from 'react-countdown';
 import Cookies from 'js-cookie';
 import { Navigate, useNavigate } from "react-router-dom";
 import { useReward } from 'react-rewards';
-import getUserCookie from "../config/cookie.mjs";
+import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
 
 
 export default function GetWalletDLNFTs() {
@@ -23,7 +23,7 @@ export default function GetWalletDLNFTs() {
   }; 
   async function checkToken() {
     //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-    let access_token = getUserCookie();
+    let access_token = getUserCookieProd();
     if (access_token){
       try {
         const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
@@ -70,7 +70,7 @@ export default function GetWalletDLNFTs() {
     setBuyLoading(true);
     user_id = user[0];
     try {
-      Axios.get(`http://localhost:9001/api/claimDLTokens/${address}/${user_id}/${token_id}`).then(async (data)=>{
+      Axios.get(`https://34.237.237.45:9001/api/claimDLTokens/${address}/${user_id}/${token_id}`).then(async (data)=>{
         mapClaimDates(nfts);
         notify('Tokens Claimed: '+data.data);
         setBuyLoading(false);
@@ -87,7 +87,7 @@ export default function GetWalletDLNFTs() {
   };
 
   async function getNextClaimDate(token_id){
-      await Axios.get(`http://localhost:9001/api/getNextClaimDate/${address}/dl/${user_id}/${token_id}`).then(async (data)=>{
+      await Axios.get(`https://34.237.237.45:9001/api/getNextClaimDate/${address}/dl/${user_id}/${token_id}`).then(async (data)=>{
         //console.log("next claim: ", data.data);
         dataArray.push([token_id, data.data]);
         //console.log('foo: ', dataArray);

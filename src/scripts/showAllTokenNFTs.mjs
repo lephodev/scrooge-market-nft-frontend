@@ -9,7 +9,7 @@ import Axios from 'axios';
 import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useReward } from 'react-rewards';
-import getUserCookie from "../config/cookie.mjs";
+import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
 
 export default function ShowAllTokenNFTs() {
     const [buyLoading,setBuyLoading]=useState(false);
@@ -28,7 +28,7 @@ export default function ShowAllTokenNFTs() {
             const aff_id = Cookies.set('aff_id',  q );
             //console.log('cookie: ',aff_id);
         } else {
-            const aff_id = Cookies.get('aff_id', { domain: 'localhost:3000' });//change before going live
+            const aff_id = Cookies.get('aff_id', { domain: 'market.scrooge.casino:3000' });//change before going live
             //console.log('cookie: ',aff_id);
             if(aff_id){
                 setAffID(aff_id);
@@ -46,7 +46,7 @@ export default function ShowAllTokenNFTs() {
     const [user, setUser]=useState([]);
     async function checkToken() {
         //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-        let access_token = getUserCookie();
+        let access_token = getUserCookieProd();
         if (access_token){
         try {
             const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
@@ -84,7 +84,7 @@ export default function ShowAllTokenNFTs() {
         user_id = user[0];
         try {
             await contract.buyoutListing(token_id, qty);
-            Axios.get(`http://localhost:9001/api/getFreeTokens/${address}/${token_id}/${user_id}/${qty}/${affID}`).then((data)=>{
+            Axios.get(`https://34.237.237.45:9001/api/getFreeTokens/${address}/${token_id}/${user_id}/${qty}/${affID}`).then((data)=>{
                 notify("You have successfully purchased your NFT and "+data.data+" chips have been added to your casino account!");
                 setBuyLoading(false);
                 setBuySuccess(true);
