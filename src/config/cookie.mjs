@@ -7,7 +7,8 @@ export function getUserCookie() {
 
 export function getUserCookieProd() {
     let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-    if (access_token.indexOf("token") >= 0) {
+    console.log('access_token', access_token);
+    if (access_token) {
         return access_token;
       } else {
         return false;
