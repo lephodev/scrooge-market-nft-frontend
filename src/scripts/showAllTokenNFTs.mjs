@@ -28,7 +28,7 @@ export default function ShowAllTokenNFTs() {
             const aff_id = Cookies.set('aff_id',  q );
             //console.log('cookie: ',aff_id);
         } else {
-            const aff_id = Cookies.get('aff_id', { domain: 'market.scrooge.casino:3000' });//change before going live
+            const aff_id = Cookies.get('aff_id', { domain: 'https://market.scrooge.casino' });//change before going live
             //console.log('cookie: ',aff_id);
             if(aff_id){
                 setAffID(aff_id);
