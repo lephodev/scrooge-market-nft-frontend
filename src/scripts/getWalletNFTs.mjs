@@ -11,14 +11,7 @@ export default function GetWalletNFTs() {
   const address = useAddress();
   const { contract } = useContract(addresses[String(selectedChain)]);
   const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
-  if(contract){
-    console.log("Contract: ", contract);
-  }
-  
-  if(nfts){
-    console.log("NFTs: ", nfts);
-    console.log("NFT length: ", nfts.length);
-  }
+ 
   
   return (
     

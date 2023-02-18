@@ -1,36 +1,33 @@
 import { ConnectWallet, useNetworkMismatch, useAddress } from "@thirdweb-dev/react";
+import {useEffect} from 'react';
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
+import ScroogeCasino from '../images/scroogeCasinoLogo.png';
 
 export default function Login() {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, []);
   const address = useAddress();
   const isMismatched = useNetworkMismatch();
 
   return (
     <div className="container">
       <main className="main">
-      <h1 className="title">
-          LOGIN TO YOUR ACCOUNT
-        </h1>
-        <br></br><br></br>
-       {(isMismatched) ? (<SwitchNetworkBSC />) : 
-          (<span></span>)}
-
-        {(!address) ? (<div>
-          <p className="description yellow">
-          Get started by connecting your wallet.
-          </p>
-        
-          <div className="connect-wallet-div">
-            <ConnectWallet />
+      
+        <div className="login-page-body">
+          <div>
+            <img className="login-page-img" src={ScroogeCasino} alt="Everything you need for Scrooge Casino" />
           </div>
-        </div>) : 
-          (<span></span>)}
-
+          <div className="login-page-desc">
+            You must be logged into your Scrooge Casino player account in order to access several areas of this marketplace. 
+            Please <a href="https://scrooge.casino/login" target="_blank" rel="noreferrer" alt="Login to Scrooge Casino">LOG IN</a> and then return to the marketplace.
+          </div>
+          <a href="https://scrooge.casino/login" target="_blank" rel="noreferrer" alt="Login to Scrooge Casino"><button className="submit-btn">LOGIN TO YOUR SCROOGE CASINO ACCOUNT</button></a>
+        </div>
         
 
-        <br></br><br></br>
-        <ShowBottomNavCards />
+
       </main>
     </div>
   );

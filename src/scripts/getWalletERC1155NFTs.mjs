@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 import Axios from 'axios';
 import LoadingGif from '../images/loading1.gif';
 import { ToastContainer, toast } from 'react-toastify';
-import ReactDOM from 'react-dom';
-import Modal from 'react-modal';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactModal from 'react-modal';
 
@@ -21,8 +19,8 @@ export default function GetWalletERC1155NFTs() {
       };
   const address = useAddress();
   function notify(message) {
-    toast(message);
-  } 
+    toast.success('🎩 '+message);
+  };
   const user_id = 1;
   const { contract } = useContract("0x729FDb31f1Cd2633aE26F0A87EfD0CC55a336F9f");
   //const { contract } = useContract("0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768");
@@ -55,13 +53,13 @@ export default function GetWalletERC1155NFTs() {
       //alert('Your email is '+emailaddress);
       setShowModal(false);
       setBurnLoading(true);
-      Axios.get(`http://localhost:3002/api/verifyEmail/${emailaddress}`).then((data)=>{
+      Axios.get(`http://localhost:9001/api/verifyEmail/${emailaddress}`).then((data)=>{
           //setNFTBalance(data.data);
           //setBurnLoading(false);
           const username = data.data[0].username;
-          console.log(data.data[0].username);
+          //console.log(data.data[0].username);
           if (username != null){
-            if (window.confirm("Email address verified for username: "+data.data[0].username+". Is this correct?") == true) {
+            if (window.confirm("Email address verified for username: "+data.data[0].username+". Is this correct?") === true) {
               usernameConfirmed = true;
             } else {
               usernameConfirmed = false;
@@ -78,8 +76,8 @@ export default function GetWalletERC1155NFTs() {
               try {
         
                 const result = await contract.erc1155.burnFrom(address, token_id, qty);
-                console.log("NFT REDEEMED!! Your chips will be added shortly.");
-                Axios.get(`http://localhost:3002/api/redeemTokenNFT/${address}/${token_id}/${user_id}/${qty}`).then((data)=>{
+                //console.log("NFT REDEEMED!! Your chips will be added shortly.");
+                Axios.get(`http://localhost:9001/api/redeemTokenNFT/${address}/${token_id}/${user_id}/${qty}`).then((data)=>{
                   //setNFTBalance(data.data);
                   setBurnLoading(false);
                   notify("You have successfully redeemed your NFT and "+data.data+" chips have been added to your casino account with email address: "+emailaddress+"!");
@@ -95,24 +93,24 @@ export default function GetWalletERC1155NFTs() {
               setBurnLoading(false);
               notify("Canceled by user. Please try again.");
             }
-            
           });
-
-      
-        
-      
-      
-    }
-    
-      
+    }    
 }
     
   return (
     <div className="bordered-section">
-      <ToastContainer 
-                position='top-center'
-                autoClose={4000}
-                />
+      <ToastContainer
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        />
       <ReactModal
                 isOpen = {showModal}
                 contentLabel = {"Modal Challenge 1"}
@@ -172,7 +170,7 @@ export default function GetWalletERC1155NFTs() {
       ) : (
         <div className="flex-row">
           {nfts.map((nft) => (
-            <div className="erc1155Card">
+            <div className="erc1155Card" key={nft.metadata.name}>
               
                 <div className="erc1155Card-image">
                 <ThirdwebNftMedia

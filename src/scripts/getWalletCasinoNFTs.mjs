@@ -1,13 +1,15 @@
-import { useAddress, useOwnedNFTs, useContract, useBurnNFT, ThirdwebNftMedia } from "@thirdweb-dev/react";
+import { useAddress, useOwnedNFTs, useContract, useBurnNFT, ThirdwebNftMedia, ChainId } from "@thirdweb-dev/react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
 import LoadingGif from '../images/loading1.gif';
+import LoadingPoker from '../images/scroogeHatLogo.png';
 import { ToastContainer, toast } from 'react-toastify';
-import ReactDOM from 'react-dom';
-import Modal from 'react-modal';
+import ChainContext from "../context/Chain";
+import { useContext } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import ReactModal from 'react-modal';
+import { Tooltip } from "../pages/Layout.mjs";
 
 export default function GetWalletERC1155NFTs() {
   const [showModal, setShowModal]=useState(false);
@@ -16,12 +18,12 @@ export default function GetWalletERC1155NFTs() {
   const [email, setEmail]=useState('');
     const handleChange = event => {
         setEmail(event.target.value);
-    
-        //console.log('value is:', event.target.value);
       };
+
+  
   const address = useAddress();
   function notify(message) {
-    toast(message);
+    toast.success('🎩 '+message);
   } 
   const user_id = 1;
   const { contract } = useContract("0x729FDb31f1Cd2633aE26F0A87EfD0CC55a336F9f");
@@ -55,13 +57,13 @@ export default function GetWalletERC1155NFTs() {
       //alert('Your email is '+emailaddress);
       setShowModal(false);
       setBurnLoading(true);
-      Axios.get(`http://localhost:3002/api/verifyEmail/${emailaddress}`).then((data)=>{
+      Axios.get(`http://localhost:9001/api/verifyEmail/${emailaddress}`).then((data)=>{
           //setNFTBalance(data.data);
           //setBurnLoading(false);
           const username = data.data[0].username;
-          console.log(data.data[0].username);
+          //console.log(data.data[0].username);
           if (username != null){
-            if (window.confirm("Email address verified for username: "+data.data[0].username+". Is this correct?") == true) {
+            if (window.confirm("Email address verified for username: "+data.data[0].username+". Is this correct?") === true) {
               usernameConfirmed = true;
             } else {
               usernameConfirmed = false;
@@ -78,8 +80,8 @@ export default function GetWalletERC1155NFTs() {
               try {
         
                 //const result = await contract.erc1155.burnFrom(address, token_id, qty);
-                console.log("NFT REDEEMED!! Your chips will be added shortly.");
-                Axios.get(`http://localhost:3002/api/redeemTokenNFT/${address}/${token_id}/${user_id}/${qty}`).then((data)=>{
+                //console.log("NFT REDEEMED!! Your chips will be added shortly.");
+                Axios.get(`http://localhost:9001/api/redeemTokenNFT/${address}/${token_id}/${user_id}/${qty}`).then((data)=>{
                   //setNFTBalance(data.data);
                   setBurnLoading(false);
                   notify("You have successfully purchased your NFT and "+data.data+" chips have been added to your casino account with email address: "+emailaddress+"!");
@@ -97,22 +99,28 @@ export default function GetWalletERC1155NFTs() {
             }
             
           });
-
-      
-        
-      
       
     }
-    
-      
 }
+useEffect(() => {
+  window.scrollTo(0, 0);
+  
+}, []);
     
   return (
     <div className="full-page-container">
-      <ToastContainer 
-                position='top-center'
-                autoClose={4000}
-                />
+      <ToastContainer
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        />
       <ReactModal
                 isOpen = {showModal}
                 contentLabel = {"Modal Challenge 1"}
@@ -122,7 +130,7 @@ export default function GetWalletERC1155NFTs() {
                       top: 0,
                       left: 0,
                       right: 0,
-                      bottom:'30%',
+                      bottom:'10%',
                       backgroundColor: 'rgba(231,201,117,0.85)'
                     },
                     content: {
@@ -162,24 +170,21 @@ export default function GetWalletERC1155NFTs() {
           <img className="loading-img" src={LoadingGif} alt="Loading..." />
         </div>) : (<></>)}
         <div className="pageTitle">
-            <h1>My Scrooge Casino Token NFTs</h1>
+            <h1>My Scrooge Casino NFTs</h1>
         </div>
       
-      {isLoading ? (
-        <div className="loading-img-div">
-          <img className="loading-img" src={LoadingGif} alt="Loading..." />
-        </div>
-      ) : (
+      {isLoading ? (<div className="pageImgContainer">
+                    <img src={LoadingPoker} alt="game" className="imageAnimation" />
+                    <div className='loading-txt pulse'>
+                        LOADING WALLET...
+                    </div>
+                </div>) : (
         <div className="flex-row">
           {nfts.map((nft) => (
-            <div className="erc1155Card">
+            <div className="erc1155Card" key={nft.metadata.id}>
               
-                <div className="erc1155Card-image">
-                <ThirdwebNftMedia
-                  key={nft.metadata.id}
-                  metadata={nft.metadata}
-                  height={200}
-                />
+                <div className="erc1155Card-image" >
+                {Tooltip(nft.metadata.id,nft.metadata,nft.metadata.description)}
                 
               </div>
               <div className="erc1155Card-details">
@@ -187,6 +192,8 @@ export default function GetWalletERC1155NFTs() {
                 
                 <span className="erc1155-price">Quantity Owned: <span>{nft.quantityOwned}</span></span><br></br>
                 
+                
+            
               </div>
               
             </div>
@@ -196,10 +203,15 @@ export default function GetWalletERC1155NFTs() {
       )}
       <div className="bottom-row-btns-div">
         <Link to="/nft-tokens">
-            <button className="subheader-btn">
-                BUY MORE NFTS
-            </button>
-          </Link>
+          <button className="subheader-btn">
+              BUY MORE NFTS
+          </button>
+        </Link>
+        <Link to="/redeem-prizes">
+          <button className="subheader-btn">
+              REDEEM MORE REWARDS
+          </button>
+        </Link>
       </div>
     </div>
     

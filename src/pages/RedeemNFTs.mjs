@@ -1,10 +1,13 @@
 import GetWalletERC1155NFTs from "../scripts/getWalletERC1155NFTs.mjs";
+import {useEffect} from 'react';
 import { ConnectWallet, useNetworkMismatch, useAddress } from "@thirdweb-dev/react";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 
 export default function RedeemNFTs() {
-
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, []);
   const address = useAddress();
   const isMismatched = useNetworkMismatch();
   

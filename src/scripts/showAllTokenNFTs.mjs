@@ -1,160 +1,155 @@
-import React,{useState,useEffect} from 'react';
+import {useState,useEffect} from 'react';
 import { useContract, ThirdwebNftMedia, useActiveListings, ConnectWallet, useAddress } from "@thirdweb-dev/react";
-import { useNavigate } from "react-router-dom";
 import SaleBadge from '../images/saleBadge1.png';
-import LoadingGif from '../images/loading1.gif';
+import StripeBadge from '../images/buyWithStripe.jpg';
+import LoadingPoker from '../images/scroogeHatLogo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ReactModal from 'react-modal';
 import Axios from 'axios';
+import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { useReward } from 'react-rewards';
+import getUserCookie from "../config/cookie.mjs";
 
 export default function ShowAllTokenNFTs() {
     const [buyLoading,setBuyLoading]=useState(false);
-    const [showModal, setShowModal]=useState(false);
-    const [NFTRedeemID, setNFTRedeemID]=useState('');
-    const [NFTRedeemName, setNFTRedeemName]=useState('');
-    const [email, setEmail]=useState('');
-        const handleChange = event => {
-            setEmail(event.target.value);
-        };
+    const [buySuccess,setBuySuccess]=useState(false);
 
     const address = useAddress();
     let user_id = '';
+    const location = useLocation();
+    //console.log('loc: ',location.search);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [affID, setAffID] = useState('');
+    function getAffData() {
+        const q = searchParams.get('aff_id');
+        if(q){
+            setAffID(q);
+            const aff_id = Cookies.set('aff_id',  q );
+            //console.log('cookie: ',aff_id);
+        } else {
+            const aff_id = Cookies.get('aff_id', { domain: 'localhost:3000' });//change before going live
+            //console.log('cookie: ',aff_id);
+            if(aff_id){
+                setAffID(aff_id);
+            }
+        }
+    }
+    
+    
 
     function notify(message) {
-        toast(message);
-    } 
+        toast.success('🎩 '+message);
+      };
 
-    let navigate = useNavigate(); 
-    const routeChange = () =>{ 
-      let path = `/nft-tokens`; 
-      navigate(path);
-    }
+    const navigate = useNavigate();
+    const [user, setUser]=useState([]);
+    async function checkToken() {
+        //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
+        let access_token = getUserCookie();
+        if (access_token){
+        try {
+            const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
+            headers: {
+                'Authorization': `Bearer ${access_token}`
+            }
+            }).then((res) =>{ 
+            //console.log('resy: ',res);
+            if (typeof res.data.user.id !== "undefined") {
+                setUser([res.data.user.id, res.data.user.username, res.data.user.firstName, res.data.user.lastName, res.data.user.profile, res.data.user.ticket, res.data.user.wallet]);
+                user_id = res.data.user.id;
+                } else {
+                    setUser(null);
+                    navigate("/login", { replace: true });
+                }
+                });
+        } catch (error) {
+            setUser(null);
+            navigate("/login", { replace: true });
+        }
+        } else {
+        setUser(null);
+        navigate("/login", { replace: true });
+        }
+    };
 
     const { contract } = useContract("0x91197754fCC899B543FebB5BE4dae193C75EF9d1", "marketplace")
     // data is the active listings, isLoading is a loading flag while we load the listings.
-    const { data: listings, isLoading: loadingListings } =
-      useActiveListings(contract);
+    const { data: listings, isLoading: loadingListings } = useActiveListings(contract);
+    const { reward, isAnimating } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
 
-    function getEmailAddress(NFT_ID, NFT_Name){
-    setShowModal(true);
-    setNFTRedeemID(NFT_ID);
-    setNFTRedeemName(NFT_Name);
-    }
-
-    async function handleBuyAsset(token_id, qty, emailaddress) {
+    async function handleBuyAsset(token_id, qty) {
         setBuyLoading(true);
-        let usernameConfirmed = false;
-        if (emailaddress == null || emailaddress === '' || emailaddress === 'Email Address') {
-            notify('No email entered.');
-          } else {
-            setShowModal(false);
-            setBuyLoading(true);
-            Axios.get(`http://3.238.243.35:9002/api/verifyEmail/${emailaddress}`).then((data)=>{
-                console.log(data);
-          const username = data.data.username;
-          user_id = data.data._id;
-          console.log('User ID: '+user_id+'');
-          if (username != null){
-            if (window.confirm("Email address verified for username: "+username+". Is this correct?") == true) {
-              usernameConfirmed = true;
-            } else {
-              usernameConfirmed = false;
-              setBuyLoading(false);
-              return false;
-            }
-          } else {
-            notify('Email address not found. Please try again.');
-            return false;
-          }
-          }).then(async () => {
-            if (usernameConfirmed){
-                try {
-                    await contract.buyoutListing(token_id, qty);
-                    Axios.get(`http://3.238.243.35:9002/api/getFreeTokens/${address}/${token_id}/${user_id}/${qty}`).then((data)=>{
-                        notify("You have successfully purchased your NFT and "+data.data+" chips have been added to your casino account with email address: "+emailaddress+"!");
-                        setBuyLoading(false);    
-                    });
-                    setBuyLoading(false);
-                    //window.location.reload();
-                  } catch (err) {
-                    console.error(err);
-                    notify("Error purchasing NFT!");
-                    setBuyLoading(false);
-                  };
-            } else {
-              setBuyLoading(false);
-              notify("Canceled by user. Please try again.");
-            }
-          });
-        } 
+        qty=1;
+        user_id = user[0];
+        try {
+            await contract.buyoutListing(token_id, qty);
+            Axios.get(`http://localhost:9001/api/getFreeTokens/${address}/${token_id}/${user_id}/${qty}/${affID}`).then((data)=>{
+                notify("You have successfully purchased your NFT and "+data.data+" chips have been added to your casino account!");
+                setBuyLoading(false);
+                setBuySuccess(true);
+            });
+        } catch (err) {
+            console.error(err);
+            notify("Error purchasing NFT!");
+            setBuyLoading(false);
+        };
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        checkToken();
+        getAffData();
+      }, []);
         
   return (
     <div>
-        <ToastContainer 
-                position='top-center'
-                autoClose={4000}
-                />
-        <ReactModal
-                isOpen = {showModal}
-                contentLabel = {"Modal Challenge 1"}
-                style={{
-                    overlay: {
-                      position: 'fixed',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom:'30%',
-                      backgroundColor: 'rgba(231,201,117,0.85)'
-                    },
-                    content: {
-                      position: 'absolute',
-                      top: '30px',
-                      left: '30px',
-                      right: '30px',
-                      bottom: '30px',
-                      border: '4px solid #D2042D',
-                      background: '#1b2129',
-                      overflow: 'auto',
-                      WebkitOverflowScrolling: 'touch',
-                      borderRadius: '4px',
-                      outline: 'none',
-                      padding: '20px'
-                    }
-                  }}
-                >
-                    <div className='modal-popup'>
-                        <div className='modal-header'>
-                            Please enter your Scrooge Casino profile email address.<br></br>Your chips will be credited to this account.
-                        </div>
-                        <form>
-                            <input type="text" id="emailaddress" name="emailaddress" placeholder='Email Address' onChange={handleChange}
-                            value={email}></input>
-                            
-                        </form>
-                        <div>
-                          <br></br>
-                          <strong>NFT to purchase: </strong>{NFTRedeemName}
-                        </div>
-                        <button className="modal-popup-btn" onClick={() => handleBuyAsset(NFTRedeemID,1,email)}>SUBMIT</button><br></br><br></br>
-                        <button className="modal-popup-btn" onClick={() => setShowModal(false)}>CLOSE</button>
+        <ToastContainer
+            position="top-center"
+            autoClose={4000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            />
+        
+        {buyLoading ? (<div className="pageImgContainer">
+                    <img src={LoadingPoker} alt="game" className="imageAnimation" />
+                    <div className='loading-txt pulse'>
+                        PURCHASING...
                     </div>
-            </ReactModal>
-        {buyLoading ? (<div className="loading-img-div">
-          <img className="loading-img" src={LoadingGif} alt="Loading..." />
-        </div>) : (<></>)}
+                </div>) : (<></>)}
+        {buySuccess ? (<div className="pageImgContainer">
+                
+                <div className='loading-txt'>
+                    PURCHASED SUCCESSFULLY<br></br>
+                    <button className="page-nav-header-btn" onClick={(() => {
+                        setBuySuccess(false);
+                        reward();
+                    })}>CLOSE</button>
+                </div>
+                
+                
+            </div>) : (<></>)}
         <div className="nft-home-sell-title">
             <h1>Scrooge Casino Marketplace NFTs</h1>
         </div>
-        
+        <div className="feature-overview-div" style={{marginBottom: '30px'}}>
+                Running low in the casino? Lucky for you, we have a great selection of purchasable casino badge NFTs that include a special bonus amount of FREE TOKENS 
+                to be used in <a href="https://scrooge.casino" target="_blank" rel="noreferrer" alt="buy your Scrooge Casino NFTs today">Scrooge Casino</a>. Simply choose the badge that is perfect for you 
+                from the list below, make your purchase, and your free bonus tokens will be automatically credited to your connected Scrooge Casino account. It couldn't be easier!
+            </div>
       {loadingListings ? (
         <div className="loading-img-div">
-            <img className="loading-img" src={LoadingGif} alt="Loading..." />
+            <img src={LoadingPoker} alt="game" className="imageAnimation" />
         </div>
       ) : (
         <div className="">
-          
+          <div style={{width: "100%", textAlign: "center"}}><div id="rewardId" style={{margin: "0 auto"}} /></div>
             <div className="nft-token-row-card">
                 <div className="nft-token-row-card-image">
                     <ThirdwebNftMedia
@@ -173,11 +168,12 @@ export default function ShowAllTokenNFTs() {
                     {(!address) ? (<div className='connect-wallet-inline'>
                         <ConnectWallet />
                         </div>) : 
-                        (<button className="erc1155-buy-btn" onClick={() => getEmailAddress(listings[0].asset.id, listings[0].asset.name.toString())} id={listings[0].asset.name.toString()}>
+                        (<button className="erc1155-buy-btn" onClick={() => handleBuyAsset(listings[0].asset.id, 1)} id={listings[0].asset.name.toString()}>
                             BUY NFT!
                         </button>)}
-                    
-
+                </div>
+                <div className="nft-token-stripe-badge-div">
+                    <a href={`https://buy.stripe.com/test_7sIbJSfwn5mb4p2dQS?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
             </div>
 
@@ -199,9 +195,12 @@ export default function ShowAllTokenNFTs() {
                     {(!address) ? (<div className='connect-wallet-inline'>
                         <ConnectWallet />
                         </div>) : 
-                        (<button className="erc1155-buy-btn" onClick={() => getEmailAddress(listings[1].asset.id, listings[1].asset.name.toString())} id={listings[1].asset.name.toString()}>
+                        (<button className="erc1155-buy-btn" onClick={() => handleBuyAsset(listings[1].asset.id, 1)} id={listings[1].asset.name.toString()}>
                             BUY NFT!
                         </button>)}
+                </div>
+                <div className="nft-token-stripe-badge-div">
+                    <a href={`https://buy.stripe.com/dR6bLA6ZIesc86s289?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
             </div>
 
@@ -223,9 +222,12 @@ export default function ShowAllTokenNFTs() {
                     {(!address) ? (<div className='connect-wallet-inline'>
                         <ConnectWallet />
                         </div>) : 
-                        (<button className="erc1155-buy-btn" onClick={() => getEmailAddress(listings[2].asset.id, listings[2].asset.name.toString())} id={listings[2].asset.name.toString()}>
+                        (<button className="erc1155-buy-btn" onClick={() => handleBuyAsset(listings[2].asset.id, 1)} id={listings[2].asset.name.toString()}>
                             BUY NFT!
                         </button>)}
+                </div>
+                <div className="nft-token-stripe-badge-div">
+                    <a href={`https://buy.stripe.com/00g5ncesaabW9aw8wy?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -251,9 +253,12 @@ export default function ShowAllTokenNFTs() {
                     {(!address) ? (<div className='connect-wallet-inline'>
                         <ConnectWallet />
                         </div>) : 
-                        (<button className="erc1155-buy-btn" onClick={() => getEmailAddress(listings[3].asset.id, listings[3].asset.name.toString())} id={listings[3].asset.name.toString()}>
+                        (<button className="erc1155-buy-btn" onClick={() => handleBuyAsset(listings[3].asset.id, 1)} id={listings[3].asset.name.toString()}>
                             BUY NFT!
                         </button>)}
+                </div>
+                <div className="nft-token-stripe-badge-div">
+                    <a href={`https://buy.stripe.com/eVaaHw5VEfwg72obIL?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -279,9 +284,12 @@ export default function ShowAllTokenNFTs() {
                     {(!address) ? (<div className='connect-wallet-inline'>
                         <ConnectWallet />
                         </div>) : 
-                        (<button className="erc1155-buy-btn" onClick={() => getEmailAddress(listings[4].asset.id, listings[4].asset.name.toString())} id={listings[4].asset.name.toString()}>
+                        (<button className="erc1155-buy-btn" onClick={() => handleBuyAsset(listings[4].asset.id, 1)} id={listings[4].asset.name.toString()}>
                             BUY NFT!
                         </button>)}
+                </div>
+                <div className="nft-token-stripe-badge-div">
+                    <a href={`https://buy.stripe.com/bIYcPE3NwabW2M8bIM?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -307,9 +315,12 @@ export default function ShowAllTokenNFTs() {
                     {(!address) ? (<div className='connect-wallet-inline'>
                         <ConnectWallet />
                         </div>) : 
-                        (<button className="erc1155-buy-btn" onClick={() => getEmailAddress(listings[5].asset.id, listings[5].asset.name.toString())} id={listings[5].asset.name.toString()}>
+                        (<button className="erc1155-buy-btn" onClick={() => handleBuyAsset(listings[5].asset.id, 1)} id={listings[5].asset.name.toString()}>
                             BUY NFT!
                         </button>)}
+                </div>
+                <div className="nft-token-stripe-badge-div">
+                    <a href={`https://buy.stripe.com/3cs2b03Nw83OaeAfZ3?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -335,9 +346,12 @@ export default function ShowAllTokenNFTs() {
                     {(!address) ? (<div className='connect-wallet-inline'>
                         <ConnectWallet />
                         </div>) : 
-                        (<button className="erc1155-buy-btn" onClick={() => getEmailAddress(listings[6].asset.id, listings[6].asset.name.toString())} id={listings[6].asset.name.toString()}>
+                        (<button className="erc1155-buy-btn" onClick={() => handleBuyAsset(listings[6].asset.id, 1)} id={listings[6].asset.name.toString()}>
                             BUY NFT!
                         </button>)}
+                </div>
+                <div className="nft-token-stripe-badge-div">
+                    <a href={`https://buy.stripe.com/5kAeXM1Fo97S2M8aEK?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -363,9 +377,12 @@ export default function ShowAllTokenNFTs() {
                     {(!address) ? (<div className='connect-wallet-inline'>
                         <ConnectWallet />
                         </div>) : 
-                        (<button className="erc1155-buy-btn" onClick={() => getEmailAddress(listings[7].asset.id, listings[7].asset.name.toString())} id={listings[7].asset.name.toString()}>
+                        (<button className="erc1155-buy-btn" onClick={() => handleBuyAsset(listings[7].asset.id, 1)} id={listings[7].asset.name.toString()}>
                             BUY NFT!
                         </button>)}
+                </div>
+                <div className="nft-token-stripe-badge-div">
+                    <a href={`https://buy.stripe.com/28oeXM4RAesc2M86ov?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -391,9 +408,12 @@ export default function ShowAllTokenNFTs() {
                     {(!address) ? (<div className='connect-wallet-inline'>
                         <ConnectWallet />
                         </div>) : 
-                        (<button className="erc1155-buy-btn" onClick={() => getEmailAddress(listings[8].asset.id, listings[8].asset.name.toString())} id={listings[8].asset.name.toString()}>
+                        (<button className="erc1155-buy-btn" onClick={() => handleBuyAsset(listings[8].asset.id, 1)} id={listings[8].asset.name.toString()}>
                             BUY NFT!
                         </button>)}
+                </div>
+                <div className="nft-token-stripe-badge-div">
+                    <a href={`https://buy.stripe.com/aEU5nc5VEck4dqMcMU?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -419,9 +439,12 @@ export default function ShowAllTokenNFTs() {
                     {(!address) ? (<div className='connect-wallet-inline'>
                         <ConnectWallet />
                         </div>) : 
-                        (<button className="erc1155-buy-btn" onClick={() => getEmailAddress(listings[9].asset.id, listings[9].asset.name.toString())} id={listings[9].asset.name.toString()}>
+                        (<button className="erc1155-buy-btn" onClick={() => handleBuyAsset(listings[9].asset.id, 1)} id={listings[9].asset.name.toString()}>
                             BUY NFT!
                         </button>)}
+                </div>
+                <div className="nft-token-stripe-badge-div">
+                    <a href={`https://buy.stripe.com/8wM16Wck25VG86sbIR?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -447,17 +470,18 @@ export default function ShowAllTokenNFTs() {
                     {(!address) ? (<div className='connect-wallet-inline'>
                         <ConnectWallet />
                         </div>) : 
-                        (<button className="erc1155-buy-btn" onClick={() => getEmailAddress(listings[10].asset.id, listings[10].asset.name.toString())} id={listings[10].asset.name.toString()}>
+                        (<button className="erc1155-buy-btn" onClick={() => handleBuyAsset(listings[10].asset.id, 1)} id={listings[10].asset.name.toString()}>
                             BUY NFT!
                         </button>)}
+                </div>
+                <div className="nft-token-stripe-badge-div">
+                    <a href={`https://buy.stripe.com/eVa16W2JsesccmI4gq?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
                     9% OFF
                 </div>
             </div>
-            
-         
         </div>
       )}
     </div>
