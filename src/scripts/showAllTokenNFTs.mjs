@@ -3,47 +3,21 @@ import { useContract, ThirdwebNftMedia, useActiveListings, ConnectWallet, useAdd
 import SaleBadge from '../images/saleBadge1.png';
 import StripeBadge from '../images/buyWithStripe.jpg';
 import LoadingPoker from '../images/scroogeHatLogo.png';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useReward } from 'react-rewards';
-import {getUserCookieProd} from "../config/cookie.mjs";
 import AuthContext from '../context/authContext';
+import { toast } from 'react-toastify';
 
 export default function ShowAllTokenNFTs() {
     const [buyLoading,setBuyLoading]=useState(false);
     const [buySuccess,setBuySuccess]=useState(false);
-
+   const { user } = useContext(AuthContext);
     const address = useAddress();
-    let user_id = '';
-    //console.log('loc: ',location.search);
     const [searchParams] = useSearchParams();
     const [affID, setAffID] = useState('');
-    function getAffData() {
-        const q = searchParams.get('aff_id');
-        if(q){
-            setAffID(q);
-            const aff_id = Cookies.set('aff_id',  q );
-            console.log('cookie: ',aff_id);
-        } else {
-            const aff_id = Cookies.get('aff_id', { domain: 'https://market.scrooge.casino' });//change before going live
-            //console.log('cookie: ',aff_id);
-            if(aff_id){
-                setAffID(aff_id);
-            }
-        }
-    }
-    
-    
-
-    function notify(message) {
-        toast.success('🎩 '+message);
-      };
-
-    const navigate = useNavigate();
-   const { user } = useContext(AuthContext);
   
 
     const { contract } = useContract("0x91197754fCC899B543FebB5BE4dae193C75EF9d1", "marketplace")
@@ -52,41 +26,49 @@ export default function ShowAllTokenNFTs() {
     const { reward } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
 
     async function handleBuyAsset(token_id, qty) {
+        if(!user)
+        return toast.error('Please Login first', { containerId: 'authenticate'});
         setBuyLoading(true);
         qty=1;
-        user_id = user[0];
+        
         try {
             await contract.buyoutListing(token_id, qty);
-            Axios.get(`https://34.237.237.45:9001/api/getFreeTokens/${address}/${token_id}/${user_id}/${qty}/${affID}`).then((data)=>{
-                notify("You have successfully purchased your NFT and "+data.data+" chips have been added to your casino account!");
+            Axios.get(`https://34.237.237.45:9001/api/getFreeTokens/${address}/${token_id}/${user?.id}/${qty}/${affID}`).then((data)=>{
+                toast.success("You have successfully purchased your NFT and "+data.data+" chips have been added to your casino account!", { containerId: 'purchased'});
                 setBuyLoading(false);
                 setBuySuccess(true);
             });
         } catch (err) {
             console.error(err);
-            notify("Error purchasing NFT!");
+            toast.error('Error purchasing NFT!', { containerId: 'authenticate'});
             setBuyLoading(false);
         };
     }
 
+    const handleBuyStripe = () => {
+        window.open(`https://buy.stripe.com/test_7sIbJSfwn5mb4p2dQS?client_reference_id=${address}_${user?.id}_${affID}`, '__blank')
+    }
+
     useEffect(() => {
+        function getAffData() {
+            const q = searchParams.get('aff_id');
+            if(q){
+                setAffID(q);
+                const aff_id = Cookies.set('aff_id',  q );
+                console.log('cookie: ',aff_id);
+            } else {
+                const aff_id = Cookies.get('aff_id', { domain: 'https://market.scrooge.casino' });//change before going live
+                //console.log('cookie: ',aff_id);
+                if(aff_id){
+                    setAffID(aff_id);
+                }
+            }
+        }
         getAffData();
-      }, [getAffData]);
+      }, [searchParams]);
         
   return (
     <div>
-        <ToastContainer
-            position="top-center"
-            autoClose={4000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-            />
         
         {buyLoading ? (<div className="pageImgContainer">
                     <img src={LoadingPoker} alt="game" className="imageAnimation" />
@@ -121,6 +103,7 @@ export default function ShowAllTokenNFTs() {
       ) : (
         <div className="">
           <div style={{width: "100%", textAlign: "center"}}><div id="rewardId" style={{margin: "0 auto"}} /></div>
+          
             <div className="nft-token-row-card">
                 <div className="nft-token-row-card-image">
                     <ThirdwebNftMedia
@@ -143,8 +126,8 @@ export default function ShowAllTokenNFTs() {
                             BUY NFT!
                         </button>)}
                 </div>
-                <div className="nft-token-stripe-badge-div">
-                    <a href={`https://buy.stripe.com/test_7sIbJSfwn5mb4p2dQS?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
+                <div className="nft-token-stripe-badge-div" onClick={handleBuyStripe}>
+                    <img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" />
                 </div>
             </div>
 
@@ -171,7 +154,7 @@ export default function ShowAllTokenNFTs() {
                         </button>)}
                 </div>
                 <div className="nft-token-stripe-badge-div">
-                    <a href={`https://buy.stripe.com/dR6bLA6ZIesc86s289?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
+                    <a href={`https://buy.stripe.com/dR6bLA6ZIesc86s289?client_reference_id=${address}_${user?.id}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
             </div>
 
@@ -198,7 +181,7 @@ export default function ShowAllTokenNFTs() {
                         </button>)}
                 </div>
                 <div className="nft-token-stripe-badge-div">
-                    <a href={`https://buy.stripe.com/00g5ncesaabW9aw8wy?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
+                    <a href={`https://buy.stripe.com/00g5ncesaabW9aw8wy?client_reference_id=${address}_${user?.id}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -229,7 +212,7 @@ export default function ShowAllTokenNFTs() {
                         </button>)}
                 </div>
                 <div className="nft-token-stripe-badge-div">
-                    <a href={`https://buy.stripe.com/eVaaHw5VEfwg72obIL?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
+                    <a href={`https://buy.stripe.com/eVaaHw5VEfwg72obIL?client_reference_id=${address}_${user?.id}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -260,7 +243,7 @@ export default function ShowAllTokenNFTs() {
                         </button>)}
                 </div>
                 <div className="nft-token-stripe-badge-div">
-                    <a href={`https://buy.stripe.com/bIYcPE3NwabW2M8bIM?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
+                    <a href={`https://buy.stripe.com/bIYcPE3NwabW2M8bIM?client_reference_id=${address}_${user?.id}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -291,7 +274,7 @@ export default function ShowAllTokenNFTs() {
                         </button>)}
                 </div>
                 <div className="nft-token-stripe-badge-div">
-                    <a href={`https://buy.stripe.com/3cs2b03Nw83OaeAfZ3?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
+                    <a href={`https://buy.stripe.com/3cs2b03Nw83OaeAfZ3?client_reference_id=${address}_${user?.id}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -322,7 +305,7 @@ export default function ShowAllTokenNFTs() {
                         </button>)}
                 </div>
                 <div className="nft-token-stripe-badge-div">
-                    <a href={`https://buy.stripe.com/5kAeXM1Fo97S2M8aEK?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
+                    <a href={`https://buy.stripe.com/5kAeXM1Fo97S2M8aEK?client_reference_id=${address}_${user?.id}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -353,7 +336,7 @@ export default function ShowAllTokenNFTs() {
                         </button>)}
                 </div>
                 <div className="nft-token-stripe-badge-div">
-                    <a href={`https://buy.stripe.com/28oeXM4RAesc2M86ov?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
+                    <a href={`https://buy.stripe.com/28oeXM4RAesc2M86ov?client_reference_id=${address}_${user?.id}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -384,7 +367,7 @@ export default function ShowAllTokenNFTs() {
                         </button>)}
                 </div>
                 <div className="nft-token-stripe-badge-div">
-                    <a href={`https://buy.stripe.com/aEU5nc5VEck4dqMcMU?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
+                    <a href={`https://buy.stripe.com/aEU5nc5VEck4dqMcMU?client_reference_id=${address}_${user?.id}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -415,7 +398,7 @@ export default function ShowAllTokenNFTs() {
                         </button>)}
                 </div>
                 <div className="nft-token-stripe-badge-div">
-                    <a href={`https://buy.stripe.com/8wM16Wck25VG86sbIR?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
+                    <a href={`https://buy.stripe.com/8wM16Wck25VG86sbIR?client_reference_id=${address}_${user?.id}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>
@@ -446,7 +429,7 @@ export default function ShowAllTokenNFTs() {
                         </button>)}
                 </div>
                 <div className="nft-token-stripe-badge-div">
-                    <a href={`https://buy.stripe.com/eVa16W2JsesccmI4gq?client_reference_id=${address}_${user[0]}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
+                    <a href={`https://buy.stripe.com/eVa16W2JsesccmI4gq?client_reference_id=${address}_${user?.id}_${affID}`} alt="buy with Stripe" target="_blank" rel="noreferrer"><img className="stripe-badge-img" src={StripeBadge} alt="Buy NFT with Stripe" /></a>
                 </div>
                 <div className="nft-token-row-sale">
                     <img className="sale-badge-img" src={SaleBadge} alt="Get the best deal possible" /><br></br>

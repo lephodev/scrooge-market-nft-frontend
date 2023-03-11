@@ -35,7 +35,7 @@ export default function App() {
   const [selectedChain, setSelectedChain] = useState(ChainId.BinanceSmartChainMainnet);
   const [user, setUser] = useState(null);
   const [cookies] = useCookies(['token']);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
  
 
@@ -46,6 +46,7 @@ export default function App() {
 
    // call this function when you want to authenticate the user
    const login = async () => {
+    console.log("api call")
     setLoading(true)
     let access_token = cookies.token;
     axios.get('https://api.scrooge.casino/v1/auth/check-auth',{
@@ -53,15 +54,16 @@ export default function App() {
         Authorization: `Bearer ${access_token}`
       }
     }).then((res: any)=>{ 
-      setLoading(false);
       // console.log(convertedData)
-      if (typeof res.data.user !== "undefined") {
+    if(res.data.user){
         console.log("user", res.data)
           setUser({
              ...res.data.user
           });
+          setLoading(false);
       } else {
         setUser(null);
+        setLoading(false);
         return <Navigate to="/login" />
       }
     }).catch((err: any) => {

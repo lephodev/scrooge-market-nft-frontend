@@ -7,6 +7,7 @@ import ShowAllTokenNFTs from "../scripts/showAllTokenNFTs.mjs";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import { useNetworkMismatch } from "@thirdweb-dev/react";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
+import Layout from "./Layout.mjs";
 
 export default function NFTTokens() {
   
@@ -19,6 +20,7 @@ export default function NFTTokens() {
   }, []);
 
   return (
+    <Layout>
     <div className="container">
       <main className="main">
         
@@ -47,5 +49,6 @@ export default function NFTTokens() {
         <ShowBottomNavCards />
       </main>
     </div>
+    </Layout>
   );
 }
