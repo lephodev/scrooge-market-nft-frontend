@@ -1,4 +1,4 @@
-import {useState,useEffect} from 'react';
+import {useState,useEffect, useContext} from 'react';
 import { useContract, ThirdwebNftMedia, useActiveListings, ConnectWallet, useAddress } from "@thirdweb-dev/react";
 import SaleBadge from '../images/saleBadge1.png';
 import StripeBadge from '../images/buyWithStripe.jpg';
@@ -6,10 +6,11 @@ import LoadingPoker from '../images/scroogeHatLogo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
-import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useReward } from 'react-rewards';
-import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
+import {getUserCookieProd} from "../config/cookie.mjs";
+import AuthContext from '../context/authContext';
 
 export default function ShowAllTokenNFTs() {
     const [buyLoading,setBuyLoading]=useState(false);
@@ -17,16 +18,15 @@ export default function ShowAllTokenNFTs() {
 
     const address = useAddress();
     let user_id = '';
-    const location = useLocation();
     //console.log('loc: ',location.search);
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const [affID, setAffID] = useState('');
     function getAffData() {
         const q = searchParams.get('aff_id');
         if(q){
             setAffID(q);
             const aff_id = Cookies.set('aff_id',  q );
-            //console.log('cookie: ',aff_id);
+            console.log('cookie: ',aff_id);
         } else {
             const aff_id = Cookies.get('aff_id', { domain: 'https://market.scrooge.casino' });//change before going live
             //console.log('cookie: ',aff_id);
@@ -43,40 +43,13 @@ export default function ShowAllTokenNFTs() {
       };
 
     const navigate = useNavigate();
-    const [user, setUser]=useState([]);
-    async function checkToken() {
-        //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-        let access_token = getUserCookieProd();
-        if (access_token){
-        try {
-            const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
-            headers: {
-                'Authorization': `Bearer ${access_token}`
-            }
-            }).then((res) =>{ 
-            //console.log('resy: ',res);
-            if (typeof res.data.user.id !== "undefined") {
-                setUser([res.data.user.id, res.data.user.username, res.data.user.firstName, res.data.user.lastName, res.data.user.profile, res.data.user.ticket, res.data.user.wallet]);
-                user_id = res.data.user.id;
-                } else {
-                    setUser(null);
-                    navigate("/login", { replace: true });
-                }
-                });
-        } catch (error) {
-            setUser(null);
-            navigate("/login", { replace: true });
-        }
-        } else {
-        setUser(null);
-        navigate("/login", { replace: true });
-        }
-    };
+   const { user } = useContext(AuthContext);
+  
 
     const { contract } = useContract("0x91197754fCC899B543FebB5BE4dae193C75EF9d1", "marketplace")
     // data is the active listings, isLoading is a loading flag while we load the listings.
     const { data: listings, isLoading: loadingListings } = useActiveListings(contract);
-    const { reward, isAnimating } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
+    const { reward } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
 
     async function handleBuyAsset(token_id, qty) {
         setBuyLoading(true);
@@ -97,10 +70,8 @@ export default function ShowAllTokenNFTs() {
     }
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-        checkToken();
         getAffData();
-      }, []);
+      }, [getAffData]);
         
   return (
     <div>

@@ -1,4 +1,4 @@
-import {useState,useEffect} from 'react';
+import {useState,useEffect, useContext} from 'react';
 import Axios from 'axios';
 import LoadingPoker from '../images/scroogeHatLogo.png';
 import { useAddress } from "@thirdweb-dev/react";
@@ -9,13 +9,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Navigate, useNavigate } from "react-router-dom";
 import { useReward } from 'react-rewards';
 import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
+import AuthContext from '../context/authContext';
+import Layout from './Layout.mjs';
 
 function RedeemPrizes() {
     const { reward, isAnimating } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
     let prizesReceived = 0;
+    const { user } = useContext(AuthContext)
     useEffect(() => {
-        window.scrollTo(0, 0);
-        checkToken();
         getCoinGeckoDataOG();
         getCoinGeckoDataJR();
         if (prizesReceived === 0) {
@@ -48,35 +49,7 @@ function RedeemPrizes() {
       }
     let user_id = '';
     const navigate = useNavigate();
-    const [user, setUser]=useState([]);
-    async function checkToken() {
-        //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-        let access_token = getUserCookieProd();
-        if (access_token){
-            try {
-            const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
-                headers: {
-                'Authorization': `Bearer ${access_token}`
-                }
-            }).then((res) =>{ 
-                //console.log('resy: ',res);
-                if (typeof res.data.user.id !== "undefined") {
-                    setUser([res.data.user.id, res.data.user.username, res.data.user.firstName, res.data.user.lastName, res.data.user.profile, res.data.user.ticket, res.data.user.wallet]);
-                    user_id = res.data.user.id;
-                    } else {
-                    setUser(null);
-                    navigate("/login", { replace: true });
-                    }
-                });
-            } catch (error) {
-            setUser(null);
-            navigate("/login", { replace: true });
-            }
-        } else {
-            setUser(null);
-            navigate("/login", { replace: true });
-        }
-    };
+   
 
     async function getPrizes(){
         setPrizesLoading(true);
@@ -185,6 +158,7 @@ function RedeemPrizes() {
     };
 
     return (
+        <Layout>
         <div className="bordered-section">
             {redeemLoading ? (<div className="pageImgContainer">
                     <img src={LoadingPoker} alt="game" className="imageAnimation" />
@@ -290,6 +264,7 @@ function RedeemPrizes() {
                 
             </div>
         </div>
+        </Layout>
         )
     }
     

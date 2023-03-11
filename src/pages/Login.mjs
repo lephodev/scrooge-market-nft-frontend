@@ -1,17 +1,21 @@
-import { ConnectWallet, useNetworkMismatch, useAddress } from "@thirdweb-dev/react";
-import {useEffect} from 'react';
-import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
-import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
+import {useContext, useEffect} from 'react';
 import ScroogeCasino from '../images/scroogeCasinoLogo.png';
+import { useNavigate } from "react-router-dom";
+import AuthContext from '../context/authContext';
+import Layout from './Layout.mjs';
 
 export default function Login() {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, []);
-  const address = useAddress();
-  const isMismatched = useNetworkMismatch();
+  const { user } = useContext(AuthContext);
+ const navigate = useNavigate();
+ useEffect(() => {
+  console.log("login", user)
+  if(user){
+    navigate('/')
+  }
+ },[user, navigate]);
 
   return (
+    <Layout>
     <div className="container">
       <main className="main">
       
@@ -30,5 +34,6 @@ export default function Login() {
 
       </main>
     </div>
+    </Layout>
   );
 }

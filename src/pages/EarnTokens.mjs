@@ -1,26 +1,21 @@
-import {useEffect} from 'react';
 import SharableData from '../components/SharableData.mjs';
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
+import Layout from './Layout.mjs';
 
 
 
 export default function EarnTokens() {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, []);
 
   return (
+    <Layout>
     <div className="">
       <main className="main">
-        
-        
-        
         <SharableData />
-        
         <div style={{height: '100px'}}></div>
         <ShowBottomNavCards />
 
       </main>
     </div>
+    </Layout>
   );
 }

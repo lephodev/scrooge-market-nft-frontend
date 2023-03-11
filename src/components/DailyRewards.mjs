@@ -1,4 +1,4 @@
-import {useState,useEffect} from 'react';
+import {useState,useEffect, useContext} from 'react';
 import Axios from 'axios';
 import LoadingPoker from '../images/scroogeHatLogo.png';
 import MoneyBagGreen from '../images/moneybagGreen.png';
@@ -7,45 +7,14 @@ import { useAddress } from "@thirdweb-dev/react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Countdown from 'react-countdown';
-import Cookies from 'js-cookie';
 import { Navigate, useNavigate } from "react-router-dom";
 import { useReward } from 'react-rewards';
 import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
+import AuthContext from '../hooks/useAuth';
 
 function DailyRewards() {
-  
-  const navigate = useNavigate();
-  const [user, setUser]=useState([]);
+ const { user } = useContext(AuthContext);
   const { reward, isAnimating } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
-  async function checkToken() {
-    //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-    let access_token = getUserCookieProd();
-    if (access_token){
-      try {
-        const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
-          headers: {
-            'Authorization': `Bearer ${access_token}`
-          }
-        }).then((res) =>{ 
-          //console.log('resy: ',res);
-          if (typeof res.data.user.id !== "undefined") {
-              setUser([res.data.user.id, res.data.user.username, res.data.user.firstName, res.data.user.lastName, res.data.user.profile, res.data.user.ticket, res.data.user.wallet]);
-              user_id = res.data.user.id;
-              } else {
-                setUser(null);
-                navigate("/login", { replace: true });
-              }
-            });
-      } catch (error) {
-        setUser(null);
-        navigate("/login", { replace: true });
-      }
-    } else {
-      setUser(null);
-      navigate("/login", { replace: true });
-    }
-  };
-
     const [buyLoading,setBuyLoading]=useState(false);
     const [nextClaimDate, setNextClaimDate]=useState("Loading...");
     const [fullDailyRewards,setFullDailyRewards]=useState(false);
@@ -111,14 +80,11 @@ const zzz = async () => {
 useEffect(() => {
   window.scrollTo(0, 0);
   
-  if(user[0]){
+  if(user){
     //console.log('UE zzz');
     zzz();
-  } else {
-    //console.log('checktoke');
-    checkToken();
   }
-}, [user]);
+}, [user, zzz]);
 
     return (<>
       {(fullDailyRewards)?(<>

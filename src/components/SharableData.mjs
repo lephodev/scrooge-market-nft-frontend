@@ -1,50 +1,36 @@
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import Axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Countdown from 'react-countdown';
 import LoadingPoker from '../images/scroogeHatLogo.png';
 import RobotAI from '../images/robotAI.gif'
 import DiceGif from '../images/diceGif.gif'
 import AffiliateLeaderboard from '../components/AffiliateLeaderboard.mjs';
-import { Navigate, useNavigate } from "react-router-dom";
-import { useReward } from 'react-rewards';
 import { TypeAnimation } from 'react-type-animation';
 import AffiliateAITools from './AffiliateAITools.mjs';
 import DailyRewards from '../components/DailyRewards.mjs';
 import {
   EmailShareButton,
   FacebookShareButton,
-  FacebookMessengerShareButton,
-  LinkedinShareButton,
   PinterestShareButton,
-  RedditShareButton,
   TelegramShareButton,
   TumblrShareButton,
   TwitterShareButton,
-  ViberShareButton,
   WhatsappShareButton,
   EmailIcon,
   FacebookIcon,
-  FacebookMessengerIcon,
-  LinkedinIcon,
   PinterestIcon,
-  RedditIcon,
   TelegramIcon,
   TumblrIcon,
   TwitterIcon,
-  ViberIcon,
   WhatsappIcon
 } from "react-share";
 import getAffiliateUser from '../scripts/getAffilateUser.mjs';
 import {createAffiliateUser} from '../scripts/getAffilateUser.mjs';
-import {getUserCookie, getUserCookieProd} from '../config/cookie.mjs';
-
-
+import AuthContext from '../context/authContext';
 
 export default function SharableData(){
-    let user_id;
-    const [user, setUser]=useState([]);
+   const { user } = useContext(AuthContext);
     const [affUser, setAffUser]=useState([]);
     const [affUserID, setAffUserID]=useState('');
     const [creatingAffUser, setCreatingAffUser]=useState(false);
@@ -55,34 +41,7 @@ export default function SharableData(){
     function notify(message) {
         toast.success('🎩 '+message);
       }; 
-    async function checkToken() {
-        //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-        let access_token = getUserCookieProd();
-        if (access_token){
-        try {
-            const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
-            headers: {
-                'Authorization': `Bearer ${access_token}`
-            }
-            }).then(async (res) =>{ 
-            //console.log('resy: ',res);
-            if (typeof res.data.user.id !== "undefined") {
-                setUser([res.data.user.id, res.data.user.username, res.data.user.firstName, res.data.user.lastName, res.data.user.profile, res.data.user.ticket, res.data.user.wallet]);
-                user_id = res.data.user.id;
-                const getAff = await getAffiliateUser(res.data.user.id);
-                setAffUser(getAff);
-                setAffUserID(getAff.user_id);
-            } else {
-                setUser(null);
-            }
-        });
-        } catch (error) {
-            setUser(null);
-        }
-        } else {
-        setUser(null);
-        }
-    };
+   
     
     const [allMessages, setAllMessages]=useState([]);
     const [messages, setMessages]=useState([]);
@@ -193,7 +152,6 @@ export default function SharableData(){
 
     useEffect(() => {
         getMessages();
-        checkToken();
       }, []);
 
     return (<>

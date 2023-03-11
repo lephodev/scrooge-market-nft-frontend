@@ -1,6 +1,4 @@
-import { useContract, ThirdwebNftMedia, useActiveListings, ConnectWallet } from "@thirdweb-dev/react";
-import {useState} from "react";
-import ScroogeCasino from '../images/scroogeCasinoLogo.png';
+import { useContract, ThirdwebNftMedia, useActiveListings } from "@thirdweb-dev/react";
 
 export default function MarketplaceShowActiveListings() {
     const { contract } = useContract("0x91197754fCC899B543FebB5BE4dae193C75EF9d1", "marketplace")

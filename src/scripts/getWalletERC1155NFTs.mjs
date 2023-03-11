@@ -1,6 +1,6 @@
 import { useAddress, useOwnedNFTs, useContract, useBurnNFT, ThirdwebNftMedia } from "@thirdweb-dev/react";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Axios from 'axios';
 import LoadingGif from '../images/loading1.gif';
 import { ToastContainer, toast } from 'react-toastify';
@@ -26,8 +26,8 @@ export default function GetWalletERC1155NFTs() {
   //const { contract } = useContract("0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768");
   const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
   const {
-    mutate: burnNft,
-    isLoadingBurn,
+    // mutate: burnNft,
+    // isLoadingBurn,
     error,
   } = useBurnNFT(contract);
 
@@ -76,7 +76,7 @@ export default function GetWalletERC1155NFTs() {
               try {
         
                 const result = await contract.erc1155.burnFrom(address, token_id, qty);
-                //console.log("NFT REDEEMED!! Your chips will be added shortly.");
+                console.log("NFT REDEEMED!! Your chips will be added shortly.", result);
                 Axios.get(`https://34.237.237.45:9001/api/redeemTokenNFT/${address}/${token_id}/${user_id}/${qty}`).then((data)=>{
                   //setNFTBalance(data.data);
                   setBurnLoading(false);

@@ -9,6 +9,7 @@ import { useAddress } from "@thirdweb-dev/react";
 import { CheckDLOnPage } from '../components/DLGate.jsx';
 import GetWalletDLNFTs from '../scripts/getWalletDLNFTs.mjs';
 import DLLogoMembersOnly from '../images/DLLogoMembersOnly.png';
+import Layout from './Layout.mjs';
 
 export default function DLClaimTokens() {
   const [walletDL, setWalletDL]=useState([]);
@@ -66,6 +67,7 @@ export default function DLClaimTokens() {
   
 
   return (
+    <Layout>
     <div className="container">
       <main className="main">
         {(hasDL)?(<>
@@ -101,5 +103,6 @@ export default function DLClaimTokens() {
         
       </main>
     </div>
+    </Layout>
   );
 }

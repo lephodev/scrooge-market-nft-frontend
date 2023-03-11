@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useState} from 'react';
 import Axios from 'axios';
 import RobotAI from '../images/robotAI.gif'
 import DiceGif from '../images/diceGif.gif'
@@ -6,10 +6,9 @@ import { TypeAnimation } from 'react-type-animation';
 import LoadingPoker from '../images/scroogeHatLogo.png';
 
 export default function AffiliateAITools(){
-    let user_id;
-    const [user, setUser]=useState([]);
+    // const [user, setUser]=useState([]);
     const [AISuggestion, setAISuggestion]=useState();
-    const [showAITools, setShowAITools]=useState(true);
+    const [showAITools]=useState(true);
     const [suggestionLoading, setSuggestionLoading]=useState(false);
 
     async function getAISuggestion(){
