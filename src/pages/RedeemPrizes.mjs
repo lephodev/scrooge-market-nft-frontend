@@ -125,8 +125,11 @@ function RedeemPrizes() {
       };
 
     const RedeemPrize = async (prize_id) => {
+        if(!user) return toast.error("Please login first", { containerId: 'login'})
+        if(!address) return toast.error("Please connect wallet first", { containerId: 'connect-wallet'})
+        console.log("user", user, prize_id)
         setRedeemLoading(true);
-        Axios.get(`https://34.237.237.45:9001/api/redeemPrize/${address}/${user?.id}/${prize_id}`).then((data)=>{
+        Axios.get(`http://localhost:9001/api/redeemPrize/${address}/${user.id}/${prize_id}`).then((data)=>{
             
             setRedeemLoading(false);
             if(data.data === 'Balance Unacceptable') {
@@ -140,10 +143,14 @@ function RedeemPrizes() {
             } else if (data.data === 'Not Enough Tickets') {
                 toast.error('ERROR! - '+data.data, { containerId: 'error'});
             } else {
-                setRedeemSuccess(true);
+                setRedeemSuccess(false);
                 //notify(data.data+' redeemed successfully!');
             }
-        });
+        }).catch((err) => {
+            if(err.response.data.message){
+                toast.error(err.response.data.message, {containerId: 'error-redeen'})
+            }
+        })
     };
 
     return (
@@ -196,7 +203,7 @@ function RedeemPrizes() {
            
             <div className="prizes_container">
                 <div style={{width: "100%", textAlign: "center"}}><div id="rewardId" style={{margin: "0 auto"}} /></div>
-                {(!prizesLoading)?(<>{prizes.map((prize) => (
+                {(!prizesLoading && prizes)?(<>{prizes.map((prize) => (
                     <div className='prizes-card' key={prize._id}>
                     {(!prize.isDynamic)?(<div className='prize-name bold'>{prize.name}</div>):(<></>)}
                     {(prize._id === '63b74c51dd789f0383a51d3b')?(<div className='prize-name bold'>{prize.name.replace("xxxValue", parseInt(OG1000).toLocaleString('en-US'))}*</div>):(<></>)}
