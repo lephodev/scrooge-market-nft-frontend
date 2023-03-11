@@ -3,20 +3,15 @@ import {useState,useEffect,useContext} from 'react';
 import Axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ChainContext from "../context/Chain";
-import LoadingPoker from '../images/scroogeHatLogo.png';
+import ChainContext from "../context/Chain.ts";
 import DLBigD from '../images/DLBigD.png'
 import Countdown from 'react-countdown';
-import Cookies from 'js-cookie';
-import { Navigate, useNavigate } from "react-router-dom";
 import { useReward } from 'react-rewards';
-import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
-import AuthContext from "../context/authContext";
+import AuthContext from "../context/authContext.ts";
 
 
 export default function GetWalletDLNFTs() {
   let user_id;
-  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const { reward, isAnimating } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
   function notify(message) {

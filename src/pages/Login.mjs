@@ -1,7 +1,7 @@
 import {useContext, useEffect} from 'react';
 import ScroogeCasino from '../images/scroogeCasinoLogo.png';
 import { useNavigate } from "react-router-dom";
-import AuthContext from '../context/authContext';
+import AuthContext from '../context/authContext.ts';
 import Layout from './Layout.mjs';
 
 export default function Login() {

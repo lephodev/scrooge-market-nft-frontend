@@ -3,14 +3,14 @@ import { ConnectWallet, useNetworkMismatch, useAddress, ChainId } from "@thirdwe
 import {useEffect, useState, useContext} from 'react';
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
-import ChainContext from "../context/Chain";
+import ChainContext from "../context/Chain.ts";
 import Axios from "axios";
 import Token from '../images/token.png';
 import Ticket from '../images/ticket.png';
 import ScroogeHatLogo from '../images/scroogeHatLogo.png';
 import ClaimOGPending from "../components/claimOGPending.mjs";
 import 'react-toastify/dist/ReactToastify.css';
-import AuthContext from "../context/authContext";
+import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
 
 export default function MyWallet() {
