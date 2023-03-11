@@ -7,10 +7,8 @@ import { useAddress } from "@thirdweb-dev/react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Countdown from 'react-countdown';
-import { Navigate, useNavigate } from "react-router-dom";
 import { useReward } from 'react-rewards';
-import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
-import AuthContext from '../hooks/useAuth';
+import AuthContext from '../context/authContext.ts';
 
 function DailyRewards() {
  const { user } = useContext(AuthContext);

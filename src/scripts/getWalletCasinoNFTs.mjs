@@ -1,12 +1,10 @@
-import { useAddress, useOwnedNFTs, useContract, useBurnNFT, ThirdwebNftMedia, ChainId } from "@thirdweb-dev/react";
+import { useAddress, useOwnedNFTs, useContract, useBurnNFT } from "@thirdweb-dev/react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
 import LoadingGif from '../images/loading1.gif';
 import LoadingPoker from '../images/scroogeHatLogo.png';
 import { ToastContainer, toast } from 'react-toastify';
-import ChainContext from "../context/Chain";
-import { useContext } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import ReactModal from 'react-modal';
 import { Tooltip } from "../pages/Layout.mjs";
