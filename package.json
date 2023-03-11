@@ -48,9 +48,11 @@
     "stream": "^0.0.2"
   },
   "scripts": {
-    "start:staging": "env-cmd -f .env.staging react-scripts start",
+    "start:local": "env-cmd -f .env.local react-scripts start",
     "start:dev": "env-cmd -f .env.development react-scripts start",
+    "start:staging": "env-cmd -f .env.staging react-scripts start",
     "start:prod": "env-cmd -f .env.production react-scripts start",
+    "build:local": "env-cmd -f .env.local react-scripts build",
     "build:dev": "env-cmd -f .env.development react-scripts build",
     "build:staging": "env-cmd -f .env.staging react-scripts build",
     "build:prod": "env-cmd -f .env.production react-scripts build",
