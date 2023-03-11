@@ -12,6 +12,7 @@ export default function AffiliateAITools() {
   const [showAITools] = useState(true);
   const [suggestionLoading, setSuggestionLoading] = useState(false);
 
+
   async function getAISuggestion() {
     setAISuggestion();
     setSuggestionLoading(true);
@@ -32,6 +33,7 @@ export default function AffiliateAITools() {
       }
     } catch (err) {
       console.error(err);
+   
     }
   }
 
