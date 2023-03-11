@@ -42,13 +42,18 @@ function RedeemPrizes() {
   async function getPrizes() {
     setPrizesLoading(true);
     if (prizes.length < 2) {
-      Axios.get(`http://localhost:9001/api/getPrizes`).then((data) => {
-        if (prizes.length < 2) {
-          setPrizes(data.data || []);
-          setPrizesLoading(false);
-          setAllPrizes(data.data || []);
+      try {
+        const res = marketPlaceInstance().get(`/getPrizes`);
+        if (res.data) {
+          if (prizes.length < 2) {
+            setPrizes(res.data.data || []);
+            setPrizesLoading(false);
+            setAllPrizes(res.data.data || []);
+          }
         }
-      });
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
 
