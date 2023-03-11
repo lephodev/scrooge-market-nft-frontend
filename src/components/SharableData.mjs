@@ -27,7 +27,7 @@ import {
 } from "react-share";
 import getAffiliateUser from '../scripts/getAffilateUser.mjs';
 import {createAffiliateUser} from '../scripts/getAffilateUser.mjs';
-import AuthContext from '../context/authContext';
+import AuthContext from '../context/authContext.ts';
 
 export default function SharableData(){
    const { user } = useContext(AuthContext);

@@ -1,5 +1,5 @@
 import { useAddress, useOwnedNFTs, useContract, ThirdwebNftMedia, ChainId } from "@thirdweb-dev/react";
-import ChainContext from "../context/Chain";
+import ChainContext from "../context/Chain.ts";
 import { useContext } from "react";
 
 export default function GetWalletNFTs() {
