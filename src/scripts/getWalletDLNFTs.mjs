@@ -11,47 +11,18 @@ import Cookies from 'js-cookie';
 import { Navigate, useNavigate } from "react-router-dom";
 import { useReward } from 'react-rewards';
 import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
+import AuthContext from "../context/authContext";
 
 
 export default function GetWalletDLNFTs() {
   let user_id;
   const navigate = useNavigate();
-  const [user, setUser]=useState([]);
+  const { user } = useContext(AuthContext);
   const { reward, isAnimating } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
   function notify(message) {
     toast.success('🎩 '+message);
   }; 
-  async function checkToken() {
-    //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-    let access_token = getUserCookieProd();
-    if (access_token){
-      try {
-        const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
-          headers: {
-            'Authorization': `Bearer ${access_token}`
-          }
-        }).then((res) =>{ 
-          //console.log('resy: ',res);
-          if (typeof res.data.user.id !== "undefined") {
-              setUser([res.data.user.id, res.data.user.username, res.data.user.firstName, res.data.user.lastName, res.data.user.profile, res.data.user.ticket, res.data.user.wallet]);
-              user_id = res.data.user.id;
-              /*if(address){
-                getNextClaimDate();
-              }*/
-              } else {
-                setUser(null);
-                navigate("/login", { replace: true });
-              }
-            });
-      } catch (error) {
-        setUser(null);
-        navigate("/login", { replace: true });
-      }
-    } else {
-      setUser(null);
-      navigate("/login", { replace: true });
-    }
-  };
+ 
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   setSelectedChain(ChainId.Mainnet);
   //console.log(selectedChain);
@@ -119,7 +90,6 @@ export default function GetWalletDLNFTs() {
   }
 
   useEffect(()=>{
-    checkToken();
     return ()=> setSelectedChain(ChainId.BinanceSmartChainMainnet);
 },[address])
 let dataArray=[];

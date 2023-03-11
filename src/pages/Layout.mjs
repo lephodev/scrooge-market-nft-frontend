@@ -15,7 +15,6 @@ import { ConnectWallet } from "@thirdweb-dev/react";
 import CookieConsent from "react-cookie-consent";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import getCoinGeckoDataOG from "../scripts/getCoinGeckoData.mjs";
 
 export const Tooltip = (id, metadata, message) => (
   <Popup
@@ -34,7 +33,7 @@ export const Tooltip = (id, metadata, message) => (
   </Popup>
 );
 
-const Layout = () => {
+const Layout = ({ children }) => {
   const [currentPriceOG, setCurrentPriceOG]=useState("");
   const [priceColor, setPriceColor]=useState("");
   const OGPrice = async () => {await fetch('https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/0xfa1ba18067ac6884fb26e329e60273488a247fc3')
@@ -93,7 +92,7 @@ const Layout = () => {
           <ConnectWallet />
         </div>
       </nav>
-
+      {children}
       
 
       <Outlet />

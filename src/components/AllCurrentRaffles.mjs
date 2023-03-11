@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import Axios from 'axios';
 import { ConnectWallet, useNetworkMismatch, useAddress, ChainId, useSDK } from "@thirdweb-dev/react";
 import Countdown from 'react-countdown';
-import {getCheckToken} from '../scripts/checkToken.mjs';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TicketsGIF from '../images/ticketsGif.gif';
@@ -112,10 +111,9 @@ export default function AllCurrentRaffles(){
     }
 
     async function checkToken() {
-        const initUser = await getCheckToken().then((res)=>{
-            setUser([res.data.user.id, res.data.user.username, res.data.user.firstName, res.data.user.lastName, res.data.user.profile, res.data.user.ticket, res.data.user.wallet]);
-            try {
-                Axios.get(`https://34.237.237.45:9001/api/getUserRaffleTickets/${res.data.user.id}`).then(async (data)=>{
+        const initUser = async()=>{
+             try {
+                Axios.get(`https://34.237.237.45:9001/api/getUserRaffleTickets/${user.id}`).then(async (data)=>{
                     setUserRaffleTickets(data.data.tickets);
                     return data.data;
                 });
@@ -123,7 +121,8 @@ export default function AllCurrentRaffles(){
                 console.error(err);
             };
             //return res;
-        })
+        }
+        initUser()
     }
 
     async function getCoinGeckoDataOG() {

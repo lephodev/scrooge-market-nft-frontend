@@ -1,86 +1,40 @@
 import GetWalletCasinoNFTs from "../scripts/getWalletCasinoNFTs.mjs";
-import { ConnectWallet, useNetworkMismatch, useAddress, ChainId, useSDK } from "@thirdweb-dev/react";
+import { ConnectWallet, useNetworkMismatch, useAddress, ChainId } from "@thirdweb-dev/react";
 import {useEffect, useState, useContext} from 'react';
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import ChainContext from "../context/Chain";
-import { Navigate, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import Token from '../images/token.png';
 import Ticket from '../images/ticket.png';
 import ScroogeHatLogo from '../images/scroogeHatLogo.png';
-import ScroogeJRLogo from '../images/scroogeJRLogo.jpg';
 import ClaimOGPending from "../components/claimOGPending.mjs";
-import { TwitterShareButton, TwitterIcon } from "react-share";
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {getCheckToken} from '../scripts/checkToken.mjs';
-import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
+import AuthContext from "../context/authContext";
+import Layout from "./Layout.mjs";
 
 export default function MyWallet() {
+  
   
 
   const [OGBalance, setOGBalance]=useState("Loading...");
   const [OGValue, setOGValue]=useState("Loading...");
   const [currentPriceOG, setCurrentPriceOG]=useState("Loading...");
-  const navigate = useNavigate();
-  const [user, setUser]=useState([]);
+  const { user } = useContext(AuthContext);
   const [userRedeemed, setUserRedeemed]=useState([]);
-  const [merchRedeemed, setMerchRedeemed]=useState([]);
   const [showMerchRedeemed, setShowMerchRedeemed]=useState(false);
   const [showCasinoNFTs, setShowCasinoNFTs]=useState(true);
   const [showCrypto, setShowCrypto]=useState(true);
-  const [showMinMenu, setShowMinMenu]=useState(true);
-  function notify(message) {
-    toast.success('🎩 '+message);
-  } 
-  /*async function checkToken() {
-    //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-    let access_token = getUserCookieProd();
-    if (access_token){
-      try {
-        const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
-          headers: {
-            'Authorization': `Bearer ${access_token}`
-          }
-        }).then((res) =>{ 
-          //console.log('resy: ',res);
-          if (typeof res.data.user.id !== "undefined") {
-              setUser([res.data.user.id, res.data.user.username, res.data.user.firstName, res.data.user.lastName, res.data.user.profile, res.data.user.ticket, res.data.user.wallet]);
-              
-              Axios.get(`https://34.237.237.45:9001/api/getUserRedeemed/${res.data.user.id}`).then((data)=>{
-                //console.log('data: ', data);
-                  setUserRedeemed(data.data);
-                  });
-                
-          } else {
-            setUser(null);
-            navigate("/login", { replace: true });
-          }
-        });
-      } catch (error) {
-        setUser(null);
-        navigate("/login", { replace: true });
-      }
-    } else {
-      setUser(null);
-      navigate("/login", { replace: true });
-    }
-  }*/
-
+  
   async function checkToken() {
-    const initUser = await getCheckToken().then((res)=>{
-        setUser([res.data.user.id, res.data.user.username, res.data.user.firstName, res.data.user.lastName, res.data.user.profile, res.data.user.ticket, res.data.user.wallet]);
         try {    
-          Axios.get(`https://34.237.237.45:9001/api/getUserRedeemed/${res.data.user.id}`).then((data)=>{
+          Axios.get(`https://34.237.237.45:9001/api/getUserRedeemed/${user.id}`).then((data)=>{
             //console.log('data: ', data);
               setUserRedeemed(data.data);
             });
         } catch (err) {
             console.error(err);
         };
-        //return res;
-    })
 }
 
   async function getCoinGeckoDataOG(bal) {
@@ -123,7 +77,7 @@ export default function MyWallet() {
     if (selectedChain===ChainId.Mainnet) {
       setSelectedChain(ChainId.BinanceSmartChainMainnet);
     }
-    if(user.length === 0){
+    if(user){
       checkToken();
     }
     if(address && !isMismatched && (selectedChain===ChainId.BinanceSmartChainMainnet)){
@@ -132,22 +86,11 @@ export default function MyWallet() {
           getCoinGeckoDataOG(data.data);
           });
     }
-  }, [isMismatched]);
+  }, [user, isMismatched]);
 
   return (
+    <Layout>
     <div className="container">
-      <ToastContainer
-        position="top-center"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        />
       <main className="main">
         <h1 className="title">
          {user[1]}'s SCROOGE CASINO WALLET
@@ -248,5 +191,6 @@ export default function MyWallet() {
         
       </main>
     </div>
+    </Layout>
   );
 }

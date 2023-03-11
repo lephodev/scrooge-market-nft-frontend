@@ -1,4 +1,4 @@
-import {useState,useEffect} from 'react';
+import {useState,useEffect, useContext} from 'react';
 import Axios from 'axios';
 import LoadingPoker from '../images/scroogeHatLogo.png';
 import { ConnectWallet, useNetworkMismatch, useAddress } from "@thirdweb-dev/react";
@@ -8,45 +8,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import fetch from 'node-fetch';
 import Countdown from 'react-countdown';
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
-import Cookies from 'js-cookie';
-import { Navigate, useNavigate } from "react-router-dom";
 import { useReward } from 'react-rewards';
-import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
+import AuthContext from '../context/authContext';
+import Layout from './Layout.mjs';
 
 function HolderClaimChips() {
   
-  const navigate = useNavigate();
-  const [user, setUser]=useState([]);
+  const { user } = useContext(AuthContext);
   const { reward, isAnimating } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
-  async function checkToken() {
-    //let access_token = Cookies.get('token', { domain: 'scrooge.casino' });
-    let access_token = getUserCookieProd();
-    if (access_token){
-      try {
-        const userRes = await Axios.get(`https://api.scrooge.casino/v1/auth/check-auth`, {
-          headers: {
-            'Authorization': `Bearer ${access_token}`
-          }
-        }).then((res) =>{ 
-          //console.log('resy: ',res);
-          if (typeof res.data.user.id !== "undefined") {
-              setUser([res.data.user.id, res.data.user.username, res.data.user.firstName, res.data.user.lastName, res.data.user.profile, res.data.user.ticket, res.data.user.wallet]);
-              user_id = res.data.user.id;
-              } else {
-                setUser(null);
-                navigate("/login", { replace: true });
-              }
-            });
-      } catch (error) {
-        setUser(null);
-        navigate("/login", { replace: true });
-      }
-    } else {
-      setUser(null);
-      navigate("/login", { replace: true });
-    }
-  };
 
     const [buyLoading,setBuyLoading]=useState(false);
     const [nextClaimDate, setNextClaimDate]=useState("Loading...");
@@ -121,8 +91,6 @@ const zzz = async () => {
 };
 
 useEffect(() => {
-  window.scrollTo(0, 0);
-  checkToken();
   getCoinGeckoData();
   if(address && !isMismatched){
     Axios.get(`https://34.237.237.45:9001/api/getOGBalance/${address}`).then((data)=>{
@@ -131,9 +99,10 @@ useEffect(() => {
           zzz();
         });
   }
-}, [address]);
+}, [user, address]);
 
-    return (<>
+    return (
+    <Layout>
         <div className="bordered-section">
             {buyLoading ? (<div className="pageImgContainer">
                     <img src={LoadingPoker} alt="game" className="imageAnimation" />
@@ -199,7 +168,7 @@ useEffect(() => {
         <div className="flex-row" style={{margin: '100px auto'}}>
           <ShowBottomNavCards />
         </div>
-        </>)
+        </Layout>)
     };
     
     export default HolderClaimChips;

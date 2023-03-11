@@ -1,16 +1,15 @@
-import React,{useState,useEffect} from 'react';
-import { useContract, ThirdwebNftMedia, useActiveListings, ConnectWallet } from "@thirdweb-dev/react";
+import React,{useState} from 'react';
+import { useContract, ThirdwebNftMedia, useActiveListings } from "@thirdweb-dev/react";
 import { useNavigate } from "react-router-dom";
-import LoadingGif from '../images/loading1.gif';
 import LoadingPoker from '../images/scroogeHatLogo.png';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function ShowCasinoTokenNFTs() {
-    const [buyloading,setBuyloading]=useState(false);
-    function notify(message) {
-        toast.success('🎩 '+message);
-      };
+    const [buyloading]=useState(false);
+    // function notify(message) {
+    //     toast.success('🎩 '+message);
+    //   };
     let navigate = useNavigate(); 
     const routeChange = () =>{ 
       let path = `/nft-tokens`; 
@@ -24,19 +23,19 @@ export default function ShowCasinoTokenNFTs() {
 
     
 
-    async function handleBuyAsset(_id, _qty) {
-        setBuyloading(true);
-        try {
-            await contract.buyoutListing(_id, _qty);
-            notify("NFT purchased successfully!");
-            setBuyloading(false);
-            //window.location.reload();
-          } catch (err) {
-            console.error(err);
-            notify("Error purchasing NFT!");
-            setBuyloading(false);
-          };
-    }
+    // async function handleBuyAsset(_id, _qty) {
+    //     setBuyloading(true);
+    //     try {
+    //         await contract.buyoutListing(_id, _qty);
+    //         notify("NFT purchased successfully!");
+    //         setBuyloading(false);
+    //         //window.location.reload();
+    //       } catch (err) {
+    //         console.error(err);
+    //         notify("Error purchasing NFT!");
+    //         setBuyloading(false);
+    //       };
+    // }
         
   return (
     <div>

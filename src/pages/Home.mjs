@@ -14,6 +14,7 @@ import MoneyBag from '../images/moneybag.gif';
 import "../styles/Home.css";
 import ChainContext from "../context/Chain";
 import { useContext } from "react";
+import Layout from "./Layout.mjs";
 
 export default function Home() {
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function Home() {
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
 
   return (
+    <Layout>
     <div className="container">
       <main className="main">
         <img className="collection-header-img" src={ScroogeCasino} alt="Everything you need for Scrooge Casino" />
@@ -108,5 +110,6 @@ export default function Home() {
         <ShowBottomNavCards />
       </main>
     </div>
+    </Layout>
   );
 }

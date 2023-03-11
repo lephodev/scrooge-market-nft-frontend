@@ -1,4 +1,4 @@
-import { useAddress, useOwnedNFTs, useContract, useContractRead, ThirdwebNftMedia, useNetwork, ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
+import { useAddress, useOwnedNFTs, useContract, ThirdwebNftMedia, ChainId } from "@thirdweb-dev/react";
 import ChainContext from "../context/Chain";
 import { useContext } from "react";
 

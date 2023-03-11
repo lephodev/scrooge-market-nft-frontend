@@ -3,6 +3,7 @@ import {useEffect} from 'react';
 import { ConnectWallet, useNetworkMismatch, useAddress } from "@thirdweb-dev/react";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
+import Layout from "./Layout.mjs";
 
 export default function RedeemNFTs() {
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function RedeemNFTs() {
   
 
   return (
+    <Layout>
     <div className="container">
       <main className="main">
         <h1 className="title">
@@ -43,6 +45,7 @@ export default function RedeemNFTs() {
         
       </main>
     </div>
+    </Layout>
   );
 }
 

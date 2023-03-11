@@ -1,15 +1,13 @@
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
-import {useEffect,useState} from 'react';
+import {useEffect} from 'react';
 import "../styles/Home.css";
 //import { Link } from "react-router-dom";
-import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
-import ShowAllTokenNFTs from "../scripts/showAllTokenNFTs.mjs";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import { useNetworkMismatch } from "@thirdweb-dev/react";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import AllCurrentRaffles from "../components/AllCurrentRaffles.mjs";
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Layout from "./Layout.mjs";
 
 export default function Raffles() {
   
@@ -22,19 +20,8 @@ export default function Raffles() {
   }, []);
 
   return (
+    <Layout>
     <div className="container">
-      <ToastContainer
-        position="top-center"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        />
       <main className="main">
         
         <h1 className="title">
@@ -59,5 +46,6 @@ export default function Raffles() {
         <ShowBottomNavCards />
       </main>
     </div>
+    </Layout>
   );
 }
