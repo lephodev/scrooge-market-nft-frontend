@@ -2,20 +2,17 @@ import {useState,useEffect, useContext} from 'react';
 import Axios from 'axios';
 import LoadingPoker from '../images/scroogeHatLogo.png';
 import { useAddress } from "@thirdweb-dev/react";
-import { ToastContainer, toast } from 'react-toastify';
-//import ChainContext from "../context/Chain";
-//import { useContext } from "react";
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Navigate, useNavigate } from "react-router-dom";
 import { useReward } from 'react-rewards';
-import {getUserCookie, getUserCookieProd} from "../config/cookie.mjs";
 import AuthContext from '../context/authContext';
 import Layout from './Layout.mjs';
 
 function RedeemPrizes() {
-    const { reward, isAnimating } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
+    const { reward } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
     let prizesReceived = 0;
-    const { user } = useContext(AuthContext)
+    const { user, loading } = useContext(AuthContext)
+    console.log("user", user,loading)
     useEffect(() => {
         getCoinGeckoDataOG();
         getCoinGeckoDataJR();
@@ -24,8 +21,6 @@ function RedeemPrizes() {
         }
         prizesReceived = 1;
       }, []);
-    
-    const [chipCount,setChipCount]=useState([]);
     const [redeemLoading,setRedeemLoading]=useState(false);
     const [redeemSuccess,setRedeemSuccess]=useState(false);
     const [allPrizes,setAllPrizes]=useState([]);
@@ -40,25 +35,20 @@ function RedeemPrizes() {
     const [JR5000, setJR5000]=useState();
     const [JR10000, setJR10000]=useState();
     const address = useAddress();
-    function notify(message) {
-        toast.success('🎩 '+message);
-      } 
+    
 
-    function timeout(delay) {
-        return new Promise( res => setTimeout(res, delay) );
-      }
-    let user_id = '';
-    const navigate = useNavigate();
+   
+    
    
 
     async function getPrizes(){
         setPrizesLoading(true);
         if(prizes.length < 2){
-            Axios.get(`https://34.237.237.45:9001/api/getPrizes`).then((data)=>{
+            Axios.get(`http://localhost:9001/api/getPrizes`).then((data)=>{
                 if(prizes.length < 2){
-                    setPrizes(data.data);
+                    setPrizes(data.data || []);
                     setPrizesLoading(false);
-                    setAllPrizes(data.data);
+                    setAllPrizes(data.data || []);
                 }
             });
         }
@@ -136,20 +126,19 @@ function RedeemPrizes() {
 
     const RedeemPrize = async (prize_id) => {
         setRedeemLoading(true);
-        user_id = user[0];
-        Axios.get(`https://34.237.237.45:9001/api/redeemPrize/${address}/${user_id}/${prize_id}`).then((data)=>{
+        Axios.get(`https://34.237.237.45:9001/api/redeemPrize/${address}/${user?.id}/${prize_id}`).then((data)=>{
             
             setRedeemLoading(false);
             if(data.data === 'Balance Unacceptable') {
-                notify('ERROR! - '+data.data);
+                toast.error('ERROR! - '+data.data, { containerId: 'error'});
             } else if (data.data === 'Invalid Prize Data') {
-                notify('ERROR! - '+data.data);
+                toast.error('ERROR! - '+data.data, { containerId: 'error'});
             } else if (data.data === 'Prize Currently Unavailable') {
-                notify('ERROR! - '+data.data);
+                toast.error('ERROR! - '+data.data, { containerId: 'error'});
             } else if (data.data === 'Transaction Failed') {
-                notify('ERROR! - '+data.data);
+                toast.error('ERROR! - '+data.data, { containerId: 'error'});
             } else if (data.data === 'Not Enough Tickets') {
-                notify('ERROR! - '+data.data);
+                toast.error('ERROR! - '+data.data, { containerId: 'error'});
             } else {
                 setRedeemSuccess(true);
                 //notify(data.data+' redeemed successfully!');
@@ -187,21 +176,8 @@ function RedeemPrizes() {
                 Ready to cash in on all of your big wins? Browse through our huge list of amazing prizes and find something you just can't live without. 
                 Make sure you have enough available tickets for the prize you want, then click the REDEEM PRIZE button!
             </div>
-            
-            <ToastContainer
-                position="top-center"
-                autoClose={4000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-                 />
             <div className='prizes-chip-count'>
-                {(user[5]>0)?(<>Your Ticket Balance: {user[5]}</>):(<><img src={LoadingPoker} alt="game" className="imageAnimation" /></>)}
+                {user?(<>Your Ticket Balance: {user?.ticket}</>):(<><img src={LoadingPoker} alt="game" className="imageAnimation" /></>)}
             </div>
             <div className='page-nav-header-btns-row'>
                 <button className="page-nav-header-btn" onClick={(() => filterPrizes('Badges'))}>BADGES</button>
