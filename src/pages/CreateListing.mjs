@@ -6,7 +6,7 @@ import "../styles/Home.css";
 import GetWalletERC1155NFTs from "../scripts/getWalletERC1155NFTs.mjs";
 import ShowCasinoTokenNFTs from "../scripts/showCasinoTokenNFTs.mjs";
 import { useAddress, useOwnedNFTs, useContract, useContractRead, ThirdwebNftMedia, useNetwork, ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
-import ChainContext from "../context/Chain";
+import ChainContext from "../context/Chain.ts";
 
 export default function CreateListing() {
   const NATIVE_TOKEN_ADDRESS = '0xe9e7cea3dedca5984780bafc599bd69add087d56';

@@ -7,12 +7,11 @@ import ShowCasinoTokenNFTs from "../scripts/showCasinoTokenNFTs.mjs";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import { Link } from "react-router-dom";
-import WalletIcon from '../images/walletIcon.png';
 import CardsTokens from '../images/cardstokens.gif';
 import CasinoNFT from '../images/absintheGold.png';
 import MoneyBag from '../images/moneybag.gif';
 import "../styles/Home.css";
-import ChainContext from "../context/Chain";
+import ChainContext from "../context/Chain.ts";
 import { useContext } from "react";
 import Layout from "./Layout.mjs";
 

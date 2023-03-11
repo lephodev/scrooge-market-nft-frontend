@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import Axios from 'axios';
 import RobotAI from '../images/robotAI.gif';
 import DiceGif from '../images/diceGif.gif';
 import { TypeAnimation } from 'react-type-animation';
 import LoadingPoker from '../images/scroogeHatLogo.png';
-import { marketPlaceInstance } from '../config/axios';
+import { marketPlaceInstance } from '../config/axios.js';
 
 export default function AffiliateAITools() {
   // const [user, setUser]=useState([]);

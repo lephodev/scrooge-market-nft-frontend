@@ -1,5 +1,9 @@
 import axios from 'axios';
+<<<<<<< HEAD
 import server from './keys';
+=======
+import { server } from './keys.js';
+>>>>>>> 2b4a8785b5a025ed54716dac29ca6c171b45344f
 import Cookies from 'js-cookie';
 
 export const getToken = () => {

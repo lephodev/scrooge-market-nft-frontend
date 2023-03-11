@@ -10,7 +10,7 @@ import Countdown from 'react-countdown';
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import { useReward } from 'react-rewards';
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
-import AuthContext from '../context/authContext';
+import AuthContext from '../context/authContext.ts';
 import Layout from './Layout.mjs';
 
 function HolderClaimChips() {

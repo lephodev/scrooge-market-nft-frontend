@@ -1,12 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
-import { marketPlaceInstance } from '../config/axios';
 import LoadingPoker from '../images/scroogeHatLogo.png';
 import { useAddress } from '@thirdweb-dev/react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useReward } from 'react-rewards';
-import AuthContext from '../context/authContext';
+import AuthContext from '../context/authContext.ts';
 import Layout from './Layout.mjs';
 
 function RedeemPrizes() {

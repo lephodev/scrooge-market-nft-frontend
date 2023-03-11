@@ -1,5 +1,5 @@
-import { useAddress, useOwnedNFTs, useContract, useContractRead, ThirdwebNftMedia, useNetwork, ChainId, useNFTs } from "@thirdweb-dev/react";
-import ChainContext from "../context/Chain";
+import {  useContract, ThirdwebNftMedia, ChainId, useNFTs } from "@thirdweb-dev/react";
+import ChainContext from "../context/Chain.ts";
 import { useContext } from "react";
 import DuckDivider from '../images/dividerLogo1.jpg';
 

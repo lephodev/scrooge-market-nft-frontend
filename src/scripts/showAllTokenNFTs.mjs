@@ -8,7 +8,7 @@ import Axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useReward } from 'react-rewards';
-import AuthContext from '../context/authContext';
+import AuthContext from '../context/authContext.ts';
 import { toast } from 'react-toastify';
 
 export default function ShowAllTokenNFTs() {

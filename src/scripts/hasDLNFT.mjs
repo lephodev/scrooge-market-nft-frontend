@@ -1,5 +1,5 @@
 import { useAddress, useOwnedNFTs, useContract } from "@thirdweb-dev/react";
-import ChainContext from "../context/Chain";
+import ChainContext from "../context/Chain.ts";
 import ShowCollection from "../scripts/ShowCollection.mjs";
 
 export default function HasDLNFT() {
