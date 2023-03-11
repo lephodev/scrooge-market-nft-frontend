@@ -115,6 +115,7 @@ function RedeemPrizes() {
       });
   }
 
+
   async function getCoinGeckoDataJR() {
     await fetch(
       'https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/0x2e9f79af51dd1bb56bbb1627fbe4cc90aa8985dd'
@@ -134,33 +135,35 @@ function RedeemPrizes() {
         return false;
       });
   }
+    const RedeemPrize = async (prize_id) => {
+        if(!user) return toast.error("Please login first", { containerId: 'login'})
+        if(!address) return toast.error("Please connect wallet first", { containerId: 'connect-wallet'})
+        console.log("user", user, prize_id)
+        setRedeemLoading(true);
+        Axios.get(`http://localhost:9001/api/redeemPrize/${address}/${user.id}/${prize_id}`).then((data)=>{
+            
+            setRedeemLoading(false);
+            if(data.data === 'Balance Unacceptable') {
+                toast.error('ERROR! - '+data.data, { containerId: 'error'});
+            } else if (data.data === 'Invalid Prize Data') {
+                toast.error('ERROR! - '+data.data, { containerId: 'error'});
+            } else if (data.data === 'Prize Currently Unavailable') {
+                toast.error('ERROR! - '+data.data, { containerId: 'error'});
+            } else if (data.data === 'Transaction Failed') {
+                toast.error('ERROR! - '+data.data, { containerId: 'error'});
+            } else if (data.data === 'Not Enough Tickets') {
+                toast.error('ERROR! - '+data.data, { containerId: 'error'});
+            } else {
+                setRedeemSuccess(false);
+                //notify(data.data+' redeemed successfully!');
+            }
+        }).catch((err) => {
+            if(err.response.data.message){
+                toast.error(err.response.data.message, {containerId: 'error-redeen'})
+            }
+        })
+    };
 
-  const RedeemPrize = async (prize_id) => {
-    setRedeemLoading(true);
-    console.log('address', address);
-    console.log('userid', user?.id);
-    console.log('prizeid', prize_id);
-    Axios.get(
-      `http://localhost:9001/api/redeemPrize/${address}/${user?.id}/${prize_id}`
-    ).then((data) => {
-      console.log('dataredeem', data);
-      setRedeemLoading(false);
-      if (data.data === 'Balance Unacceptable') {
-        toast.error('ERROR! - ' + data.data, { containerId: 'error' });
-      } else if (data.data === 'Invalid Prize Data') {
-        toast.error('ERROR! - ' + data.data, { containerId: 'error' });
-      } else if (data.data === 'Prize Currently Unavailable') {
-        toast.error('ERROR! - ' + data.data, { containerId: 'error' });
-      } else if (data.data === 'Transaction Failed') {
-        toast.error('ERROR! - ' + data.data, { containerId: 'error' });
-      } else if (data.data === 'Not Enough Tickets') {
-        toast.error('ERROR! - ' + data.data, { containerId: 'error' });
-      } else {
-        setRedeemSuccess(true);
-        //notify(data.data+' redeemed successfully!');
-      }
-    });
-  };
 
   return (
     <Layout>
