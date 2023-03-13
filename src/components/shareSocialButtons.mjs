@@ -1,38 +1,20 @@
-import {useContext, useEffect, useState} from 'react';
-import Countdown from 'react-countdown';
+// import Countdown from 'react-countdown';
 import {
-  EmailShareButton,
   FacebookShareButton,
-  FacebookMessengerShareButton,
-  LinkedinShareButton,
-  PinterestShareButton,
-  RedditShareButton,
-  TelegramShareButton,
-  TumblrShareButton,
   TwitterShareButton,
-  ViberShareButton,
-  WhatsappShareButton,
-  EmailIcon,
   FacebookIcon,
-  FacebookMessengerIcon,
-  LinkedinIcon,
-  PinterestIcon,
-  RedditIcon,
-  TelegramIcon,
-  TumblrIcon,
   TwitterIcon,
-  ViberIcon,
-  WhatsappIcon
 } from "react-share";
+import { scroogeClient } from '../config/keys.js';
 
 export default function ShareSocialButtons() {
     
 
-    function getCountdown(claimableIn){
-      return (
-        <Countdown date={claimableIn}></Countdown>
-      )
-    }
+    // function getCountdown(claimableIn){
+    //   return (
+    //     <Countdown date={claimableIn}></Countdown>
+    //   )
+    // }
     
     
 
@@ -44,7 +26,7 @@ export default function ShareSocialButtons() {
         <div>
           <div className='social-share-card'>
             <TwitterShareButton
-                url="https://scrooge.casino"
+                url={scroogeClient}
                 title="Come join me and WIN all kinds of awesome prizes at Scrooge Casino! Play Now 👉 ScroogeCasino.com #Play2Earn #ScroogeCasino @scrooge_coin @ScroogePoker"
                 className="social-share-btn"
               >
@@ -56,7 +38,7 @@ export default function ShareSocialButtons() {
           </div>
           <div className='social-share-card'>
             <FacebookShareButton
-              url="https://scrooge.casino"
+              url={scroogeClient}
               quote="Come join me and WIN all kinds of awesome prizes at Scrooge Casino! Play Now 👉 ScroogeCasino.com #Play2Earn @scroogegold"
               className="social-share-btn"
             >

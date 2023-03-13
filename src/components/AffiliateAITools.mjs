@@ -4,6 +4,7 @@ import DiceGif from '../images/diceGif.gif';
 import { TypeAnimation } from 'react-type-animation';
 import LoadingPoker from '../images/scroogeHatLogo.png';
 import { marketPlaceInstance } from '../config/axios.js';
+import { scroogeClient } from '../config/keys.js';
 
 export default function AffiliateAITools() {
   // const [user, setUser]=useState([]);
@@ -113,7 +114,7 @@ export default function AffiliateAITools() {
                 <p>
                   At{' '}
                   <a
-                    href='https://scrooge.casino'
+                    href={scroogeClient}
                     target='_blank'
                     rel='noreferrer'
                     alt='Visit Scrooge Casino and play today'>
