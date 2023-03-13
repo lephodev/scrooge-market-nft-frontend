@@ -28,11 +28,11 @@ import EarnTokens from "./pages/EarnTokens.mjs";
 import Raffles from "./pages/Raffles.mjs";
 import { useCookies } from "react-cookie";
 import AuthContext from "./context/authContext";
-import axios from "axios";
 import { ToastContainer } from "react-toastify";
+import { authInstance } from "./config/axios";
 
 export default function App() {
-  const [selectedChain, setSelectedChain] = useState(ChainId.BinanceSmartChainMainnet);
+  const [selectedChain, setSelectedChain] = useState<ChainId>(ChainId.BinanceSmartChainMainnet);
   const [user, setUser] = useState(null);
   const [cookies] = useCookies(['token']);
   const [loading, setLoading] = useState(true);
@@ -49,7 +49,7 @@ export default function App() {
     console.log("api call")
     setLoading(true)
     let access_token = cookies.token;
-    axios.get('https://api.scrooge.casino/v1/auth/check-auth',{
+    authInstance().get('/auth/check-auth',{
       headers:{
         Authorization: `Bearer ${access_token}`
       }
@@ -93,8 +93,9 @@ export default function App() {
          loader...
         </div>
       ) : (
-    <ChainContext.Provider value={{ selectedChain, setSelectedChain }}>
-      <ThirdwebProvider desiredChainId={selectedChain}
+    <ChainContext.Provider value={{ selectedChain, setSelectedChain }}> 
+      <ThirdwebProvider
+      activeChain={ChainId.BinanceSmartChainMainnet}
         dAppMeta={{
           name: "Scrooge Casino NFT Marketplace",
           description: "Everything you need to be a high roller in the Scrooge Casino.",

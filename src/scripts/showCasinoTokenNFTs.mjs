@@ -1,8 +1,7 @@
-import React,{useState} from 'react';
+import {useState} from 'react';
 import { useContract, ThirdwebNftMedia, useActiveListings } from "@thirdweb-dev/react";
 import { useNavigate } from "react-router-dom";
 import LoadingPoker from '../images/scroogeHatLogo.png';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function ShowCasinoTokenNFTs() {
@@ -16,10 +15,11 @@ export default function ShowCasinoTokenNFTs() {
       navigate(path);
     }
 
-    const { contract } = useContract("0x91197754fCC899B543FebB5BE4dae193C75EF9d1", "marketplace")
+    const { contract } = useContract(process.env.REACT_APP_MARKETPLACE_ADDRESS, "marketplace")
     // data is the active listings, isLoading is a loading flag while we load the listings.
-    const { data: listings, isLoading: loadingListings } =
+    const { data: listings = [], isLoading: loadingListings } =
       useActiveListings(contract);
+      console.log("contract", contract, listings, loadingListings)
 
     
 
@@ -39,18 +39,6 @@ export default function ShowCasinoTokenNFTs() {
         
   return (
     <div>
-        <ToastContainer
-        position="top-center"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        />
         {buyloading ? (<div className="pageImgContainer">
                     <img src={LoadingPoker} alt="game" className="imageAnimation" />
                     <div className='loading-txt pulse'>
@@ -65,7 +53,7 @@ export default function ShowCasinoTokenNFTs() {
         <div className="loading-img-div">
         <img src={LoadingPoker} alt="game" className="imageAnimation" />
       </div>
-      ) : (
+      ) :  listings.length === 0 ? "" :(
         <div className="flex-row nft-home-sell-div">
           
           <div className="nft-home-sell-card">

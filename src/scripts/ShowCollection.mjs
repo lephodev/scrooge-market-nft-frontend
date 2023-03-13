@@ -4,13 +4,13 @@ import { useContext } from "react";
 import DuckDivider from '../images/dividerLogo1.jpg';
 
 export default function ShowCollection() {
-  const { selectedChain, setSelectedChain } = useContext(ChainContext);
+  const { selectedChain } = useContext(ChainContext);
   const addresses = {
-    [String(ChainId.Mainnet)]: "0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768",
-    [String(ChainId.BinanceSmartChainMainnet)]: "0x729FDb31f1Cd2633aE26F0A87EfD0CC55a336F9f",
+    [String(ChainId.Mainnet)]: process.env.REACT_APP_MAINNET_ADDRESS,
+    [String(ChainId.BinanceSmartChainMainnet)]: process.env.REACT_APP_BSC_MAINNET,
   };
   const { contract } = useContract(addresses[String(selectedChain)]);
-  const { data: nfts, isLoading, error } = useNFTs(contract, { start: 0, count: 100 });
+  const { data: nfts, isLoading } = useNFTs(contract, { start: 0, count: 100 });
   
   return (
     

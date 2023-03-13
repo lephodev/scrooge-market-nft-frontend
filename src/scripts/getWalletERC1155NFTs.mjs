@@ -22,8 +22,7 @@ export default function GetWalletERC1155NFTs() {
     toast.success('🎩 '+message);
   };
   const user_id = 1;
-  const { contract } = useContract("0x729FDb31f1Cd2633aE26F0A87EfD0CC55a336F9f");
-  //const { contract } = useContract("0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768");
+  const { contract } = useContract(process.env.REACT_APP_BSC_MAINNET);
   const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
   const {
     // mutate: burnNft,

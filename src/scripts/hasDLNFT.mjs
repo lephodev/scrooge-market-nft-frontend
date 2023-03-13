@@ -1,13 +1,13 @@
-import { useAddress, useOwnedNFTs, useContract } from "@thirdweb-dev/react";
+import { useAddress, useOwnedNFTs, useContract, ChainId } from "@thirdweb-dev/react";
+import { useContext } from "react";
 import ChainContext from "../context/Chain.ts";
 import ShowCollection from "../scripts/ShowCollection.mjs";
 
 export default function HasDLNFT() {
-  const { selectedChain, setSelectedChain } = useContext(ChainContext);
+  const { selectedChain } = useContext(ChainContext);
     const address = useAddress();
-    const { contract } = useContract("0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768");
-  const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
-  (e) => setSelectedChain(ChainId.Mainnet);
+    const { contract } = useContract(process.env.REACT_APP_MAINNET_ADDRESS);
+  const { data: nfts } = useOwnedNFTs(contract, address);
   //console.log("Contract: ", contract);
   //console.log("NFTs: ", nfts);
   return (
