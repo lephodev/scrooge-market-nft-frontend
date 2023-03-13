@@ -19,7 +19,7 @@ jobs:
       uses: actions/setup-node@v3
 
     - run: npm install
-    - run: CI= npm run build
+    - run: CI= npm run build:dev
     - name: Deploy to ec2
       uses: easingthemes/ssh-deploy@main
       env:
