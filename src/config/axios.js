@@ -1,9 +1,5 @@
 import axios from 'axios';
-<<<<<<< HEAD
-import server from './keys';
-=======
-import { server } from './keys.js';
->>>>>>> 2b4a8785b5a025ed54716dac29ca6c171b45344f
+import { server, scroogeServer } from './keys.js';
 import Cookies from 'js-cookie';
 
 export const getToken = () => {
@@ -17,5 +13,11 @@ export const getAuthorizationHeader = () => `Bearer ${getToken()}`;
 export const marketPlaceInstance = () =>
   axios.create({
     baseURL: `${server}/api`,
+    headers: { Authorization: getAuthorizationHeader() },
+  });
+
+export const authInstance = () =>
+  axios.create({
+    baseURL: `${scroogeServer}/v1`,
     headers: { Authorization: getAuthorizationHeader() },
   });
