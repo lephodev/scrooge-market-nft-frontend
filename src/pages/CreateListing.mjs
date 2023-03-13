@@ -13,7 +13,6 @@ export default function CreateListing() {
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   const address = useAddress();
   const { contract } = useContract("0xD831267dDF05156Da33e35EaD05DDBf9ffE1F93E");
-  //const { contract } = useContract("0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768");
   const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
   const [buyoutPricePerToken, setBuyoutPricePerToken] = useState("");
   const [reservePricePerToken, setReservePricePerToken] = useState("");

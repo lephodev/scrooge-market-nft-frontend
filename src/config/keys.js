@@ -1,4 +1,4 @@
 import config from './config.json';
 
 const configData = config[process.env.REACT_APP_ENV];
-export const { server, client } = configData;
+export const { server, client, scroogeServer,scroogeClient } = configData;
