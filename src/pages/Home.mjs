@@ -14,6 +14,7 @@ import "../styles/Home.css";
 import ChainContext from "../context/Chain.ts";
 import { useContext } from "react";
 import Layout from "./Layout.mjs";
+import { scroogeClient } from "../config/keys.js";
 
 export default function Home() {
   useEffect(() => {
@@ -92,7 +93,7 @@ export default function Home() {
             <img className="card-img" src="https://casino-nft-marketplace.s3.amazonaws.com/DLGif1.gif" alt="duckylucks nfts" />
           </Link>
 
-          <a href="https://scrooge.casino" className="card" target="_blank" rel="noreferrer">
+          <a href={scroogeClient} className="card" target="_blank" rel="noreferrer">
             <h2>HEAD OVER TO SCROOGE CASINO &rarr;</h2>
             <p>
               Time to cash in your winnings? Browse our huge selection of available prizes.

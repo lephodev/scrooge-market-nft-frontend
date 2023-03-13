@@ -4,7 +4,6 @@ import {useEffect, useState, useContext} from 'react';
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import ChainContext from "../context/Chain.ts";
-import Axios from "axios";
 import Token from '../images/token.png';
 import Ticket from '../images/ticket.png';
 import ScroogeHatLogo from '../images/scroogeHatLogo.png';
@@ -12,6 +11,7 @@ import ClaimOGPending from "../components/claimOGPending.mjs";
 import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
+import { marketPlaceInstance } from "../config/axios.js";
 
 export default function MyWallet() {
   
@@ -28,7 +28,7 @@ export default function MyWallet() {
   
   async function checkToken() {
         try {    
-          Axios.get(`https://34.237.237.45:9001/api/getUserRedeemed/${user.id}`).then((data)=>{
+          marketPlaceInstance().get(`/getUserRedeemed/${user.id}`).then((data)=>{
             //console.log('data: ', data);
               setUserRedeemed(data.data);
             });
@@ -53,7 +53,7 @@ export default function MyWallet() {
   };
 
   const handleMarkRedeemed = (trans_id) => {
-    Axios.get(`https://34.237.237.45:9001/api/markMerchCouponRedeemed/${trans_id}/${user[0]}`).then((res)=>{
+   marketPlaceInstance().get(`/markMerchCouponRedeemed/${trans_id}/${user.id}`).then((res)=>{
       //console.log('handle: ', res);
       getUserRedeemed();
     });
@@ -61,7 +61,7 @@ export default function MyWallet() {
 
   const getUserRedeemed = () => {
     //console.log('user: ', user[0]);
-      Axios.get(`https://34.237.237.45:9001/api/getUserRedeemed/${user[0]}`).then((data)=>{
+     marketPlaceInstance().get(`/getUserRedeemed/${user.id}`).then((data)=>{
       //console.log('post get data: ', data);
       setUserRedeemed(data.data);
       //console.log('useRed: ',userRedeemed);
@@ -73,7 +73,6 @@ export default function MyWallet() {
   const isMismatched = useNetworkMismatch();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     if (selectedChain===ChainId.Mainnet) {
       setSelectedChain(ChainId.BinanceSmartChainMainnet);
     }
@@ -81,7 +80,7 @@ export default function MyWallet() {
       checkToken();
     }
     if(address && !isMismatched && (selectedChain===ChainId.BinanceSmartChainMainnet)){
-      Axios.get(`https://34.237.237.45:9001/api/getOGBalance/${address}`).then((data)=>{
+      marketPlaceInstance().get(`/getOGBalance/${address}`).then((data)=>{
           setOGBalance(data.data);
           getCoinGeckoDataOG(data.data);
           });
@@ -93,7 +92,7 @@ export default function MyWallet() {
     <div className="container">
       <main className="main">
         <h1 className="title">
-         {user[1]}'s SCROOGE CASINO WALLET
+         {user?.username}'s SCROOGE CASINO WALLET
         </h1>
 
         {(!showMerchRedeemed || !showCasinoNFTs || !showCrypto)?(<>
@@ -104,19 +103,19 @@ export default function MyWallet() {
             </div>
         </>):(<></>)}
         
-        {(user[4])?(
+        {(user)?(
           <div className="wallet-casino-profile-div">
             <div className="wallet-casino-profile-img-div">
-              <img className="wallet-casino-profile-img" src={user[4]} alt="Scrooge Casino profile picture" /><br></br>
+              <img className="wallet-casino-profile-img" src={user?.profile} alt="Scrooge Casino profile" /><br></br>
             </div>
             <div className="wallet-casino-profile-details">
               <div className="">
-                <span className="wallet-casino-profile-username">{user[1]}</span><br></br>
-                <span className="yellow">{user[2]} {user[3]}</span><br></br>
+                <span className="wallet-casino-profile-username">{user?.username}</span><br></br>
+                <span className="yellow">{user?.firstName} {user?.lastName}</span><br></br>
               </div>
               <div className="balance-column">
-                <div className="token-ticket-row"><img className="token-small" src={Token} alt="Scrooge Casino balances" />TOKENS: {user[6].toLocaleString('en-US')}</div>
-                <div className="token-ticket-row"><img className="ticket-small" src={Ticket} alt="Scrooge Casino balances" />TICKETS: {user[5].toLocaleString('en-US')}</div>
+                <div className="token-ticket-row"><img className="token-small" src={Token} alt="Scrooge Casino balances" />TOKENS: {user?.wallet?.toLocaleString('en-US')}</div>
+                <div className="token-ticket-row"><img className="ticket-small" src={Ticket} alt="Scrooge Casino balances" />TICKETS: {user?.ticket?.toLocaleString('en-US')}</div>
               </div>
               
             </div>

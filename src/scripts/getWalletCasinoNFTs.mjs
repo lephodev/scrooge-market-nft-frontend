@@ -1,15 +1,17 @@
 import { useAddress, useOwnedNFTs, useContract, useBurnNFT } from "@thirdweb-dev/react";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from 'react';
-import Axios from 'axios';
+import { useContext, useEffect, useState } from 'react';
 import LoadingGif from '../images/loading1.gif';
 import LoadingPoker from '../images/scroogeHatLogo.png';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import ReactModal from 'react-modal';
 import { Tooltip } from "../pages/Layout.mjs";
+import { marketPlaceInstance } from "../config/axios.js";
+import AuthContext from "../context/authContext.ts";
+import { toast } from "react-toastify";
 
 export default function GetWalletERC1155NFTs() {
+  const { user } = useContext(AuthContext);
   const [showModal, setShowModal]=useState(false);
   const [NFTRedeemID, setNFTRedeemID]=useState('');
   const [NFTRedeemName, setNFTRedeemName]=useState('');
@@ -23,7 +25,6 @@ export default function GetWalletERC1155NFTs() {
   function notify(message) {
     toast.success('🎩 '+message);
   } 
-  const user_id = 1;
   const { contract } = useContract(process.env.REACT_APP_BSC_MAINNET);
   const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
   const {
@@ -54,7 +55,7 @@ export default function GetWalletERC1155NFTs() {
       //alert('Your email is '+emailaddress);
       setShowModal(false);
       setBurnLoading(true);
-      Axios.get(`https://34.237.237.45:9001/api/verifyEmail/${emailaddress}`).then((data)=>{
+      marketPlaceInstance().get(`/verifyEmail/${emailaddress}`).then((data)=>{
           //setNFTBalance(data.data);
           //setBurnLoading(false);
           const username = data.data[0].username;
@@ -78,7 +79,7 @@ export default function GetWalletERC1155NFTs() {
         
                 //const result = await contract.erc1155.burnFrom(address, token_id, qty);
                 //console.log("NFT REDEEMED!! Your chips will be added shortly.");
-                Axios.get(`https://34.237.237.45:9001/api/redeemTokenNFT/${address}/${token_id}/${user_id}/${qty}`).then((data)=>{
+                marketPlaceInstance().get(`/redeemTokenNFT/${address}/${token_id}/${user?.id}/${qty}`).then((data)=>{
                   //setNFTBalance(data.data);
                   setBurnLoading(false);
                   notify("You have successfully purchased your NFT and "+data.data+" chips have been added to your casino account with email address: "+emailaddress+"!");
@@ -106,18 +107,6 @@ useEffect(() => {
     
   return (
     <div className="full-page-container">
-      <ToastContainer
-        position="top-center"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        />
       <ReactModal
                 isOpen = {showModal}
                 contentLabel = {"Modal Challenge 1"}
