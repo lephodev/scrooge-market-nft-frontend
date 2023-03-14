@@ -36,7 +36,7 @@ export const Tooltip = (id, metadata, message) => (
 const Layout = ({ children }) => {
   const [currentPriceOG, setCurrentPriceOG]=useState("");
   const [priceColor, setPriceColor]=useState("");
-  const OGPrice = async () => {await fetch('https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/0xfa1ba18067ac6884fb26e329e60273488a247fc3')
+  const OGPrice = async () => {await fetch(`https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${process.env.REACT_APP_OGCONTRACT_ADDRESS}`)
     .then(response => response.json())
     .then((data) => {
         //console.log('gecko data: ', data.market_data.price_change_percentage_24h);
