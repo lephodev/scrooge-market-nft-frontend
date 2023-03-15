@@ -17,9 +17,8 @@ export default function Login() {
 
   return (
     <Layout>
-    <div className="container">
-      <main className="main">
-      
+      <div className="main login-page">
+        <div className="container">
         <div className="login-page-body">
           <div>
             <img className="login-page-img" src={ScroogeCasino} alt="Everything you need for Scrooge Casino" />
@@ -30,10 +29,7 @@ export default function Login() {
           </div>
           <a href={`${scroogeClient}/login`} target="_blank" rel="noreferrer" alt="Login to Scrooge Casino"><button className="submit-btn">LOGIN TO YOUR SCROOGE CASINO ACCOUNT</button></a>
         </div>
-        
-
-
-      </main>
+      </div>
     </div>
     </Layout>
   );

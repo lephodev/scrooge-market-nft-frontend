@@ -1,15 +1,6 @@
-.container {
-  padding: 0 2rem;
-}
 
 .main {
-  min-height: 100vh;
-  padding: 0.5rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 100px 0px;
 }
 
 .title a {
@@ -40,10 +31,11 @@
 }
 
 .description {
-  margin-top: 3rem;
-  margin-bottom: 2rem;
   line-height: 1.5;
-  font-size: 1.5rem;
+  text-align: center;
+  font-size: 18px;
+  color: #878d93;
+  margin: 0;
 }
 
 .code {
@@ -57,10 +49,8 @@
 
 .grid {
   display: flex;
-  align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 1200px;
 }
 
 .card {
@@ -79,7 +69,7 @@
 .card:hover,
 .card:focus,
 .card:active {
-  background-color: #272c34;
+  background-color: #0a0a0a;
   color: #e7c975;
   border-color: #e7c975;
 }
@@ -112,8 +102,7 @@
   }
 }
 
-.card,
-.footer {
+.card {
   border-color: #222;
 }
 .code {

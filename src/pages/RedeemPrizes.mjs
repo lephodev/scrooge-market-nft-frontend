@@ -161,6 +161,9 @@ function RedeemPrizes() {
 
   return (
     <Layout>
+        <main className="main">
+       <div className="container">
+    
       <div className='bordered-section'>
         {redeemLoading ? (
           <div className='pageImgContainer'>
@@ -190,7 +193,7 @@ function RedeemPrizes() {
         )}
 
         <div className='pageTitle'>
-          <h1>Redeem for Prizes</h1>
+          <h1 className='title'>Redeem for Prizes</h1>
         </div>
         <div className='feature-overview-div' style={{ marginBottom: '30px' }}>
           Ready to cash in on all of your big wins? Browse through our huge list
@@ -576,6 +579,8 @@ function RedeemPrizes() {
           )}
         </div>
       </div>
+      </div>
+      </main>
     </Layout>
   );
 }
