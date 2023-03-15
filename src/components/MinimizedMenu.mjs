@@ -1,18 +1,39 @@
-import {useEffect, useState} from 'react';
-import Axios from 'axios';
+import { useState} from 'react';
 import RobotAI from '../images/robotAI.gif'
 import DiceGif from '../images/diceGif.gif'
-import { TypeAnimation } from 'react-type-animation';
 import LoadingPoker from '../images/scroogeHatLogo.png';
+import { scroogeClient } from '../config/keys.js';
+import { marketPlaceInstance } from '../config/axios.js';
+import { TypeAnimation } from 'react-type-animation';
 
 export default function MinimizedMenu(){
-    let user_id;
-    const [user, setUser]=useState([]);
     const [AISuggestion, setAISuggestion]=useState();
     const [showAITools, setShowAITools]=useState(true);
     const [suggestionLoading, setSuggestionLoading]=useState(false);
 
-    
+    async function getAISuggestion() {
+        setAISuggestion();
+        setSuggestionLoading(true);
+        const prompt =
+          'Give me one unique, new, or interesting tip on how to successfully promote my Scrooge Casino affiliate link to get more people to sign up or make purchases at Scrooge Casino, which is an online casino where players can win real prizes playing live poker, blackjack, slots, and other casino games.';
+        try {
+          const res = await marketPlaceInstance().get(
+            `/getAIMessage/${prompt}/6399cb2354a1dd8bdd842a1a/suggestion`
+          );
+          if (res.data) {
+            //console.log("setAISuggestion: ", data.data);
+            //setAISuggestion(data.data);
+            setAISuggestion(
+              <TypeAnimation sequence={[res.data]} wrapper='span' cursor={true} />
+            );
+            setSuggestionLoading(false);
+            return true;
+          }
+        } catch (err) {
+          console.error(err);
+       
+        }
+      }
 
 
     return (<>
@@ -60,7 +81,7 @@ export default function MinimizedMenu(){
                         <img style={{marginTop: '20px'}} src={RobotAI} width="100px" alt="Scrooge Casino, Scrooge LLC" />
                     </div>
                     <div className='earn-free-tokens-desc' style={{fontSize: '20px', marginBottom: '10px', padding:'0 50px'}}>
-                    <p>At <a href="https://scrooge.casino" target="_blank" rel="noreferrer" alt="Visit Scrooge Casino and play today">Scrooge Casino</a>, we understand the challenges that come with affiliate marketing and want to help you achieve your goals. 
+                    <p>At <a href={scroogeClient} target="_blank" rel="noreferrer" alt="Visit Scrooge Casino and play today">Scrooge Casino</a>, we understand the challenges that come with affiliate marketing and want to help you achieve your goals. 
                     That's why we've created an AI-powered platform that provides personalized affiliate marketing tips and strategies. </p>
                     </div>
                 

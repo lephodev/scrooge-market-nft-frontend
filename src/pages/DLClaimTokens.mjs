@@ -14,6 +14,7 @@ export default function DLClaimTokens() {
   const [hasDL, setHasDL]=useState(0);
   const navigate = useNavigate();
   const address = useAddress();
+  const [loading, setLoading] = useState(true);
 
   // async function getWalletDLBalance() {
   //   if(address){
@@ -43,14 +44,12 @@ export default function DLClaimTokens() {
 
   async function getWalletDL() {
     //console.log("zzzzz");
+    setLoading(true);
     const DLBal = await CheckDLOnPage(address);
     //console.log('DLBal: ',DLBal);
-    if(DLBal >= 1){
       setHasDL(DLBal);
-    } else {
-      //setHasDL(-1);
-      navigate("/", { replace: true });
-    }
+    setLoading(false);
+
     
   }
   
@@ -83,12 +82,12 @@ export default function DLClaimTokens() {
               <GetWalletDLNFTs />
             </div>
           </div>
-        </>):(
+        </>): loading ? (
           <div style={{width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center"}}>
             <div className=''><img className="detecting-dl-img pulse" src="https://casino-nft-marketplace.s3.amazonaws.com/DLGif1.gif" alt="duckylucks nfts" /></div><br></br>
             <div className='detecting-txt'>Detecting your Ducky Lucks...</div>
           </div>
-        )}
+        ): "No DL Tokens"}
 
         {(!address)?(
           <div className='white-txt'>Please connect your wallet.</div>
