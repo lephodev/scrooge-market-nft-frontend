@@ -16,23 +16,19 @@ export default function Login() {
 
   return (
     <Layout>
-    <div className="container">
-      <main className="main">
-      
+      <div className="main login-page">
+        <div className="container">
         <div className="login-page-body">
           <div>
             <img className="login-page-img" src={ScroogeCasino} alt="Everything you need for Scrooge Casino" />
           </div>
           <div className="login-page-desc">
             You must be logged into your Scrooge Casino player account in order to access several areas of this marketplace. 
-            Please <a href="https://scrooge.casino/login" target="_blank" rel="noreferrer" alt="Login to Scrooge Casino">LOG IN</a> and then return to the marketplace.
+            Please <a href="https://scrooge.casino/login" target="_blank" rel="noreferrer" alt="Login to Scrooge Casino">Login</a> and then return to the marketplace.
           </div>
-          <a href="https://scrooge.casino/login" target="_blank" rel="noreferrer" alt="Login to Scrooge Casino"><button className="submit-btn">LOGIN TO YOUR SCROOGE CASINO ACCOUNT</button></a>
+          <a className="submit-btn" href="https://scrooge.casino/login" target="_blank" rel="noreferrer" alt="Login to Scrooge Casino">Login to your Scrooge Casino Account</a>
         </div>
-        
-
-
-      </main>
+      </div>
     </div>
     </Layout>
   );
