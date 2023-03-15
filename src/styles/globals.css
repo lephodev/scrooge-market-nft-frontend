@@ -100,7 +100,7 @@ html {
   margin-bottom: 50px;
 }
 .wallet-casino-profile-div{
-  width: 90%;
+  width: 100%;
   margin: 30px 0 40px 0;
   padding: 5px 30px;
   display: flex;
@@ -108,7 +108,7 @@ html {
   justify-content: space-evenly;
   border: 4px solid #D2042D;
   border-radius: 10px;
-  background-color: #1b2129;
+  background-color: transparent;
   font-family: 'Poppins';
 }
 .wallet-casino-profile-img{
@@ -194,9 +194,9 @@ html {
   flex-direction: row;
   border: 4px solid #fff;
   border-radius: 10px;
-  background-color: #1b2129;
+  background-color: #070707;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
 }
 .crypto-balance-header{
   text-align: center;
@@ -408,12 +408,9 @@ html {
   color: #D2042D;
 }
 .bordered-section{
-  margin: 20px auto;
-  padding: 15px;
-  width: 85%;
-  border: 3px solid #D2042D;
-  border-radius: 5px;
-  background-color: #1b2129;
+  margin: 0px auto;
+  width: 100%;
+  background-color: transparent;
   
 }
 .pageTitle{
@@ -489,10 +486,10 @@ html {
 .nft-home-sell-div{
   margin: 20px auto;
   padding: 15px;
-  width: 85%;
+  width: 100%;
   border: 3px solid #D2042D;
   border-radius: 5px;
-  background-color: #1b2129;
+  background-color: transparent;
 }
 .nft-home-sell-title{
   text-align: center;
@@ -629,7 +626,7 @@ html {
 }
 .nft-token-row-card{
   width: 100%;
-  border: 6px solid #D2042D;
+  border: 3px solid #D2042D;
   border-radius: 5px;
   padding: 20px 50px;
   margin: 15px 0;
@@ -650,16 +647,16 @@ html {
   border-radius: 10px;
 }
 .green-border-6px{
-  border: 6px solid #5EE47E !important;
+  border: 3px solid #5EE47E !important;
 }
 .pink-border-6px{
-  border: 6px solid #ff206e !important;
+  border: 3px solid #ff206e !important;
 }
 .blue-border-6px{
-  border: 6px solid #3a86ff !important;
+  border: 3px solid #3a86ff !important;
 }
 .nft-token-row-card-image{
-  width: 20%;
+  width: 15%;
 }
 .nft-token-row-desc{
   width: 50%;
@@ -863,10 +860,12 @@ font-weight: bold;
   margin: 0 auto 35px auto;
 }
 .detecting-dl-img{
-  margin: 100px auto;
+  margin: 0px auto 50px;
   border: 7px solid #FBFF12;
   border-radius: 5px;
   animation: 2s infinite security;
+  max-width: 400px;
+  width: 100%;
 }
 @keyframes security {
   0% {
@@ -906,7 +905,7 @@ font-weight: bold;
   font-family: 'Poppins';
   text-transform: uppercase;
   font-size: 26px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   animation: 2s infinite text-color;
 }
 @keyframes text-color {
@@ -1423,9 +1422,6 @@ font-weight: bold;
   justify-content: center;
   align-items: center;
   margin: 15px auto 10px auto;
-  border-top: 2px solid #D2042D;
-  border-bottom: 2px solid #D2042D;
-  border-radius: 5px;
   padding: 10px;
 }
 .min-menu-btn{
@@ -1627,6 +1623,17 @@ font-weight: bold;
   width: 150px!important;
   height: 150px!important;
 }
+
+
+.main .title {
+  text-align: center;
+  font-size: 44px;
+  margin: 0;
+  padding-bottom: 15px;
+  color: #FBFF12;
+  text-shadow: 2px 2px #d2042d;
+}
+
 
 /*********************** Header *************************/
 
@@ -2034,7 +2041,7 @@ ul.footer-support li img {
 
 .nft-page h2 {
   text-align: center;
-  font-size: 36px;
+  font-size: 44px;
   margin: 0;
   padding-bottom: 15px;
   color: #FBFF12;
@@ -2048,33 +2055,48 @@ ul.footer-support li img {
   margin: 0;
 }
 
-.show-nav-card .grid {
+.show-nav-card {
+  margin-top: 50px;
+}
+
+.grid {
   max-width: 100%;
   gap: 20px;
 }
 
-.show-nav-card .grid .card {
+.grid .card {
   border: 1px solid #1c1c1c;
   background: transparent;
   /* background: radial-gradient(circle, rgb(28 28 28) 0%, rgb(0 0 0) 100%); */
   box-shadow: 0px 20px 20px #00000091;
   margin: 0;
-  
   max-width: calc(33.33% - 15px);
 }
 
-.show-nav-card .grid .card h2 {
+.grid .card h2 {
   margin: 0;
+  text-align: left;
+  padding-bottom: 15px;
+  font-size: 20px;
 }
 
-.show-nav-card .grid .card p{
-  font-size: 18px;
+.grid .card p{
+  font-size: 16px;
+  text-align: left;
 }
 
 .connect-wallet-inline button, .connect-wallet-inline button:hover, .connect-wallet-inline button:focus {
   background: transparent;
   border-color: transparent;
 }
+
+
+.connect-wallet {
+  text-align: center;
+}
+
+
+
 
 /********************************************************************************************/
                 /************* Media Query ******************/
@@ -2149,7 +2171,7 @@ ul.footer-support li img {
     display: flex;
     flex-direction: row;
     border: 4px solid #fff;
-    font-size: 20px;
+    font-size: 16px;
   }
 }
 
@@ -2199,11 +2221,11 @@ ul.footer-support li img {
   .login-page-body {
     padding: 30px 20px;
   }
-  .show-nav-card .grid .card {
+  .grid .card {
     max-width: 100%;
 }
 
-.show-nav-card .grid .card .card-img {
+.grid .card .card-img {
   margin: 20px auto 0px;
   display: block;
 }
@@ -2212,6 +2234,9 @@ ul.footer-support li img {
   font-size: 25px;
 }
 .nft-page h2 {
+  font-size: 30px;
+}
+.main .title {
   font-size: 30px;
 }
 .connect-wallet-div {
@@ -2279,14 +2304,14 @@ ul.footer-support li img {
     text-align: center;
     padding: 30px 0 200px 0;
   }
-  .bordered-section{
+  /* .bordered-section{
     margin: 20px auto;
     padding: 15px 5px;
     width: 100%;
     border: 3px solid #D2042D;
     border-radius: 5px;
     background-color: #1b2129;
-  }
+  } */
   .full-page-container{
     min-width: 100%;
     background-color: #1b2129;
@@ -2459,7 +2484,7 @@ ul.footer-support li img {
     display: flex;
     flex-direction: row;
     border: 4px solid #fff;
-    font-size: 20px;
+    font-size: 16px;
   }
   .affiliate-card-div{
     width: 98%;
