@@ -114,7 +114,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[0].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[0].asset.name.toString()}</span>
                     
                     {listings[0].asset.description.toString()}
                 </div>
@@ -141,7 +141,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[1].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[1].asset.name.toString()}</span>
                     
                     {listings[1].asset.description.toString()}
                 </div>
@@ -168,7 +168,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[2].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[2].asset.name.toString()}</span>
                     
                     {listings[2].asset.description.toString()}
                 </div>
@@ -199,7 +199,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[3].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[3].asset.name.toString()}</span>
                     
                     {listings[3].asset.description.toString()}
                 </div>
@@ -230,7 +230,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[4].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[4].asset.name.toString()}</span>
                     
                     {listings[4].asset.description.toString()}
                 </div>
@@ -261,7 +261,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[5].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[5].asset.name.toString()}</span>
                     
                     {listings[5].asset.description.toString()}
                 </div>
@@ -292,7 +292,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[6].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[6].asset.name.toString()}</span>
                     
                     {listings[6].asset.description.toString()}
                 </div>
@@ -323,7 +323,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[7].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[7].asset.name.toString()}</span>
                     
                     {listings[7].asset.description.toString()}
                 </div>
@@ -354,7 +354,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[8].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[8].asset.name.toString()}</span>
                     
                     {listings[8].asset.description.toString()}
                 </div>
@@ -385,7 +385,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[9].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[9].asset.name.toString()}</span>
                     
                     {listings[9].asset.description.toString()}
                 </div>
@@ -416,7 +416,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[10].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[10].asset.name.toString()}</span>
                     
                     {listings[10].asset.description.toString()}
                 </div>
