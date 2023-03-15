@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Countdown from 'react-countdown';
 import { useReward } from 'react-rewards';
 import AuthContext from '../context/authContext.ts';
+import { scroogeClient } from '../config/keys.js';
 
 function DailyRewards() {
  const { user } = useContext(AuthContext);
@@ -116,7 +117,7 @@ useEffect(() => {
                       {((new Date(nextClaimDate.nextClaimDate) <= new Date() || nextClaimDate === 'CLAIM NOW')) ? (<button className="button2" onClick={() => claimTokens()}>Claim Tokens</button>) : (<><div className='next-claim-div'>{(nextClaimDate !== 'Loading...')?(<>Next Claim Available:<br></br><Countdown date={nextClaimDate.nextClaimDate}><button className="submit-btn" onClick={() => claimTokens()}>Claim Tokens</button></Countdown></>):(<><img src={LoadingPoker} alt="game" className="imageAnimation" /></>)}</div></>)}
                       
                       <div className='fine-print-txt' style={{marginTop: '40px'}}>
-                        *Your claimed tokens will automatically be added to your connected <a href="https://scrooge.casino" alt="Visit Scrooge Casino" target="_blank" rel="noreferrer">Scrooge Casino</a> account.
+                        *Your claimed tokens will automatically be added to your connected <a href={scroogeClient} alt="Visit Scrooge Casino" target="_blank" rel="noreferrer">Scrooge Casino</a> account.
                       </div>
                   </div>
                   

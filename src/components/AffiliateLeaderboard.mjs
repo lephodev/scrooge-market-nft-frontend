@@ -1,9 +1,11 @@
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import Axios from 'axios';
+import AuthContext from '../context/authContext.ts';
+import { marketPlaceInstance } from '../config/axios.js';
 
 export default function AffiliateLeaderboard(){
-    let user_id;
-    const [user, setUser]=useState([]);
+
+   const { user } = useContext(AuthContext);
     const [leaderboard, setLeaderboard]=useState([]);
     const [showLeaderboards, setShowLeaderboards]=useState(true);
     const [leaderboardByCount, setLeaderboardByCount]=useState([]);
@@ -15,8 +17,9 @@ export default function AffiliateLeaderboard(){
 
     async function getAffLeadersByCount(limit=10, days=0) {
         try {
-            Axios.get(`https://34.237.237.45:9001/api/getAffLeadersByCount/${limit}/${days}`).then((data)=>{
+            marketPlaceInstance().get(`/getAffLeadersByCount/${limit}/${days}`).then((data)=>{
                 //console.log("getAffLeadersByCount: ", data.data);
+                if(typeof data.data !== "string")
                 setLeaderboardByCount(data.data);
                 return data.data;
             });
@@ -27,8 +30,9 @@ export default function AffiliateLeaderboard(){
 
     async function getAffLeadersByTokens(limit=10, days=0) {
         try {
-            Axios.get(`https://34.237.237.45:9001/api/getAffLeadersByTokens/${limit}/${days}`).then((data)=>{
+            marketPlaceInstance().get(`/getAffLeadersByTokens/${limit}/${days}`).then((data)=>{
                 //console.log("getAffLeadersByTokens: ", data.data);
+                if(typeof data.data !== "string")
                 setLeaderboardByTokens(data.data);
                 return data.data;
             });
@@ -39,8 +43,9 @@ export default function AffiliateLeaderboard(){
 
     async function getAffLeadersHottestNewcomers(limit=10, days=7) {
         try {
-            Axios.get(`https://34.237.237.45:9001/api/getAffLeadersByTokens/${limit}/${days}`).then((data)=>{
+            marketPlaceInstance().get(`/getAffLeadersByTokens/${limit}/${days}`).then((data)=>{
                 //console.log("getAffLeadersByTokens: ", data.data);
+                if(typeof data.data !== "string")
                 setLeaderboardHottestNewcomers(data.data);
                 return data.data;
             });
@@ -51,8 +56,9 @@ export default function AffiliateLeaderboard(){
 
     async function getAffLeadersMonthlyMovers(limit=10, days=30) {
         try {
-            Axios.get(`https://34.237.237.45:9001/api/getAffLeadersByTokens/${limit}/${days}`).then((data)=>{
+            marketPlaceInstance().get(`/getAffLeadersByTokens/${limit}/${days}`).then((data)=>{
                 //console.log("getAffLeadersByTokens: ", data.data);
+                if(typeof data.data !== "string")
                 setLeaderboardMonthlyMovers(data.data);
                 return data.data;
             });
@@ -66,8 +72,9 @@ export default function AffiliateLeaderboard(){
 
     async function getAffLeadersTopSales(type='order', limit=10, days=0) {
         try {
-            Axios.get(`https://34.237.237.45:9001/api/getAffLeadersByType/${type}/${limit}/${days}`).then((data)=>{
+            marketPlaceInstance().get(`/getAffLeadersByType/${type}/${limit}/${days}`).then((data)=>{
                 //console.log("getAffLeadersByTokens: ", data.data);
+                if(typeof data.data !== "string")
                 setLeaderboardTopSales(data.data);
                 return data.data;
             });
@@ -78,8 +85,9 @@ export default function AffiliateLeaderboard(){
 
     async function getAffLeadersTopRegisters(type='register', limit=10, days=0) {
         try {
-            Axios.get(`https://34.237.237.45:9001/api/getAffLeadersByType/${type}/${limit}/${days}`).then((data)=>{
+            marketPlaceInstance().get(`/getAffLeadersByType/${type}/${limit}/${days}`).then((data)=>{
                 //console.log("getAffLeadersByTokens: ", data.data);
+                if(typeof data.data !== "string")
                 setLeaderboardTopRegisters(data.data);
                 return data.data;
             });

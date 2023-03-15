@@ -1,8 +1,7 @@
 import {useState,useEffect, useContext} from 'react';
-import Axios from 'axios';
 import LoadingPoker from '../images/scroogeHatLogo.png';
 import { ConnectWallet, useNetworkMismatch, useAddress } from "@thirdweb-dev/react";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 //import ReactModal from 'react-modal';
 import fetch from 'node-fetch';
@@ -13,21 +12,18 @@ import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import AuthContext from '../context/authContext.ts';
 import Layout from './Layout.mjs';
 import { marketPlaceInstance } from '../config/axios.js';
+import { scroogeClient } from '../config/keys.js';
 
 function HolderClaimChips() {
   
   const { user } = useContext(AuthContext);
-  const { reward, isAnimating } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
+  const { reward, } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
 
     const [buyLoading,setBuyLoading]=useState(false);
     const [nextClaimDate, setNextClaimDate]=useState("Loading...");
     const [OGBalance, setOGBalance]=useState("Loading...");
     const [currentPrice, setCurrentPrice]=useState("Loading...");
-    const [email, setEmail]=useState('');
-    const handleChange = event => {
-        setEmail(event.target.value);
-      };
-    let user_id = '';
+   
     const address = useAddress();
     const isMismatched = useNetworkMismatch();
     function notify(message) {
@@ -45,7 +41,7 @@ function HolderClaimChips() {
     };
 
     async function getCoinGeckoData() {
-      await fetch('https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/0xfa1ba18067ac6884fb26e329e60273488a247fc3')
+      await fetch(`https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${process.env.REACT_APP_OGCONTRACT_ADDRESS}`)
         .then(response => response.json())
         .then((data) => {
             const current_price = data.market_data.current_price.usd;
@@ -64,7 +60,6 @@ function HolderClaimChips() {
 
     const claimTokens = () => {
       setBuyLoading(true);
-      user_id = user[0];
       try {
         marketPlaceInstance().get(`/claimHolderTokens/${address}/${user.id}`).then(async (data)=>{
           notify('Tokens Claimed: '+data.data);
@@ -83,7 +78,7 @@ function HolderClaimChips() {
 
 const zzz = async () => {
   if(address && !isMismatched){
-    const xxx = await getNextClaimDate().then((resu)=>{
+    await getNextClaimDate().then((resu)=>{
       return true;
     });
   } else {
@@ -116,7 +111,7 @@ useEffect(() => {
             </div>
             <div className="feature-overview-div" style={{marginBottom: '30px'}}>
                 <p>Did you know that you get FREE TOKENS EVERY MONTH just for holding Scrooge in your wallet? 
-                Once every 30 days, you can come right to this page and claim your free <a href="https://scrooge.casino" target="_blank" rel="noreferrer" alt="claim free tokens to spend in Scrooge Casino">Scrooge Casino</a> tokens just by clicking the CLAIM TOKENS button.</p>
+                Once every 30 days, you can come right to this page and claim your free <a href={scroogeClient} target="_blank" rel="noreferrer" alt="claim free tokens to spend in Scrooge Casino">Scrooge Casino</a> tokens just by clicking the CLAIM TOKENS button.</p>
                 <p>Your claimable monthly token rate is automatically determined based on the amount of Scrooge you currently hold, as well as the current Scrooge price.</p>
             </div>
             {(isMismatched && address) ? (<div><SwitchNetworkBSC /></div>) : 
@@ -134,9 +129,18 @@ useEffect(() => {
                       </div>
                       {(OGBalance > 0)?(<>Claim {((OGBalance * currentPrice)*.1).toFixed(0).toLocaleString('en-US')}</>):(<>0</>)} FREE Tokens Every 30 Days</div>
                       <div style={{width: "100%", textAlign: "center"}}><div id="rewardId" style={{margin: "0 auto"}} /></div>
-                      {((new Date(nextClaimDate) <= new Date() || nextClaimDate === 'CLAIM NOW') && OGBalance > 0) ? (<button className="submit-btn" onClick={() => claimTokens()}>Claim {((OGBalance * currentPrice)*.1).toFixed(0).toLocaleString('en-US')} Tokens</button>) : (<><div className='prize-name'>{(nextClaimDate !== 'Loading...' && OGBalance>0)?(<>Next Claim Available:<br></br><Countdown date={nextClaimDate}><button className="submit-btn" onClick={() => claimTokens()}>Claim {(OGBalance * currentPrice).toFixed(0).toLocaleString('en-US')} Tokens</button></Countdown></>):(<><img src={LoadingPoker} alt="game" className="imageAnimation" /></>)}</div><br></br><br></br></>)}
+                      {((new Date(nextClaimDate) <= new Date() || nextClaimDate === 'CLAIM NOW') && OGBalance > 0) ? (
+                      <button className="submit-btn" onClick={() => claimTokens()}>
+                        Claim {((OGBalance * currentPrice)*.1).toFixed(0).toLocaleString('en-US')} Tokens</button>
+                        ) : (<>
+                        <div className='prize-name'>
+                          {(nextClaimDate !== 'Loading...' && OGBalance>0)?(
+                          <>Next Claim Available:<br></br><Countdown date={nextClaimDate}>
+                            <button className="submit-btn" onClick={() => claimTokens()}>Claim {(OGBalance * currentPrice).toFixed(0).toLocaleString('en-US')} Tokens</button>
+                            </Countdown></>):OGBalance === 0 ? "" : (<>
+                            <img src={LoadingPoker} alt="game" className="imageAnimation" /></>)}</div><br></br><br></br></>)}
                       <div className='fine-print-txt' style={{marginTop: '40px'}}>
-                        *Your claimed tokens will automatically be added to your connected <a href="https://scrooge.casino" alt="Visit Scrooge Casino" target="_blank" rel="noreferrer">Scrooge Casino</a> account.
+                        *Your claimed tokens will automatically be added to your connected <a href={scroogeClient} alt="Visit Scrooge Casino" target="_blank" rel="noreferrer">Scrooge Casino</a> account.
                       </div>
                   </div>
                   <div className='fine-print-txt' style={{marginTop: '40px'}}>

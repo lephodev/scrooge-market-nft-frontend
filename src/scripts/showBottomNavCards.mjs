@@ -3,6 +3,7 @@ import WalletIcon from '../images/walletIcon.png';
 import PokerChips from '../images/pokerChips.png';
 import Casino from '../images/casino200.png';
 import "../styles/Home.css";
+import { scroogeClient } from "../config/keys.js";
 
 export default function ShowBottomNavCards() {
    return ( <div className="grid">
@@ -15,7 +16,7 @@ export default function ShowBottomNavCards() {
           </Link>
 
           
-          <a href="https://scrooge.casino" className="card" target="_blank" rel="noreferrer">
+          <a href={scroogeClient} className="card" target="_blank" rel="noreferrer">
             <h2>VISIT THE CASINO &rarr;</h2>
             <p>
               Have everything you need? Head on over to Scrooge Casino to get the party started.
