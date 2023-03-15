@@ -99,6 +99,8 @@ useEffect(() => {
 
     return (
     <Layout>
+        <main className="main">
+    <div className="container">
         <div className="bordered-section">
             {buyLoading ? (<div className="pageImgContainer">
                     <img src={LoadingPoker} alt="game" className="imageAnimation" />
@@ -107,7 +109,7 @@ useEffect(() => {
                     </div>
                 </div>) : (<></>)}
             <div className="pageTitle">
-                <h1>Claim Free Tokens</h1>
+                <h1 className='title'>Claim Free Tokens</h1>
             </div>
             <div className="feature-overview-div" style={{marginBottom: '30px'}}>
                 <p>Did you know that you get FREE TOKENS EVERY MONTH just for holding Scrooge in your wallet? 
@@ -158,9 +160,11 @@ useEffect(() => {
 
             
         </div>
-        <div className="flex-row" style={{margin: '100px auto'}}>
+        <div className="flex-row" style={{margin: '50px auto 0px'}}>
           <ShowBottomNavCards />
         </div>
+        </div>
+        </main>
         </Layout>)
     };
     

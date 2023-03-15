@@ -29,18 +29,19 @@ export default function Home() {
 
   return (
     <Layout>
-    <div className="container">
       <main className="main">
-        <img className="collection-header-img" src={ScroogeCasino} alt="Everything you need for Scrooge Casino" />
+    <div className="container">
+      
+        {/* <img className="collection-header-img" src={ScroogeCasino} alt="Everything you need for Scrooge Casino" /> */}
         <div className="title">
           NFT MARKETPLACE
         </div>
-        <br></br>
+        
         {(isMismatched) ? (<SwitchNetworkBSC />) : 
           (<span></span>)}
         
         {(!address) ? (<div>
-          <p className="description yellow">
+          <p className="description">
           Get started by connecting your wallet.
           </p>
         
@@ -108,8 +109,9 @@ export default function Home() {
         <div><ShowCasinoTokenNFTs /></div>
         <br></br><br></br>
         <ShowBottomNavCards />
-      </main>
+      
     </div>
+    </main>
     </Layout>
   );
 }

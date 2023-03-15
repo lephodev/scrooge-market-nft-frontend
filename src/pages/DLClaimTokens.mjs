@@ -63,8 +63,9 @@ export default function DLClaimTokens() {
 
   return (
     <Layout>
+        <main className="main">
     <div className="container">
-      <main className="main">
+    
         {(hasDL)?(<>
           <div className='large-header-div'>
             <img className='large-header-img' src={DLLogoMembersOnly} alt="Ducky Lucks Members Only" />
@@ -90,15 +91,16 @@ export default function DLClaimTokens() {
         ): "No DL Tokens"}
 
         {(!address)?(
-          <div className='white-txt'>Please connect your wallet.</div>
+          <div className='connect-wallet'>Please connect your wallet.</div>
         ):(<></>)}
           
         <div style={{marginTop: "75px"}}><ShowBottomNavCards /></div>
         
         
         
-      </main>
+    
     </div>
+    </main>
     </Layout>
   );
 }
