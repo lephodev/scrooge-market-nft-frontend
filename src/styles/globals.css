@@ -5,7 +5,7 @@ body {
   padding: 0;
   margin: 0;
   color: #878d93;
-  background: #24262b;
+  background: #000000;
   font-family: 'Poppins', sans-serif!important;
   overflow-x: hidden;
 }
@@ -637,11 +637,12 @@ html {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 .nft-token-stripe-badge-div{
   height: 100%;
   text-align: center;
-  padding: 0 50px 0 0;
+  padding: 0 0px 0 0;
 }
 .stripe-badge-img{
   width: 100px;
@@ -671,9 +672,13 @@ html {
   align-items: center;
   line-height: .9;
 }
-.nft-token-row-name{
+.nft-token-row-name {
   font-size: 26px;
   color: #FBFF12;
+  text-shadow: 2px 2px #d2042d;
+  display: block;
+  padding-bottom: 15px;
+  font-weight: 500;
 }
 .nft-token-row-sale{
   text-align: center;
@@ -1024,12 +1029,12 @@ font-weight: bold;
   font-weight: bold;
 }
 .feature-overview-div{
-  margin: 0 20%;
+  margin: 0 auto;
   padding: 20px 20px;
   background-color: #000;
   border: 2px solid #FBFF12;
   border-radius: 5px;
-  font-family: 'Poppins';
+  text-align: center;
 }
 .feature-overview-div1{
   margin: 0 20%;
@@ -1037,7 +1042,6 @@ font-weight: bold;
   background-color: #1b2129;
   border: 4px solid #0dff00;
   border-radius: 5px;
-  font-family: 'Poppins';
 }
 .feature-overview-div2{
   margin: 0 20%;
@@ -1045,7 +1049,6 @@ font-weight: bold;
   background-color: #1b2129;
   border: 4px solid #FBFF12;
   border-radius: 5px;
-  font-family: 'Poppins';
 }
 .feature-overview-div3{
   margin: 0 20%;
@@ -1608,7 +1611,22 @@ font-weight: bold;
   border-radius: 100%;
 }
 
+.loading{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9;
+}
 
+.nft-token-row-card-image img {
+  width: 150px!important;
+  height: 150px!important;
+}
 
 /*********************** Header *************************/
 
@@ -1954,7 +1972,7 @@ ul.footer-support li img {
 
 
 
-/*********************** Login Popup *************************/
+/*********************** Login Page *************************/
 
 
 .login-page-body {
@@ -1966,9 +1984,10 @@ ul.footer-support li img {
   font-size: 16px;
   text-align: center;
   max-width: 600px;
-  border: 1px solid #121212;
-  background: rgb(46,46,48);
-  background: radial-gradient(circle, rgb(28 28 28) 0%, rgb(0 0 0) 100%);
+  margin: 0px auto;
+  border: 1px solid #1c1c1c;
+  background: transparent;
+  /* background: radial-gradient(circle, rgb(28 28 28) 0%, rgb(0 0 0) 100%); */
   box-shadow: 0px 20px 20px #00000091;
 }
 
@@ -2003,6 +2022,58 @@ ul.footer-support li img {
 
 .login-page-body .submit-btn:hover {
   background-image: conic-gradient(from 1turn,#ffd712,#f9ff00)!important;
+}
+
+
+
+/*********************** NFT Page *************************/
+
+.nft-page{
+  position: relative;
+}
+
+.nft-page h2 {
+  text-align: center;
+  font-size: 36px;
+  margin: 0;
+  padding-bottom: 15px;
+  color: #FBFF12;
+  text-shadow: 2px 2px #d2042d;
+}
+
+.nft-page p {
+  text-align: center;
+  font-size: 18px;
+  color: #878d93;
+  margin: 0;
+}
+
+.show-nav-card .grid {
+  max-width: 100%;
+  gap: 20px;
+}
+
+.show-nav-card .grid .card {
+  border: 1px solid #1c1c1c;
+  background: transparent;
+  /* background: radial-gradient(circle, rgb(28 28 28) 0%, rgb(0 0 0) 100%); */
+  box-shadow: 0px 20px 20px #00000091;
+  margin: 0;
+  
+  max-width: calc(33.33% - 15px);
+}
+
+.show-nav-card .grid .card h2 {
+  margin: 0;
+}
+
+.show-nav-card .grid .card p{
+  font-size: 18px;
+}
+
+.connect-wallet-inline button, .connect-wallet-inline button:hover, .connect-wallet-inline button:focus {
+  background: transparent;
+  border-color: transparent;
 }
 
 /********************************************************************************************/
@@ -2090,6 +2161,10 @@ ul.footer-support li img {
 }
 
 @media screen and (max-width: 991px) {
+  .main {
+    padding: 50px 0px!important;
+}
+
   .footer-grid {
     padding: 40px 0px 100px;
   }
@@ -2116,11 +2191,35 @@ ul.footer-support li img {
     position: fixed;
     width: 100%;
     bottom: 0;
-    background: #23252a;
+    background: #000000;
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid #292d30;
   }
+  .login-page-body {
+    padding: 30px 20px;
+  }
+  .show-nav-card .grid .card {
+    max-width: 100%;
+}
+
+.show-nav-card .grid .card .card-img {
+  margin: 20px auto 0px;
+  display: block;
+}
+
+.nft-home-sell-title h1 {
+  font-size: 25px;
+}
+.nft-page h2 {
+  font-size: 30px;
+}
+.connect-wallet-div {
+  margin-bottom: 30px;
+}
+.nft-home-sell-title {
+  margin-bottom: 30px;
+}
 }
 
 @media screen and (max-width: 720px) {
@@ -2234,7 +2333,7 @@ ul.footer-support li img {
   }
   .nft-token-stripe-badge-div{
     width: 100%;
-    margin: 25px auto;
+    margin: 0px auto;
     display: flex;
     justify-content: center;
     padding: 0;
@@ -2297,7 +2396,7 @@ ul.footer-support li img {
     text-align: center;
     line-height: 2;
     font-size: 26px;
-    margin-top: 40px;
+    margin-top: 10px;
   }
   .sale-badge-img{
     width: 160px;
@@ -2471,6 +2570,7 @@ ul.footer-support li img {
     width: 90%;
     border: 2px solid #D2042D;
   }
+
 }
 
 @media screen and (max-width: 480px) {

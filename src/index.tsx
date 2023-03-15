@@ -30,6 +30,7 @@ import { useCookies } from "react-cookie";
 import AuthContext from "./context/authContext";
 import { ToastContainer } from "react-toastify";
 import { authInstance } from "./config/axios";
+import LoadingPoker from './images/scroogeHatLogo.png';
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(ChainId.BinanceSmartChainMainnet);
@@ -89,9 +90,11 @@ export default function App() {
       setUser
     }}>
        {loading ? (
-        <div className="loader">
-         loader...
-        </div>
+          <div className="loading">
+            <div className="loading-img-div">
+                <img src={LoadingPoker} alt="game" className="imageAnimation" />
+            </div>
+          </div>
       ) : (
     <ChainContext.Provider value={{ selectedChain, setSelectedChain }}> 
       <ThirdwebProvider

@@ -22,7 +22,7 @@ export default function NFTTokens() {
   return (
     <Layout>
    
-      <main className="main nft-page">
+      <div className="main nft-page">
       <div className="container">
         <h2>
           CASINO MARKETPLACE
@@ -30,28 +30,24 @@ export default function NFTTokens() {
         <p>
          Get everything you need to be a Scrooge Casino high roller.
         </p>
-        {(isMismatched) ? (<SwitchNetworkBSC />) : 
-          (<span></span>)}
+        {(isMismatched) ? (<SwitchNetworkBSC />) : ("")}
         
-        {(!address) ? (<div className="wallet-connect">
+        {(!address) ? (
+        <div className="wallet-connect">
           <p>
           Get started by connecting your wallet.
           </p>
-        
           <div className="connect-wallet-div">
             <ConnectWallet />
           </div>
-        </div>) : 
-          (<span></span>)}
+        </div>) : ("")}
 
         <div className="show-all-token"><ShowAllTokenNFTs /></div>
 
-        <div className="show-nav-card">
-        <ShowBottomNavCards />
-        </div>
+        <div className="show-nav-card"><ShowBottomNavCards /></div>
      
        </div>
-    </main>
+    </div>
     </Layout>
   );
 }
