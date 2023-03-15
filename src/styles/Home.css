@@ -1,10 +1,6 @@
-.container {
-  padding: 0 2rem;
-}
 
 .main {
-  min-height: 100vh;
-  padding: 0.5rem 0;
+  padding: 100px 0px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -112,8 +108,7 @@
   }
 }
 
-.card,
-.footer {
+.card {
   border-color: #222;
 }
 .code {
