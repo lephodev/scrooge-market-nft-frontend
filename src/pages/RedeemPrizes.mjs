@@ -98,7 +98,7 @@ function RedeemPrizes() {
 
   async function getCoinGeckoDataOG() {
     await fetch(
-      'https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/0xfa1ba18067ac6884fb26e329e60273488a247fc3'
+      `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${process.env.REACT_APP_OGCONTRACT_ADDRESS}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -179,6 +179,9 @@ function RedeemPrizes() {
 
   return (
     <Layout>
+        <main className="main">
+       <div className="container">
+    
       <div className='bordered-section'>
         {redeemLoading ? (
           <div className='pageImgContainer'>
@@ -208,7 +211,7 @@ function RedeemPrizes() {
         )}
 
         <div className='pageTitle'>
-          <h1>Redeem for Prizes</h1>
+          <h1 className='title'>Redeem for Prizes</h1>
         </div>
         <div className='feature-overview-div' style={{ marginBottom: '30px' }}>
           Ready to cash in on all of your big wins? Browse through our huge list
@@ -594,6 +597,8 @@ function RedeemPrizes() {
           )}
         </div>
       </div>
+      </div>
+      </main>
     </Layout>
   );
 }

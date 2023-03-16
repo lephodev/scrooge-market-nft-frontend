@@ -1,16 +1,23 @@
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ThirdwebNftMedia } from "@thirdweb-dev/react";
 import {useEffect, useState} from 'react';
 import Logo from '../images/scroogeHatLogo.png';
 import DLBigD from '../images/DLBigD.png';
-import Token from '../images/token.png';
-import Casino from '../images/casino200.png';
-import WalletIcon from '../images/walletIcon.png';
+import WalletIcon from '../images/wallet.png';
 import StoreIconBadge from '../images/storeIconBadge.png';
 import ClaimIconBadge from '../images/claimIconBadge.png';
 import PrizesIconBadge from '../images/prizesIconBadge.png';
 import WalletIconBadge from '../images/walletIconBadge.png';
 import TophatIconBadge from '../images/tophatIconBadge.png';
+
+import logo from "../images/footer/logo.png";
+import envelope from "../images/footer/envelope.svg";
+import twitter from "../images/footer/twitter.svg";
+import discord from "../images/footer/discord.svg";
+import telegram from "../images/footer/telegram.svg";
+import facebook from "../images/footer/facebook.svg";
+import reddit from "../images/footer/reddit.svg";
+
 import { ConnectWallet } from "@thirdweb-dev/react";
 import CookieConsent from "react-cookie-consent";
 import Popup from 'reactjs-popup';
@@ -36,7 +43,7 @@ export const Tooltip = (id, metadata, message) => (
 const Layout = ({ children }) => {
   const [currentPriceOG, setCurrentPriceOG]=useState("");
   const [priceColor, setPriceColor]=useState("");
-  const OGPrice = async () => {await fetch('https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/0xfa1ba18067ac6884fb26e329e60273488a247fc3')
+  const OGPrice = async () => {await fetch(`https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${process.env.REACT_APP_OGCONTRACT_ADDRESS}`)
     .then(response => response.json())
     .then((data) => {
         //console.log('gecko data: ', data.market_data.price_change_percentage_24h);
@@ -62,111 +69,210 @@ const Layout = ({ children }) => {
     OGPrice();
   }, []);
   return (
-    <>
-      <nav className="header-nav-container">
-        <div className="header-nav-logo-div">
-          <div><Link to="/"><img src={Logo} alt="logo" className="menu-logo-img"/></Link></div>
-          <div className={priceColor}>${currentPriceOG}</div>
-        </div>
-        
-        <div className="header-nav-menu">
-          <ul>
+    <div className="wrapper">
+
+      <div className="header">
+        <div className="container">
+          <nav className="header-nav">
+            <div className="header-nav-logo">
+              <Link to="/"><img src={Logo} alt="logo" className="menu-logo-img"/></Link>
+            </div>
             
-            <li>
-              <Link to="/nft-tokens">Casino NFT Shop</Link>
-            </li>
-            <li>
-              <Link to="/claim-free-tokens">Claim Monthly Tokens</Link>
-            </li>
-            <li>
-              <Link to="/redeem-prizes">Redeem Prizes</Link>
-            </li>
-            <li>
-              <Link to="/earn-tokens"><img className="token-nav pulse" src={Token} alt="Scrooge Casino balances" />EARN FREE TOKENS</Link>
-            </li>
-          </ul>
+            <div className="header-menu">
+              <ul> 
+                <li>
+                  <Link to="/nft-tokens">Casino NFT Shop</Link>
+                </li>
+                <li>
+                  <Link to="/claim-free-tokens">Claim Monthly Tokens</Link>
+                </li>
+                <li>
+                  <Link to="/redeem-prizes">Redeem Prizes</Link>
+                </li>
+                <li>
+                  <Link to="/earn-tokens">Earn Free Tokens</Link>
+                </li>
+              </ul>
+            </div>
+
+            <div className="header-action"> 
+              <div className="icon-links">
+                <Link to="/ducky-lucks-claim-tokens"><img src={DLBigD} alt="Ducky Lucks VIPs" className="wallet-icon"/></Link>
+                <Link to="/my-wallet"><img className="wallet-icon" src={WalletIcon} alt="my wallet" /></Link>
+              </div>
+              <div className="wallet">
+                <ConnectWallet />
+                <div className={priceColor}>${currentPriceOG}</div>
+              </div>
+            </div>
+          </nav>
         </div>
-        <div><Link to="/ducky-lucks-claim-tokens"><img src={DLBigD} alt="Ducky Lucks VIPs" className="wallet-icon-img"/></Link></div>
-        <div><Link to="/my-wallet"><img className="wallet-icon-img" src={WalletIcon} alt="my wallet" /></Link></div>
-        <div>
-          <ConnectWallet />
-        </div>
-      </nav>
-      {children}
+      </div>
       
 
-      <Outlet />
-      <nav className="header-nav-container-mobile">
-        
-        <div className="header-nav-menu-mobile">
-          <ul>
-            <li>
-            <Link to="/"><img src={TophatIconBadge} alt="logo" className="wallet-icon-img-mobile"/></Link>
-            </li>
-            <li>
-              <Link to="/nft-tokens"><img className="wallet-icon-img-mobile" src={StoreIconBadge} alt="shop casino NFTs" /></Link>
-            </li>
-            <li>
-              <Link to="/claim-free-tokens"><img className="wallet-icon-img-mobile" src={ClaimIconBadge} alt="claim monthly casino free tokens" /></Link>
-            </li>
-            <li>
-              <Link to="/redeem-prizes"><img className="wallet-icon-img-mobile" src={PrizesIconBadge} alt="redeem casino tickets for prizes" /></Link>
-            </li>
-            <li>
-              <Link to="/my-wallet"><img className="wallet-icon-img-mobile" src={WalletIconBadge} alt="my wallet" /></Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <div className="content">
+          {children}
+      </div>
+      
 
+      <div className="footer">
+        <div className="container">
+          <div className="footer-grid">
+            <div className="footer-info">
+              <Link to="/">
+                <img src={logo} alt="scrooge casino nft token packages" />
+              </Link>
+              <h6>
+                Want to stay ahead of your competition. Subscribe and be the first
+                to know everything happening in the world of SCROOGE.
+              </h6>
+              <p>
+                <span>Copyright &copy; Scrooge LLC.</span> All Rights Reserved
+              </p>
+            </div>
 
-      <div className="footer-nav">
-      <div className="footer-inner-div">
-          <strong>MY WALLET</strong>
-          <br></br><br></br>
-          <Link to="/my-wallet"><img className="wallet-icon-img" src={WalletIcon} alt="my wallet" /></Link>
-        </div>
-        <div className="footer-inner-div">
-          <strong>DESTINATIONS</strong><br></br><br></br>
-          <Link to="/nft-tokens">NFT Marketplace</Link><br></br>
-          <a href="https://scrooge.casino" target="_blank" rel="noreferrer">Scrooge Casino Home</a><br></br>
-          <a href="https://poker.scrooge.casino" target="_blank" rel="noreferrer">Scrooge Poker</a><br></br>
-          <a href="https://blackjack.scrooge.casino" target="_blank" rel="noreferrer">Scrooge Blackjack</a><br></br>
-          <a href="https://roulette.scrooge.casino" target="_blank" rel="noreferrer">Scrooge Roulette</a><br></br>
-        </div>
-        <div className="footer-inner-div">
-          <strong>SOCIAL</strong><br></br><br></br>
-          <a href="https://twitter.com/scrooge_coin" target="_blank" rel="noreferrer">Scrooge Casino on Twitter</a><br></br>
-          <a href="https://facebook.com/scroogegold" target="_blank" rel="noreferrer">Scrooge Casino on Facebook</a><br></br>
-          <a href="http://t.me/scroogecoingold" target="_blank" rel="noreferrer">Scrooge on Telegram</a><br></br>
-          <a href="https://discord.gg/scroogecoin" target="_blank" rel="noreferrer">Scrooge on Discord</a><br></br>
-          <a href="https://www.reddit.com/r/scroogecoin/" target="_blank" rel="noreferrer">Scrooge on Reddit</a><br></br>
-        </div>
-        <div className="footer-inner-div">
-          <strong>INFO</strong><br></br><br></br>
-          <Link to="/privacy">Privacy Policy</Link><br></br>
-          <Link to="/terms">Terms and Conditions</Link><br></br>
-          <Link to="/contact">Contact Us</Link><br></br>
+            <div className="footer-menu">
+              <h3>Destinations</h3>
+              <ul>
+                <li>
+                  <Link to="/nft-tokens">NFT Marketplace</Link>
+                </li>
+                <li>
+                  <a href="https://scrooge.casino" target="_blank" rel="noreferrer">Scrooge Casino Home</a>
+                </li>
+                <li>
+                  <a href="https://poker.scrooge.casino" target="_blank" rel="noreferrer">Scrooge Poker</a>
+                </li>
+                <li>
+                  <a href="https://blackjack.scrooge.casino" target="_blank" rel="noreferrer">Scrooge Blackjack</a>
+                </li>
+                <li>
+                  <a href="https://roulette.scrooge.casino" target="_blank" rel="noreferrer">Scrooge Roulette</a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="footer-menu">
+              <h3>Policy</h3>
+              <ul>
+                <li>
+                <Link to="/privacy">Privacy Policy</Link>
+                </li>
+                <li>
+                <Link to="/terms">Terms and Conditions</Link>
+                </li>
+
+                <li>
+                <Link to="/contact">Contact Us</Link>
+                </li>
+              </ul>
+            </div>
+
+            <div className="footer-contact">
+              <h3>Follow us</h3>
+              <ul className="footer-social">
+                <li>
+                  <a
+                    href="https://www.facebook.com/scroogegold/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={facebook} alt="" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://twitter.com/scrooge_coin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={twitter} alt="" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="http://t.me/scroogecoingold"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={telegram} alt="" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://discord.gg/scroogecoin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={discord} alt="" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.reddit.com/r/scroogecoin/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={reddit} alt="" />
+                  </a>
+                </li>
+              </ul>
+              <h3>Contact Us</h3>
+              <ul className="footer-support">
+                <li>
+                  <a
+                    href="mailto:support@scroogegold.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={envelope} alt="" />
+                    support@scroogegold.com
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="footer-div">
-        <Link to="/">
-            <img className="" src={Casino} alt="scrooge casino nft token packages" />
-          </Link>
-      </div>
-      <div className="footer-div">Copyright &copy; Scrooge LLC. All rights reserved.</div>
+
+
       <CookieConsent
         location="bottom"
         buttonText="ACCEPT"
         cookieName="nftMarketCookieConsent"
-        style={{ background: "#D2042D", fontFamily: 'Martian Mono', paddingLeft: "10%", paddingRight: "10%", borderTop: "3px solid #e7c975"}}
-        buttonStyle={{ color: "#0dff00", backgroundColor: "#000000", fontSize: "13px", borderRadius: "5px", border: "2px solid #e7c975", fontFamily: 'Martian Mono'  }}
         expires={150}
       >
-        This website uses delicious cookies to enhance the user experience.{" "}
-        <span style={{ fontSize: "11px", fontFamily: 'Martian Mono'  }}>Only for good stuff. We promise.</span>
+        <h4>Cookies Policy</h4>
+        <p>This website uses delicious cookies to enhance the user experience. Only for good stuff. We promise.</p>
       </CookieConsent>
-    </>
+
+
+      <div className="mobile-menu">
+        <nav className="header-nav-container-mobile">
+          
+          <div className="header-nav-menu-mobile">
+            <ul>
+              <li>
+              <Link to="/"><img src={TophatIconBadge} alt="logo" /></Link>
+              </li>
+              <li>
+                <Link to="/nft-tokens"><img  src={StoreIconBadge} alt="shop casino NFTs" /></Link>
+              </li>
+              <li>
+                <Link to="/claim-free-tokens"><img  src={ClaimIconBadge} alt="claim monthly casino free tokens" /></Link>
+              </li>
+              <li>
+                <Link to="/redeem-prizes"><img  src={PrizesIconBadge} alt="redeem casino tickets for prizes" /></Link>
+              </li>
+              <li>
+                <Link to="/my-wallet"><img  src={WalletIconBadge} alt="my wallet" /></Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+    </div>
   )
 };
 

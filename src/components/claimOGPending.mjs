@@ -19,7 +19,7 @@ export default function ClaimOGPending() {
     const { reward, isAnimating } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
     const sdk = useSDK();
     const address = useAddress();
-    const OGContractAddress = '0xfA1BA18067aC6884fB26e329e60273488a247FC3';
+    const OGContractAddress = process.env.REACT_APP_OGCONTRACT_ADDRESS;
     const contractClaim = async () => await sdk.getContractFromAbi(
         OGContractAddress,
         OG_ABI
