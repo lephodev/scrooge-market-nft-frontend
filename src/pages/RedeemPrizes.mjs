@@ -43,12 +43,13 @@ function RedeemPrizes() {
     setPrizesLoading(true);
     if (prizes.length < 2) {
       try {
-        const res = marketPlaceInstance().get(`/getPrizes`);
+        const res = await marketPlaceInstance().get(`/getPrizes`);
+        console.log('res', res);
         if (res.data) {
           if (prizes.length < 2) {
-            setPrizes(res.data.data || []);
+            setPrizes(res.data || []);
             setPrizesLoading(false);
-            setAllPrizes(res.data.data || []);
+            setAllPrizes(res.data || []);
           }
         }
       } catch (e) {
@@ -142,11 +143,15 @@ function RedeemPrizes() {
         containerId: 'connect-wallet',
       });
     console.log('user', user, prize_id);
+    console.log('add', address);
+    console.log('user.id', user.id);
+    console.log('prize_id', prize_id);
     setRedeemLoading(true);
     Axios.get(
       `http://localhost:9001/api/redeemPrize/${address}/${user.id}/${prize_id}`
     )
       .then((data) => {
+        console.log('data', data);
         setRedeemLoading(false);
         if (data.data === 'Balance Unacceptable') {
           toast.error('ERROR! - ' + data.data, { containerId: 'error' });
