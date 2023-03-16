@@ -111,7 +111,7 @@ export default function MyWallet() {
             <div className="wallet-casino-profile-details">
               <div className="">
                 <span className="wallet-casino-profile-username">{user?.username}</span><br></br>
-                <span className="yellow">{user?.firstName} {user?.lastName}</span><br></br>
+                <span className="wallet-user-name">{user?.firstName} {user?.lastName}</span><br></br>
               </div>
               <div className="balance-column">
                 <div className="token-ticket-row"><img className="token-small" src={Token} alt="Scrooge Casino balances" />TOKENS: {user?.wallet?.toLocaleString('en-US')}</div>

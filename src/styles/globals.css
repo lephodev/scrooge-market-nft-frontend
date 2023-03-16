@@ -175,6 +175,13 @@ html {
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  font-size: 20px;
+  padding: 5px 0px;
+}
+span.wallet-user-name {
+  font-weight: 500;
+  font-size: 20px;
+  color: #878d93;
 }
 .crypto-balance-row{
   display: flex;
@@ -192,9 +199,9 @@ html {
   padding: 20px 20px;
   display: flex;
   flex-direction: row;
-  border: 4px solid #fff;
+  border: 4px solid #fbff12;
   border-radius: 10px;
-  background-color: #070707;
+  background-color: transparent;
   font-weight: bold;
   font-size: 16px;
 }
@@ -393,9 +400,9 @@ html {
 .page-nav-header-subbtn{
   padding: 10px 25px;
   margin: 0 10px;
-  background-color: #000000;
+  background-color: #24262b;
   font-family: 'Poppins';
-  border: 2px solid #D2042D;
+  border: none;
   border-radius: 5px;
 }
 .disabled{
@@ -645,6 +652,7 @@ html {
   width: 100px;
   height: 100px;
   border-radius: 10px;
+  cursor: pointer;
 }
 .green-border-6px{
   border: 3px solid #5EE47E !important;
@@ -2245,6 +2253,11 @@ ul.footer-support li img {
 .nft-home-sell-title {
   margin-bottom: 30px;
 }
+.CookieConsent {
+  left: 0rem!important;
+  bottom: 0rem!important;
+
+}
 }
 
 @media screen and (max-width: 720px) {
@@ -2437,11 +2450,21 @@ ul.footer-support li img {
 
   .wallet-casino-profile-div{
     width: 100%;
-    padding: 20px 10px;
+    padding: 0px;
     display: flex;
     flex-direction: column;
     text-align: center;
     flex-wrap: wrap;
+    border: none;
+  }
+  .min-menu-btn {
+    font-size: 16px;
+  }
+  .token-small {
+    width: 30px;
+  }
+  .ticket-small {
+    width: 50px;
   }
   .wallet-casino-profile-img{
     width: 150px;
@@ -2469,6 +2492,7 @@ ul.footer-support li img {
     justify-content: center;
     align-items: center;
     width: 100%;
+   
   }
   .crypto-balance-row{
     display: flex;
@@ -2483,7 +2507,10 @@ ul.footer-support li img {
     margin: 30px 0 0px 0;
     display: flex;
     flex-direction: row;
-    border: 4px solid #fff;
+    border:4px solid #D2042D;
+    font-size: 16px;
+  }
+  span.wallet-user-name {
     font-size: 16px;
   }
   .affiliate-card-div{
@@ -2602,5 +2629,29 @@ ul.footer-support li img {
   .footer-info {
     max-width: 100%;
     padding-top: 0;
+  }
+  .page-nav-header-btns-row {
+    gap: 10px;
+}
+
+.page-nav-header-subbtn {
+    width: 48%;
+    margin: 0;
+}
+
+.page-nav-header-btns-subrow {
+    gap: 10px;
+}
+
+  .page-nav-header-btn {
+    margin: 0;
+    width: 48%;
+    background-color: transparent;
+    font-size: 16px;
+}
+  .prizes-chip-count {
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 20px;
   }
 }
