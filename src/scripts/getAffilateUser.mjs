@@ -1,15 +1,15 @@
 import Axios from 'axios';
+import { marketPlaceInstance } from '../config/axios.js';
 
 export default async function getAffiliateUser(user_id) {
   let affilateUser;
   try {
-    await Axios.get(
-      `http://localhost:9001/api/getAffiliateUser/${user_id}`
-    ).then((data) => {
-      console.log(data);
-      affilateUser = data.data;
-      //return data.data;
-    });
+    await marketPlaceInstance()
+      .get(`/getAffiliateUser/${user_id}`)
+      .then((data) => {
+        affilateUser = data.data;
+        //return data.data;
+      });
   } catch (err) {
     console.error(err);
   }
@@ -22,19 +22,14 @@ export async function createAffiliateUser(user_id) {
     let resp;
     try {
       const res = await Axios.get('https://geolocation-db.com/json/');
-      const data = await Axios.get(
-        `http://localhost:9001/api/createAffiliateUser/${user_id}/${res.data.IPv4}`
-      );
-      //console.log("data: ", data.data);
-      if (data.success) {
-        console.log('if', data);
-        return data;
-      } else {
-        console.log('else', data);
-        return data;
-      }
+      await marketPlaceInstance()
+        .get(`/createAffiliateUser/${user_id}/${res.data.IPv4}`)
+        .then((data) => {
+          //console.log("data: ", data.data);
+          resp = data.data;
+        });
     } catch (err) {
-      console.error('err', err);
+      console.error(err);
       resp = 'Error';
     }
     return resp;

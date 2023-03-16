@@ -1,9 +1,13 @@
+@import "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap";
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  color: #878d93;
+  background: #000000;
+  font-family: 'Poppins', sans-serif!important;
+  overflow-x: hidden;
 }
 
 a {
@@ -18,10 +22,7 @@ a {
 html {
   color-scheme: dark;
 }
-body {
-  color: #e7e8e8;
-  background: #000;
-}
+
 .pink{
   color: #D2042D;
 }
@@ -99,7 +100,7 @@ body {
   margin-bottom: 50px;
 }
 .wallet-casino-profile-div{
-  width: 90%;
+  width: 100%;
   margin: 30px 0 40px 0;
   padding: 5px 30px;
   display: flex;
@@ -107,7 +108,7 @@ body {
   justify-content: space-evenly;
   border: 4px solid #D2042D;
   border-radius: 10px;
-  background-color: #1b2129;
+  background-color: transparent;
   font-family: 'Poppins';
 }
 .wallet-casino-profile-img{
@@ -174,6 +175,13 @@ body {
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  font-size: 20px;
+  padding: 5px 0px;
+}
+span.wallet-user-name {
+  font-weight: 500;
+  font-size: 20px;
+  color: #878d93;
 }
 .crypto-balance-row{
   display: flex;
@@ -191,11 +199,11 @@ body {
   padding: 20px 20px;
   display: flex;
   flex-direction: row;
-  border: 4px solid #fff;
+  border: 4px solid #fbff12;
   border-radius: 10px;
-  background-color: #1b2129;
+  background-color: transparent;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
 }
 .crypto-balance-header{
   text-align: center;
@@ -258,18 +266,14 @@ body {
 .header-nav-container-mobile{
   width: 100%;
   bottom: 0;
-  display: none;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   text-align: center;
   padding: 0px 10px;
-  background-color: #D2042D;
-  position:fixed;
-  border-top: 2px solid #FBFF12;
 }
 .header-nav-menu-mobile{
   width: 100%;
-  max-height: 80px;
 }
 .header-nav-container-mobile ul{
   width: 100%;
@@ -278,11 +282,11 @@ body {
   justify-content: space-between;
   list-style: none;
   align-items: center;
-  padding-inline-start: 0px;
-  margin: 8px auto;
+  margin: 0;
+  padding: 0;
 }
 .header-nav-menu-mobile a{
-  padding: 2px;
+  display: flex;
 }
 .wallet-icon-img-mobile{
   max-width: 60px;
@@ -311,7 +315,6 @@ body {
   padding: 40px;
 }
 .footer-nav{
-  background-color: #1b2129;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -319,13 +322,11 @@ body {
   justify-content: center;
   margin: 100px 0 0 0;
   padding: 60px 20px 20px 10px;
-  border-top: 3px solid #FBFF12;
 }
 .footer-inner-div{
   padding: 0 50px;
 }
 .footer-div{
-  background-color: #1b2129;
   text-align: center;
   padding: 30px 0;
 }
@@ -399,9 +400,9 @@ body {
 .page-nav-header-subbtn{
   padding: 10px 25px;
   margin: 0 10px;
-  background-color: #000000;
+  background-color: #24262b;
   font-family: 'Poppins';
-  border: 2px solid #D2042D;
+  border: none;
   border-radius: 5px;
 }
 .disabled{
@@ -414,12 +415,9 @@ body {
   color: #D2042D;
 }
 .bordered-section{
-  margin: 20px auto;
-  padding: 15px;
-  width: 85%;
-  border: 3px solid #D2042D;
-  border-radius: 5px;
-  background-color: #1b2129;
+  margin: 0px auto;
+  width: 100%;
+  background-color: transparent;
   
 }
 .pageTitle{
@@ -495,10 +493,10 @@ body {
 .nft-home-sell-div{
   margin: 20px auto;
   padding: 15px;
-  width: 85%;
+  width: 100%;
   border: 3px solid #D2042D;
   border-radius: 5px;
-  background-color: #1b2129;
+  background-color: transparent;
 }
 .nft-home-sell-title{
   text-align: center;
@@ -635,7 +633,7 @@ body {
 }
 .nft-token-row-card{
   width: 100%;
-  border: 6px solid #D2042D;
+  border: 3px solid #D2042D;
   border-radius: 5px;
   padding: 20px 50px;
   margin: 15px 0;
@@ -643,28 +641,30 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 .nft-token-stripe-badge-div{
   height: 100%;
   text-align: center;
-  padding: 0 50px 0 0;
+  padding: 0 0px 0 0;
 }
 .stripe-badge-img{
   width: 100px;
   height: 100px;
   border-radius: 10px;
+  cursor: pointer;
 }
 .green-border-6px{
-  border: 6px solid #5EE47E !important;
+  border: 3px solid #5EE47E !important;
 }
 .pink-border-6px{
-  border: 6px solid #ff206e !important;
+  border: 3px solid #ff206e !important;
 }
 .blue-border-6px{
-  border: 6px solid #3a86ff !important;
+  border: 3px solid #3a86ff !important;
 }
 .nft-token-row-card-image{
-  width: 20%;
+  width: 15%;
 }
 .nft-token-row-desc{
   width: 50%;
@@ -677,9 +677,13 @@ body {
   align-items: center;
   line-height: .9;
 }
-.nft-token-row-name{
+.nft-token-row-name {
   font-size: 26px;
   color: #FBFF12;
+  text-shadow: 2px 2px #d2042d;
+  display: block;
+  padding-bottom: 15px;
+  font-weight: 500;
 }
 .nft-token-row-sale{
   text-align: center;
@@ -864,10 +868,12 @@ font-weight: bold;
   margin: 0 auto 35px auto;
 }
 .detecting-dl-img{
-  margin: 100px auto;
+  margin: 0px auto 50px;
   border: 7px solid #FBFF12;
   border-radius: 5px;
   animation: 2s infinite security;
+  max-width: 400px;
+  width: 100%;
 }
 @keyframes security {
   0% {
@@ -907,7 +913,7 @@ font-weight: bold;
   font-family: 'Poppins';
   text-transform: uppercase;
   font-size: 26px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   animation: 2s infinite text-color;
 }
 @keyframes text-color {
@@ -1030,12 +1036,12 @@ font-weight: bold;
   font-weight: bold;
 }
 .feature-overview-div{
-  margin: 0 20%;
+  margin: 0 auto;
   padding: 20px 20px;
   background-color: #000;
   border: 2px solid #FBFF12;
   border-radius: 5px;
-  font-family: 'Poppins';
+  text-align: center;
 }
 .feature-overview-div1{
   margin: 0 20%;
@@ -1043,7 +1049,6 @@ font-weight: bold;
   background-color: #1b2129;
   border: 4px solid #0dff00;
   border-radius: 5px;
-  font-family: 'Poppins';
 }
 .feature-overview-div2{
   margin: 0 20%;
@@ -1051,7 +1056,6 @@ font-weight: bold;
   background-color: #1b2129;
   border: 4px solid #FBFF12;
   border-radius: 5px;
-  font-family: 'Poppins';
 }
 .feature-overview-div3{
   margin: 0 20%;
@@ -1426,9 +1430,6 @@ font-weight: bold;
   justify-content: center;
   align-items: center;
   margin: 15px auto 10px auto;
-  border-top: 2px solid #D2042D;
-  border-bottom: 2px solid #D2042D;
-  border-radius: 5px;
   padding: 10px;
 }
 .min-menu-btn{
@@ -1564,21 +1565,551 @@ font-weight: bold;
   }
 }
 
-.login-page-body{
+
+/********************************************************************************************/
+                /************* New Styling for Marketplace ******************/
+/********************************************************************************************/
+
+
+
+
+/*********************** Global *************************/
+
+.container{
+  max-width: 1360px;
+  padding: 0px 16px;
+  margin: 0px auto;
+}
+
+.wrapper:before {
+  content: "";
+  background: #000000c7;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.wrapper {
+  background: url(https://blackwallpaperhd.com/wp-content/uploads/2022/01/texture35.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+
+.content{
+  position: relative;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+.mobile-menu .header-nav-container-mobile ul li img {
+  max-width: 50px;
+  object-fit: contain;
+  border: 2px solid #FBFF12;
+  border-radius: 100%;
+}
+
+.loading{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9;
+}
+
+.nft-token-row-card-image img {
+  width: 150px!important;
+  height: 150px!important;
+}
+
+
+.main .title {
+  text-align: center;
+  font-size: 44px;
+  margin: 0;
+  padding-bottom: 15px;
+  color: #FBFF12;
+  text-shadow: 2px 2px #d2042d;
+}
+
+
+/*********************** Header *************************/
+
+.header {
+  /* background: #1a1c20; */
+  position: relative;
+}
+
+.header-nav-logo {
+  max-width: 180px;
+  width: 100%;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.header-menu ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  gap: 50px;
+}
+
+.header-menu ul li a {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  color: #ffffff;
+}
+
+.header-menu ul li a:hover {
+  color: #f9ff00;
+}
+
+.header-action a {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  background: #24262b;
+  border-radius: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-action a img {
+  width: 30px;
+}
+
+.menu-logo-img{
+  width: 100px;
+}
+
+.wallet {
+  text-align: center;
+}
+
+.icon-links {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  left: 100px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.wallet button {
+  letter-spacing: 0;
+  font-family: 'Poppins', sans-serif!important;
+  font-weight: 400;
+  background: #24262b;
+  border-color: #24262b;
+  font-size: 14px;
+  min-width: 180px!important;
+  height: 44px!important;
+
+}
+
+.wallet button:hover, .wallet button:focus {
+  background: #24262b;
+  border-color: #24262b;
+}
+
+li#metamask, li#coinbasewallet, li#walletConnect {
+  font-family: 'Poppins', sans-serif!important;
+  font-size: 14px;
+}
+
+/*********************** Footer *************************/
+
+
+.footer {
+  /* background: #1a1c20; */
+  position: relative;
+}
+
+
+
+.footer-grid {
+  padding-top: 25px;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-info {
+  position: relative;
+}
+
+.footer-info h4 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  padding-bottom: 30px;
+  color: #878d93;
+  margin: 0;
+}
+
+.footer-info h6 {
+  max-width: 390px;
+  width: 100%;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 24px;
+  /* or 171% */
+  color: #878d93;
+  margin: 0;
+  padding-bottom: 30px;
+}
+
+.footer-info p {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  color: #878d93;
+  margin: 0;
+}
+
+.footer-info a img {
+  margin-left: -50px;
+}
+
+.footer-info span {
+  font-weight: 700;
+}
+
+.footer-menu h3 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  color: #fff;
+  padding-bottom: 20px;
+  /* title_shadow */
+  text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  margin: 0;
+}
+
+.footer-menu ul {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+.footer-menu ul li a {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 143% */
+  color: #878d93;
+  text-decoration: none;
+  transition: all 0.5s;
+}
+
+.footer-menu ul li a:hover {
+  color: #f9ff00;
+}
+
+.footer-menu ul li {
+  padding-left: 15px;
+  position: relative;
+}
+
+.footer-menu ul li:before {
+  content: "";
+
+  background: #f9ff00;
+  border-radius: 5px;
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.footer-contact h3 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  color: #fff;
+
+  /* title_shadow */
+  text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  margin: 0;
+  padding-bottom: 8px;
+}
+
+ul.footer-social {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  margin-bottom: 34px;
+}
+
+ul.footer-social li {
+  margin-right: 15px;
+}
+
+ul.footer-social li a {
+  width: 30px;
+  height: 30px;
+  background: #343a40;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.05);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s;
+}
+ul.footer-social li a img {
+  width: 20px;
+  height: 20px;
+}
+ul.footer-social li a:hover img {
+  filter: invert(1);
+}
+
+ul.footer-social li a:hover {
+  /* background: var(--main-bg); */
+  background: #f9ff00;
+}
+
+ul.footer-support {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.footer-support li {
+  display: flex;
+  align-items: center;
+}
+
+ul.footer-support li a {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 143% */
+  text-decoration: none;
+
+  color: #878d93;
+  transition: all 0.5s;
+}
+
+ul.footer-support li a:hover {
+  color: #fff;
+}
+ul.footer-support li img {
+  margin-right: 3px;
+}
+
+.footer-menu,
+.footer-contact {
+  padding-top: 90px;
+}
+
+.footer-info a img,
+.logo-mobile img {
+  max-width: 270px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/*********************** Coockie popup *************************/
+
+.CookieConsent {
+  left: 2rem!important;
+  bottom: 1.25rem!important;
+  max-width: 650px;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  background-color: #1e2024!important;
+  box-shadow: 0 0 10px #00000030;
+  align-items: center!important;
+}
+
+.CookieConsent h4 {
+  font-weight: 600;
+  margin: 0;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.375rem;
+  padding-bottom: 12px;
+}
+
+.CookieConsent p {
+  color: #878d93;
+  font-size: 14px;
+  margin: 0;
+}
+
+
+.CookieConsent button {
+  color: #000!important;
+  background-color: #ffd712!important;
+  background-image: conic-gradient(from 1turn,#f9ff00,#ffd712)!important;
+  width: 120px;
+  height: 48px;
+  border-radius: 0.125rem!important;
+  font-weight: 600;
+  font-size: 14px!important;
+  font-family: 'Poppins', sans-serif!important;
+}
+
+.CookieConsent button:hover{
+  background-image: conic-gradient(from 1turn,#ffd712,#f9ff00)!important;
+}
+
+
+
+/*********************** Login Page *************************/
+
+
+.login-page-body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 75%;
-  margin: 75px 0;
-  padding: 0 200px 100px 200px;
-  border: 4px solid #D2042D;
-  border-radius: 5px;
-  font-size: 24px;
+  padding: 50px;
+  border-radius: 8px;
+  font-size: 16px;
   text-align: center;
+  max-width: 600px;
+  margin: 0px auto;
+  border: 1px solid #1c1c1c;
+  background: transparent;
+  /* background: radial-gradient(circle, rgb(28 28 28) 0%, rgb(0 0 0) 100%); */
+  box-shadow: 0px 20px 20px #00000091;
 }
+
 .login-page-desc{
   text-align: center;
 }
+
+
+.login-page-body .login-page-img {
+  max-width: 300px;
+  margin: 0px auto;
+}
+
+
+.login-page-body .submit-btn {
+  margin-top: 45px;
+  padding: 10px 20px !important;
+  font-size: 18px;
+  border-radius: 4px;
+  color: #000!important;
+  background-color: #ffd712!important;
+  background-image: conic-gradient(from 1turn,#f9ff00,#ffd712)!important;
+  height: 60px;
+  border: none;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif!important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-page-body .submit-btn:hover {
+  background-image: conic-gradient(from 1turn,#ffd712,#f9ff00)!important;
+}
+
+
+
+/*********************** NFT Page *************************/
+
+.nft-page{
+  position: relative;
+}
+
+.nft-page h2 {
+  text-align: center;
+  font-size: 44px;
+  margin: 0;
+  padding-bottom: 15px;
+  color: #FBFF12;
+  text-shadow: 2px 2px #d2042d;
+}
+
+.nft-page p {
+  text-align: center;
+  font-size: 18px;
+  color: #878d93;
+  margin: 0;
+}
+
+.show-nav-card {
+  margin-top: 50px;
+}
+
+.grid {
+  max-width: 100%;
+  gap: 20px;
+}
+
+.grid .card {
+  border: 1px solid #1c1c1c;
+  background: transparent;
+  /* background: radial-gradient(circle, rgb(28 28 28) 0%, rgb(0 0 0) 100%); */
+  box-shadow: 0px 20px 20px #00000091;
+  margin: 0;
+  max-width: calc(33.33% - 15px);
+}
+
+.grid .card h2 {
+  margin: 0;
+  text-align: left;
+  padding-bottom: 15px;
+  font-size: 20px;
+}
+
+.grid .card p{
+  font-size: 16px;
+  text-align: left;
+}
+
+.connect-wallet-inline button, .connect-wallet-inline button:hover, .connect-wallet-inline button:focus {
+  background: transparent;
+  border-color: transparent;
+}
+
+
+.connect-wallet {
+  text-align: center;
+}
+
+
+
+
+/********************************************************************************************/
+                /************* Media Query ******************/
+/********************************************************************************************/
+
 
 @media screen and (max-width: 1240px) and (min-width: 720px) {
   .header-nav-container{
@@ -1593,9 +2124,7 @@ font-weight: bold;
   .header-nav-menu{
     display: none;
   }
-  .header-nav-container-mobile{
-    display: flex;
-  }
+
   .wallet-icon-img-mobile{
     width: 40%;
     height: 40%;
@@ -1650,9 +2179,87 @@ font-weight: bold;
     display: flex;
     flex-direction: row;
     border: 4px solid #fff;
-    font-size: 20px;
+    font-size: 16px;
   }
 }
+
+@media screen and (max-width: 1080px) {
+  .footer-info {
+    position: relative;
+    max-width: 250px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .main {
+    padding: 50px 0px!important;
+}
+
+  .footer-grid {
+    padding: 40px 0px 100px;
+  }
+  .footer-menu,
+  .footer-contact {
+    padding-top: 30px;
+    padding-bottom: 15px;
+  }
+  .header-menu {
+    display: none;
+  }
+  .menu-logo-img {
+    width: 75px;
+}
+.wallet .green {
+  font-size: 14px;
+  padding-top: 5px;
+}
+.icon-links {
+  left: 80px;
+}
+  .mobile-menu{
+    display: block;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background: #000000;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #292d30;
+  }
+  .login-page-body {
+    padding: 30px 20px;
+  }
+  .grid .card {
+    max-width: 100%;
+}
+
+.grid .card .card-img {
+  margin: 20px auto 0px;
+  display: block;
+}
+
+.nft-home-sell-title h1 {
+  font-size: 25px;
+}
+.nft-page h2 {
+  font-size: 30px;
+}
+.main .title {
+  font-size: 30px;
+}
+.connect-wallet-div {
+  margin-bottom: 30px;
+}
+.nft-home-sell-title {
+  margin-bottom: 30px;
+}
+.CookieConsent {
+  left: 0rem!important;
+  bottom: 0rem!important;
+
+}
+}
+
 @media screen and (max-width: 720px) {
   .header-nav-container{
     display: flex;
@@ -1691,11 +2298,9 @@ font-weight: bold;
     height: 50px;
     width: 50px;
   }
-  .menu-logo-img{
-    width: 50px;
-  }
+
   .footer-nav{
-    background-color: #1b2129;
+
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -1703,24 +2308,23 @@ font-weight: bold;
     justify-content: center;
     margin: 100px 0 0 0;
     padding: 60px 20px 20px 10px;
-    border-top: 3px solid #FBFF12;
   }
   .footer-inner-div{
     padding: 20px 50px;
   }
   .footer-div{
-    background-color: #1b2129;
+
     text-align: center;
     padding: 30px 0 200px 0;
   }
-  .bordered-section{
+  /* .bordered-section{
     margin: 20px auto;
     padding: 15px 5px;
     width: 100%;
     border: 3px solid #D2042D;
     border-radius: 5px;
     background-color: #1b2129;
-  }
+  } */
   .full-page-container{
     min-width: 100%;
     background-color: #1b2129;
@@ -1767,7 +2371,7 @@ font-weight: bold;
   }
   .nft-token-stripe-badge-div{
     width: 100%;
-    margin: 25px auto;
+    margin: 0px auto;
     display: flex;
     justify-content: center;
     padding: 0;
@@ -1830,7 +2434,7 @@ font-weight: bold;
     text-align: center;
     line-height: 2;
     font-size: 26px;
-    margin-top: 40px;
+    margin-top: 10px;
   }
   .sale-badge-img{
     width: 160px;
@@ -1843,16 +2447,24 @@ font-weight: bold;
   .collection-header-img{
     width: 90%;
   }
-  .header-nav-container-mobile{
-    display: flex;
-  }
+
   .wallet-casino-profile-div{
     width: 100%;
-    padding: 20px 10px;
+    padding: 0px;
     display: flex;
     flex-direction: column;
     text-align: center;
     flex-wrap: wrap;
+    border: none;
+  }
+  .min-menu-btn {
+    font-size: 16px;
+  }
+  .token-small {
+    width: 30px;
+  }
+  .ticket-small {
+    width: 50px;
   }
   .wallet-casino-profile-img{
     width: 150px;
@@ -1880,6 +2492,7 @@ font-weight: bold;
     justify-content: center;
     align-items: center;
     width: 100%;
+   
   }
   .crypto-balance-row{
     display: flex;
@@ -1894,8 +2507,11 @@ font-weight: bold;
     margin: 30px 0 0px 0;
     display: flex;
     flex-direction: row;
-    border: 4px solid #fff;
-    font-size: 20px;
+    border:4px solid #D2042D;
+    font-size: 16px;
+  }
+  span.wallet-user-name {
+    font-size: 16px;
   }
   .affiliate-card-div{
     width: 98%;
@@ -2005,5 +2621,37 @@ font-weight: bold;
     margin: 15px auto;
     width: 90%;
     border: 2px solid #D2042D;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+  .footer-info {
+    max-width: 100%;
+    padding-top: 0;
+  }
+  .page-nav-header-btns-row {
+    gap: 10px;
+}
+
+.page-nav-header-subbtn {
+    width: 48%;
+    margin: 0;
+}
+
+.page-nav-header-btns-subrow {
+    gap: 10px;
+}
+
+  .page-nav-header-btn {
+    margin: 0;
+    width: 48%;
+    background-color: transparent;
+    font-size: 16px;
+}
+  .prizes-chip-count {
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 20px;
   }
 }

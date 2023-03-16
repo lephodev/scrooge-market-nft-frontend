@@ -1,19 +1,19 @@
-import { useAddress, useOwnedNFTs, useContract, ThirdwebNftMedia, useNetworkMismatch, ChainId } from "@thirdweb-dev/react";
+import { useAddress, useOwnedNFTs, useContract, ThirdwebNftMedia, ChainId } from "@thirdweb-dev/react";
 import {useState,useEffect,useContext} from 'react';
-import Axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ChainContext from "../context/Chain.ts";
 import DLBigD from '../images/DLBigD.png'
 import Countdown from 'react-countdown';
 import { useReward } from 'react-rewards';
 import AuthContext from "../context/authContext.ts";
+import { scroogeClient } from "../config/keys.js";
+import { marketPlaceInstance } from "../config/axios.js";
 
 
 export default function GetWalletDLNFTs() {
-  let user_id;
   const { user } = useContext(AuthContext);
-  const { reward, isAnimating } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
+  const { reward } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
   function notify(message) {
     toast.success('🎩 '+message);
   }; 
@@ -26,7 +26,6 @@ export default function GetWalletDLNFTs() {
     [String(ChainId.BinanceSmartChainMainnet)]: "",
   };
   const address = useAddress();
-  const isMismatched = useNetworkMismatch();
   const [buyLoading,setBuyLoading]=useState(false);
   const [nextClaimDate, setNextClaimDate]=useState("");
   const [tokensClaimDate, setTokensClaimDate]=useState([{token_id: '', nextClaimDate: ''}]);
@@ -34,9 +33,8 @@ export default function GetWalletDLNFTs() {
   const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
   const claimTokens = (token_id) => {
     setBuyLoading(true);
-    user_id = user[0];
     try {
-      Axios.get(`https://34.237.237.45:9001/api/claimDLTokens/${address}/${user_id}/${token_id}`).then(async (data)=>{
+      marketPlaceInstance().get(`/claimDLTokens/${address}/${user?.id}/${token_id}`).then(async (data)=>{
         mapClaimDates(nfts);
         notify('Tokens Claimed: '+data.data);
         setBuyLoading(false);
@@ -47,13 +45,13 @@ export default function GetWalletDLNFTs() {
       });
     } catch (err) {
       console.error(err);
-      notify("Error claiming tokens!");
+      toast.error("Error claiming tokens!", { containerId: "claim-error"})
       setBuyLoading(false);
     };
   };
 
   async function getNextClaimDate(token_id){
-      await Axios.get(`https://34.237.237.45:9001/api/getNextClaimDate/${address}/dl/${user_id}/${token_id}`).then(async (data)=>{
+      await marketPlaceInstance().get(`/getNextClaimDate/${address}/dl/${user?.id}/${token_id}`).then(async (data)=>{
         //console.log("next claim: ", data.data);
         dataArray.push([token_id, data.data]);
         //console.log('foo: ', dataArray);
@@ -110,18 +108,6 @@ async function mapClaimDates(nfts) {
   return (
     
     <div>
-      <ToastContainer
-        position="top-center"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        />
       {buyLoading ? (<div className="pageImgContainer-dl bg-animated">
                 <img className='spin dl-loader-img' src={DLBigD} alt="Ducky Lucks Loader" style={{margin: '10px auto', width: '200px', height: '200px'}} />
                     <div className='loading-txt pulse'>
@@ -141,7 +127,7 @@ async function mapClaimDates(nfts) {
           <div className="flex-column">
           <div className="feature-overview-div" style={{marginBottom: '30px'}}>
                 <p>Did you know that you get FREE TOKENS EVERY MONTH just for being a cool motherducker and holding at least one <a href="https://duckylucks.com" target="_blank" rel="noreferrer" alt="claim free tokens for holding ducky lucks NFTs">Ducky Lucks NFT</a> in your wallet? 
-                Once every 30 days, you can come right to this page and claim your free <a href="https://scrooge.casino" target="_blank" rel="noreferrer" alt="claim free tokens to spend in Scrooge Casino">Scrooge Casino</a> tokens just by clicking the CLAIM FREE TOKENS button.</p>
+                Once every 30 days, you can come right to this page and claim your free <a href={scroogeClient} target="_blank" rel="noreferrer" alt="claim free tokens to spend in Scrooge Casino">Scrooge Casino</a> tokens just by clicking the CLAIM FREE TOKENS button.</p>
                 <p>Your claimable monthly token amount is automatically determined based on the rarity points of the Ducky Lucks you currently hold.</p>
             </div>
             <div className="pageTitle">

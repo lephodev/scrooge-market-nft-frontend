@@ -14,6 +14,7 @@ import "../styles/Home.css";
 import ChainContext from "../context/Chain.ts";
 import { useContext } from "react";
 import Layout from "./Layout.mjs";
+import { scroogeClient } from "../config/keys.js";
 
 export default function Home() {
   useEffect(() => {
@@ -28,18 +29,19 @@ export default function Home() {
 
   return (
     <Layout>
-    <div className="container">
       <main className="main">
-        <img className="collection-header-img" src={ScroogeCasino} alt="Everything you need for Scrooge Casino" />
+    <div className="container">
+      
+        {/* <img className="collection-header-img" src={ScroogeCasino} alt="Everything you need for Scrooge Casino" /> */}
         <div className="title">
           NFT MARKETPLACE
         </div>
-        <br></br>
+        
         {(isMismatched) ? (<SwitchNetworkBSC />) : 
           (<span></span>)}
         
         {(!address) ? (<div>
-          <p className="description yellow">
+          <p className="description">
           Get started by connecting your wallet.
           </p>
         
@@ -92,7 +94,7 @@ export default function Home() {
             <img className="card-img" src="https://casino-nft-marketplace.s3.amazonaws.com/DLGif1.gif" alt="duckylucks nfts" />
           </Link>
 
-          <a href="https://scrooge.casino" className="card" target="_blank" rel="noreferrer">
+          <a href={scroogeClient} className="card" target="_blank" rel="noreferrer">
             <h2>HEAD OVER TO SCROOGE CASINO &rarr;</h2>
             <p>
               Time to cash in your winnings? Browse our huge selection of available prizes.
@@ -107,8 +109,9 @@ export default function Home() {
         <div><ShowCasinoTokenNFTs /></div>
         <br></br><br></br>
         <ShowBottomNavCards />
-      </main>
+      
     </div>
+    </main>
     </Layout>
   );
 }

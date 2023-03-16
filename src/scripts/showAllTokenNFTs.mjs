@@ -10,6 +10,7 @@ import Cookies from 'js-cookie';
 import { useReward } from 'react-rewards';
 import AuthContext from '../context/authContext.ts';
 import { toast } from 'react-toastify';
+import { scroogeClient } from '../config/keys.js';
 
 export default function ShowAllTokenNFTs() {
     const [buyLoading,setBuyLoading]=useState(false);
@@ -20,7 +21,7 @@ export default function ShowAllTokenNFTs() {
     const [affID, setAffID] = useState('');
   
 
-    const { contract } = useContract("0x91197754fCC899B543FebB5BE4dae193C75EF9d1", "marketplace")
+    const { contract } = useContract(process.env.REACT_APP_MARKETPLACE_ADDRESS, "marketplace")
     // data is the active listings, isLoading is a loading flag while we load the listings.
     const { data: listings, isLoading: loadingListings } = useActiveListings(contract);
     const { reward } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
@@ -57,7 +58,7 @@ export default function ShowAllTokenNFTs() {
                 const aff_id = Cookies.set('aff_id',  q );
                 console.log('cookie: ',aff_id);
             } else {
-                const aff_id = Cookies.get('aff_id', { domain: 'https://market.scrooge.casino' });//change before going live
+                const aff_id = Cookies.get('aff_id', { domain: scroogeClient });//change before going live
                 //console.log('cookie: ',aff_id);
                 if(aff_id){
                     setAffID(aff_id);
@@ -93,7 +94,7 @@ export default function ShowAllTokenNFTs() {
         </div>
         <div className="feature-overview-div" style={{marginBottom: '30px'}}>
                 Running low in the casino? Lucky for you, we have a great selection of purchasable casino badge NFTs that include a special bonus amount of FREE TOKENS 
-                to be used in <a href="https://scrooge.casino" target="_blank" rel="noreferrer" alt="buy your Scrooge Casino NFTs today">Scrooge Casino</a>. Simply choose the badge that is perfect for you 
+                to be used in <a href={scroogeClient} target="_blank" rel="noreferrer" alt="buy your Scrooge Casino NFTs today">Scrooge Casino</a>. Simply choose the badge that is perfect for you 
                 from the list below, make your purchase, and your free bonus tokens will be automatically credited to your connected Scrooge Casino account. It couldn't be easier!
             </div>
       {loadingListings ? (
@@ -113,7 +114,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[0].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[0].asset.name.toString()}</span>
                     
                     {listings[0].asset.description.toString()}
                 </div>
@@ -140,7 +141,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[1].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[1].asset.name.toString()}</span>
                     
                     {listings[1].asset.description.toString()}
                 </div>
@@ -167,7 +168,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[2].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[2].asset.name.toString()}</span>
                     
                     {listings[2].asset.description.toString()}
                 </div>
@@ -198,7 +199,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[3].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[3].asset.name.toString()}</span>
                     
                     {listings[3].asset.description.toString()}
                 </div>
@@ -229,7 +230,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[4].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[4].asset.name.toString()}</span>
                     
                     {listings[4].asset.description.toString()}
                 </div>
@@ -260,7 +261,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[5].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[5].asset.name.toString()}</span>
                     
                     {listings[5].asset.description.toString()}
                 </div>
@@ -291,7 +292,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[6].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[6].asset.name.toString()}</span>
                     
                     {listings[6].asset.description.toString()}
                 </div>
@@ -322,7 +323,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[7].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[7].asset.name.toString()}</span>
                     
                     {listings[7].asset.description.toString()}
                 </div>
@@ -353,7 +354,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[8].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[8].asset.name.toString()}</span>
                     
                     {listings[8].asset.description.toString()}
                 </div>
@@ -384,7 +385,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[9].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[9].asset.name.toString()}</span>
                     
                     {listings[9].asset.description.toString()}
                 </div>
@@ -415,7 +416,7 @@ export default function ShowAllTokenNFTs() {
                     />
                 </div>
                 <div className="nft-token-row-desc">
-                    <span className="nft-token-row-name">{listings[10].asset.name.toString()}</span><br></br><br></br>
+                    <span className="nft-token-row-name">{listings[10].asset.name.toString()}</span>
                     
                     {listings[10].asset.description.toString()}
                 </div>
