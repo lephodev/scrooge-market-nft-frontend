@@ -179,425 +179,440 @@ function RedeemPrizes() {
 
   return (
     <Layout>
-        <main className="main">
-       <div className="container">
-    
-      <div className='bordered-section'>
-        {redeemLoading ? (
-          <div className='pageImgContainer'>
-            <img src={LoadingPoker} alt='game' className='imageAnimation' />
-            <div className='loading-txt pulse'>REDEEMING...</div>
-          </div>
-        ) : (
-          <></>
-        )}
+      <main className='main'>
+        <div className='container'>
+          <div className='bordered-section'>
+            {redeemLoading ? (
+              <div className='pageImgContainer'>
+                <img src={LoadingPoker} alt='game' className='imageAnimation' />
+                <div className='loading-txt pulse'>REDEEMING...</div>
+              </div>
+            ) : (
+              <></>
+            )}
 
-        {redeemSuccess ? (
-          <div className='pageImgContainer'>
-            <div className='loading-txt'>
-              REDEEMED SUCCESSFULLY<br></br>
+            {redeemSuccess ? (
+              <div className='pageImgContainer'>
+                <div className='loading-txt'>
+                  REDEEMED SUCCESSFULLY<br></br>
+                  <button
+                    className='page-nav-header-btn'
+                    onClick={() => {
+                      setRedeemSuccess(false);
+                      reward();
+                    }}>
+                    CLOSE
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
+
+            <div className='pageTitle'>
+              <h1 className='title'>Redeem for Prizes</h1>
+            </div>
+            <div
+              className='feature-overview-div'
+              style={{ marginBottom: '30px' }}>
+              Ready to cash in on all of your big wins? Browse through our huge
+              list of amazing prizes and find something you just can't live
+              without. Make sure you have enough available tickets for the prize
+              you want, then click the REDEEM PRIZE button!
+            </div>
+            <div className='prizes-chip-count'>
+              {user ? (
+                <>Your Ticket Balance: {user?.ticket}</>
+              ) : (
+                <>
+                  <img
+                    src={LoadingPoker}
+                    alt='game'
+                    className='imageAnimation'
+                  />
+                </>
+              )}
+            </div>
+            <div className='page-nav-header-btns-row'>
               <button
                 className='page-nav-header-btn'
-                onClick={() => {
-                  setRedeemSuccess(false);
-                  reward();
-                }}>
-                CLOSE
+                onClick={() => filterPrizes('Badges')}>
+                BADGES
+              </button>
+              <button
+                className='page-nav-header-btn'
+                onClick={() => filterPrizes('Crypto')}>
+                CRYPTO
+              </button>
+              <button
+                className='page-nav-header-btn'
+                onClick={() => filterPrizes('Merch')}>
+                MERCH
+              </button>
+              <button
+                className='page-nav-header-btn'
+                onClick={() => filterPrizes('NFTs')}>
+                NFTS
               </button>
             </div>
-          </div>
-        ) : (
-          <></>
-        )}
+            <div className='page-nav-header-btns-subrow'>
+              <button
+                className='page-nav-header-subbtn'
+                onClick={() => sortPrizes('priceDescending')}>
+                PRICE HIGH TO LOW
+              </button>
+              <button
+                className='page-nav-header-subbtn'
+                onClick={() => sortPrizes('priceAscending')}>
+                PRICE LOW TO HIGH
+              </button>
+              <button
+                className='page-nav-header-subbtn'
+                onClick={() => sortPrizes('nameDescending')}>
+                NAME A-Z
+              </button>
+              <button
+                className='page-nav-header-subbtn'
+                onClick={() => sortPrizes('nameAscending')}>
+                NAME Z-A
+              </button>
+              <button
+                className='page-nav-header-subbtn'
+                onClick={() => sortPrizes('categoryDescending')}>
+                CATEGORY A-Z
+              </button>
+              <button
+                className='page-nav-header-subbtn'
+                onClick={() => sortPrizes('categoryAscending')}>
+                CATEGORY Z-A
+              </button>
+            </div>
 
-        <div className='pageTitle'>
-          <h1 className='title'>Redeem for Prizes</h1>
-        </div>
-        <div className='feature-overview-div' style={{ marginBottom: '30px' }}>
-          Ready to cash in on all of your big wins? Browse through our huge list
-          of amazing prizes and find something you just can't live without. Make
-          sure you have enough available tickets for the prize you want, then
-          click the REDEEM PRIZE button!
-        </div>
-        <div className='prizes-chip-count'>
-          {user ? (
-            <>Your Ticket Balance: {user?.ticket}</>
-          ) : (
-            <>
-              <img src={LoadingPoker} alt='game' className='imageAnimation' />
-            </>
-          )}
-        </div>
-        <div className='page-nav-header-btns-row'>
-          <button
-            className='page-nav-header-btn'
-            onClick={() => filterPrizes('Badges')}>
-            BADGES
-          </button>
-          <button
-            className='page-nav-header-btn'
-            onClick={() => filterPrizes('Crypto')}>
-            CRYPTO
-          </button>
-          <button
-            className='page-nav-header-btn'
-            onClick={() => filterPrizes('Merch')}>
-            MERCH
-          </button>
-          <button
-            className='page-nav-header-btn'
-            onClick={() => filterPrizes('NFTs')}>
-            NFTS
-          </button>
-        </div>
-        <div className='page-nav-header-btns-subrow'>
-          <button
-            className='page-nav-header-subbtn'
-            onClick={() => sortPrizes('priceDescending')}>
-            PRICE HIGH TO LOW
-          </button>
-          <button
-            className='page-nav-header-subbtn'
-            onClick={() => sortPrizes('priceAscending')}>
-            PRICE LOW TO HIGH
-          </button>
-          <button
-            className='page-nav-header-subbtn'
-            onClick={() => sortPrizes('nameDescending')}>
-            NAME A-Z
-          </button>
-          <button
-            className='page-nav-header-subbtn'
-            onClick={() => sortPrizes('nameAscending')}>
-            NAME Z-A
-          </button>
-          <button
-            className='page-nav-header-subbtn'
-            onClick={() => sortPrizes('categoryDescending')}>
-            CATEGORY A-Z
-          </button>
-          <button
-            className='page-nav-header-subbtn'
-            onClick={() => sortPrizes('categoryAscending')}>
-            CATEGORY Z-A
-          </button>
-        </div>
-
-        <div className='prizes_container'>
-          <div style={{ width: '100%', textAlign: 'center' }}>
-            <div id='rewardId' style={{ margin: '0 auto' }} />
-          </div>
-          {!prizesLoading ? (
-            <>
-              {prizes.map((prize) => (
-                <div className='prizes-card' key={prize._id}>
-                  {!prize.isDynamic ? (
-                    <div className='prize-name bold'>{prize.name}</div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63b74c51dd789f0383a51d3b' ? (
-                    <div className='prize-name bold'>
-                      {prize.name.replace(
-                        'xxxValue',
-                        parseInt(OG1000).toLocaleString('en-US')
+            <div className='prizes_container'>
+              <div style={{ width: '100%', textAlign: 'center' }}>
+                <div id='rewardId' style={{ margin: '0 auto' }} />
+              </div>
+              {!prizesLoading ? (
+                <>
+                  {prizes.map((prize) => (
+                    <div className='prizes-card' key={prize._id}>
+                      {!prize.isDynamic ? (
+                        <div className='prize-name bold'>{prize.name}</div>
+                      ) : (
+                        <></>
                       )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63b74ce7dd789f0383a51d3c' ? (
-                    <div className='prize-name bold'>
-                      {prize.name.replace(
-                        'xxxValue',
-                        parseInt(JR1000).toLocaleString('en-US')
+                      {prize._id === '63b74c51dd789f0383a51d3b' ? (
+                        <div className='prize-name bold'>
+                          {prize.name.replace(
+                            'xxxValue',
+                            parseInt(OG1000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
                       )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63b78b42dd789f0383a51d3d' ? (
-                    <div className='prize-name bold'>
-                      {prize.name.replace(
-                        'xxxValue',
-                        parseInt(OG1000).toLocaleString('en-US')
+                      {prize._id === '63b74ce7dd789f0383a51d3c' ? (
+                        <div className='prize-name bold'>
+                          {prize.name.replace(
+                            'xxxValue',
+                            parseInt(JR1000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
                       )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63b78c0edd789f0383a51d3f' ? (
-                    <div className='prize-name bold'>
-                      {prize.name.replace(
-                        'xxxValue',
-                        parseInt(JR1000).toLocaleString('en-US')
+                      {prize._id === '63b78b42dd789f0383a51d3d' ? (
+                        <div className='prize-name bold'>
+                          {prize.name.replace(
+                            'xxxValue',
+                            parseInt(OG1000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
                       )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedf0d1736630ad01d5f4e' ? (
-                    <div className='prize-name bold'>
-                      {prize.name.replace(
-                        'xxxValue',
-                        parseInt(OG5000).toLocaleString('en-US')
+                      {prize._id === '63b78c0edd789f0383a51d3f' ? (
+                        <div className='prize-name bold'>
+                          {prize.name.replace(
+                            'xxxValue',
+                            parseInt(JR1000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
                       )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedf5a1736630ad01d5f50' ? (
-                    <div className='prize-name bold'>
-                      {prize.name.replace(
-                        'xxxValue',
-                        parseInt(JR5000).toLocaleString('en-US')
+                      {prize._id === '63cedf0d1736630ad01d5f4e' ? (
+                        <div className='prize-name bold'>
+                          {prize.name.replace(
+                            'xxxValue',
+                            parseInt(OG5000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
                       )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedf761736630ad01d5f52' ? (
-                    <div className='prize-name bold'>
-                      {prize.name.replace(
-                        'xxxValue',
-                        parseInt(OG5000).toLocaleString('en-US')
+                      {prize._id === '63cedf5a1736630ad01d5f50' ? (
+                        <div className='prize-name bold'>
+                          {prize.name.replace(
+                            'xxxValue',
+                            parseInt(JR5000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
                       )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedfb61736630ad01d5f55' ? (
-                    <div className='prize-name bold'>
-                      {prize.name.replace(
-                        'xxxValue',
-                        parseInt(JR5000).toLocaleString('en-US')
+                      {prize._id === '63cedf761736630ad01d5f52' ? (
+                        <div className='prize-name bold'>
+                          {prize.name.replace(
+                            'xxxValue',
+                            parseInt(OG5000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
                       )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedf301736630ad01d5f4f' ? (
-                    <div className='prize-name bold'>
-                      {prize.name.replace(
-                        'xxxValue',
-                        parseInt(OG10000).toLocaleString('en-US')
+                      {prize._id === '63cedfb61736630ad01d5f55' ? (
+                        <div className='prize-name bold'>
+                          {prize.name.replace(
+                            'xxxValue',
+                            parseInt(JR5000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
                       )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedf651736630ad01d5f51' ? (
-                    <div className='prize-name bold'>
-                      {prize.name.replace(
-                        'xxxValue',
-                        parseInt(JR10000).toLocaleString('en-US')
+                      {prize._id === '63cedf301736630ad01d5f4f' ? (
+                        <div className='prize-name bold'>
+                          {prize.name.replace(
+                            'xxxValue',
+                            parseInt(OG10000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
                       )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedf9d1736630ad01d5f54' ? (
-                    <div className='prize-name bold'>
-                      {prize.name.replace(
-                        'xxxValue',
-                        parseInt(OG10000).toLocaleString('en-US')
+                      {prize._id === '63cedf651736630ad01d5f51' ? (
+                        <div className='prize-name bold'>
+                          {prize.name.replace(
+                            'xxxValue',
+                            parseInt(JR10000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
                       )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedfc51736630ad01d5f56' ? (
-                    <div className='prize-name bold'>
-                      {prize.name.replace(
-                        'xxxValue',
-                        parseInt(JR10000).toLocaleString('en-US')
+                      {prize._id === '63cedf9d1736630ad01d5f54' ? (
+                        <div className='prize-name bold'>
+                          {prize.name.replace(
+                            'xxxValue',
+                            parseInt(OG10000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
                       )}
-                      *
+                      {prize._id === '63cedfc51736630ad01d5f56' ? (
+                        <div className='prize-name bold'>
+                          {prize.name.replace(
+                            'xxxValue',
+                            parseInt(JR10000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      <br></br>
+                      <img
+                        className='card-img pulse'
+                        src={prize.image_url}
+                        alt={prize.name}
+                      />
+                      <br></br>
+                      <div className='prize-cost'>
+                        Cost: {prize.price} Tickets
+                      </div>
+                      <br></br>
+                      Category: {prize.category}
+                      <br></br>
+                      <br></br>
+                      {!prize.isDynamic ? (
+                        <div>{prize.description}</div>
+                      ) : (
+                        <></>
+                      )}
+                      {prize._id === '63b74c51dd789f0383a51d3b' ? (
+                        <div className=''>
+                          {prize.description.replace(
+                            'xxxValue',
+                            parseInt(OG1000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      {prize._id === '63b74ce7dd789f0383a51d3c' ? (
+                        <div className=''>
+                          {prize.description.replace(
+                            'xxxValue',
+                            parseInt(JR1000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      {prize._id === '63b78b42dd789f0383a51d3d' ? (
+                        <div className=''>
+                          {prize.description.replace(
+                            'xxxValue',
+                            parseInt(OG1000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      {prize._id === '63b78c0edd789f0383a51d3f' ? (
+                        <div className=''>
+                          {prize.description.replace(
+                            'xxxValue',
+                            parseInt(JR1000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      {prize._id === '63cedf0d1736630ad01d5f4e' ? (
+                        <div className=''>
+                          {prize.description.replace(
+                            'xxxValue',
+                            parseInt(OG5000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      {prize._id === '63cedf5a1736630ad01d5f50' ? (
+                        <div className=''>
+                          {prize.description.replace(
+                            'xxxValue',
+                            parseInt(JR5000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      {prize._id === '63cedf761736630ad01d5f52' ? (
+                        <div className=''>
+                          {prize.description.replace(
+                            'xxxValue',
+                            parseInt(OG5000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      {prize._id === '63cedfb61736630ad01d5f55' ? (
+                        <div className=''>
+                          {prize.description.replace(
+                            'xxxValue',
+                            parseInt(JR5000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      {prize._id === '63cedf301736630ad01d5f4f' ? (
+                        <div className=''>
+                          {prize.description.replace(
+                            'xxxValue',
+                            parseInt(OG10000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      {prize._id === '63cedf651736630ad01d5f51' ? (
+                        <div className=''>
+                          {prize.description.replace(
+                            'xxxValue',
+                            parseInt(JR10000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      {prize._id === '63cedf9d1736630ad01d5f54' ? (
+                        <div className=''>
+                          {prize.description.replace(
+                            'xxxValue',
+                            parseInt(OG10000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      {prize._id === '63cedfc51736630ad01d5f56' ? (
+                        <div className=''>
+                          {prize.description.replace(
+                            'xxxValue',
+                            parseInt(JR10000).toLocaleString('en-US')
+                          )}
+                          *
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      {prize.isDynamic ? (
+                        <div className='asterisk-desc'>
+                          *Amount received is calculated at time of redemption
+                          and may vary from the amount displayed.
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      <button
+                        className='submit-btn'
+                        onClick={() => RedeemPrize(prize._id)}>
+                        REDEEM PRIZE
+                      </button>
+                      <br></br>
                     </div>
-                  ) : (
-                    <></>
-                  )}
-                  <br></br>
+                  ))}
+                </>
+              ) : (
+                <>
                   <img
-                    className='card-img pulse'
-                    src={prize.image_url}
-                    alt={prize.name}
+                    src={LoadingPoker}
+                    alt='game'
+                    className='imageAnimation'
                   />
-                  <br></br>
-                  <div className='prize-cost'>Cost: {prize.price} Tickets</div>
-                  <br></br>
-                  Category: {prize.category}
-                  <br></br>
-                  <br></br>
-                  {!prize.isDynamic ? <div>{prize.description}</div> : <></>}
-                  {prize._id === '63b74c51dd789f0383a51d3b' ? (
-                    <div className=''>
-                      {prize.description.replace(
-                        'xxxValue',
-                        parseInt(OG1000).toLocaleString('en-US')
-                      )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63b74ce7dd789f0383a51d3c' ? (
-                    <div className=''>
-                      {prize.description.replace(
-                        'xxxValue',
-                        parseInt(JR1000).toLocaleString('en-US')
-                      )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63b78b42dd789f0383a51d3d' ? (
-                    <div className=''>
-                      {prize.description.replace(
-                        'xxxValue',
-                        parseInt(OG1000).toLocaleString('en-US')
-                      )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63b78c0edd789f0383a51d3f' ? (
-                    <div className=''>
-                      {prize.description.replace(
-                        'xxxValue',
-                        parseInt(JR1000).toLocaleString('en-US')
-                      )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedf0d1736630ad01d5f4e' ? (
-                    <div className=''>
-                      {prize.description.replace(
-                        'xxxValue',
-                        parseInt(OG5000).toLocaleString('en-US')
-                      )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedf5a1736630ad01d5f50' ? (
-                    <div className=''>
-                      {prize.description.replace(
-                        'xxxValue',
-                        parseInt(JR5000).toLocaleString('en-US')
-                      )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedf761736630ad01d5f52' ? (
-                    <div className=''>
-                      {prize.description.replace(
-                        'xxxValue',
-                        parseInt(OG5000).toLocaleString('en-US')
-                      )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedfb61736630ad01d5f55' ? (
-                    <div className=''>
-                      {prize.description.replace(
-                        'xxxValue',
-                        parseInt(JR5000).toLocaleString('en-US')
-                      )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedf301736630ad01d5f4f' ? (
-                    <div className=''>
-                      {prize.description.replace(
-                        'xxxValue',
-                        parseInt(OG10000).toLocaleString('en-US')
-                      )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedf651736630ad01d5f51' ? (
-                    <div className=''>
-                      {prize.description.replace(
-                        'xxxValue',
-                        parseInt(JR10000).toLocaleString('en-US')
-                      )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedf9d1736630ad01d5f54' ? (
-                    <div className=''>
-                      {prize.description.replace(
-                        'xxxValue',
-                        parseInt(OG10000).toLocaleString('en-US')
-                      )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize._id === '63cedfc51736630ad01d5f56' ? (
-                    <div className=''>
-                      {prize.description.replace(
-                        'xxxValue',
-                        parseInt(JR10000).toLocaleString('en-US')
-                      )}
-                      *
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {prize.isDynamic ? (
-                    <div className='asterisk-desc'>
-                      *Amount received is calculated at time of redemption and
-                      may vary from the amount displayed.
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  <button
-                    className='submit-btn'
-                    onClick={() => RedeemPrize(prize._id)}>
-                    REDEEM PRIZE
-                  </button>
-                  <br></br>
-                </div>
-              ))}
-            </>
-          ) : (
-            <>
-              <img src={LoadingPoker} alt='game' className='imageAnimation' />
-            </>
-          )}
+                </>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
       </main>
     </Layout>
   );
