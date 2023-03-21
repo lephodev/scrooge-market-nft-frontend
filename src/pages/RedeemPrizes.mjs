@@ -221,7 +221,7 @@ function RedeemPrizes() {
             </div>
             <div className='prizes-chip-count'>
               {user ? (
-                <>Your Ticket Balance: {user?.ticket}</>
+                <>Your Ticket Balance: {user?.ticket.toFixed(2)}</>
               ) : (
                 <>
                   <img

@@ -1,19 +1,19 @@
 {
   "local": {
     "client": "http://localhost:3000",
-    "server": "http://localhost:9001",
+    "server": "http://localhost:4242",
     "scroogeServer": "https://dev-api.scrooge.casino",
     "scroogeClient": "https://dev.scrooge.casino"
   },
   "development": {
     "client": "https://dev-marketplace.scrooge.casino",
-    "server": "http://dev-api-marketplace.scrooge.casino",
+    "server": "https://devmarket-api.scrooge.casino",
     "scroogeServer": "https://dev-api.scrooge.casino",
     "scroogeClient": "https://dev.scrooge.casino"
   },
   "beta": {
     "client": "https://beta-marketplace.scrooge.casino",
-    "server": "http://beta-api-marketplace.scrooge.casino",
+    "server": "http://betamarket-api.scrooge.casino",
     "scroogeServer": "https://beta-api.scrooge.casino",
     "scroogeClient": "https://beta.scrooge.casino"
   },
