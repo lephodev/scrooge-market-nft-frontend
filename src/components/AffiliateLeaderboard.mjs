@@ -53,7 +53,7 @@ export default function AffiliateLeaderboard() {
         `/getAffLeadersByTokens/${limit}/${days}`
       );
 
-      //console.log("getAffLeadersByTokens: ", data.data);
+      console.log("getAffLeadersByTokens: ", data.data);
       if (data.data.success) {
         setLeaderboardHottestNewcomers(data.data.data);
       } else {
@@ -134,7 +134,6 @@ export default function AffiliateLeaderboard() {
       {showLeaderboards ? (
         <div className='bordered-section'>
           <div className='flex-row-no-margin'>
-            {console.log("leaderboardByCount", leaderboardByCount)}
             {leaderboardByCount !== "Error" ? (
               <>
                 <div className='leaderboard-card-div'>
