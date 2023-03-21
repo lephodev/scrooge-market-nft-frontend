@@ -224,32 +224,32 @@ export default function AllCurrentRaffles() {
 
   return (
     <>
-      <div className="half-page-menu-wrapper">
-        <div className="half-page-card-menu-div">
+      <div className='half-page-menu-wrapper'>
+        <div className='half-page-card-menu-div'>
           <div
-            className="feature-overview-div1"
+            className='feature-overview-div1'
             style={{ margin: "5px auto", width: "100%", textAlign: "center" }}
           >
-            <div className="flex-row-no-margin">
+            <div className='flex-row-no-margin'>
               <div>
-                <div>
+                <div className='raffles-page-card'>
                   <img
-                    className="wallet-casino-profile-img"
-                    src={user[4]}
-                    alt="Scrooge Casino profile picture"
+                    className='wallet-casino-profile-img'
+                    src={user}
+                    alt='Scrooge Casino profile picture'
                   />
                 </div>
               </div>
 
               <div>
-                <div className="inlineTitle" style={{ fontSize: "20px" }}>
+                <div className='inlineTitle' style={{ fontSize: "20px" }}>
                   RAFFLE TICKET BALANCE
                 </div>
 
                 <div>
                   YOU HAVE{" "}
                   <span
-                    className="green"
+                    className='green'
                     style={{ fontSize: "26px", fontWeight: "bold" }}
                   >
                     {userRaffleTickets} TICKETS
@@ -260,7 +260,7 @@ export default function AllCurrentRaffles() {
             </div>
           </div>
           <div
-            className="feature-overview-div3"
+            className='feature-overview-div3'
             style={{ margin: "5px auto", width: "100%", textAlign: "left" }}
           >
             <p>
@@ -275,17 +275,17 @@ export default function AllCurrentRaffles() {
             </p>
           </div>
           <div
-            className="feature-overview-div3"
+            className='feature-overview-div3'
             style={{ margin: "5px auto", width: "100%", textAlign: "center" }}
           >
             <div style={{ fontSize: "20px" }}>
               Winning big with Scrooge Raffles is as easy as 1, 2, 3!
             </div>
-            <div className="flex-row-no-margin" style={{ marginTop: "25px" }}>
-              <div className="feature-overview-block">1. BUY TICKETS</div>
-              <div className="feature-overview-block">2. CHOOSE RAFFLE</div>
+            <div className='flex-row-no-margin' style={{ marginTop: "25px" }}>
+              <div className='feature-overview-block'>1. BUY TICKETS</div>
+              <div className='feature-overview-block'>2. CHOOSE RAFFLE</div>
               <div
-                className="feature-overview-block bg-animated2"
+                className='feature-overview-block bg-animated2'
                 style={{ fontWeight: "bold" }}
               >
                 3. WIN BIG!
@@ -296,18 +296,18 @@ export default function AllCurrentRaffles() {
 
         {raffles.length !== 0 ? (
           <>
-            <div className="leaderboard-card-div" style={{ margin: "0 auto" }}>
-              <div className="pulse">
+            <div className='leaderboard-card-div' style={{ margin: "0 auto" }}>
+              <div className='pulse'>
                 <strong>ENTER TO WIN!</strong>
               </div>
-              <div className="teeter">
-                <div className="ending-soon bg-animated3">ENDING SOON</div>
+              <div className='teeter'>
+                <div className='ending-soon bg-animated3'>ENDING SOON</div>
               </div>
-              <div className="pageTitle" style={{ marginBottom: "-20px" }}>
+              <div className='pageTitle' style={{ marginBottom: "-20px" }}>
                 <h1>{raffles[0].prize_details.name}</h1>
               </div>
-              <div className="flex-row-no-margin">
-                <div className="raffle-data-box">
+              <div className='flex-row-no-margin'>
+                <div className='raffle-data-box'>
                   <div>
                     <strong>ENTRY FEE:</strong>
                   </div>
@@ -315,12 +315,12 @@ export default function AllCurrentRaffles() {
                 </div>
                 <div>
                   <img
-                    className="raffle-img pulse"
+                    className='raffle-img pulse'
                     src={raffles[0].prize_details.image_url}
-                    alt="Scrooge raffle prize"
+                    alt='Scrooge raffle prize'
                   />
                 </div>
-                <div className="raffle-data-box">
+                <div className='raffle-data-box'>
                   <div>
                     <strong>DRAW:</strong>
                   </div>
@@ -332,7 +332,7 @@ export default function AllCurrentRaffles() {
               <div style={{ marginBottom: "25px" }}>
                 {raffles[0].prize_details.description}
               </div>
-              <div className="leaderboard-row">
+              <div className='leaderboard-row'>
                 <div>
                   <div>
                     <strong># OF PRIZES</strong>
@@ -358,7 +358,7 @@ export default function AllCurrentRaffles() {
                 </div>
               </div>
               <button
-                className="button4"
+                className='button4'
                 style={{ width: "60%", margin: "35px auto 0 auto" }}
                 onClick={() => enterRaffle(raffles[0]._id)}
               >
@@ -373,23 +373,23 @@ export default function AllCurrentRaffles() {
 
       {items.length !== 0 && currentPriceOG ? (
         <>
-          <div className="pageTitle" style={{ marginBottom: "0px" }}>
+          <div className='pageTitle' style={{ marginBottom: "0px" }}>
             <h1>BUY SCROOGE RAFFLE ENTRY NFTS</h1>
           </div>
-          <div className="raffles-header-shop-div">
+          <div className='raffles-header-shop-div'>
             {items.slice(0, 4).map((item, index) => (
               <>
-                <div className="raffles-header-shop-card" key={item + index}>
+                <div className='raffles-header-shop-card' key={item + index}>
                   <div>{item.name}</div>
                   <div>
                     <img
-                      className="card-img"
+                      className='card-img'
                       src={item.image_url}
-                      alt="purchase scrooge raffle NFTs"
+                      alt='purchase scrooge raffle NFTs'
                     />
                   </div>
                   <div
-                    className="green"
+                    className='green'
                     style={{ fontWeight: 600, fontSize: "18px" }}
                   >
                     SPECIAL BONUS:<br></br> {item.chip_value} FREE RAFFLE ENTR
@@ -413,7 +413,7 @@ export default function AllCurrentRaffles() {
                           item._id
                         )
                       }
-                      className="button3 pulse"
+                      className='button3 pulse'
                     >
                       Purchase
                     </button>
@@ -429,10 +429,10 @@ export default function AllCurrentRaffles() {
 
       {raffles.length !== 0 ? (
         <>
-          <div className="min-menu-div" style={{ marginTop: "100px" }}>
+          <div className='min-menu-div' style={{ marginTop: "100px" }}>
             <div>FILTER BY:</div>
             <button
-              className="min-menu-btn"
+              className='min-menu-btn'
               onClick={() => {
                 alert(true);
               }}
@@ -440,7 +440,7 @@ export default function AllCurrentRaffles() {
               BADGES
             </button>
             <button
-              className="min-menu-btn"
+              className='min-menu-btn'
               onClick={() => {
                 alert(true);
               }}
@@ -448,7 +448,7 @@ export default function AllCurrentRaffles() {
               CRYPTO
             </button>
             <button
-              className="min-menu-btn"
+              className='min-menu-btn'
               onClick={() => {
                 alert(true);
               }}
@@ -456,7 +456,7 @@ export default function AllCurrentRaffles() {
               MERCH
             </button>
             <button
-              className="min-menu-btn"
+              className='min-menu-btn'
               onClick={() => {
                 alert(true);
               }}
@@ -465,22 +465,22 @@ export default function AllCurrentRaffles() {
             </button>
           </div>
 
-          <div className="bordered-section">
-            <div className="pageTitle">
+          <div className='bordered-section'>
+            <div className='pageTitle'>
               <h1>CURRENT RAFFLES</h1>
             </div>
-            <div className="flex-row-no-margin">
+            <div className='flex-row-no-margin'>
               {raffles.map((raffle) => (
-                <div className="leaderboard-card-div" key={raffle._id}>
-                  <div className="teeter">
+                <div className='leaderboard-card-div' key={raffle._id}>
+                  <div className='teeter'>
                     <strong>ENTER TO WIN!</strong>
                   </div>
 
-                  <div className="pageTitle" style={{ marginBottom: "-20px" }}>
+                  <div className='pageTitle' style={{ marginBottom: "-20px" }}>
                     <h1>{raffle.prize_details.name}</h1>
                   </div>
-                  <div className="flex-row-no-margin">
-                    <div className="raffle-data-box">
+                  <div className='flex-row-no-margin'>
+                    <div className='raffle-data-box'>
                       <div>
                         <strong>ENTRY FEE:</strong>
                       </div>
@@ -488,12 +488,12 @@ export default function AllCurrentRaffles() {
                     </div>
                     <div>
                       <img
-                        className="raffle-img pulse"
+                        className='raffle-img pulse'
                         src={raffle.prize_details.image_url}
-                        alt="Scrooge raffle prize"
+                        alt='Scrooge raffle prize'
                       />
                     </div>
-                    <div className="raffle-data-box">
+                    <div className='raffle-data-box'>
                       <div>
                         <strong>DRAW:</strong>
                       </div>
@@ -505,7 +505,7 @@ export default function AllCurrentRaffles() {
                   <div style={{ marginBottom: "25px" }}>
                     {raffle.prize_details.description}
                   </div>
-                  <div className="leaderboard-row">
+                  <div className='leaderboard-row'>
                     <div>
                       <div>
                         <strong># OF PRIZES</strong>
@@ -531,14 +531,14 @@ export default function AllCurrentRaffles() {
                     </div>
                   </div>
                   <button
-                    className="button4"
+                    className='button4'
                     style={{ width: "60%", margin: "35px auto 0 auto" }}
                     onClick={() => enterRaffle(raffle._id)}
                   >
                     ENTER RAFFLE
                   </button>
                   <div
-                    className="fine-print-txt"
+                    className='fine-print-txt'
                     style={{ marginTop: "15px", color: "darkgray" }}
                   >
                     Raffle ID: {raffle._id}
