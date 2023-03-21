@@ -40,7 +40,8 @@ function HolderClaimChips() {
       marketPlaceInstance()
         .get(`/getNextClaimDate/${address}/holder/${user.id}/0`)
         .then((data) => {
-          setNextClaimDate(data.data);
+          console.log("setclam=im---", data);
+          setNextClaimDate(data.data.message);
           return nextClaimDate;
         });
     }
@@ -53,6 +54,7 @@ function HolderClaimChips() {
       .then((response) => response.json())
       .then((data) => {
         const current_price = data.market_data.current_price.usd;
+        console.log("coingeckodata", current_price);
         setCurrentPrice(current_price);
         return current_price;
       })
@@ -98,10 +100,13 @@ function HolderClaimChips() {
 
   useEffect(() => {
     getCoinGeckoData();
+    console.log("address", address);
+    console.log("isMismatched", !isMismatched);
     if (address && !isMismatched) {
       marketPlaceInstance()
         .get(`/getOGBalance/${address}`)
         .then((data) => {
+          console.log("ogbalance", data);
           setOGBalance(data.data);
         })
         .then(() => {
@@ -182,10 +187,11 @@ function HolderClaimChips() {
                       <br></br> X <br></br>Current Scrooge Coin Price ($
                       {parseFloat(currentPrice).toFixed(10)})<br></br> X{" "}
                       <br></br> EARNING RATE (10%)<br></br> = <br></br>
+                      {OGBalance * parseFloat(currentPrice).toFixed(10) * 0.1}
                     </div>
+                    Claim{" "}
                     {OGBalance > 0 ? (
                       <>
-                        Claim{" "}
                         {(OGBalance * currentPrice * 0.1)
                           .toFixed(0)
                           .toLocaleString("en-US")}
@@ -199,7 +205,7 @@ function HolderClaimChips() {
                     <div id='rewardId' style={{ margin: "0 auto" }} />
                   </div>
                   {(new Date(nextClaimDate) <= new Date() ||
-                    nextClaimDate === "CLAIM NOW") &&
+                    nextClaimDate === "No Entries Found") &&
                   OGBalance > 0 ? (
                     <button
                       className='submit-btn'
@@ -231,7 +237,7 @@ function HolderClaimChips() {
                             </Countdown>
                           </>
                         ) : OGBalance === 0 ? (
-                          ""
+                          "OG Balance is 0"
                         ) : (
                           <>
                             <img
