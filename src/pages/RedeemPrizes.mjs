@@ -147,11 +147,10 @@ function RedeemPrizes() {
     console.log("user.id", user.id);
     console.log("prize_id", prize_id);
     setRedeemLoading(true);
-    Axios.get(
-      `http://localhost:9001/api/redeemPrize/${address}/${user.id}/${prize_id}`
-    )
+    marketPlaceInstance()
+      .get(`/redeemPrize/${address}/${user.id}/${prize_id}`)
       .then((data) => {
-        console.log("data", data);
+        console.log("redeemdata", data);
         setRedeemLoading(false);
         if (data.data === "Balance Unacceptable") {
           toast.error("ERROR! - " + data.data, { containerId: "error" });

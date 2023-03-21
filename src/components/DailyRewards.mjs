@@ -68,7 +68,7 @@ function DailyRewards() {
     user_id = user.id;
     console.log("user_id", user.id);
     try {
-      const data = await marketPlaceInstance.get(
+      const data = await marketPlaceInstance().get(
         `/claimDailyRewards/${user.id}`
       );
       console.log("datatatta", data);
