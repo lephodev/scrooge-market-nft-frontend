@@ -1,7 +1,7 @@
 {
   "local": {
     "client": "http://localhost:3000",
-    "server": "http://localhost:9001",
+    "server": "http://localhost:4242",
     "scroogeServer": "https://dev-api.scrooge.casino",
     "scroogeClient": "https://dev.scrooge.casino"
   },
