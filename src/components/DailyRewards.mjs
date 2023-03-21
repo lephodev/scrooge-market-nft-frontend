@@ -66,7 +66,7 @@ function DailyRewards() {
     setBuyLoading(true);
     user_id = user[0];
     try {
-      const data = await marketPlaceInstance.get(
+      const data = await marketPlaceInstance().get(
         `/claimDailyRewards/${user.id}`
       );
       notify("Tokens Claimed: " + data.data);
