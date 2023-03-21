@@ -1,21 +1,21 @@
-import { useState, useEffect, useContext } from 'react';
-import Axios from 'axios';
-import LoadingPoker from '../images/scroogeHatLogo.png';
-import { useAddress } from '@thirdweb-dev/react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useReward } from 'react-rewards';
-import AuthContext from '../context/authContext.ts';
-import Layout from './Layout.mjs';
-import { marketPlaceInstance } from '../config/axios.js';
+import { useState, useEffect, useContext } from "react";
+import Axios from "axios";
+import LoadingPoker from "../images/scroogeHatLogo.png";
+import { useAddress } from "@thirdweb-dev/react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useReward } from "react-rewards";
+import AuthContext from "../context/authContext.ts";
+import Layout from "./Layout.mjs";
+import { marketPlaceInstance } from "../config/axios.js";
 
 function RedeemPrizes() {
-  const { reward } = useReward('rewardId', 'confetti', {
-    colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000'],
+  const { reward } = useReward("rewardId", "confetti", {
+    colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
   let prizesReceived = 0;
   const { user, loading } = useContext(AuthContext);
-  console.log('user', user, loading);
+  console.log("user", user, loading);
   useEffect(() => {
     getCoinGeckoDataOG();
     getCoinGeckoDataJR();
@@ -29,8 +29,8 @@ function RedeemPrizes() {
   const [allPrizes, setAllPrizes] = useState([]);
   const [prizes, setPrizes] = useState([]);
   const [prizesLoading, setPrizesLoading] = useState([]);
-  const [currentPriceOG, setCurrentPriceOG] = useState('Loading...');
-  const [currentPriceJR, setCurrentPriceJR] = useState('Loading...');
+  const [currentPriceOG, setCurrentPriceOG] = useState("Loading...");
+  const [currentPriceJR, setCurrentPriceJR] = useState("Loading...");
   const [OG1000, setOG1000] = useState();
   const [OG5000, setOG5000] = useState();
   const [OG10000, setOG10000] = useState();
@@ -44,7 +44,7 @@ function RedeemPrizes() {
     if (prizes.length < 2) {
       try {
         const res = await marketPlaceInstance().get(`/getPrizes`);
-        console.log('res', res);
+        console.log("res", res);
         if (res.data) {
           if (prizes.length < 2) {
             setPrizes(res.data || []);
@@ -59,38 +59,38 @@ function RedeemPrizes() {
   }
 
   const sortPrizes = (sortOn) => {
-    if (sortOn === 'priceAscending') {
+    if (sortOn === "priceAscending") {
       setPrizes([...prizes].sort((a, b) => a.price - b.price));
-    } else if (sortOn === 'priceDescending') {
+    } else if (sortOn === "priceDescending") {
       setPrizes([...prizes].sort((a, b) => b.price - a.price));
-    } else if (sortOn === 'nameDescending') {
+    } else if (sortOn === "nameDescending") {
       setPrizes([...prizes].sort((a, b) => (a.name > b.name ? 1 : -1)));
-    } else if (sortOn === 'nameAscending') {
+    } else if (sortOn === "nameAscending") {
       setPrizes([...prizes].sort((a, b) => (a.name > b.name ? -1 : 1)));
-    } else if (sortOn === 'categoryDescending') {
+    } else if (sortOn === "categoryDescending") {
       setPrizes([...prizes].sort((a, b) => (a.category > b.category ? 1 : -1)));
-    } else if (sortOn === 'categoryAscending') {
+    } else if (sortOn === "categoryAscending") {
       setPrizes([...prizes].sort((a, b) => (a.category > b.category ? -1 : 1)));
     }
   };
 
   const filterPrizes = (filterOn) => {
     if (allPrizes.length > 2) {
-      if (filterOn === 'Badges') {
+      if (filterOn === "Badges") {
         setPrizes(
-          [...allPrizes].filter((prize) => prize.category === 'Badges')
+          [...allPrizes].filter((prize) => prize.category === "Badges")
         );
         //console.log('badges: ',prizes);
-      } else if (filterOn === 'Crypto') {
+      } else if (filterOn === "Crypto") {
         setPrizes(
-          [...allPrizes].filter((prize) => prize.category === 'Crypto')
+          [...allPrizes].filter((prize) => prize.category === "Crypto")
         );
         //console.log('crypto: ',prizes);
-      } else if (filterOn === 'Merch') {
-        setPrizes([...allPrizes].filter((prize) => prize.category === 'Merch'));
+      } else if (filterOn === "Merch") {
+        setPrizes([...allPrizes].filter((prize) => prize.category === "Merch"));
         //console.log('merch: ',prizes);
-      } else if (filterOn === 'NFTs') {
-        setPrizes([...allPrizes].filter((prize) => prize.category === 'NFTs'));
+      } else if (filterOn === "NFTs") {
+        setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
       }
     }
@@ -118,7 +118,7 @@ function RedeemPrizes() {
 
   async function getCoinGeckoDataJR() {
     await fetch(
-      'https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/0x2e9f79af51dd1bb56bbb1627fbe4cc90aa8985dd'
+      "https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/0x2e9f79af51dd1bb56bbb1627fbe4cc90aa8985dd"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -137,32 +137,31 @@ function RedeemPrizes() {
   }
   const RedeemPrize = async (prize_id) => {
     if (!user)
-      return toast.error('Please login first', { containerId: 'login' });
+      return toast.error("Please login first", { containerId: "login" });
     if (!address)
-      return toast.error('Please connect wallet first', {
-        containerId: 'connect-wallet',
+      return toast.error("Please connect wallet first", {
+        containerId: "connect-wallet",
       });
-    console.log('user', user, prize_id);
-    console.log('add', address);
-    console.log('user.id', user.id);
-    console.log('prize_id', prize_id);
+    console.log("user", user, prize_id);
+    console.log("add", address);
+    console.log("user.id", user.id);
+    console.log("prize_id", prize_id);
     setRedeemLoading(true);
-    Axios.get(
-      `http://localhost:9001/api/redeemPrize/${address}/${user.id}/${prize_id}`
-    )
+    marketPlaceInstance()
+      .get(`/redeemPrize/${address}/${user.id}/${prize_id}`)
       .then((data) => {
-        console.log('data', data);
+        console.log("redeemdata", data);
         setRedeemLoading(false);
-        if (data.data === 'Balance Unacceptable') {
-          toast.error('ERROR! - ' + data.data, { containerId: 'error' });
-        } else if (data.data === 'Invalid Prize Data') {
-          toast.error('ERROR! - ' + data.data, { containerId: 'error' });
-        } else if (data.data === 'Prize Currently Unavailable') {
-          toast.error('ERROR! - ' + data.data, { containerId: 'error' });
-        } else if (data.data === 'Transaction Failed') {
-          toast.error('ERROR! - ' + data.data, { containerId: 'error' });
-        } else if (data.data === 'Not Enough Tickets') {
-          toast.error('ERROR! - ' + data.data, { containerId: 'error' });
+        if (data.data === "Balance Unacceptable") {
+          toast.error("ERROR! - " + data.data, { containerId: "error" });
+        } else if (data.data === "Invalid Prize Data") {
+          toast.error("ERROR! - " + data.data, { containerId: "error" });
+        } else if (data.data === "Prize Currently Unavailable") {
+          toast.error("ERROR! - " + data.data, { containerId: "error" });
+        } else if (data.data === "Transaction Failed") {
+          toast.error("ERROR! - " + data.data, { containerId: "error" });
+        } else if (data.data === "Not Enough Tickets") {
+          toast.error("ERROR! - " + data.data, { containerId: "error" });
         } else {
           setRedeemSuccess(false);
           //notify(data.data+' redeemed successfully!');
@@ -171,7 +170,7 @@ function RedeemPrizes() {
       .catch((err) => {
         if (err.response.data.message) {
           toast.error(err.response.data.message, {
-            containerId: 'error-redeen',
+            containerId: "error-redeen",
           });
         }
       });
@@ -214,7 +213,7 @@ function RedeemPrizes() {
             </div>
             <div
               className='feature-overview-div'
-              style={{ marginBottom: '30px' }}>
+              style={{ marginBottom: "30px" }}>
               Ready to cash in on all of your big wins? Browse through our huge
               list of amazing prizes and find something you just can't live
               without. Make sure you have enough available tickets for the prize
@@ -236,61 +235,61 @@ function RedeemPrizes() {
             <div className='page-nav-header-btns-row'>
               <button
                 className='page-nav-header-btn'
-                onClick={() => filterPrizes('Badges')}>
+                onClick={() => filterPrizes("Badges")}>
                 BADGES
               </button>
               <button
                 className='page-nav-header-btn'
-                onClick={() => filterPrizes('Crypto')}>
+                onClick={() => filterPrizes("Crypto")}>
                 CRYPTO
               </button>
               <button
                 className='page-nav-header-btn'
-                onClick={() => filterPrizes('Merch')}>
+                onClick={() => filterPrizes("Merch")}>
                 MERCH
               </button>
               <button
                 className='page-nav-header-btn'
-                onClick={() => filterPrizes('NFTs')}>
+                onClick={() => filterPrizes("NFTs")}>
                 NFTS
               </button>
             </div>
             <div className='page-nav-header-btns-subrow'>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes('priceDescending')}>
+                onClick={() => sortPrizes("priceDescending")}>
                 PRICE HIGH TO LOW
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes('priceAscending')}>
+                onClick={() => sortPrizes("priceAscending")}>
                 PRICE LOW TO HIGH
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes('nameDescending')}>
+                onClick={() => sortPrizes("nameDescending")}>
                 NAME A-Z
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes('nameAscending')}>
+                onClick={() => sortPrizes("nameAscending")}>
                 NAME Z-A
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes('categoryDescending')}>
+                onClick={() => sortPrizes("categoryDescending")}>
                 CATEGORY A-Z
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes('categoryAscending')}>
+                onClick={() => sortPrizes("categoryAscending")}>
                 CATEGORY Z-A
               </button>
             </div>
 
             <div className='prizes_container'>
-              <div style={{ width: '100%', textAlign: 'center' }}>
-                <div id='rewardId' style={{ margin: '0 auto' }} />
+              <div style={{ width: "100%", textAlign: "center" }}>
+                <div id='rewardId' style={{ margin: "0 auto" }} />
               </div>
               {!prizesLoading ? (
                 <>
@@ -301,132 +300,132 @@ function RedeemPrizes() {
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63b74c51dd789f0383a51d3b' ? (
+                      {prize._id === "63b74c51dd789f0383a51d3b" ? (
                         <div className='prize-name bold'>
                           {prize.name.replace(
-                            'xxxValue',
-                            parseInt(OG1000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(OG1000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63b74ce7dd789f0383a51d3c' ? (
+                      {prize._id === "63b74ce7dd789f0383a51d3c" ? (
                         <div className='prize-name bold'>
                           {prize.name.replace(
-                            'xxxValue',
-                            parseInt(JR1000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(JR1000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63b78b42dd789f0383a51d3d' ? (
+                      {prize._id === "63b78b42dd789f0383a51d3d" ? (
                         <div className='prize-name bold'>
                           {prize.name.replace(
-                            'xxxValue',
-                            parseInt(OG1000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(OG1000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63b78c0edd789f0383a51d3f' ? (
+                      {prize._id === "63b78c0edd789f0383a51d3f" ? (
                         <div className='prize-name bold'>
                           {prize.name.replace(
-                            'xxxValue',
-                            parseInt(JR1000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(JR1000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedf0d1736630ad01d5f4e' ? (
+                      {prize._id === "63cedf0d1736630ad01d5f4e" ? (
                         <div className='prize-name bold'>
                           {prize.name.replace(
-                            'xxxValue',
-                            parseInt(OG5000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(OG5000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedf5a1736630ad01d5f50' ? (
+                      {prize._id === "63cedf5a1736630ad01d5f50" ? (
                         <div className='prize-name bold'>
                           {prize.name.replace(
-                            'xxxValue',
-                            parseInt(JR5000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(JR5000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedf761736630ad01d5f52' ? (
+                      {prize._id === "63cedf761736630ad01d5f52" ? (
                         <div className='prize-name bold'>
                           {prize.name.replace(
-                            'xxxValue',
-                            parseInt(OG5000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(OG5000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedfb61736630ad01d5f55' ? (
+                      {prize._id === "63cedfb61736630ad01d5f55" ? (
                         <div className='prize-name bold'>
                           {prize.name.replace(
-                            'xxxValue',
-                            parseInt(JR5000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(JR5000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedf301736630ad01d5f4f' ? (
+                      {prize._id === "63cedf301736630ad01d5f4f" ? (
                         <div className='prize-name bold'>
                           {prize.name.replace(
-                            'xxxValue',
-                            parseInt(OG10000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(OG10000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedf651736630ad01d5f51' ? (
+                      {prize._id === "63cedf651736630ad01d5f51" ? (
                         <div className='prize-name bold'>
                           {prize.name.replace(
-                            'xxxValue',
-                            parseInt(JR10000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(JR10000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedf9d1736630ad01d5f54' ? (
+                      {prize._id === "63cedf9d1736630ad01d5f54" ? (
                         <div className='prize-name bold'>
                           {prize.name.replace(
-                            'xxxValue',
-                            parseInt(OG10000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(OG10000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedfc51736630ad01d5f56' ? (
+                      {prize._id === "63cedfc51736630ad01d5f56" ? (
                         <div className='prize-name bold'>
                           {prize.name.replace(
-                            'xxxValue',
-                            parseInt(JR10000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(JR10000).toLocaleString("en-US")
                           )}
                           *
                         </div>
@@ -452,132 +451,132 @@ function RedeemPrizes() {
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63b74c51dd789f0383a51d3b' ? (
+                      {prize._id === "63b74c51dd789f0383a51d3b" ? (
                         <div className=''>
                           {prize.description.replace(
-                            'xxxValue',
-                            parseInt(OG1000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(OG1000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63b74ce7dd789f0383a51d3c' ? (
+                      {prize._id === "63b74ce7dd789f0383a51d3c" ? (
                         <div className=''>
                           {prize.description.replace(
-                            'xxxValue',
-                            parseInt(JR1000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(JR1000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63b78b42dd789f0383a51d3d' ? (
+                      {prize._id === "63b78b42dd789f0383a51d3d" ? (
                         <div className=''>
                           {prize.description.replace(
-                            'xxxValue',
-                            parseInt(OG1000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(OG1000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63b78c0edd789f0383a51d3f' ? (
+                      {prize._id === "63b78c0edd789f0383a51d3f" ? (
                         <div className=''>
                           {prize.description.replace(
-                            'xxxValue',
-                            parseInt(JR1000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(JR1000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedf0d1736630ad01d5f4e' ? (
+                      {prize._id === "63cedf0d1736630ad01d5f4e" ? (
                         <div className=''>
                           {prize.description.replace(
-                            'xxxValue',
-                            parseInt(OG5000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(OG5000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedf5a1736630ad01d5f50' ? (
+                      {prize._id === "63cedf5a1736630ad01d5f50" ? (
                         <div className=''>
                           {prize.description.replace(
-                            'xxxValue',
-                            parseInt(JR5000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(JR5000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedf761736630ad01d5f52' ? (
+                      {prize._id === "63cedf761736630ad01d5f52" ? (
                         <div className=''>
                           {prize.description.replace(
-                            'xxxValue',
-                            parseInt(OG5000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(OG5000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedfb61736630ad01d5f55' ? (
+                      {prize._id === "63cedfb61736630ad01d5f55" ? (
                         <div className=''>
                           {prize.description.replace(
-                            'xxxValue',
-                            parseInt(JR5000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(JR5000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedf301736630ad01d5f4f' ? (
+                      {prize._id === "63cedf301736630ad01d5f4f" ? (
                         <div className=''>
                           {prize.description.replace(
-                            'xxxValue',
-                            parseInt(OG10000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(OG10000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedf651736630ad01d5f51' ? (
+                      {prize._id === "63cedf651736630ad01d5f51" ? (
                         <div className=''>
                           {prize.description.replace(
-                            'xxxValue',
-                            parseInt(JR10000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(JR10000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedf9d1736630ad01d5f54' ? (
+                      {prize._id === "63cedf9d1736630ad01d5f54" ? (
                         <div className=''>
                           {prize.description.replace(
-                            'xxxValue',
-                            parseInt(OG10000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(OG10000).toLocaleString("en-US")
                           )}
                           *
                         </div>
                       ) : (
                         <></>
                       )}
-                      {prize._id === '63cedfc51736630ad01d5f56' ? (
+                      {prize._id === "63cedfc51736630ad01d5f56" ? (
                         <div className=''>
                           {prize.description.replace(
-                            'xxxValue',
-                            parseInt(JR10000).toLocaleString('en-US')
+                            "xxxValue",
+                            parseInt(JR10000).toLocaleString("en-US")
                           )}
                           *
                         </div>

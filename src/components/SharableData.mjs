@@ -106,8 +106,9 @@ export default function SharableData() {
 
   const createAffUser = async (user_id) => {
     setCreatingAffUser(true);
+    console.log("userid", user_id);
     await createAffiliateUser(user_id).then(async (affNew) => {
-      //console.log('affNew: ', affNew);
+      console.log("affNew: ", affNew);
       await getAffiliateUser(user_id).then((aff) => {
         //console.log('user2: ', user_id);
         console.log("new aff user: ", aff);
@@ -123,8 +124,10 @@ export default function SharableData() {
   };
 
   const refreshAffData = async () => {
+    console.log("user?.id", user?.id);
     const getAff = await getAffiliateUser(user?.id);
-    setAffUser(getAff);
+    console.log("getAff", getAff);
+    setAffUser("getAff", getAff);
   };
 
   const decrementAITickets = () => {

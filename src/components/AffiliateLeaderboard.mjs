@@ -19,6 +19,7 @@ export default function AffiliateLeaderboard() {
       const data = await marketPlaceInstance().get(
         `/getAffLeadersByCount/${limit}/${days}`
       );
+      console.log("getbycount", data);
       if (data.data.success) {
         setLeaderboardByCount(data.data.data);
       } else {
@@ -133,6 +134,7 @@ export default function AffiliateLeaderboard() {
       {showLeaderboards ? (
         <div className='bordered-section'>
           <div className='flex-row-no-margin'>
+            {console.log("leaderboardByCount", leaderboardByCount)}
             {leaderboardByCount !== "Error" ? (
               <>
                 <div className='leaderboard-card-div'>
