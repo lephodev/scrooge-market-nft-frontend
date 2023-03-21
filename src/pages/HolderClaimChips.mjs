@@ -1,171 +1,291 @@
-import {useState,useEffect, useContext} from 'react';
-import LoadingPoker from '../images/scroogeHatLogo.png';
-import { ConnectWallet, useNetworkMismatch, useAddress } from "@thirdweb-dev/react";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useState, useEffect, useContext } from "react";
+import LoadingPoker from "../images/scroogeHatLogo.png";
+import {
+  ConnectWallet,
+  useNetworkMismatch,
+  useAddress,
+} from "@thirdweb-dev/react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 //import ReactModal from 'react-modal';
-import fetch from 'node-fetch';
-import Countdown from 'react-countdown';
+import fetch from "node-fetch";
+import Countdown from "react-countdown";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
-import { useReward } from 'react-rewards';
+import { useReward } from "react-rewards";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
-import AuthContext from '../context/authContext.ts';
-import Layout from './Layout.mjs';
-import { marketPlaceInstance } from '../config/axios.js';
-import { scroogeClient } from '../config/keys.js';
+import AuthContext from "../context/authContext.ts";
+import Layout from "./Layout.mjs";
+import { marketPlaceInstance } from "../config/axios.js";
+import { scroogeClient } from "../config/keys.js";
 
 function HolderClaimChips() {
-  
   const { user } = useContext(AuthContext);
-  const { reward, } = useReward('rewardId', 'confetti', {colors: ['#D2042D', '#FBFF12', '#AD1927', '#E7C975', '#FF0000']});
+  const { reward } = useReward("rewardId", "confetti", {
+    colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
+  });
 
-    const [buyLoading,setBuyLoading]=useState(false);
-    const [nextClaimDate, setNextClaimDate]=useState("Loading...");
-    const [OGBalance, setOGBalance]=useState("Loading...");
-    const [currentPrice, setCurrentPrice]=useState("Loading...");
-   
-    const address = useAddress();
-    const isMismatched = useNetworkMismatch();
-    function notify(message) {
-      toast.success('🎩 '+message);
-    }  
-    
-    async function getNextClaimDate(){
-      if(user){
-       marketPlaceInstance().get(`/getNextClaimDate/${address}/holder/${user.id}/0`).then((data)=>{
-          setNextClaimDate(data.data);
-          return nextClaimDate;
-          });
-      }
-        
-    };
+  const [buyLoading, setBuyLoading] = useState(false);
+  const [nextClaimDate, setNextClaimDate] = useState("Loading...");
+  const [OGBalance, setOGBalance] = useState("Loading...");
+  const [currentPrice, setCurrentPrice] = useState("Loading...");
 
-    async function getCoinGeckoData() {
-      await fetch(`https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${process.env.REACT_APP_OGCONTRACT_ADDRESS}`)
-        .then(response => response.json())
+  const address = useAddress();
+  const isMismatched = useNetworkMismatch();
+  function notify(message) {
+    toast.success("🎩 " + message);
+  }
+
+  async function getNextClaimDate() {
+    if (user) {
+      marketPlaceInstance()
+        .get(`/getNextClaimDate/${address}/holder/${user.id}/0`)
         .then((data) => {
-            const current_price = data.market_data.current_price.usd;
-            setCurrentPrice(current_price);
-            return current_price;
-        })
-        .catch((e) => {
-            console.log(e);
-            return false;
+          console.log("setclam=im---", data);
+          setNextClaimDate(data.data.message);
+          return nextClaimDate;
         });
-    };
+    }
+  }
 
-    function timeout(delay) {
-      return new Promise( res => setTimeout(res, delay) );
-    };
+  async function getCoinGeckoData() {
+    await fetch(
+      `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${process.env.REACT_APP_OGCONTRACT_ADDRESS}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const current_price = data.market_data.current_price.usd;
+        console.log("coingeckodata", current_price);
+        setCurrentPrice(current_price);
+        return current_price;
+      })
+      .catch((e) => {
+        console.log(e);
+        return false;
+      });
+  }
 
-    const claimTokens = () => {
-      setBuyLoading(true);
-      try {
-        marketPlaceInstance().get(`/claimHolderTokens/${address}/${user.id}`).then(async (data)=>{
-          notify('Tokens Claimed: '+data.data);
+  function timeout(delay) {
+    return new Promise((res) => setTimeout(res, delay));
+  }
+
+  const claimTokens = () => {
+    setBuyLoading(true);
+    try {
+      marketPlaceInstance()
+        .get(`/claimHolderTokens/${address}/${user.id}`)
+        .then(async (data) => {
+          notify("Tokens Claimed: " + data.data);
           setBuyLoading(false);
           reward();
           zzz();
-          //await timeout(4200); 
+          //await timeout(4200);
           //window.location.reload();
         });
-      } catch (err) {
-        console.error(err);
-        notify("Error claiming tokens!");
-        setBuyLoading(false);
-      };
-    };
+    } catch (err) {
+      console.error(err);
+      notify("Error claiming tokens!");
+      setBuyLoading(false);
+    }
+  };
 
-const zzz = async () => {
-  if(address && !isMismatched){
-    await getNextClaimDate().then((resu)=>{
-      return true;
-    });
-  } else {
-    return false;
-  }
-};
+  const zzz = async () => {
+    if (address && !isMismatched) {
+      await getNextClaimDate().then((resu) => {
+        return true;
+      });
+    } else {
+      return false;
+    }
+  };
 
-useEffect(() => {
-  getCoinGeckoData();
-  if(address && !isMismatched){
-   marketPlaceInstance().get(`/getOGBalance/${address}`).then((data)=>{
-        setOGBalance(data.data);
-        }).then(()=>{
+  useEffect(() => {
+    getCoinGeckoData();
+    console.log("address", address);
+    console.log("isMismatched", !isMismatched);
+    if (address && !isMismatched) {
+      marketPlaceInstance()
+        .get(`/getOGBalance/${address}`)
+        .then((data) => {
+          console.log("ogbalance", data);
+          setOGBalance(data.data);
+        })
+        .then(() => {
           zzz();
         });
-  }
-}, [user, address]);
+    }
+  }, [user, address]);
 
-    return (
+  return (
     <Layout>
-        <main className="main">
-    <div className="container">
-        <div className="bordered-section">
-            {buyLoading ? (<div className="pageImgContainer">
-                    <img src={LoadingPoker} alt="game" className="imageAnimation" />
-                    <div className='loading-txt pulse'>
-                        CLAIMING TOKENS...
-                    </div>
-                </div>) : (<></>)}
-            <div className="pageTitle">
-                <h1 className='title'>Claim Free Tokens</h1>
-            </div>
-            <div className="feature-overview-div" style={{marginBottom: '30px'}}>
-                <p>Did you know that you get FREE TOKENS EVERY MONTH just for holding Scrooge in your wallet? 
-                Once every 30 days, you can come right to this page and claim your free <a href={scroogeClient} target="_blank" rel="noreferrer" alt="claim free tokens to spend in Scrooge Casino">Scrooge Casino</a> tokens just by clicking the CLAIM TOKENS button.</p>
-                <p>Your claimable monthly token rate is automatically determined based on the amount of Scrooge you currently hold, as well as the current Scrooge price.</p>
-            </div>
-            {(isMismatched && address) ? (<div><SwitchNetworkBSC /></div>) : 
-              (<span></span>)}
-            {(address)?(
-              <div className="prizes_container">
-                  <div className='prizes-card'>
-                      {(OGBalance)?(<div className='holder-claim-details'>Scrooge Coin Balance: {OGBalance.toLocaleString('en-US')}</div>):(<div className='holder-claim-details'>Scrooge Coin Balance: {OGBalance}</div>)}
-                      
-                      <div className='holder-claim-details'>Scrooge Coin Price: ${parseFloat(currentPrice).toFixed(10)}</div><br></br>
-                   
-                      <div className='prizes-chip-count'>Your Claimable Monthly Token Rate:<br></br>
-                      <div className='additional-info-div'>
-                        Your Balance ({OGBalance.toLocaleString('en-US')})<br></br> X <br></br>Current Scrooge Coin Price (${parseFloat(currentPrice).toFixed(10)})<br></br> X <br></br> EARNING RATE (10%)<br></br> = <br></br>
-                      </div>
-                      {(OGBalance > 0)?(<>Claim {((OGBalance * currentPrice)*.1).toFixed(0).toLocaleString('en-US')}</>):(<>0</>)} FREE Tokens Every 30 Days</div>
-                      <div style={{width: "100%", textAlign: "center"}}><div id="rewardId" style={{margin: "0 auto"}} /></div>
-                      {((new Date(nextClaimDate) <= new Date() || nextClaimDate === 'CLAIM NOW') && OGBalance > 0) ? (
-                      <button className="submit-btn" onClick={() => claimTokens()}>
-                        Claim {((OGBalance * currentPrice)*.1).toFixed(0).toLocaleString('en-US')} Tokens</button>
-                        ) : (<>
-                        <div className='prize-name'>
-                          {(nextClaimDate !== 'Loading...' && OGBalance>0)?(
-                          <>Next Claim Available:<br></br><Countdown date={nextClaimDate}>
-                            <button className="submit-btn" onClick={() => claimTokens()}>Claim {(OGBalance * currentPrice).toFixed(0).toLocaleString('en-US')} Tokens</button>
-                            </Countdown></>):OGBalance === 0 ? "" : (<>
-                            <img src={LoadingPoker} alt="game" className="imageAnimation" /></>)}</div><br></br><br></br></>)}
-                      <div className='fine-print-txt' style={{marginTop: '40px'}}>
-                        *Your claimed tokens will automatically be added to your connected <a href={scroogeClient} alt="Visit Scrooge Casino" target="_blank" rel="noreferrer">Scrooge Casino</a> account.
-                      </div>
-                  </div>
-                  <div className='fine-print-txt' style={{marginTop: '40px'}}>
-                    Monthly claimable token rates are calculated based on the current price of the Scrooge cryptocurrency token. This ensures a fair and even claimable monthly amount for all holders.
-                  </div>
+      <main className='main'>
+        <div className='container'>
+          <div className='bordered-section'>
+            {buyLoading ? (
+              <div className='pageImgContainer'>
+                <img src={LoadingPoker} alt='game' className='imageAnimation' />
+                <div className='loading-txt pulse'>CLAIMING TOKENS...</div>
               </div>
-            ):(<div>
-              <p className="description yellow">
-              Get started by connecting your wallet.
+            ) : (
+              <></>
+            )}
+            <div className='pageTitle'>
+              <h1 className='title'>Claim Free Tokens</h1>
+            </div>
+            <div
+              className='feature-overview-div'
+              style={{ marginBottom: "30px" }}>
+              <p>
+                Did you know that you get FREE TOKENS EVERY MONTH just for
+                holding Scrooge in your wallet? Once every 30 days, you can come
+                right to this page and claim your free{" "}
+                <a
+                  href={scroogeClient}
+                  target='_blank'
+                  rel='noreferrer'
+                  alt='claim free tokens to spend in Scrooge Casino'>
+                  Scrooge Casino
+                </a>{" "}
+                tokens just by clicking the CLAIM TOKENS button.
               </p>
-              <div className="connect-wallet-div">
-                <ConnectWallet />
+              <p>
+                Your claimable monthly token rate is automatically determined
+                based on the amount of Scrooge you currently hold, as well as
+                the current Scrooge price.
+              </p>
+            </div>
+            {isMismatched && address ? (
+              <div>
+                <SwitchNetworkBSC />
               </div>
-            </div>)}
+            ) : (
+              <span></span>
+            )}
+            {address ? (
+              <div className='prizes_container'>
+                <div className='prizes-card'>
+                  {OGBalance ? (
+                    <div className='holder-claim-details'>
+                      Scrooge Coin Balance: {OGBalance.toLocaleString("en-US")}
+                    </div>
+                  ) : (
+                    <div className='holder-claim-details'>
+                      Scrooge Coin Balance: {OGBalance}
+                    </div>
+                  )}
 
-            
+                  <div className='holder-claim-details'>
+                    Scrooge Coin Price: ${parseFloat(currentPrice).toFixed(10)}
+                  </div>
+                  <br></br>
+
+                  <div className='prizes-chip-count'>
+                    Your Claimable Monthly Token Rate:<br></br>
+                    <div className='additional-info-div'>
+                      Your Balance ({OGBalance.toLocaleString("en-US")})
+                      <br></br> X <br></br>Current Scrooge Coin Price ($
+                      {parseFloat(currentPrice).toFixed(10)})<br></br> X{" "}
+                      <br></br> EARNING RATE (10%)<br></br> = <br></br>
+                      {OGBalance * parseFloat(currentPrice).toFixed(10) * 0.1}
+                    </div>
+                    Claim{" "}
+                    {OGBalance > 0 ? (
+                      <>
+                        {(OGBalance * currentPrice * 0.1)
+                          .toFixed(0)
+                          .toLocaleString("en-US")}
+                      </>
+                    ) : (
+                      <>0</>
+                    )}{" "}
+                    FREE Tokens Every 30 Days
+                  </div>
+                  <div style={{ width: "100%", textAlign: "center" }}>
+                    <div id='rewardId' style={{ margin: "0 auto" }} />
+                  </div>
+                  {(new Date(nextClaimDate) <= new Date() ||
+                    nextClaimDate === "No Entries Found") &&
+                  OGBalance > 0 ? (
+                    <button
+                      className='submit-btn'
+                      onClick={() => claimTokens()}>
+                      Claim{" "}
+                      {(OGBalance * currentPrice * 0.1)
+                        .toFixed(0)
+                        .toLocaleString("en-US")}{" "}
+                      Tokens
+                    </button>
+                  ) : (
+                    <>
+                      <div className='prize-name'>
+                        {nextClaimDate !== "Loading..." && OGBalance > 0 ? (
+                          <>
+                            Next Claim Available:<br></br>
+                            <Countdown date={nextClaimDate}>
+                              <button
+                                className='submit-btn'
+                                onClick={() => claimTokens()}>
+                                Claim{" "}
+                                {(OGBalance * currentPrice)
+                                  .toFixed(0)
+                                  .toLocaleString("en-US")}{" "}
+                                Tokens
+                              </button>
+                            </Countdown>
+                          </>
+                        ) : OGBalance === 0 ? (
+                          "OG Balance is 0"
+                        ) : (
+                          <>
+                            <img
+                              src={LoadingPoker}
+                              alt='game'
+                              className='imageAnimation'
+                            />
+                          </>
+                        )}
+                      </div>
+                      <br></br>
+                      <br></br>
+                    </>
+                  )}
+                  <div className='fine-print-txt' style={{ marginTop: "40px" }}>
+                    *Your claimed tokens will automatically be added to your
+                    connected{" "}
+                    <a
+                      href={scroogeClient}
+                      alt='Visit Scrooge Casino'
+                      target='_blank'
+                      rel='noreferrer'>
+                      Scrooge Casino
+                    </a>{" "}
+                    account.
+                  </div>
+                </div>
+                <div className='fine-print-txt' style={{ marginTop: "40px" }}>
+                  Monthly claimable token rates are calculated based on the
+                  current price of the Scrooge cryptocurrency token. This
+                  ensures a fair and even claimable monthly amount for all
+                  holders.
+                </div>
+              </div>
+            ) : (
+              <div>
+                <p className='description yellow'>
+                  Get started by connecting your wallet.
+                </p>
+                <div className='connect-wallet-div'>
+                  <ConnectWallet />
+                </div>
+              </div>
+            )}
+          </div>
+          <div className='flex-row' style={{ margin: "50px auto 0px" }}>
+            <ShowBottomNavCards />
+          </div>
         </div>
-        <div className="flex-row" style={{margin: '50px auto 0px'}}>
-          <ShowBottomNavCards />
-        </div>
-        </div>
-        </main>
-        </Layout>)
-    };
-    
-    export default HolderClaimChips;
+      </main>
+    </Layout>
+  );
+}
+
+export default HolderClaimChips;
