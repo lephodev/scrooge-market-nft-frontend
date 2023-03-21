@@ -88,7 +88,7 @@ export default function ShowAllTokenNFTs() {
 
   const handleBuyStripe = () => {
     window.open(
-      `https://buy.stripe.com/test_7sIbJSfwn5mb4p2dQS?client_reference_id=${address}_${user?.id}_${affID}`,
+      `https://buy.stripe.com/test_bIY9BpcxRaMHeuA145?client_reference_id=${address}_${user?.id}_${affID}`,
       "__blank"
     );
   };
