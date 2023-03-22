@@ -164,7 +164,7 @@ function RedeemPrizes() {
           toast.error("ERROR! - " + data.data, { containerId: "error" });
         } else {
           setRedeemSuccess(false);
-          //notify(data.data+' redeemed successfully!');
+          toast.success(data.data + " redeemed successfully!");
         }
       })
       .catch((err) => {
