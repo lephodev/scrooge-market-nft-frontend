@@ -5,16 +5,18 @@ import { useAddress } from "@thirdweb-dev/react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useReward } from "react-rewards";
+import { useCookies } from "react-cookie";
+
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
-import { marketPlaceInstance } from "../config/axios.js";
+import { authInstance, marketPlaceInstance } from "../config/axios.js";
 
 function RedeemPrizes() {
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
   let prizesReceived = 0;
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading,setUser } = useContext(AuthContext);
   console.log("user", user, loading);
   useEffect(() => {
     getCoinGeckoDataOG();
@@ -37,6 +39,7 @@ function RedeemPrizes() {
   const [JR1000, setJR1000] = useState();
   const [JR5000, setJR5000] = useState();
   const [JR10000, setJR10000] = useState();
+  const [cookies] = useCookies(['token']);
   const address = useAddress();
 
   async function getPrizes() {
@@ -135,6 +138,29 @@ function RedeemPrizes() {
         return false;
       });
   }
+
+  const getUserDataInstant=()=>{
+    console.log("abbababababbababa");
+    let access_token = cookies.token;
+    authInstance().get('/auth/check-auth',{
+      headers:{
+        Authorization: `Bearer ${access_token}`
+      }
+    }).then((res)=>{ 
+    console.log("convertedData",res)
+    if(res.data.user){
+        console.log("user", res.data)
+        setUser({
+          ...res.data.user
+       });
+      } 
+    }).catch((err) => {
+      console.log("error ", err)
+      
+    })
+    
+  
+}
   const RedeemPrize = async (prize_id) => {
     if (!user)
       return toast.error("Please login first", { containerId: "login" });
@@ -146,6 +172,7 @@ function RedeemPrizes() {
     console.log("add", address);
     console.log("user.id", user.id);
     console.log("prize_id", prize_id);
+    console.log("address",address)
     setRedeemLoading(true);
     marketPlaceInstance()
       .get(`/redeemPrize/${address}/${user.id}/${prize_id}`)
@@ -162,9 +189,12 @@ function RedeemPrizes() {
           toast.error("ERROR! - " + data.data, { containerId: "error" });
         } else if (data.data === "Not Enough Tickets") {
           toast.error("ERROR! - " + data.data, { containerId: "error" });
-        } else {
+        }
+        
+        else {
           setRedeemSuccess(false);
-          toast.success(data.data + " redeemed successfully!");
+          toast.success(data.data+' redeemed successfully!');
+          getUserDataInstant()
         }
       })
       .catch((err) => {
