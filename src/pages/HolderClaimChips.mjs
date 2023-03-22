@@ -117,7 +117,7 @@ function HolderClaimChips() {
 
   return (
     <Layout>
-      <main className='main'>
+      <main className='main claim-free-page'>
         <div className='container'>
           <div className='bordered-section'>
             {buyLoading ? (
@@ -133,7 +133,8 @@ function HolderClaimChips() {
             </div>
             <div
               className='feature-overview-div'
-              style={{ marginBottom: "30px" }}>
+              style={{ marginBottom: "30px" }}
+            >
               <p>
                 Did you know that you get FREE TOKENS EVERY MONTH just for
                 holding Scrooge in your wallet? Once every 30 days, you can come
@@ -142,7 +143,8 @@ function HolderClaimChips() {
                   href={scroogeClient}
                   target='_blank'
                   rel='noreferrer'
-                  alt='claim free tokens to spend in Scrooge Casino'>
+                  alt='claim free tokens to spend in Scrooge Casino'
+                >
                   Scrooge Casino
                 </a>{" "}
                 tokens just by clicking the CLAIM TOKENS button.
@@ -207,7 +209,8 @@ function HolderClaimChips() {
                   OGBalance > 0 ? (
                     <button
                       className='submit-btn'
-                      onClick={() => claimTokens()}>
+                      onClick={() => claimTokens()}
+                    >
                       Claim{" "}
                       {(OGBalance * currentPrice * 0.1)
                         .toFixed(0)
@@ -223,7 +226,8 @@ function HolderClaimChips() {
                             <Countdown date={nextClaimDate}>
                               <button
                                 className='submit-btn'
-                                onClick={() => claimTokens()}>
+                                onClick={() => claimTokens()}
+                              >
                                 Claim{" "}
                                 {(OGBalance * currentPrice)
                                   .toFixed(0)
@@ -255,7 +259,8 @@ function HolderClaimChips() {
                       href={scroogeClient}
                       alt='Visit Scrooge Casino'
                       target='_blank'
-                      rel='noreferrer'>
+                      rel='noreferrer'
+                    >
                       Scrooge Casino
                     </a>{" "}
                     account.

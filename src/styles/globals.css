@@ -6,7 +6,7 @@ body {
   margin: 0;
   color: #878d93;
   background: #000000;
-  font-family: 'Poppins', sans-serif!important;
+  font-family: "Poppins", sans-serif !important;
   overflow-x: hidden;
 }
 
@@ -23,37 +23,37 @@ html {
   color-scheme: dark;
 }
 
-.pink{
-  color: #D2042D;
+.pink {
+  color: #d2042d;
 }
-.red{
-  color: #D30101;
+.red {
+  color: #d30101;
 }
-.gold{
+.gold {
   color: #f8d761;
 }
-.green{
+.green {
   color: #0dff00;
 }
-.teal{
+.teal {
   color: #41ead4;
 }
-.yellow{
-  color: #FBFF12;
+.yellow {
+  color: #fbff12;
 }
-.font-martian{
-  font-family: 'Poppins';
+.font-martian {
+  font-family: "Poppins";
 }
-.header-nav-container{
+.header-nav-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 20px 20px;
 }
-.header-nav-menu{
+.header-nav-menu {
   width: 70%;
 }
-.header-nav-container ul{
+.header-nav-container ul {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -62,114 +62,113 @@ html {
   text-transform: uppercase;
   font-size: 18px;
 }
-.header-nav-menu a{
-  font-family: 'Poppins';
-  color: #D2042D;
+.header-nav-menu a {
+  font-family: "Poppins";
+  color: #d2042d;
   border: 2px solid #000;
   padding: 10px;
   font-weight: bold;
 }
-.header-nav-menu a:hover{
-  background-color: #FBFF12;
+.header-nav-menu a:hover {
+  background-color: #fbff12;
 }
-.header-nav-logo-div{
+.header-nav-logo-div {
   text-align: center;
-  font-family: 'Unica One';
-
+  font-family: "Unica One";
 }
 
-.menu-logo-img{
+.menu-logo-img {
   width: 50px;
 }
-.connect-wallet-header{
-  border: 2px solid #D2042D;
+.connect-wallet-header {
+  border: 2px solid #d2042d;
   border-radius: 10px;
 }
-.wallet-icon-img{
+.wallet-icon-img {
   height: 50px;
   width: 50px;
 }
-.wallet-icon-img:hover{
+.wallet-icon-img:hover {
   transform: rotate(-20deg);
 }
-.connect-wallet-div{
+.connect-wallet-div {
   margin: 30px auto;
   width: 250px;
-  border: 2px solid #D2042D;
+  border: 2px solid #d2042d;
   border-radius: 10px;
   margin-bottom: 50px;
 }
-.wallet-casino-profile-div{
+.wallet-casino-profile-div {
   width: 100%;
   margin: 30px 0 40px 0;
   padding: 5px 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  border: 4px solid #D2042D;
+  border: 4px solid #d2042d;
   border-radius: 10px;
   background-color: transparent;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
-.wallet-casino-profile-img{
+.wallet-casino-profile-img {
   width: 150px;
   border-radius: 100%;
-  border: 5px solid #FBFF12;
+  border: 5px solid #fbff12;
 }
-.wallet-casino-profile-details{
+.wallet-casino-profile-details {
   width: 50%;
   margin: 0 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-weight: bold;
   color: #fff;
   font-size: 24px;
 }
-.wallet-casino-profile-username{
-  color: #D2042D;
+.wallet-casino-profile-username {
+  color: #d2042d;
   font-size: 32px;
-  text-shadow: 1px 1px #FBFF12;
+  text-shadow: 1px 1px #fbff12;
 }
-.wallet-casino-profile-img-div{
+.wallet-casino-profile-img-div {
   display: flex;
   align-items: center;
 }
-.button-section{
+.button-section {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.bottom-margin-100{
+.bottom-margin-100 {
   margin-bottom: 100px;
 }
-.token-small{
+.token-small {
   width: 45px;
   margin-right: 10px;
 }
-.token-nav{
+.token-nav {
   width: 25px;
   margin-right: 10px;
-  vertical-align:top;
+  vertical-align: top;
 }
-.token-nav-div{
+.token-nav-div {
   display: flex;
   flex-direction: row;
   align-items: top;
 }
-.ticket-small{
+.ticket-small {
   width: 60px;
   margin-right: 10px;
 }
-.token-logo{
+.token-logo {
   width: 60px;
   margin-right: 15px;
   border-radius: 100%;
 }
-.token-ticket-row{
+.token-ticket-row {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -183,17 +182,17 @@ span.wallet-user-name {
   font-size: 20px;
   color: #878d93;
 }
-.crypto-balance-row{
+.crypto-balance-row {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  line-height: .08;
+  line-height: 0.08;
 }
-.width-100{
+.width-100 {
   width: 100%;
 }
-.crypto-balance-div{
+.crypto-balance-div {
   width: 30%;
   margin: 10px 0 10px 0;
   padding: 20px 20px;
@@ -205,65 +204,65 @@ span.wallet-user-name {
   font-weight: bold;
   font-size: 16px;
 }
-.crypto-balance-header{
+.crypto-balance-header {
   text-align: center;
   font-weight: bold;
   font-size: 22px;
-  color: #FBFF12;
+  color: #fbff12;
   margin-bottom: 10px;
 }
-.claim-pending-div{
+.claim-pending-div {
   text-align: center;
   font-weight: 200;
   font-size: 14px;
   margin-top: 40px;
 }
-.claim-countdown{
+.claim-countdown {
   margin-top: 15px;
-  color: #FBFF12;
+  color: #fbff12;
   font-size: 18px;
 }
-.claim-btn{
+.claim-btn {
   margin-top: 20px;
   padding: 10px 20px !important;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-size: 14px;
   background-color: #000;
-  border: 2px solid #D2042D;
+  border: 2px solid #d2042d;
   border-radius: 5px;
   text-transform: uppercase;
 }
-.claim-btn:hover{
+.claim-btn:hover {
   cursor: pointer;
-  background-color: #D2042D;
-  border: 2px solid #FBFF12;
+  background-color: #d2042d;
+  border: 2px solid #fbff12;
   border-radius: 5px;
 }
-.daily-reward-bag{
+.daily-reward-bag {
   width: 100%;
 }
-.daily-reward-bag-div{
+.daily-reward-bag-div {
   margin-top: 45px;
   margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-.daily-rewards-bag-card{
+.daily-rewards-bag-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.next-claim-div{
-  border: 2px solid #D2042D;
+.next-claim-div {
+  border: 2px solid #d2042d;
   border-radius: 5px;
   padding: 20px;
   width: 50%;
   margin: 45px auto 0 auto;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-size: 24px;
 }
-.header-nav-container-mobile{
+.header-nav-container-mobile {
   width: 100%;
   bottom: 0;
   display: flex;
@@ -272,10 +271,10 @@ span.wallet-user-name {
   text-align: center;
   padding: 0px 10px;
 }
-.header-nav-menu-mobile{
+.header-nav-menu-mobile {
   width: 100%;
 }
-.header-nav-container-mobile ul{
+.header-nav-container-mobile ul {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -285,36 +284,36 @@ span.wallet-user-name {
   margin: 0;
   padding: 0;
 }
-.header-nav-menu-mobile a{
+.header-nav-menu-mobile a {
   display: flex;
 }
-.wallet-icon-img-mobile{
+.wallet-icon-img-mobile {
   max-width: 60px;
-                
-                object-fit: contain;
-  border: 5px solid #FBFF12;
+
+  object-fit: contain;
+  border: 5px solid #fbff12;
   border-radius: 100%;
 }
 
-.loading-img-div{
+.loading-img-div {
   display: flex;
   justify-content: center;
   padding: 20px;
 }
-.loading-img{
+.loading-img {
   width: 200px;
 }
-.switch-network-div{
+.switch-network-div {
   text-align: center;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-weight: bold;
-  color: #FBFF12;
-  border: 3px solid #FBFF12;
-  background-color: #D2042D;
+  color: #fbff12;
+  border: 3px solid #fbff12;
+  background-color: #d2042d;
   border-radius: 5px;
   padding: 40px;
 }
-.footer-nav{
+.footer-nav {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -323,35 +322,35 @@ span.wallet-user-name {
   margin: 100px 0 0 0;
   padding: 60px 20px 20px 10px;
 }
-.footer-inner-div{
+.footer-inner-div {
   padding: 0 50px;
 }
-.footer-div{
+.footer-div {
   text-align: center;
   padding: 30px 0;
 }
-.transaction-div{
+.transaction-div {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   width: 90%;
-  border: 4px solid #D2042D;
+  border: 4px solid #d2042d;
   border-radius: 5px;
   background-color: #1b2129;
   padding: 20px;
   margin: 5px auto 30px auto;
 }
-.transaction-div-title{
+.transaction-div-title {
   width: 100%;
   text-align: center;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-size: 26px;
   padding: 10px 0 30px 0;
   text-transform: uppercase;
 }
-.transaction-card{
+.transaction-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -363,169 +362,168 @@ span.wallet-user-name {
   text-align: center;
   border: 2px solid #f9ff00;
   border-radius: 5px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
-.transaction-card-coupon-code{
+.transaction-card-coupon-code {
   margin-top: 15px;
   font-weight: bold;
-  background-color:#D2042D;
+  background-color: #d2042d;
   padding: 6px;
 }
-.page-nav-header-btns-row{
+.page-nav-header-btns-row {
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   padding: 20px 0 0 0;
 }
-.page-nav-header-btns-subrow{
+.page-nav-header-btns-subrow {
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
   padding: 10px 0 0 0;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
-.page-nav-header-btn{
+.page-nav-header-btn {
   padding: 10px 5px;
   margin: 0 10px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   width: 200px;
-  border: 2px solid #D2042D;
+  border: 2px solid #d2042d;
   background-color: #000000;
   border-radius: 5px;
   font-size: 22px;
 }
-.page-nav-header-subbtn{
+.page-nav-header-subbtn {
   padding: 10px 25px;
   margin: 0 10px;
   background-color: #24262b;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   border: none;
   border-radius: 5px;
 }
-.disabled{
+.disabled {
   background-color: #d2042d8c !important;
   color: #8d8a8a;
 }
-.asterisk-desc{
+.asterisk-desc {
   margin-top: 25px;
   font-size: 14px;
-  color: #D2042D;
+  color: #d2042d;
 }
-.bordered-section{
+.bordered-section {
   margin: 0px auto;
   width: 100%;
   background-color: transparent;
-  
 }
-.pageTitle{
+.pageTitle {
   text-align: center;
   margin-bottom: 50px;
-  color: #FBFF12;
-  text-shadow: 2px 2px #D2042D;
+  color: #fbff12;
+  text-shadow: 2px 2px #d2042d;
   text-transform: uppercase;
 }
-.inlineTitle{
-  color: #FBFF12;
-  text-shadow: 2px 2px #D2042D;
+.inlineTitle {
+  color: #fbff12;
+  text-shadow: 2px 2px #d2042d;
   text-transform: uppercase;
 }
-.subheader-btn{
+.subheader-btn {
   margin: 30px;
   background-color: #000;
   padding: 20px 30px;
-  border: 2px solid #FBFF12;
+  border: 2px solid #fbff12;
   border-radius: 5px;
-  color: #5EE47E;
-  font-family: 'Poppins';
+  color: #5ee47e;
+  font-family: "Poppins";
   font-weight: bold;
 }
-.subheader-btn:hover{
+.subheader-btn:hover {
   background-color: #000;
-  color: #D2042D;
+  color: #d2042d;
   cursor: pointer;
 }
-.card-img{
+.card-img {
   width: 100px;
   height: 100px;
   margin: 15px 0 0 0;
   border-radius: 5px;
 }
-.card-img:hover{
+.card-img:hover {
   transform: rotate(-20deg);
 }
-.raffle-img{
+.raffle-img {
   width: 200px;
   height: 200px;
   margin: 0;
   border-radius: 5px;
 }
-.raffle-img:hover{
+.raffle-img:hover {
   transform: rotate(-20deg);
 }
-.raffle-data-box{
-  border: 2px solid #D2042D;
+.raffle-data-box {
+  border: 2px solid #d2042d;
   border-radius: 5px;
   padding: 20px;
   width: 25%;
 }
-.fine-print-txt{
+.fine-print-txt {
   text-align: center;
   font-size: 16px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
-.flex-row{
+.flex-row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin-bottom: 80px;
 }
-.flex-row-no-margin{
+.flex-row-no-margin {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
 }
-.nft-home-sell-div{
+.nft-home-sell-div {
   margin: 20px auto;
   padding: 15px;
   width: 100%;
-  border: 3px solid #D2042D;
+  border: 3px solid #d2042d;
   border-radius: 5px;
   background-color: transparent;
 }
-.nft-home-sell-title{
+.nft-home-sell-title {
   text-align: center;
   margin-bottom: 50px;
-  color: #FBFF12;
-  text-shadow: 2px 2px #D2042D;
+  color: #fbff12;
+  text-shadow: 2px 2px #d2042d;
   text-transform: uppercase;
 }
-.nft-home-sell-more{
+.nft-home-sell-more {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.nft-home-sell-more-btn{
+.nft-home-sell-more-btn {
   background-color: #000;
   padding: 10px 20px;
-  border: 2px solid #FBFF12;
+  border: 2px solid #fbff12;
   border-radius: 5px;
   margin-top: 15px;
-  color: #5EE47E;
-  font-family: 'Poppins';
+  color: #5ee47e;
+  font-family: "Poppins";
   font-weight: bold;
 }
-.nft-home-sell-more-btn:hover{
+.nft-home-sell-more-btn:hover {
   background-color: #000;
-  color: #D2042D;
+  color: #d2042d;
   cursor: pointer;
 }
-.nft-home-sell-card{
+.nft-home-sell-card {
   padding: 10px;
   margin: 10px 15px;
   display: flex;
@@ -533,30 +531,30 @@ span.wallet-user-name {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  font-family: 'Poppins';
-  color: #FBFF12;
-  width:16%;
+  font-family: "Poppins";
+  color: #fbff12;
+  width: 16%;
 }
-.nft-home-sell-details{
+.nft-home-sell-details {
   text-align: center;
 }
-.contact-div{
+.contact-div {
   padding: 50px;
   margin: 30px 0;
   background-color: #1b2129;
-  border: 2px solid #D2042D;
+  border: 2px solid #d2042d;
   border-radius: 5px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
-.full-page-container{
+.full-page-container {
   min-width: 100%;
   background-color: #1b2129;
   padding: 20px 30px;
-  border: 6px solid #FBFF12;
+  border: 6px solid #fbff12;
   border-radius: 10px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
-.modal-popup{
+.modal-popup {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -564,33 +562,33 @@ span.wallet-user-name {
   padding: 30px;
   height: 100%;
 }
-.modal-header{
-  font-family: 'Poppins';
-  color: #FBFF12;
+.modal-header {
+  font-family: "Poppins";
+  color: #fbff12;
   text-align: center;
   margin-bottom: 25px;
   font-size: 22px;
 }
-.modal-popup input{
+.modal-popup input {
   padding: 15px;
-  border: 2px solid #FBFF12;
+  border: 2px solid #fbff12;
   font-size: 20px;
   color: #fff;
 }
-.modal-popup-btn{
+.modal-popup-btn {
   margin-top: 30px;
   padding: 15px 30px !important;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-size: 20px;
-  color: #FBFF12;
+  color: #fbff12;
   background-color: #000;
-  border: 2px solid #D2042D;
+  border: 2px solid #d2042d;
   border-radius: 5px;
   cursor: pointer;
 }
-.modal-popup-btn:hover{
-  background-color: #D2042D;
-  border: 2px solid #FBFF12;
+.modal-popup-btn:hover {
+  background-color: #d2042d;
+  border: 2px solid #fbff12;
   border-radius: 5px;
 }
 
@@ -601,39 +599,39 @@ span.wallet-user-name {
   padding: 5px;
 }
 .popup-arrow {
-  color: #FBFF12;
+  color: #fbff12;
 }
-[role='tooltip'].popup-content {
+[role="tooltip"].popup-content {
   width: 500px;
   padding: 15px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
-  color: #D2042D;
+  color: #d2042d;
   background: #1b2129;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   text-align: center;
-  border: 2px solid #FBFF12;
+  border: 2px solid #fbff12;
 }
 
 .popup-overlay {
   background: rgba(0, 0, 0, 0.5);
 }
-[data-popup='tooltip'].popup-overlay {
+[data-popup="tooltip"].popup-overlay {
   background: transparent;
 }
 
-.connect-wallet-inline{
-  border: 2px solid #D2042D;
+.connect-wallet-inline {
+  border: 2px solid #d2042d;
   border-radius: 5px;
 }
-.connect-wallet-inline:hover{
-  border: 2px solid #FBFF12;
+.connect-wallet-inline:hover {
+  border: 2px solid #fbff12;
 }
-.nft-token-row-div{
+.nft-token-row-div {
   width: 100%;
 }
-.nft-token-row-card{
+.nft-token-row-card {
   width: 100%;
-  border: 3px solid #D2042D;
+  border: 3px solid #d2042d;
   border-radius: 5px;
   padding: 20px 50px;
   margin: 15px 0;
@@ -643,73 +641,73 @@ span.wallet-user-name {
   align-items: center;
   gap: 20px;
 }
-.nft-token-stripe-badge-div{
+.nft-token-stripe-badge-div {
   height: 100%;
   text-align: center;
   padding: 0 0px 0 0;
 }
-.stripe-badge-img{
+.stripe-badge-img {
   width: 100px;
   height: 100px;
   border-radius: 10px;
   cursor: pointer;
 }
-.green-border-6px{
-  border: 3px solid #5EE47E !important;
+.green-border-6px {
+  border: 3px solid #5ee47e !important;
 }
-.pink-border-6px{
+.pink-border-6px {
   border: 3px solid #ff206e !important;
 }
-.blue-border-6px{
+.blue-border-6px {
   border: 3px solid #3a86ff !important;
 }
-.nft-token-row-card-image{
+.nft-token-row-card-image {
   width: 15%;
 }
-.nft-token-row-desc{
+.nft-token-row-desc {
   width: 50%;
 }
-.nft-token-row-details{
+.nft-token-row-details {
   width: 20%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  line-height: .9;
+  line-height: 0.9;
 }
 .nft-token-row-name {
   font-size: 26px;
-  color: #FBFF12;
+  color: #fbff12;
   text-shadow: 2px 2px #d2042d;
   display: block;
   padding-bottom: 15px;
   font-weight: 500;
 }
-.nft-token-row-sale{
+.nft-token-row-sale {
   text-align: center;
   line-height: 2;
   font-size: 26px;
-  color: #5EE47E;
-  text-shadow: 1px 1px #D2042D;
+  color: #5ee47e;
+  text-shadow: 1px 1px #d2042d;
 }
-.sale-badge-img{
+.sale-badge-img {
   width: 140px;
 }
-.qty-badge{
+.qty-badge {
   border-radius: 100%;
   background-color: #0dff00;
   width: 30px;
   height: 30px;
-  color: #D2042D;
+  color: #d2042d;
 }
-.bottom-row-btns-div{
+.bottom-row-btns-div {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-.erc721Card{
-  border: 2px solid #D2042D;
+.erc721Card {
+  border: 2px solid #d2042d;
   border-radius: 5px;
   background-color: #1b2129;
   padding: 30px;
@@ -719,99 +717,116 @@ span.wallet-user-name {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   color: #fff;
-  width:100%;
+  width: 100%;
   line-height: 1.5;
 }
-.erc721Card-name{
+.erc721Card-name {
   display: flex;
   flex-direction: column;
   text-align: center;
   font-size: 24px;
   line-height: 1;
 }
-.erc721Card-image{
-  border: 3px solid #FBFF12;
+.erc721Card-image {
+  border: 3px solid #fbff12;
   margin: 0 15px;
   border-radius: 5px;
 }
-.erc721Card-image:hover{
-  border: 3px solid #D2042D;
+.erc721Card-image:hover {
+  border: 3px solid #d2042d;
   transform: rotate(-10deg);
 }
-.erc721Card-details{
+.erc721Card-details {
   padding-left: 15px;
   width: 30%;
 }
-.erc721Card-col-title{
+.erc721Card-col-title {
   font-size: 24px;
-  color: #D2042D;
-  background-color: #FBFF12;
+  color: #d2042d;
+  background-color: #fbff12;
   padding: 4px 8px;
 }
-.erc721Card-3rd-col{
+.erc721Card-3rd-col {
   padding-left: 15px;
   width: 30%;
 }
-.erc721Card-4th-col{
+.erc721Card-4th-col {
   width: 15%;
   text-align: center;
   font-size: 16px;
-  border: 2px solid #D2042D;
+  border: 2px solid #d2042d;
   border-radius: 5px;
   padding: 10px 0;
 }
-.erc721Card-rarity-subsection{
-  
+.erc721Card-rarity-subsection {
 }
-.rarity-pct-1{
+.rarity-pct-1 {
   color: rgb(245, 168, 168);
 }
-.rarity-pct-2{
+.rarity-pct-2 {
   color: rgb(248, 135, 135);
 }
-.rarity-pct-3{
+.rarity-pct-3 {
   color: rgb(250, 63, 209);
 }
-.rarity-pct-4{
+.rarity-pct-4 {
   color: rgb(86, 250, 174);
 }
-.rarity-pct-6{
+.rarity-pct-6 {
   background: linear-gradient(270deg, #ff0000, #0dff00, #f9ff00, #00b9ff);
-    background-size: 800% 800%;
-    -webkit-background-clip: text;
+  background-size: 800% 800%;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
 
-    -webkit-animation: AnimationName 30s ease infinite;
-    -moz-animation: AnimationName 30s ease infinite;
-    animation: AnimationName 30s ease infinite;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
 }
 
 @-webkit-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 @-moz-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 @keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
-.rarity-pct-5{
-  background: #FF0000;
-background: linear-gradient(to left, #FF0000 0%, #ffff00 50%, #FF0000 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-font-weight: bold;
+.rarity-pct-5 {
+  background: #ff0000;
+  background: linear-gradient(to left, #ff0000 0%, #ffff00 50%, #ff0000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
 }
-.erc1155Card{
+.erc1155Card {
   padding: 20px;
   margin: 10px 30px;
   display: flex;
@@ -820,32 +835,32 @@ font-weight: bold;
   text-align: center;
   flex-wrap: wrap;
   align-items: center;
-  font-family: 'Poppins';
-  color: #FBFF12;
-  width:40%;
+  font-family: "Poppins";
+  color: #fbff12;
+  width: 40%;
 }
-.erc1155-buy-btn{
-  background-color: #D2042D;
+.erc1155-buy-btn {
+  background-color: #d2042d;
   padding: 10px 20px;
-  border: 2px solid #FBFF12;
+  border: 2px solid #fbff12;
   border-radius: 5px;
   margin-top: 15px;
-  color: #FBFF12;
-  font-family: 'Poppins';
+  color: #fbff12;
+  font-family: "Poppins";
   font-weight: bold;
 }
-.erc1155-buy-btn:hover{
+.erc1155-buy-btn:hover {
   background-color: #000;
-  border: 2px solid #FBFF12;
-  color: #5EE47E;
+  border: 2px solid #fbff12;
+  color: #5ee47e;
   cursor: pointer;
 }
-.erc1155Card-details{
+.erc1155Card-details {
 }
-.erc1155-price{
-  color: #5EE47E;
+.erc1155-price {
+  color: #5ee47e;
 }
-.create-listing-form{
+.create-listing-form {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -853,23 +868,24 @@ font-weight: bold;
   width: 50%;
   line-height: 2.5;
 }
-.create-listing-form input, select{
+.create-listing-form input,
+select {
   margin-left: 25px;
   padding: 5px;
 }
-.large-header-div{
+.large-header-div {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.large-header-img{
+.large-header-img {
   width: 70%;
   margin: 0 auto 35px auto;
 }
-.detecting-dl-img{
+.detecting-dl-img {
   margin: 0px auto 50px;
-  border: 7px solid #FBFF12;
+  border: 7px solid #fbff12;
   border-radius: 5px;
   animation: 2s infinite security;
   max-width: 400px;
@@ -877,40 +893,40 @@ font-weight: bold;
 }
 @keyframes security {
   0% {
-    border-color: #5EE47E;
+    border-color: #5ee47e;
   }
   25% {
-    border-color: #D2042D;
+    border-color: #d2042d;
   }
   75% {
-    border-color: #FBFF12;
+    border-color: #fbff12;
   }
   100% {
-    border-color: #5EE47E;
+    border-color: #5ee47e;
   }
 }
 @-webkit-keyframes security {
   0% {
-    border-color: #5EE47E;
+    border-color: #5ee47e;
   }
   25% {
-    border-color: #D2042D;
+    border-color: #d2042d;
   }
   75% {
-    border-color: #FBFF12;
+    border-color: #fbff12;
   }
   100% {
-    border-color: #5EE47E;
+    border-color: #5ee47e;
   }
 }
-.white-txt{
-  font-family: 'Poppins';
+.white-txt {
+  font-family: "Poppins";
   text-transform: uppercase;
   font-size: 20px;
   margin-bottom: 20px;
 }
-.detecting-txt{
-  font-family: 'Poppins';
+.detecting-txt {
+  font-family: "Poppins";
   text-transform: uppercase;
   font-size: 26px;
   margin-bottom: 20px;
@@ -918,90 +934,90 @@ font-weight: bold;
 }
 @keyframes text-color {
   0% {
-    color: #5EE47E;
+    color: #5ee47e;
   }
   25% {
-    color: #D2042D;
+    color: #d2042d;
   }
   75% {
-    color: #FBFF12;
+    color: #fbff12;
   }
   100% {
-    color: #5EE47E;
+    color: #5ee47e;
   }
 }
 @-webkit-keyframes text-color {
   0% {
-    color: #5EE47E;
+    color: #5ee47e;
   }
   25% {
-    color: #D2042D;
+    color: #d2042d;
   }
   75% {
-    color: #FBFF12;
+    color: #fbff12;
   }
   100% {
-    color: #5EE47E;
+    color: #5ee47e;
   }
 }
-.submit-btn{
+.submit-btn {
   margin-top: 45px;
   padding: 15px 30px !important;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-size: 22px;
   background-color: #000;
-  border: 2px solid #D2042D;
+  border: 2px solid #d2042d;
   border-radius: 5px;
 }
-.submit-btn:hover{
+.submit-btn:hover {
   cursor: pointer;
   color: #fff;
-  background-color: #D2042D;
+  background-color: #d2042d;
 }
-.button1{
+.button1 {
   padding: 15px 30px !important;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-size: 24px;
   background-color: #000;
-  border: 2px solid #D2042D;
+  border: 2px solid #d2042d;
   border-radius: 5px;
 }
-.button1:hover{
+.button1:hover {
   cursor: pointer;
   color: #fff;
-  background-color: #D2042D;
+  background-color: #d2042d;
 }
-.button2{
+.button2 {
   padding: 15px 30px !important;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-size: 20px;
   background-color: #000;
-  border: 2px solid #D2042D;
+  border: 2px solid #d2042d;
   border-radius: 5px;
   text-transform: uppercase;
 }
-.button2:hover{
+.button2:hover {
   cursor: pointer;
   color: #fff;
-  background-color: #D2042D;
+  background-color: #d2042d;
 }
-.button3{
+.button3 {
   padding: 15px 30px !important;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-size: 20px;
-  background-color: #D2042D;
-  border: 2px solid #D2042D;
+  background-color: #d2042d;
+  border: 2px solid #d2042d;
   border-radius: 5px;
   text-transform: uppercase;
 }
-.button3:hover{
+.button3:hover {
   cursor: pointer;
   color: #000;
   border: 2px solid #0dff00;
   background-color: #0dff00;
   font-weight: bold;
 }
-.button4{
+.button4 {
   padding: 10px 25px !important;
   font-size: 30px;
   font-weight: bolder;
@@ -1009,129 +1025,160 @@ font-weight: bold;
   border: 2px solid #0dff00;
   border-radius: 5px;
   text-transform: uppercase;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   color: #000;
 }
-.button4:hover{
+.button4:hover {
   cursor: pointer;
   color: #0dff00;
   border: 2px solid #0dff00;
   background-color: #1b2129;
 }
-.button-inline{
+.button-inline {
   padding: 5px 10px !important;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-size: 16px;
   background-color: #000;
-  border: 2px solid #D2042D;
+  border: 2px solid #d2042d;
   border-radius: 5px;
   text-transform: uppercase;
 }
-.button-inline:hover{
+.button-inline:hover {
   cursor: pointer;
   color: #fff;
-  background-color: #D2042D;
+  background-color: #d2042d;
 }
-.bold{
+.bold {
   font-weight: bold;
 }
-.feature-overview-div{
+.feature-overview-div {
   margin: 0 auto;
   padding: 20px 20px;
   background-color: #000;
-  border: 2px solid #FBFF12;
+  border: 2px solid #fbff12;
   border-radius: 5px;
   text-align: center;
 }
-.feature-overview-div1{
+.feature-overview-div1 {
   margin: 0 20%;
   padding: 20px 20px;
   background-color: #1b2129;
-  border: 4px solid #0dff00;
+  border: 3px solid #0dff00;
   border-radius: 5px;
 }
-.feature-overview-div2{
+.feature-overview-div2 {
   margin: 0 20%;
   padding: 20px 20px;
   background-color: #1b2129;
-  border: 4px solid #FBFF12;
+  border: 3px solid #fbff12;
   border-radius: 5px;
 }
-.feature-overview-div3{
+.feature-overview-div3 {
   margin: 0 20%;
   padding: 20px 20px;
   background-color: #1b2129;
-  border: 4px solid #D2042D;
+  border: 3px solid #d2042d;
   border-radius: 5px;
   text-align: center;
 }
-.feature-overview-block{
+.feature-overview-block {
   padding: 20px 20px;
-  background-color: #D2042D;
+  background-color: #d2042d;
   border-radius: 5px;
-  border: 2px solid #D2042D;
+  border: 2px solid #d2042d;
 }
-.half-page-menu-wrapper{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  padding: 50px 10px 50px 15%;
+.feature-overview-block {
+  padding: 10px 20px;
+  color: #fff;
+  cursor: pointer;
+  background-color: #d2042d;
+  border: 2px solid #fbff12;
+  color: #fbff12;
+  font-family: "Poppins";
+  font-weight: bold;
+  transition: all 0.5s;
 }
-.half-page-card-menu-div{
+.feature-overview-block:hover {
+  color: #5ee47e;
+  background-color: transparent;
+}
+.flex-row-no-margin {
+  gap: 20px;
+}
+.flex-row-no-margin .feature-overview-block:last-child {
+  border: none;
+  color: #fff;
+}
+.half-page-menu-wrapper {
+  /* display: flex; */
+  /* align-items: center; */
+  /* flex-direction: row; */
+  /* justify-content: flex-end; */
+  /* padding: 50px 10px 50px 15%; */
+  padding: 50px 0;
+}
+.half-page-card-menu-div {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center !important;
   vertical-align: middle;
-  padding: 0 20px;
-  background-color: #000;
-  width: 40%;
+  /* padding: 0 20px; */
+  /* background-color: #000; */
+  width: 100%;
+  gap: 20px;
 }
-.prizes_container{
+.half-page-card-menu-div .feature-overview-div1,
+.half-page-card-menu-div .feature-overview-div3 {
+  margin: 0 auto !important;
+  border-radius: 10px;
+  min-height: 275px;
+  background-color: transparent;
+}
+.prizes_container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
 }
-.prizes-card{
+.prizes-card {
   margin: 20px;
   width: 80%;
   padding: 40px;
-  border: 4px solid #FBFF12;
+  border: 4px solid #fbff12;
   border-radius: 5px;
   text-align: center;
   text-transform: uppercase;
   align-items: center;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   color: #ffffff;
   font-size: 20px;
   background-color: #000;
 }
-.prizes-card:hover{
-  border: 4px solid #FBFF12;
+.prizes-card:hover {
+  border: 4px solid #fbff12;
 }
-.prizes-chip-count{
+.prizes-chip-count {
   text-align: center;
   margin-bottom: 25px;
-  color:#0dff00;
-  font-family: 'Poppins';
+  color: #0dff00;
+  font-family: "Poppins";
   font-size: 26px;
   text-transform: uppercase;
 }
-.prize-name{
+.prize-name {
   font-size: 30px;
-  color: #FFF;
+  color: #fff;
   margin-bottom: 15px;
   background-color: #1b2129;
   padding: 12px 0;
-  border: 2px solid #FBFF12;
+  border: 2px solid #fbff12;
   border-radius: 3px;
 }
-.prize-cost{
-  color:#0dff00;
+.prize-cost {
+  color: #0dff00;
   font-size: 26px;
 }
-.holder-claim-details{
+.holder-claim-details {
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
@@ -1139,7 +1186,7 @@ font-weight: bold;
   text-transform: uppercase;
   font-weight: bold;
 }
-.additional-info-div{
+.additional-info-div {
   width: 50%;
   color: #fff;
   background-color: #1b2129;
@@ -1149,11 +1196,11 @@ font-weight: bold;
   border-radius: 5px;
   padding: 10px;
 }
-.title{
+.title {
   font-weight: bold;
   font-size: 20px;
 }
-.earn-free-tokens-desc-div{
+.earn-free-tokens-desc-div {
   padding: 20px;
   width: 45%;
   margin: 20px auto 40px auto;
@@ -1164,7 +1211,7 @@ font-weight: bold;
   justify-content: center;
   align-items: center;
 }
-.earn-free-tokens-desc-div-full{
+.earn-free-tokens-desc-div-full {
   padding: 60px;
   width: 85%;
   margin: 20px auto 40px auto;
@@ -1175,46 +1222,46 @@ font-weight: bold;
   justify-content: center;
   align-items: center;
 }
-.earn-free-tokens-desc-header{
+.earn-free-tokens-desc-header {
   text-align: center;
   font-size: 24px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
-.earn-free-tokens-desc{
+.earn-free-tokens-desc {
   text-align: center;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   margin-bottom: 20px;
 }
-.social-share-card{
+.social-share-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 15px 30px;
   margin: 8px;
-  border: 2px solid #D2042D;
+  border: 2px solid #d2042d;
   font-size: 20px;
 }
-.social-share-btn{
+.social-share-btn {
   margin-right: 15px;
   margin-left: 15px;
 }
-.social-share-btn-div{
+.social-share-btn-div {
   margin-top: 20px;
 }
-.social-share-filter-btn{
+.social-share-filter-btn {
   margin: 0 10px;
   cursor: pointer;
   border: 3px solid #1b2129;
 }
-.social-share-filter-btn:hover{
-  border: 3px solid #D2042D;
+.social-share-filter-btn:hover {
+  border: 3px solid #d2042d;
   border-radius: 100%;
 }
-.txt-align-center{
+.txt-align-center {
   text-align: center;
 }
-.leaderboard-card-div{
+.leaderboard-card-div {
   width: 45%;
   margin: 5px auto;
   padding: 10px 10px 30px 10px;
@@ -1226,13 +1273,13 @@ font-weight: bold;
   font-size: 18px;
   text-align: center;
 }
-.leaderboard-row{
+.leaderboard-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 10px 30px;
 }
-.affiliate-card-div{
+.affiliate-card-div {
   width: 85%;
   margin: 5px auto;
   padding: 30px 50px 10px 50px;
@@ -1243,13 +1290,13 @@ font-weight: bold;
   border-radius: 5px;
   font-size: 20px;
 }
-.affiliate-card-row{
+.affiliate-card-row {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   margin-bottom: 20px;
 }
-.daily-reward-card-div{
+.daily-reward-card-div {
   width: 85%;
   margin: 5px auto;
   padding: 10px 50px;
@@ -1257,7 +1304,7 @@ font-weight: bold;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  border: 4px solid #D2042D;
+  border: 4px solid #d2042d;
   border-radius: 5px;
   font-size: 20px;
   color: #888888;
@@ -1283,7 +1330,6 @@ font-weight: bold;
 }
 
 @keyframes teeter-animation {
-  
   0% {
     transform: rotate(5deg); /* increasing the size */
   }
@@ -1295,54 +1341,59 @@ font-weight: bold;
   }
 }
 
-
-.bg-gray{
+.bg-gray {
   background-color: #1b2129;
 }
 
 .bg-animated {
   background-size: 300% 300%;
   background-image: linear-gradient(
-        -45deg, 
-        rgba(59,173,227,1) 0%, 
-        rgba(87,111,230,1) 25%, 
-        rgba(152,68,183,1) 51%, 
-        rgba(255,53,127,1) 100%
-  );  
+    -45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
   animation: AnimateBG 5s ease infinite;
 }
 
-@keyframes AnimateBG { 
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+@keyframes AnimateBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .bg-animated2 {
   background-size: 300% 300%;
   background-image: linear-gradient(
-        -45deg, 
-        rgb(29, 196, 93) 0%, 
-        rgb(40, 168, 14) 25%, 
-        rgb(15, 155, 15) 51%, 
-        rgb(34, 233, 77) 100%
-  );  
+    -45deg,
+    rgb(29, 196, 93) 0%,
+    rgb(40, 168, 14) 25%,
+    rgb(15, 155, 15) 51%,
+    rgb(34, 233, 77) 100%
+  );
   animation: AnimateBG 5s ease infinite;
 }
 
 .bg-animated3 {
   background-size: 300% 300%;
   background-image: linear-gradient(
-        45deg, 
-        rgb(211, 69, 13) 0%, 
-        rgb(235, 134, 19) 20%, 
-        rgb(241, 8, 8) 71%, 
-        rgb(248, 232, 12) 100%
-  );  
+    45deg,
+    rgb(211, 69, 13) 0%,
+    rgb(235, 134, 19) 20%,
+    rgb(241, 8, 8) 71%,
+    rgb(248, 232, 12) 100%
+  );
   animation: AnimateBG 5s ease infinite;
 }
 
-.dl-loader-img{
+.dl-loader-img {
   width: 75px;
   height: 75px;
 }
@@ -1365,11 +1416,11 @@ font-weight: bold;
   width: 100%;
   height: 50%;
   position: absolute;
-  position:fixed;
+  position: fixed;
   background: #000000;
   z-index: 9999999;
 }
-.z1001{
+.z1001 {
   z-index: 1001;
 }
 .pageImgContainer {
@@ -1377,18 +1428,18 @@ font-weight: bold;
   left: 0;
   margin: 0 5%;
   position: fixed;
-  background: #FBFF12f5;
+  background: #fbff12f5;
   width: 90%;
   height: 60vh;
   display: grid;
   place-content: center;
   padding: 100px 25px;
-  color:#D2042D;
+  color: #d2042d;
   text-shadow: 2px 2px #1b2129;
   font-size: 50px;
   font-weight: bold;
   text-align: center;
-  border: 4px solid #D2042D;
+  border: 4px solid #d2042d;
   border-radius: 5px;
   z-index: 1000;
 }
@@ -1402,28 +1453,28 @@ font-weight: bold;
   display: grid;
   place-content: center;
   padding: 100px 25px;
-  color:#fff;
+  color: #fff;
   text-shadow: 2px 2px #1b2129;
   font-size: 50px;
   font-weight: bold;
   text-align: center;
-  border: 4px solid #D2042D;
+  border: 4px solid #d2042d;
   border-radius: 5px;
   z-index: 1000;
 }
-.social-share-filter-btns-div{
+.social-share-filter-btns-div {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-bottom: 25px;
 }
-.mint-DL-div{
+.mint-DL-div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 0 auto 50px auto;
 }
-.min-menu-div{
+.min-menu-div {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -1432,24 +1483,24 @@ font-weight: bold;
   margin: 15px auto 10px auto;
   padding: 10px;
 }
-.min-menu-btn{
-  background-color: #D2042D;
-  border: 2px solid #D2042D;
+.min-menu-btn {
+  background-color: #d2042d;
+  border: 2px solid #d2042d;
   border-radius: 5px;
   padding: 10px 30px;
   margin: 0 20px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-weight: 400;
   font-size: 20px;
   cursor: pointer;
 }
-.min-menu-btn:hover{
+.min-menu-btn:hover {
   background-color: #000000;
-  color: #D2042D;
+  color: #d2042d;
 }
-.raffles-header-shop-card{
+.raffles-header-shop-card {
   background-color: #000;
-  border: 2px solid #D2042D;
+  border: 2px solid #d2042d;
   border-radius: 5px;
   padding: 20px 30px;
   display: flex;
@@ -1459,9 +1510,9 @@ font-weight: bold;
   width: 20%;
   max-width: 20%;
 }
-.raffles-header-shop-div{
+.raffles-header-shop-div {
   background-color: #1b2129;
-  border: 4px solid #D2042D;
+  border: 4px solid #d2042d;
   border-radius: 5px;
   padding: 10px 30px;
   display: flex;
@@ -1470,33 +1521,33 @@ font-weight: bold;
   flex-wrap: wrap;
   width: 90%;
 }
-.ending-soon{
+.ending-soon {
   padding: 10px 30px;
   margin: 15px auto -5px auto;
   background-color: #1b2129;
-  border: 4px solid #D2042D;
+  border: 4px solid #d2042d;
   border-radius: 5px;
   width: 30%;
 }
-.close-btn-round-div{
+.close-btn-round-div {
   margin: 25px 0 -15px 0;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   width: 90%;
 }
-.close-btn-round{
+.close-btn-round {
   padding: 7px 16px;
   background-color: #1b2129;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   border-radius: 100%;
-  color: #D2042D;
-  border: 2px solid #D2042D;
+  color: #d2042d;
+  border: 2px solid #d2042d;
   font-weight: bold;
   cursor: pointer;
 }
-.close-btn-round:hover{
-  background-color: #D2042D;
+.close-btn-round:hover {
+  background-color: #d2042d;
   color: #1b2129;
   font-weight: bold;
 }
@@ -1565,17 +1616,13 @@ font-weight: bold;
   }
 }
 
-
 /********************************************************************************************/
-                /************* New Styling for Marketplace ******************/
+/************* New Styling for Marketplace ******************/
 /********************************************************************************************/
-
-
-
 
 /*********************** Global *************************/
 
-.container{
+.container {
   max-width: 1360px;
   padding: 0px 16px;
   margin: 0px auto;
@@ -1600,7 +1647,7 @@ font-weight: bold;
   background-attachment: fixed;
 }
 
-.content{
+.content {
   position: relative;
 }
 
@@ -1611,11 +1658,11 @@ font-weight: bold;
 .mobile-menu .header-nav-container-mobile ul li img {
   max-width: 50px;
   object-fit: contain;
-  border: 2px solid #FBFF12;
+  border: 2px solid #fbff12;
   border-radius: 100%;
 }
 
-.loading{
+.loading {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -1628,20 +1675,18 @@ font-weight: bold;
 }
 
 .nft-token-row-card-image img {
-  width: 150px!important;
-  height: 150px!important;
+  width: 150px !important;
+  height: 150px !important;
 }
-
 
 .main .title {
   text-align: center;
   font-size: 44px;
   margin: 0;
   padding-bottom: 15px;
-  color: #FBFF12;
+  color: #fbff12;
   text-shadow: 2px 2px #d2042d;
 }
-
 
 /*********************** Header *************************/
 
@@ -1697,7 +1742,7 @@ font-weight: bold;
   width: 30px;
 }
 
-.menu-logo-img{
+.menu-logo-img {
   width: 100px;
 }
 
@@ -1716,35 +1761,34 @@ font-weight: bold;
 
 .wallet button {
   letter-spacing: 0;
-  font-family: 'Poppins', sans-serif!important;
+  font-family: "Poppins", sans-serif !important;
   font-weight: 400;
   background: #24262b;
   border-color: #24262b;
   font-size: 14px;
-  min-width: 180px!important;
-  height: 44px!important;
-
+  min-width: 180px !important;
+  height: 44px !important;
 }
 
-.wallet button:hover, .wallet button:focus {
+.wallet button:hover,
+.wallet button:focus {
   background: #24262b;
   border-color: #24262b;
 }
 
-li#metamask, li#coinbasewallet, li#walletConnect {
-  font-family: 'Poppins', sans-serif!important;
+li#metamask,
+li#coinbasewallet,
+li#walletConnect {
+  font-family: "Poppins", sans-serif !important;
   font-size: 14px;
 }
 
 /*********************** Footer *************************/
 
-
 .footer {
   /* background: #1a1c20; */
   position: relative;
 }
-
-
 
 .footer-grid {
   padding-top: 25px;
@@ -1943,14 +1987,14 @@ ul.footer-support li img {
 /*********************** Coockie popup *************************/
 
 .CookieConsent {
-  left: 2rem!important;
-  bottom: 1.25rem!important;
+  left: 2rem !important;
+  bottom: 1.25rem !important;
   max-width: 650px;
   padding: 0.5rem 1.5rem;
   border-radius: 6px;
-  background-color: #1e2024!important;
+  background-color: #1e2024 !important;
   box-shadow: 0 0 10px #00000030;
-  align-items: center!important;
+  align-items: center !important;
 }
 
 .CookieConsent h4 {
@@ -1968,27 +2012,23 @@ ul.footer-support li img {
   margin: 0;
 }
 
-
 .CookieConsent button {
-  color: #000!important;
-  background-color: #ffd712!important;
-  background-image: conic-gradient(from 1turn,#f9ff00,#ffd712)!important;
+  color: #000 !important;
+  background-color: #ffd712 !important;
+  background-image: conic-gradient(from 1turn, #f9ff00, #ffd712) !important;
   width: 120px;
   height: 48px;
-  border-radius: 0.125rem!important;
+  border-radius: 0.125rem !important;
   font-weight: 600;
-  font-size: 14px!important;
-  font-family: 'Poppins', sans-serif!important;
+  font-size: 14px !important;
+  font-family: "Poppins", sans-serif !important;
 }
 
-.CookieConsent button:hover{
-  background-image: conic-gradient(from 1turn,#ffd712,#f9ff00)!important;
+.CookieConsent button:hover {
+  background-image: conic-gradient(from 1turn, #ffd712, #f9ff00) !important;
 }
-
-
 
 /*********************** Login Page *************************/
-
 
 .login-page-body {
   display: flex;
@@ -2006,29 +2046,27 @@ ul.footer-support li img {
   box-shadow: 0px 20px 20px #00000091;
 }
 
-.login-page-desc{
+.login-page-desc {
   text-align: center;
 }
-
 
 .login-page-body .login-page-img {
   max-width: 300px;
   margin: 0px auto;
 }
 
-
 .login-page-body .submit-btn {
   margin-top: 45px;
   padding: 10px 20px !important;
   font-size: 18px;
   border-radius: 4px;
-  color: #000!important;
-  background-color: #ffd712!important;
-  background-image: conic-gradient(from 1turn,#f9ff00,#ffd712)!important;
+  color: #000 !important;
+  background-color: #ffd712 !important;
+  background-image: conic-gradient(from 1turn, #f9ff00, #ffd712) !important;
   height: 60px;
   border: none;
   font-weight: 600;
-  font-family: 'Poppins', sans-serif!important;
+  font-family: "Poppins", sans-serif !important;
   width: 100%;
   display: flex;
   align-items: center;
@@ -2036,14 +2074,12 @@ ul.footer-support li img {
 }
 
 .login-page-body .submit-btn:hover {
-  background-image: conic-gradient(from 1turn,#ffd712,#f9ff00)!important;
+  background-image: conic-gradient(from 1turn, #ffd712, #f9ff00) !important;
 }
-
-
 
 /*********************** NFT Page *************************/
 
-.nft-page{
+.nft-page {
   position: relative;
 }
 
@@ -2052,7 +2088,7 @@ ul.footer-support li img {
   font-size: 44px;
   margin: 0;
   padding-bottom: 15px;
-  color: #FBFF12;
+  color: #fbff12;
   text-shadow: 2px 2px #d2042d;
 }
 
@@ -2088,51 +2124,149 @@ ul.footer-support li img {
   font-size: 20px;
 }
 
-.grid .card p{
+.grid .card p {
   font-size: 16px;
   text-align: left;
 }
 
-.connect-wallet-inline button, .connect-wallet-inline button:hover, .connect-wallet-inline button:focus {
+.connect-wallet-inline button,
+.connect-wallet-inline button:hover,
+.connect-wallet-inline button:focus {
   background: transparent;
   border-color: transparent;
 }
 
-
 .connect-wallet {
   text-align: center;
 }
+/* ****************** new css  ********************** */
+.explore-page .flex-row {
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.explore-page .pageTitle {
+  margin: 0;
+}
+.raffles-page .half-page-card-menu-div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.contact-us .contact-div {
+  text-align: center;
+  background-color: transparent;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 0;
+  border: none;
+}
 
-
-
-
+.privacy-page .contact-div {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+.privacy-page .contact-div h4 {
+  margin: 0;
+}
+.raffles-page .raffles-page-card {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  border: 5px solid #fbff12;
+}
+.raffles-page .raffles-page-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: none;
+}
+.explore-page .subheader-btn,
+.my-wallet-page .min-menu-btn {
+  border-radius: 5px;
+  padding: 10px 30px;
+  margin: 0 20px;
+  background-color: #d2042d;
+  border: 2px solid #fbff12;
+  color: #fbff12;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.5s;
+}
+.explore-page .subheader-btn:hover,
+.my-wallet-page .min-menu-btn:hover {
+  background-color: transparent;
+  color: #5ee47e;
+}
+.my-wallet-page .wallet-casino-profile-div {
+  border: none;
+}
+.my-wallet-page .wallet-casino-profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  border: 5px solid #fbff12;
+  object-fit: cover;
+}
+.explore-page .erc-card-box {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.explore-page .erc-card-box .erc1155Card {
+  width: 100%;
+}
+.nft-page .feature-overview-div {
+  border: none;
+}
+.nft-page .nft-home-sell-title,
+.nft-page .nft-home-sell-title h1 {
+  margin: 0px;
+}
+.claim-free-page .feature-overview-div,
+.redeem-prizes-page .feature-overview-div {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+.claim-free-page .pageTitle,
+.redeem-prizes-page .pageTitle {
+  margin: 0;
+}
+.redeem-prizes-page .page-nav-header-btns-subrow {
+  padding-top: 20px;
+}
+.redeem-prizes-page .page-nav-header-btns-subrow,
+.redeem-prizes-page .page-nav-header-btns-row {
+  gap: 20px;
+}
 /********************************************************************************************/
-                /************* Media Query ******************/
+/************* Media Query ******************/
 /********************************************************************************************/
-
 
 @media screen and (max-width: 1240px) and (min-width: 720px) {
-  .header-nav-container{
+  .header-nav-container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 10px;
     width: 100%;
     background-color: #2b333d;
-    border-bottom: 2px solid #D2042D;
+    border-bottom: 2px solid #d2042d;
   }
-  .header-nav-menu{
+  .header-nav-menu {
     display: none;
   }
 
-  .wallet-icon-img-mobile{
+  .wallet-icon-img-mobile {
     width: 40%;
     height: 40%;
   }
-  .wallet-icon-img-mobile{
+  .wallet-icon-img-mobile {
     max-width: 135px;
   }
-  .wallet-casino-profile-div{
+  .wallet-casino-profile-div {
     width: 100%;
     padding: 20px 10px;
     display: flex;
@@ -2140,40 +2274,40 @@ ul.footer-support li img {
     text-align: center;
     flex-wrap: wrap;
   }
-  .wallet-casino-profile-img{
+  .wallet-casino-profile-img {
     width: 150px;
     border-radius: 100%;
-    border: 5px solid #FBFF12;
+    border: 5px solid #fbff12;
   }
-  .wallet-casino-profile-details{
+  .wallet-casino-profile-details {
     width: 100%;
     margin: 0;
     flex-direction: column;
   }
-  .wallet-casino-profile-img-div{
+  .wallet-casino-profile-img-div {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
   }
-  .balance-column{
+  .balance-column {
     margin-top: 15px;
     color: #fff;
   }
-  .token-ticket-row{
+  .token-ticket-row {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%;
   }
-  .crypto-balance-row{
+  .crypto-balance-row {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
-  .crypto-balance-div{
+  .crypto-balance-div {
     width: 100%;
     margin: 30px 0 0px 0;
     display: flex;
@@ -2192,8 +2326,8 @@ ul.footer-support li img {
 
 @media screen and (max-width: 991px) {
   .main {
-    padding: 50px 0px!important;
-}
+    padding: 50px 0px !important;
+  }
 
   .footer-grid {
     padding: 40px 0px 100px;
@@ -2208,15 +2342,15 @@ ul.footer-support li img {
   }
   .menu-logo-img {
     width: 75px;
-}
-.wallet .green {
-  font-size: 14px;
-  padding-top: 5px;
-}
-.icon-links {
-  left: 80px;
-}
-  .mobile-menu{
+  }
+  .wallet .green {
+    font-size: 14px;
+    padding-top: 5px;
+  }
+  .icon-links {
+    left: 80px;
+  }
+  .mobile-menu {
     display: block;
     position: fixed;
     width: 100%;
@@ -2231,49 +2365,69 @@ ul.footer-support li img {
   }
   .grid .card {
     max-width: 100%;
-}
+  }
 
-.grid .card .card-img {
-  margin: 20px auto 0px;
-  display: block;
-}
+  .grid .card .card-img {
+    margin: 20px auto 0px;
+    display: block;
+  }
 
-.nft-home-sell-title h1 {
-  font-size: 25px;
-}
-.nft-page h2 {
-  font-size: 30px;
-}
-.main .title {
-  font-size: 30px;
-}
-.connect-wallet-div {
-  margin-bottom: 30px;
-}
-.nft-home-sell-title {
-  margin-bottom: 30px;
-}
-.CookieConsent {
-  left: 0rem!important;
-  bottom: 0rem!important;
+  .nft-home-sell-title h1 {
+    font-size: 25px;
+  }
+  .nft-page h2 {
+    font-size: 30px;
+  }
+  .main .title {
+    font-size: 30px;
+  }
+  .connect-wallet-div {
+    margin-bottom: 30px;
+  }
+  .nft-home-sell-title {
+    margin-bottom: 30px;
+  }
+  .CookieConsent {
+    left: 0rem !important;
+    bottom: 0rem !important;
+  }
+  /* ******************** new responsive ******************** */
 
-}
+  .raffles-page .half-page-card-menu-div,
+  .explore-page .erc-card-box {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .nft-page .nft-token-row-card {
+    flex-wrap: wrap;
+  }
+
+  .nft-page .nft-token-row-card-image,
+  .nft-page .nft-token-row-desc,
+  .nft-page .nft-token-row-details,
+  .nft-page .nft-token-stripe-badge-div,
+  .nft-page .nft-token-row-sale {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media screen and (max-width: 720px) {
-  .header-nav-container{
+  .header-nav-container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 10px;
     width: 100%;
     background-color: #2b333d;
-    border-bottom: 2px solid #D2042D;
+    border-bottom: 2px solid #d2042d;
   }
-  .header-nav-menu{
+  .header-nav-menu {
     display: none;
   }
-  .header-nav-container ul{
+  .header-nav-container ul {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -2282,25 +2436,24 @@ ul.footer-support li img {
     text-transform: uppercase;
     font-size: 18px;
   }
-  .header-nav-menu a{
+  .header-nav-menu a {
     display: none;
-    font-family: 'Poppins';
-    color: #D2042D;
+    font-family: "Poppins";
+    color: #d2042d;
     border: 2px solid #000;
     padding: 15px;
     font-weight: bold;
   }
-  .header-nav-menu a:hover{
-    background-color: #FBFF12;
+  .header-nav-menu a:hover {
+    background-color: #fbff12;
   }
-  .wallet-icon-img{
+  .wallet-icon-img {
     display: none;
     height: 50px;
     width: 50px;
   }
 
-  .footer-nav{
-
+  .footer-nav {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -2309,11 +2462,10 @@ ul.footer-support li img {
     margin: 100px 0 0 0;
     padding: 60px 20px 20px 10px;
   }
-  .footer-inner-div{
+  .footer-inner-div {
     padding: 20px 50px;
   }
-  .footer-div{
-
+  .footer-div {
     text-align: center;
     padding: 30px 0 200px 0;
   }
@@ -2325,41 +2477,41 @@ ul.footer-support li img {
     border-radius: 5px;
     background-color: #1b2129;
   } */
-  .full-page-container{
+  .full-page-container {
     min-width: 100%;
     background-color: #1b2129;
     padding: 10px 5px;
-    border: 3px solid #FBFF12;
+    border: 3px solid #fbff12;
     border-radius: 10px;
-    font-family: 'Poppins';
+    font-family: "Poppins";
   }
-  .prizes-card{
+  .prizes-card {
     margin: 20px 0;
     width: 100%;
     padding: 15px 10px;
     font-size: 12px;
   }
-  .prize-cost{
-    color:#0dff00;
+  .prize-cost {
+    color: #0dff00;
     font-size: 26px;
   }
-  .prize-name{
+  .prize-name {
     width: 90%;
     font-size: 20px;
-    color: #FFF;
+    color: #fff;
     margin: 0 auto;
     background-color: #1b2129;
     padding: 12px 0;
-    border: 2px solid #FBFF12;
+    border: 2px solid #fbff12;
     border-radius: 3px;
   }
-  .holder-claim-details{
+  .holder-claim-details {
     font-size: 16px;
     line-height: 1.4;
     text-transform: uppercase;
     font-weight: 200;
   }
-  .additional-info-div{
+  .additional-info-div {
     width: 90%;
     color: #fff;
     background-color: #1b2129;
@@ -2369,45 +2521,45 @@ ul.footer-support li img {
     border-radius: 5px;
     padding: 10px;
   }
-  .nft-token-stripe-badge-div{
+  .nft-token-stripe-badge-div {
     width: 100%;
     margin: 0px auto;
     display: flex;
     justify-content: center;
     padding: 0;
   }
-  .nft-home-sell-div{
+  .nft-home-sell-div {
     width: 98%;
   }
-  .nft-home-sell-more{
+  .nft-home-sell-more {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .nft-home-sell-more-btn{
+  .nft-home-sell-more-btn {
     background-color: #000;
     padding: 10px 20px;
-    border: 2px solid #FBFF12;
+    border: 2px solid #fbff12;
     border-radius: 5px;
     margin-top: 15px;
-    color: #5EE47E;
-    font-family: 'Poppins';
+    color: #5ee47e;
+    font-family: "Poppins";
     font-weight: bold;
   }
-  .flex-row{
+  .flex-row {
     flex-direction: column;
     justify-content: space-evenly;
     margin-bottom: 80px;
   }
-  .flex-row-no-margin{
+  .flex-row-no-margin {
     flex-direction: column;
     justify-content: space-evenly;
   }
-  .nft-home-sell-card{
+  .nft-home-sell-card {
     margin: 10px 0 35px 0;
-    width:100%;
+    width: 100%;
   }
-  .nft-token-row-card{
+  .nft-token-row-card {
     width: 100%;
     padding: 20px 10px;
     margin: 20px 0;
@@ -2415,40 +2567,40 @@ ul.footer-support li img {
     justify-content: center;
     text-align: center;
   }
-  .nft-token-row-card-image{
+  .nft-token-row-card-image {
     width: 100%;
   }
-  .nft-token-row-desc{
+  .nft-token-row-desc {
     width: 95%;
     margin-bottom: 20px;
   }
-  .nft-token-row-details{
+  .nft-token-row-details {
     width: 95%;
   }
-  .erc1155-price{
+  .erc1155-price {
     line-height: normal;
     font-size: 20px;
     margin-bottom: 10px;
   }
-  .nft-token-row-sale{
+  .nft-token-row-sale {
     text-align: center;
     line-height: 2;
     font-size: 26px;
     margin-top: 10px;
   }
-  .sale-badge-img{
+  .sale-badge-img {
     width: 160px;
   }
-  .erc1155Card{
+  .erc1155Card {
     width: 100%;
     text-align: center;
     margin: 30px 0;
   }
-  .collection-header-img{
+  .collection-header-img {
     width: 90%;
   }
 
-  .wallet-casino-profile-div{
+  .wallet-casino-profile-div {
     width: 100%;
     padding: 0px;
     display: flex;
@@ -2466,35 +2618,34 @@ ul.footer-support li img {
   .ticket-small {
     width: 50px;
   }
-  .wallet-casino-profile-img{
+  .wallet-casino-profile-img {
     width: 150px;
     border-radius: 100%;
-    border: 5px solid #FBFF12;
+    border: 5px solid #fbff12;
   }
-  .wallet-casino-profile-details{
+  .wallet-casino-profile-details {
     width: 100%;
     margin: 0;
     flex-direction: column;
   }
-  .wallet-casino-profile-img-div{
+  .wallet-casino-profile-img-div {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
   }
-  .balance-column{
+  .balance-column {
     margin-top: 15px;
     color: #fff;
   }
-  .token-ticket-row{
+  .token-ticket-row {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%;
-   
   }
-  .crypto-balance-row{
+  .crypto-balance-row {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2502,35 +2653,35 @@ ul.footer-support li img {
     font-size: 18px;
     line-height: 2;
   }
-  .crypto-balance-div{
+  .crypto-balance-div {
     width: 100%;
     margin: 30px 0 0px 0;
     display: flex;
     flex-direction: row;
-    border:4px solid #D2042D;
+    border: 4px solid #d2042d;
     font-size: 16px;
   }
   span.wallet-user-name {
     font-size: 16px;
   }
-  .affiliate-card-div{
+  .affiliate-card-div {
     width: 98%;
     margin: 5px auto;
     padding: 20px;
     flex-direction: column;
     font-size: 18px;
   }
-  .affiliate-card-row{
+  .affiliate-card-row {
     flex-direction: column;
     justify-content: space-evenly;
     margin-bottom: 20px;
   }
-  .inlineTitle{
+  .inlineTitle {
     text-align: center;
     margin-bottom: 10px;
     font-size: 18px;
   }
-  .daily-reward-card-div{
+  .daily-reward-card-div {
     width: 98%;
     padding: 10px;
     flex-direction: column;
@@ -2538,91 +2689,100 @@ ul.footer-support li img {
     color: #888888;
     text-align: center;
   }
-  .earn-free-tokens-desc-div, .earn-free-tokens-desc-div-full{
+  .earn-free-tokens-desc-div,
+  .earn-free-tokens-desc-div-full {
     width: 98%;
   }
-  .earn-free-tokens-desc-div-full{
+  .earn-free-tokens-desc-div-full {
     padding: 20px;
   }
-  .social-share-card{
+  .social-share-card {
     padding: 15px 5px;
     font-size: 16px;
     text-align: center;
     margin: 4px;
   }
-  .social-share-btn-div{
+  .social-share-btn-div {
     margin-top: 25px;
   }
-  .social-share-filter-btn{
+  .social-share-filter-btn {
     margin: 0 10px;
     cursor: pointer;
   }
-  .submit-btn{
+  .submit-btn {
     margin-top: 20px;
   }
-  .erc721Card{
+  .erc721Card {
     padding: 30px 3px;
     margin: 10px auto;
     flex-direction: column;
-    width:100%;
+    width: 100%;
     text-align: center;
   }
-  .erc721Card-name{
+  .erc721Card-name {
     flex-direction: column;
     text-align: center;
   }
-  .erc721Card-image{
+  .erc721Card-image {
     margin: 0 auto;
   }
-  .erc721Card-details{
+  .erc721Card-details {
     padding-left: 0px;
     width: 100%;
     margin-top: 30px;
     line-height: 1.8;
   }
-  .erc721Card-col-title{
+  .erc721Card-col-title {
     margin-top: 30px;
   }
-  .erc721Card-3rd-col{
+  .erc721Card-3rd-col {
     padding-left: 0px;
     width: 100%;
     margin-top: 30px;
     line-height: 1.8;
   }
-  .erc721Card-4th-col{
+  .erc721Card-4th-col {
     width: 100%;
     margin-top: 30px;
     border: none;
   }
-  .large-header-img{
+  .large-header-img {
     width: 100%;
     margin: 10px auto 20px auto;
   }
-  .transaction-div{
+  .transaction-div {
     flex-direction: column;
     width: 100%;
     padding: 5px;
     margin: 5px auto 30px auto;
   }
-  .transaction-div-title{
+  .transaction-div-title {
     font-size: 20px;
   }
-  .transaction-card{
+  .transaction-card {
     flex-direction: column;
     width: 100%;
     margin: 5px auto;
   }
-  .bottom-row-btns-div{
+  .bottom-row-btns-div {
     width: 100%;
     flex-direction: column;
     text-align: center;
   }
-  .subheader-btn{
+  .subheader-btn {
     margin: 15px auto;
     width: 90%;
-    border: 2px solid #D2042D;
+    border: 2px solid #d2042d;
   }
 
+  /* ******************** new responsive ******************** */
+  .raffles-page .half-page-card-menu-div,
+  .explore-page .erc-card-box {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .explore-page .subheader-btn {
+    margin-bottom: 20px;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -2632,23 +2792,23 @@ ul.footer-support li img {
   }
   .page-nav-header-btns-row {
     gap: 10px;
-}
+  }
 
-.page-nav-header-subbtn {
+  .page-nav-header-subbtn {
     width: 48%;
     margin: 0;
-}
+  }
 
-.page-nav-header-btns-subrow {
+  .page-nav-header-btns-subrow {
     gap: 10px;
-}
+  }
 
   .page-nav-header-btn {
     margin: 0;
     width: 48%;
     background-color: transparent;
     font-size: 16px;
-}
+  }
   .prizes-chip-count {
     margin-bottom: 10px;
     font-weight: 600;

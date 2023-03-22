@@ -178,7 +178,7 @@ function RedeemPrizes() {
 
   return (
     <Layout>
-      <main className='main'>
+      <main className='main redeem-prizes-page'>
         <div className='container'>
           <div className='bordered-section'>
             {redeemLoading ? (
@@ -199,7 +199,8 @@ function RedeemPrizes() {
                     onClick={() => {
                       setRedeemSuccess(false);
                       reward();
-                    }}>
+                    }}
+                  >
                     CLOSE
                   </button>
                 </div>
@@ -213,7 +214,8 @@ function RedeemPrizes() {
             </div>
             <div
               className='feature-overview-div'
-              style={{ marginBottom: "30px" }}>
+              style={{ marginBottom: "30px" }}
+            >
               Ready to cash in on all of your big wins? Browse through our huge
               list of amazing prizes and find something you just can't live
               without. Make sure you have enough available tickets for the prize
@@ -235,54 +237,64 @@ function RedeemPrizes() {
             <div className='page-nav-header-btns-row'>
               <button
                 className='page-nav-header-btn'
-                onClick={() => filterPrizes("Badges")}>
+                onClick={() => filterPrizes("Badges")}
+              >
                 BADGES
               </button>
               <button
                 className='page-nav-header-btn'
-                onClick={() => filterPrizes("Crypto")}>
+                onClick={() => filterPrizes("Crypto")}
+              >
                 CRYPTO
               </button>
               <button
                 className='page-nav-header-btn'
-                onClick={() => filterPrizes("Merch")}>
+                onClick={() => filterPrizes("Merch")}
+              >
                 MERCH
               </button>
               <button
                 className='page-nav-header-btn'
-                onClick={() => filterPrizes("NFTs")}>
+                onClick={() => filterPrizes("NFTs")}
+              >
                 NFTS
               </button>
             </div>
             <div className='page-nav-header-btns-subrow'>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("priceDescending")}>
+                onClick={() => sortPrizes("priceDescending")}
+              >
                 PRICE HIGH TO LOW
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("priceAscending")}>
+                onClick={() => sortPrizes("priceAscending")}
+              >
                 PRICE LOW TO HIGH
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("nameDescending")}>
+                onClick={() => sortPrizes("nameDescending")}
+              >
                 NAME A-Z
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("nameAscending")}>
+                onClick={() => sortPrizes("nameAscending")}
+              >
                 NAME Z-A
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("categoryDescending")}>
+                onClick={() => sortPrizes("categoryDescending")}
+              >
                 CATEGORY A-Z
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("categoryAscending")}>
+                onClick={() => sortPrizes("categoryAscending")}
+              >
                 CATEGORY Z-A
               </button>
             </div>
@@ -593,7 +605,8 @@ function RedeemPrizes() {
                       )}
                       <button
                         className='submit-btn'
-                        onClick={() => RedeemPrize(prize._id)}>
+                        onClick={() => RedeemPrize(prize._id)}
+                      >
                         REDEEM PRIZE
                       </button>
                       <br></br>

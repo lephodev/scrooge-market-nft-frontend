@@ -19,20 +19,20 @@ export default function Raffles() {
 
   return (
     <Layout>
-      <div className="container">
-        <main className="main">
-          <h1 className="title">SCROOGE RAFFLES</h1>
+      <div className='container'>
+        <main className='main raffles-page'>
+          <h1 className='title'>SCROOGE RAFFLES</h1>
 
           <AllCurrentRaffles />
           {isMismatched ? <SwitchNetworkBSC /> : <span></span>}
 
           {!address ? (
             <div>
-              <p className="description yellow">
+              <p className='description yellow'>
                 Get started by connecting your wallet.
               </p>
 
-              <div className="connect-wallet-div">
+              <div className='connect-wallet-div'>
                 <ConnectWallet />
               </div>
             </div>
