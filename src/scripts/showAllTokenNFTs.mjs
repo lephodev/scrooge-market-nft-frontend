@@ -33,6 +33,8 @@ export default function ShowAllTokenNFTs() {
   // data is the active listings, isLoading is a loading flag while we load the listings.
   const { data: listings, isLoading: loadingListings } =
     useActiveListings(contract);
+
+    console.log("listings",listings);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
@@ -159,6 +161,7 @@ export default function ShowAllTokenNFTs() {
         credited to your connected Scrooge Casino account. It couldn't be
         easier!
       </div>
+      {console.log("lllll",listings)}
       {loadingListings ? (
         <div className="loading-img-div">
           <img src={LoadingPoker} alt="game" className="imageAnimation" />
@@ -184,6 +187,7 @@ export default function ShowAllTokenNFTs() {
 
               {listings[0].asset.description.toString()}
             </div>
+            {console.log("listings[0].buyoutPrice ",listings[0].buyoutPrice )}
             <div className="nft-token-row-details">
               <span className="erc1155-price">
                 ${(listings[0].buyoutPrice / 10 ** 18).toFixed(2).toString()}{" "}
