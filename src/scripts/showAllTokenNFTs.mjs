@@ -19,7 +19,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import { scroogeClient } from "../config/keys.js";
 import { marketPlaceInstance } from "../config/axios.js";
 
-
 const stripePromise = loadStripe(
   "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT"
 );
@@ -109,17 +108,25 @@ export default function ShowAllTokenNFTs() {
       address,
       affID
     });
+    const {code,msg}=response?.data
+  console.log("response",response);
+    if(code===200){
     
       const session = await response.data.id;
       // When the customer clicks on the button, redirect them to Checkout.
       const result = await stripe.redirectToCheckout({
         sessionId: session,
       });
+    
       console.log(result);
       if (result.error) {
         console.log(result.error);
       
     }
+  }
+  else {
+    return toast.error(msg, { id: "A" });
+  }
   };
 
 
