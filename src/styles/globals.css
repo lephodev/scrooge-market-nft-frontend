@@ -2763,7 +2763,8 @@ ul.footer-support li img {
   margin: 0;
   color: #fbff12;
 }
-.claim-free-page .pageImgContainer {
+.claim-free-page .pageImgContainer,
+.my-wallet-page .pageImgContainer {
   /* background-color: rgb(255 255 255 / 45%); */
   background: rgb(231 201 117 / 50%);
   border: 1px solid #1c1c1c;
@@ -2774,13 +2775,16 @@ ul.footer-support li img {
   width: 60%;
   margin: 0;
 }
-.my-wallet-page .full-page-container {
+.my-wallet-page .full-page-container,
+.earn-token .social-share-card {
   border: 1px solid #1c1c1c;
   background-color: transparent;
   box-shadow: 0px 20px 20px #00000091;
   border-radius: 10px;
 }
-
+.earn-token .social-share-card {
+  background-color: rgba(255, 255, 255, 0.05);
+}
 .my-wallet-page .close-btn-round-div {
   justify-content: flex-end;
   margin: 0;
@@ -2803,8 +2807,15 @@ ul.footer-support li img {
   width: 100%;
   margin: 0 auto;
 }
-.raffles-page .new-btn button {
+.raffles-page .leaderboard-card-div .new-btn button {
   height: 60px;
+}
+.redeem-nfts-page .text-animate {
+  text-align: center;
+}
+.explore-page .explore-btn {
+  display: flex;
+  gap: 30px;
 }
 /* *********************************** btn - design **************************** */
 .available-btn {
