@@ -2287,7 +2287,13 @@ ul.footer-support li img {
 }
 .redeem-prizes-page .page-nav-header-subbtn {
   background-color: transparent;
-  border: 1px solid yellow;
+  border: 1px solid #fbff12;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.redeem-prizes-page .page-nav-header-subbtn:hover {
+  background-color: #000;
+  color: #fbff12;
 }
 .home-page .nft-home-sell-div {
   border: 1px solid #1c1c1c;
@@ -2549,7 +2555,23 @@ ul.footer-support li img {
 .home-page .nft-home-sell-div:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
+.raffles-page .min-menu-div {
+  margin: 40px 0;
+  padding: 0;
+}
 
+.raffles-page .min-menu-div .min-menu-btn {
+  background-color: transparent;
+  border: 1px solid #fbff12;
+  cursor: pointer;
+  transition: all 0.5s;
+  padding: 8px 24px;
+  font-size: 16px;
+}
+.raffles-page .min-menu-div .min-menu-btn:hover {
+  color: #fbff12;
+  background-color: #000;
+}
 .earn-token .earn-free-tokens-desc-div:hover::before {
   content: "";
   position: absolute;
@@ -2691,7 +2713,99 @@ ul.footer-support li img {
   justify-content: center;
   padding: 100px 0;
 }
+.claim-free-page .prizes-card {
+  margin: 0;
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s;
+  color: #878d93;
+  width: 100%;
+  padding: 30px 20px;
+}
+.claim-free-page .prizes-card:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.claim-free-page .prizes-card .additional-info-div {
+  background: #000;
+  border: 1px solid #1c1c1c;
+  box-shadow: 0px 20px 20px #00000091;
+  padding: 50px;
+}
+.claim-free-page .prizes-card .new-btn {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+.claim-free-page .prizes-card .new-btn button {
+  height: 60px;
+}
 
+.claim-free-page .prizes-card .new-btn {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.claim-free-page .prizes-card .holder-claim-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.claim-free-page .prizes-card .holder-claim-details h4 {
+  margin: 0;
+  color: #fbff12;
+}
+.claim-free-page .pageImgContainer {
+  /* background-color: rgb(255 255 255 / 45%); */
+  background: rgb(231 201 117 / 50%);
+  border: 1px solid #1c1c1c;
+  box-shadow: 0px 20px 20px #00000091;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  margin: 0;
+}
+.my-wallet-page .full-page-container {
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+}
+
+.my-wallet-page .close-btn-round-div {
+  justify-content: flex-end;
+  margin: 0;
+  width: 100%;
+
+  margin-bottom: -20px;
+}
+.my-wallet-page .close-btn-round {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.my-wallet-page .bottom-row-btns-div {
+  justify-content: space-between;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+.raffles-page .new-btn button {
+  height: 60px;
+}
 /* *********************************** btn - design **************************** */
 .available-btn {
   display: flex;
@@ -2715,6 +2829,51 @@ ul.footer-support li img {
 
 .new-btn button:hover {
   background-image: conic-gradient(from 1turn, #ffd712, #f9ff00) !important;
+}
+
+.gradient-btn {
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+}
+.card-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gradient-btn {
+  margin: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  cursor: pointer;
+}
+
+.gradient-btn:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.gradient-btn:active {
+  transform: scale(0.95);
+}
+.redeem-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 /********************************************************************************************/
 /************* Media Query ******************/
@@ -2840,6 +2999,7 @@ ul.footer-support li img {
   }
   .grid .card {
     max-width: 100%;
+    width: 100%;
   }
 
   .grid .card .card-img {
@@ -2875,6 +3035,10 @@ ul.footer-support li img {
   }
   .nft-page .nft-token-row-card {
     flex-wrap: wrap;
+    width: 60%;
+  }
+  .nft-page .nft-card-grid {
+    align-items: center;
   }
 
   .nft-page .nft-token-row-card-image,
@@ -2900,6 +3064,12 @@ ul.footer-support li img {
   }
   .redeem-prizes-page .prizes_container {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .home-page .nft-home-sell-div {
+    flex-wrap: wrap;
+  }
+  .nft-home-sell-card {
+    width: 45%;
   }
 }
 
@@ -3281,7 +3451,7 @@ ul.footer-support li img {
   }
 
   .text-animate h1 {
-    font-size: 18px;
+    font-size: 22px;
   }
   .raffles-page .leaderboard-card-div .ending-soon,
   .raffles-page .leaderboard-card-div .raffle-data-box {
@@ -3290,6 +3460,9 @@ ul.footer-support li img {
   .raffles-page .min-menu-div {
     flex-wrap: wrap;
     gap: 10px;
+  }
+  .nft-page .nft-token-row-card {
+    width: 100%;
   }
 }
 

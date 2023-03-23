@@ -324,7 +324,7 @@ export default function MyWallet() {
             <div className='bottom-margin-100'>
               <div
                 className='close-btn-round-div'
-                style={{ width: "45px", marginTop: "0" }}
+                // style={{ width: "45px", marginTop: "0" }}
               >
                 <div
                   className='close-btn-round'
