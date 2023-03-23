@@ -644,9 +644,10 @@ function RedeemPrizes() {
                           <></>
                         )}
                         <br />
-                        <div className='new-btn'>
+                        <div className='redeem-btn'>
                           <button
                             // className='submit-btn'
+                            className='gradient-btn'
                             onClick={() => RedeemPrize(prize._id)}
                           >
                             REDEEM PRIZE
