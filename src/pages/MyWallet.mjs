@@ -33,7 +33,7 @@ export default function MyWallet() {
       marketPlaceInstance()
         .get(`/getUserRedeemed/${user.id}`)
         .then((data) => {
-          console.log('data:====>>>12 ', data.data);
+          console.log("data:====>>>12 ", data.data);
           setUserRedeemed(data.data);
         });
     } catch (err) {
@@ -59,21 +59,21 @@ export default function MyWallet() {
   }
 
   const handleMarkRedeemed = (trans_id) => {
-    console.log("trans_id",trans_id);
+    console.log("trans_id", trans_id);
     marketPlaceInstance()
       .get(`/markMerchCouponRedeemed/${trans_id}/${user.id}`)
       .then((res) => {
-        console.log('handle: ', res);
+        console.log("handle: ", res);
         getUserRedeemed();
       });
   };
 
   const getUserRedeemed = () => {
-    console.log('user===>>>: ', user[0]);
+    console.log("user===>>>: ", user[0]);
     marketPlaceInstance()
       .get(`/getUserRedeemed/${user.id}`)
       .then((data) => {
-        console.log('post get data: ', data);
+        console.log("post get data: ", data);
         setUserRedeemed(data.data);
         //console.log('useRed: ',userRedeemed);
       });
@@ -115,14 +115,17 @@ export default function MyWallet() {
               <div className='min-menu-div'>
                 {!showMerchRedeemed ? (
                   <>
-                    <button
-                      className='min-menu-btn'
-                      onClick={() => {
-                        setShowMerchRedeemed(true);
-                      }}
-                    >
-                      MERCH CODES
-                    </button>
+                    <div className='new-btn'>
+                      <button
+                        // className='min-menu-btn'
+
+                        onClick={() => {
+                          setShowMerchRedeemed(true);
+                        }}
+                      >
+                        MERCH CODES
+                      </button>
+                    </div>
                   </>
                 ) : (
                   <></>

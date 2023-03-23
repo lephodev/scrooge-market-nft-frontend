@@ -145,21 +145,23 @@ export default function ShowAllTokenNFTs() {
         <h1>Scrooge Casino Marketplace NFTs</h1>
       </div>
       <div className='feature-overview-div' style={{ marginBottom: "30px" }}>
-        Running low in the casino? Lucky for you, we have a great selection of
-        purchasable casino badge NFTs that include a special bonus amount of
-        FREE TOKENS to be used in{" "}
-        <a
-          href={scroogeClient}
-          target='_blank'
-          rel='noreferrer'
-          alt='buy your Scrooge Casino NFTs today'
-        >
-          Scrooge Casino
-        </a>
-        . Simply choose the badge that is perfect for you from the list below,
-        make your purchase, and your free bonus tokens will be automatically
-        credited to your connected Scrooge Casino account. It couldn't be
-        easier!
+        <p>
+          Running low in the casino? Lucky for you, we have a great selection of
+          purchasable casino badge NFTs that include a special bonus amount of
+          FREE TOKENS to be used in {""}
+          <a
+            href={scroogeClient}
+            target='_blank'
+            rel='noreferrer'
+            alt='buy your Scrooge Casino NFTs today'
+          >
+            Scrooge Casino
+          </a>
+          . Simply choose the badge that is perfect for you from the list below,
+          make your purchase, and your free bonus tokens will be automatically
+          credited to your connected Scrooge Casino account. It couldn't be
+          easier!
+        </p>
       </div>
       {console.log("lllll", listings)}
       {loadingListings ? (
@@ -185,7 +187,7 @@ export default function ShowAllTokenNFTs() {
                 {listings[0].asset.name.toString()}
               </span>
 
-              {listings[0].asset.description.toString()}
+              <p> {listings[0].asset.description.toString()}</p>
             </div>
             {console.log("listings[0].buyoutPrice ", listings[0].buyoutPrice)}
             <div className='nft-token-row-details'>
