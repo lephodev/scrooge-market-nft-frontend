@@ -299,327 +299,332 @@ function RedeemPrizes() {
               </button>
             </div>
 
-            <div className='prizes_container'>
+            <div className='prizes-container'>
               <div style={{ width: "100%", textAlign: "center" }}>
                 <div id='rewardId' style={{ margin: "0 auto" }} />
               </div>
               {!prizesLoading ? (
                 <>
-                  {prizes.map((prize) => (
-                    <div className='prizes-card' key={prize._id}>
-                      {!prize.isDynamic ? (
-                        <div className='prize-name bold'>{prize.name}</div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                        <div className='prize-name bold'>
-                          {prize.name.replace(
-                            "xxxValue",
-                            parseInt(OG1000).toLocaleString("en-US")
-                          )}
-                          *
+                  <div className='prizes_container'>
+                    {prizes.map((prize) => (
+                      <div className='prizes-card' key={prize._id}>
+                        {!prize.isDynamic ? (
+                          <div className='prize-name bold text-animate'>
+                            <h1>{prize.name}</h1>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63b74c51dd789f0383a51d3b" ? (
+                          <div className='prize-name bold'>
+                            {prize.name.replace(
+                              "xxxValue",
+                              parseInt(OG1000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63b74ce7dd789f0383a51d3c" ? (
+                          <div className='prize-name bold'>
+                            {prize.name.replace(
+                              "xxxValue",
+                              parseInt(JR1000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63b78b42dd789f0383a51d3d" ? (
+                          <div className='prize-name bold'>
+                            {prize.name.replace(
+                              "xxxValue",
+                              parseInt(OG1000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63b78c0edd789f0383a51d3f" ? (
+                          <div className='prize-name bold'>
+                            {prize.name.replace(
+                              "xxxValue",
+                              parseInt(JR1000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedf0d1736630ad01d5f4e" ? (
+                          <div className='prize-name bold'>
+                            {prize.name.replace(
+                              "xxxValue",
+                              parseInt(OG5000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedf5a1736630ad01d5f50" ? (
+                          <div className='prize-name bold'>
+                            {prize.name.replace(
+                              "xxxValue",
+                              parseInt(JR5000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedf761736630ad01d5f52" ? (
+                          <div className='prize-name bold'>
+                            {prize.name.replace(
+                              "xxxValue",
+                              parseInt(OG5000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedfb61736630ad01d5f55" ? (
+                          <div className='prize-name bold'>
+                            {prize.name.replace(
+                              "xxxValue",
+                              parseInt(JR5000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedf301736630ad01d5f4f" ? (
+                          <div className='prize-name bold'>
+                            {prize.name.replace(
+                              "xxxValue",
+                              parseInt(OG10000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedf651736630ad01d5f51" ? (
+                          <div className='prize-name bold'>
+                            {prize.name.replace(
+                              "xxxValue",
+                              parseInt(JR10000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedf9d1736630ad01d5f54" ? (
+                          <div className='prize-name bold'>
+                            {prize.name.replace(
+                              "xxxValue",
+                              parseInt(OG10000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedfc51736630ad01d5f56" ? (
+                          <div className='prize-name bold'>
+                            {prize.name.replace(
+                              "xxxValue",
+                              parseInt(JR10000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        <img
+                          className='card-img pulse'
+                          src={prize.image_url}
+                          alt={prize.name}
+                        />
+                        <br></br>
+                        <div className='prize-cost'>
+                          Cost: {prize.price} Tickets
                         </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                        <div className='prize-name bold'>
-                          {prize.name.replace(
-                            "xxxValue",
-                            parseInt(JR1000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                        <div className='prize-name bold'>
-                          {prize.name.replace(
-                            "xxxValue",
-                            parseInt(OG1000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                        <div className='prize-name bold'>
-                          {prize.name.replace(
-                            "xxxValue",
-                            parseInt(JR1000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                        <div className='prize-name bold'>
-                          {prize.name.replace(
-                            "xxxValue",
-                            parseInt(OG5000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                        <div className='prize-name bold'>
-                          {prize.name.replace(
-                            "xxxValue",
-                            parseInt(JR5000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedf761736630ad01d5f52" ? (
-                        <div className='prize-name bold'>
-                          {prize.name.replace(
-                            "xxxValue",
-                            parseInt(OG5000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedfb61736630ad01d5f55" ? (
-                        <div className='prize-name bold'>
-                          {prize.name.replace(
-                            "xxxValue",
-                            parseInt(JR5000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedf301736630ad01d5f4f" ? (
-                        <div className='prize-name bold'>
-                          {prize.name.replace(
-                            "xxxValue",
-                            parseInt(OG10000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedf651736630ad01d5f51" ? (
-                        <div className='prize-name bold'>
-                          {prize.name.replace(
-                            "xxxValue",
-                            parseInt(JR10000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                        <div className='prize-name bold'>
-                          {prize.name.replace(
-                            "xxxValue",
-                            parseInt(OG10000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedfc51736630ad01d5f56" ? (
-                        <div className='prize-name bold'>
-                          {prize.name.replace(
-                            "xxxValue",
-                            parseInt(JR10000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      <br></br>
-                      <img
-                        className='card-img pulse'
-                        src={prize.image_url}
-                        alt={prize.name}
-                      />
-                      <br></br>
-                      <div className='prize-cost'>
-                        Cost: {prize.price} Tickets
+                        <br></br>
+                        Category: {prize.category}
+                        <br></br>
+                        <br></br>
+                        {!prize.isDynamic ? (
+                          <div>{prize.description}</div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63b74c51dd789f0383a51d3b" ? (
+                          <div className=''>
+                            {prize.description.replace(
+                              "xxxValue",
+                              parseInt(OG1000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63b74ce7dd789f0383a51d3c" ? (
+                          <div className=''>
+                            {prize.description.replace(
+                              "xxxValue",
+                              parseInt(JR1000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63b78b42dd789f0383a51d3d" ? (
+                          <div className=''>
+                            {prize.description.replace(
+                              "xxxValue",
+                              parseInt(OG1000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63b78c0edd789f0383a51d3f" ? (
+                          <div className=''>
+                            {prize.description.replace(
+                              "xxxValue",
+                              parseInt(JR1000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedf0d1736630ad01d5f4e" ? (
+                          <div className=''>
+                            {prize.description.replace(
+                              "xxxValue",
+                              parseInt(OG5000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedf5a1736630ad01d5f50" ? (
+                          <div className=''>
+                            {prize.description.replace(
+                              "xxxValue",
+                              parseInt(JR5000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedf761736630ad01d5f52" ? (
+                          <div className=''>
+                            {prize.description.replace(
+                              "xxxValue",
+                              parseInt(OG5000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedfb61736630ad01d5f55" ? (
+                          <div className=''>
+                            {prize.description.replace(
+                              "xxxValue",
+                              parseInt(JR5000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedf301736630ad01d5f4f" ? (
+                          <div className=''>
+                            {prize.description.replace(
+                              "xxxValue",
+                              parseInt(OG10000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedf651736630ad01d5f51" ? (
+                          <div className=''>
+                            {prize.description.replace(
+                              "xxxValue",
+                              parseInt(JR10000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedf9d1736630ad01d5f54" ? (
+                          <div className=''>
+                            {prize.description.replace(
+                              "xxxValue",
+                              parseInt(OG10000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize._id === "63cedfc51736630ad01d5f56" ? (
+                          <div className=''>
+                            {prize.description.replace(
+                              "xxxValue",
+                              parseInt(JR10000).toLocaleString("en-US")
+                            )}
+                            *
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {prize.isDynamic ? (
+                          <div className='asterisk-desc'>
+                            *Amount received is calculated at time of redemption
+                            and may vary from the amount displayed.
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        <button
+                          className='submit-btn'
+                          onClick={() => RedeemPrize(prize._id)}
+                        >
+                          REDEEM PRIZE
+                        </button>
+                        <br></br>
                       </div>
-                      <br></br>
-                      Category: {prize.category}
-                      <br></br>
-                      <br></br>
-                      {!prize.isDynamic ? (
-                        <div>{prize.description}</div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                        <div className=''>
-                          {prize.description.replace(
-                            "xxxValue",
-                            parseInt(OG1000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                        <div className=''>
-                          {prize.description.replace(
-                            "xxxValue",
-                            parseInt(JR1000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                        <div className=''>
-                          {prize.description.replace(
-                            "xxxValue",
-                            parseInt(OG1000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                        <div className=''>
-                          {prize.description.replace(
-                            "xxxValue",
-                            parseInt(JR1000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                        <div className=''>
-                          {prize.description.replace(
-                            "xxxValue",
-                            parseInt(OG5000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                        <div className=''>
-                          {prize.description.replace(
-                            "xxxValue",
-                            parseInt(JR5000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedf761736630ad01d5f52" ? (
-                        <div className=''>
-                          {prize.description.replace(
-                            "xxxValue",
-                            parseInt(OG5000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedfb61736630ad01d5f55" ? (
-                        <div className=''>
-                          {prize.description.replace(
-                            "xxxValue",
-                            parseInt(JR5000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedf301736630ad01d5f4f" ? (
-                        <div className=''>
-                          {prize.description.replace(
-                            "xxxValue",
-                            parseInt(OG10000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedf651736630ad01d5f51" ? (
-                        <div className=''>
-                          {prize.description.replace(
-                            "xxxValue",
-                            parseInt(JR10000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                        <div className=''>
-                          {prize.description.replace(
-                            "xxxValue",
-                            parseInt(OG10000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize._id === "63cedfc51736630ad01d5f56" ? (
-                        <div className=''>
-                          {prize.description.replace(
-                            "xxxValue",
-                            parseInt(JR10000).toLocaleString("en-US")
-                          )}
-                          *
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {prize.isDynamic ? (
-                        <div className='asterisk-desc'>
-                          *Amount received is calculated at time of redemption
-                          and may vary from the amount displayed.
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      <button
-                        className='submit-btn'
-                        onClick={() => RedeemPrize(prize._id)}
-                      >
-                        REDEEM PRIZE
-                      </button>
-                      <br></br>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </>
               ) : (
                 <>
-                  <img
-                    src={LoadingPoker}
-                    alt='game'
-                    className='imageAnimation'
-                  />
+                  <div className='loader-img'>
+                    <img
+                      src={LoadingPoker}
+                      alt='game'
+                      className='imageAnimation'
+                    />
+                  </div>
                 </>
               )}
             </div>
