@@ -132,12 +132,15 @@ export default function AffiliateLeaderboard() {
   return (
     <>
       {showLeaderboards ? (
-        <div className='bordered-section'>
-          <div className='flex-row-no-margin'>
+        <div className='bordered-section '>
+          <div className='flex-row-no-margin leaderboard-card-box'>
             {leaderboardByCount !== "Error" ? (
               <>
                 <div className='leaderboard-card-div'>
-                  <div className='pageTitle' style={{ marginBottom: "20px" }}>
+                  <div
+                    className='pageTitless text-animate'
+                    style={{ marginBottom: "20px" }}
+                  >
                     <h1>Affiliate Sales Leaders</h1>
                   </div>
                   {leaderboardByCount !== "No Entries Found For User" &&
@@ -152,9 +155,7 @@ export default function AffiliateLeaderboard() {
                     ))
                   ) : (
                     <div>
-                      <div className='leaderboard-row'>
-                        <div>No Data Found</div>
-                      </div>
+                      <div className='no-data'>No Data Found</div>
                     </div>
                   )}
                 </div>
@@ -166,7 +167,10 @@ export default function AffiliateLeaderboard() {
             {leaderboardByTokens !== "Error" ? (
               <>
                 <div className='leaderboard-card-div'>
-                  <div className='pageTitle' style={{ marginBottom: "20px" }}>
+                  <div
+                    className='pageTitless text-animate'
+                    style={{ marginBottom: "20px" }}
+                  >
                     <h1>Affiliate Tokens Leaders</h1>
                   </div>
                   {leaderboardByTokens !== "No Entries Found For User" &&
@@ -180,7 +184,10 @@ export default function AffiliateLeaderboard() {
                       </div>
                     ))
                   ) : (
-                    <div className='leaderboard-row'>No Data Found</div>
+                    <div className=''>
+                      {" "}
+                      <div className='no-data'>No Data Found</div>
+                    </div>
                   )}
                 </div>
               </>
@@ -191,7 +198,10 @@ export default function AffiliateLeaderboard() {
             {leaderboardHottestNewcomers !== "Error" ? (
               <>
                 <div className='leaderboard-card-div'>
-                  <div className='pageTitle' style={{ marginBottom: "20px" }}>
+                  <div
+                    className='pageTitlesss text-animate'
+                    style={{ marginBottom: "20px" }}
+                  >
                     <h1>Hottest Newcomers</h1>
                   </div>
                   {leaderboardHottestNewcomers !==
@@ -206,7 +216,10 @@ export default function AffiliateLeaderboard() {
                       </div>
                     ))
                   ) : (
-                    <div className='leaderboard-row'>No Data Found</div>
+                    <div className=''>
+                      {" "}
+                      <div className='no-data'>No Data Found</div>
+                    </div>
                   )}
                 </div>
               </>
@@ -217,7 +230,10 @@ export default function AffiliateLeaderboard() {
             {leaderboardMonthlyMovers !== "Error" ? (
               <>
                 <div className='leaderboard-card-div'>
-                  <div className='pageTitle' style={{ marginBottom: "20px" }}>
+                  <div
+                    className='pageTitless text-animate'
+                    style={{ marginBottom: "20px" }}
+                  >
                     <h1>Monthly Movers</h1>
                   </div>
                   {leaderboardMonthlyMovers !== "No Entries Found For User" &&
@@ -231,7 +247,9 @@ export default function AffiliateLeaderboard() {
                       </div>
                     ))
                   ) : (
-                    <div className='leaderboard-row'>No Data Found</div>
+                    <div className=''>
+                      <div className='no-data'>No Data Found</div>
+                    </div>
                   )}
                 </div>
               </>
@@ -242,7 +260,10 @@ export default function AffiliateLeaderboard() {
             {leaderboardTopRegisters !== "Error" ? (
               <>
                 <div className='leaderboard-card-div'>
-                  <div className='pageTitle' style={{ marginBottom: "20px" }}>
+                  <div
+                    className='pageTitless text-animate'
+                    style={{ marginBottom: "20px" }}
+                  >
                     <h1>Top User Referrals</h1>
                   </div>
                   {leaderboardTopRegisters !== "No Entries Found For User" &&
@@ -256,7 +277,10 @@ export default function AffiliateLeaderboard() {
                       </div>
                     ))
                   ) : (
-                    <div className='leaderboard-row'>No Data Found</div>
+                    <div className=''>
+                      {" "}
+                      <div className='no-data'>No Data Found</div>
+                    </div>
                   )}
                 </div>
               </>
@@ -267,7 +291,10 @@ export default function AffiliateLeaderboard() {
             {leaderboardTopSales !== "Error" ? (
               <>
                 <div className='leaderboard-card-div'>
-                  <div className='pageTitle' style={{ marginBottom: "20px" }}>
+                  <div
+                    className='pageTitless text-animate'
+                    style={{ marginBottom: "20px" }}
+                  >
                     <h1>Top Product Sales</h1>
                   </div>
                   {leaderboardTopSales !== "No Entries Found For User" &&
@@ -281,7 +308,10 @@ export default function AffiliateLeaderboard() {
                       </div>
                     ))
                   ) : (
-                    <div className='leaderboard-row'>No Data Found</div>
+                    <div className=''>
+                      {" "}
+                      <div className='no-data'>No Data Found</div>
+                    </div>
                   )}
                 </div>
               </>

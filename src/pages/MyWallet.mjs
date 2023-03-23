@@ -172,7 +172,7 @@ export default function MyWallet() {
               </div>
               <div className='wallet-casino-profile-details'>
                 <div className=''>
-                  <span className='wallet-casino-profile-username'>
+                  <span className='wallet-casino-profile-username text-animate'>
                     {user?.username}
                   </span>
                   <br></br>
@@ -202,7 +202,9 @@ export default function MyWallet() {
               </div>
               <div className='crypto-balance-div'>
                 <div className='width-100'>
-                  <div className='crypto-balance-header'>CRYPTO BALANCE</div>
+                  <div className='crypto-balance-header text-animate'>
+                    CRYPTO BALANCE
+                  </div>
                   <div className='crypto-balance-row'>
                     <img
                       className='token-logo'
