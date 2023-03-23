@@ -2564,7 +2564,7 @@ ul.footer-support li img {
     #f09819 51%,
     #ff512f 100%
   );
-  clip-path: circle(20% at 10% 10%);
+  clip-path: circle(15% at 5% 7%);
   transition: all 0.5s;
 }
 .raffles-page .raffles-header-shop-div {
