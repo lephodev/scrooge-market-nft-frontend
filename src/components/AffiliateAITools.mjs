@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import RobotAI from '../images/robotAI.gif';
-import DiceGif from '../images/diceGif.gif';
-import { TypeAnimation } from 'react-type-animation';
-import LoadingPoker from '../images/scroogeHatLogo.png';
-import { marketPlaceInstance } from '../config/axios.js';
-import { scroogeClient } from '../config/keys.js';
+import { useState } from "react";
+import RobotAI from "../images/robotAI.gif";
+import DiceGif from "../images/diceGif.gif";
+import { TypeAnimation } from "react-type-animation";
+import LoadingPoker from "../images/scroogeHatLogo.png";
+import { marketPlaceInstance } from "../config/axios.js";
+import { scroogeClient } from "../config/keys.js";
 
 export default function AffiliateAITools() {
   // const [user, setUser]=useState([]);
@@ -12,12 +12,11 @@ export default function AffiliateAITools() {
   const [showAITools] = useState(true);
   const [suggestionLoading, setSuggestionLoading] = useState(false);
 
-
   async function getAISuggestion() {
     setAISuggestion();
     setSuggestionLoading(true);
     const prompt =
-      'Give me one unique, new, or interesting tip on how to successfully promote my Scrooge Casino affiliate link to get more people to sign up or make purchases at Scrooge Casino, which is an online casino where players can win real prizes playing live poker, blackjack, slots, and other casino games.';
+      "Give me one unique, new, or interesting tip on how to successfully promote my Scrooge Casino affiliate link to get more people to sign up or make purchases at Scrooge Casino, which is an online casino where players can win real prizes playing live poker, blackjack, slots, and other casino games.";
     try {
       const res = await marketPlaceInstance().get(
         `/getAIMessage/${prompt}/6399cb2354a1dd8bdd842a1a/suggestion`
@@ -33,18 +32,15 @@ export default function AffiliateAITools() {
       }
     } catch (err) {
       console.error(err);
-   
     }
   }
 
   return (
     <>
       {showAITools ? (
-        <div
-          className='bordered-section bg-animated'
-          style={{ marginBottom: '40px' }}>
+        <div className='bordered-section bg-animated'>
           <div className='flex-row-no-margin'>
-            {showAITools === 'jfkjdj' ? (
+            {showAITools === "jfkjdj" ? (
               <div className='earn-free-tokens-desc-div-full bg-gray'>
                 <div className='earn-free-tokens-desc-header'>
                   LET'S ROLL THE DICE<br></br>
@@ -74,7 +70,8 @@ export default function AffiliateAITools() {
                         <div className='close-btn-round-div'>
                           <div
                             className='close-btn-round'
-                            onClick={() => setAISuggestion(null)}>
+                            onClick={() => setAISuggestion(null)}
+                          >
                             X
                           </div>
                         </div>
@@ -92,13 +89,14 @@ export default function AffiliateAITools() {
             <div className='earn-free-tokens-desc-div-full bg-gray'>
               <div className='earn-free-tokens-desc-header'>
                 <span
-                  className='bg-animated'
-                  style={{ padding: '0 15px', fontSize: '36px' }}>
-                  SCROOGE AFFILIATE TIPS WITH THE POWER OF AI!
+                  className='text-animate'
+                  style={{ padding: "0 15px", fontSize: "36px" }}
+                >
+                  <h1>SCROOGE AFFILIATE TIPS WITH THE POWER OF AI!</h1>
                 </span>
-                <br></br>
+
                 <img
-                  style={{ marginTop: '20px' }}
+                  style={{ marginTop: "20px" }}
                   src={RobotAI}
                   width='100px'
                   alt='Scrooge Casino, Scrooge LLC'
@@ -107,23 +105,25 @@ export default function AffiliateAITools() {
               <div
                 className='earn-free-tokens-desc'
                 style={{
-                  fontSize: '20px',
-                  marginBottom: '10px',
-                  padding: '0 50px',
-                }}>
+                  fontSize: "20px",
+                  marginBottom: "10px",
+                  padding: "0 50px",
+                }}
+              >
                 <p>
-                  At{' '}
+                  At{" "}
                   <a
                     href={scroogeClient}
                     target='_blank'
                     rel='noreferrer'
-                    alt='Visit Scrooge Casino and play today'>
+                    alt='Visit Scrooge Casino and play today'
+                  >
                     Scrooge Casino
                   </a>
                   , we understand the challenges that come with affiliate
                   marketing and want to help you achieve your goals. That's why
                   we've created an AI-powered platform that provides
-                  personalized affiliate marketing tips and strategies.{' '}
+                  personalized affiliate marketing tips and strategies.{" "}
                 </p>
               </div>
 
@@ -136,8 +136,9 @@ export default function AffiliateAITools() {
                       <div className='close-btn-round-div'>
                         <div
                           className='close-btn-round'
-                          style={{ margin: '0 auto 30px auto' }}
-                          onClick={() => setAISuggestion(null)}>
+                          style={{ margin: "0 auto 30px auto" }}
+                          onClick={() => setAISuggestion(null)}
+                        >
                           X
                         </div>
                       </div>
@@ -149,33 +150,39 @@ export default function AffiliateAITools() {
               </div>
               <div
                 className='social-share-filter-btns-div'
-                style={{ marginTop: '20px' }}>
+                style={{ marginTop: "20px" }}
+              >
                 {suggestionLoading ? (
                   <>
                     <img
                       src={LoadingPoker}
                       alt='game'
                       className='imageAnimation'
-                      style={{ width: '70px', height: '70px' }}
+                      style={{ width: "70px", height: "70px" }}
                     />
                   </>
                 ) : (
                   <>
-                    <button
-                      className='button2 bg-animated'
-                      onClick={() => getAISuggestion()}>
-                      GIVE ME A TIP!
-                    </button>
+                    <div className='new-btn'>
+                      <button
+                        // className='button2 bg-animated'
+
+                        onClick={() => getAISuggestion()}
+                      >
+                        GIVE ME A TIP!
+                      </button>
+                    </div>
                   </>
                 )}
               </div>
               <div
                 className='earn-free-tokens-desc'
                 style={{
-                  fontSize: '16px',
-                  marginBottom: '10px',
-                  padding: '0 50px',
-                }}>
+                  fontSize: "16px",
+                  marginBottom: "10px",
+                  padding: "0 50px",
+                }}
+              >
                 <p>
                   Our state-of-the-art technology offers tailored advice to help
                   you maximize your earnings and grow your business. Whether
