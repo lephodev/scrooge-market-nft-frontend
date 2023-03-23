@@ -34,7 +34,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <main className='main'>
+      <main className='main home-page'>
         <div className='container'>
           {/* <img className="collection-header-img" src={ScroogeCasino} alt="Everything you need for Scrooge Casino" /> */}
           <div className='title'>NFT MARKETPLACE</div>

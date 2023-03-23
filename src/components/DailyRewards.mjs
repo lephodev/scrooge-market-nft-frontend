@@ -103,24 +103,24 @@ function DailyRewards() {
       {console.log(fullDailyRewards)}
       {fullDailyRewards ? (
         <>
-          <div className="bordered-section">
+          <div className='bordered-section'>
             {user[0] && user[0] !== "" && nextClaimDate.nextClaimDate ? (
-              <div className="prizes_container">
+              <div className='prizes_container'>
                 <div
-                  className="prizes-card"
+                  className='prizes-card'
                   style={{ width: "95%", margin: "0 auto" }}
                 >
-                  <div className="pageTitle" style={{ margin: "20px auto" }}>
+                  <div className='pageTitle' style={{ margin: "20px auto" }}>
                     <h1>Claim Your Daily Rewards</h1>
                   </div>
                   <div>
                     Get free tokens, well, for FREE! Visit daily to earn more.
                   </div>
                   <div
-                    className="prizes-chip-count"
+                    className='prizes-chip-count'
                     style={{ marginTop: "35px" }}
                   >
-                    <div className="additional-info-div">
+                    <div className='additional-info-div'>
                       You have claimed your daily rewards{" "}
                       {nextClaimDate.consecutive_days} day
                       {nextClaimDate.consecutive_days >= 2 ||
@@ -130,104 +130,104 @@ function DailyRewards() {
                         <></>
                       )}{" "}
                       in a row.
-                      <div className="daily-reward-bag-div">
-                        <div className="daily-rewards-bag-card">
+                      <div className='daily-reward-bag-div'>
+                        <div className='daily-rewards-bag-card'>
                           {nextClaimDate.consecutive_days > 0 ? (
                             <>
                               <div>
                                 <img
-                                  className="daily-reward-bag"
+                                  className='daily-reward-bag'
                                   src={MoneyBagGreen}
-                                  alt="daily reward money bag"
+                                  alt='daily reward money bag'
                                 />
                               </div>
-                              <div className="green">25 Tokens</div>
+                              <div className='green'>25 Tokens</div>
                             </>
                           ) : (
                             <>
                               <div>
                                 <img
-                                  className="daily-reward-bag"
+                                  className='daily-reward-bag'
                                   src={MoneyBagGray}
-                                  alt="daily reward money bag"
+                                  alt='daily reward money bag'
                                 />
                               </div>
-                              <div className="red">25 Tokens</div>
+                              <div className='red'>25 Tokens</div>
                             </>
                           )}
                         </div>
-                        <div className="daily-rewards-bag-card">
+                        <div className='daily-rewards-bag-card'>
                           {nextClaimDate.consecutive_days > 1 ? (
                             <>
                               <div>
                                 <img
-                                  className="daily-reward-bag"
+                                  className='daily-reward-bag'
                                   src={MoneyBagGreen}
-                                  alt="daily reward money bag"
+                                  alt='daily reward money bag'
                                 />
                               </div>
-                              <div className="green">35 Tokens</div>
+                              <div className='green'>35 Tokens</div>
                             </>
                           ) : (
                             <>
                               <div>
                                 <img
-                                  className="daily-reward-bag"
+                                  className='daily-reward-bag'
                                   src={MoneyBagGray}
-                                  alt="daily reward money bag"
+                                  alt='daily reward money bag'
                                 />
                               </div>
-                              <div className="red">35 Tokens</div>
+                              <div className='red'>35 Tokens</div>
                             </>
                           )}
                         </div>
-                        <div className="daily-rewards-bag-card">
+                        <div className='daily-rewards-bag-card'>
                           {nextClaimDate.consecutive_days > 2 ? (
                             <>
                               <div>
                                 <img
-                                  className="daily-reward-bag"
+                                  className='daily-reward-bag'
                                   src={MoneyBagGreen}
-                                  alt="daily reward money bag"
+                                  alt='daily reward money bag'
                                 />
                               </div>
-                              <div className="green">45 Tokens</div>
+                              <div className='green'>45 Tokens</div>
                             </>
                           ) : (
                             <>
                               <div>
                                 <img
-                                  className="daily-reward-bag"
+                                  className='daily-reward-bag'
                                   src={MoneyBagGray}
-                                  alt="daily reward money bag"
+                                  alt='daily reward money bag'
                                 />
                               </div>
-                              <div className="red">45 Tokens</div>
+                              <div className='red'>45 Tokens</div>
                             </>
                           )}
                         </div>
-                        <div className="daily-rewards-bag-card">
+                        <div className='daily-rewards-bag-card'>
                           {nextClaimDate.consecutive_days > 3 ? (
                             <>
                               <div>
                                 <img
-                                  className="daily-reward-bag"
+                                  className='daily-reward-bag'
                                   src={MoneyBagGreen}
-                                  alt="daily reward money bag"
+                                  alt='daily reward money bag'
                                 />
                               </div>
-                              <div className="green">60 Tokens</div>
+                              <div className='green'>60 Tokens</div>
                             </>
                           ) : (
                             <>
                               <div>
                                 <img
-                                  className="daily-reward-bag"
+                                  className='daily-reward-bag'
                                   src={MoneyBagGray}
-                                  alt="daily reward money bag"
+                                  alt='daily reward money bag'
                                 />
                               </div>
-                              <div className="red">60 Tokens</div>
+                              <div className='red'>60 Tokens</div>
                             </>
                           )}
                         </div>
@@ -236,22 +236,22 @@ function DailyRewards() {
                     Your last claim amount was {nextClaimDate.qty} Tokens
                   </div>
                   <div style={{ width: "100%", textAlign: "center" }}>
-                    <div id="rewardId" style={{ margin: "0 auto" }} />
+                    <div id='rewardId' style={{ margin: "0 auto" }} />
                   </div>
                   {new Date(nextClaimDate.nextClaimDate) <= new Date() ||
                   nextClaimDate === "CLAIM NOW" ? (
-                    <button className="button2" onClick={() => claimTokens()}>
+                    <button className='button2' onClick={() => claimTokens()}>
                       Claim Tokens
                     </button>
                   ) : (
                     <>
-                      <div className="next-claim-div">
+                      <div className='next-claim-div'>
                         {nextClaimDate !== "Loading..." ? (
                           <>
                             Next Claim Available:<br></br>
                             <Countdown date={nextClaimDate.nextClaimDate}>
                               <button
-                                className="submit-btn"
+                                className='submit-btn'
                                 onClick={() => claimTokens()}
                               >
                                 Claim Tokens
@@ -262,8 +262,8 @@ function DailyRewards() {
                           <>
                             <img
                               src={LoadingPoker}
-                              alt="game"
-                              className="imageAnimation"
+                              alt='game'
+                              className='imageAnimation'
                             />
                           </>
                         )}
@@ -271,14 +271,14 @@ function DailyRewards() {
                     </>
                   )}
 
-                  <div className="fine-print-txt" style={{ marginTop: "40px" }}>
+                  <div className='fine-print-txt' style={{ marginTop: "40px" }}>
                     *Your claimed tokens will automatically be added to your
                     connected{" "}
                     <a
                       href={scroogeClient}
-                      alt="Visit Scrooge Casino"
-                      target="_blank"
-                      rel="noreferrer"
+                      alt='Visit Scrooge Casino'
+                      target='_blank'
+                      rel='noreferrer'
                     >
                       Scrooge Casino
                     </a>{" "}
@@ -290,8 +290,8 @@ function DailyRewards() {
               <div style={{ width: "100%", textAlign: "center" }}>
                 <img
                   src={LoadingPoker}
-                  alt="game"
-                  className="imageAnimation"
+                  alt='game'
+                  className='imageAnimation'
                   style={{ margin: "0 auto" }}
                 />
               </div>
@@ -301,14 +301,15 @@ function DailyRewards() {
       ) : (
         <>
           {!nextClaimDate.nextClaimDate ? (
-            <div className="daily-reward-card-div">
-              <div className="inlineTitle">DAILY REWARDS</div>
-              <div>
-                <strong>Last Claim Amount:</strong> {nextClaimDate.qty} Tokens
+            <div className='daily-reward-card-div'>
+              <div className='inlineTitle'>DAILY REWARDS</div>
+              <div className='rewards'>
+                <span>Last Claim Amount:</span>{" "}
+                <p>{nextClaimDate.qty} Tokens</p>
               </div>
-              <div>
-                <strong>Consecutive:</strong> {nextClaimDate.consecutive_days}{" "}
-                day
+              <div className='rewards'>
+                <span>Consecutive:</span>{" "}
+                <p>{nextClaimDate.consecutive_days} day</p>
                 {nextClaimDate.consecutive_days >= 2 ||
                 nextClaimDate.consecutive_days === 0 ? (
                   <>s</>
@@ -316,16 +317,19 @@ function DailyRewards() {
                   <></>
                 )}
               </div>
-              <div>
-                <strong>Available:</strong>{" "}
+              <div className='available-btn'>
+                <span>Available:</span>{" "}
                 <Countdown date={nextClaimDate.nextClaimDate}>
-                  <button
-                    className="button-inline"
+                  {/* <button
+                    className='button-inline'
                     style={{ marginLeft: "20px" }}
                     onClick={() => claimTokens()}
                   >
                     Claim NOW
-                  </button>
+                  </button> */}
+                  <div className='new-btn'>
+                    <button>Claim NOW</button>
+                  </div>
                 </Countdown>
               </div>
             </div>
@@ -336,16 +340,16 @@ function DailyRewards() {
       )}
 
       {buyLoading ? (
-        <div className="pageImgContainer">
-          <img src={LoadingPoker} alt="game" className="imageAnimation" />
-          <div className="loading-txt pulse">CLAIMING TOKENS...</div>
+        <div className='pageImgContainer'>
+          <img src={LoadingPoker} alt='game' className='imageAnimation' />
+          <div className='loading-txt pulse'>CLAIMING TOKENS...</div>
         </div>
       ) : (
         <></>
       )}
 
       <ToastContainer
-        position="top-center"
+        position='top-center'
         autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -354,7 +358,7 @@ function DailyRewards() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme='light'
       />
     </>
   );

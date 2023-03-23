@@ -1133,6 +1133,38 @@ select {
   border-radius: 10px;
   min-height: 275px;
   background-color: transparent;
+  border: 1px solid #1c1c1c;
+  background: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+.half-page-card-menu-div .feature-overview-div1:hover,
+.half-page-card-menu-div .feature-overview-div3:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+.raffles-page .half-page-menu-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+.raffles-page .leaderboard-card-div {
+  width: 100%;
+  border: 1px solid #1c1c1c;
+  background: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  transition: all 0.5s;
+  cursor: pointer;
+  padding: 30px 20px;
+  display: flex;
+  gap: 10px;
+}
+.raffles-page .leaderboard-card-div {
+}
+
+.raffles-page .leaderboard-card-div h1 {
+  margin: 30px 0;
 }
 .prizes_container {
   display: flex;
@@ -2169,6 +2201,8 @@ ul.footer-support li img {
 }
 .privacy-page .contact-div h4 {
   margin: 0;
+  color: #fff;
+  font-size: 22px;
 }
 .raffles-page .raffles-page-card {
   width: 100px;
@@ -2200,8 +2234,17 @@ ul.footer-support li img {
   color: #5ee47e;
 }
 .my-wallet-page .wallet-casino-profile-div {
-  border: none;
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s;
+  padding: 20px;
 }
+
 .my-wallet-page .wallet-casino-profile-img {
   width: 150px;
   height: 150px;
@@ -2219,6 +2262,7 @@ ul.footer-support li img {
 }
 .nft-page .feature-overview-div {
   border: none;
+  background-color: transparent;
 }
 .nft-page .nft-home-sell-title,
 .nft-page .nft-home-sell-title h1 {
@@ -2240,6 +2284,437 @@ ul.footer-support li img {
 .redeem-prizes-page .page-nav-header-btns-subrow,
 .redeem-prizes-page .page-nav-header-btns-row {
   gap: 20px;
+}
+.redeem-prizes-page .page-nav-header-subbtn {
+  background-color: transparent;
+  border: 1px solid yellow;
+}
+.home-page .nft-home-sell-div {
+  border: 1px solid #1c1c1c;
+  background: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  position: relative;
+  overflow: hidden;
+}
+.home-page .text-animate h1 {
+  margin: 40px 0;
+}
+.my-wallet-page .wallet-casino-profile-div .crypto-balance-div,
+.explore-page .erc-card-box .erc1155Card {
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s;
+  margin: 0;
+}
+.my-wallet-page .wallet-casino-profile-div .crypto-balance-div:hover,
+.explore-page .erc-card-box .erc1155Card:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.my-wallet-page .wallet-casino-profile-div .crypto-balance-div:hover:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#2196f3, #e91e63);
+  clip-path: circle(10% at 5% 5%);
+  transition: all 0.5s;
+}
+/* ************************** social-card ************************** */
+
+.social-share-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+}
+
+.social-share-grid .social-share-card {
+  margin: 0;
+  border-radius: 10px;
+  text-align: center;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(40px);
+  border: 1px solid #1c1c1c;
+  background: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+}
+
+.social-share-grid .social-share-btn-div {
+  margin-top: 30px;
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-share-card .card-color {
+  height: 128px;
+  width: 128px;
+  background-color: #f9b234;
+  z-index: 1;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+  border-radius: 50%;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.social-share-card:hover .card-color {
+  -webkit-transform: scale(10);
+  -ms-transform: scale(10);
+  transform: scale(10);
+  z-index: -1;
+}
+.social-share-message {
+  transition: all 0.2s ease;
+}
+
+.social-share-card:hover .social-share-message {
+  color: #fff;
+}
+.social-share-card:nth-child(2n + 1) .card-color {
+  /* background-color: #3ecd5e; */
+  background-color: rgba(59, 173, 227, 1);
+}
+.social-share-card:nth-child(2n) .card-color {
+  /* background-color: #e44002; */
+  background-color: rgba(87, 111, 230, 1);
+}
+.social-share-card:nth-child(5n - 1) .card-color {
+  /* background-color: #f9b234; */
+  background-color: rgba(152, 68, 183, 1);
+}
+.earn-token .affiliate-card-div {
+  border: none;
+  padding: 0;
+  margin: 0 auto;
+}
+.earn-token .daily-reward-card-div {
+  margin: 0;
+  width: 100%;
+  border: 1px solid #1c1c1c;
+  background: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.earn-token .close-btn-round-div {
+  margin: 0;
+  width: 100%;
+  justify-content: flex-end;
+  margin-bottom: -60px;
+  z-index: 9;
+}
+.earn-token .close-btn-round-div .close-btn-round {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.earn-token {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.earn-token .bordered-section {
+  padding: 40px 20px;
+  border: 1px solid #1c1c1c;
+  background: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+}
+.earn-token .bordered-section .leaderboard-card-box {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.earn-token .bordered-section .leaderboard-card-div {
+  margin: 0;
+  width: 100%;
+  border: 1px solid #1c1c1c;
+  background: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  /* max-height: 500px; */
+  cursor: pointer;
+  text-align: start;
+  padding: 20px 10px;
+}
+.earn-token .bordered-section .leaderboard-card-div h4 {
+  text-align: center;
+}
+.earn-token .bordered-section .leaderboard-card-div:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.earn-token .leaderboard-row {
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.earn-token .leaderboard-row p {
+  margin: 0;
+  font-size: 18px;
+}
+.earn-token .daily-reward-card-div span {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.earn-token .daily-reward-card-div p {
+  margin: 0;
+  font-size: 16px;
+}
+.earn-token .no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.earn-token .rewards {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.earn-token .bordered-section .leaderboard-card-div:hover {
+  color: #fff;
+}
+.earn-token .bordered-section .flex-row-no-margin {
+  align-items: flex-start;
+}
+
+.text-animate {
+  animation: color-change 5s infinite;
+}
+
+@keyframes color-change {
+  0% {
+    color: rgba(59, 173, 227, 1);
+  }
+  50% {
+    color: rgba(87, 111, 230, 1);
+  }
+  75% {
+    color: rgba(152, 68, 183, 1);
+  }
+  100% {
+    color: rgba(255, 53, 127, 1);
+  }
+}
+.text-animate h1 {
+  font-size: 2rem;
+  margin: 0;
+  text-align: center;
+}
+.text-animate h4 {
+  font-size: 24px;
+  margin: 0;
+}
+.redeem-prizes-page .prizes-card p {
+  margin: 0;
+  font-size: 18px;
+}
+.earn-token .earn-free-tokens-desc-div-full {
+  border: none;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+.earn-token .earn-free-tokens-desc-div {
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.earn-token .earn-free-tokens-desc-div:hover,
+.redeem-prizes-page .prizes_container .prizes-card:hover,
+.raffles-page .leaderboard-card-div:hover,
+.raffles-page .raffles-header-shop-div .raffles-header-shop-card:hover,
+.nft-card-grid .nft-token-row-card:hover,
+.home-page .nft-home-sell-div:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.earn-token .earn-free-tokens-desc-div:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: linear-gradient(#2196f3, #e91e63); */
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+  clip-path: circle(15% at 5% 7%);
+  transition: all 0.5s;
+}
+.raffles-page .raffles-header-shop-div {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  transition: all 0.5s;
+  width: 100%;
+  padding: 40px;
+}
+.raffles-page .raffles-header-shop-div .raffles-header-shop-card {
+  max-width: 100%;
+  width: 100%;
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  transition: all 0.5s;
+  position: relative;
+  overflow: hidden;
+}
+.raffles-page .raffles-header-shop-div .raffles-header-shop-card:hover:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#2196f3, #e91e63);
+  clip-path: circle(10% at 5% 5%);
+}
+.raffles-page .raffles-card-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 40px 0;
+}
+.raffles-page .leaderboard-card-div .ending-soon {
+  color: #fff;
+}
+.nft-card-grid .nft-token-row-card {
+  border: 1px solid #1c1c1c;
+  background: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  margin: 0;
+}
+
+.nft-card-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.nft-page .nft-card-grid p {
+  text-align: start;
+}
+.claim-free-page .feature-overview-div p {
+  line-height: 1.5;
+  text-align: center;
+  font-size: 18px;
+  color: #878d93;
+  margin: 0;
+}
+.nft-card-grid .green-border-6px {
+  border: 1px solid #5ee47e !important;
+}
+.nft-card-grid .pink-border-6px {
+  border: 1px solid #ff206e !important;
+}
+.nft-card-grid .blue-border-6px {
+  border: 1px solid #3a86ff !important;
+}
+/* ***************************************************************************************** */
+.redeem-prizes-page .prizes_container {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 40px 0;
+}
+
+.redeem-prizes-page .prizes_container .prizes-card {
+  margin: 0;
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s;
+  color: #878d93;
+  width: 100%;
+  padding: 30px 20px;
+}
+.redeem-prizes-page .prizes_container .prizes-card:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: linear-gradient(#f00, #f0f); */
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+  clip-path: circle(10% at right 100%);
+  transition: all 0.5s;
+}
+.redeem-prizes-page .prizes_container .prizes-card .prize-name {
+  border: none;
+  background-color: transparent;
+  margin: 0;
+}
+
+.loader-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+}
+
+/* *********************************** btn - design **************************** */
+.available-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.new-btn button {
+  color: #000 !important;
+  background-color: #ffd712 !important;
+  background-image: conic-gradient(from 1turn, #f9ff00, #ffd712) !important;
+  padding: 4px 12px;
+  width: 100%;
+  height: 48px;
+  border-radius: 0.125rem !important;
+  font-weight: 600;
+  font-size: 14px !important;
+  font-family: "Poppins", sans-serif !important;
+  border: none;
+  cursor: pointer;
+}
+
+.new-btn button:hover {
+  background-image: conic-gradient(from 1turn, #ffd712, #f9ff00) !important;
 }
 /********************************************************************************************/
 /************* Media Query ******************/
@@ -2394,7 +2869,8 @@ ul.footer-support li img {
   /* ******************** new responsive ******************** */
 
   .raffles-page .half-page-card-menu-div,
-  .explore-page .erc-card-box {
+  .explore-page .erc-card-box,
+  .raffles-page .raffles-header-shop-div {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .nft-page .nft-token-row-card {
@@ -2411,6 +2887,19 @@ ul.footer-support li img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+  .earn-token .bordered-section .leaderboard-card-box,
+  .raffles-page .raffles-card-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .social-share-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .text-animate h1 {
+    font-size: 28px;
+  }
+  .redeem-prizes-page .prizes_container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -2777,11 +3266,30 @@ ul.footer-support li img {
 
   /* ******************** new responsive ******************** */
   .raffles-page .half-page-card-menu-div,
-  .explore-page .erc-card-box {
+  .explore-page .erc-card-box,
+  .social-share-grid,
+  .redeem-prizes-page .prizes_container,
+  .raffles-page .raffles-header-shop-div {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .raffles-page .raffles-header-shop-div {
+    padding: 0;
+    border: none;
   }
   .explore-page .subheader-btn {
     margin-bottom: 20px;
+  }
+
+  .text-animate h1 {
+    font-size: 18px;
+  }
+  .raffles-page .leaderboard-card-div .ending-soon,
+  .raffles-page .leaderboard-card-div .raffle-data-box {
+    width: 100%;
+  }
+  .raffles-page .min-menu-div {
+    flex-wrap: wrap;
+    gap: 10px;
   }
 }
 
