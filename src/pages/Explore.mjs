@@ -29,21 +29,25 @@ export default function Explore() {
       <main className='main explore-page'>
         <div className='container'>
           <h1 className='title'>EXPLORE THE MARKETPLACE</h1>
-          <div className='flex-row'>
-            <button
-              className='subheader-btn'
-              onClick={(e) =>
-                setSelectedChain(ChainId.BinanceSmartChainMainnet)
-              }
-            >
-              SCROOGE CASINO
-            </button>
-            <button
-              className='subheader-btn'
-              onClick={(e) => setSelectedChain(ChainId.Mainnet)}
-            >
-              DUCKY LUCKS
-            </button>
+          <div className='flex-row explore-btn'>
+            <div className='new-btn'>
+              <button
+                className='subheader-btn'
+                onClick={(e) =>
+                  setSelectedChain(ChainId.BinanceSmartChainMainnet)
+                }
+              >
+                SCROOGE CASINO
+              </button>
+            </div>
+            <div className='new-btn'>
+              <button
+                className='subheader-btn'
+                onClick={(e) => setSelectedChain(ChainId.Mainnet)}
+              >
+                DUCKY LUCKS
+              </button>
+            </div>
           </div>
           <br></br>
           {selectedChain === ChainId.Mainnet ? (
