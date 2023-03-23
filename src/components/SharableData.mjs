@@ -194,7 +194,8 @@ export default function SharableData() {
                   className='min-menu-btn bg-animated'
                   onClick={() => {
                     setShowAITools(true);
-                  }}>
+                  }}
+                >
                   AI TOOLS
                 </button>
               </>
@@ -207,7 +208,8 @@ export default function SharableData() {
                   className='min-menu-btn'
                   onClick={() => {
                     setShowDailyRewards(true);
-                  }}>
+                  }}
+                >
                   DAILY REWARDS
                 </button>
               </>
@@ -220,7 +222,8 @@ export default function SharableData() {
                   className='min-menu-btn'
                   onClick={() => {
                     setShowAffLeaderboards(true);
-                  }}>
+                  }}
+                >
                   LEADERBOARDS
                 </button>
               </>
@@ -233,7 +236,8 @@ export default function SharableData() {
                   className='min-menu-btn'
                   onClick={() => {
                     setShowSocialShare(true);
-                  }}>
+                  }}
+                >
                   SOCIAL SHARING
                 </button>
               </>
@@ -251,7 +255,8 @@ export default function SharableData() {
       affUser?.message?.toString() !== "User not found." ? (
         <div
           className='affiliate-card-div'
-          style={{ backgroundColor: "#1b2129" }}>
+          style={{ backgroundColor: "#1b2129" }}
+        >
           <div className='affiliate-card-row'>
             <div style={{ textAlign: "center" }}>
               <div className='inlineTitle'>
@@ -273,7 +278,8 @@ export default function SharableData() {
                 flexDirection: "column",
                 justifyContent: "space-between",
                 alignSelf: "center",
-              }}>
+              }}
+            >
               <div className='affiliate-card-row'>
                 <div>
                   <strong>ID:</strong> {affUser?.data?.user_id}
@@ -324,7 +330,8 @@ export default function SharableData() {
             <br></br>with one click!<br></br>👇👇👇<br></br>
             <button
               className='submit-btn pulse'
-              onClick={() => createAffUser(user?.id)}>
+              onClick={() => createAffUser(user?.id)}
+            >
               Become an Affiliate
             </button>
           </div>
@@ -347,7 +354,8 @@ export default function SharableData() {
             <div
               className='close-btn-round'
               style={{ width: "45px", marginTop: "0" }}
-              onClick={() => setShowDailyRewards(false)}>
+              onClick={() => setShowDailyRewards(false)}
+            >
               X
             </div>
           </div>
@@ -363,7 +371,8 @@ export default function SharableData() {
             <div
               className='close-btn-round'
               style={{ width: "45px", marginTop: "0" }}
-              onClick={() => setShowAffLeaderboards(false)}>
+              onClick={() => setShowAffLeaderboards(false)}
+            >
               X
             </div>
           </div>
@@ -379,7 +388,8 @@ export default function SharableData() {
             <div
               className='close-btn-round'
               style={{ width: "45px", marginTop: "0" }}
-              onClick={() => setShowAITools(false)}>
+              onClick={() => setShowAITools(false)}
+            >
               X
             </div>
           </div>
@@ -395,13 +405,16 @@ export default function SharableData() {
             <div
               className='close-btn-round'
               style={{ width: "45px", marginTop: "0" }}
-              onClick={() => setShowSocialShare(false)}>
+              onClick={() => setShowSocialShare(false)}
+            >
               X
             </div>
           </div>
           <div className='bordered-section'>
-            <div className='pageTitle' style={{ marginBottom: "20px" }}>
-              <h1>EARN FREE TOKENS</h1>
+            <div className='pageTitless' style={{ marginBottom: "20px" }}>
+              <div className='text-animate'>
+                <h1>EARN FREE TOKENS</h1>
+              </div>
             </div>
             <div className='flex-row'>
               <div className='earn-free-tokens-desc-div'>
@@ -418,11 +431,14 @@ export default function SharableData() {
                 </div>
 
                 <div className='social-share-filter-btns-div'>
-                  <button
-                    className='button2'
-                    onClick={() => getRandomMessage()}>
-                    GIMME A MESSAGE!
-                  </button>
+                  <div className='new-btn'>
+                    <button
+                      // className='btn btn-new'
+                      onClick={() => getRandomMessage()}
+                    >
+                      GIMME A MESSAGE!
+                    </button>
+                  </div>
                 </div>
                 <div>
                   {randomMessage.message ? (
@@ -437,33 +453,38 @@ export default function SharableData() {
                           <FacebookShareButton
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             quote={randomMessage.message}
-                            className='social-share-btn'>
+                            className='social-share-btn'
+                          >
                             <FacebookIcon size={40} round />
                           </FacebookShareButton>
                           <TwitterShareButton
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             title={randomMessage.message}
-                            className='social-share-btn'>
+                            className='social-share-btn'
+                          >
                             <TwitterIcon size={40} round />
                           </TwitterShareButton>
                           <PinterestShareButton
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             description={randomMessage.message}
                             media='https://casino-nft-marketplace.s3.amazonaws.com/affPinterest.jpg'
-                            className='social-share-btn'>
+                            className='social-share-btn'
+                          >
                             <PinterestIcon size={40} round />
                           </PinterestShareButton>
                           <TumblrShareButton
                             title={randomMessage.message}
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             caption='Join me for free at Scrooge Casino and WIN REAL PRIZES!'
-                            className='social-share-btn'>
+                            className='social-share-btn'
+                          >
                             <TumblrIcon size={40} round />
                           </TumblrShareButton>
                           <TelegramShareButton
                             url={`${scroogeClient}/?aff_id=${affUser?.data.user_id}`}
                             title={randomMessage.message}
-                            className='social-share-btn'>
+                            className='social-share-btn'
+                          >
                             <TelegramIcon size={40} round />
                           </TelegramShareButton>
                           <WhatsappShareButton
@@ -478,7 +499,8 @@ export default function SharableData() {
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}
                                             
                                             `}
-                            className='social-share-btn'>
+                            className='social-share-btn'
+                          >
                             <EmailIcon size={40} round />
                           </EmailShareButton>
                         </div>
@@ -486,7 +508,8 @@ export default function SharableData() {
                           <div
                             className='close-btn-round'
                             style={{ margin: "0 auto 30px auto" }}
-                            onClick={() => setRandomMessage([])}>
+                            onClick={() => setRandomMessage([])}
+                          >
                             X
                           </div>
                         </div>
@@ -515,9 +538,14 @@ export default function SharableData() {
                 </div>
 
                 <div className='social-share-filter-btns-div'>
-                  <button className='button2' onClick={() => getAIMessage()}>
-                    CREATE A MESSAGE!
-                  </button>
+                  <div className='new-btn'>
+                    <button
+                      // className='btn btn-new'
+                      onClick={() => getAIMessage()}
+                    >
+                      CREATE A MESSAGE!
+                    </button>
+                  </div>
                 </div>
                 <div>
                   {AIMessage ? (
@@ -532,33 +560,38 @@ export default function SharableData() {
                           <FacebookShareButton
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             quote={randomMessage.message}
-                            className='social-share-btn'>
+                            className='social-share-btn'
+                          >
                             <FacebookIcon size={40} round />
                           </FacebookShareButton>
                           <TwitterShareButton
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             title={randomMessage.message}
-                            className='social-share-btn'>
+                            className='social-share-btn'
+                          >
                             <TwitterIcon size={40} round />
                           </TwitterShareButton>
                           <PinterestShareButton
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             description={randomMessage.message}
                             media='https://casino-nft-marketplace.s3.amazonaws.com/affPinterest.jpg'
-                            className='social-share-btn'>
+                            className='social-share-btn'
+                          >
                             <PinterestIcon size={40} round />
                           </PinterestShareButton>
                           <TumblrShareButton
                             title={randomMessage.message}
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             caption='Join me for free at Scrooge Casino and WIN REAL PRIZES!'
-                            className='social-share-btn'>
+                            className='social-share-btn'
+                          >
                             <TumblrIcon size={40} round />
                           </TumblrShareButton>
                           <TelegramShareButton
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             title={randomMessage.message}
-                            className='social-share-btn'>
+                            className='social-share-btn'
+                          >
                             <TelegramIcon size={40} round />
                           </TelegramShareButton>
                           <WhatsappShareButton
@@ -573,7 +606,8 @@ export default function SharableData() {
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}
                                             
                                             `}
-                            className='social-share-btn'>
+                            className='social-share-btn'
+                          >
                             <EmailIcon size={40} round />
                           </EmailShareButton>
                         </div>
@@ -581,7 +615,8 @@ export default function SharableData() {
                           <div
                             className='close-btn-round'
                             style={{ margin: "0 auto 30px auto" }}
-                            onClick={() => setAIMessage()}>
+                            onClick={() => setAIMessage()}
+                          >
                             X
                           </div>
                         </div>
@@ -596,9 +631,11 @@ export default function SharableData() {
             <div>
               <div
                 className='inlineTitle txt-align-center'
-                style={{ marginBottom: "25px" }}>
+                style={{ marginBottom: "25px" }}
+              >
                 👇 Pre-made messages ready for you to share! 👇
               </div>
+
               {messages.length > 0 ? (
                 <>
                   {messages.map((message) => (
@@ -651,13 +688,15 @@ export default function SharableData() {
                           url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}
                                     
                                     `}
-                          className='social-share-btn'>
-                          <EmailIcon size={40} round />
-                        </EmailShareButton>
+                            className='social-share-btn'
+                          >
+                            <EmailIcon size={40} round />
+                          </EmailShareButton>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </>
+                    ))}
+                  </>
+               
               ) : (
                 <div style={{ width: "100%", textAlign: "center" }}>
                   Messages loading...<br></br>
