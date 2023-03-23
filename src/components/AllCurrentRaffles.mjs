@@ -366,13 +366,15 @@ export default function AllCurrentRaffles() {
                   </div>
                 </div>
               </div>
-              <button
-                className='button4'
-                style={{ width: "60%", margin: "35px auto 0 auto" }}
-                onClick={() => enterRaffle(raffles[0]._id)}
-              >
-                ENTER RAFFLE
-              </button>
+              <div className='new-btn'>
+                <button
+                  // className='button4'
+                  style={{ width: "60%", margin: "35px auto 0 auto" }}
+                  onClick={() => enterRaffle(raffles[0]._id)}
+                >
+                  ENTER RAFFLE
+                </button>
+              </div>
             </div>
           </>
         ) : (
@@ -392,7 +394,9 @@ export default function AllCurrentRaffles() {
             {items.slice(0, 4).map((item, index) => (
               <>
                 <div className='raffles-header-shop-card' key={item + index}>
-                  <div>{item.name}</div>
+                  <div>
+                    <h4>{item.name}</h4>
+                  </div>
                   <div>
                     <img
                       className='card-img'
@@ -417,7 +421,7 @@ export default function AllCurrentRaffles() {
                   <div style={{ fontSize: "12px" }}>
                     (~ ${parseInt(item.price.$numberDecimal)} USD)
                   </div>
-                  <div style={{ marginTop: "15px" }}>
+                  <div className='card-btn' style={{ marginTop: "15px" }}>
                     <button
                       onClick={() =>
                         handlePurchase(
@@ -425,7 +429,7 @@ export default function AllCurrentRaffles() {
                           item._id
                         )
                       }
-                      className='button3 pulse'
+                      className='gradient-btn pulse'
                     >
                       Purchase
                     </button>
@@ -441,7 +445,7 @@ export default function AllCurrentRaffles() {
 
       {raffles.length !== 0 ? (
         <>
-          <div className='min-menu-div' style={{ marginTop: "100px" }}>
+          <div className='min-menu-div' style={{ marginTop: "40px" }}>
             <div>FILTER BY:</div>
             <button
               className='min-menu-btn'
@@ -545,13 +549,15 @@ export default function AllCurrentRaffles() {
                       </div>
                     </div>
                   </div>
-                  <button
-                    className='button4'
-                    style={{ width: "60%", margin: "35px auto 0 auto" }}
-                    onClick={() => enterRaffle(raffle._id)}
-                  >
-                    ENTER RAFFLE
-                  </button>
+                  <div className='new-btn'>
+                    <button
+                      // className='button4'
+                      style={{ width: "60%", margin: "35px auto 0 auto" }}
+                      onClick={() => enterRaffle(raffle._id)}
+                    >
+                      ENTER RAFFLE
+                    </button>
+                  </div>
                   <div
                     className='fine-print-txt'
                     style={{ marginTop: "15px", color: "darkgray" }}
