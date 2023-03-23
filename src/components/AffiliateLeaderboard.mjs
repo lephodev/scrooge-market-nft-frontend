@@ -129,11 +129,13 @@ export default function AffiliateLeaderboard() {
     getData();
   }, []);
 
+  console.log("userrr",user);
   return (
     <>
-      {showLeaderboards ? (
-        <div className='bordered-section '>
-          <div className='flex-row-no-margin leaderboard-card-box'>
+      {showLeaderboards   ? (
+        
+        <div className='bordered-section'>
+          <div className='flex-row-no-margin'>
             {leaderboardByCount !== "Error" ? (
               <>
                 <div className='leaderboard-card-div'>
