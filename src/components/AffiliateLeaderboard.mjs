@@ -129,9 +129,11 @@ export default function AffiliateLeaderboard() {
     getData();
   }, []);
 
+  console.log("userrr",user);
   return (
     <>
-      {showLeaderboards ? (
+      {showLeaderboards   ? (
+        
         <div className='bordered-section'>
           <div className='flex-row-no-margin'>
             {leaderboardByCount !== "Error" ? (
