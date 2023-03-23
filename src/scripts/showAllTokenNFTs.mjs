@@ -49,6 +49,7 @@ export default function ShowAllTokenNFTs() {
     setBuyLoading(true);
     qty = 1;
     try {
+      console.log("token_id, qty",token_id, qty,"address",address,"userId",user?.id,"affID",affID);
       await contract.buyoutListing(token_id, qty);
       marketPlaceInstance()
         .get(
@@ -129,13 +130,14 @@ export default function ShowAllTokenNFTs() {
   useEffect(() => {
     function getAffData() {
       const q = searchParams.get("aff_id");
+      console.log("q",q);
       if (q) {
         setAffID(q);
         const aff_id = Cookies.set("aff_id", q);
         console.log("cookie: ", aff_id);
       } else {
         const aff_id = Cookies.get("aff_id", { domain: scroogeClient }); //change before going live
-        //console.log('cookie: ',aff_id);
+        console.log('cookie=====>>>>>: ',aff_id);
         if (aff_id) {
           setAffID(aff_id);
         }
@@ -143,6 +145,8 @@ export default function ShowAllTokenNFTs() {
     }
     getAffData();
   }, [searchParams]);
+
+console.log("AffIdd",affID);
 
   return (
     <div>
