@@ -16,7 +16,7 @@ function RedeemPrizes() {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
   let prizesReceived = 0;
-  const { user, loading,setUser } = useContext(AuthContext);
+  const { user, loading, setUser } = useContext(AuthContext);
   console.log("user", user, loading);
   useEffect(() => {
     getCoinGeckoDataOG();
@@ -39,7 +39,7 @@ function RedeemPrizes() {
   const [JR1000, setJR1000] = useState();
   const [JR5000, setJR5000] = useState();
   const [JR10000, setJR10000] = useState();
-  const [cookies] = useCookies(['token']);
+  const [cookies] = useCookies(["token"]);
   const address = useAddress();
 
   async function getPrizes() {
@@ -139,28 +139,28 @@ function RedeemPrizes() {
       });
   }
 
-  const getUserDataInstant=()=>{
+  const getUserDataInstant = () => {
     console.log("abbababababbababa");
     let access_token = cookies.token;
-    authInstance().get('/auth/check-auth',{
-      headers:{
-        Authorization: `Bearer ${access_token}`
-      }
-    }).then((res)=>{ 
-    console.log("convertedData",res)
-    if(res.data.user){
-        console.log("user", res.data)
-        setUser({
-          ...res.data.user
-       });
-      } 
-    }).catch((err) => {
-      console.log("error ", err)
-      
-    })
-    
-  
-}
+    authInstance()
+      .get("/auth/check-auth", {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((res) => {
+        console.log("convertedData", res);
+        if (res.data.user) {
+          console.log("user", res.data);
+          setUser({
+            ...res.data.user,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log("error ", err);
+      });
+  };
   const RedeemPrize = async (prize_id) => {
     if (!user)
       return toast.error("Please login first", { containerId: "login" });
@@ -172,7 +172,7 @@ function RedeemPrizes() {
     console.log("add", address);
     console.log("user.id", user.id);
     console.log("prize_id", prize_id);
-    console.log("address",address)
+    console.log("address", address);
     setRedeemLoading(true);
     marketPlaceInstance()
       .get(`/redeemPrize/${address}/${user.id}/${prize_id}`)
@@ -189,12 +189,10 @@ function RedeemPrizes() {
           toast.error("ERROR! - " + data.data, { containerId: "error" });
         } else if (data.data === "Not Enough Tickets") {
           toast.error("ERROR! - " + data.data, { containerId: "error" });
-        }
-        
-        else {
+        } else {
           setRedeemSuccess(false);
-          toast.success(data.data+' redeemed successfully!');
-          getUserDataInstant()
+          toast.success(data.data + " redeemed successfully!");
+          getUserDataInstant();
         }
       })
       .catch((err) => {
@@ -265,30 +263,38 @@ function RedeemPrizes() {
               )}
             </div>
             <div className='page-nav-header-btns-row'>
-              <button
-                className='page-nav-header-btn'
-                onClick={() => filterPrizes("Badges")}
-              >
-                BADGES
-              </button>
-              <button
-                className='page-nav-header-btn'
-                onClick={() => filterPrizes("Crypto")}
-              >
-                CRYPTO
-              </button>
-              <button
-                className='page-nav-header-btn'
-                onClick={() => filterPrizes("Merch")}
-              >
-                MERCH
-              </button>
-              <button
-                className='page-nav-header-btn'
-                onClick={() => filterPrizes("NFTs")}
-              >
-                NFTS
-              </button>
+              <div className='new-btn'>
+                <button
+                  // className='page-nav-header-btn'
+                  onClick={() => filterPrizes("Badges")}
+                >
+                  BADGES
+                </button>
+              </div>
+              <div className='new-btn'>
+                <button
+                  // className='page-nav-header-btn'
+                  onClick={() => filterPrizes("Crypto")}
+                >
+                  CRYPTO
+                </button>
+              </div>
+              <div className='new-btn'>
+                <button
+                  // className='page-nav-header-btn'
+                  onClick={() => filterPrizes("Merch")}
+                >
+                  MERCH
+                </button>
+              </div>
+              <div className='new-btn'>
+                <button
+                  // className='page-nav-header-btn'
+                  onClick={() => filterPrizes("NFTs")}
+                >
+                  NFTS
+                </button>
+              </div>
             </div>
             <div className='page-nav-header-btns-subrow'>
               <button
@@ -340,7 +346,7 @@ function RedeemPrizes() {
                       <div className='prizes-card' key={prize._id}>
                         {!prize.isDynamic ? (
                           <div className='prize-name bold text-animate'>
-                            <h1>{prize.name}</h1>
+                            <h4>{prize.name}</h4>
                           </div>
                         ) : (
                           <></>
@@ -484,14 +490,16 @@ function RedeemPrizes() {
                         />
                         <br></br>
                         <div className='prize-cost'>
-                          Cost: {prize.price} Tickets
+                          <p>Cost: {prize.price} Tickets</p>
                         </div>
                         <br></br>
-                        Category: {prize.category}
+                        <p>Category: {prize.category}</p>
                         <br></br>
-                        <br></br>
+
                         {!prize.isDynamic ? (
-                          <div>{prize.description}</div>
+                          <div>
+                            <p>{prize.description}</p>
+                          </div>
                         ) : (
                           <></>
                         )}
@@ -635,12 +643,16 @@ function RedeemPrizes() {
                         ) : (
                           <></>
                         )}
-                        <button
-                          className='submit-btn'
-                          onClick={() => RedeemPrize(prize._id)}
-                        >
-                          REDEEM PRIZE
-                        </button>
+                        <br />
+                        <div className='new-btn'>
+                          <button
+                            // className='submit-btn'
+                            onClick={() => RedeemPrize(prize._id)}
+                          >
+                            REDEEM PRIZE
+                          </button>
+                        </div>
+
                         <br></br>
                       </div>
                     ))}

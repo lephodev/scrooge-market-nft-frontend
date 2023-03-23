@@ -141,16 +141,22 @@ export default function AffiliateLeaderboard() {
                     className='pageTitless text-animate'
                     style={{ marginBottom: "20px" }}
                   >
-                    <h1>Affiliate Sales Leaders</h1>
+                    <h4>Affiliate Sales Leaders</h4>
                   </div>
                   {leaderboardByCount !== "No Entries Found For User" &&
                   leaderboardByCount !== "Error in Request Process" &&
                   leaderboardByCount.length ? (
                     leaderboardByCount.map((lead, index) => (
                       <div className='leaderboard-row' key={lead._id}>
-                        <div>{index + 1}.</div>
-                        <div>Affiliate ID: {lead._id}</div>
-                        <div># of Sales: {lead.count}</div>
+                        <div>
+                          <p>{index + 1}.</p>
+                        </div>
+                        <div>
+                          <p>Affiliate ID: {lead._id}</p>
+                        </div>
+                        <div>
+                          <p># of Sales: {lead.count}</p>
+                        </div>
                       </div>
                     ))
                   ) : (
@@ -171,16 +177,22 @@ export default function AffiliateLeaderboard() {
                     className='pageTitless text-animate'
                     style={{ marginBottom: "20px" }}
                   >
-                    <h1>Affiliate Tokens Leaders</h1>
+                    <h4>Affiliate Tokens Leaders</h4>
                   </div>
                   {leaderboardByTokens !== "No Entries Found For User" &&
                   leaderboardByTokens !== "Error in Request Process" &&
                   leaderboardByTokens.length ? (
                     leaderboardByTokens.map((lead, index) => (
                       <div className='leaderboard-row' key={lead._id}>
-                        <div>{index + 1}.</div>
-                        <div>Affiliate ID: {lead._id}</div>
-                        <div>Earned: {lead.totalCommission} Tokens</div>
+                        <div>
+                          <p>{index + 1}.</p>
+                        </div>
+                        <div>
+                          <p>Affiliate ID: {lead._id}</p>
+                        </div>
+                        <div>
+                          <p>Earned: {lead.totalCommission} Tokens</p>
+                        </div>
                       </div>
                     ))
                   ) : (
@@ -202,7 +214,7 @@ export default function AffiliateLeaderboard() {
                     className='pageTitlesss text-animate'
                     style={{ marginBottom: "20px" }}
                   >
-                    <h1>Hottest Newcomers</h1>
+                    <h4>Hottest Newcomers</h4>
                   </div>
                   {leaderboardHottestNewcomers !==
                     "No Entries Found For User" &&
@@ -210,9 +222,15 @@ export default function AffiliateLeaderboard() {
                   leaderboardHottestNewcomers.length ? (
                     leaderboardHottestNewcomers.map((lead, index) => (
                       <div className='leaderboard-row' key={lead._id}>
-                        <div>{index + 1}.</div>
-                        <div>Affiliate ID: {lead._id}</div>
-                        <div>Earned: {lead.totalCommission} Tokens</div>
+                        <div>
+                          <p>{index + 1}.</p>
+                        </div>
+                        <div>
+                          <p>Affiliate ID: {lead._id}</p>
+                        </div>
+                        <div>
+                          <p>Earned: {lead.totalCommission} Tokens</p>
+                        </div>
                       </div>
                     ))
                   ) : (
@@ -234,16 +252,22 @@ export default function AffiliateLeaderboard() {
                     className='pageTitless text-animate'
                     style={{ marginBottom: "20px" }}
                   >
-                    <h1>Monthly Movers</h1>
+                    <h4>Monthly Movers</h4>
                   </div>
                   {leaderboardMonthlyMovers !== "No Entries Found For User" &&
                   leaderboardMonthlyMovers !== "Error in Request Process" &&
                   leaderboardMonthlyMovers.length ? (
                     leaderboardMonthlyMovers.map((lead, index) => (
                       <div className='leaderboard-row' key={lead._id}>
-                        <div>{index + 1}.</div>
-                        <div>Affiliate ID: {lead._id}</div>
-                        <div>Earned: {lead.totalCommission} Tokens</div>
+                        <div>
+                          <p>{index + 1}.</p>
+                        </div>
+                        <div>
+                          <p>Affiliate ID: {lead._id}</p>
+                        </div>
+                        <div>
+                          <p>Earned: {lead.totalCommission} Tokens</p>
+                        </div>
                       </div>
                     ))
                   ) : (
@@ -264,16 +288,22 @@ export default function AffiliateLeaderboard() {
                     className='pageTitless text-animate'
                     style={{ marginBottom: "20px" }}
                   >
-                    <h1>Top User Referrals</h1>
+                    <h4>Top User Referrals</h4>
                   </div>
                   {leaderboardTopRegisters !== "No Entries Found For User" &&
                   leaderboardTopRegisters !== "Error in Request Process" &&
                   leaderboardTopRegisters.length ? (
                     leaderboardTopRegisters.map((lead, index) => (
                       <div className='leaderboard-row' key={lead._id}>
-                        <div>{index + 1}.</div>
-                        <div>Affiliate ID: {lead._id}</div>
-                        <div>Earned: {lead.totalCommission} Tokens</div>
+                        <div>
+                          <p>{index + 1}.</p>
+                        </div>
+                        <div>
+                          <p>Affiliate ID: {lead._id}</p>
+                        </div>
+                        <div>
+                          <p>Earned: {lead.totalCommission} Tokens</p>
+                        </div>
                       </div>
                     ))
                   ) : (
@@ -295,16 +325,22 @@ export default function AffiliateLeaderboard() {
                     className='pageTitless text-animate'
                     style={{ marginBottom: "20px" }}
                   >
-                    <h1>Top Product Sales</h1>
+                    <h4>Top Product Sales</h4>
                   </div>
                   {leaderboardTopSales !== "No Entries Found For User" &&
                   leaderboardTopSales !== "Error in Request Process" &&
                   leaderboardTopSales.length ? (
                     leaderboardTopSales.map((lead, index) => (
                       <div className='leaderboard-row' key={lead._id}>
-                        <div>{index + 1}.</div>
-                        <div>Affiliate ID: {lead._id}</div>
-                        <div>Earned: {lead.totalCommission} Tokens</div>
+                        <div>
+                          <p>{index + 1}.</p>
+                        </div>
+                        <div>
+                          <p>Affiliate ID: {lead._id}</p>
+                        </div>
+                        <div>
+                          <p>Earned: {lead.totalCommission} Tokens</p>
+                        </div>
                       </div>
                     ))
                   ) : (

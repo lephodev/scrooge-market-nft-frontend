@@ -2285,6 +2285,10 @@ ul.footer-support li img {
 .redeem-prizes-page .page-nav-header-btns-row {
   gap: 20px;
 }
+.redeem-prizes-page .page-nav-header-subbtn {
+  background-color: transparent;
+  border: 1px solid yellow;
+}
 .home-page .nft-home-sell-div {
   border: 1px solid #1c1c1c;
   background: transparent;
@@ -2450,6 +2454,9 @@ ul.footer-support li img {
   text-align: start;
   padding: 20px 10px;
 }
+.earn-token .bordered-section .leaderboard-card-div h4 {
+  text-align: center;
+}
 .earn-token .bordered-section .leaderboard-card-div:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
@@ -2457,10 +2464,28 @@ ul.footer-support li img {
   align-items: flex-start;
   flex-wrap: wrap;
 }
+.earn-token .leaderboard-row p {
+  margin: 0;
+  font-size: 18px;
+}
+.earn-token .daily-reward-card-div span {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.earn-token .daily-reward-card-div p {
+  margin: 0;
+  font-size: 16px;
+}
 .earn-token .no-data {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.earn-token .rewards {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .earn-token .bordered-section .leaderboard-card-div:hover {
   color: #fff;
@@ -2491,6 +2516,14 @@ ul.footer-support li img {
   font-size: 2rem;
   margin: 0;
   text-align: center;
+}
+.text-animate h4 {
+  font-size: 24px;
+  margin: 0;
+}
+.redeem-prizes-page .prizes-card p {
+  margin: 0;
+  font-size: 18px;
 }
 .earn-token .earn-free-tokens-desc-div-full {
   border: none;
@@ -2588,6 +2621,16 @@ ul.footer-support li img {
   flex-direction: column;
   gap: 20px;
 }
+.nft-page .nft-card-grid p {
+  text-align: start;
+}
+.claim-free-page .feature-overview-div p {
+  line-height: 1.5;
+  text-align: center;
+  font-size: 18px;
+  color: #878d93;
+  margin: 0;
+}
 .nft-card-grid .green-border-6px {
   border: 1px solid #5ee47e !important;
 }
@@ -2626,8 +2669,14 @@ ul.footer-support li img {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(#f00, #f0f);
-  clip-path: circle(20% at right 100%);
+  /* background: linear-gradient(#f00, #f0f); */
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+  clip-path: circle(10% at right 100%);
   transition: all 0.5s;
 }
 .redeem-prizes-page .prizes_container .prizes-card .prize-name {
