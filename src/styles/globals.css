@@ -2776,7 +2776,8 @@ ul.footer-support li img {
   margin: 0;
 }
 .my-wallet-page .full-page-container,
-.earn-token .social-share-card {
+.earn-token .social-share-card,
+.claim-free-page .prizes-card .prize-name {
   border: 1px solid #1c1c1c;
   background-color: transparent;
   box-shadow: 0px 20px 20px #00000091;
@@ -2816,6 +2817,8 @@ ul.footer-support li img {
 .explore-page .explore-btn {
   display: flex;
   gap: 30px;
+}
+.claim-free-page .prizes-card .prize-name {
 }
 /* *********************************** btn - design **************************** */
 .available-btn {
@@ -3473,6 +3476,12 @@ ul.footer-support li img {
     gap: 10px;
   }
   .nft-page .nft-token-row-card {
+    width: 100%;
+  }
+  .text-animate h4 {
+    text-align: center;
+  }
+  .redeem-prizes-page .prizes_container .prizes-card .prize-name {
     width: 100%;
   }
 }
