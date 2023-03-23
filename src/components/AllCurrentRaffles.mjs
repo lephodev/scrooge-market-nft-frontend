@@ -282,8 +282,14 @@ export default function AllCurrentRaffles() {
               Winning big with Scrooge Raffles is as easy as 1, 2, 3!
             </div>
             <div className='flex-row-no-margin' style={{ marginTop: "25px" }}>
-              <div className='feature-overview-block'>1. BUY TICKETS</div>
-              <div className='feature-overview-block'>2. CHOOSE RAFFLE</div>
+              {/* <div className='feature-overview-block'>1. BUY TICKETS</div> */}
+              {/* <div className='feature-overview-block'>2. CHOOSE RAFFLE</div> */}
+              <div className='new-btn'>
+                <button>1. BUY TICKETS</button>
+              </div>
+              <div className='new-btn'>
+                <button>2. CHOOSE RAFFLE</button>
+              </div>
               <div
                 className='feature-overview-block bg-animated2'
                 style={{ fontWeight: "bold" }}
@@ -303,7 +309,10 @@ export default function AllCurrentRaffles() {
               <div className='teeter'>
                 <div className='ending-soon bg-animated3'>ENDING SOON</div>
               </div>
-              <div className='pageTitle' style={{ marginBottom: "-20px" }}>
+              <div
+                className='pageTitless text-animate'
+                style={{ marginBottom: "-20px" }}
+              >
                 <h1>{raffles[0].prize_details.name}</h1>
               </div>
               <div className='flex-row-no-margin'>
@@ -373,7 +382,10 @@ export default function AllCurrentRaffles() {
 
       {items.length !== 0 && currentPriceOG ? (
         <>
-          <div className='pageTitle' style={{ marginBottom: "0px" }}>
+          <div
+            className='pageTitless text-animate'
+            style={{ marginBottom: "20px" }}
+          >
             <h1>BUY SCROOGE RAFFLE ENTRY NFTS</h1>
           </div>
           <div className='raffles-header-shop-div'>
@@ -466,17 +478,20 @@ export default function AllCurrentRaffles() {
           </div>
 
           <div className='bordered-section'>
-            <div className='pageTitle'>
+            <div className='pageTitless text-animate'>
               <h1>CURRENT RAFFLES</h1>
             </div>
-            <div className='flex-row-no-margin'>
+            <div className='flex-row-no-margin raffles-card-grid'>
               {raffles.map((raffle) => (
                 <div className='leaderboard-card-div' key={raffle._id}>
                   <div className='teeter'>
                     <strong>ENTER TO WIN!</strong>
                   </div>
 
-                  <div className='pageTitle' style={{ marginBottom: "-20px" }}>
+                  <div
+                    className='pageTitless text-animate'
+                    style={{ marginBottom: "-20px" }}
+                  >
                     <h1>{raffle.prize_details.name}</h1>
                   </div>
                   <div className='flex-row-no-margin'>
