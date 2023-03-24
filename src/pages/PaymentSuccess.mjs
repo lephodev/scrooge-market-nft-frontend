@@ -44,6 +44,7 @@ export default function PaymentSuccess() {
                       />
                     </svg>
                   </div>
+                  <div class='check-shadow'></div>
                 </div>
               </div>
               <h1>Success</h1>
