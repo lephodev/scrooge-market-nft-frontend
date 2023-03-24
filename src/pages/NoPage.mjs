@@ -1,14 +1,13 @@
+import LoadingPoker from "../images/scroogeHatLogo.png";
+
 const NoPage = () => {
   return (
-    <h1
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      404
-    </h1>
+    <div className='no-page'>
+      <h1>
+        4
+        <img src={LoadingPoker} alt='game' className='imageAnimation' />4
+      </h1>
+    </div>
   );
 };
 
