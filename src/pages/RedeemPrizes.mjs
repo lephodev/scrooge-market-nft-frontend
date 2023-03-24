@@ -236,22 +236,23 @@ function RedeemPrizes() {
             ) : (
               <></>
             )}
+            <div className='scrooge-main-heading'>
+              <div className='pageTitle'>
+                <h1 className='title'>Redeem for Prizes</h1>
+              </div>
+              <div className='feature-overview-div'>
+                Ready to cash in on all of your big wins? Browse through our
+                huge list of amazing prizes and find something you just can't
+                live without. Make sure you have enough available tickets for
+                the prize you want, then click the REDEEM PRIZE button!
+              </div>
+            </div>
 
-            <div className='pageTitle'>
-              <h1 className='title'>Redeem for Prizes</h1>
-            </div>
-            <div
-              className='feature-overview-div'
-              style={{ marginBottom: "30px" }}
-            >
-              Ready to cash in on all of your big wins? Browse through our huge
-              list of amazing prizes and find something you just can't live
-              without. Make sure you have enough available tickets for the prize
-              you want, then click the REDEEM PRIZE button!
-            </div>
             <div className='prizes-chip-count'>
               {user ? (
-                <>Your Ticket Balance: {user?.ticket.toFixed(2)}</>
+                <>
+                  <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
+                </>
               ) : (
                 <>
                   <img
