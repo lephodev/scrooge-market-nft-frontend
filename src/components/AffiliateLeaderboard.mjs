@@ -145,6 +145,7 @@ export default function AffiliateLeaderboard() {
                   >
                     <h4>Affiliate Sales Leaders</h4>
                   </div>
+                  {console.log("leaderboardByCount",leaderboardByCount)}
                   {leaderboardByCount !== "No Entries Found For User" &&
                   leaderboardByCount !== "Error in Request Process" &&
                   leaderboardByCount.length ? (
