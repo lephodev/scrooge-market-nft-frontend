@@ -162,6 +162,7 @@ function RedeemPrizes() {
       });
   };
   const RedeemPrize = async (prize_id) => {
+    console.log("prize_id",prize_id);
     if (!user)
       return toast.error("Please login first", { containerId: "login" });
     if (!address)
