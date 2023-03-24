@@ -74,7 +74,12 @@ function HolderClaimChips() {
       marketPlaceInstance()
         .get(`/claimHolderTokens/${address}/${user.id}`)
         .then(async (data) => {
-          notify("Tokens Claimed: " + data.data);
+         if(data?.data?.code===200){
+          toast.success("Tokens Claimed: " + data?.data?.data);
+         }
+         else {
+          toast.error("Tokens Claimed: " + data.data.msg);
+         }
           setBuyLoading(false);
           reward();
           zzz();
