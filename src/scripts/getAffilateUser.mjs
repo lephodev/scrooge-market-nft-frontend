@@ -13,9 +13,10 @@ export default async function getAffiliateUser(user_id) {
   } catch (err) {
     console.error(err);
   }
-  //console.log("data: ", affilateUser);
+  console.log("data: ", affilateUser);
   return affilateUser;
 }
+
 
 export async function createAffiliateUser(user_id) {
   const createAffiliateUserData = async () => {
