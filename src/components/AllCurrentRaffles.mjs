@@ -282,8 +282,14 @@ export default function AllCurrentRaffles() {
               Winning big with Scrooge Raffles is as easy as 1, 2, 3!
             </div>
             <div className='flex-row-no-margin' style={{ marginTop: "25px" }}>
-              <div className='feature-overview-block'>1. BUY TICKETS</div>
-              <div className='feature-overview-block'>2. CHOOSE RAFFLE</div>
+              {/* <div className='feature-overview-block'>1. BUY TICKETS</div> */}
+              {/* <div className='feature-overview-block'>2. CHOOSE RAFFLE</div> */}
+              <div className='new-btn'>
+                <button>1. BUY TICKETS</button>
+              </div>
+              <div className='new-btn'>
+                <button>2. CHOOSE RAFFLE</button>
+              </div>
               <div
                 className='feature-overview-block bg-animated2'
                 style={{ fontWeight: "bold" }}
@@ -303,7 +309,10 @@ export default function AllCurrentRaffles() {
               <div className='teeter'>
                 <div className='ending-soon bg-animated3'>ENDING SOON</div>
               </div>
-              <div className='pageTitle' style={{ marginBottom: "-20px" }}>
+              <div
+                className='pageTitless text-animate'
+                style={{ marginBottom: "-20px" }}
+              >
                 <h1>{raffles[0].prize_details.name}</h1>
               </div>
               <div className='flex-row-no-margin'>
@@ -357,13 +366,15 @@ export default function AllCurrentRaffles() {
                   </div>
                 </div>
               </div>
-              <button
-                className='button4'
-                style={{ width: "60%", margin: "35px auto 0 auto" }}
-                onClick={() => enterRaffle(raffles[0]._id)}
-              >
-                ENTER RAFFLE
-              </button>
+              <div className='new-btn'>
+                <button
+                  // className='button4'
+                  style={{ width: "60%", margin: "35px auto 0 auto" }}
+                  onClick={() => enterRaffle(raffles[0]._id)}
+                >
+                  ENTER RAFFLE
+                </button>
+              </div>
             </div>
           </>
         ) : (
@@ -373,14 +384,19 @@ export default function AllCurrentRaffles() {
 
       {items.length !== 0 && currentPriceOG ? (
         <>
-          <div className='pageTitle' style={{ marginBottom: "0px" }}>
+          <div
+            className='pageTitless text-animate'
+            style={{ marginBottom: "20px" }}
+          >
             <h1>BUY SCROOGE RAFFLE ENTRY NFTS</h1>
           </div>
           <div className='raffles-header-shop-div'>
             {items.slice(0, 4).map((item, index) => (
               <>
                 <div className='raffles-header-shop-card' key={item + index}>
-                  <div>{item.name}</div>
+                  <div>
+                    <h4>{item.name}</h4>
+                  </div>
                   <div>
                     <img
                       className='card-img'
@@ -405,7 +421,7 @@ export default function AllCurrentRaffles() {
                   <div style={{ fontSize: "12px" }}>
                     (~ ${parseInt(item.price.$numberDecimal)} USD)
                   </div>
-                  <div style={{ marginTop: "15px" }}>
+                  <div className='card-btn' style={{ marginTop: "15px" }}>
                     <button
                       onClick={() =>
                         handlePurchase(
@@ -413,7 +429,7 @@ export default function AllCurrentRaffles() {
                           item._id
                         )
                       }
-                      className='button3 pulse'
+                      className='gradient-btn pulse'
                     >
                       Purchase
                     </button>
@@ -429,7 +445,7 @@ export default function AllCurrentRaffles() {
 
       {raffles.length !== 0 ? (
         <>
-          <div className='min-menu-div' style={{ marginTop: "100px" }}>
+          <div className='min-menu-div' style={{ marginTop: "40px" }}>
             <div>FILTER BY:</div>
             <button
               className='min-menu-btn'
@@ -466,17 +482,20 @@ export default function AllCurrentRaffles() {
           </div>
 
           <div className='bordered-section'>
-            <div className='pageTitle'>
+            <div className='pageTitless text-animate'>
               <h1>CURRENT RAFFLES</h1>
             </div>
-            <div className='flex-row-no-margin'>
+            <div className='flex-row-no-margin raffles-card-grid'>
               {raffles.map((raffle) => (
                 <div className='leaderboard-card-div' key={raffle._id}>
                   <div className='teeter'>
                     <strong>ENTER TO WIN!</strong>
                   </div>
 
-                  <div className='pageTitle' style={{ marginBottom: "-20px" }}>
+                  <div
+                    className='pageTitless text-animate'
+                    style={{ marginBottom: "-20px" }}
+                  >
                     <h1>{raffle.prize_details.name}</h1>
                   </div>
                   <div className='flex-row-no-margin'>
@@ -530,13 +549,15 @@ export default function AllCurrentRaffles() {
                       </div>
                     </div>
                   </div>
-                  <button
-                    className='button4'
-                    style={{ width: "60%", margin: "35px auto 0 auto" }}
-                    onClick={() => enterRaffle(raffle._id)}
-                  >
-                    ENTER RAFFLE
-                  </button>
+                  <div className='new-btn'>
+                    <button
+                      // className='button4'
+                      style={{ width: "60%", margin: "35px auto 0 auto" }}
+                      onClick={() => enterRaffle(raffle._id)}
+                    >
+                      ENTER RAFFLE
+                    </button>
+                  </div>
                   <div
                     className='fine-print-txt'
                     style={{ marginTop: "15px", color: "darkgray" }}

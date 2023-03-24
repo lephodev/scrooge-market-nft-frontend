@@ -298,14 +298,14 @@ function DailyRewards() {
         <>
           {!nextClaimDate.nextClaimDate ? (
             <div className='daily-reward-card-div'>
-              {console.log("nextdate", nextClaimDate.nextClaimDate)}
               <div className='inlineTitle'>DAILY REWARDS</div>
-              <div>
-                <strong>Last Claim Amount:</strong> {nextClaimDate.qty} Tokens
+              <div className='rewards'>
+                <span>Last Claim Amount:</span>{" "}
+                <p>{nextClaimDate.qty} Tokens</p>
               </div>
-              <div>
-                <strong>Consecutive:</strong> {nextClaimDate.consecutive_days}{" "}
-                day
+              <div className='rewards'>
+                <span>Consecutive:</span>{" "}
+                <p>{nextClaimDate.consecutive_days} day</p>
                 {nextClaimDate.consecutive_days >= 2 ||
                 nextClaimDate.consecutive_days === 0 ? (
                   <>s</>
@@ -313,15 +313,18 @@ function DailyRewards() {
                   <></>
                 )}
               </div>
-              <div>
-                <strong>Available:</strong>{" "}
+              <div className='available-btn'>
+                <span>Available:</span>{" "}
                 <Countdown date={nextClaimDate.nextClaimDate}>
-                  <button
+                  {/* <button
                     className='button-inline'
                     style={{ marginLeft: "20px" }}
                     onClick={() => claimTokens()}>
                     Claim NOW
-                  </button>
+                  </button> */}
+                  <div className='new-btn'>
+                    <button>Claim NOW</button>
+                  </div>
                 </Countdown>
               </div>
             </div>
