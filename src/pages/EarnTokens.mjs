@@ -1,21 +1,17 @@
-import SharableData from '../components/SharableData.mjs';
+import SharableData from "../components/SharableData.mjs";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
-import Layout from './Layout.mjs';
-
-
+import Layout from "./Layout.mjs";
 
 export default function EarnTokens() {
-
   return (
     <Layout>
-    <div className="">
-      <main className="main">
-        <SharableData />
-        <div style={{height: '100px'}}></div>
-        <ShowBottomNavCards />
-
-      </main>
-    </div>
+      <div className='container'>
+        <main className='main earn-token'>
+          <SharableData />
+          <div style={{ height: "100px" }}></div>
+          <ShowBottomNavCards />
+        </main>
+      </div>
     </Layout>
   );
 }

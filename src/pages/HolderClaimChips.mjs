@@ -74,7 +74,12 @@ function HolderClaimChips() {
       marketPlaceInstance()
         .get(`/claimHolderTokens/${address}/${user.id}`)
         .then(async (data) => {
-          notify("Tokens Claimed: " + data.data);
+         if(data?.data?.code===200){
+          toast.success("Tokens Claimed: " + data?.data?.data);
+         }
+         else {
+          toast.error("Tokens Claimed: " + data.data.msg);
+         }
           setBuyLoading(false);
           reward();
           zzz();
@@ -167,16 +172,18 @@ function HolderClaimChips() {
                 <div className='prizes-card'>
                   {OGBalance ? (
                     <div className='holder-claim-details'>
-                      Scrooge Coin Balance: {OGBalance.toLocaleString("en-US")}
+                      <h4> Scrooge Coin Balance:</h4>
+                      {OGBalance.toLocaleString("en-US")}
                     </div>
                   ) : (
                     <div className='holder-claim-details'>
-                      Scrooge Coin Balance: {OGBalance}
+                      <h4> Scrooge Coin Balance:</h4> {OGBalance}
                     </div>
                   )}
 
                   <div className='holder-claim-details'>
-                    Scrooge Coin Price: ${parseFloat(currentPrice).toFixed(10)}
+                    <h4>Scrooge Coin Price:</h4> $
+                    {parseFloat(currentPrice).toFixed(10)}
                   </div>
                   <br></br>
 
@@ -207,16 +214,18 @@ function HolderClaimChips() {
                   {(new Date(nextClaimDate) <= new Date() ||
                     nextClaimDate === "No Entries Found") &&
                   OGBalance > 0 ? (
-                    <button
-                      className='submit-btn'
-                      onClick={() => claimTokens()}
-                    >
-                      Claim{" "}
-                      {(OGBalance * currentPrice * 0.1)
-                        .toFixed(0)
-                        .toLocaleString("en-US")}{" "}
-                      Tokens
-                    </button>
+                    <div className='new-btn'>
+                      <button
+                        // className='submit-btn'
+                        onClick={() => claimTokens()}
+                      >
+                        Claim{" "}
+                        {(OGBalance * currentPrice * 0.1)
+                          .toFixed(0)
+                          .toLocaleString("en-US")}{" "}
+                        Tokens
+                      </button>
+                    </div>
                   ) : (
                     <>
                       <div className='prize-name'>
