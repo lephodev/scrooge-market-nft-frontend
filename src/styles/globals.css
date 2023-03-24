@@ -2960,6 +2960,57 @@ ul.footer-support li img {
   font-weight: 600;
   color: #fbff12;
 }
+/* ************************** success page *************************************** */
+.payment-success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.payment-success i {
+  color: #9abc66;
+  font-size: 100px;
+  line-height: 200px;
+  margin-left: -15px;
+}
+.payment-success .card-check {
+  border-radius: 200px;
+  height: 150px;
+  width: 150px;
+  margin: 0 auto;
+  /* background-color: #9abc663d; */
+}
+.payment-success .payment-success-card {
+  background: #000;
+  border: 1px solid #1c1c1c;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  padding: 60px;
+  text-align: center;
+  margin: 40px 0;
+}
+.payment-success svg {
+  display: block;
+  color: #9abc66;
+}
+.payment-success .circle {
+  stroke-dasharray: 76;
+  stroke-dashoffset: 76;
+  animation: draw 1s forwards;
+}
+.payment-success .tick {
+  stroke-dasharray: 18;
+  stroke-dashoffset: 18;
+  animation: draw 1s forwards 1s;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
@@ -3597,6 +3648,9 @@ ul.footer-support li img {
     font-size: 8rem;
     font-weight: 600;
     color: #fbff12;
+  }
+  .pageImgContainer {
+    font-size: 28px;
   }
 }
 
