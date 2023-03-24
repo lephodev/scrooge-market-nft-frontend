@@ -327,12 +327,14 @@ export default function SharableData() {
           <div style={{ textAlign: "center" }}>
             Start earning <strong>FREE CASINO TOKENS</strong>
             <br></br>with one click!<br></br>👇👇👇<br></br>
-            <button
-              className='submit-btn pulse'
-              onClick={() => createAffUser(user?.id)}
-            >
-              Become an Affiliate
-            </button>
+            <div className='earn-affiliate-btn'>
+              <button
+                className='gradient-btn pulse'
+                onClick={() => createAffUser(user?.id)}
+              >
+                Become an Affiliate
+              </button>
+            </div>
           </div>
         </div>
       ) : (
