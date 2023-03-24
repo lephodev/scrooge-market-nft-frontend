@@ -9,8 +9,7 @@ export default function PaymentSuccess() {
           <div className='payment-success'>
             <div className='payment-success-card'>
               <div className='card-check'>
-                {/* <i class='checkmark'>✓</i> */}
-                <svg viewBox='0 0 26 26' xmlns='http://www.w3.org/2000/svg'>
+                {/* <svg viewBox='0 0 26 26' xmlns='http://www.w3.org/2000/svg'>
                   <g
                     stroke='currentColor'
                     stroke-width='2'
@@ -28,7 +27,24 @@ export default function PaymentSuccess() {
                       d='M6.5 13.5L10 17 l8.808621-8.308621'
                     />
                   </g>
-                </svg>
+                </svg> */}
+                <div class='check-container'>
+                  <div className='check-background'>
+                    <svg
+                      viewBox='0 0 65 51'
+                      fill='none'
+                      xmlns='http://www.w3.org/2000/svg'
+                    >
+                      <path
+                        d='M7 25L27.3077 44L58.5 7'
+                        stroke='white'
+                        stroke-width='11'
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                      />
+                    </svg>
+                  </div>
+                </div>
               </div>
               <h1>Success</h1>
               <p>
