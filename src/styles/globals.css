@@ -2772,7 +2772,8 @@ ul.footer-support li img {
 .claim-free-page .pageImgContainer,
 .my-wallet-page .pageImgContainer,
 .redeem-prizes-page .pageImgContainer,
-.nft-page .pageImgContainer {
+.nft-page .pageImgContainer,
+.earn-token .pageImgContainer {
   /* background-color: rgb(255 255 255 / 45%); */
   background: rgb(231 201 117 / 50%);
   border: 1px solid #1c1c1c;
@@ -2935,6 +2936,29 @@ ul.footer-support li img {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.earn-affiliate-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ***********************  404 page ************************* */
+.no-page img.imageAnimation {
+  margin: 0;
+}
+
+.no-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.no-page h1 {
+  font-size: 15rem;
+  font-weight: 600;
+  color: #fbff12;
 }
 /********************************************************************************************/
 /************* Media Query ******************/
@@ -3555,6 +3579,24 @@ ul.footer-support li img {
   }
   .raffles-page .min-menu-div .min-menu-btn {
     margin: 0;
+  }
+  .no-page img.imageAnimation {
+    margin: 0;
+    width: 100px;
+    height: 100px;
+  }
+
+  .no-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .no-page h1 {
+    font-size: 8rem;
+    font-weight: 600;
+    color: #fbff12;
   }
 }
 
