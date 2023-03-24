@@ -74,12 +74,11 @@ function HolderClaimChips() {
       marketPlaceInstance()
         .get(`/claimHolderTokens/${address}/${user.id}`)
         .then(async (data) => {
-         if(data?.data?.code===200){
-          toast.success("Tokens Claimed: " + data?.data?.data);
-         }
-         else {
-          toast.error("Tokens Claimed: " + data.data.msg);
-         }
+          if (data?.data?.code === 200) {
+            toast.success("Tokens Claimed: " + data?.data?.data);
+          } else {
+            toast.error("Tokens Claimed: " + data.data.msg);
+          }
           setBuyLoading(false);
           reward();
           zzz();
@@ -133,33 +132,33 @@ function HolderClaimChips() {
             ) : (
               <></>
             )}
-            <div className='pageTitle'>
-              <h1 className='title'>Claim Free Tokens</h1>
+            <div className='scrooge-main-heading'>
+              <div className='pageTitle'>
+                <h1 className='title'>Claim Free Tokens</h1>
+              </div>
+              <div className='feature-overview-div'>
+                <p>
+                  Did you know that you get FREE TOKENS EVERY MONTH just for
+                  holding Scrooge in your wallet? Once every 30 days, you can
+                  come right to this page and claim your free{" "}
+                  <a
+                    href={scroogeClient}
+                    target='_blank'
+                    rel='noreferrer'
+                    alt='claim free tokens to spend in Scrooge Casino'
+                  >
+                    Scrooge Casino
+                  </a>{" "}
+                  tokens just by clicking the CLAIM TOKENS button.
+                </p>
+                <p>
+                  Your claimable monthly token rate is automatically determined
+                  based on the amount of Scrooge you currently hold, as well as
+                  the current Scrooge price.
+                </p>
+              </div>
             </div>
-            <div
-              className='feature-overview-div'
-              style={{ marginBottom: "30px" }}
-            >
-              <p>
-                Did you know that you get FREE TOKENS EVERY MONTH just for
-                holding Scrooge in your wallet? Once every 30 days, you can come
-                right to this page and claim your free{" "}
-                <a
-                  href={scroogeClient}
-                  target='_blank'
-                  rel='noreferrer'
-                  alt='claim free tokens to spend in Scrooge Casino'
-                >
-                  Scrooge Casino
-                </a>{" "}
-                tokens just by clicking the CLAIM TOKENS button.
-              </p>
-              <p>
-                Your claimable monthly token rate is automatically determined
-                based on the amount of Scrooge you currently hold, as well as
-                the current Scrooge price.
-              </p>
-            </div>
+
             {isMismatched && address ? (
               <div>
                 <SwitchNetworkBSC />
@@ -185,28 +184,36 @@ function HolderClaimChips() {
                     <h4>Scrooge Coin Price:</h4> $
                     {parseFloat(currentPrice).toFixed(10)}
                   </div>
-                  <br></br>
 
                   <div className='prizes-chip-count'>
-                    Your Claimable Monthly Token Rate:<br></br>
+                    <h3> Your Claimable Monthly Token Rate:</h3>
                     <div className='additional-info-div'>
-                      Your Balance ({OGBalance.toLocaleString("en-US")})
-                      <br></br> X <br></br>Current Scrooge Coin Price ($
-                      {parseFloat(currentPrice).toFixed(10)})<br></br> X{" "}
-                      <br></br> EARNING RATE (10%)<br></br> = <br></br>
+                      <span>
+                        Your Balance ({OGBalance.toLocaleString("en-US")})
+                      </span>{" "}
+                      <div>X</div>
+                      <span>
+                        {" "}
+                        Current Scrooge Coin Price ($
+                        {parseFloat(currentPrice).toFixed(10)})
+                      </span>{" "}
+                      <div>X</div>
+                      <span>EARNING RATE (10%)</span> <div>=</div>
                       {OGBalance * parseFloat(currentPrice).toFixed(10) * 0.1}
                     </div>
-                    Claim{" "}
-                    {OGBalance > 0 ? (
-                      <>
-                        {(OGBalance * currentPrice * 0.1)
-                          .toFixed(0)
-                          .toLocaleString("en-US")}
-                      </>
-                    ) : (
-                      <>0</>
-                    )}{" "}
-                    FREE Tokens Every 30 Days
+                    <h3>
+                      Claim{" "}
+                      {OGBalance > 0 ? (
+                        <>
+                          {(OGBalance * currentPrice * 0.1)
+                            .toFixed(0)
+                            .toLocaleString("en-US")}
+                        </>
+                      ) : (
+                        <>0</>
+                      )}{" "}
+                      FREE Tokens Every 30 Days
+                    </h3>
                   </div>
                   <div style={{ width: "100%", textAlign: "center" }}>
                     <div id='rewardId' style={{ margin: "0 auto" }} />
@@ -261,25 +268,29 @@ function HolderClaimChips() {
                       <br></br>
                     </>
                   )}
-                  <div className='fine-print-txt' style={{ marginTop: "40px" }}>
-                    *Your claimed tokens will automatically be added to your
-                    connected{" "}
-                    <a
-                      href={scroogeClient}
-                      alt='Visit Scrooge Casino'
-                      target='_blank'
-                      rel='noreferrer'
-                    >
-                      Scrooge Casino
-                    </a>{" "}
-                    account.
+                  <div className='fine-print-txt'>
+                    <p>
+                      *Your claimed tokens will automatically be added to your
+                      connected{" "}
+                      <a
+                        href={scroogeClient}
+                        alt='Visit Scrooge Casino'
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        Scrooge Casino
+                      </a>{" "}
+                      account.
+                    </p>
                   </div>
                 </div>
-                <div className='fine-print-txt' style={{ marginTop: "40px" }}>
-                  Monthly claimable token rates are calculated based on the
-                  current price of the Scrooge cryptocurrency token. This
-                  ensures a fair and even claimable monthly amount for all
-                  holders.
+                <div className='fine-print-txt'>
+                  <p>
+                    Monthly claimable token rates are calculated based on the
+                    current price of the Scrooge cryptocurrency token. This
+                    ensures a fair and even claimable monthly amount for all
+                    holders.
+                  </p>
                 </div>
               </div>
             ) : (

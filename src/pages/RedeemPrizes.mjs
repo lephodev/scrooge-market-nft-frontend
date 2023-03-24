@@ -180,19 +180,13 @@ function RedeemPrizes() {
       .then((data) => {
         console.log("redeemdata", data);
         setRedeemLoading(false);
-        if (data.data === "Balance Unacceptable") {
-          toast.error("ERROR! - " + data.data, { containerId: "error" });
-        } else if (data.data === "Invalid Prize Data") {
-          toast.error("ERROR! - " + data.data, { containerId: "error" });
-        } else if (data.data === "Prize Currently Unavailable") {
-          toast.error("ERROR! - " + data.data, { containerId: "error" });
-        } else if (data.data === "Transaction Failed") {
-          toast.error("ERROR! - " + data.data, { containerId: "error" });
-        } else if (data.data === "Not Enough Tickets") {
-          toast.error("ERROR! - " + data.data, { containerId: "error" });
+        if (!data.data.success) {
+          toast.error("ERROR! - " + data.data.message, {
+            containerId: "error",
+          });
         } else {
           setRedeemSuccess(false);
-          toast.success(data.data + " redeemed successfully!");
+          toast.success(data.data.message + " redeemed successfully!");
           getUserDataInstant();
         }
       })
@@ -228,8 +222,7 @@ function RedeemPrizes() {
                     onClick={() => {
                       setRedeemSuccess(false);
                       reward();
-                    }}
-                  >
+                    }}>
                     CLOSE
                   </button>
                 </div>
@@ -237,22 +230,23 @@ function RedeemPrizes() {
             ) : (
               <></>
             )}
+            <div className='scrooge-main-heading'>
+              <div className='pageTitle'>
+                <h1 className='title'>Redeem for Prizes</h1>
+              </div>
+              <div className='feature-overview-div'>
+                Ready to cash in on all of your big wins? Browse through our
+                huge list of amazing prizes and find something you just can't
+                live without. Make sure you have enough available tickets for
+                the prize you want, then click the REDEEM PRIZE button!
+              </div>
+            </div>
 
-            <div className='pageTitle'>
-              <h1 className='title'>Redeem for Prizes</h1>
-            </div>
-            <div
-              className='feature-overview-div'
-              style={{ marginBottom: "30px" }}
-            >
-              Ready to cash in on all of your big wins? Browse through our huge
-              list of amazing prizes and find something you just can't live
-              without. Make sure you have enough available tickets for the prize
-              you want, then click the REDEEM PRIZE button!
-            </div>
             <div className='prizes-chip-count'>
               {user ? (
-                <>Your Ticket Balance: {user?.ticket.toFixed(2)}</>
+                <>
+                  <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
+                </>
               ) : (
                 <>
                   <img
@@ -267,32 +261,28 @@ function RedeemPrizes() {
               <div className='new-btn'>
                 <button
                   // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("Badges")}
-                >
+                  onClick={() => filterPrizes("Badges")}>
                   BADGES
                 </button>
               </div>
               <div className='new-btn'>
                 <button
                   // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("Crypto")}
-                >
+                  onClick={() => filterPrizes("Crypto")}>
                   CRYPTO
                 </button>
               </div>
               <div className='new-btn'>
                 <button
                   // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("Merch")}
-                >
+                  onClick={() => filterPrizes("Merch")}>
                   MERCH
                 </button>
               </div>
               <div className='new-btn'>
                 <button
                   // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("NFTs")}
-                >
+                  onClick={() => filterPrizes("NFTs")}>
                   NFTS
                 </button>
               </div>
@@ -300,38 +290,32 @@ function RedeemPrizes() {
             <div className='page-nav-header-btns-subrow'>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("priceDescending")}
-              >
+                onClick={() => sortPrizes("priceDescending")}>
                 PRICE HIGH TO LOW
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("priceAscending")}
-              >
+                onClick={() => sortPrizes("priceAscending")}>
                 PRICE LOW TO HIGH
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("nameDescending")}
-              >
+                onClick={() => sortPrizes("nameDescending")}>
                 NAME A-Z
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("nameAscending")}
-              >
+                onClick={() => sortPrizes("nameAscending")}>
                 NAME Z-A
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("categoryDescending")}
-              >
+                onClick={() => sortPrizes("categoryDescending")}>
                 CATEGORY A-Z
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("categoryAscending")}
-              >
+                onClick={() => sortPrizes("categoryAscending")}>
                 CATEGORY Z-A
               </button>
             </div>
@@ -649,8 +633,7 @@ function RedeemPrizes() {
                           <button
                             // className='submit-btn'
                             className='gradient-btn'
-                            onClick={() => RedeemPrize(prize._id)}
-                          >
+                            onClick={() => RedeemPrize(prize._id)}>
                             REDEEM PRIZE
                           </button>
                         </div>

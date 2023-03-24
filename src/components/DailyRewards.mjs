@@ -43,10 +43,10 @@ function DailyRewards() {
         const data = await marketPlaceInstance().get(
           `/getNextClaimDate/${address}/daily/${user.id}/0`
         );
-        console.log("claimdat3e", data);
+        console.log("claimdat3e", data.data.data[0]);
         if (data.success) {
           setFullDailyRewards(true);
-          setNextClaimDate(data.data);
+          setNextClaimDate(data.data.data[0]);
         } else {
           setFullDailyRewards(false);
           setNextClaimDate("No Data Found");
@@ -108,8 +108,7 @@ function DailyRewards() {
               <div className='prizes_container'>
                 <div
                   className='prizes-card'
-                  style={{ width: "95%", margin: "0 auto" }}
-                >
+                  style={{ width: "95%", margin: "0 auto" }}>
                   <div className='pageTitle' style={{ margin: "20px auto" }}>
                     <h1>Claim Your Daily Rewards</h1>
                   </div>
@@ -118,8 +117,7 @@ function DailyRewards() {
                   </div>
                   <div
                     className='prizes-chip-count'
-                    style={{ marginTop: "35px" }}
-                  >
+                    style={{ marginTop: "35px" }}>
                     <div className='additional-info-div'>
                       You have claimed your daily rewards{" "}
                       {nextClaimDate.consecutive_days} day
@@ -252,8 +250,7 @@ function DailyRewards() {
                             <Countdown date={nextClaimDate.nextClaimDate}>
                               <button
                                 className='submit-btn'
-                                onClick={() => claimTokens()}
-                              >
+                                onClick={() => claimTokens()}>
                                 Claim Tokens
                               </button>
                             </Countdown>
@@ -278,8 +275,7 @@ function DailyRewards() {
                       href={scroogeClient}
                       alt='Visit Scrooge Casino'
                       target='_blank'
-                      rel='noreferrer'
-                    >
+                      rel='noreferrer'>
                       Scrooge Casino
                     </a>{" "}
                     account.
@@ -323,8 +319,7 @@ function DailyRewards() {
                   {/* <button
                     className='button-inline'
                     style={{ marginLeft: "20px" }}
-                    onClick={() => claimTokens()}
-                  >
+                    onClick={() => claimTokens()}>
                     Claim NOW
                   </button> */}
                   <div className='new-btn'>

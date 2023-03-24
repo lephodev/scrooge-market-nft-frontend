@@ -4,6 +4,8 @@ import {
   useNetworkMismatch,
   useAddress,
   ChainId,
+  useSigner,
+  useSDK,
 } from "@thirdweb-dev/react";
 import { useEffect, useState, useContext } from "react";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
@@ -27,13 +29,18 @@ export default function MyWallet() {
   const [showMerchRedeemed, setShowMerchRedeemed] = useState(false);
   const [showCasinoNFTs, setShowCasinoNFTs] = useState(true);
   const [showCrypto, setShowCrypto] = useState(true);
+  const sdk = useSDK();
+  const address = useAddress();
+  const signer = useSigner();
+  console.log(address);
+  console.log(signer);
 
   async function checkToken() {
     try {
       marketPlaceInstance()
         .get(`/getUserRedeemed/${user.id}`)
         .then((data) => {
-          console.log("data:====>>>12 ", data.data);
+          //console.log('data: ', data);
           setUserRedeemed(data.data);
         });
     } catch (err) {
@@ -59,27 +66,33 @@ export default function MyWallet() {
   }
 
   const handleMarkRedeemed = (trans_id) => {
-    console.log("trans_id", trans_id);
     marketPlaceInstance()
       .get(`/markMerchCouponRedeemed/${trans_id}/${user.id}`)
       .then((res) => {
-        console.log("handle: ", res);
+        //console.log('handle: ', res);
         getUserRedeemed();
       });
   };
 
   const getUserRedeemed = () => {
-    console.log("user===>>>: ", user[0]);
+    //console.log('user: ', user[0]);
     marketPlaceInstance()
       .get(`/getUserRedeemed/${user.id}`)
       .then((data) => {
-        console.log("post get data: ", data);
+        //console.log('post get data: ', data);
         setUserRedeemed(data.data);
         //console.log('useRed: ',userRedeemed);
       });
   };
 
-  const address = useAddress();
+  const sdksdk = async () => {
+    const rawBal = await sdk.wallet.balance(
+      "0xfA1BA18067aC6884fB26e329e60273488a247FC3"
+    );
+    setOGBalance(parseInt(rawBal.value / 10 ** 18));
+    getCoinGeckoDataOG(parseInt(rawBal.value / 10 ** 18));
+  };
+
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   const isMismatched = useNetworkMismatch();
 
@@ -95,14 +108,9 @@ export default function MyWallet() {
       !isMismatched &&
       selectedChain === ChainId.BinanceSmartChainMainnet
     ) {
-      marketPlaceInstance()
-        .get(`/getOGBalance/${address}`)
-        .then((data) => {
-          setOGBalance(data.data);
-          getCoinGeckoDataOG(data.data);
-        });
+      sdksdk();
     }
-  }, [user, isMismatched]);
+  }, [user, isMismatched, address, signer]);
 
   return (
     <Layout>
@@ -115,17 +123,13 @@ export default function MyWallet() {
               <div className='min-menu-div'>
                 {!showMerchRedeemed ? (
                   <>
-                    <div className='new-btn'>
-                      <button
-                        // className='min-menu-btn'
-
-                        onClick={() => {
-                          setShowMerchRedeemed(true);
-                        }}
-                      >
-                        MERCH CODES
-                      </button>
-                    </div>
+                    <button
+                      className='min-menu-btn'
+                      onClick={() => {
+                        setShowMerchRedeemed(true);
+                      }}>
+                      MERCH CODES
+                    </button>
                   </>
                 ) : (
                   <></>
@@ -136,8 +140,7 @@ export default function MyWallet() {
                       className='min-menu-btn'
                       onClick={() => {
                         setShowCasinoNFTs(true);
-                      }}
-                    >
+                      }}>
                       CASINO NFTS
                     </button>
                   </>
@@ -150,8 +153,7 @@ export default function MyWallet() {
                       className='min-menu-btn'
                       onClick={() => {
                         setShowCrypto(true);
-                      }}
-                    >
+                      }}>
                       CRYPTO
                     </button>
                   </>
@@ -176,7 +178,7 @@ export default function MyWallet() {
               </div>
               <div className='wallet-casino-profile-details'>
                 <div className=''>
-                  <span className='wallet-casino-profile-username text-animate'>
+                  <span className='wallet-casino-profile-username'>
                     {user?.username}
                   </span>
                   <br></br>
@@ -204,27 +206,31 @@ export default function MyWallet() {
                   </div>
                 </div>
               </div>
-              <div className='crypto-balance-div'>
-                <div className='width-100'>
-                  <div className='crypto-balance-header text-animate'>
-                    CRYPTO BALANCE
-                  </div>
-                  <div className='crypto-balance-row'>
-                    <img
-                      className='token-logo'
-                      src={ScroogeHatLogo}
-                      alt='Scrooge Casino balances'
-                    />
-                    SCROOGE COIN: {OGBalance.toLocaleString("en-US")}
-                  </div>
-                  <div className='crypto-balance-row'>
-                    VALUE: ${OGValue.toLocaleString("en-US")}
-                  </div>
-                  <div className='claim-pending-div'>
-                    <ClaimOGPending />
+              {address ? (
+                <div className='crypto-balance-div'>
+                  <div className='width-100'>
+                    <div className='crypto-balance-header'>CRYPTO BALANCE</div>
+                    <div className='crypto-balance-row'>
+                      <img
+                        className='token-logo'
+                        src={ScroogeHatLogo}
+                        alt='Scrooge Casino balances'
+                      />
+                      SCROOGE COIN: {OGBalance.toLocaleString("en-US")}
+                    </div>
+                    <div className='crypto-balance-row'>
+                      VALUE: ${OGValue.toLocaleString("en-US")}
+                    </div>
+                    <div className='claim-pending-div'>
+                      <ClaimOGPending />
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div className='connect-wallet-div'>
+                  <ConnectWallet />
+                </div>
+              )}
             </div>
           ) : (
             <></>
@@ -234,12 +240,10 @@ export default function MyWallet() {
             <div className='transaction-div'>
               <div
                 className='close-btn-round-div'
-                style={{ width: "45px", marginTop: "0" }}
-              >
+                style={{ width: "45px", marginTop: "0" }}>
                 <div
                   className='close-btn-round'
-                  onClick={() => setShowMerchRedeemed(false)}
-                >
+                  onClick={() => setShowMerchRedeemed(false)}>
                   X
                 </div>
               </div>
@@ -258,8 +262,7 @@ export default function MyWallet() {
                               ? "disabled transaction-card"
                               : "transaction-card"
                           }
-                          key={red._id}
-                        >
+                          key={red._id}>
                           <div key={deet._id}>
                             {deet.name}
                             <br></br>
@@ -279,8 +282,7 @@ export default function MyWallet() {
                             ) : (
                               <button
                                 className='claim-btn'
-                                onClick={() => handleMarkRedeemed(red._id)}
-                              >
+                                onClick={() => handleMarkRedeemed(red._id)}>
                                 Mark as Redeemed
                               </button>
                             )}
@@ -324,12 +326,10 @@ export default function MyWallet() {
             <div className='bottom-margin-100'>
               <div
                 className='close-btn-round-div'
-                // style={{ width: "45px", marginTop: "0" }}
-              >
+                style={{ width: "45px", marginTop: "0" }}>
                 <div
                   className='close-btn-round'
-                  onClick={() => setShowCasinoNFTs(false)}
-                >
+                  onClick={() => setShowCasinoNFTs(false)}>
                   X
                 </div>
               </div>

@@ -49,7 +49,17 @@ export default function ShowAllTokenNFTs() {
     setBuyLoading(true);
     qty = 1;
     try {
-      console.log("token_id, qty",token_id, qty,"address",address,"userId",user?.id,"affID",affID);
+      console.log(
+        "token_id, qty",
+        token_id,
+        qty,
+        "address",
+        address,
+        "userId",
+        user?.id,
+        "affID",
+        affID
+      );
       await contract.buyoutListing(token_id, qty);
       marketPlaceInstance()
         .get(
@@ -130,14 +140,14 @@ export default function ShowAllTokenNFTs() {
   useEffect(() => {
     function getAffData() {
       const q = searchParams.get("aff_id");
-      console.log("q",q);
+      console.log("q", q);
       if (q) {
         setAffID(q);
         const aff_id = Cookies.set("aff_id", q);
         console.log("cookie: ", aff_id);
       } else {
         const aff_id = Cookies.get("aff_id", { domain: scroogeClient }); //change before going live
-        console.log('cookie=====>>>>>: ',aff_id);
+        console.log("cookie=====>>>>>: ", aff_id);
         if (aff_id) {
           setAffID(aff_id);
         }
@@ -146,7 +156,7 @@ export default function ShowAllTokenNFTs() {
     getAffData();
   }, [searchParams]);
 
-console.log("AffIdd",affID);
+  console.log("AffIdd", affID);
 
   return (
     <div>
@@ -176,27 +186,29 @@ console.log("AffIdd",affID);
       ) : (
         <></>
       )}
-      <div className='nft-home-sell-titles text-animate'>
-        <h1>Scrooge Casino Marketplace NFTs</h1>
-      </div>
-      <div className='feature-overview-div' style={{ marginBottom: "30px" }}>
-        <p>
-          Running low in the casino? Lucky for you, we have a great selection of
-          purchasable casino badge NFTs that include a special bonus amount of
-          FREE TOKENS to be used in {""}
-          <a
-            href={scroogeClient}
-            target='_blank'
-            rel='noreferrer'
-            alt='buy your Scrooge Casino NFTs today'
-          >
-            Scrooge Casino
-          </a>
-          . Simply choose the badge that is perfect for you from the list below,
-          make your purchase, and your free bonus tokens will be automatically
-          credited to your connected Scrooge Casino account. It couldn't be
-          easier!
-        </p>
+      <div className='scrooge-second-heading'>
+        <div className='nft-home-sell-titles text-animate'>
+          <h1>Scrooge Casino Marketplace NFTs</h1>
+        </div>
+        <div className='feature-overview-div'>
+          <p>
+            Running low in the casino? Lucky for you, we have a great selection
+            of purchasable casino badge NFTs that include a special bonus amount
+            of FREE TOKENS to be used in {""}
+            <a
+              href={scroogeClient}
+              target='_blank'
+              rel='noreferrer'
+              alt='buy your Scrooge Casino NFTs today'
+            >
+              Scrooge Casino
+            </a>
+            . Simply choose the badge that is perfect for you from the list
+            below, make your purchase, and your free bonus tokens will be
+            automatically credited to your connected Scrooge Casino account. It
+            couldn't be easier!
+          </p>
+        </div>
       </div>
       {console.log("lllll", listings)}
       {loadingListings ? (
