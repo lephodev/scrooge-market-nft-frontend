@@ -2172,6 +2172,10 @@ ul.footer-support li img {
   text-align: center;
 }
 /* ****************** new css  ********************** */
+.scrooge-main-heading,
+.scrooge-second-heading {
+  padding-bottom: 50px;
+}
 .explore-page .flex-row {
   justify-content: center;
   margin-bottom: 40px;
@@ -2279,7 +2283,7 @@ ul.footer-support li img {
   margin: 0;
 }
 .redeem-prizes-page .page-nav-header-btns-subrow {
-  padding-top: 20px;
+  padding-top: 30px;
 }
 .redeem-prizes-page .page-nav-header-btns-subrow,
 .redeem-prizes-page .page-nav-header-btns-row {
@@ -2451,11 +2455,11 @@ ul.footer-support li img {
 }
 .earn-token .bordered-section .leaderboard-card-div {
   margin: 0;
+  max-width: 49%;
   width: 100%;
   border: 1px solid #1c1c1c;
   background: transparent;
   box-shadow: 0px 20px 20px #00000091;
-  /* max-height: 500px; */
   cursor: pointer;
   text-align: start;
   padding: 20px 10px;
@@ -2472,7 +2476,7 @@ ul.footer-support li img {
 }
 .earn-token .leaderboard-row p {
   margin: 0;
-  font-size: 18px;
+  font-size: 16px;
 }
 .earn-token .daily-reward-card-div span {
   font-size: 18px;
@@ -2519,7 +2523,9 @@ ul.footer-support li img {
   }
 }
 .text-animate h1 {
-  font-size: 2rem;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 44px;
   margin: 0;
   text-align: center;
 }
@@ -2779,14 +2785,53 @@ ul.footer-support li img {
 }
 .my-wallet-page .full-page-container,
 .earn-token .social-share-card,
-.claim-free-page .prizes-card .prize-name {
+.claim-free-page .prizes-card .prize-name,
+.earn-token .earn-affiliate-card {
   border: 1px solid #1c1c1c;
   background-color: transparent;
   box-shadow: 0px 20px 20px #00000091;
   border-radius: 10px;
 }
-.earn-token .social-share-card {
+.earn-token .earn-affiliate-card {
+  margin: 0;
+  width: 100%;
+  padding: 30px;
+}
+.earn-token .earn-affiliate-card .earn-card-profile {
+  max-width: 350px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.earn-token .earn-affiliate-card .affiliate-card-row {
+  margin: 0;
+}
+/* .earn-token .social-share-card {
   background-color: rgba(255, 255, 255, 0.05);
+} */
+.earn-token .earn-affiliate-card .earn-card-profile .inlineTitle {
+  text-shadow: 1px 1px #fbff12;
+}
+.earn-token .earn-card-box .affiliate-card-row p {
+  margin: 0;
+  font-size: 18px;
+}
+
+.earn-token .earn-affiliate-card .earn-card-box {
+  width: calc(100% - 350px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.earn-token .earn-card-box .affiliate-card-row {
+  gap: 20px;
+  flex-wrap: wrap;
 }
 .my-wallet-page .close-btn-round-div {
   justify-content: flex-end;
@@ -2972,6 +3017,10 @@ ul.footer-support li img {
     position: relative;
     max-width: 250px;
   }
+  .header-menu ul {
+    gap: 30px;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 991px) {
@@ -3086,6 +3135,12 @@ ul.footer-support li img {
   }
   .nft-home-sell-card {
     width: 45%;
+  }
+  .earn-token .bordered-section .leaderboard-card-div {
+    max-width: 100%;
+  }
+  .earn-token .earn-free-tokens-desc-div {
+    width: 100%;
   }
 }
 
@@ -3485,6 +3540,21 @@ ul.footer-support li img {
   }
   .redeem-prizes-page .prizes_container .prizes-card .prize-name {
     width: 100%;
+  }
+  .earn-token .earn-affiliate-card .earn-card-box {
+    width: 100%;
+  }
+  .earn-token {
+    gap: 20px;
+  }
+  .earn-token .earn-free-tokens-desc {
+    padding: 0 !important;
+  }
+  .earn-token .earn-free-tokens-desc-div:hover::before {
+    display: none;
+  }
+  .raffles-page .min-menu-div .min-menu-btn {
+    margin: 0;
   }
 }
 

@@ -144,7 +144,7 @@ export default function SharableData() {
         .get(`/getAIMessage/${prompt}/${user?.id}/message`)
         .then((data) => {
           //console.log("getAIMessage: ", data.data);
-        affUser.data.ai_tickets = affUser?.data?.ai_tickets - 1;
+          affUser.data.ai_tickets = affUser?.data?.ai_tickets - 1;
           //setAIMessage(data.data);
           setAIMessage(
             <TypeAnimation
@@ -167,7 +167,7 @@ export default function SharableData() {
     refreshAffData();
   }, []);
 
-  console.log("affUser",affUser);
+  console.log("affUser", affUser);
 
   return (
     <>
@@ -253,16 +253,13 @@ export default function SharableData() {
       {affUser?.data?.user_id &&
       affUser?.message?.toString() !== "" &&
       affUser?.message?.toString() !== "User not found." ? (
-        <div
-          className='affiliate-card-div'
-          style={{ backgroundColor: "#1b2129" }}
-        >
+        <div className='affiliate-card-div earn-affiliate-card'>
           <div className='affiliate-card-row'>
-            <div style={{ textAlign: "center" }}>
-              <div className='inlineTitle'>
+            <div className='earn-card-profile'>
+              <div className='inlineTitle text-animate'>
                 {user?.username}'s Affiliate Dashboard
               </div>
-              <div style={{ marginTop: "15px" }}>
+              <div>
                 <img
                   className='wallet-casino-profile-img'
                   src={user?.profile}
@@ -270,46 +267,48 @@ export default function SharableData() {
                 />
               </div>
             </div>
-            <div
-              style={{
-                height: "100%",
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                alignSelf: "center",
-              }}
-            >
+            <div className='earn-card-box'>
               <div className='affiliate-card-row'>
                 <div>
-                  <strong>ID:</strong> {affUser?.data?.user_id}
+                  <p>
+                    <strong>ID:</strong> {affUser?.data?.user_id}
+                  </p>
                 </div>
                 <div>
-                  <strong>Total Earned:</strong>{" "}
-                  {affUser?.data?.total_earned > 0 ? affUser?.data?.total_earned : <>0</>}{" "}
-                  Tokens
+                  <p>
+                    <strong>Total Earned:</strong>{" "}
+                    {affUser?.data?.total_earned > 0 ? (
+                      affUser?.data?.total_earned
+                    ) : (
+                      <>0</>
+                    )}{" "}
+                    Tokens
+                  </p>
                 </div>
                 <div>
-                  <strong>Last Commission Earned:</strong>{" "}
-                  {affUser?.data?.last_earned_at ? (
-                    affUser?.data?.last_earned_at.substring(
-                      0,
-                      affUser?.data?.last_earned_at.indexOf("T")
-                    )
-                  ) : (
-                    <>Start earning today!</>
-                  )}
+                  <p>
+                    <strong>Last Commission Earned:</strong>{" "}
+                    {affUser?.data?.last_earned_at ? (
+                      affUser?.data?.last_earned_at.substring(
+                        0,
+                        affUser?.data?.last_earned_at.indexOf("T")
+                      )
+                    ) : (
+                      <>Start earning today!</>
+                    )}
+                  </p>
                 </div>
               </div>
               <div className='affiliate-card-row'>
-                <div
-                  className='bg-animated'
-                  style={{ borderRadius: "5px", padding: "5px 25px" }}>
+                <div className='text-animate'>
                   <strong>AI Tickets:</strong> {affUser?.data?.ai_tickets}
                 </div>
                 <div className='txt-align-center'>
                   <strong>Affiliate Link: </strong>
-                  <a href={affUser?.data?.aff_short_link} alt='Your affiliate link'>
+                  <a
+                    href={affUser?.data?.aff_short_link}
+                    alt='Your affiliate link'
+                  >
                     {affUser?.data?.aff_short_link}
                   </a>
                 </div>
@@ -321,9 +320,9 @@ export default function SharableData() {
         <></>
       )}
 
-{/* affUser.toString() === "User not found." */}
-{console.log("MMYYYYY",affUser)}
-      { user && affUser?.message?.toString() === "User not found."  ? (
+      {/* affUser.toString() === "User not found." */}
+      {console.log("MMYYYYY", affUser)}
+      {user && affUser?.message?.toString() === "User not found." ? (
         <div className='affiliate-card-div'>
           <div style={{ textAlign: "center" }}>
             Start earning <strong>FREE CASINO TOKENS</strong>
@@ -365,7 +364,7 @@ export default function SharableData() {
         <></>
       )}
 
-      {showAffLeaderboards   ? (
+      {showAffLeaderboards ? (
         <>
           <div className='close-btn-round-div'>
             <div
@@ -419,7 +418,7 @@ export default function SharableData() {
             <div className='flex-row'>
               <div className='earn-free-tokens-desc-div'>
                 <div className='earn-free-tokens-desc-header'>
-                  LET'S ROLL THE DICE<br></br>
+                  <h4> LET'S ROLL THE DICE</h4>
                   <img
                     src={DiceGif}
                     width='100px'
@@ -443,74 +442,79 @@ export default function SharableData() {
                 <div>
                   {randomMessage.message ? (
                     <>
-                      <div className='social-share-card'>
-                        <div className='social-share-message'>
-                          {randomMessage.message}{" "}
-                          <a
-                            href={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}>{`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}</a>
-                        </div>
-                        <div className='social-share-btn-div'>
-                          <FacebookShareButton
-                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                            quote={randomMessage.message}
-                            className='social-share-btn'
-                          >
-                            <FacebookIcon size={40} round />
-                          </FacebookShareButton>
-                          <TwitterShareButton
-                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                            title={randomMessage.message}
-                            className='social-share-btn'
-                          >
-                            <TwitterIcon size={40} round />
-                          </TwitterShareButton>
-                          <PinterestShareButton
-                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                            description={randomMessage.message}
-                            media='https://casino-nft-marketplace.s3.amazonaws.com/affPinterest.jpg'
-                            className='social-share-btn'
-                          >
-                            <PinterestIcon size={40} round />
-                          </PinterestShareButton>
-                          <TumblrShareButton
-                            title={randomMessage.message}
-                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                            caption='Join me for free at Scrooge Casino and WIN REAL PRIZES!'
-                            className='social-share-btn'
-                          >
-                            <TumblrIcon size={40} round />
-                          </TumblrShareButton>
-                          <TelegramShareButton
-                            url={`${scroogeClient}/?aff_id=${affUser?.data.user_id}`}
-                            title={randomMessage.message}
-                            className='social-share-btn'
-                          >
-                            <TelegramIcon size={40} round />
-                          </TelegramShareButton>
-                          <WhatsappShareButton
-                            title={randomMessage.message}
-                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                            className='social-share-btn'>
-                            <WhatsappIcon size={40} round />
-                          </WhatsappShareButton>
-                          <EmailShareButton
-                            subject={randomMessage.message}
-                            body={randomMessage.message}
-                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}
+                      <div className='social-share-grid-box'>
+                        <div className='social-share-card'>
+                          {/* <div className='card-color' /> */}
+                          <div className='social-share-message'>
+                            {randomMessage.message}{" "}
+                            <a
+                              href={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                            >{`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}</a>
+                          </div>
+                          <div className='social-share-btn-div'>
+                            <FacebookShareButton
+                              url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                              quote={randomMessage.message}
+                              className='social-share-btn'
+                            >
+                              <FacebookIcon size={40} round />
+                            </FacebookShareButton>
+                            <TwitterShareButton
+                              url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                              title={randomMessage.message}
+                              className='social-share-btn'
+                            >
+                              <TwitterIcon size={40} round />
+                            </TwitterShareButton>
+                            <PinterestShareButton
+                              url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                              description={randomMessage.message}
+                              media='https://casino-nft-marketplace.s3.amazonaws.com/affPinterest.jpg'
+                              className='social-share-btn'
+                            >
+                              <PinterestIcon size={40} round />
+                            </PinterestShareButton>
+                            <TumblrShareButton
+                              title={randomMessage.message}
+                              url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                              caption='Join me for free at Scrooge Casino and WIN REAL PRIZES!'
+                              className='social-share-btn'
+                            >
+                              <TumblrIcon size={40} round />
+                            </TumblrShareButton>
+                            <TelegramShareButton
+                              url={`${scroogeClient}/?aff_id=${affUser?.data.user_id}`}
+                              title={randomMessage.message}
+                              className='social-share-btn'
+                            >
+                              <TelegramIcon size={40} round />
+                            </TelegramShareButton>
+                            <WhatsappShareButton
+                              title={randomMessage.message}
+                              url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                              className='social-share-btn'
+                            >
+                              <WhatsappIcon size={40} round />
+                            </WhatsappShareButton>
+                            <EmailShareButton
+                              subject={randomMessage.message}
+                              body={randomMessage.message}
+                              url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}
                                             
                                             `}
-                            className='social-share-btn'
-                          >
-                            <EmailIcon size={40} round />
-                          </EmailShareButton>
-                        </div>
-                        <div className='close-btn-round-div'>
-                          <div
-                            className='close-btn-round'
-                            style={{ margin: "0 auto 30px auto" }}
-                            onClick={() => setRandomMessage([])}
-                          >
-                            X
+                              className='social-share-btn'
+                            >
+                              <EmailIcon size={40} round />
+                            </EmailShareButton>
+                          </div>
+                          <div className='close-btn-round-div'>
+                            <div
+                              className='close-btn-round'
+                              style={{ margin: "0 auto 30px auto" }}
+                              onClick={() => setRandomMessage([])}
+                            >
+                              X
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -522,9 +526,9 @@ export default function SharableData() {
               </div>
 
               {affUser?.data?.ai_tickets < 1 ? <></> : <></>}
-              <div className='earn-free-tokens-desc-div bg-animated'>
+              <div className='earn-free-tokens-desc-div '>
                 <div className='earn-free-tokens-desc-header'>
-                  STEP INTO THE FUTURE<br></br>
+                  <h4> STEP INTO THE FUTURE</h4>
                   <img
                     src={RobotAI}
                     width='100px'
@@ -550,74 +554,80 @@ export default function SharableData() {
                 <div>
                   {AIMessage ? (
                     <>
-                      <div className='social-share-card'>
-                        <div className='social-share-message'>
-                          {AIMessage}{" "}
-                          <a
-                            href={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}>{`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}</a>
-                        </div>
-                        <div className='social-share-btn-div'>
-                          <FacebookShareButton
-                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                            quote={randomMessage.message}
-                            className='social-share-btn'
-                          >
-                            <FacebookIcon size={40} round />
-                          </FacebookShareButton>
-                          <TwitterShareButton
-                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                            title={randomMessage.message}
-                            className='social-share-btn'
-                          >
-                            <TwitterIcon size={40} round />
-                          </TwitterShareButton>
-                          <PinterestShareButton
-                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                            description={randomMessage.message}
-                            media='https://casino-nft-marketplace.s3.amazonaws.com/affPinterest.jpg'
-                            className='social-share-btn'
-                          >
-                            <PinterestIcon size={40} round />
-                          </PinterestShareButton>
-                          <TumblrShareButton
-                            title={randomMessage.message}
-                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                            caption='Join me for free at Scrooge Casino and WIN REAL PRIZES!'
-                            className='social-share-btn'
-                          >
-                            <TumblrIcon size={40} round />
-                          </TumblrShareButton>
-                          <TelegramShareButton
-                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                            title={randomMessage.message}
-                            className='social-share-btn'
-                          >
-                            <TelegramIcon size={40} round />
-                          </TelegramShareButton>
-                          <WhatsappShareButton
-                            title={randomMessage.message}
-                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                            className='social-share-btn'>
-                            <WhatsappIcon size={40} round />
-                          </WhatsappShareButton>
-                          <EmailShareButton
-                            subject={randomMessage.message}
-                            body={randomMessage.message}
-                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}
+                      <div className='social-share-grid-box'>
+                        <div className='social-share-card'>
+                          {/* <div className='card-color' /> */}
+
+                          <div className='social-share-message'>
+                            {AIMessage}{" "}
+                            <a
+                              href={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                            >{`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}</a>
+                          </div>
+                          <div className='social-share-btn-div'>
+                            <FacebookShareButton
+                              url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                              quote={randomMessage.message}
+                              className='social-share-btn'
+                            >
+                              <FacebookIcon size={40} round />
+                            </FacebookShareButton>
+                            <TwitterShareButton
+                              url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                              title={randomMessage.message}
+                              className='social-share-btn'
+                            >
+                              <TwitterIcon size={40} round />
+                            </TwitterShareButton>
+                            <PinterestShareButton
+                              url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                              description={randomMessage.message}
+                              media='https://casino-nft-marketplace.s3.amazonaws.com/affPinterest.jpg'
+                              className='social-share-btn'
+                            >
+                              <PinterestIcon size={40} round />
+                            </PinterestShareButton>
+                            <TumblrShareButton
+                              title={randomMessage.message}
+                              url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                              caption='Join me for free at Scrooge Casino and WIN REAL PRIZES!'
+                              className='social-share-btn'
+                            >
+                              <TumblrIcon size={40} round />
+                            </TumblrShareButton>
+                            <TelegramShareButton
+                              url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                              title={randomMessage.message}
+                              className='social-share-btn'
+                            >
+                              <TelegramIcon size={40} round />
+                            </TelegramShareButton>
+                            <WhatsappShareButton
+                              title={randomMessage.message}
+                              url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                              className='social-share-btn'
+                            >
+                              <WhatsappIcon size={40} round />
+                            </WhatsappShareButton>
+                            <EmailShareButton
+                              subject={randomMessage.message}
+                              body={randomMessage.message}
+                              url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}
                                             
                                             `}
-                            className='social-share-btn'
-                          >
-                            <EmailIcon size={40} round />
-                          </EmailShareButton>
-                        </div>
-                        <div className='close-btn-round-div'>
-                          <div
-                            className='close-btn-round'
-                            style={{ margin: "0 auto 30px auto" }}
-                            onClick={() => setAIMessage()}
-                          >
-                            X
+                              className='social-share-btn'
+                            >
+                              <EmailIcon size={40} round />
+                            </EmailShareButton>
+                          </div>
+                          <div className='close-btn-round-div'>
+                            <div
+                              className='close-btn-round'
+                              style={{ margin: "0 auto 30px auto" }}
+                              onClick={() => setAIMessage()}
+                            >
+                              X
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -638,54 +648,63 @@ export default function SharableData() {
 
               {messages.length > 0 ? (
                 <>
-                  {messages.map((message) => (
-                    <div className='social-share-card' key={message._id}>
-                      <div className='social-share-message'>
-                        {message.message}
-                      </div>
-                      <div className='social-share-btn-div'>
-                        <FacebookShareButton
-                          url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                          quote={message.message}
-                          className='social-share-btn'>
-                          <FacebookIcon size={40} round />
-                        </FacebookShareButton>
-                        <TwitterShareButton
-                          url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                          title={message.message}
-                          className='social-share-btn'>
-                          <TwitterIcon size={40} round />
-                        </TwitterShareButton>
-                        <PinterestShareButton
-                          url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                          description={message.message}
-                          media='https://casino-nft-marketplace.s3.amazonaws.com/affPinterest.jpg'
-                          className='social-share-btn'>
-                          <PinterestIcon size={40} round />
-                        </PinterestShareButton>
-                        <TumblrShareButton
-                          title={message.message}
-                          url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                          caption='Join me for free at Scrooge Casino and WIN REAL PRIZES!'
-                          className='social-share-btn'>
-                          <TumblrIcon size={40} round />
-                        </TumblrShareButton>
-                        <TelegramShareButton
-                          url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                          title={message.message}
-                          className='social-share-btn'>
-                          <TelegramIcon size={40} round />
-                        </TelegramShareButton>
-                        <WhatsappShareButton
-                          title={message.message}
-                          url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                          className='social-share-btn'>
-                          <WhatsappIcon size={40} round />
-                        </WhatsappShareButton>
-                        <EmailShareButton
-                          subject={message.message}
-                          body={message.message}
-                          url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}
+                  <div className='social-share-grid'>
+                    {messages.map((message) => (
+                      <div className='social-share-card' key={message._id}>
+                        <div className='card-color' />
+
+                        <div className='social-share-message'>
+                          {message.message}
+                        </div>
+                        <div className='social-share-btn-div'>
+                          <FacebookShareButton
+                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                            quote={message.message}
+                            className='social-share-btn'
+                          >
+                            <FacebookIcon size={40} round />
+                          </FacebookShareButton>
+                          <TwitterShareButton
+                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                            title={message.message}
+                            className='social-share-btn'
+                          >
+                            <TwitterIcon size={40} round />
+                          </TwitterShareButton>
+                          <PinterestShareButton
+                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                            description={message.message}
+                            media='https://casino-nft-marketplace.s3.amazonaws.com/affPinterest.jpg'
+                            className='social-share-btn'
+                          >
+                            <PinterestIcon size={40} round />
+                          </PinterestShareButton>
+                          <TumblrShareButton
+                            title={message.message}
+                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                            caption='Join me for free at Scrooge Casino and WIN REAL PRIZES!'
+                            className='social-share-btn'
+                          >
+                            <TumblrIcon size={40} round />
+                          </TumblrShareButton>
+                          <TelegramShareButton
+                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                            title={message.message}
+                            className='social-share-btn'
+                          >
+                            <TelegramIcon size={40} round />
+                          </TelegramShareButton>
+                          <WhatsappShareButton
+                            title={message.message}
+                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
+                            className='social-share-btn'
+                          >
+                            <WhatsappIcon size={40} round />
+                          </WhatsappShareButton>
+                          <EmailShareButton
+                            subject={message.message}
+                            body={message.message}
+                            url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}
                                     
                                     `}
                             className='social-share-btn'
@@ -695,8 +714,8 @@ export default function SharableData() {
                         </div>
                       </div>
                     ))}
-                  </>
-               
+                  </div>
+                </>
               ) : (
                 <div style={{ width: "100%", textAlign: "center" }}>
                   Messages loading...<br></br>
