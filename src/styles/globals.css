@@ -2764,7 +2764,9 @@ ul.footer-support li img {
   color: #fbff12;
 }
 .claim-free-page .pageImgContainer,
-.my-wallet-page .pageImgContainer {
+.my-wallet-page .pageImgContainer,
+.redeem-prizes-page .pageImgContainer,
+.nft-page .pageImgContainer {
   /* background-color: rgb(255 255 255 / 45%); */
   background: rgb(231 201 117 / 50%);
   border: 1px solid #1c1c1c;
