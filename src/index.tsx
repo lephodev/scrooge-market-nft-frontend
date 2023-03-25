@@ -171,7 +171,7 @@ export default function App() {
                 <Route path='/blog-posts' element={<BlogPosts />} />
                 <Route path='/create-posts' element={<CreatePost />} />
                 <Route path='/nft-tokens' element={<NFTTokens />} />
-                <Route path='/payment-success' element={<PaymentSuccess />} />
+                <Route path='/payment' element={<PaymentSuccess />} />
                 <Route path='/vip' element={<NoPage />} />
                 <Route path='/*' element={<NoPage />} />
               </Routes>
