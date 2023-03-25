@@ -110,8 +110,8 @@ function HolderClaimChips() {
       marketPlaceInstance()
         .get(`/getOGBalance/${address}`)
         .then((data) => {
-          console.log("ogbalance", data);
-          setOGBalance(data.data);
+          console.log("ogbalance====>>>", data);
+          setOGBalance(data?.data?.data);
         })
         .then(() => {
           zzz();
