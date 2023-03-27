@@ -2472,7 +2472,7 @@ ul.footer-support li img {
   background: transparent;
   box-shadow: 0px 20px 20px #00000091;
   border-radius: 10px;
-
+  padding: 20px;
   flex-wrap: wrap;
   gap: 20px;
 }
@@ -2521,7 +2521,14 @@ ul.footer-support li img {
   padding: 20px 10px;
 }
 .earn-token .bordered-section .leaderboard-card-div h4 {
+  color: #f9ff00;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 30px;
+  position: relative;
   text-align: center;
+  text-transform: uppercase;
 }
 .earn-token .bordered-section .leaderboard-card-div:hover {
   background-color: rgba(255, 255, 255, 0.05);
@@ -2560,7 +2567,7 @@ ul.footer-support li img {
   align-items: flex-start;
 }
 
-.text-animate {
+/* .text-animate {
   animation: color-change 5s infinite;
 }
 
@@ -2577,17 +2584,24 @@ ul.footer-support li img {
   100% {
     color: rgba(255, 53, 127, 1);
   }
-}
+} */
 .text-animate h1 {
-  font-size: 36px;
+  color: #f9ff00;
+  font-size: 32px;
   font-weight: 700;
-  line-height: 44px;
-  margin: 0;
+  letter-spacing: 0.2em;
+  line-height: 30px;
+  position: relative;
   text-align: center;
+  text-transform: uppercase;
 }
 .text-animate h4 {
-  font-size: 24px;
+  font-size: 20px;
   margin: 0;
+  color: #f9ff00;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 30px;
 }
 .redeem-prizes-page .prizes-card p {
   margin: 0;
@@ -2853,6 +2867,16 @@ ul.footer-support li img {
   background-color: #000;
   padding: 20px;
 }
+.claim-free-page .prizes-card .prize-name h4 {
+  color: #f9ff00;
+  font-size: 32px;
+  font-weight: 700;
+  /* letter-spacing: 0.2em; */
+  line-height: 30px;
+  position: relative;
+  text-align: center;
+  /* text-transform: uppercase; */
+}
 .earn-token .social-share-card {
   background: #000;
   color: #fff;
@@ -2877,9 +2901,9 @@ ul.footer-support li img {
 /* .earn-token .social-share-card {
   background-color: rgba(255, 255, 255, 0.05);
 } */
-.earn-token .earn-affiliate-card .earn-card-profile .inlineTitle {
+/* .earn-token .earn-affiliate-card .earn-card-profile .inlineTitle {
   text-shadow: 1px 1px #fbff12;
-}
+} */
 .earn-token .earn-card-box .affiliate-card-row p {
   margin: 0;
   font-size: 18px;

@@ -235,10 +235,10 @@ function HolderClaimChips() {
                     </div>
                   ) : (
                     <>
-                      <div className='prize-name'>
+                      <div className='prize-name text-animate'>
                         {nextClaimDate !== "Loading..." && OGBalance > 0 ? (
                           <>
-                            <h4>Next Claim Available:</h4>
+                            <h1>Next Claim Available:</h1>
 
                             <Countdown date={nextClaimDate}>
                               <div className='new-btn'>
