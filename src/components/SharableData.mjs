@@ -169,6 +169,8 @@ export default function SharableData() {
 
   console.log("affUser", affUser);
 
+  console.log("user>>>>", user);
+
   return (
     <>
       {creatingAffUser ? (
@@ -262,8 +264,8 @@ export default function SharableData() {
               <div>
                 <img
                   className='wallet-casino-profile-img'
-                  src={user?.profile}
-                  alt='Scrooge Casino profile'
+                  src={user}
+                  alt='Scrooge-Casino-profile'
                 />
               </div>
             </div>
