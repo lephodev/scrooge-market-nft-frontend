@@ -2566,7 +2566,52 @@ ul.footer-support li img {
 .earn-token .bordered-section .flex-row-no-margin {
   align-items: flex-start;
 }
+.earn-token .prizes-card {
+  width: 100%;
+  border: 1px solid #1c1c1c;
+  background: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  margin: 0;
+}
 
+.earn-token .prizes-card .additional-info-div {
+  background: #000;
+  border: 1px solid #1c1c1c;
+  box-shadow: 0px 20px 20px #00000091;
+}
+
+.earn-token .prizes-card .next-claim-div {
+  background: #000;
+  border: 1px solid #1c1c1c;
+  box-shadow: 0px 20px 20px #00000091;
+}
+
+.earn-token .prizes-card .next-claim-div span {
+  color: #f9ff00;
+}
+.earn-token .leaderboard-row .leaderboard-left {
+  display: flex;
+  gap: 20px;
+}
+.earn-token
+  .earn-free-tokens-desc-div
+  .social-share-card
+  .social-share-message {
+  font-size: 16px;
+  text-align: center;
+}
+
+.earn-token
+  .earn-free-tokens-desc-div
+  .social-share-card
+  .social-share-btn-div {
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+}
+.earn-token .earn-free-tokens-desc-div .social-share-card {
+  gap: 20px;
+}
 /* .text-animate {
   animation: color-change 5s infinite;
 }
@@ -2906,14 +2951,14 @@ ul.footer-support li img {
 } */
 .earn-token .earn-card-box .affiliate-card-row p {
   margin: 0;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .earn-token .earn-affiliate-card .earn-card-box {
   width: calc(100% - 350px);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 20px;
 }
@@ -2921,7 +2966,13 @@ ul.footer-support li img {
 .earn-token .earn-card-box .affiliate-card-row {
   gap: 20px;
   flex-wrap: wrap;
+  flex-direction: column;
 }
+.earn-token .earn-card-box .affiliate-card-row p strong,
+.earn-token .earn-card-box .affiliate-card-row strong {
+  color: #f9ff01;
+}
+
 .my-wallet-page .close-btn-round-div {
   justify-content: flex-end;
   margin: 0;
@@ -3461,6 +3512,9 @@ ul.footer-support li img {
   .my-wallet-page .transaction-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .earn-token .prizes-card .additional-info-div {
+    width: 80%;
+  }
 }
 
 @media screen and (max-width: 720px) {
@@ -3897,6 +3951,23 @@ ul.footer-support li img {
   }
   .pageImgContainer {
     font-size: 28px;
+  }
+  .earn-token .prizes-card .additional-info-div .daily-reward-bag-div {
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 0;
+  }
+  .earn-token .bordered-section .leaderboard-card-div {
+    padding: 20px 0;
+  }
+  .earn-token .leaderboard-row {
+    padding: 10px;
+  }
+  .earn-token .prizes-card .next-claim-div {
+    width: 100%;
+  }
+  .earn-token .prizes-card .additional-info-div .daily-rewards-bag-card img {
+    width: 100px;
   }
 }
 
