@@ -2237,6 +2237,37 @@ ul.footer-support li img {
   background-color: transparent;
   color: #5ee47e;
 }
+.my-wallet-page .connect-wallet-div {
+  margin-bottom: 66px;
+}
+.my-wallet-page .transaction-card,
+.my-wallet-page .casino-card {
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s;
+  margin: 0;
+  width: 100%;
+}
+.my-wallet-page .transaction-card .transaction-card-coupon-code {
+  color: #fbff12;
+  margin: 0;
+  background: #000;
+  border: 1px solid #1c1c1c;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+}
+
+.my-wallet-page .transaction-card p {
+  color: #fff;
+}
+.my-wallet-page .transaction-card:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
 .my-wallet-page .wallet-casino-profile-div {
   border: 1px solid #1c1c1c;
   background-color: transparent;
@@ -2247,6 +2278,31 @@ ul.footer-support li img {
   cursor: pointer;
   transition: all 0.5s;
   padding: 20px;
+}
+
+.my-wallet-page .transaction-div {
+  width: 100%;
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  margin: 70px 0 40px;
+  display: block;
+  position: relative;
+}
+.my-wallet-page .transaction-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.my-wallet-page .transaction-div-title {
+  padding: 30px 0;
+}
+
+.my-wallet-page .wallet-close {
+  position: absolute;
+  top: -25px;
+  left: 0;
 }
 
 .my-wallet-page .wallet-casino-profile-img {
@@ -2416,7 +2472,7 @@ ul.footer-support li img {
   background: transparent;
   box-shadow: 0px 20px 20px #00000091;
   border-radius: 10px;
-
+  padding: 20px;
   flex-wrap: wrap;
   gap: 20px;
 }
@@ -2465,7 +2521,14 @@ ul.footer-support li img {
   padding: 20px 10px;
 }
 .earn-token .bordered-section .leaderboard-card-div h4 {
+  color: #f9ff00;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 30px;
+  position: relative;
   text-align: center;
+  text-transform: uppercase;
 }
 .earn-token .bordered-section .leaderboard-card-div:hover {
   background-color: rgba(255, 255, 255, 0.05);
@@ -2504,7 +2567,7 @@ ul.footer-support li img {
   align-items: flex-start;
 }
 
-.text-animate {
+/* .text-animate {
   animation: color-change 5s infinite;
 }
 
@@ -2521,17 +2584,24 @@ ul.footer-support li img {
   100% {
     color: rgba(255, 53, 127, 1);
   }
-}
+} */
 .text-animate h1 {
-  font-size: 36px;
+  color: #f9ff00;
+  font-size: 32px;
   font-weight: 700;
-  line-height: 44px;
-  margin: 0;
+  letter-spacing: 0.2em;
+  line-height: 30px;
+  position: relative;
   text-align: center;
+  text-transform: uppercase;
 }
 .text-animate h4 {
-  font-size: 24px;
+  font-size: 20px;
   margin: 0;
+  color: #f9ff00;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 30px;
 }
 .redeem-prizes-page .prizes-card p {
   margin: 0;
@@ -2793,6 +2863,24 @@ ul.footer-support li img {
   box-shadow: 0px 20px 20px #00000091;
   border-radius: 10px;
 }
+.claim-free-page .prizes-card .prize-name {
+  background-color: #000;
+  padding: 20px;
+}
+.claim-free-page .prizes-card .prize-name h4 {
+  color: #f9ff00;
+  font-size: 32px;
+  font-weight: 700;
+  /* letter-spacing: 0.2em; */
+  line-height: 30px;
+  position: relative;
+  text-align: center;
+  /* text-transform: uppercase; */
+}
+.earn-token .social-share-card {
+  background: #000;
+  color: #fff;
+}
 .earn-token .earn-affiliate-card {
   margin: 0;
   width: 100%;
@@ -2813,9 +2901,9 @@ ul.footer-support li img {
 /* .earn-token .social-share-card {
   background-color: rgba(255, 255, 255, 0.05);
 } */
-.earn-token .earn-affiliate-card .earn-card-profile .inlineTitle {
+/* .earn-token .earn-affiliate-card .earn-card-profile .inlineTitle {
   text-shadow: 1px 1px #fbff12;
-}
+} */
 .earn-token .earn-card-box .affiliate-card-row p {
   margin: 0;
   font-size: 18px;
@@ -2866,8 +2954,7 @@ ul.footer-support li img {
   display: flex;
   gap: 30px;
 }
-.claim-free-page .prizes-card .prize-name {
-}
+
 /* *********************************** btn - design **************************** */
 .available-btn {
   display: flex;
@@ -2960,6 +3047,33 @@ ul.footer-support li img {
   font-weight: 600;
   color: #fbff12;
 }
+.requestNotFound {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.requestNotFound .errorMssg {
+  color: #eee;
+  font-size: 17px;
+  letter-spacing: 4px;
+  line-height: 34px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.requestNotFound span {
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  line-height: 30px;
+  position: relative;
+  text-transform: uppercase;
+  margin-top: 50px;
+  display: block;
+}
 /* ************************** success page *************************************** */
 .payment-success {
   display: flex;
@@ -3038,6 +3152,20 @@ ul.footer-support li img {
   justify-content: center;
   opacity: 0;
 }
+.cross-background {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(to bottom right, #d2042d, #c1586d);
+  box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset,
+    0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
+  transform: scale(0.84);
+  border-radius: 50%;
+  animation: animateContainer 0.75s ease-out forwards 0.75s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
 .check-container svg {
   width: 50%;
   transform: translateY(0.25rem);
@@ -3050,6 +3178,13 @@ ul.footer-support li img {
   left: 0;
   border-radius: 50%;
   background: radial-gradient(closest-side, rgba(73, 218, 131, 1), transparent);
+  animation: animateShadow 0.75s ease-out forwards 0.75s;
+}
+.cross-shadow {
+  bottom: calc(-15% - 5px);
+  left: 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, #d2042d, transparent);
   animation: animateShadow 0.75s ease-out forwards 0.75s;
 }
 
@@ -3322,6 +3457,9 @@ ul.footer-support li img {
   }
   .earn-token .earn-free-tokens-desc-div {
     width: 100%;
+  }
+  .my-wallet-page .transaction-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -3691,9 +3829,11 @@ ul.footer-support li img {
   .explore-page .erc-card-box,
   .social-share-grid,
   .redeem-prizes-page .prizes_container,
-  .raffles-page .raffles-header-shop-div {
+  .raffles-page .raffles-header-shop-div,
+  .my-wallet-page .transaction-card-grid {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
+
   .raffles-page .raffles-header-shop-div {
     padding: 0;
     border: none;

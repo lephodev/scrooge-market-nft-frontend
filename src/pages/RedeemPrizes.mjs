@@ -10,6 +10,7 @@ import { useCookies } from "react-cookie";
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
 import { authInstance, marketPlaceInstance } from "../config/axios.js";
+import { async } from "q";
 
 function RedeemPrizes() {
   const { reward } = useReward("rewardId", "confetti", {
@@ -33,6 +34,9 @@ function RedeemPrizes() {
   const [prizesLoading, setPrizesLoading] = useState([]);
   const [currentPriceOG, setCurrentPriceOG] = useState("Loading...");
   const [currentPriceJR, setCurrentPriceJR] = useState("Loading...");
+  const [showConvert,setShowConvert]=useState(false)
+  const [convertPrice,setConvertPrice]=useState(0)
+
   const [OG1000, setOG1000] = useState();
   const [OG5000, setOG5000] = useState();
   const [OG10000, setOG10000] = useState();
@@ -83,17 +87,26 @@ function RedeemPrizes() {
         setPrizes(
           [...allPrizes].filter((prize) => prize.category === "Badges")
         );
+        setShowConvert(false)
         //console.log('badges: ',prizes);
       } else if (filterOn === "Crypto") {
         setPrizes(
           [...allPrizes].filter((prize) => prize.category === "Crypto")
         );
+        setShowConvert(false)
         //console.log('crypto: ',prizes);
       } else if (filterOn === "Merch") {
         setPrizes([...allPrizes].filter((prize) => prize.category === "Merch"));
         //console.log('merch: ',prizes);
       } else if (filterOn === "NFTs") {
         setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
+        //console.log('nfts: ',prizes);
+        setShowConvert(false)
+      }
+      else if (filterOn === "convert") {
+        setShowConvert(true)
+        setPrizes([])
+        // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
       }
     }
@@ -162,7 +175,7 @@ function RedeemPrizes() {
       });
   };
   const RedeemPrize = async (prize_id) => {
-    console.log("prize_id",prize_id);
+    console.log("prize_id", prize_id);
     if (!user)
       return toast.error("Please login first", { containerId: "login" });
     if (!address)
@@ -199,6 +212,36 @@ function RedeemPrizes() {
       });
   };
 
+  const convert=async()=>
+  {
+    console.log("convertPrice",convertPrice);
+    try {
+      if(parseInt(convertPrice)>0){
+      if(user?.ticket>parseInt(convertPrice)){
+      const res = await marketPlaceInstance().get(`/coverttickettotoken/${convertPrice}/${user.id}`);
+      const {message,code,data}=res.data
+      if (code===200) {
+        console.log("datattat",data);
+        getUserDataInstant()
+        setConvertPrice('')
+        toast.success(message,{id:"A"});
+      }
+    }
+    else{
+      toast.error("Not sufficent tokens",{id:"A"});
+    }
+   
+  }
+  else {
+    toast.error("Please enter token",{id:"A"});
+  }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  
+  // console.log("convertPrice",convertPrice);
+
   return (
     <Layout>
       <main className='main redeem-prizes-page'>
@@ -222,7 +265,8 @@ function RedeemPrizes() {
                     onClick={() => {
                       setRedeemSuccess(false);
                       reward();
-                    }}>
+                    }}
+                  >
                     CLOSE
                   </button>
                 </div>
@@ -261,72 +305,115 @@ function RedeemPrizes() {
               <div className='new-btn'>
                 <button
                   // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("Badges")}>
+                  onClick={() => filterPrizes("Badges")}
+                >
                   BADGES
                 </button>
               </div>
               <div className='new-btn'>
                 <button
                   // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("Crypto")}>
+                  onClick={() => filterPrizes("Crypto")}
+                >
                   CRYPTO
                 </button>
               </div>
               <div className='new-btn'>
                 <button
                   // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("Merch")}>
+                  onClick={() => filterPrizes("Merch")}
+                >
                   MERCH
                 </button>
               </div>
               <div className='new-btn'>
                 <button
                   // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("NFTs")}>
+                  onClick={() => filterPrizes("NFTs")}
+                >
                   NFTS
+                </button>
+              </div>
+              <div className='new-btn'>
+                <button
+                   onClick={() => filterPrizes("convert")}
+                  >
+                  Convert ticket to token
                 </button>
               </div>
             </div>
             <div className='page-nav-header-btns-subrow'>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("priceDescending")}>
+                onClick={() => sortPrizes("priceDescending")}
+              >
                 PRICE HIGH TO LOW
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("priceAscending")}>
+                onClick={() => sortPrizes("priceAscending")}
+              >
                 PRICE LOW TO HIGH
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("nameDescending")}>
+                onClick={() => sortPrizes("nameDescending")}
+              >
                 NAME A-Z
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("nameAscending")}>
+                onClick={() => sortPrizes("nameAscending")}
+              >
                 NAME Z-A
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("categoryDescending")}>
+                onClick={() => sortPrizes("categoryDescending")}
+              >
                 CATEGORY A-Z
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("categoryAscending")}>
+                onClick={() => sortPrizes("categoryAscending")}
+              >
                 CATEGORY Z-A
               </button>
             </div>
-
+           
             <div className='prizes-container'>
+            {showConvert &&
+            <>
+           
+            <div className='redeem-btn'>
+            <input
+              type='Number'
+              placeholder=''
+              value={convertPrice}
+              onChange={(e) => {
+                setConvertPrice(e.target.value);
+              }}
+              
+            ></input>
+                          <button
+                            // className='submit-btn'
+                            className='gradient-btn'
+                           onClick={()=>convert()}>
+
+                           convert
+                          </button>
+                        </div>
+                        </>
+
+}
               <div style={{ width: "100%", textAlign: "center" }}>
                 <div id='rewardId' style={{ margin: "0 auto" }} />
               </div>
               {!prizesLoading ? (
                 <>
                   <div className='prizes_container'>
+                  
+
                     {prizes.map((prize) => (
                       <div className='prizes-card' key={prize._id}>
                         {!prize.isDynamic ? (
@@ -337,132 +424,163 @@ function RedeemPrizes() {
                           <></>
                         )}
                         {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(OG1000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(OG1000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(JR1000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(JR1000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(OG1000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(OG1000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(JR1000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(JR1000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(OG5000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(OG5000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(JR5000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(JR5000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedf761736630ad01d5f52" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(OG5000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(OG5000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedfb61736630ad01d5f55" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(JR5000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(JR5000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedf301736630ad01d5f4f" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(OG10000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(OG10000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedf651736630ad01d5f51" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(JR10000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(JR10000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(OG10000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(OG10000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedfc51736630ad01d5f56" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(JR10000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(JR10000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
@@ -633,7 +751,8 @@ function RedeemPrizes() {
                           <button
                             // className='submit-btn'
                             className='gradient-btn'
-                            onClick={() => RedeemPrize(prize._id)}>
+                            onClick={() => RedeemPrize(prize._id)}
+                          >
                             REDEEM PRIZE
                           </button>
                         </div>
