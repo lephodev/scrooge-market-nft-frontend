@@ -238,18 +238,21 @@ function HolderClaimChips() {
                       <div className='prize-name'>
                         {nextClaimDate !== "Loading..." && OGBalance > 0 ? (
                           <>
-                            Next Claim Available:<br></br>
+                            <h4>Next Claim Available:</h4>
+
                             <Countdown date={nextClaimDate}>
-                              <button
-                                className='submit-btn'
-                                onClick={() => claimTokens()}
-                              >
-                                Claim{" "}
-                                {(OGBalance * currentPrice)
-                                  .toFixed(0)
-                                  .toLocaleString("en-US")}{" "}
-                                Tokens
-                              </button>
+                              <div className='new-btn'>
+                                <button
+                                  // className='submit-btn'
+                                  onClick={() => claimTokens()}
+                                >
+                                  Claim{" "}
+                                  {(OGBalance * currentPrice)
+                                    .toFixed(0)
+                                    .toLocaleString("en-US")}{" "}
+                                  Tokens
+                                </button>
+                              </div>
                             </Countdown>
                           </>
                         ) : OGBalance === 0 ? (

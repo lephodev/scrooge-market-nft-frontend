@@ -2240,6 +2240,34 @@ ul.footer-support li img {
 .my-wallet-page .connect-wallet-div {
   margin-bottom: 66px;
 }
+.my-wallet-page .transaction-card,
+.my-wallet-page .casino-card {
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s;
+  margin: 0;
+  width: 100%;
+}
+.my-wallet-page .transaction-card .transaction-card-coupon-code {
+  color: #fbff12;
+  margin: 0;
+  background: #000;
+  border: 1px solid #1c1c1c;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+}
+
+.my-wallet-page .transaction-card p {
+  color: #fff;
+}
+.my-wallet-page .transaction-card:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
 .my-wallet-page .wallet-casino-profile-div {
   border: 1px solid #1c1c1c;
   background-color: transparent;
@@ -2258,15 +2286,23 @@ ul.footer-support li img {
   background-color: transparent;
   box-shadow: 0px 20px 20px #00000091;
   border-radius: 10px;
-  margin: 40px 0;
+  margin: 70px 0 40px;
+  display: block;
+  position: relative;
 }
-
+.my-wallet-page .transaction-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
 .my-wallet-page .transaction-div-title {
   padding: 30px 0;
 }
 
 .my-wallet-page .wallet-close {
-  margin-top: -55px !important;
+  position: absolute;
+  top: -25px;
+  left: 0;
 }
 
 .my-wallet-page .wallet-casino-profile-img {
@@ -2813,6 +2849,14 @@ ul.footer-support li img {
   box-shadow: 0px 20px 20px #00000091;
   border-radius: 10px;
 }
+.claim-free-page .prizes-card .prize-name {
+  background-color: #000;
+  padding: 20px;
+}
+.earn-token .social-share-card {
+  background: #000;
+  color: #fff;
+}
 .earn-token .earn-affiliate-card {
   margin: 0;
   width: 100%;
@@ -2886,8 +2930,7 @@ ul.footer-support li img {
   display: flex;
   gap: 30px;
 }
-.claim-free-page .prizes-card .prize-name {
-}
+
 /* *********************************** btn - design **************************** */
 .available-btn {
   display: flex;
@@ -2979,6 +3022,33 @@ ul.footer-support li img {
   font-size: 15rem;
   font-weight: 600;
   color: #fbff12;
+}
+.requestNotFound {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.requestNotFound .errorMssg {
+  color: #eee;
+  font-size: 17px;
+  letter-spacing: 4px;
+  line-height: 34px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.requestNotFound span {
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  line-height: 30px;
+  position: relative;
+  text-transform: uppercase;
+  margin-top: 50px;
+  display: block;
 }
 /* ************************** success page *************************************** */
 .payment-success {
@@ -3364,6 +3434,9 @@ ul.footer-support li img {
   .earn-token .earn-free-tokens-desc-div {
     width: 100%;
   }
+  .my-wallet-page .transaction-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media screen and (max-width: 720px) {
@@ -3732,9 +3805,11 @@ ul.footer-support li img {
   .explore-page .erc-card-box,
   .social-share-grid,
   .redeem-prizes-page .prizes_container,
-  .raffles-page .raffles-header-shop-div {
+  .raffles-page .raffles-header-shop-div,
+  .my-wallet-page .transaction-card-grid {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
+
   .raffles-page .raffles-header-shop-div {
     padding: 0;
     border: none;

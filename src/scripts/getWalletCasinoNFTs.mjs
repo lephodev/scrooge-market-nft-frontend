@@ -209,7 +209,7 @@ export default function GetWalletERC1155NFTs() {
       ) : (
         <div className='flex-row'>
           {nfts.map((nft) => (
-            <div className='erc1155Card' key={nft.metadata.id}>
+            <div className='erc1155Card casino-card' key={nft.metadata.id}>
               <div className='erc1155Card-image'>
                 {Tooltip(
                   nft.metadata.id,
@@ -220,7 +220,6 @@ export default function GetWalletERC1155NFTs() {
               <div className='erc1155Card-details'>
                 <span>{nft.metadata.name}</span>
                 <br></br>
-
                 <span className='erc1155-price'>
                   Quantity Owned: <span>{nft.quantityOwned}</span>
                 </span>
@@ -230,6 +229,7 @@ export default function GetWalletERC1155NFTs() {
           ))}
         </div>
       )}
+
       <div className='bottom-row-btns-div'>
         <Link to='/nft-tokens'>
           <div className='new-btn'>
