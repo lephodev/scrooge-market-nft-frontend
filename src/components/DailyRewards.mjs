@@ -43,8 +43,8 @@ function DailyRewards() {
         const data = await marketPlaceInstance().get(
           `/getNextClaimDate/${address}/daily/${user.id}/0`
         );
-        console.log("claimdat3e", data.data.data[0]);
-        if (data.success) {
+        console.log("claimdat3e", data.data);
+        if (data.data.success) {
           setFullDailyRewards(true);
           setNextClaimDate(data.data.data[0]);
         } else {
@@ -96,15 +96,15 @@ function DailyRewards() {
       //console.log('UE zzz');
       zzz();
     }
-  }, [user]);
+  }, [user, address]);
 
   return (
     <>
-      {console.log(fullDailyRewards)}
+      {console.log("fullDR", fullDailyRewards)}
       {fullDailyRewards ? (
         <>
           <div className='bordered-section'>
-            {user[0] && user[0] !== "" && nextClaimDate.nextClaimDate ? (
+            {user && nextClaimDate.nextClaimDate ? (
               <div className='prizes_container'>
                 <div
                   className='prizes-card'
@@ -302,8 +302,9 @@ function DailyRewards() {
         </>
       ) : (
         <>
-          {!nextClaimDate.nextClaimDate ? (
+          {nextClaimDate.nextClaimDate ? (
             <div className='daily-reward-card-div'>
+              {console.log("nextclaimdate", nextClaimDate)}
               <div className='inlineTitle'>DAILY REWARDS</div>
               <div className='rewards'>
                 <span>Last Claim Amount:</span>{" "}
