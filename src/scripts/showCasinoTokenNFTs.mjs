@@ -52,7 +52,7 @@ export default function ShowCasinoTokenNFTs() {
       ) : (
         <></>
       )}
-      <div className='nft-home-sell-titles text-animate'>
+      <div className='nft-home-sell-titles text-animate secodry-heading'>
         <h1>Scrooge Casino NFT Token Packages</h1>
       </div>
 

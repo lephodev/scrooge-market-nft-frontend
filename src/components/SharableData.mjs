@@ -169,6 +169,8 @@ export default function SharableData() {
 
   console.log("affUser", affUser);
 
+  console.log("user>>>>", user);
+
   return (
     <>
       {creatingAffUser ? (
@@ -263,7 +265,7 @@ export default function SharableData() {
                 <img
                   className='wallet-casino-profile-img'
                   src={user?.profile}
-                  alt='Scrooge Casino profile'
+                  alt='Scrooge-Casino-profile'
                 />
               </div>
             </div>
@@ -642,10 +644,10 @@ export default function SharableData() {
             </div>
             <div>
               <div
-                className='inlineTitle txt-align-center'
-                style={{ marginBottom: "25px" }}
+                className=' txt-align-center text-animate'
+                style={{ marginBottom: "40px" }}
               >
-                👇 Pre-made messages ready for you to share! 👇
+                <h1> 👇 Pre-made messages ready for you to share! 👇</h1>
               </div>
 
               {messages.length > 0 ? (
