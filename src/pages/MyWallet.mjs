@@ -251,8 +251,8 @@ export default function MyWallet() {
                   X
                 </div>
               </div>
-              <div className='transaction-div-title'>
-                <h3> Your Merch Coupon Codes</h3>
+              <div className='transaction-div-title text-animate'>
+                <h1> Your Merch Coupon Codes</h1>
               </div>
               <br></br>
               {userRedeemed.map((red) => (

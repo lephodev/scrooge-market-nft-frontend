@@ -197,7 +197,11 @@ export default function GetWalletERC1155NFTs() {
       ) : (
         <></>
       )}
-      <div className='pageTitle'>
+      <div
+        className='
+       pageTitless 
+      text-animate'
+      >
         <h1>My Scrooge Casino NFTs</h1>
       </div>
 
