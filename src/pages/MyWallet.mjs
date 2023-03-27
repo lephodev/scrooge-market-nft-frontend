@@ -123,13 +123,16 @@ export default function MyWallet() {
               <div className='min-menu-div'>
                 {!showMerchRedeemed ? (
                   <>
-                    <button
-                      className='min-menu-btn'
-                      onClick={() => {
-                        setShowMerchRedeemed(true);
-                      }}>
-                      MERCH CODES
-                    </button>
+                    <div className='new-btn'>
+                      <button
+                        // className='min-menu-btn'
+                        onClick={() => {
+                          setShowMerchRedeemed(true);
+                        }}
+                      >
+                        MERCH CODES
+                      </button>
+                    </div>
                   </>
                 ) : (
                   <></>
@@ -140,7 +143,8 @@ export default function MyWallet() {
                       className='min-menu-btn'
                       onClick={() => {
                         setShowCasinoNFTs(true);
-                      }}>
+                      }}
+                    >
                       CASINO NFTS
                     </button>
                   </>
@@ -153,7 +157,8 @@ export default function MyWallet() {
                       className='min-menu-btn'
                       onClick={() => {
                         setShowCrypto(true);
-                      }}>
+                      }}
+                    >
                       CRYPTO
                     </button>
                   </>
@@ -238,17 +243,16 @@ export default function MyWallet() {
 
           {userRedeemed.length > 0 && showMerchRedeemed ? (
             <div className='transaction-div'>
-              <div
-                className='close-btn-round-div'
-                style={{ width: "45px", marginTop: "0" }}>
+              <div className='close-btn-round-div wallet-close'>
                 <div
                   className='close-btn-round'
-                  onClick={() => setShowMerchRedeemed(false)}>
+                  onClick={() => setShowMerchRedeemed(false)}
+                >
                   X
                 </div>
               </div>
-              <div className='transaction-div-title'>
-                Your Merch Coupon Codes
+              <div className='transaction-div-title text-animate'>
+                <h1> Your Merch Coupon Codes</h1>
               </div>
               <br></br>
               {userRedeemed.map((red) => (
@@ -256,36 +260,44 @@ export default function MyWallet() {
                   {red.prize_details.map((deet) => (
                     <>
                       {deet.category === "Merch" ? (
-                        <div
-                          className={
-                            red.markRedeemed
-                              ? "disabled transaction-card"
-                              : "transaction-card"
-                          }
-                          key={red._id}>
-                          <div key={deet._id}>
-                            {deet.name}
-                            <br></br>
-                            COUPON CODE: <br></br>
-                            <div className='transaction-card-coupon-code'>
-                              {red.coupon_code}
+                        <div className='transaction-card-grid'>
+                          <div
+                            className={
+                              red.markRedeemed
+                                ? "disabled transaction-card"
+                                : "transaction-card"
+                            }
+                            key={red._id}
+                          >
+                            <div key={deet._id}>
+                              {deet.name}
+                              <br></br>
+                              <p>COUPON CODE:</p>
+                              <div className='transaction-card-coupon-code'>
+                                {red.coupon_code}
+                                sdjbvwsbjvjwkdsbijnbdnx
+                              </div>
+                              <br></br>
+                              Received Date:{" "}
+                              {red.timestamp.substring(
+                                0,
+                                red.timestamp.indexOf("T")
+                              )}
+                              <br></br>
+                              <br />
+                              {red.markRedeemed ? (
+                                <div className='green bold'>Redeemed</div>
+                              ) : (
+                                <div className='new-btn'>
+                                  <button
+                                    // className='claim-btn'
+                                    onClick={() => handleMarkRedeemed(red._id)}
+                                  >
+                                    Mark as Redeemed
+                                  </button>
+                                </div>
+                              )}
                             </div>
-                            <br></br>
-                            Received Date:{" "}
-                            {red.timestamp.substring(
-                              0,
-                              red.timestamp.indexOf("T")
-                            )}
-                            <br></br>
-                            {red.markRedeemed ? (
-                              <div className='green bold'>Redeemed</div>
-                            ) : (
-                              <button
-                                className='claim-btn'
-                                onClick={() => handleMarkRedeemed(red._id)}>
-                                Mark as Redeemed
-                              </button>
-                            )}
                           </div>
                         </div>
                       ) : (
@@ -326,10 +338,12 @@ export default function MyWallet() {
             <div className='bottom-margin-100'>
               <div
                 className='close-btn-round-div'
-                style={{ width: "45px", marginTop: "0" }}>
+                // style={{ width: "45px", marginTop: "0" }}
+              >
                 <div
                   className='close-btn-round'
-                  onClick={() => setShowCasinoNFTs(false)}>
+                  onClick={() => setShowCasinoNFTs(false)}
+                >
                   X
                 </div>
               </div>
