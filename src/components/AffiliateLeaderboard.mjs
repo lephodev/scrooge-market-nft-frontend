@@ -19,7 +19,7 @@ export default function AffiliateLeaderboard() {
       const data = await marketPlaceInstance().get(
         `/getAffLeadersByCount/${limit}/${days}`
       );
-      console.log("getbycount", data);
+      // console.log("getbycount", data);
       if (data.data.success) {
         setLeaderboardByCount(data.data.data);
       } else {
@@ -27,7 +27,7 @@ export default function AffiliateLeaderboard() {
       }
     } catch (err) {
       setLeaderboardByCount("Error");
-      console.error("bycount", err);
+      // console.error("bycount", err);
     }
   };
 
@@ -53,7 +53,7 @@ export default function AffiliateLeaderboard() {
         `/getAffLeadersByTokens/${limit}/${days}`
       );
 
-      console.log("getAffLeadersByTokens: ", data.data);
+      // console.log("getAffLeadersByTokens: ", data.data);
       if (data.data.success) {
         setLeaderboardHottestNewcomers(data.data.data);
       } else {
@@ -129,11 +129,10 @@ export default function AffiliateLeaderboard() {
     getData();
   }, []);
 
-  console.log("userrr",user);
+  console.log("userrr", user);
   return (
     <>
-      {showLeaderboards   ? (
-        
+      {showLeaderboards ? (
         <div className='bordered-section'>
           <div className='flex-row-no-margin'>
             {leaderboardByCount !== "Error" ? (
@@ -141,11 +140,9 @@ export default function AffiliateLeaderboard() {
                 <div className='leaderboard-card-div'>
                   <div
                     className='pageTitless text-animate'
-                    style={{ marginBottom: "20px" }}
-                  >
+                    style={{ marginBottom: "20px" }}>
                     <h4>Affiliate Sales Leaders</h4>
                   </div>
-                  {console.log("leaderboardByCount",leaderboardByCount)}
                   {leaderboardByCount !== "No Entries Found For User" &&
                   leaderboardByCount !== "Error in Request Process" &&
                   leaderboardByCount.length ? (
@@ -178,8 +175,7 @@ export default function AffiliateLeaderboard() {
                 <div className='leaderboard-card-div'>
                   <div
                     className='pageTitless text-animate'
-                    style={{ marginBottom: "20px" }}
-                  >
+                    style={{ marginBottom: "20px" }}>
                     <h4>Affiliate Tokens Leaders</h4>
                   </div>
                   {leaderboardByTokens !== "No Entries Found For User" &&
@@ -215,8 +211,7 @@ export default function AffiliateLeaderboard() {
                 <div className='leaderboard-card-div'>
                   <div
                     className='pageTitlesss text-animate'
-                    style={{ marginBottom: "20px" }}
-                  >
+                    style={{ marginBottom: "20px" }}>
                     <h4>Hottest Newcomers</h4>
                   </div>
                   {leaderboardHottestNewcomers !==
@@ -253,8 +248,7 @@ export default function AffiliateLeaderboard() {
                 <div className='leaderboard-card-div'>
                   <div
                     className='pageTitless text-animate'
-                    style={{ marginBottom: "20px" }}
-                  >
+                    style={{ marginBottom: "20px" }}>
                     <h4>Monthly Movers</h4>
                   </div>
                   {leaderboardMonthlyMovers !== "No Entries Found For User" &&
@@ -289,8 +283,7 @@ export default function AffiliateLeaderboard() {
                 <div className='leaderboard-card-div'>
                   <div
                     className='pageTitless text-animate'
-                    style={{ marginBottom: "20px" }}
-                  >
+                    style={{ marginBottom: "20px" }}>
                     <h4>Top User Referrals</h4>
                   </div>
                   {leaderboardTopRegisters !== "No Entries Found For User" &&
@@ -326,8 +319,7 @@ export default function AffiliateLeaderboard() {
                 <div className='leaderboard-card-div'>
                   <div
                     className='pageTitless text-animate'
-                    style={{ marginBottom: "20px" }}
-                  >
+                    style={{ marginBottom: "20px" }}>
                     <h4>Top Product Sales</h4>
                   </div>
                   {leaderboardTopSales !== "No Entries Found For User" &&

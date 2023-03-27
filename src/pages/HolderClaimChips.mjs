@@ -4,6 +4,8 @@ import {
   ConnectWallet,
   useNetworkMismatch,
   useAddress,
+  useSDK,
+  useSigner,
 } from "@thirdweb-dev/react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,8 +30,10 @@ function HolderClaimChips() {
   const [nextClaimDate, setNextClaimDate] = useState("Loading...");
   const [OGBalance, setOGBalance] = useState("Loading...");
   const [currentPrice, setCurrentPrice] = useState("Loading...");
-
+  const sdk = useSDK();
   const address = useAddress();
+  const signer = useSigner();
+
   const isMismatched = useNetworkMismatch();
   function notify(message) {
     toast.success("🎩 " + message);
@@ -92,6 +96,13 @@ function HolderClaimChips() {
     }
   };
 
+  const sdksdk = async () => {
+    const rawBal = await sdk.wallet.balance(
+      "0xfA1BA18067aC6884fB26e329e60273488a247FC3"
+    );
+    setOGBalance(parseInt(rawBal.value / 10 ** 18));
+  };
+
   const zzz = async () => {
     if (address && !isMismatched) {
       await getNextClaimDate().then((resu) => {
@@ -107,15 +118,8 @@ function HolderClaimChips() {
     console.log("address", address);
     console.log("isMismatched", !isMismatched);
     if (address && !isMismatched) {
-      marketPlaceInstance()
-        .get(`/getOGBalance/${address}`)
-        .then((data) => {
-          console.log("ogbalance====>>>", data);
-          setOGBalance(data?.data?.data);
-        })
-        .then(() => {
-          zzz();
-        });
+      sdksdk();
+      zzz();
     }
   }, [user, address]);
 
@@ -145,8 +149,7 @@ function HolderClaimChips() {
                     href={scroogeClient}
                     target='_blank'
                     rel='noreferrer'
-                    alt='claim free tokens to spend in Scrooge Casino'
-                  >
+                    alt='claim free tokens to spend in Scrooge Casino'>
                     Scrooge Casino
                   </a>{" "}
                   tokens just by clicking the CLAIM TOKENS button.
@@ -224,8 +227,7 @@ function HolderClaimChips() {
                     <div className='new-btn'>
                       <button
                         // className='submit-btn'
-                        onClick={() => claimTokens()}
-                      >
+                        onClick={() => claimTokens()}>
                         Claim{" "}
                         {(OGBalance * currentPrice * 0.1)
                           .toFixed(0)
@@ -242,10 +244,9 @@ function HolderClaimChips() {
                             <Countdown date={nextClaimDate}>
                               <button
                                 className='submit-btn'
-                                onClick={() => claimTokens()}
-                              >
+                                onClick={() => claimTokens()}>
                                 Claim{" "}
-                                {(OGBalance * currentPrice)
+                                {(OGBalance * currentPrice * 0.1)
                                   .toFixed(0)
                                   .toLocaleString("en-US")}{" "}
                                 Tokens
@@ -276,8 +277,7 @@ function HolderClaimChips() {
                         href={scroogeClient}
                         alt='Visit Scrooge Casino'
                         target='_blank'
-                        rel='noreferrer'
-                      >
+                        rel='noreferrer'>
                         Scrooge Casino
                       </a>{" "}
                       account.
