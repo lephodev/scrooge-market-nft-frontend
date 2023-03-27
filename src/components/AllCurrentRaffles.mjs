@@ -236,7 +236,7 @@ export default function AllCurrentRaffles() {
                   <img
                     className='wallet-casino-profile-img'
                     src={user}
-                    alt='Scrooge Casino profile picture'
+                    alt='Scrooge-Casino-profilepicture'
                   />
                 </div>
               </div>
