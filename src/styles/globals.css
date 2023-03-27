@@ -2237,6 +2237,9 @@ ul.footer-support li img {
   background-color: transparent;
   color: #5ee47e;
 }
+.my-wallet-page .connect-wallet-div {
+  margin-bottom: 66px;
+}
 .my-wallet-page .wallet-casino-profile-div {
   border: 1px solid #1c1c1c;
   background-color: transparent;
@@ -2247,6 +2250,23 @@ ul.footer-support li img {
   cursor: pointer;
   transition: all 0.5s;
   padding: 20px;
+}
+
+.my-wallet-page .transaction-div {
+  width: 100%;
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  margin: 40px 0;
+}
+
+.my-wallet-page .transaction-div-title {
+  padding: 30px 0;
+}
+
+.my-wallet-page .wallet-close {
+  margin-top: -55px !important;
 }
 
 .my-wallet-page .wallet-casino-profile-img {
@@ -3038,6 +3058,20 @@ ul.footer-support li img {
   justify-content: center;
   opacity: 0;
 }
+.cross-background {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(to bottom right, #d2042d, #c1586d);
+  box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset,
+    0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
+  transform: scale(0.84);
+  border-radius: 50%;
+  animation: animateContainer 0.75s ease-out forwards 0.75s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
 .check-container svg {
   width: 50%;
   transform: translateY(0.25rem);
@@ -3050,6 +3084,13 @@ ul.footer-support li img {
   left: 0;
   border-radius: 50%;
   background: radial-gradient(closest-side, rgba(73, 218, 131, 1), transparent);
+  animation: animateShadow 0.75s ease-out forwards 0.75s;
+}
+.cross-shadow {
+  bottom: calc(-15% - 5px);
+  left: 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, #d2042d, transparent);
   animation: animateShadow 0.75s ease-out forwards 0.75s;
 }
 
