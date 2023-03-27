@@ -110,13 +110,12 @@ export default function DLClaimTokens() {
             </div>
           ) : (
             <div
-              className=''
+              className='text-animate'
               style={{
                 textAlign: "center",
-                fontSize: "24px",
               }}
             >
-              No DL Tokens
+              <h1>No DL Tokens</h1>
             </div>
           )}
 

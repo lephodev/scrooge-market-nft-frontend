@@ -175,7 +175,7 @@ function RedeemPrizes() {
       });
   };
   const RedeemPrize = async (prize_id) => {
-    console.log("prize_id",prize_id);
+    console.log("prize_id", prize_id);
     if (!user)
       return toast.error("Please login first", { containerId: "login" });
     if (!address)
@@ -265,7 +265,8 @@ function RedeemPrizes() {
                     onClick={() => {
                       setRedeemSuccess(false);
                       reward();
-                    }}>
+                    }}
+                  >
                     CLOSE
                   </button>
                 </div>
@@ -304,28 +305,32 @@ function RedeemPrizes() {
               <div className='new-btn'>
                 <button
                   // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("Badges")}>
+                  onClick={() => filterPrizes("Badges")}
+                >
                   BADGES
                 </button>
               </div>
               <div className='new-btn'>
                 <button
                   // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("Crypto")}>
+                  onClick={() => filterPrizes("Crypto")}
+                >
                   CRYPTO
                 </button>
               </div>
               <div className='new-btn'>
                 <button
                   // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("Merch")}>
+                  onClick={() => filterPrizes("Merch")}
+                >
                   MERCH
                 </button>
               </div>
               <div className='new-btn'>
                 <button
                   // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("NFTs")}>
+                  onClick={() => filterPrizes("NFTs")}
+                >
                   NFTS
                 </button>
               </div>
@@ -340,32 +345,38 @@ function RedeemPrizes() {
             <div className='page-nav-header-btns-subrow'>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("priceDescending")}>
+                onClick={() => sortPrizes("priceDescending")}
+              >
                 PRICE HIGH TO LOW
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("priceAscending")}>
+                onClick={() => sortPrizes("priceAscending")}
+              >
                 PRICE LOW TO HIGH
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("nameDescending")}>
+                onClick={() => sortPrizes("nameDescending")}
+              >
                 NAME A-Z
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("nameAscending")}>
+                onClick={() => sortPrizes("nameAscending")}
+              >
                 NAME Z-A
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("categoryDescending")}>
+                onClick={() => sortPrizes("categoryDescending")}
+              >
                 CATEGORY A-Z
               </button>
               <button
                 className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("categoryAscending")}>
+                onClick={() => sortPrizes("categoryAscending")}
+              >
                 CATEGORY Z-A
               </button>
             </div>
@@ -413,132 +424,163 @@ function RedeemPrizes() {
                           <></>
                         )}
                         {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(OG1000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(OG1000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(JR1000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(JR1000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(OG1000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(OG1000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(JR1000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(JR1000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(OG5000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(OG5000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(JR5000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(JR5000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedf761736630ad01d5f52" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(OG5000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(OG5000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedfb61736630ad01d5f55" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(JR5000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(JR5000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedf301736630ad01d5f4f" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(OG10000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(OG10000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedf651736630ad01d5f51" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(JR10000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {" "}
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(JR10000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(OG10000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(OG10000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
                           <></>
                         )}
                         {prize._id === "63cedfc51736630ad01d5f56" ? (
-                          <div className='prize-name bold'>
-                            {prize.name.replace(
-                              "xxxValue",
-                              parseInt(JR10000).toLocaleString("en-US")
-                            )}
+                          <div className='prize-name bold text-animate'>
+                            <h4>
+                              {prize.name.replace(
+                                "xxxValue",
+                                parseInt(JR10000).toLocaleString("en-US")
+                              )}
+                            </h4>
                             *
                           </div>
                         ) : (
@@ -709,7 +751,8 @@ function RedeemPrizes() {
                           <button
                             // className='submit-btn'
                             className='gradient-btn'
-                            onClick={() => RedeemPrize(prize._id)}>
+                            onClick={() => RedeemPrize(prize._id)}
+                          >
                             REDEEM PRIZE
                           </button>
                         </div>
