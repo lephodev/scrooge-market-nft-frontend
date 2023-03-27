@@ -91,6 +91,13 @@
 .home-page .grid {
   padding: 20px 0 0;
 }
+.redeem-btn
+input[type="Number"] {
+  height: 38px;
+  border-radius: 10px;
+  border: none;
+  padding: 6px 10px;
+}
 
 @media (max-width: 600px) {
   .grid {
