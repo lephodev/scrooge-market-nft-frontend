@@ -23,6 +23,7 @@ import {
   TumblrIcon,
   TwitterIcon,
   WhatsappIcon,
+  PinterestShareCount
 } from "react-share";
 import getAffiliateUser from "../scripts/getAffilateUser.mjs";
 import { createAffiliateUser } from "../scripts/getAffilateUser.mjs";
@@ -477,7 +478,8 @@ export default function SharableData() {
                             <WhatsappShareButton
                               title={randomMessage.message}
                               url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
-                              className='social-share-btn'>
+                              className='social-share-btn'
+                              >
                               <WhatsappIcon size={40} round />
                             </WhatsappShareButton>
                             <EmailShareButton
