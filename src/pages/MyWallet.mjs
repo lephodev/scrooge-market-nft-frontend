@@ -123,13 +123,16 @@ export default function MyWallet() {
               <div className='min-menu-div'>
                 {!showMerchRedeemed ? (
                   <>
-                    <button
-                      className='min-menu-btn'
-                      onClick={() => {
-                        setShowMerchRedeemed(true);
-                      }}>
-                      MERCH CODES
-                    </button>
+                    <div className='new-btn'>
+                      <button
+                        // className='min-menu-btn'
+                        onClick={() => {
+                          setShowMerchRedeemed(true);
+                        }}
+                      >
+                        MERCH CODES
+                      </button>
+                    </div>
                   </>
                 ) : (
                   <></>
@@ -140,7 +143,8 @@ export default function MyWallet() {
                       className='min-menu-btn'
                       onClick={() => {
                         setShowCasinoNFTs(true);
-                      }}>
+                      }}
+                    >
                       CASINO NFTS
                     </button>
                   </>
@@ -153,7 +157,8 @@ export default function MyWallet() {
                       className='min-menu-btn'
                       onClick={() => {
                         setShowCrypto(true);
-                      }}>
+                      }}
+                    >
                       CRYPTO
                     </button>
                   </>
@@ -238,12 +243,11 @@ export default function MyWallet() {
 
           {userRedeemed.length > 0 && showMerchRedeemed ? (
             <div className='transaction-div'>
-              <div
-                className='close-btn-round-div'
-                style={{ width: "45px", marginTop: "0" }}>
+              <div className='close-btn-round-div wallet-close'>
                 <div
                   className='close-btn-round'
-                  onClick={() => setShowMerchRedeemed(false)}>
+                  onClick={() => setShowMerchRedeemed(false)}
+                >
                   X
                 </div>
               </div>
@@ -262,7 +266,8 @@ export default function MyWallet() {
                               ? "disabled transaction-card"
                               : "transaction-card"
                           }
-                          key={red._id}>
+                          key={red._id}
+                        >
                           <div key={deet._id}>
                             {deet.name}
                             <br></br>
@@ -282,7 +287,8 @@ export default function MyWallet() {
                             ) : (
                               <button
                                 className='claim-btn'
-                                onClick={() => handleMarkRedeemed(red._id)}>
+                                onClick={() => handleMarkRedeemed(red._id)}
+                              >
                                 Mark as Redeemed
                               </button>
                             )}
@@ -326,10 +332,12 @@ export default function MyWallet() {
             <div className='bottom-margin-100'>
               <div
                 className='close-btn-round-div'
-                style={{ width: "45px", marginTop: "0" }}>
+                style={{ width: "45px", marginTop: "0" }}
+              >
                 <div
                   className='close-btn-round'
-                  onClick={() => setShowCasinoNFTs(false)}>
+                  onClick={() => setShowCasinoNFTs(false)}
+                >
                   X
                 </div>
               </div>
