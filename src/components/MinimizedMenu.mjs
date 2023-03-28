@@ -103,7 +103,7 @@ export default function MinimizedMenu() {
               <div className='earn-free-tokens-desc-header'>
                 <span
                   className='bg-animated'
-                  style={{ padding: "0 15px", fontSize: "36px" }}
+                  // style={{ padding: "0 15px", fontSize: "36px" }}
                 >
                   SCROOGE AFFILIATE TIPS WITH THE POWER OF AI!
                 </span>
