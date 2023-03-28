@@ -108,7 +108,7 @@ function DailyRewards() {
               <div className='prizes_container'>
                 <div
                   className='prizes-card'
-                  style={{ width: "95%", margin: "0 auto" }}
+                  // style={{ width: "95%", margin: "0 auto" }}
                 >
                   <div className='pageTitle' style={{ margin: "20px auto" }}>
                     <h1>Claim Your Daily Rewards</h1>
