@@ -2607,8 +2607,11 @@ ul.footer-support li img {
   border: 1px solid #1c1c1c;
   box-shadow: 0px 20px 20px #00000091;
   width: 80%;
+  padding: 20px;
 }
-
+.earn-token .prizes-card .additional-info-div .daily-reward-bag {
+  width: 70%;
+}
 .earn-token .prizes-card .next-claim-div {
   background: #000;
   border: 1px solid #1c1c1c;
@@ -3554,6 +3557,9 @@ ul.footer-support li img {
   .earn-token .prizes-card .additional-info-div {
     width: 80%;
   }
+  .earn-token .prizes-card .next-claim-div {
+    width: 65%;
+  }
 }
 
 @media screen and (max-width: 720px) {
@@ -3769,6 +3775,7 @@ ul.footer-support li img {
     width: 100%;
     margin: 0;
     flex-direction: column;
+    padding: 20px 0;
   }
   .wallet-casino-profile-img-div {
     display: flex;
@@ -3995,18 +4002,61 @@ ul.footer-support li img {
     flex-wrap: wrap;
     gap: 20px;
     margin: 0;
+    padding-top: 20px;
   }
   .earn-token .bordered-section .leaderboard-card-div {
-    padding: 20px 0;
+    padding: 20px;
   }
   .earn-token .leaderboard-row {
     padding: 10px;
+    justify-content: center;
   }
   .earn-token .prizes-card .next-claim-div {
     width: 100%;
+    font-size: 18px;
   }
   .earn-token .prizes-card .additional-info-div .daily-rewards-bag-card img {
     width: 100px;
+  }
+  .earn-token .prizes-card {
+    border: none;
+    padding: 0;
+  }
+  .earn-token .earn-card-box .affiliate-card-row p {
+    text-align: center;
+  }
+  .earn-token .earn-card-box .affiliate-card-row {
+    align-items: center;
+  }
+  .earn-token .leaderboard-row .leaderboard-left {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .earn-token .earn-free-tokens-desc-div {
+    margin: 20px 0;
+  }
+
+  .earn-token .leaderboard-row p {
+    text-align: center;
+  }
+  .earn-token .prizes-card .additional-info-div {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  .nft-page .nft-card-grid p {
+    text-align: center;
+  }
+  .my-wallet-page
+    .wallet-casino-profile-div
+    .crypto-balance-div
+    .claim-pending-div {
+    margin-top: 10px;
+  }
+  .my-wallet-page .flex-row {
+    margin: 0;
   }
 }
 
