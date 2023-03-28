@@ -34,8 +34,8 @@ function RedeemPrizes() {
   const [prizesLoading, setPrizesLoading] = useState([]);
   const [currentPriceOG, setCurrentPriceOG] = useState("Loading...");
   const [currentPriceJR, setCurrentPriceJR] = useState("Loading...");
-  const [showConvert,setShowConvert]=useState(false)
-  const [convertPrice,setConvertPrice]=useState(0)
+  const [showConvert, setShowConvert] = useState(false);
+  const [convertPrice, setConvertPrice] = useState(0);
 
   const [OG1000, setOG1000] = useState();
   const [OG5000, setOG5000] = useState();
@@ -87,13 +87,13 @@ function RedeemPrizes() {
         setPrizes(
           [...allPrizes].filter((prize) => prize.category === "Badges")
         );
-        setShowConvert(false)
+        setShowConvert(false);
         //console.log('badges: ',prizes);
       } else if (filterOn === "Crypto") {
         setPrizes(
           [...allPrizes].filter((prize) => prize.category === "Crypto")
         );
-        setShowConvert(false)
+        setShowConvert(false);
         //console.log('crypto: ',prizes);
       } else if (filterOn === "Merch") {
         setPrizes([...allPrizes].filter((prize) => prize.category === "Merch"));
@@ -101,11 +101,10 @@ function RedeemPrizes() {
       } else if (filterOn === "NFTs") {
         setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
-        setShowConvert(false)
-      }
-      else if (filterOn === "convert") {
-        setShowConvert(true)
-        setPrizes([])
+        setShowConvert(false);
+      } else if (filterOn === "convert") {
+        setShowConvert(true);
+        setPrizes([]);
         // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
       }
@@ -212,34 +211,32 @@ function RedeemPrizes() {
       });
   };
 
-  const convert=async()=>
-  {
-    console.log("convertPrice",convertPrice);
+  const convert = async () => {
+    console.log("convertPrice", convertPrice);
     try {
-      if(parseInt(convertPrice)>0){
-      if(user?.ticket>=parseInt(convertPrice)){
-      const res = await marketPlaceInstance().get(`/coverttickettotoken/${convertPrice}/${user.id}`);
-      const {message,code,data}=res.data
-      if (code===200) {
-        console.log("datattat",data);
-        getUserDataInstant()
-        setConvertPrice('')
-        toast.success(message,{id:"A"});
+      if (parseInt(convertPrice) > 0) {
+        if (user?.ticket >= parseInt(convertPrice)) {
+          const res = await marketPlaceInstance().get(
+            `/coverttickettotoken/${convertPrice}/${user.id}`
+          );
+          const { message, code, data } = res.data;
+          if (code === 200) {
+            console.log("datattat", data);
+            getUserDataInstant();
+            setConvertPrice("");
+            toast.success(message, { id: "A" });
+          }
+        } else {
+          toast.error("Not sufficent tokens", { id: "A" });
+        }
+      } else {
+        toast.error("Please enter token", { id: "A" });
       }
-    }
-    else{
-      toast.error("Not sufficent tokens",{id:"A"});
-    }
-   
-  }
-  else {
-    toast.error("Please enter token",{id:"A"});
-  }
     } catch (e) {
       console.log(e);
     }
-  }
-  
+  };
+
   // console.log("convertPrice",convertPrice);
 
   return (
@@ -335,9 +332,7 @@ function RedeemPrizes() {
                 </button>
               </div>
               <div className='new-btn'>
-                <button
-                   onClick={() => filterPrizes("convert")}
-                  >
+                <button onClick={() => filterPrizes("convert")}>
                   Convert ticket to token
                 </button>
               </div>
@@ -380,40 +375,37 @@ function RedeemPrizes() {
                 CATEGORY Z-A
               </button>
             </div>
-           
+
             <div className='prizes-container'>
-            {showConvert &&
-            <>
-           
-            <div className='redeem-btn'>
-            <input
-              type='Number'
-              placeholder=''
-              value={convertPrice}
-              onChange={(e) => {
-                setConvertPrice(e.target.value);
-              }}
-              
-            ></input>
-                          <button
-                            // className='submit-btn'
-                            className='gradient-btn'
-                           onClick={()=>convert()}>
-
-                           convert
-                          </button>
-                        </div>
-                        </>
-
-}
+              {showConvert && (
+                <>
+                  <div className='redeem-btn'>
+                    <input
+                      type='Number'
+                      placeholder=''
+                      value={convertPrice}
+                      onChange={(e) => {
+                        setConvertPrice(e.target.value);
+                      }}
+                    ></input>
+                    <div className='new-btn'>
+                      <button
+                        // className='submit-btn'
+                        // className='gradient-btn'
+                        onClick={() => convert()}
+                      >
+                        convert
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
               <div style={{ width: "100%", textAlign: "center" }}>
                 <div id='rewardId' style={{ margin: "0 auto" }} />
               </div>
               {!prizesLoading ? (
                 <>
                   <div className='prizes_container'>
-                  
-
                     {prizes.map((prize) => (
                       <div className='prizes-card' key={prize._id}>
                         {!prize.isDynamic ? (
