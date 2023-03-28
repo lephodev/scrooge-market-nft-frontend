@@ -43,7 +43,7 @@ function DailyRewards() {
         const data = await marketPlaceInstance().get(
           `/getNextClaimDate/${address}/daily/${user.id}/0`
         );
-        console.log("claimdat3e", data.data);
+        console.log("claimdat3e", data);
         if (data.data.success) {
           setFullDailyRewards(true);
           setNextClaimDate(data.data.data[0]);
@@ -239,7 +239,7 @@ function DailyRewards() {
                     <div id='rewardId' style={{ margin: "0 auto" }} />
                   </div>
                   {new Date(nextClaimDate.nextClaimDate) <= new Date() ||
-                  nextClaimDate === "CLAIM NOW" ? (
+                  nextClaimDate === "No Entries Found" ? (
                     <button className='button2' onClick={() => claimTokens()}>
                       Claim Tokens
                     </button>
@@ -302,7 +302,7 @@ function DailyRewards() {
         </>
       ) : (
         <>
-          {nextClaimDate.nextClaimDate ? (
+          {!nextClaimDate.nextClaimDate ? (
             <div className='daily-reward-card-div'>
               {console.log("nextclaimdate", nextClaimDate)}
               <div className='inlineTitle'>DAILY REWARDS</div>
@@ -323,15 +323,15 @@ function DailyRewards() {
               <div className='available-btn'>
                 <span>Available:</span>{" "}
                 <Countdown date={nextClaimDate.nextClaimDate}>
-                  {/* <button
+                  <button
                     className='button-inline'
                     style={{ marginLeft: "20px" }}
                     onClick={() => claimTokens()}>
                     Claim NOW
-                  </button> */}
-                  <div className='new-btn'>
+                  </button>
+                  {/* <div className='new-btn'>
                     <button>Claim NOW</button>
-                  </div>
+                  </div> */}
                 </Countdown>
               </div>
             </div>
