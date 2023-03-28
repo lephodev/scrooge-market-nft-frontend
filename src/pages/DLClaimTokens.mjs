@@ -60,7 +60,7 @@ export default function DLClaimTokens() {
     }
   }, [address]);
 
-  console.log("loacacac", loading);
+  console.log("hasDL", hasDL);
   return (
     <Layout>
       <main className='main'>
@@ -73,6 +73,7 @@ export default function DLClaimTokens() {
                   src={DLLogoMembersOnly}
                   alt='Ducky Lucks Members Only'
                 />
+                {console.log("process.env.REACT_APP_MAINNET_ADDRESS",process.env.REACT_APP_MAINNET_ADDRESS)}
                 <div className='mint-DL-div'>
                   <iframe
                     src={`https://gateway.ipfscdn.io/ipfs/Qmcine1gpZUbQ73nk7ZGCcjKBVFYXrEtqrhujXk3HDQ6Nn/erc721.html?contract=${process.env.REACT_APP_MAINNET_ADDRESS}&chainId=1&theme=dark&primaryColor=teal`}
@@ -118,7 +119,7 @@ export default function DLClaimTokens() {
               <h1>No DL Tokens</h1>
             </div>
           )}
-
+{console.log("address----",address)}
           {!address ? (
             // <div className="connect-wallet">Please connect your wallet.</div>
             <div className='connect-wallet-div'>
