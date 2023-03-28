@@ -6,6 +6,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useReward } from "react-rewards";
 import { useCookies } from "react-cookie";
+import coin1 from "../images/4.png";
+import coin2 from "../images/3.png";
+import coin3 from "../images/2.png";
+import coin4 from "../images/1.png";
 
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
@@ -379,7 +383,7 @@ function RedeemPrizes() {
             <div className='prizes-container'>
               {showConvert && (
                 <>
-                  <div className='redeem-btn'>
+                  {/* <div className='redeem-btn'>
                     <input
                       type='Number'
                       placeholder=''
@@ -396,6 +400,81 @@ function RedeemPrizes() {
                       >
                         convert
                       </button>
+                    </div>
+                  </div> */}
+                  <div className='buy-chips-content'>
+                    <div className='buy-chips-grid'>
+                      <div className='buy-chips-grid-box'>
+                        <p>55000 </p>
+                        <div className='chips-images'>
+                          <img src={coin1} alt='coin' />
+                          <img src={coin1} alt='coin' />
+                        </div>
+
+                        <div className='gradient-btn'>
+                          <span>50000 - tickets</span>
+                        </div>
+                      </div>
+                      <div className='buy-chips-grid-box'>
+                        <p>25000 </p>
+                        <div className='chips-images'>
+                          <img src={coin2} alt='coin' />
+                          <img src={coin2} alt='coin' />
+                        </div>
+
+                        <div className='gradient-btn'>
+                          <span>27000 - tickets</span>
+                        </div>
+                      </div>
+                      <div className='buy-chips-grid-box'>
+                        <p>20000 </p>
+                        <div className='chips-images'>
+                          <img src={coin3} alt='coin' />
+                          <img src={coin3} alt='coin' />
+                        </div>
+
+                        <div className='gradient-btn'>
+                          <span>21400 - tickets</span>
+                        </div>
+                      </div>
+                      <div className='buy-chips-grid-box'>
+                        <p>10000 </p>
+                        <div className='chips-images'>
+                          <img src={coin4} alt='coin' />
+                          <img src={coin3} alt='coin' />
+                        </div>
+                        <div className='gradient-btn'>
+                          <span>10600 - tickets</span>
+                        </div>
+                      </div>
+                      <div className='buy-chips-grid-box'>
+                        <p>5000 </p>
+                        <img src={coin1} alt='coin' />
+                        <div className='gradient-btn'>
+                          <span>5250 - tickets</span>
+                        </div>
+                      </div>
+                      <div className='buy-chips-grid-box'>
+                        <p>2500 </p>
+                        <img src={coin2} alt='coin' />
+                        <div className='gradient-btn'>
+                          <span>2600 - tickets</span>
+                        </div>
+                      </div>
+                      <div className='buy-chips-grid-box'>
+                        <p>1000 </p>
+                        <img src={coin3} alt='coin' />
+                        <div className='gradient-btn'>
+                          <span>1025 - tickets</span>
+                        </div>
+                      </div>
+                      <div className='buy-chips-grid-box'>
+                        <p>500 </p>
+                        <img src={coin4} alt='coin' />
+                        <div className='gradient-btn'>
+                          <span>510 - tickets</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </>
