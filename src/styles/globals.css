@@ -2260,6 +2260,7 @@ ul.footer-support li img {
   border: 1px solid #1c1c1c;
   box-shadow: 0px 20px 20px #00000091;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .my-wallet-page .transaction-card p {
@@ -2600,6 +2601,10 @@ ul.footer-support li img {
   background: transparent;
   box-shadow: 0px 20px 20px #00000091;
   margin: 0;
+  transition: all 0.5s;
+}
+.earn-token .prizes-card:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .earn-token .prizes-card .additional-info-div {
@@ -2607,8 +2612,11 @@ ul.footer-support li img {
   border: 1px solid #1c1c1c;
   box-shadow: 0px 20px 20px #00000091;
   width: 80%;
+  padding: 20px;
 }
-
+.earn-token .prizes-card .additional-info-div .daily-reward-bag {
+  width: 70%;
+}
 .earn-token .prizes-card .next-claim-div {
   background: #000;
   border: 1px solid #1c1c1c;
@@ -3341,7 +3349,61 @@ ul.footer-support li img {
     opacity: 0.25;
   }
 }
+/* **************************************************************************************** */
 
+.buy-chips-grid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.buy-chips-grid .buy-chips-grid-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  background-color: initial;
+  border: 1px solid #1c1c1c;
+  border-radius: 10px;
+  box-shadow: 0 20px 20px #00000091;
+  cursor: pointer;
+  transition: all 0.5s;
+  padding: 20px;
+}
+.buy-chips-grid .buy-chips-grid-box:hover {
+  background-color: hsla(0, 0%, 100%, 0.05);
+}
+
+.buy-chips-grid .buy-chips-grid-box img {
+  width: 100%;
+}
+
+.buy-chips-content {
+  padding: 40px 0;
+}
+
+.buy-chips-grid .buy-chips-grid-box p {
+  color: #f9ff00;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 30px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+}
+.chips-images {
+  position: relative;
+  padding: 10px 0;
+}
+
+.chips-images img:last-child {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+}
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
@@ -3501,7 +3563,8 @@ ul.footer-support li img {
 
   .raffles-page .half-page-card-menu-div,
   .explore-page .erc-card-box,
-  .raffles-page .raffles-header-shop-div {
+  .raffles-page .raffles-header-shop-div,
+  .buy-chips-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .nft-page .nft-token-row-card {
@@ -3553,6 +3616,9 @@ ul.footer-support li img {
   }
   .earn-token .prizes-card .additional-info-div {
     width: 80%;
+  }
+  .earn-token .prizes-card .next-claim-div {
+    width: 65%;
   }
 }
 
@@ -3769,6 +3835,7 @@ ul.footer-support li img {
     width: 100%;
     margin: 0;
     flex-direction: column;
+    padding: 20px 0;
   }
   .wallet-casino-profile-img-div {
     display: flex;
@@ -3923,7 +3990,8 @@ ul.footer-support li img {
   .social-share-grid,
   .redeem-prizes-page .prizes_container,
   .raffles-page .raffles-header-shop-div,
-  .my-wallet-page .transaction-card-grid {
+  .my-wallet-page .transaction-card-grid,
+  .buy-chips-grid {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
@@ -3995,18 +4063,61 @@ ul.footer-support li img {
     flex-wrap: wrap;
     gap: 20px;
     margin: 0;
+    padding-top: 20px;
   }
   .earn-token .bordered-section .leaderboard-card-div {
-    padding: 20px 0;
+    padding: 20px;
   }
   .earn-token .leaderboard-row {
     padding: 10px;
+    justify-content: center;
   }
   .earn-token .prizes-card .next-claim-div {
     width: 100%;
+    font-size: 18px;
   }
   .earn-token .prizes-card .additional-info-div .daily-rewards-bag-card img {
     width: 100px;
+  }
+  .earn-token .prizes-card {
+    border: none;
+    padding: 0;
+  }
+  .earn-token .earn-card-box .affiliate-card-row p {
+    text-align: center;
+  }
+  .earn-token .earn-card-box .affiliate-card-row {
+    align-items: center;
+  }
+  .earn-token .leaderboard-row .leaderboard-left {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .earn-token .earn-free-tokens-desc-div {
+    margin: 20px 0;
+  }
+
+  .earn-token .leaderboard-row p {
+    text-align: center;
+  }
+  .earn-token .prizes-card .additional-info-div {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  .nft-page .nft-card-grid p {
+    text-align: center;
+  }
+  .my-wallet-page
+    .wallet-casino-profile-div
+    .crypto-balance-div
+    .claim-pending-div {
+    margin-top: 10px;
+  }
+  .my-wallet-page .flex-row {
+    margin: 0;
   }
 }
 

@@ -185,7 +185,7 @@ function HolderClaimChips() {
 
                   <div className='holder-claim-details'>
                     <h4>Scrooge Coin Price:</h4> $
-                    {parseFloat(currentPrice).toFixed(10)}
+                    {currentPrice>0 ? parseFloat(currentPrice).toFixed(10):0}
                   </div>
 
                   <div className='prizes-chip-count'>
@@ -198,19 +198,19 @@ function HolderClaimChips() {
                       <span>
                         {" "}
                         Current Scrooge Coin Price ($
-                        {parseFloat(currentPrice).toFixed(10)})
+                        {currentPrice>0 ?parseFloat(currentPrice).toFixed(10):0})
                       </span>{" "}
                       <div>X</div>
                       <span>EARNING RATE (10%)</span> <div>=</div>
-                      {OGBalance * parseFloat(currentPrice).toFixed(10) * 0.1}
+                      {currentPrice>0 ?OGBalance * parseFloat(currentPrice).toFixed(10) * 0.1:0}
                     </div>
                     <h3>
                       Claim{" "}
                       {OGBalance > 0 ? (
                         <>
-                          {(OGBalance * currentPrice * 0.1)
+                          { currentPrice>0 ?(OGBalance * currentPrice * 0.1)
                             .toFixed(0)
-                            .toLocaleString("en-US")}
+                            .toLocaleString("en-US"):0}
                         </>
                       ) : (
                         <>0</>
@@ -247,9 +247,9 @@ function HolderClaimChips() {
                                 className='submit-btn'
                                 onClick={() => claimTokens()}>
                                 Claim{" "}
-                                {(OGBalance * currentPrice * 0.1)
+                                {currentPrice>0 ?(OGBalance * currentPrice * 0.1)
                                   .toFixed(0)
-                                  .toLocaleString("en-US")}{" "}
+                                  .toLocaleString("en-US"):0}{" "}
                                 Tokens
                               </button>
                             </Countdown>
