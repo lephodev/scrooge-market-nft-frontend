@@ -193,56 +193,64 @@ export default function SharableData() {
           <div className='min-menu-div'>
             {!showAITools ? (
               <>
-                <button
-                  className='min-menu-btn bg-animated'
-                  onClick={() => {
-                    setShowAITools(true);
-                  }}
-                >
-                  AI TOOLS
-                </button>
+                <div className='new-btn'>
+                  <button
+                    // className='min-menu-btn bg-animated'
+                    onClick={() => {
+                      setShowAITools(true);
+                    }}
+                  >
+                    AI TOOLS
+                  </button>
+                </div>
               </>
             ) : (
               <></>
             )}
             {!showDailyRewards ? (
               <>
-                <button
-                  className='min-menu-btn'
-                  onClick={() => {
-                    setShowDailyRewards(true);
-                  }}
-                >
-                  DAILY REWARDS
-                </button>
+                <div className='new-btn'>
+                  <button
+                    // className='min-menu-btn'
+                    onClick={() => {
+                      setShowDailyRewards(true);
+                    }}
+                  >
+                    DAILY REWARDS
+                  </button>
+                </div>
               </>
             ) : (
               <></>
             )}
             {!showAffLeaderboards ? (
               <>
-                <button
-                  className='min-menu-btn'
-                  onClick={() => {
-                    setShowAffLeaderboards(true);
-                  }}
-                >
-                  LEADERBOARDS
-                </button>
+                <div className='new-btn'>
+                  <button
+                    // className='min-menu-btn'
+                    onClick={() => {
+                      setShowAffLeaderboards(true);
+                    }}
+                  >
+                    LEADERBOARDS
+                  </button>
+                </div>
               </>
             ) : (
               <></>
             )}
             {!showSocialShare ? (
               <>
-                <button
-                  className='min-menu-btn'
-                  onClick={() => {
-                    setShowSocialShare(true);
-                  }}
-                >
-                  SOCIAL SHARING
-                </button>
+                <div className='new-btn'>
+                  <button
+                    // className='min-menu-btn'
+                    onClick={() => {
+                      setShowSocialShare(true);
+                    }}
+                  >
+                    SOCIAL SHARING
+                  </button>
+                </div>
               </>
             ) : (
               <></>

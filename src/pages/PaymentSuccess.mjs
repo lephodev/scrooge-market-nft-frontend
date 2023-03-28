@@ -86,7 +86,7 @@ l812 810 818 -815 c956 -954 870 -884 1082 -884 122 0 127 1 195 34 59 29 95
                 </>
               ) : (
                 <>
-                  <h1>Faild</h1>
+                  <h1>Failed</h1>
                   <p>
                     Payment purchase request faild
                     <br /> we'll be in touch shortly!
