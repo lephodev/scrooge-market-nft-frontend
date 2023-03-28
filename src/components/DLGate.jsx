@@ -22,6 +22,7 @@ export async function CheckDLOnPage(address) {
     await marketPlaceInstance()
       .get(`/getWalletDLBalance/${address}`)
       .then(res => {
+        console.log("resmmmm",res);
         if (res.data >= 0) {
           bal = res.data
         } else {
