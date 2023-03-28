@@ -76,7 +76,7 @@ function HolderClaimChips() {
     setBuyLoading(true);
     try {
       marketPlaceInstance()
-        .get(`/claimHolderTokens/${address}/${user.id}`)
+        .get(`/claimHolderTokens/${address}/${OGBalance}/${user.id}`)
         .then(async (data) => {
           if (data?.data?.code === 200) {
             toast.success("Tokens Claimed: " + data?.data?.data);
