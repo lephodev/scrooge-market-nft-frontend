@@ -240,9 +240,14 @@ function DailyRewards() {
                   </div>
                   {new Date(nextClaimDate.nextClaimDate) <= new Date() ||
                   nextClaimDate === "CLAIM NOW" ? (
-                    <button className='button2' onClick={() => claimTokens()}>
-                      Claim Tokens
-                    </button>
+                    <div className='new-btn'>
+                      <button
+                        // className='button2'
+                        onClick={() => claimTokens()}
+                      >
+                        Claim Tokens
+                      </button>
+                    </div>
                   ) : (
                     <>
                       <div className='next-claim-div'>
