@@ -2260,6 +2260,7 @@ ul.footer-support li img {
   border: 1px solid #1c1c1c;
   box-shadow: 0px 20px 20px #00000091;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .my-wallet-page .transaction-card p {
