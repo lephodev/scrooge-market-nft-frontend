@@ -90,7 +90,7 @@ export default function AffiliateAITools() {
               <div className='earn-free-tokens-desc-header'>
                 <span
                   className='text-animate'
-                  style={{ padding: "0 15px", fontSize: "36px" }}
+                  // style={{ padding: "0 15px", fontSize: "36px" }}
                 >
                   <h1>SCROOGE AFFILIATE TIPS WITH THE POWER OF AI!</h1>
                 </span>
