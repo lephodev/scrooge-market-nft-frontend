@@ -247,9 +247,9 @@ function HolderClaimChips() {
                                 className='submit-btn'
                                 onClick={() => claimTokens()}>
                                 Claim{" "}
-                                {(OGBalance * currentPrice * 0.1)
+                                {currentPrice>0 ?(OGBalance * currentPrice * 0.1)
                                   .toFixed(0)
-                                  .toLocaleString("en-US")}{" "}
+                                  .toLocaleString("en-US"):0}{" "}
                                 Tokens
                               </button>
                             </Countdown>

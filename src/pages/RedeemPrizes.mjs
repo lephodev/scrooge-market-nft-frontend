@@ -400,6 +400,7 @@ function RedeemPrizes() {
                   </div>
                 </>
               )}
+             
               <div style={{ width: "100%", textAlign: "center" }}>
                 <div id='rewardId' style={{ margin: "0 auto" }} />
               </div>
@@ -408,6 +409,7 @@ function RedeemPrizes() {
                   <div className='prizes_container'>
                     {prizes.map((prize) => (
                       <div className='prizes-card' key={prize._id}>
+                        {console.log("prize",prize._id)}
                         {!prize.isDynamic ? (
                           <div className='prize-name bold text-animate'>
                             <h4>{prize.name}</h4>
