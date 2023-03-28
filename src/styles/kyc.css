@@ -1,212 +1,347 @@
 .select-banner-area {
-    width: 48%;
-  }
-  
-  .select-banner-option {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  .select-banner-option .react-date-picker__wrapper {
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgb(124 116 142 / 20%);
-    border-radius: 4px;
-    height: 44px;
+  width: 48%;
+}
+
+.select-banner-option {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.select-banner-option .react-date-picker__wrapper {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgb(124 116 142 / 20%);
+  border-radius: 4px;
+  height: 44px;
+  width: 100%;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.select-banner-option .react-date-picker {
+  width: 100%;
+}
+
+.select-banner-option .react-calendar {
+  border: 1px solid rgb(124 116 142 / 20%);
+}
+
+.faq-footer {
+  background: transparent !important;
+}
+
+.select-banner-option .deposit-cash-app [type="radio"]:checked+label:before,
+.select-banner-option .deposit-cash-app [type="radio"]:not(:checked)+label:before {
+  border: 1px solid rgb(124 116 142 / 20%);
+}
+
+.select-banner-option .deposit-cash-app [type="radio"]:checked+label,
+.select-banner-option .deposit-cash-app [type="radio"]:not(:checked)+label {
+  padding-top: 2px;
+}
+
+.kyc-page .form-group p {
+  padding: 0;
+}
+
+.upload-game-thumnail .form-control {
+  padding: 5px 12px !important;
+}
+
+.kyc-page .login-box form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.kyc-page .login-box form .form-group {
+  width: calc(50% - 10px);
+}
+
+.kyc-page .login-box form .full-w {
+  width: 100% !important;
+}
+
+.kyc-page .login-form {
+  max-width: 700px;
+}
+
+.kyc-page .login-box {
+  max-width: 620px;
+}
+
+.upload-game-thumnail label.form-label {
+  margin: 0;
+  width: 100%;
+}
+
+.no-image-area {
+  display: flex;
+  padding: 10px 0px;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 3px;
+}
+
+.upload-grid {
+  width: 24%;
+  position: relative;
+  cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.upload-grid img {
+  margin: 0;
+  max-width: 100%;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.upload-grid img.crossImg {
+  position: absolute;
+  max-width: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.upload-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #0000007d;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.upload-grid:hover img.crossImg,
+.upload-grid:hover::before {
+  opacity: 1;
+}
+
+.react-date-picker__calendar * {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.react-date-picker__inputGroup input,
+.react-date-picker__inputGroup span {
+  font-size: 14px;
+  outline: none;
+  color: #8a969c;
+}
+
+.kyc-msg-grid {
+  margin: 0px auto;
+  padding: 0px 0px;
+  position: relative;
+  background: #fff;
+  max-width: 500px;
+  border-radius: 8px;
+  padding: 50px;
+  box-shadow: 0px 0px 35px 0px rgb(154 161 171 / 15%);
+}
+
+.kyc-form-msg h4 {
+  margin: 0;
+  text-align: center;
+  font-weight: 700;
+  padding-bottom: 15px;
+}
+
+.kyc-form-msg p {
+  font-size: 16px;
+  padding: 0;
+  line-height: 25px;
+  text-align: center;
+  color: #8a969c;
+  margin: 0;
+  font-weight: 400;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.kyc-form-msg span {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 600;
+  color: #3661eb;
+  cursor: pointer;
+}
+
+.kyc-form-msg a {
+  padding: 9px 40px;
+  background: #3661eb;
+  box-shadow: 0px 19px 30px -5px rgb(54 97 235 / 20%);
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: 0.003em;
+  color: #ffffff;
+  border: none;
+  transition: all 0.5s;
+  max-width: 150px;
+  width: 100%;
+  margin: 0px auto;
+  display: block;
+  cursor: pointer;
+}
+
+.kyc-form-msg a:hover {
+  color: #fff;
+  box-shadow: none;
+}
+
+
+
+
+@media screen and (max-width: 767px) {
+  .select-banner-area {
     width: 100%;
-    padding: 0 15px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
   }
-  
-  .select-banner-option .react-date-picker {
-    width: 100%;
+
+  .select-banner-area:last-child {
+    margin-bottom: 10px;
   }
-  
-  .select-banner-option .react-calendar {
-    border: 1px solid rgb(124 116 142 / 20%);
-  }
-  
-  .faq-footer {
-    background: transparent !important;
-  }
-  
-  .select-banner-option .deposit-cash-app [type="radio"]:checked + label:before,
-  .select-banner-option
-    .deposit-cash-app
-    [type="radio"]:not(:checked)
-    + label:before {
-    border: 1px solid rgb(124 116 142 / 20%);
-  }
-  
-  .select-banner-option .deposit-cash-app [type="radio"]:checked + label,
-  .select-banner-option .deposit-cash-app [type="radio"]:not(:checked) + label {
-    padding-top: 2px;
-  }
-  .kyc-page .form-group p {
-    padding: 0;
-  }
-  
-  .upload-game-thumnail .form-control {
-    padding: 5px 12px !important;
-  }
-  .kyc-page .login-box form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .kyc-page .login-box form .form-group {
-    width: calc(50% - 10px);
-  }
-  
-  .kyc-page .login-box form .full-w {
-    width: 100% !important;
-  }
-  
-  .kyc-page .login-form {
-    max-width: 700px;
-  }
-  
-  .kyc-page .login-box {
-    max-width: 620px;
-  }
-  .upload-game-thumnail label.form-label {
-    margin: 0;
-    width: 100%;
-  }
-  
-  .no-image-area {
-    display: flex;
-    padding: 10px 0px;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 3px;
-  }
-  
-  .upload-grid {
-    width: 24%;
-    position: relative;
-    cursor: pointer;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  .upload-grid img {
-    margin: 0;
-    max-width: 100%;
-    border-radius: 6px;
-    width: 100%;
-  }
-  
-  .upload-grid img.crossImg {
-    position: absolute;
-    max-width: 20px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: all 0.5s;
-  }
-  
-  .upload-grid::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: #0000007d;
-    opacity: 0;
-    transition: all 0.5s;
-  }
-  
-  .upload-grid:hover img.crossImg,
-  .upload-grid:hover::before {
-    opacity: 1;
-  }
-  
-  .react-date-picker__calendar * {
-    font-family: "Poppins", sans-serif !important;
-  }
-  
-  .react-date-picker__inputGroup input,
-  .react-date-picker__inputGroup span {
-    font-size: 14px;
-    outline: none;
-    color: #8a969c;
-  }
-  
-  .kyc-msg-grid {
-    margin: 0px auto;
-    padding: 0px 0px;
-    position: relative;
-    background: #fff;
-    max-width: 500px;
-    border-radius: 8px;
-    padding: 50px;
-    box-shadow: 0px 0px 35px 0px rgb(154 161 171 / 15%);
-  }
-  
-  .kyc-form-msg h4 {
-    margin: 0;
-    text-align: center;
-    font-weight: 700;
-    padding-bottom: 15px;
-  }
-  
-  .kyc-form-msg p {
-    font-size: 16px;
-    padding: 0;
-    line-height: 25px;
-    text-align: center;
-    color: #8a969c;
-    margin: 0;
-    font-weight: 400;
-    position: relative;
-    padding-bottom: 20px;
-  }
-  
-  .kyc-form-msg span {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-    font-weight: 600;
-    color: #3661eb;
-    cursor: pointer;
-  }
-  
-  .kyc-form-msg a {
-    padding: 9px 40px;
-    background: #3661eb;
-    box-shadow: 0px 19px 30px -5px rgb(54 97 235 / 20%);
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 30px;
-    text-align: center;
-    letter-spacing: 0.003em;
-    color: #ffffff;
-    border: none;
-    transition: all 0.5s;
-    max-width: 150px;
-    width: 100%;
-    margin: 0px auto;
-    display: block;
-    cursor: pointer;
-  }
-  .kyc-form-msg a:hover {
-    color: #fff;
-    box-shadow: none;
-  }
-  
-  @media screen and (max-width: 767px) {
-    .select-banner-area {
-      width: 100%;
-    }
-  
-    .select-banner-area:last-child {
-      margin-bottom: 10px;
-    }
-  }
-  
+}
+
+
+.kycForm.marketPlace_kycForm {
+  margin: 40px auto;
+  display: grid;
+  place-content: center;
+}
+
+.kycForm.marketPlace_kycForm .login-form {
+  max-width: 900px;
+  width: 100%;
+  background: #24262b;
+  padding: 40px 50px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px #24262bcc;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #ddd;
+  align-items: flex-start;
+}
+
+.marketPlace_kycForm * {
+  margin: 0px;
+}
+
+.marketPlace_kycForm form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.marketPlace_kycForm input.form-label {
+  font-weight: 600;
+}
+
+.marketPlace_kycForm input.form-control {
+  height: 38px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #24262b;
+  box-shadow: none;
+
+  font-size: 16px;
+  color: #ddd;
+  background: #131314;
+  width: 100%;
+}
+
+.marketPlace_kycForm input.form-control::placeholder {
+  font-size: 12px;
+}
+
+.marketPlace_kycForm input.form-control:focus-visible,
+.marketPlace_kycForm input.form-control:focus,
+.marketPlace_kycForm input.form-control:active {
+
+  border: 1px solid rgb(58, 58, 58) !important;
+  outline: 1px solid rgb(58, 58, 58) !important;
+}
+
+.marketPlace_kycForm .form-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.marketPlace_kycForm .form-check label.form-check-label {
+  padding: 0px !important;
+
+}
+
+.marketPlace_kycForm .upload-game-thumnail {
+  background: #131314;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.marketPlace_kycForm .no-image-area {
+  font-size: 12px;
+  width: 100%;
+  display: grid;
+  place-content: center;
+  padding: 2px 0px;
+}
+
+.marketPlace_kycForm input#IDimageFront {
+  font-size: 14px;
+}
+
+.marketPlace_kycForm .login-button.full-w {
+  margin-top: 24px;
+}
+
+.marketPlace_kycForm .login-button.full-w button {
+  margin: 0px auto;
+  padding: 13px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  cursor: pointer;
+  background-image: linear-gradient(45deg, #ff512f 0%, #f09819 51%, #ff512f 100%);
+  width: 160px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.marketPlace_kycForm h1 {
+  font-size: 32px;
+  letter-spacing: 4px;
+  font-weight: 800;
+  color: linear-gradient(45deg, #ff512f 0%, #f09819 51%, #ff512f 100%);
+  background: -webkit-linear-gradient(#ff512f, #eeff00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.marketPlace_kycForm p.error-text {
+  color: red;
+  font-size: 12px;
+  margin-left: 4px;
+}
