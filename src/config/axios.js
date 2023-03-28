@@ -16,6 +16,12 @@ export const marketPlaceInstance = () =>
     headers: { Authorization: getAuthorizationHeader() },
   });
 
+export const kycInstance = () =>
+  axios.create({
+    baseURL: `${server}/v1`,
+    headers: { Authorization: getAuthorizationHeader() },
+  });
+
 export const authInstance = () =>
   axios.create({
     baseURL: `${scroogeServer}/v1`,

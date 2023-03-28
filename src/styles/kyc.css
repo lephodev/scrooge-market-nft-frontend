@@ -1,0 +1,212 @@
+.select-banner-area {
+    width: 48%;
+  }
+  
+  .select-banner-option {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .select-banner-option .react-date-picker__wrapper {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgb(124 116 142 / 20%);
+    border-radius: 4px;
+    height: 44px;
+    width: 100%;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .select-banner-option .react-date-picker {
+    width: 100%;
+  }
+  
+  .select-banner-option .react-calendar {
+    border: 1px solid rgb(124 116 142 / 20%);
+  }
+  
+  .faq-footer {
+    background: transparent !important;
+  }
+  
+  .select-banner-option .deposit-cash-app [type="radio"]:checked + label:before,
+  .select-banner-option
+    .deposit-cash-app
+    [type="radio"]:not(:checked)
+    + label:before {
+    border: 1px solid rgb(124 116 142 / 20%);
+  }
+  
+  .select-banner-option .deposit-cash-app [type="radio"]:checked + label,
+  .select-banner-option .deposit-cash-app [type="radio"]:not(:checked) + label {
+    padding-top: 2px;
+  }
+  .kyc-page .form-group p {
+    padding: 0;
+  }
+  
+  .upload-game-thumnail .form-control {
+    padding: 5px 12px !important;
+  }
+  .kyc-page .login-box form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .kyc-page .login-box form .form-group {
+    width: calc(50% - 10px);
+  }
+  
+  .kyc-page .login-box form .full-w {
+    width: 100% !important;
+  }
+  
+  .kyc-page .login-form {
+    max-width: 700px;
+  }
+  
+  .kyc-page .login-box {
+    max-width: 620px;
+  }
+  .upload-game-thumnail label.form-label {
+    margin: 0;
+    width: 100%;
+  }
+  
+  .no-image-area {
+    display: flex;
+    padding: 10px 0px;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 3px;
+  }
+  
+  .upload-grid {
+    width: 24%;
+    position: relative;
+    cursor: pointer;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .upload-grid img {
+    margin: 0;
+    max-width: 100%;
+    border-radius: 6px;
+    width: 100%;
+  }
+  
+  .upload-grid img.crossImg {
+    position: absolute;
+    max-width: 20px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  
+  .upload-grid::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #0000007d;
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  
+  .upload-grid:hover img.crossImg,
+  .upload-grid:hover::before {
+    opacity: 1;
+  }
+  
+  .react-date-picker__calendar * {
+    font-family: "Poppins", sans-serif !important;
+  }
+  
+  .react-date-picker__inputGroup input,
+  .react-date-picker__inputGroup span {
+    font-size: 14px;
+    outline: none;
+    color: #8a969c;
+  }
+  
+  .kyc-msg-grid {
+    margin: 0px auto;
+    padding: 0px 0px;
+    position: relative;
+    background: #fff;
+    max-width: 500px;
+    border-radius: 8px;
+    padding: 50px;
+    box-shadow: 0px 0px 35px 0px rgb(154 161 171 / 15%);
+  }
+  
+  .kyc-form-msg h4 {
+    margin: 0;
+    text-align: center;
+    font-weight: 700;
+    padding-bottom: 15px;
+  }
+  
+  .kyc-form-msg p {
+    font-size: 16px;
+    padding: 0;
+    line-height: 25px;
+    text-align: center;
+    color: #8a969c;
+    margin: 0;
+    font-weight: 400;
+    position: relative;
+    padding-bottom: 20px;
+  }
+  
+  .kyc-form-msg span {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 600;
+    color: #3661eb;
+    cursor: pointer;
+  }
+  
+  .kyc-form-msg a {
+    padding: 9px 40px;
+    background: #3661eb;
+    box-shadow: 0px 19px 30px -5px rgb(54 97 235 / 20%);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 0.003em;
+    color: #ffffff;
+    border: none;
+    transition: all 0.5s;
+    max-width: 150px;
+    width: 100%;
+    margin: 0px auto;
+    display: block;
+    cursor: pointer;
+  }
+  .kyc-form-msg a:hover {
+    color: #fff;
+    box-shadow: none;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .select-banner-area {
+      width: 100%;
+    }
+  
+    .select-banner-area:last-child {
+      margin-bottom: 10px;
+    }
+  }
+  
