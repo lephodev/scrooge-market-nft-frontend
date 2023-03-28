@@ -38,7 +38,11 @@ export default function GetWalletDLNFTs() {
   const [tokensClaimDate, setTokensClaimDate] = useState([
     { token_id: "", nextClaimDate: "" },
   ]);
-  const { contract } = useContract(addresses[String(selectedChain)]);
+  console.log("selectedChain",selectedChain);
+  console.log("addresses[String(selectedChain)]",addresses[String(selectedChain)]);
+  const { contract,error } = useContract(addresses[String(selectedChain)]);
+  console.log("error",error);
+  console.log('contract---->>>',contract)
   const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
   const claimTokens = (token_id) => {
     setBuyLoading(true);
@@ -65,7 +69,7 @@ export default function GetWalletDLNFTs() {
     await marketPlaceInstance()
       .get(`/getNextClaimDate/${address}/dl/${user?.id}/${token_id}`)
       .then(async (data) => {
-        //console.log("next claim: ", data.data);
+        console.log("next claim: ", data.data);
         dataArray.push([token_id, data.data]);
         //console.log('foo: ', dataArray);
         setClaimDateArray(dataArray);
