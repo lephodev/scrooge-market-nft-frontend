@@ -39,7 +39,6 @@ function RedeemPrizes() {
   const [currentPriceOG, setCurrentPriceOG] = useState("Loading...");
   const [currentPriceJR, setCurrentPriceJR] = useState("Loading...");
   const [showConvert, setShowConvert] = useState(false);
-  const [convertPrice, setConvertPrice] = useState(0);
 
   const [OG1000, setOG1000] = useState();
   const [OG5000, setOG5000] = useState();
@@ -215,19 +214,18 @@ function RedeemPrizes() {
       });
   };
 
-  const convert = async () => {
-    console.log("convertPrice", convertPrice);
+  const convert = async (ticketPrice,tokenPrice) => {
+    console.log("convertPrice", ticketPrice,tokenPrice);
     try {
-      if (parseInt(convertPrice) > 0) {
-        if (user?.ticket >= parseInt(convertPrice)) {
+      if (parseInt(ticketPrice) > 0) {
+        if (user?.ticket >= parseInt(ticketPrice)) {
           const res = await marketPlaceInstance().get(
-            `/coverttickettotoken/${convertPrice}/${user.id}`
+            `/coverttickettotoken/${ticketPrice}/${tokenPrice}/${user.id}`
           );
           const { message, code, data } = res.data;
           if (code === 200) {
             console.log("datattat", data);
             getUserDataInstant();
-            setConvertPrice("");
             toast.success(message, { id: "A" });
           }
         } else {
@@ -405,74 +403,74 @@ function RedeemPrizes() {
                   <div className='buy-chips-content'>
                     <div className='buy-chips-grid'>
                       <div className='buy-chips-grid-box'>
-                        <p>55000 </p>
+                        {/* <p>55000 </p> */}
                         <div className='chips-images'>
                           <img src={coin1} alt='coin' />
                           <img src={coin1} alt='coin' />
                         </div>
 
-                        <div className='gradient-btn'>
-                          <span>50000 - tickets</span>
+                        <div className='gradient-btn' onClick={()=>convert(500,510)}>
+                          <span>500 tickets gets you 510 chips </span>
                         </div>
                       </div>
                       <div className='buy-chips-grid-box'>
-                        <p>25000 </p>
+                        {/* <p>25000 </p> */}
                         <div className='chips-images'>
                           <img src={coin2} alt='coin' />
                           <img src={coin2} alt='coin' />
                         </div>
 
-                        <div className='gradient-btn'>
-                          <span>27000 - tickets</span>
+                        <div className='gradient-btn' onClick={()=>convert(1000,1025)}>
+                        <span>1000 tickets gets you 1025 chips </span>
                         </div>
                       </div>
                       <div className='buy-chips-grid-box'>
-                        <p>20000 </p>
+                        {/* <p>20000 </p> */}
                         <div className='chips-images'>
                           <img src={coin3} alt='coin' />
                           <img src={coin3} alt='coin' />
                         </div>
 
-                        <div className='gradient-btn'>
-                          <span>21400 - tickets</span>
+                        <div className='gradient-btn' onClick={()=>convert(2500,2600)}>
+                        <span>2500 tickets gets you 2600 chips </span>
                         </div>
                       </div>
                       <div className='buy-chips-grid-box'>
-                        <p>10000 </p>
+                        {/* <p>10000 </p> */}
                         <div className='chips-images'>
                           <img src={coin4} alt='coin' />
                           <img src={coin3} alt='coin' />
                         </div>
-                        <div className='gradient-btn'>
-                          <span>10600 - tickets</span>
+                        <div className='gradient-btn' onClick={()=>convert(5000,5250)}>
+                        <span>5000 tickets gets you 5250 chips </span>
                         </div>
                       </div>
                       <div className='buy-chips-grid-box'>
-                        <p>5000 </p>
+                        {/* <p>5000 </p> */}
                         <img src={coin1} alt='coin' />
-                        <div className='gradient-btn'>
-                          <span>5250 - tickets</span>
+                        <div className='gradient-btn' onClick={()=>convert(10000,10600)}>
+                        <span>10000 tickets gets you 10600 chips </span>
                         </div>
                       </div>
                       <div className='buy-chips-grid-box'>
-                        <p>2500 </p>
+                        {/* <p>2500 </p> */}
                         <img src={coin2} alt='coin' />
-                        <div className='gradient-btn'>
-                          <span>2600 - tickets</span>
+                        <div className='gradient-btn' onClick={()=>convert(20000,21400)}>
+                        <span>20000 tickets gets you 21400 chips </span>
                         </div>
                       </div>
                       <div className='buy-chips-grid-box'>
-                        <p>1000 </p>
+                        {/* <p>1000 </p> */}
                         <img src={coin3} alt='coin' />
-                        <div className='gradient-btn'>
-                          <span>1025 - tickets</span>
+                        <div className='gradient-btn' onClick={()=>convert(25000,27000)}>
+                        <span>25000 tickets gets you 27000 chips </span>
                         </div>
                       </div>
-                      <div className='buy-chips-grid-box'>
-                        <p>500 </p>
+                      <div className='buy-chips-grid-box' onClick={()=>convert(50000,55000)}>
+                        {/* <p>500 </p> */}
                         <img src={coin4} alt='coin' />
                         <div className='gradient-btn'>
-                          <span>510 - tickets</span>
+                        <span>50000 tickets gets you 55000 chips </span>
                         </div>
                       </div>
                     </div>
