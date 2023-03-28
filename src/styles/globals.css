@@ -3404,6 +3404,9 @@ ul.footer-support li img {
   left: 25px;
   top: 25px;
 }
+.earn-token .min-menu-div {
+  gap: 20px;
+}
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
@@ -3563,7 +3566,8 @@ ul.footer-support li img {
 
   .raffles-page .half-page-card-menu-div,
   .explore-page .erc-card-box,
-  .raffles-page .raffles-header-shop-div {
+  .raffles-page .raffles-header-shop-div,
+  .buy-chips-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .nft-page .nft-token-row-card {
@@ -3989,7 +3993,8 @@ ul.footer-support li img {
   .social-share-grid,
   .redeem-prizes-page .prizes_container,
   .raffles-page .raffles-header-shop-div,
-  .my-wallet-page .transaction-card-grid {
+  .my-wallet-page .transaction-card-grid,
+  .buy-chips-grid {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
