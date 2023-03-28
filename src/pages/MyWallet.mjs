@@ -254,14 +254,13 @@ export default function MyWallet() {
               <div className='transaction-div-title text-animate'>
                 <h1> Your Merch Coupon Codes</h1>
               </div>
-              <br></br>
+
               <div className='transaction-card-grid'>
-              {userRedeemed.map((red) => (
-                <>
-                  {red.prize_details.map((deet) => (
-                    <>
-                      {deet.category === "Merch" ? (
-                       
+                {userRedeemed.map((red) => (
+                  <>
+                    {red.prize_details.map((deet) => (
+                      <>
+                        {deet.category === "Merch" ? (
                           <div
                             className={
                               red.markRedeemed
@@ -299,15 +298,14 @@ export default function MyWallet() {
                               )}
                             </div>
                           </div>
-                      ) : (
-                        <></>
-                      )}
-                    </>
-                  ))}
-                </>
-              ))}
-                        </div>
-
+                        ) : (
+                          <></>
+                        )}
+                      </>
+                    ))}
+                  </>
+                ))}
+              </div>
             </div>
           ) : (
             <></>
