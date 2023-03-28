@@ -32,6 +32,8 @@ import { ToastContainer } from "react-toastify";
 import { authInstance } from "./config/axios";
 import LoadingPoker from "./images/scroogeHatLogo.png";
 import PaymentSuccess from "./pages/PaymentSuccess.mjs";
+import KycForm from "./pages/KycForm.mjs";
+
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
@@ -139,6 +141,11 @@ export default function App() {
                   path='/claim-free-tokens'
                   element={<ProtectedRoute component={<HolderClaimChips />} />}
                 />
+                {/* <Route
+                  path='/kyc'
+                  element={<ProtectedRoute component={<KycForm />} />}
+                /> */}
+          
                 <Route
                   path='/ducky-lucks-claim-tokens'
                   element={
@@ -163,6 +170,7 @@ export default function App() {
                 {/* Public Routes */}
 
                 <Route path='/login' element={<Login />} />
+                <Route path='/kyc' element={<KycForm />} />
                 <Route path='/explore' element={<Explore />} />
                 <Route path='/contact' element={<Contact />} />
                 <Route path='/privacy' element={<Privacy />} />
