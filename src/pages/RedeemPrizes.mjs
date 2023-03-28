@@ -217,7 +217,7 @@ function RedeemPrizes() {
     console.log("convertPrice",convertPrice);
     try {
       if(parseInt(convertPrice)>0){
-      if(user?.ticket>parseInt(convertPrice)){
+      if(user?.ticket>=parseInt(convertPrice)){
       const res = await marketPlaceInstance().get(`/coverttickettotoken/${convertPrice}/${user.id}`);
       const {message,code,data}=res.data
       if (code===200) {

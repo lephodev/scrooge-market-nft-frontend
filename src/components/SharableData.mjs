@@ -23,6 +23,7 @@ import {
   TumblrIcon,
   TwitterIcon,
   WhatsappIcon,
+  PinterestShareCount,
 } from "react-share";
 import getAffiliateUser from "../scripts/getAffilateUser.mjs";
 import { createAffiliateUser } from "../scripts/getAffilateUser.mjs";
