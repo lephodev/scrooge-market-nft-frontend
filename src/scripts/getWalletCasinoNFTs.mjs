@@ -211,7 +211,7 @@ export default function GetWalletERC1155NFTs() {
           <div className='loading-txt pulse'>LOADING WALLET...</div>
         </div>
       ) : (
-        <div className='flex-row'>
+        <div className='flex-row transaction-card-grid'>
           {nfts.map((nft) => (
             <div className='erc1155Card casino-card' key={nft.metadata.id}>
               <div className='erc1155Card-image'>
@@ -237,12 +237,20 @@ export default function GetWalletERC1155NFTs() {
       <div className='bottom-row-btns-div'>
         <Link to='/nft-tokens'>
           <div className='new-btn'>
-            <button className='subheader-btn'>BUY MORE NFTS</button>
+            <button
+            //  className='subheader-btn'
+            >
+              BUY MORE NFTS
+            </button>
           </div>
         </Link>
         <Link to='/redeem-prizes'>
           <div className='new-btn'>
-            <button className='subheader-btn'>REDEEM MORE REWARDS</button>
+            <button
+            //  className='subheader-btn'
+            >
+              REDEEM MORE REWARDS
+            </button>
           </div>
         </Link>
       </div>
