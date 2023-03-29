@@ -205,15 +205,6 @@
 
 
 
-@media screen and (max-width: 767px) {
-  .select-banner-area {
-    width: 100%;
-  }
-
-  .select-banner-area:last-child {
-    margin-bottom: 10px;
-  }
-}
 
 
 .kycForm.marketPlace_kycForm {
@@ -382,6 +373,7 @@
   font-weight: 500;
   margin-top: 28px;
 }
+
 .spinner-border {
   --bs-spinner-width: 2rem;
   --bs-spinner-height: 2rem;
@@ -392,7 +384,9 @@
   border: var(--bs-spinner-border-width) solid;
   border-right-color: transparent;
 }
-.spinner-border, .spinner-grow {
+
+.spinner-border,
+.spinner-grow {
   display: inline-block;
   width: var(--bs-spinner-width);
   height: var(--bs-spinner-height);
@@ -401,9 +395,40 @@
   -webkit-animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
   animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
 }
+
 @keyframes spinner-border {
   100% {
     -webkit-transform: rotate(1turn);
     transform: rotate(1turn);
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+  .select-banner-area {
+    width: 100%;
+  }
+
+  .select-banner-area:last-child {
+    margin-bottom: 10px;
+  }
+
+  .kycForm.marketPlace_kycForm .login-form {
+    padding: 25px 15px;
+  }
+
+  .marketPlace_kycForm h1 {
+
+    font-size: 24px;
+    letter-spacing: 2px;
+
+  }
+
+  .kyc-page .login-box form .form-group {
+    width: 100%;
+  }
+
+  .marketPlace_kycForm p {
+    font-size: 12px;
   }
 }
