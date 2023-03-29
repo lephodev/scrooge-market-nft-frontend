@@ -139,28 +139,32 @@ export default function MyWallet() {
                 )}
                 {!showCasinoNFTs ? (
                   <>
-                    <button
-                      className='min-menu-btn'
-                      onClick={() => {
-                        setShowCasinoNFTs(true);
-                      }}
-                    >
-                      CASINO NFTS
-                    </button>
+                    <div className='new-btn'>
+                      <button
+                        // className='min-menu-btn'
+                        onClick={() => {
+                          setShowCasinoNFTs(true);
+                        }}
+                      >
+                        CASINO NFTS
+                      </button>
+                    </div>
                   </>
                 ) : (
                   <></>
                 )}
                 {!showCrypto ? (
                   <>
-                    <button
-                      className='min-menu-btn'
-                      onClick={() => {
-                        setShowCrypto(true);
-                      }}
-                    >
-                      CRYPTO
-                    </button>
+                    <div className='new-btn'>
+                      <button
+                        // className='min-menu-btn'
+                        onClick={() => {
+                          setShowCrypto(true);
+                        }}
+                      >
+                        CRYPTO
+                      </button>
+                    </div>
                   </>
                 ) : (
                   <></>
