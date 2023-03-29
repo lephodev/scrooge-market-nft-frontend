@@ -2611,6 +2611,7 @@ ul.footer-support li img {
 }
 .earn-token .bordered-section .flex-row-no-margin {
   align-items: flex-start;
+  padding-top: 20px;
 }
 .earn-token .prizes-card {
   width: 100%;
