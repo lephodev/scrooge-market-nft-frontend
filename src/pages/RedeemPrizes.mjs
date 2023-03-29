@@ -4,33 +4,30 @@ import LoadingPoker from "../images/scroogeHatLogo.png";
 import { useAddress } from "@thirdweb-dev/react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 import { useReward } from "react-rewards";
 import { useCookies } from "react-cookie";
 import coin1 from "../images/4.png";
 import coin2 from "../images/3.png";
 import coin3 from "../images/2.png";
 import coin4 from "../images/1.png";
-
+import { userKycDetails } from "../utils/api.mjs";
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
 import { authInstance, marketPlaceInstance } from "../config/axios.js";
 import { async } from "q";
 
 function RedeemPrizes() {
+  const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
   let prizesReceived = 0;
   const { user, loading, setUser } = useContext(AuthContext);
   console.log("user", user, loading);
-  useEffect(() => {
-    getCoinGeckoDataOG();
-    getCoinGeckoDataJR();
-    if (prizesReceived === 0) {
-      getPrizes();
-    }
-    prizesReceived = 1;
-  }, []);
+
+
+
   const [redeemLoading, setRedeemLoading] = useState(false);
   const [redeemSuccess, setRedeemSuccess] = useState(false);
   const [allPrizes, setAllPrizes] = useState([]);
@@ -39,6 +36,7 @@ function RedeemPrizes() {
   const [currentPriceOG, setCurrentPriceOG] = useState("Loading...");
   const [currentPriceJR, setCurrentPriceJR] = useState("Loading...");
   const [showConvert, setShowConvert] = useState(false);
+  const [globalLoader, setglobalLoader] = useState(true);
 
   const [OG1000, setOG1000] = useState();
   const [OG5000, setOG5000] = useState();
@@ -66,6 +64,15 @@ function RedeemPrizes() {
         console.log(e);
       }
     }
+  }
+
+  async function startFetching(){
+    getCoinGeckoDataOG();
+    getCoinGeckoDataJR();
+    if (prizesReceived === 0) {
+      getPrizes();
+    }
+    prizesReceived = 1;
   }
 
   const sortPrizes = (sortOn) => {
@@ -239,13 +246,37 @@ function RedeemPrizes() {
     }
   };
 
+  useEffect(()=>{
+     async function checkKYCStatus(){
+      const response = await userKycDetails();
+      if (response?.code === 200) {
+        if(response.message !=="accept"){
+           setglobalLoader(false);
+           navigate('/kyc');
+        }else{
+           setglobalLoader(false);
+           startFetching();
+        }
+      } else {
+        setglobalLoader(false);
+        toast.error(response.message, { toastId: "error-fetching-kyc-details" });
+        navigate('/');
+      }
+     }
+     checkKYCStatus();
+  },[])
   // console.log("convertPrice",convertPrice);
 
   return (
     <Layout>
       <main className='main redeem-prizes-page'>
         <div className='container'>
-          <div className='bordered-section'>
+        {globalLoader && <div className='loading'>
+             <div className='loading-img-div'>
+               <img src={LoadingPoker} alt='game' className='imageAnimation' />
+             </div>
+             </div>}
+          <div className='bordered-section'>  
             {redeemLoading ? (
               <div className='pageImgContainer'>
                 <img src={LoadingPoker} alt='game' className='imageAnimation' />
@@ -273,6 +304,8 @@ function RedeemPrizes() {
             ) : (
               <></>
             )}
+          {!globalLoader && (
+            <>
             <div className='scrooge-main-heading'>
               <div className='pageTitle'>
                 <h1 className='title'>Redeem for Prizes</h1>
@@ -853,6 +886,8 @@ function RedeemPrizes() {
                 </>
               )}
             </div>
+
+            </>)}
           </div>
         </div>
       </main>
