@@ -210,6 +210,8 @@
   margin: 40px auto;
   display: grid;
   place-content: center;
+  width: 100%;
+  min-height: 300px;
 }
 
 .kycForm.marketPlace_kycForm .login-form {
