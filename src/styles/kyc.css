@@ -205,15 +205,6 @@
 
 
 
-@media screen and (max-width: 767px) {
-  .select-banner-area {
-    width: 100%;
-  }
-
-  .select-banner-area:last-child {
-    margin-bottom: 10px;
-  }
-}
 
 
 .kycForm.marketPlace_kycForm {
@@ -315,17 +306,19 @@
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
-  transition: 0.5s;
+  transition: 0.2s;
   background-size: 200% auto;
   color: white;
   border-radius: 10px;
-  display: block;
+  display: grid;
+  place-content: center;
   border: 0px;
   font-weight: 700;
   box-shadow: 0px 0px 14px -7px #f09819;
   cursor: pointer;
   background-image: linear-gradient(45deg, #ff512f 0%, #f09819 51%, #ff512f 100%);
   width: 160px;
+  height: 44px;
   font-size: 16px;
   font-weight: 600;
 }
@@ -344,4 +337,98 @@
   color: red;
   font-size: 12px;
   margin-left: 4px;
+}
+
+.kyc-msg-grid.failedErrorBox {
+  background: #24262b;
+}
+
+.failedErrorBox .kyc-form-msg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.failedErrorBox .kyc-form-msg img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.failedErrorBox .kyc-form-msg h4 {
+  margin: 0;
+  text-align: center;
+  font-weight: 700;
+  padding-bottom: 2px;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: #ddd;
+  margin-bottom: 10px;
+
+}
+
+.failedErrorBox .kyc-form-msg p {
+  color: #ddd;
+  font-weight: 500;
+  margin-top: 28px;
+}
+
+.spinner-border {
+  --bs-spinner-width: 2rem;
+  --bs-spinner-height: 2rem;
+  --bs-spinner-vertical-align: -0.125em;
+  --bs-spinner-border-width: 0.25em;
+  --bs-spinner-animation-speed: 0.75s;
+  --bs-spinner-animation-name: spinner-border;
+  border: var(--bs-spinner-border-width) solid;
+  border-right-color: transparent;
+}
+
+.spinner-border,
+.spinner-grow {
+  display: inline-block;
+  width: var(--bs-spinner-width);
+  height: var(--bs-spinner-height);
+  vertical-align: var(--bs-spinner-vertical-align);
+  border-radius: 50%;
+  -webkit-animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
+  animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
+}
+
+@keyframes spinner-border {
+  100% {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn);
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+  .select-banner-area {
+    width: 100%;
+  }
+
+  .select-banner-area:last-child {
+    margin-bottom: 10px;
+  }
+
+  .kycForm.marketPlace_kycForm .login-form {
+    padding: 25px 15px;
+  }
+
+  .marketPlace_kycForm h1 {
+
+    font-size: 24px;
+    letter-spacing: 2px;
+
+  }
+
+  .kyc-page .login-box form .form-group {
+    width: 100%;
+  }
+
+  .marketPlace_kycForm p {
+    font-size: 12px;
+  }
 }
