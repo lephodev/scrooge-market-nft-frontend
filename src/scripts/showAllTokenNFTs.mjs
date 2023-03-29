@@ -34,6 +34,7 @@ export default function ShowAllTokenNFTs() {
     process.env.REACT_APP_MARKETPLACE_ADDRESS,
     "marketplace"
   );
+  console.log("contract000",contract);
   // data is the active listings, isLoading is a loading flag while we load the listings.
   const { data: listings, isLoading: loadingListings } =
     useActiveListings(contract);
@@ -60,13 +61,21 @@ export default function ShowAllTokenNFTs() {
         "affID",
         affID
       );
-      await contract.buyoutListing(token_id, qty);
+    const buyout = await contract.buyoutListing(token_id, qty);
+console.log("buyoutbuyoutbuyout",buyout);
       marketPlaceInstance()
-        .get(
-          `/getFreeTokens/${address}/${token_id}/${user?.id}/${qty}/${affID}`
+        .post(
+          `/getFreeTokens`,{
+            address:address,
+            token_id:token_id,
+            userid:user.id,
+            qty:qty,
+            affID:affID
+          }
         )
+        // ${address}/${token_id}/${user?.id}/${qty}/${affID}
         .then((data) => {
-          console.log("datatat", data);
+          console.log("datatat---->>>.", data);
           toast.success(
             "You have successfully purchased your NFT and " +
               data.data +
@@ -77,7 +86,7 @@ export default function ShowAllTokenNFTs() {
           setBuySuccess(true);
         });
     } catch (err) {
-      console.error(err);
+      console.log("err",err);
       toast.error("Error purchasing NFT!", { containerId: "authenticate" });
       setBuyLoading(false);
     }
