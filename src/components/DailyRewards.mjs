@@ -110,7 +110,10 @@ function DailyRewards() {
                   className='prizes-card'
                   // style={{ width: "95%", margin: "0 auto" }}
                 >
-                  <div className='pageTitle' style={{ margin: "20px auto" }}>
+                  <div
+                    className='pageTitless text-animate'
+                    style={{ margin: "20px auto" }}
+                  >
                     <h1>Claim Your Daily Rewards</h1>
                   </div>
                   <div>
@@ -240,9 +243,14 @@ function DailyRewards() {
                   </div>
                   {new Date(nextClaimDate.nextClaimDate) <= new Date() ||
                   nextClaimDate === "No Entries Found" ? (
-                    <button className='button2' onClick={() => claimTokens()}>
-                      Claim Tokens
-                    </button>
+                    <div className='cliam-token-btn new-btn'>
+                      <button
+                        // className='button2'
+                        onClick={() => claimTokens()}
+                      >
+                        Claim Tokens
+                      </button>
+                    </div>
                   ) : (
                     <>
                       <div className='next-claim-div'>
@@ -323,12 +331,16 @@ function DailyRewards() {
               <div className='available-btn'>
                 <span>Available:</span>{" "}
                 <Countdown date={nextClaimDate.nextClaimDate}>
-                  <button
-                    className='button-inline'
-                    style={{ marginLeft: "20px" }}
-                    onClick={() => claimTokens()}>
-                    Claim NOW
-                  </button>
+                  <div className='new-btn'>
+                    <button
+                      // className='button-inline'
+                      style={{ marginLeft: "20px" }}
+                      onClick={() => claimTokens()}
+                    >
+                      Claim NOW
+                    </button>
+                  </div>
+
                   {/* <div className='new-btn'>
                     <button>Claim NOW</button>
                   </div> */}
