@@ -2372,6 +2372,7 @@ ul.footer-support li img {
   border: 1px solid #fbff12;
   cursor: pointer;
   transition: all 0.5s;
+  margin: 0;
 }
 .redeem-prizes-page .page-nav-header-subbtn:hover {
   background-color: #000;
@@ -4163,6 +4164,15 @@ ul.footer-support li img {
   }
   .my-wallet-page .flex-row {
     margin: 0;
+  }
+  .my-wallet-page .transaction-div {
+    padding: 20px;
+  }
+  .my-wallet-page .transaction-card-grid {
+    margin-bottom: 20px;
+  }
+  .redeem-prizes-page .page-nav-header-btns-subrow {
+    gap: 15px;
   }
 }
 
