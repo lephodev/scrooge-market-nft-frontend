@@ -8,11 +8,13 @@ import { createKYC, userKycDetails } from "../utils/api.mjs";
 import { createKYCSchema } from "../utils/validationSchema.mjs";
 import { toast } from 'react-toastify';
 import Layout from "./Layout.mjs";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import failed from "../images/failed.png"
+import submit from "../images/submit.png"
+import success from "../images/success.png"
 import "../styles/kyc.css";
 
 const KYCForm = () => {
-
   const navigate = useNavigate();
   const [frontIdImage, setfrontIdImage] = useState([]);
   const [backIdImage, setbackIdImage] = useState([]);
@@ -21,7 +23,6 @@ const KYCForm = () => {
   const [globalLoader, setglobalLoader] = useState(true);
   // const [successMsg, setSuccessMsg] = useState("");
   const [activeRatioType, setActiveRatioType] = useState("Male");
-
 
   const {
     handleSubmit,
@@ -416,9 +417,6 @@ const KYCForm = () => {
           </div>
         </div>
       </div>
-
-
-
     </Layout>
   );
 };
@@ -426,10 +424,12 @@ export default KYCForm;
 
 const SubmitKYC = ({ handleLogOut }) => {
   return (
-    <div className="kyc-msg-grid">
+    <div className="kyc-msg-grid failedErrorBox">
       <div className="kyc-form-msg">
+      <h4>Submit !</h4>
+      <img src={submit} alt="failed" />
         <p>Your KYC request has been submitted, this may take up to 5 mins</p>
-        <span onClick={handleLogOut}>Logout</span>
+        {/* <span onClick={handleLogOut}>Logout</span> */}
       </div>
     </div>
   );
@@ -437,15 +437,16 @@ const SubmitKYC = ({ handleLogOut }) => {
 
 const FailedKYC = ({ handleLogOut }) => {
   return (
-    <div className="kyc-msg-grid">
+    <div className="kyc-msg-grid failedErrorBox">
       <div className="kyc-form-msg">
-        <h4>Failed!</h4>
+        <h4>Failed !</h4>
+        <img src={failed} alt="failed" />
         <p>
           You already have an account with us, please contact support to get
           more information.
         </p>
-        <Link to="/">Contact Support</Link>
-        <span onClick={handleLogOut}>Logout</span>
+        {/* <Link to="/">Contact Support</Link>
+        <span onClick={handleLogOut}>Logout</span> */}
       </div>
     </div>
   );
@@ -453,14 +454,15 @@ const FailedKYC = ({ handleLogOut }) => {
 
 const SuccessKYC = ({ handleLogOut }) => {
   return (
-    <div className="kyc-msg-grid">
+    <div className="kyc-msg-grid failedErrorBox">
       <div className="kyc-form-msg">
-        <h4>Congrast!</h4>
+        <h4>congrats !</h4>
+        <img src={success} alt="failed" />
         <p>
           Your KYC has been processed successfully. Thank you for choosing us!
         </p>
-        <Link to="/profile">Profile</Link>
-        <span onClick={handleLogOut}>Logout</span>
+        {/* <Link to="/profile">Profile</Link>
+        <span onClick={handleLogOut}>Logout</span> */}
       </div>
     </div>
   );
