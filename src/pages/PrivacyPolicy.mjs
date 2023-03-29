@@ -14,14 +14,18 @@ export default function PrivacyPolicy() {
           <h1 className='title'>PRIVACY POLICY</h1>
 
           <div className='contact-div'>
-            <h4>Who we are</h4>
+            <div className='text-animate'>
+              <h4>Who we are</h4>
+            </div>
             <br></br>
             Our website address is: https://www.scroogegold.com. Scrooge Coin is
             a hyper-deflationary cryptocurrency token that provides rewards to
             holders in the form of BUSD.
             <br></br>
             <br></br>
-            <h4>Comments</h4>
+            <div className='text-animate'>
+              <h4>Comments</h4>
+            </div>
             <br></br>
             When visitors leave comments on the site we collect the data shown
             in the comments form, and also the visitor’s IP address and browser
@@ -36,7 +40,9 @@ export default function PrivacyPolicy() {
             comment.
             <br></br>
             <br></br>
-            <h4>Media</h4>
+            <div className='text-animate'>
+              <h4>Media</h4>
+            </div>
             <br></br>
             If you upload images to the website, you should avoid uploading
             images with embedded location data (EXIF GPS) included. Visitors to
@@ -44,7 +50,9 @@ export default function PrivacyPolicy() {
             on the website.
             <br></br>
             <br></br>
-            <h4>Cookies</h4>
+            <div className='text-animate'>
+              <h4>Cookies</h4>
+            </div>
             <br></br>
             If you leave a comment on our site you may opt-in to saving your
             name, email address and website in cookies. These are for your
@@ -71,7 +79,9 @@ export default function PrivacyPolicy() {
             expires after 1 day.
             <br></br>
             <br></br>
-            <h4>Embedded content from other websites</h4>
+            <div className='text-animate'>
+              <h4>Embedded content from other websites</h4>
+            </div>
             <br></br>
             Articles on this site may include embedded content (e.g. videos,
             images, articles, etc.). Embedded content from other websites
@@ -86,13 +96,17 @@ export default function PrivacyPolicy() {
             website.
             <br></br>
             <br></br>
-            <h4>Who we share your data with</h4>
+            <div className='text-animate'>
+              <h4>Who we share your data with</h4>
+            </div>
             <br></br>
             If you request a password reset, your IP address will be included in
             the reset email for your own security purposes.
             <br></br>
             <br></br>
-            <h4>How long we retain your data</h4>
+            <div className='text-animate'>
+              <h4>How long we retain your data</h4>
+            </div>
             <br></br>
             If you leave a comment, the comment and its metadata are retained
             indefinitely. This is so we can recognize and approve any follow-up
@@ -107,7 +121,9 @@ export default function PrivacyPolicy() {
             can also see and edit that information.
             <br></br>
             <br></br>
-            <h4>What rights you have over your data</h4>
+            <div className='text-animate'>
+              <h4>What rights you have over your data</h4>
+            </div>
             <br></br>
             If you have an account on this site, or have left comments, you can
             request to receive an exported file of the personal data we hold
@@ -117,7 +133,9 @@ export default function PrivacyPolicy() {
             legal, or security purposes.
             <br></br>
             <br></br>
-            <h4>Where we send your data</h4>
+            <div className='text-animate'>
+              <h4>Where we send your data</h4>
+            </div>
             <br></br>
             Visitor comments may be checked through an automated spam detection
             service. Scrooge Coin will never distribute your information to any

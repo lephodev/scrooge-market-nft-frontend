@@ -496,7 +496,7 @@ export default function AllCurrentRaffles() {
                     className='pageTitless text-animate'
                     style={{ marginBottom: "-20px" }}
                   >
-                    <h1>{raffle.prize_details.name}</h1>
+                    <h4>{raffle.prize_details.name}</h4>
                   </div>
                   <div className='flex-row-no-margin'>
                     <div className='raffle-data-box'>
