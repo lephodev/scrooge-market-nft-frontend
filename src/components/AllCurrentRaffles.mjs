@@ -29,18 +29,16 @@ export default function AllCurrentRaffles() {
 
   const handlePurchase = async (amt, item_id) => {
     try {
-      const initEntryPurchase = await Axios.get(
-        `https://34.237.237.45:9001/api/initEntryPurchase/${user[0]}/${address}/${amt}/${item_id}`
-      ).then(async (data) => {
+      const initEntryPurchase =  await marketPlaceInstance().get(`/initEntryPurchase/${user[0]}/${address}/${amt}/${item_id}`)
+      .then(async (data) => {
         const price = (amt / currentPriceOG).toFixed(0);
         const purchase = await sdk.wallet.transfer(
-          "0xEcc9A9EFB21e71c2a794DEb28CA512dD05363a45",
+          "0x29efb15bdcd0a6ce5bcf0b7811f227080fba0427",
           0.5,
           "0xe9e7cea3dedca5984780bafc599bd69add087d56"
         );
         //console.log('purchase: ', purchase); //${purchase.receipt.transactionHash}
-        const finalizeEntryPurchase = await Axios.get(
-          `https://34.237.237.45:9001/api/finalizeEntryPurchase/${user[0]}/${address}/${amt}/${data.data}/${purchase.receipt.transactionHash}`
+        const finalizeEntryPurchase =await marketPlaceInstance().get(`/finalizeEntryPurchase/${user[0]}/${address}/${amt}/${data.data}/${purchase.receipt.transactionHash}`
         ).then(async (resp) => {
           if (resp.data >= 1) {
             toast("Purchase successful! You bought " + resp.data + " tickets!");
@@ -61,7 +59,7 @@ export default function AllCurrentRaffles() {
     setData("");
     const base64data = Buffer.from("Product 1").toString("base64");
     try {
-      Axios.get(`https://34.237.237.45:9001/api/encrypt/${base64data}`).then(
+      await marketPlaceInstance().get(`/encrypt/${base64data}`).then(
         async (data) => {
           //console.log("encrypt: ", data.data);
           encrypted = data.data;
@@ -81,7 +79,7 @@ export default function AllCurrentRaffles() {
     //setData('');
     //const base64data = Buffer.from(data).toString('base64');
     try {
-      Axios.get(`https://34.237.237.45:9001/api/decrypt/${data}`).then(
+      await marketPlaceInstance().get(`/decrypt/${data}`).then(
         async (data) => {
           //console.log("decrypt: ", data.data);
           encrypted = data.data;
@@ -176,8 +174,7 @@ export default function AllCurrentRaffles() {
   async function checkToken() {
     const initUser = async () => {
       try {
-        Axios.get(
-          `https://34.237.237.45:9001/api/getUserRaffleTickets/${user.id}`
+        await marketPlaceInstance().get(`/getUserRaffleTickets/${user.id}`
         ).then(async (data) => {
           setUserRaffleTickets(data.data.tickets);
           return data.data;
