@@ -32,13 +32,16 @@
   background: transparent !important;
 }
 
-.select-banner-option .deposit-cash-app [type="radio"]:checked+label:before,
-.select-banner-option .deposit-cash-app [type="radio"]:not(:checked)+label:before {
+.select-banner-option .deposit-cash-app [type="radio"]:checked + label:before,
+.select-banner-option
+  .deposit-cash-app
+  [type="radio"]:not(:checked)
+  + label:before {
   border: 1px solid rgb(124 116 142 / 20%);
 }
 
-.select-banner-option .deposit-cash-app [type="radio"]:checked+label,
-.select-banner-option .deposit-cash-app [type="radio"]:not(:checked)+label {
+.select-banner-option .deposit-cash-app [type="radio"]:checked + label,
+.select-banner-option .deposit-cash-app [type="radio"]:not(:checked) + label {
   padding-top: 2px;
 }
 
@@ -54,6 +57,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .kyc-page .login-box form .form-group {
@@ -202,11 +206,6 @@
   box-shadow: none;
 }
 
-
-
-
-
-
 .kycForm.marketPlace_kycForm {
   margin: 40px auto;
   display: grid;
@@ -214,7 +213,7 @@
 }
 
 .kycForm.marketPlace_kycForm .login-form {
-  max-width: 900px;
+  /* max-width: 900px;
   width: 100%;
   background: #24262b;
   padding: 40px 50px;
@@ -224,7 +223,21 @@
   flex-direction: column;
   gap: 20px;
   color: #ddd;
-  align-items: flex-start;
+  align-items: flex-start; */
+  max-width: 900px;
+  width: 100%;
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  padding: 40px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #ddd;
+}
+.kycForm.marketPlace_kycForm .login-form:hover {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .marketPlace_kycForm * {
@@ -262,7 +275,6 @@
 .marketPlace_kycForm input.form-control:focus-visible,
 .marketPlace_kycForm input.form-control:focus,
 .marketPlace_kycForm input.form-control:active {
-
   border: 1px solid rgb(58, 58, 58) !important;
   outline: 1px solid rgb(58, 58, 58) !important;
 }
@@ -275,7 +287,6 @@
 
 .marketPlace_kycForm .form-check label.form-check-label {
   padding: 0px !important;
-
 }
 
 .marketPlace_kycForm .upload-game-thumnail {
@@ -316,7 +327,12 @@
   font-weight: 700;
   box-shadow: 0px 0px 14px -7px #f09819;
   cursor: pointer;
-  background-image: linear-gradient(45deg, #ff512f 0%, #f09819 51%, #ff512f 100%);
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
   width: 160px;
   height: 44px;
   font-size: 16px;
@@ -331,6 +347,7 @@
   background: -webkit-linear-gradient(#ff512f, #eeff00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-align: center;
 }
 
 .marketPlace_kycForm p.error-text {
@@ -365,7 +382,6 @@
   letter-spacing: 2px;
   color: #ddd;
   margin-bottom: 10px;
-
 }
 
 .failedErrorBox .kyc-form-msg p {
@@ -392,8 +408,10 @@
   height: var(--bs-spinner-height);
   vertical-align: var(--bs-spinner-vertical-align);
   border-radius: 50%;
-  -webkit-animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
-  animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
+  -webkit-animation: var(--bs-spinner-animation-speed) linear infinite
+    var(--bs-spinner-animation-name);
+  animation: var(--bs-spinner-animation-speed) linear infinite
+    var(--bs-spinner-animation-name);
 }
 
 @keyframes spinner-border {
@@ -402,7 +420,6 @@
     transform: rotate(1turn);
   }
 }
-
 
 @media screen and (max-width: 767px) {
   .select-banner-area {
@@ -418,10 +435,8 @@
   }
 
   .marketPlace_kycForm h1 {
-
     font-size: 24px;
     letter-spacing: 2px;
-
   }
 
   .kyc-page .login-box form .form-group {
