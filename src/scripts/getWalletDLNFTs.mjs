@@ -201,7 +201,8 @@ export default function GetWalletDLNFTs() {
           <div style={{ width: "100%", textAlign: "center" }}>
             <div id='rewardId' style={{ margin: "0 auto" }} />
           </div>
-          {nfts.map((nft) => (
+          {console.log("nfts90909",nfts)}
+          {nfts?.map((nft) => (
             <div className='erc721Card' key={nft.metadata.id}>
               <div className='erc721Card-name'>
                 {nft.metadata.name}
