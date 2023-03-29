@@ -86,14 +86,16 @@ export default function AffiliateLeaderboard() {
       marketPlaceInstance()
         .get(`/getAffLeadersByType/${type}/${limit}/${days}`)
         .then((data) => {
-          //console.log("getAffLeadersByTokens: ", data.data);
-          if (typeof data.data !== "string") setLeaderboardTopSales(data.data);
+          console.log("getAffLeadersByTokens: ", data.data);
+          if (typeof data.data !== "string") setLeaderboardTopSales(data?.data?.data);
           return data.data;
         });
     } catch (err) {
       console.error(err);
     }
   }
+
+
 
   async function getAffLeadersTopRegisters(
     type = "register",
@@ -124,7 +126,8 @@ export default function AffiliateLeaderboard() {
       await getAffLeadersHottestNewcomers();
       await getAffLeadersMonthlyMovers();
       await getAffLeadersTopRegisters();
-      // getAffLeadersTopSales();
+      // getAffLeadersTopSales
+      await  getAffLeadersTopSales();
     };
     getData();
   }, []);
