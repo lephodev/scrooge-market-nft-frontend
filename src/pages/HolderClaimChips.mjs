@@ -91,11 +91,12 @@ function HolderClaimChips() {
         .then(async (data) => {
           if (data?.data?.code === 200) {
             toast.success("Tokens Claimed: " + data?.data?.data);
+            reward();
           } else {
             toast.error("Tokens Claimed: " + data.data.msg);
           }
           setBuyLoading(false);
-          reward();
+
           zzz();
           //await timeout(4200);
           //window.location.reload();
