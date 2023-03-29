@@ -18,7 +18,7 @@ const KYCForm = () => {
   const navigate = useNavigate();
   const [frontIdImage, setfrontIdImage] = useState([]);
   const [backIdImage, setbackIdImage] = useState([]);
-  const [statusKyc, setstatusKyc] = useState("NotApplied");
+  const [statusKyc, setstatusKyc] = useState(null);
   const [loading, setLoading] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
   // const [successMsg, setSuccessMsg] = useState("");
@@ -456,7 +456,7 @@ const SuccessKYC = ({ handleLogOut }) => {
   return (
     <div className="kyc-msg-grid failedErrorBox">
       <div className="kyc-form-msg">
-        <h4>congrats !</h4>
+        <h4>Congrats !</h4>
         <img src={success} alt="failed" />
         <p>
           Your KYC has been processed successfully. Thank you for choosing us!
