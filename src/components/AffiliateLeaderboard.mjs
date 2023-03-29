@@ -134,6 +134,9 @@ export default function AffiliateLeaderboard() {
     <>
       {showLeaderboards ? (
         <div className='bordered-section'>
+          <div className='text-animate'>
+            <h1>LEADERBOARDS</h1>
+          </div>
           <div className='flex-row-no-margin'>
             {leaderboardByCount !== "Error" ? (
               <>
