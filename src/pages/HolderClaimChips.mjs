@@ -47,7 +47,7 @@ function HolderClaimChips() {
         .then((data) => {
           console.log("setclam=im---", data);
           if (data.data.success) {
-            setNextClaimDate(data.data.data[0].claimDate);
+            setNextClaimDate(data.data.data[0].nextClaimDate);
           } else {
             setNextClaimDate(data.data.message);
           }
@@ -245,20 +245,18 @@ function HolderClaimChips() {
                   {(new Date(nextClaimDate) <= new Date() ||
                     nextClaimDate === "No Entries Found") &&
                   OGBalance > 0 ? (
-                    <Countdown date={nextClaimDate}>
-                      <div className='new-btn'>
-                        <button
-                          disabled={disable}
-                          // className='submit-btn'
-                          onClick={() => claimTokens()}>
-                          Claim{" "}
-                          {(OGBalance * currentPrice * 0.1)
-                            .toFixed(0)
-                            .toLocaleString("en-US")}{" "}
-                          Tokens
-                        </button>
-                      </div>
-                    </Countdown>
+                    <div className='new-btn'>
+                      <button
+                        disabled={disable}
+                        // className='submit-btn'
+                        onClick={() => claimTokens()}>
+                        Claim{" "}
+                        {(OGBalance * currentPrice * 0.1)
+                          .toFixed(0)
+                          .toLocaleString("en-US")}{" "}
+                        Tokens
+                      </button>
+                    </div>
                   ) : (
                     <>
                       <div className='prize-name text-animate'>
