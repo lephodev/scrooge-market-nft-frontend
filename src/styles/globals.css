@@ -2982,7 +2982,8 @@ ul.footer-support li img {
 .my-wallet-page .full-page-container,
 .earn-token .social-share-card,
 .claim-free-page .prizes-card .prize-name,
-.earn-token .earn-affiliate-card {
+.earn-token .earn-affiliate-card,
+.claim-free-token .feature-overview-div {
   border: 1px solid #1c1c1c;
   background-color: transparent;
   box-shadow: 0px 20px 20px #00000091;
@@ -3449,6 +3450,11 @@ ul.footer-support li img {
 .earn-token .min-menu-div {
   gap: 20px;
   flex-wrap: wrap;
+}
+.claim-token-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 /********************************************************************************************/
 /************* Media Query ******************/
