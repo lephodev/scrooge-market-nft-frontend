@@ -228,25 +228,27 @@ export default function ShowAllTokenNFTs() {
         </div>
       ) : (
         <div className='nft-card-grid'>
-          
+          {listings&& listings.length>0 && listings.map((el,index)=>{
+            return (
+              <>
           <div className='nft-token-row-card'>
             <div className='nft-token-row-card-image'>
               <ThirdwebNftMedia
-                key={listings[0].id}
-                metadata={listings[0].asset}
+                key={el?.id}
+                metadata={el?.asset}
                 height={150}
               />
             </div>
             <div className='nft-token-row-desc'>
               <span className='nft-token-row-namess text-animate'>
-                <h4> {listings[0].asset.name.toString()}</h4>
+                <h4> {el?.asset?.name.toString()}</h4>
               </span>
-              <p> {listings[0].asset.description.toString()}</p>
+              <p> {el?.asset?.description.toString()}</p>
             </div>
-            {/* {console.log("listings[0].buyoutPrice ", listings[0].buyoutPrice)} */}
+            
             <div className='nft-token-row-details'>
               <span className='erc1155-price'>
-                ${(listings[0].buyoutPrice / 10 ** 18).toFixed(2).toString()}{" "}
+                ${(el?.buyoutPrice / 10 ** 18).toFixed(2).toString()}{" "}
                 BUSD
               </span>
               <br></br>
@@ -257,8 +259,8 @@ export default function ShowAllTokenNFTs() {
               ) : (
                 <button
                   className='erc1155-buy-btn'
-                  onClick={() => handleBuyAsset(listings[0]?.id, 1)}
-                  id={listings[0].asset.name.toString()}
+                  onClick={() => handleBuyAsset(el?.id, 1)}
+                  id={el?.asset?.name.toString()}
                 >
                   BUY NFT!
                 </button>
@@ -266,7 +268,7 @@ export default function ShowAllTokenNFTs() {
             </div>
             <div
               className='nft-token-stripe-badge-div'
-              onClick={() => handleBuyStripe(listings[0])}
+              onClick={() => handleBuyStripe(el)}
             >
               <img
                 className='stripe-badge-img'
@@ -274,9 +276,22 @@ export default function ShowAllTokenNFTs() {
                 alt='Buy NFT with Stripe'
               />
             </div>
-          </div> 
-
-          <div className='nft-token-row-card'>
+            {index!==0 && index!==1   ?
+            <div className='nft-token-row-sale'>
+              <img
+                className='sale-badge-img'
+                src={SaleBadge}
+                alt='Get the best deal possible'
+              />
+              <br></br>
+              {index-1}% OFF
+            </div>
+            :""}
+          </div>
+          </>
+            ) 
+})}
+          {/* <div className='nft-token-row-card'>
             <div className='nft-token-row-card-image'>
               <ThirdwebNftMedia
                 key={listings[1].id}
@@ -434,9 +449,9 @@ export default function ShowAllTokenNFTs() {
               <br></br>
               2% OFF
             </div>
-          </div>
+          </div> */}
 
-          <div className='nft-token-row-card green-border-6px'>
+          {/* <div className='nft-token-row-card green-border-6px'>
             <div className='nft-token-row-card-image'>
               <ThirdwebNftMedia
                 key={listings[4].id}
@@ -665,9 +680,9 @@ export default function ShowAllTokenNFTs() {
               <br></br>
               6% OFF
             </div>
-          </div>
+          </div> */}
 
-          <div className='nft-token-row-card pink-border-6px'>
+          {/* <div className='nft-token-row-card pink-border-6px'>
             <div className='nft-token-row-card-image'>
               <ThirdwebNftMedia
                 key={listings[8].id}
@@ -781,7 +796,7 @@ export default function ShowAllTokenNFTs() {
               <br></br>
               8% OFF
             </div>
-          </div>
+          </div> */}
 
           {/* <div className='nft-token-row-card blue-border-6px'>
             <div className='nft-token-row-card-image'>
