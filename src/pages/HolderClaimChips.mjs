@@ -30,6 +30,7 @@ function HolderClaimChips() {
   const [nextClaimDate, setNextClaimDate] = useState("Loading...");
   const [OGBalance, setOGBalance] = useState("Loading...");
   const [currentPrice, setCurrentPrice] = useState("Loading...");
+  const [disable, setDisable] = useState(false);
   const sdk = useSDK();
   const address = useAddress();
   const signer = useSigner();
@@ -45,7 +46,11 @@ function HolderClaimChips() {
         .get(`/getNextClaimDate/${address}/holder/${user.id}/0`)
         .then((data) => {
           console.log("setclam=im---", data);
-          setNextClaimDate(data.data.message);
+          if (data.data.success) {
+            setNextClaimDate(data.data.data[0].claimDate);
+          } else {
+            setNextClaimDate(data.data.message);
+          }
           return nextClaimDate;
         });
     }
@@ -73,18 +78,25 @@ function HolderClaimChips() {
   }
 
   const claimTokens = () => {
+    setDisable(true);
+    setTimeout(() => {
+      setDisable(false);
+    }, 4000);
     setBuyLoading(true);
     try {
       marketPlaceInstance()
-        .get(`/claimHolderTokens/${address}/${OGBalance}/${user.id}`)
+        .get(
+          `/claimHolderTokens/${address}/${OGBalance}/${currentPrice}/${user.id}`
+        )
         .then(async (data) => {
           if (data?.data?.code === 200) {
             toast.success("Tokens Claimed: " + data?.data?.data);
+            reward();
           } else {
             toast.error("Tokens Claimed: " + data.data.msg);
           }
           setBuyLoading(false);
-          reward();
+
           zzz();
           //await timeout(4200);
           //window.location.reload();
@@ -185,7 +197,9 @@ function HolderClaimChips() {
 
                   <div className='holder-claim-details'>
                     <h4>Scrooge Coin Price:</h4> $
-                    {currentPrice>0 ? parseFloat(currentPrice).toFixed(10):0}
+                    {currentPrice > 0
+                      ? parseFloat(currentPrice).toFixed(10)
+                      : 0}
                   </div>
 
                   <div className='prizes-chip-count'>
@@ -198,19 +212,26 @@ function HolderClaimChips() {
                       <span>
                         {" "}
                         Current Scrooge Coin Price ($
-                        {currentPrice>0 ?parseFloat(currentPrice).toFixed(10):0})
+                        {currentPrice > 0
+                          ? parseFloat(currentPrice).toFixed(10)
+                          : 0}
+                        )
                       </span>{" "}
                       <div>X</div>
                       <span>EARNING RATE (10%)</span> <div>=</div>
-                      {currentPrice>0 ?OGBalance * parseFloat(currentPrice).toFixed(10) * 0.1:0}
+                      {currentPrice > 0
+                        ? OGBalance * parseFloat(currentPrice).toFixed(10) * 0.1
+                        : 0}
                     </div>
                     <h3>
                       Claim{" "}
                       {OGBalance > 0 ? (
                         <>
-                          { currentPrice>0 ?(OGBalance * currentPrice * 0.1)
-                            .toFixed(0)
-                            .toLocaleString("en-US"):0}
+                          {currentPrice > 0
+                            ? (OGBalance * currentPrice * 0.1)
+                                .toFixed(0)
+                                .toLocaleString("en-US")
+                            : 0}
                         </>
                       ) : (
                         <>0</>
@@ -224,17 +245,20 @@ function HolderClaimChips() {
                   {(new Date(nextClaimDate) <= new Date() ||
                     nextClaimDate === "No Entries Found") &&
                   OGBalance > 0 ? (
-                    <div className='new-btn'>
-                      <button
-                        // className='submit-btn'
-                        onClick={() => claimTokens()}>
-                        Claim{" "}
-                        {(OGBalance * currentPrice * 0.1)
-                          .toFixed(0)
-                          .toLocaleString("en-US")}{" "}
-                        Tokens
-                      </button>
-                    </div>
+                    <Countdown date={nextClaimDate}>
+                      <div className='new-btn'>
+                        <button
+                          disabled={disable}
+                          // className='submit-btn'
+                          onClick={() => claimTokens()}>
+                          Claim{" "}
+                          {(OGBalance * currentPrice * 0.1)
+                            .toFixed(0)
+                            .toLocaleString("en-US")}{" "}
+                          Tokens
+                        </button>
+                      </div>
+                    </Countdown>
                   ) : (
                     <>
                       <div className='prize-name text-animate'>
@@ -244,12 +268,15 @@ function HolderClaimChips() {
 
                             <Countdown date={nextClaimDate}>
                               <button
+                                disabled={disable}
                                 className='submit-btn'
                                 onClick={() => claimTokens()}>
                                 Claim{" "}
-                                {currentPrice>0 ?(OGBalance * currentPrice * 0.1)
-                                  .toFixed(0)
-                                  .toLocaleString("en-US"):0}{" "}
+                                {currentPrice > 0
+                                  ? (OGBalance * currentPrice * 0.1)
+                                      .toFixed(0)
+                                      .toLocaleString("en-US")
+                                  : 0}{" "}
                                 Tokens
                               </button>
                             </Countdown>
