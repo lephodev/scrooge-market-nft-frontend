@@ -34,17 +34,19 @@ export default function ShowAllTokenNFTs() {
     process.env.REACT_APP_MARKETPLACE_ADDRESS,
     "marketplace"
   );
-  console.log("contract000",contract);
+  console.log("contract",contract);
+  // console.log("contract000",contract);
   // data is the active listings, isLoading is a loading flag while we load the listings.
   const { data: listings, isLoading: loadingListings } =
     useActiveListings(contract);
 
-  console.log("listings", listings);
+ console.log("listings", listings);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
 
   async function handleBuyAsset(token_id, qty) {
+    console.log("token_id, qty",token_id, qty);
     if (!user)
       return toast.error("Please Login first", { containerId: "authenticate" });
     setBuyLoading(true);
@@ -61,8 +63,9 @@ export default function ShowAllTokenNFTs() {
         "affID",
         affID
       );
+      console.log();
     const buyout = await contract.buyoutListing(token_id, qty);
-console.log("buyoutbuyoutbuyout",buyout);
+ console.log("buyoutbuyoutbuyout",buyout);
       marketPlaceInstance()
         .post(
           `/getFreeTokens`,{
@@ -73,9 +76,7 @@ console.log("buyoutbuyoutbuyout",buyout);
             affID:affID
           }
         )
-        // ${address}/${token_id}/${user?.id}/${qty}/${affID}
         .then((data) => {
-          console.log("datatat---->>>.", data);
           toast.success(
             "You have successfully purchased your NFT and " +
               data.data +
@@ -120,6 +121,7 @@ console.log("buyoutbuyoutbuyout",buyout);
   // };
 
   const handleBuyStripe = async (item) => {
+    console.log("itemitemitem",item);
     let stripe;
     stripe = await stripePromise;
     const response = await marketPlaceInstance().post("/user/depositMoney", {
@@ -129,7 +131,7 @@ console.log("buyoutbuyoutbuyout",buyout);
       affID,
     });
     const { code, msg } = response?.data;
-    console.log("response", response);
+    // console.log("response", response);
     if (code === 200) {
       const session = await response.data.id;
       // When the customer clicks on the button, redirect them to Checkout.
@@ -137,7 +139,7 @@ console.log("buyoutbuyoutbuyout",buyout);
         sessionId: session,
       });
 
-      console.log(result);
+      // console.log(result);
       if (result.error) {
         console.log(result.error);
       }
@@ -149,14 +151,14 @@ console.log("buyoutbuyoutbuyout",buyout);
   useEffect(() => {
     function getAffData() {
       const q = searchParams.get("aff_id");
-      console.log("q", q);
+      // console.log("q", q);
       if (q) {
         setAffID(q);
         const aff_id = Cookies.set("aff_id", q);
-        console.log("cookie: ", aff_id);
+        // console.log("cookie: ", aff_id);
       } else {
         const aff_id = Cookies.get("aff_id", { domain: scroogeClient }); //change before going live
-        console.log("cookie=====>>>>>: ", aff_id);
+        // console.log("cookie=====>>>>>: ", aff_id);
         if (aff_id) {
           setAffID(aff_id);
         }
@@ -165,7 +167,7 @@ console.log("buyoutbuyoutbuyout",buyout);
     getAffData();
   }, [searchParams]);
 
-  console.log("AffIdd", affID);
+  // console.log("AffIdd", affID);
 
   return (
     <div>
@@ -219,7 +221,7 @@ console.log("buyoutbuyoutbuyout",buyout);
           </p>
         </div>
       </div>
-      {console.log("lllll", listings)}
+      {/* {console.log("lllll", listings)} */}
       {loadingListings ? (
         <div className='loading-img-div'>
           <img src={LoadingPoker} alt='game' className='imageAnimation' />
@@ -241,7 +243,7 @@ console.log("buyoutbuyoutbuyout",buyout);
               </span>
               <p> {listings[0].asset.description.toString()}</p>
             </div>
-            {console.log("listings[0].buyoutPrice ", listings[0].buyoutPrice)}
+            {/* {console.log("listings[0].buyoutPrice ", listings[0].buyoutPrice)} */}
             <div className='nft-token-row-details'>
               <span className='erc1155-price'>
                 ${(listings[0].buyoutPrice / 10 ** 18).toFixed(2).toString()}{" "}
@@ -255,7 +257,7 @@ console.log("buyoutbuyoutbuyout",buyout);
               ) : (
                 <button
                   className='erc1155-buy-btn'
-                  onClick={() => handleBuyAsset(listings[0].asset.id, 1)}
+                  onClick={() => handleBuyAsset(listings[0]?.id, 1)}
                   id={listings[0].asset.name.toString()}
                 >
                   BUY NFT!
@@ -301,7 +303,7 @@ console.log("buyoutbuyoutbuyout",buyout);
               ) : (
                 <button
                   className='erc1155-buy-btn'
-                  onClick={() => handleBuyAsset(listings[1].asset.id, 1)}
+                  onClick={() => handleBuyAsset(listings[1]?.id, 1)}
                   id={listings[1].asset.name.toString()}
                 >
                   BUY NFT!
@@ -347,7 +349,7 @@ console.log("buyoutbuyoutbuyout",buyout);
               ) : (
                 <button
                   className='erc1155-buy-btn'
-                  onClick={() => handleBuyAsset(listings[2].asset.id, 1)}
+                  onClick={() => handleBuyAsset(listings[2]?.id, 1)}
                   id={listings[2].asset.name.toString()}
                 >
                   BUY NFT!
@@ -404,7 +406,7 @@ console.log("buyoutbuyoutbuyout",buyout);
               ) : (
                 <button
                   className='erc1155-buy-btn'
-                  onClick={() => handleBuyAsset(listings[3].asset.id, 1)}
+                  onClick={() => handleBuyAsset(listings[3]?.id, 1)}
                   id={listings[3].asset.name.toString()}
                 >
                   BUY NFT!
@@ -462,7 +464,7 @@ console.log("buyoutbuyoutbuyout",buyout);
               ) : (
                 <button
                   className='erc1155-buy-btn'
-                  onClick={() => handleBuyAsset(listings[4].asset.id, 1)}
+                  onClick={() => handleBuyAsset(listings[4]?.id, 1)}
                   id={listings[4].asset.name.toString()}
                 >
                   BUY NFT!
@@ -519,7 +521,7 @@ console.log("buyoutbuyoutbuyout",buyout);
               ) : (
                 <button
                   className='erc1155-buy-btn'
-                  onClick={() => handleBuyAsset(listings[5].asset.id, 1)}
+                  onClick={() => handleBuyAsset(listings[5]?.id, 1)}
                   id={listings[5].asset.name.toString()}
                 >
                   BUY NFT!
@@ -577,7 +579,7 @@ console.log("buyoutbuyoutbuyout",buyout);
               ) : (
                 <button
                   className='erc1155-buy-btn'
-                  onClick={() => handleBuyAsset(listings[6].asset.id, 1)}
+                  onClick={() => handleBuyAsset(listings[6]?.id, 1)}
                   id={listings[6].asset.name.toString()}
                 >
                   BUY NFT!
@@ -635,7 +637,7 @@ console.log("buyoutbuyoutbuyout",buyout);
               ) : (
                 <button
                   className='erc1155-buy-btn'
-                  onClick={() => handleBuyAsset(listings[7].asset.id, 1)}
+                  onClick={() => handleBuyAsset(listings[7]?.id, 1)}
                   id={listings[7].asset.name.toString()}
                 >
                   BUY NFT!
@@ -693,7 +695,7 @@ console.log("buyoutbuyoutbuyout",buyout);
               ) : (
                 <button
                   className='erc1155-buy-btn'
-                  onClick={() => handleBuyAsset(listings[8].asset.id, 1)}
+                  onClick={() => handleBuyAsset(listings[8]?.id, 1)}
                   id={listings[8].asset.name.toString()}
                 >
                   BUY NFT!
@@ -751,7 +753,7 @@ console.log("buyoutbuyoutbuyout",buyout);
               ) : (
                 <button
                   className='erc1155-buy-btn'
-                  onClick={() => handleBuyAsset(listings[9].asset.id, 1)}
+                  onClick={() => handleBuyAsset(listings[9]?.id, 1)}
                   id={listings[9].asset.name.toString()}
                 >
                   BUY NFT!
