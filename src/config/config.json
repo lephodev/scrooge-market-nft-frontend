@@ -6,13 +6,13 @@
     "scroogeClient": "https://dev.scrooge.casino"
   },
   "development": {
-    "client": "https://dev-marketplace.scrooge.casino",
+    "client": "https://devmarket.scrooge.casino",
     "server": "https://devmarket-api.scrooge.casino",
     "scroogeServer": "https://dev-api.scrooge.casino",
     "scroogeClient": "https://dev.scrooge.casino"
   },
   "beta": {
-    "client": "https://beta-marketplace.scrooge.casino",
+    "client": "https://betamarket.scrooge.casino",
     "server": "http://betamarket-api.scrooge.casino",
     "scroogeServer": "https://beta-api.scrooge.casino",
     "scroogeClient": "https://beta.scrooge.casino"
