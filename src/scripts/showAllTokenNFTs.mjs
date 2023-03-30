@@ -226,10 +226,7 @@ console.log("buyoutbuyoutbuyout",buyout);
         </div>
       ) : (
         <div className='nft-card-grid'>
-          {/* <div style={{ width: "100%", textAlign: "center" }}>
-            <div id='rewardId' style={{ margin: "0 auto" }} />
-          </div> */}
-
+          
           <div className='nft-token-row-card'>
             <div className='nft-token-row-card-image'>
               <ThirdwebNftMedia
@@ -275,7 +272,7 @@ console.log("buyoutbuyoutbuyout",buyout);
                 alt='Buy NFT with Stripe'
               />
             </div>
-          </div>
+          </div> 
 
           <div className='nft-token-row-card'>
             <div className='nft-token-row-card-image'>
@@ -361,18 +358,12 @@ console.log("buyoutbuyoutbuyout",buyout);
               className='nft-token-stripe-badge-div'
               onClick={() => handleBuyStripe(listings[2])}
             >
-              {/* <a
-                href={`https://buy.stripe.com/00g5ncesaabW9aw8wy?client_reference_id=${address}_${user?.id}_${affID}`}
-                alt="buy with Stripe"
-                target="_blank"
-                rel="noreferrer"
-              > */}
               <img
                 className='stripe-badge-img'
                 src={StripeBadge}
                 alt='Buy NFT with Stripe'
               />
-              {/* </a> */}
+             
             </div>
             <div className='nft-token-row-sale'>
               <img
@@ -424,18 +415,13 @@ console.log("buyoutbuyoutbuyout",buyout);
               className='nft-token-stripe-badge-div'
               onClick={() => handleBuyStripe(listings[3])}
             >
-              {/* <a
-                href={`https://buy.stripe.com/eVaaHw5VEfwg72obIL?client_reference_id=${address}_${user?.id}_${affID}`}
-                alt="buy with Stripe"
-                target="_blank"
-                rel="noreferrer"
-              > */}
+             
               <img
                 className='stripe-badge-img'
                 src={StripeBadge}
                 alt='Buy NFT with Stripe'
               />
-              {/* </a> */}
+              
             </div>
             <div className='nft-token-row-sale'>
               <img
@@ -487,18 +473,12 @@ console.log("buyoutbuyoutbuyout",buyout);
               className='nft-token-stripe-badge-div'
               onClick={() => handleBuyStripe(listings[4])}
             >
-              {/* <a
-                href={`https://buy.stripe.com/bIYcPE3NwabW2M8bIM?client_reference_id=${address}_${user?.id}_${affID}`}
-                alt="buy with Stripe"
-                target="_blank"
-                rel="noreferrer"
-              > */}
               <img
                 className='stripe-badge-img'
                 src={StripeBadge}
                 alt='Buy NFT with Stripe'
               />
-              {/* </a> */}
+              
             </div>
             <div className='nft-token-row-sale'>
               <img
@@ -550,18 +530,13 @@ console.log("buyoutbuyoutbuyout",buyout);
               className='nft-token-stripe-badge-div'
               onClick={() => handleBuyStripe(listings[5])}
             >
-              {/* <a
-                href={`https://buy.stripe.com/3cs2b03Nw83OaeAfZ3?client_reference_id=${address}_${user?.id}_${affID}`}
-                alt="buy with Stripe"
-                target="_blank"
-                rel="noreferrer"
-              > */}
+             
               <img
                 className='stripe-badge-img'
                 src={StripeBadge}
                 alt='Buy NFT with Stripe'
               />
-              {/* </a> */}
+             
             </div>
             <div className='nft-token-row-sale'>
               <img
@@ -613,18 +588,13 @@ console.log("buyoutbuyoutbuyout",buyout);
               className='nft-token-stripe-badge-div'
               onClick={() => handleBuyStripe(listings[6])}
             >
-              {/* <a
-                href={`https://buy.stripe.com/5kAeXM1Fo97S2M8aEK?client_reference_id=${address}_${user?.id}_${affID}`}
-                alt="buy with Stripe"
-                target="_blank"
-                rel="noreferrer"
-              > */}
+              
               <img
                 className='stripe-badge-img'
                 src={StripeBadge}
                 alt='Buy NFT with Stripe'
               />
-              {/* </a> */}
+              
             </div>
             <div className='nft-token-row-sale'>
               <img
@@ -676,18 +646,13 @@ console.log("buyoutbuyoutbuyout",buyout);
               className='nft-token-stripe-badge-div'
               onClick={() => handleBuyStripe(listings[7])}
             >
-              {/* <a
-                href={`https://buy.stripe.com/28oeXM4RAesc2M86ov?client_reference_id=${address}_${user?.id}_${affID}`}
-                alt="buy with Stripe"
-                target="_blank"
-                rel="noreferrer"
-              > */}
+             
               <img
                 className='stripe-badge-img'
                 src={StripeBadge}
                 alt='Buy NFT with Stripe'
               />
-              {/* </a> */}
+             
             </div>
             <div className='nft-token-row-sale'>
               <img
@@ -739,18 +704,13 @@ console.log("buyoutbuyoutbuyout",buyout);
               className='nft-token-stripe-badge-div'
               onClick={() => handleBuyStripe(listings[8])}
             >
-              {/* <a
-                href={`https://buy.stripe.com/aEU5nc5VEck4dqMcMU?client_reference_id=${address}_${user?.id}_${affID}`}
-                alt="buy with Stripe"
-                target="_blank"
-                rel="noreferrer"
-              > */}
+             
               <img
                 className='stripe-badge-img'
                 src={StripeBadge}
                 alt='Buy NFT with Stripe'
               />
-              {/* </a> */}
+              
             </div>
             <div className='nft-token-row-sale'>
               <img
@@ -763,7 +723,7 @@ console.log("buyoutbuyoutbuyout",buyout);
             </div>
           </div>
 
-          <div className='nft-token-row-card pink-border-6px'>
+           <div className='nft-token-row-card pink-border-6px'>
             <div className='nft-token-row-card-image'>
               <ThirdwebNftMedia
                 key={listings[9].id}
@@ -802,18 +762,13 @@ console.log("buyoutbuyoutbuyout",buyout);
               className='nft-token-stripe-badge-div'
               onClick={() => handleBuyStripe(listings[9])}
             >
-              {/* <a
-                href={`https://buy.stripe.com/8wM16Wck25VG86sbIR?client_reference_id=${address}_${user?.id}_${affID}`}
-                alt="buy with Stripe"
-                target="_blank"
-                rel="noreferrer"
-              > */}
+              
               <img
                 className='stripe-badge-img'
                 src={StripeBadge}
                 alt='Buy NFT with Stripe'
               />
-              {/* </a> */}
+              
             </div>
             <div className='nft-token-row-sale'>
               <img
@@ -826,7 +781,7 @@ console.log("buyoutbuyoutbuyout",buyout);
             </div>
           </div>
 
-          <div className='nft-token-row-card blue-border-6px'>
+          {/* <div className='nft-token-row-card blue-border-6px'>
             <div className='nft-token-row-card-image'>
               <ThirdwebNftMedia
                 key={listings[10].id}
@@ -836,14 +791,14 @@ console.log("buyoutbuyoutbuyout",buyout);
             </div>
             <div className='nft-token-row-desc'>
               <span className='nft-token-row-namess text-animate'>
-                <h4>{listings[10].asset.name.toString()}</h4>
+                <h4>{listings[10]?.asset?.name?.toString()}</h4>
               </span>
 
-              <p>{listings[10].asset.description.toString()}</p>
+              <p>{listings[10]?.asset?.description?.toString()}</p>
             </div>
             <div className='nft-token-row-details'>
               <span className='erc1155-price'>
-                ${(listings[10].buyoutPrice / 10 ** 18).toFixed(2).toString()}{" "}
+                ${(listings[10]?.buyoutPrice / 10 ** 18).toFixed(2).toString()}{" "}
                 BUSD
               </span>
               <br></br>
@@ -854,8 +809,8 @@ console.log("buyoutbuyoutbuyout",buyout);
               ) : (
                 <button
                   className='erc1155-buy-btn'
-                  onClick={() => handleBuyAsset(listings[10].asset.id, 1)}
-                  id={listings[10].asset.name.toString()}
+                  onClick={() => handleBuyAsset(listings[10]?.asset?.id, 1)}
+                  id={listings[10]?.asset?.name?.toString()}
                 >
                   BUY NFT!
                 </button>
@@ -865,18 +820,13 @@ console.log("buyoutbuyoutbuyout",buyout);
               className='nft-token-stripe-badge-div'
               onClick={() => handleBuyStripe(listings[10])}
             >
-              {/* <a
-                href={`https://buy.stripe.com/eVa16W2JsesccmI4gq?client_reference_id=${address}_${user?.id}_${affID}`}
-                alt="buy with Stripe"
-                target="_blank"
-                rel="noreferrer"
-              > */}
+              
               <img
                 className='stripe-badge-img'
                 src={StripeBadge}
                 alt='Buy NFT with Stripe'
               />
-              {/* </a> */}
+              
             </div>
             <div className='nft-token-row-sale'>
               <img
@@ -887,7 +837,7 @@ console.log("buyoutbuyoutbuyout",buyout);
               <br></br>
               9% OFF
             </div>
-          </div>
+          </div>  */}
         </div>
       )}
     </div>
