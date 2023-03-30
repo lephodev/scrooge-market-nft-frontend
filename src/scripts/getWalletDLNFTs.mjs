@@ -5,6 +5,8 @@ import {
   ThirdwebNftMedia,
   ChainId,
 } from "@thirdweb-dev/react";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
+
 import { useState, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,26 +26,39 @@ export default function GetWalletDLNFTs() {
   function notify(message) {
     toast.success("🎩 " + message);
   }
+  // const sdk = new ThirdwebSDK("ethereum");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // useEffect(async() => {
+  //   const contractssss =  await sdk.getContract("0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768");
+  //   console.log("contractssss",contractssss);
+    
+  // }, [])
+  
+
 
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   setSelectedChain(ChainId.Mainnet);
-  //console.log(selectedChain);
+  console.log("ChainId.Mainnet",ChainId.Mainnet);
   const addresses = {
     [String(ChainId.Mainnet)]: process.env.REACT_APP_MAINNET_ADDRESS,
     [String(ChainId.BinanceSmartChainMainnet)]: "",
   };
+
+  console.log("addressesaddresses",addresses);
   const address = useAddress();
   const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("");
   const [tokensClaimDate, setTokensClaimDate] = useState([
     { token_id: "", nextClaimDate: "" },
   ]);
-  console.log("selectedChain",selectedChain);
-  console.log("addresses[String(selectedChain)]",addresses[String(selectedChain)]);
+  console.log("selectedChain",selectedChain,tokensClaimDate);
+  console.log("addresses[String(selectedChain)]===>>>",addresses[String(selectedChain)]);
   const { contract,error } = useContract(addresses[String(selectedChain)]);
   console.log("error",error);
+  
   console.log('contract---->>>',contract)
   const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
+  console.log("nfts",nfts);
   const claimTokens = (token_id) => {
     setBuyLoading(true);
     try {
@@ -99,6 +114,7 @@ export default function GetWalletDLNFTs() {
   }
 
   useEffect(() => {
+    console.log("ChainId.BinanceSmartChainMainnet",ChainId.BinanceSmartChainMainnet);
     return () => setSelectedChain(ChainId.BinanceSmartChainMainnet);
   }, [address]);
   let dataArray = [];
