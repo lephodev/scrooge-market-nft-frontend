@@ -45,8 +45,8 @@ export default function ShowAllTokenNFTs() {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
 
-  async function handleBuyAsset(token_id, qty) {
-    console.log("token_id, qty",token_id, qty);
+  async function handleBuyAsset(token_id, qty,assetId) {
+    console.log("token_id, qty",token_id, qty,assetId);
     if (!user)
       return toast.error("Please Login first", { containerId: "authenticate" });
     setBuyLoading(true);
@@ -70,7 +70,7 @@ export default function ShowAllTokenNFTs() {
         .post(
           `/getFreeTokens`,{
             address:address,
-            token_id:token_id,
+            token_id:assetId,
             userid:user.id,
             qty:qty,
             affID:affID
@@ -259,7 +259,7 @@ export default function ShowAllTokenNFTs() {
               ) : (
                 <button
                   className='erc1155-buy-btn'
-                  onClick={() => handleBuyAsset(el?.id, 1)}
+                  onClick={() => handleBuyAsset(el?.id, 1,el?.asset?.id)}
                   id={el?.asset?.name.toString()}
                 >
                   BUY NFT!
