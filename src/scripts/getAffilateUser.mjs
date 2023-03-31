@@ -4,6 +4,7 @@ import { marketPlaceInstance } from '../config/axios.js';
 export default async function getAffiliateUser(user_id) {
   let affilateUser;
   try {
+    console.log("user_id00000",user_id)
     await marketPlaceInstance()
       .get(`/getAffiliateUser/${user_id}`)
       .then((data) => {
