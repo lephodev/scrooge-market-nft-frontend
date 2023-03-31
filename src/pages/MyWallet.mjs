@@ -14,6 +14,7 @@ import ChainContext from "../context/Chain.ts";
 import Token from "../images/token.png";
 import Ticket from "../images/ticket.png";
 import ScroogeHatLogo from "../images/scroogeHatLogo.png";
+import scroogejr from "../images/scroogejr.jpeg";
 import ClaimOGPending from "../components/claimOGPending.mjs";
 import ClaimJRPending from "../components/claimJRPending.mjs";
 import "react-toastify/dist/ReactToastify.css";
@@ -159,7 +160,8 @@ export default function MyWallet() {
                         // className='min-menu-btn'
                         onClick={() => {
                           setShowMerchRedeemed(true);
-                        }}>
+                        }}
+                      >
                         MERCH CODES
                       </button>
                     </div>
@@ -174,7 +176,8 @@ export default function MyWallet() {
                         // className='min-menu-btn'
                         onClick={() => {
                           setShowCasinoNFTs(true);
-                        }}>
+                        }}
+                      >
                         CASINO NFTS
                       </button>
                     </div>
@@ -189,7 +192,8 @@ export default function MyWallet() {
                         // className='min-menu-btn'
                         onClick={() => {
                           setShowCrypto(true);
-                        }}>
+                        }}
+                      >
                         CRYPTO
                       </button>
                     </div>
@@ -257,25 +261,29 @@ export default function MyWallet() {
                         <div className='crypto-balance-header'>
                           CRYPTO BALANCE
                         </div>
-                        <div className='crypto-balance-row'>
-                          <img
-                            className='token-logo'
-                            src={ScroogeHatLogo}
-                            alt='Scrooge Casino balances'
-                          />
-                          SCROOGE COIN:{" "}
-                          {OGBalance > 100000000 ? (
-                            <>
-                              {(OGBalance / 100000000).toFixed(2)}
-                              <>x 10</>
-                              <span class='sup'>8</span>
-                            </>
-                          ) : (
-                            OGBalance
-                          )}
-                        </div>
-                        <div className='crypto-balance-row'>
-                          VALUE: ${OGValue.toLocaleString("en-US")}
+                        <div className='crypto-balance-row-new'>
+                          <div className='crypto-balance-row-img'>
+                            <img
+                              className='token-logo'
+                              src={ScroogeHatLogo}
+                              alt='Scrooge Casino balances'
+                            />
+                          </div>
+                          <div className='crypto-balance-row-text'>
+                            <p>
+                              SCROOGE COIN:{" "}
+                              {OGBalance > 100000000 ? (
+                                <>
+                                  {(OGBalance / 100000000).toFixed(2)}
+                                  <>x 10</>
+                                  <span class='sup'>8</span>
+                                </>
+                              ) : (
+                                OGBalance
+                              )}
+                            </p>
+                            <p> VALUE: ${OGValue.toLocaleString("en-US")}</p>
+                          </div>
                         </div>
                         <div className='claim-pending-div'>
                           <ClaimOGPending />
@@ -285,17 +293,23 @@ export default function MyWallet() {
                     <div className='crypto-balance-div'>
                       <div className='width-100'>
                         <div className='crypto-balance-header'>JR BALANCE</div>
-                        <div className='crypto-balance-row'>
-                          <img
-                            className='token-logo'
-                            src={ScroogeHatLogo}
-                            alt='Scrooge Casino balances'
-                          />
-                          SCROOGE COIN: {(JRBalance / 100000000).toFixed(2)}x 10
-                          <span class='sup'>8</span>
-                        </div>
-                        <div className='crypto-balance-row'>
-                          VALUE: ${JRValue.toLocaleString("en-US")}
+                        <div className='crypto-balance-row-new'>
+                          <div className='crypto-balance-row-img'>
+                            <img
+                              className='token-logo'
+                              src={scroogejr}
+                              alt='Scrooge Casino balances'
+                            />
+                          </div>
+                          <div className='crypto-balance-row-text'>
+                            <p>
+                              {" "}
+                              SCROOGE COIN: {(JRBalance / 100000000).toFixed(2)}
+                              x 10
+                              <span class='sup'>8</span>
+                            </p>
+                            <p> VALUE: ${JRValue.toLocaleString("en-US")}</p>
+                          </div>
                         </div>
                         <div className='claim-pending-div'>
                           <ClaimJRPending />
@@ -319,7 +333,8 @@ export default function MyWallet() {
               <div className='close-btn-round-div wallet-close'>
                 <div
                   className='close-btn-round'
-                  onClick={() => setShowMerchRedeemed(false)}>
+                  onClick={() => setShowMerchRedeemed(false)}
+                >
                   X
                 </div>
               </div>
@@ -339,7 +354,8 @@ export default function MyWallet() {
                                 ? "disabled transaction-card"
                                 : "transaction-card"
                             }
-                            key={red._id}>
+                            key={red._id}
+                          >
                             <div key={deet._id}>
                               {deet.name}
                               <br></br>
@@ -361,7 +377,8 @@ export default function MyWallet() {
                                 <div className='new-btn'>
                                   <button
                                     // className='claim-btn'
-                                    onClick={() => handleMarkRedeemed(red._id)}>
+                                    onClick={() => handleMarkRedeemed(red._id)}
+                                  >
                                     Mark as Redeemed
                                   </button>
                                 </div>
@@ -411,7 +428,8 @@ export default function MyWallet() {
               >
                 <div
                   className='close-btn-round'
-                  onClick={() => setShowCasinoNFTs(false)}>
+                  onClick={() => setShowCasinoNFTs(false)}
+                >
                   X
                 </div>
               </div>
