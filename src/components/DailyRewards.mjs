@@ -140,7 +140,7 @@ function DailyRewards() {
         </>
       ) : (
         <>
-          <div className=''>
+          <div className='bordered-section'>
             {user && nextClaimDate.nextClaimDate ? (
               <div className='prizes_container'>
                 <div
