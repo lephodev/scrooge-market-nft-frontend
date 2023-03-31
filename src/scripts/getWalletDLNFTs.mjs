@@ -2,8 +2,10 @@ import {
   useAddress,
   useOwnedNFTs,
   useContract,
+  useContractMetadata,
   ThirdwebNftMedia,
   ChainId,
+  useSDK,
 } from "@thirdweb-dev/react";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
 
@@ -26,13 +28,6 @@ export default function GetWalletDLNFTs() {
   function notify(message) {
     toast.success("🎩 " + message);
   }
-  // const sdk = new ThirdwebSDK("ethereum");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // useEffect(async() => {
-  //   const contractssss =  await sdk.getContract("0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768");
-  //   console.log("contractssss",contractssss);
-
-  // }, [])
 
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   setSelectedChain(ChainId.Mainnet);
@@ -44,22 +39,42 @@ export default function GetWalletDLNFTs() {
 
   console.log("addressesaddresses", addresses);
   const address = useAddress();
+  const sdk = useSDK();
   const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("");
+  const [nfts, setNFTs] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [tokensClaimDate, setTokensClaimDate] = useState([
     { token_id: "", nextClaimDate: "" },
   ]);
-  console.log("selectedChain", selectedChain, tokensClaimDate);
-  console.log(
-    "addresses[String(selectedChain)]===>>>",
-    addresses[String(selectedChain)]
-  );
-  const { contract, error } = useContract(addresses[String(selectedChain)]);
-  console.log("error", error);
 
-  console.log("contract---->>>", contract);
-  const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
-  console.log("nfts", nfts);
+  const { contract, error } = useContract(
+    "0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768"
+  );
+  //console.log("error", error);
+  //console.log("contract---->>>", contract);
+  //const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
+  //console.log("nfts", nfts);
+
+  const getContrat = async () => {
+    setIsLoading(true);
+    console.log("--callled getcont---");
+    try {
+      const NFTs = await marketPlaceInstance().get(`/getDLNFTs/${address}`);
+      console.log(NFTs.data.allNFTs);
+      let nft = NFTs.data.allNFTs.filter((n) => n.owner === address);
+      setNFTs(nft);
+      setIsLoading(false);
+      console.log("nfttt---", nft);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getContrat();
+  }, []);
+
   const claimTokens = (token_id) => {
     setBuyLoading(true);
     try {
@@ -82,6 +97,7 @@ export default function GetWalletDLNFTs() {
   };
 
   async function getNextClaimDate(token_id) {
+    console.log("--called nextcD");
     await marketPlaceInstance()
       .get(`/getNextClaimDate/${address}/dl/${user?.id}/${token_id}`)
       .then(async (data) => {
@@ -125,13 +141,14 @@ export default function GetWalletDLNFTs() {
   const [claimDateArray, setClaimDateArray] = useState([]);
   useEffect(() => {
     if (nfts) {
-      if (nfts.length > 1) {
+      if (nfts.length > 0) {
         mapClaimDates(nfts);
       }
     }
   }, [nfts]);
 
   async function mapClaimDates(nfts) {
+    console.log("mapclaimdates");
     nfts.map((nft) => foo(nft.metadata.id));
     async function foo(id) {
       //console.log('nft: ', id);
@@ -161,8 +178,7 @@ export default function GetWalletDLNFTs() {
             <button
               // className='submit-btn'
               style={{ width: "350px", margin: "35px auto" }}
-              onClick={() => setSelectedChain(ChainId.Mainnet)}
-            >
+              onClick={() => setSelectedChain(ChainId.Mainnet)}>
               Display My Ducks
             </button>
             {/* </div> */}
@@ -195,8 +211,7 @@ export default function GetWalletDLNFTs() {
                   href='https://duckylucks.com'
                   target='_blank'
                   rel='noreferrer'
-                  alt='claim free tokens for holding ducky lucks NFTs'
-                >
+                  alt='claim free tokens for holding ducky lucks NFTs'>
                   Ducky Lucks NFT
                 </a>{" "}
                 in your wallet? Once every 30 days, you can come right to this
@@ -205,8 +220,7 @@ export default function GetWalletDLNFTs() {
                   href={scroogeClient}
                   target='_blank'
                   rel='noreferrer'
-                  alt='claim free tokens to spend in Scrooge Casino'
-                >
+                  alt='claim free tokens to spend in Scrooge Casino'>
                   Scrooge Casino
                 </a>{" "}
                 tokens just by clicking the CLAIM FREE TOKENS button.
@@ -294,6 +308,7 @@ export default function GetWalletDLNFTs() {
                 ) : (
                   <span></span>
                 )}
+                {console.log("nmav", nft.metadata.attributes[12].value)}
                 {nft.metadata.attributes[12].value > 20 &&
                 nft.metadata.attributes[12].value <= 30 ? (
                   <div className='rarity-pct-2'>
@@ -419,15 +434,14 @@ export default function GetWalletDLNFTs() {
                       <>
                         <button
                           className='subheader-btn'
-                          onClick={() => claimTokens(nft.metadata.id)}
-                        >
+                          onClick={() => claimTokens(nft.metadata.id)}>
                           CLAIM FREE TOKENS!
                         </button>
                       </>
                     ) : (
                       <>
                         <div>
-                          NEXT CLAIM AVAILABLE:<br></br>
+                          NEXT CLAIM AVAILABLE:
                           <Countdown
                             date={
                               new Date(
@@ -435,8 +449,7 @@ export default function GetWalletDLNFTs() {
                                   (element) => element[0] === nft.metadata.id
                                 )[1]
                               )
-                            }
-                          ></Countdown>
+                            }></Countdown>
                         </div>
                       </>
                     )}
