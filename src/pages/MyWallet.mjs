@@ -155,7 +155,7 @@ export default function MyWallet() {
               <div className='min-menu-div'>
                 {!showMerchRedeemed ? (
                   <>
-                    <div className='new-btn'>
+                    {/* <div className='new-btn'>
                       <button
                         // className='min-menu-btn'
                         onClick={() => {
@@ -164,7 +164,7 @@ export default function MyWallet() {
                       >
                         MERCH CODES
                       </button>
-                    </div>
+                    </div> */}
                   </>
                 ) : (
                   <></>
@@ -176,8 +176,7 @@ export default function MyWallet() {
                         // className='min-menu-btn'
                         onClick={() => {
                           setShowCasinoNFTs(true);
-                        }}
-                      >
+                        }}>
                         CASINO NFTS
                       </button>
                     </div>
@@ -192,8 +191,7 @@ export default function MyWallet() {
                         // className='min-menu-btn'
                         onClick={() => {
                           setShowCrypto(true);
-                        }}
-                      >
+                        }}>
                         CRYPTO
                       </button>
                     </div>
@@ -261,29 +259,16 @@ export default function MyWallet() {
                         <div className='crypto-balance-header'>
                           CRYPTO BALANCE
                         </div>
-                        <div className='crypto-balance-row-new'>
-                          <div className='crypto-balance-row-img'>
-                            <img
-                              className='token-logo'
-                              src={ScroogeHatLogo}
-                              alt='Scrooge Casino balances'
-                            />
-                          </div>
-                          <div className='crypto-balance-row-text'>
-                            <p>
-                              SCROOGE COIN:{" "}
-                              {OGBalance > 100000000 ? (
-                                <>
-                                  {(OGBalance / 100000000).toFixed(2)}
-                                  <>x 10</>
-                                  <span class='sup'>8</span>
-                                </>
-                              ) : (
-                                OGBalance
-                              )}
-                            </p>
-                            <p> VALUE: ${OGValue.toLocaleString("en-US")}</p>
-                          </div>
+                        <div className='crypto-balance-row'>
+                          <img
+                            className='token-logo'
+                            src={ScroogeHatLogo}
+                            alt='Scrooge Casino balances'
+                          />
+                          SCROOGE COIN: {OGBalance}
+                        </div>
+                        <div className='crypto-balance-row'>
+                          VALUE: ${OGValue.toLocaleString("en-US")}
                         </div>
                         <div className='claim-pending-div'>
                           <ClaimOGPending />
@@ -293,23 +278,16 @@ export default function MyWallet() {
                     <div className='crypto-balance-div'>
                       <div className='width-100'>
                         <div className='crypto-balance-header'>JR BALANCE</div>
-                        <div className='crypto-balance-row-new'>
-                          <div className='crypto-balance-row-img'>
-                            <img
-                              className='token-logo'
-                              src={scroogejr}
-                              alt='Scrooge Casino balances'
-                            />
-                          </div>
-                          <div className='crypto-balance-row-text'>
-                            <p>
-                              {" "}
-                              SCROOGE COIN: {(JRBalance / 100000000).toFixed(2)}
-                              x 10
-                              <span class='sup'>8</span>
-                            </p>
-                            <p> VALUE: ${JRValue.toLocaleString("en-US")}</p>
-                          </div>
+                        <div className='crypto-balance-row'>
+                          <img
+                            className='token-logo'
+                            src={ScroogeHatLogo}
+                            alt='Scrooge Casino balances'
+                          />
+                          SCROOGE COIN: {JRBalance}
+                        </div>
+                        <div className='crypto-balance-row'>
+                          VALUE: ${JRValue.toLocaleString("en-US")}
                         </div>
                         <div className='claim-pending-div'>
                           <ClaimJRPending />
@@ -333,8 +311,7 @@ export default function MyWallet() {
               <div className='close-btn-round-div wallet-close'>
                 <div
                   className='close-btn-round'
-                  onClick={() => setShowMerchRedeemed(false)}
-                >
+                  onClick={() => setShowMerchRedeemed(false)}>
                   X
                 </div>
               </div>
@@ -354,8 +331,7 @@ export default function MyWallet() {
                                 ? "disabled transaction-card"
                                 : "transaction-card"
                             }
-                            key={red._id}
-                          >
+                            key={red._id}>
                             <div key={deet._id}>
                               {deet.name}
                               <br></br>
@@ -377,8 +353,7 @@ export default function MyWallet() {
                                 <div className='new-btn'>
                                   <button
                                     // className='claim-btn'
-                                    onClick={() => handleMarkRedeemed(red._id)}
-                                  >
+                                    onClick={() => handleMarkRedeemed(red._id)}>
                                     Mark as Redeemed
                                   </button>
                                 </div>
@@ -428,8 +403,7 @@ export default function MyWallet() {
               >
                 <div
                   className='close-btn-round'
-                  onClick={() => setShowCasinoNFTs(false)}
-                >
+                  onClick={() => setShowCasinoNFTs(false)}>
                   X
                 </div>
               </div>
