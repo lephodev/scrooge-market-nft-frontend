@@ -3006,11 +3006,12 @@ ul.footer-support li img {
 } */
 .claim-free-page .prizes-card .additional-info-div {
   background: transparent;
-  border: 1px solid #1c1c1c;
-  box-shadow: 0px 20px 20px #00000091;
   padding: 30px;
-  border-radius: 10px;
-  width: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .claim-free-page .prizes-card .additional-info-div:hover {
   background-color: rgba(255, 255, 255, 0.05);
