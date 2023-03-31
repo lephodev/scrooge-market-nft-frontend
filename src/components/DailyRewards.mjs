@@ -140,7 +140,7 @@ function DailyRewards() {
         </>
       ) : (
         <>
-          <div className=''>
+          <div className='bordered-section'>
             {user && nextClaimDate.nextClaimDate ? (
               <div className='prizes_container'>
                 <div
@@ -277,9 +277,17 @@ function DailyRewards() {
                   </div>
                   {new Date(nextClaimDate.nextClaimDate) <= new Date() ||
                   nextClaimDate === "CLAIM NOW" ? (
-                    <button className='button2' onClick={() => claimTokens()}>
-                      Claim Tokens
-                    </button>
+                    <div
+                      className='new-btn'
+                      style={{ width: "50%", margin: "0 auto" }}
+                    >
+                      <button
+                        //  className='button2'
+                        onClick={() => claimTokens()}
+                      >
+                        Claim Tokens
+                      </button>
+                    </div>
                   ) : (
                     <>
                       <div className='next-claim-div next-claim-box'>
