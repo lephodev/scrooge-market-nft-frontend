@@ -14,6 +14,7 @@ import ChainContext from "../context/Chain.ts";
 import Token from "../images/token.png";
 import Ticket from "../images/ticket.png";
 import ScroogeHatLogo from "../images/scroogeHatLogo.png";
+import scroogejr from "../images/scroogejr.jpeg";
 import ClaimOGPending from "../components/claimOGPending.mjs";
 import ClaimJRPending from "../components/claimJRPending.mjs";
 import "react-toastify/dist/ReactToastify.css";
@@ -159,7 +160,8 @@ export default function MyWallet() {
                         // className='min-menu-btn'
                         onClick={() => {
                           setShowMerchRedeemed(true);
-                        }}>
+                        }}
+                      >
                         MERCH CODES
                       </button>
                     </div> */}

@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import Layout from "./Layout.mjs";
 import { useNavigate } from "react-router-dom";
 import failed from "../images/failed.png";
-import submit from "../images/submit.png";
+// import submit from "../images/submit.png";
 import success from "../images/success.png";
 import "../styles/kyc.css";
 
@@ -29,6 +29,7 @@ const KYCForm = () => {
     register,
     setError,
     formState: { errors },
+    clearErrors,
     //reset,
   } = useForm({ resolver: yupResolver(createKYCSchema) });
 
@@ -36,9 +37,11 @@ const KYCForm = () => {
     const { name } = e.target;
     if (name === "IDimageFront") {
       setfrontIdImage([...e.target.files]);
+      clearErrors('IDimageFront');
     }
     if (name === "IDimageBack") {
       setbackIdImage([...e.target.files]);
+      clearErrors('IDimageBack');
     }
   };
 
@@ -65,6 +68,21 @@ const KYCForm = () => {
       });
       return;
     }
+     let mbLimit = 10*1024*1024
+
+    if (frontIdImage[0]?.size > mbLimit) {
+      setError("IDimageFront", {
+        message: "Front image of ID size should not be greater than 10 MB.",
+      });
+      return;
+    }
+
+    if (backIdImage[0]?.size > mbLimit) {
+      setError("IDimageBack", {
+        message: "Selfie with your Id image size should not be greater than 10 MB.",
+      });
+      return;
+    }    
 
     payload.gender = activeRatioType;
     formData.append("IDimageFront", frontIdImage[0]);
@@ -424,9 +442,9 @@ const SubmitKYC = ({ handleLogOut }) => {
   return (
     <div className='kyc-msg-grid failedErrorBox'>
       <div className='kyc-form-msg'>
-        <h4>Submit !</h4>
-        <img src={submit} alt='failed' />
-        <p>Your KYC request has been submitted, this may take up to 5 mins</p>
+        <h4>Pending Verification </h4>
+        <img src={success} alt='failed' />
+        <p>Your Documents have been submitted</p>
         {/* <span onClick={handleLogOut}>Logout</span> */}
       </div>
     </div>
