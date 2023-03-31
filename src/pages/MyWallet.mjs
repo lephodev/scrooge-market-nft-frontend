@@ -154,7 +154,7 @@ export default function MyWallet() {
               <div className='min-menu-div'>
                 {!showMerchRedeemed ? (
                   <>
-                    <div className='new-btn'>
+                    {/* <div className='new-btn'>
                       <button
                         // className='min-menu-btn'
                         onClick={() => {
@@ -162,7 +162,7 @@ export default function MyWallet() {
                         }}>
                         MERCH CODES
                       </button>
-                    </div>
+                    </div> */}
                   </>
                 ) : (
                   <></>
@@ -263,16 +263,7 @@ export default function MyWallet() {
                             src={ScroogeHatLogo}
                             alt='Scrooge Casino balances'
                           />
-                          SCROOGE COIN:{" "}
-                          {OGBalance > 100000000 ? (
-                            <>
-                              {(OGBalance / 100000000).toFixed(2)}
-                              <>x 10</>
-                              <span class='sup'>8</span>
-                            </>
-                          ) : (
-                            OGBalance
-                          )}
+                          SCROOGE COIN: {OGBalance}
                         </div>
                         <div className='crypto-balance-row'>
                           VALUE: ${OGValue.toLocaleString("en-US")}
@@ -291,8 +282,7 @@ export default function MyWallet() {
                             src={ScroogeHatLogo}
                             alt='Scrooge Casino balances'
                           />
-                          SCROOGE COIN: {(JRBalance / 100000000).toFixed(2)}x 10
-                          <span class='sup'>8</span>
+                          SCROOGE COIN: {JRBalance}
                         </div>
                         <div className='crypto-balance-row'>
                           VALUE: ${JRValue.toLocaleString("en-US")}

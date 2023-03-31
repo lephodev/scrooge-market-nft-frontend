@@ -72,7 +72,6 @@ export default function DLClaimTokens() {
                   src={DLLogoMembersOnly}
                   alt='Ducky Lucks Members Only'
                 />
-                {console.log("process.env.REACT_APP_MAINNET_ADDRESS",process.env.REACT_APP_MAINNET_ADDRESS)}
                 <div className='mint-DL-div'>
                   <iframe
                     src={`https://gateway.ipfscdn.io/ipfs/Qmcine1gpZUbQ73nk7ZGCcjKBVFYXrEtqrhujXk3HDQ6Nn/erc721.html?contract=${process.env.REACT_APP_MAINNET_ADDRESS}&chainId=1&theme=dark&primaryColor=teal`}
@@ -80,8 +79,7 @@ export default function DLClaimTokens() {
                     height='600px'
                     style={{ maxWidth: "100%" }}
                     frameborder='0'
-                    title='DLLogo'
-                  ></iframe>
+                    title='DLLogo'></iframe>
                 </div>
                 <div className='flex-row'>
                   <GetWalletDLNFTs />
@@ -96,8 +94,7 @@ export default function DLClaimTokens() {
                 flexDirection: "column",
                 justifyContent: "center",
                 textAlign: "center",
-              }}
-            >
+              }}>
               <div className=''>
                 <img
                   className='detecting-dl-img pulse'
@@ -113,12 +110,10 @@ export default function DLClaimTokens() {
               className='text-animate'
               style={{
                 textAlign: "center",
-              }}
-            >
+              }}>
               <h1>No DL Tokens</h1>
             </div>
           )}
-{console.log("address----",address)}
           {!address ? (
             // <div className="connect-wallet">Please connect your wallet.</div>
             <div className='connect-wallet-div'>
