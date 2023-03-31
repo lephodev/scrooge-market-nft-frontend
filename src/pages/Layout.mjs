@@ -88,9 +88,9 @@ const Layout = ({ children }) => {
                 <li>
                   <Link to='/redeem-prizes'>Redeem Prizes</Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to='/earn-tokens'>Earn Free Tokens</Link>
-                </li>
+                </li> */}
               </ul>
             </div>
 
