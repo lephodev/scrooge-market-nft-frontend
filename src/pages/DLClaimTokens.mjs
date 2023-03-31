@@ -12,7 +12,6 @@ import Layout from "./Layout.mjs";
 export default function DLClaimTokens() {
   // const [walletDL, setWalletDL]=useState([]);
   const [hasDL, setHasDL] = useState(0);
-  const navigate = useNavigate();
   const address = useAddress();
   const [loading, setLoading] = useState(true);
 

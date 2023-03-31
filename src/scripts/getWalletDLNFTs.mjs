@@ -5,6 +5,8 @@ import {
   ThirdwebNftMedia,
   ChainId,
 } from "@thirdweb-dev/react";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
+
 import { useState, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,26 +26,40 @@ export default function GetWalletDLNFTs() {
   function notify(message) {
     toast.success("🎩 " + message);
   }
+  // const sdk = new ThirdwebSDK("ethereum");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // useEffect(async() => {
+  //   const contractssss =  await sdk.getContract("0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768");
+  //   console.log("contractssss",contractssss);
+
+  // }, [])
 
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   setSelectedChain(ChainId.Mainnet);
-  //console.log(selectedChain);
+  console.log("ChainId.Mainnet", ChainId.Mainnet);
   const addresses = {
     [String(ChainId.Mainnet)]: process.env.REACT_APP_MAINNET_ADDRESS,
     [String(ChainId.BinanceSmartChainMainnet)]: "",
   };
+
+  console.log("addressesaddresses", addresses);
   const address = useAddress();
   const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("");
   const [tokensClaimDate, setTokensClaimDate] = useState([
     { token_id: "", nextClaimDate: "" },
   ]);
-  console.log("selectedChain",selectedChain);
-  console.log("addresses[String(selectedChain)]",addresses[String(selectedChain)]);
-  const { contract,error } = useContract(addresses[String(selectedChain)]);
-  console.log("error",error);
-  console.log('contract---->>>',contract)
+  console.log("selectedChain", selectedChain, tokensClaimDate);
+  console.log(
+    "addresses[String(selectedChain)]===>>>",
+    addresses[String(selectedChain)]
+  );
+  const { contract, error } = useContract(addresses[String(selectedChain)]);
+  console.log("error", error);
+
+  console.log("contract---->>>", contract);
   const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
+  console.log("nfts", nfts);
   const claimTokens = (token_id) => {
     setBuyLoading(true);
     try {
@@ -99,6 +115,10 @@ export default function GetWalletDLNFTs() {
   }
 
   useEffect(() => {
+    console.log(
+      "ChainId.BinanceSmartChainMainnet",
+      ChainId.BinanceSmartChainMainnet
+    );
     return () => setSelectedChain(ChainId.BinanceSmartChainMainnet);
   }, [address]);
   let dataArray = [];
@@ -135,15 +155,19 @@ export default function GetWalletDLNFTs() {
         <></>
       )}
       {selectedChain !== ChainId.Mainnet ? (
-        <div className='button-section'>
-          <button
-            className='submit-btn'
-            style={{ width: "350px", margin: "35px auto" }}
-            onClick={() => setSelectedChain(ChainId.Mainnet)}
-          >
-            Display My Ducks
-          </button>
-        </div>
+        <>
+          <div className='new-btn claim-token-btn'>
+            {/* <div className='button-section'> */}
+            <button
+              // className='submit-btn'
+              style={{ width: "350px", margin: "35px auto" }}
+              onClick={() => setSelectedChain(ChainId.Mainnet)}
+            >
+              Display My Ducks
+            </button>
+            {/* </div> */}
+          </div>
+        </>
       ) : (
         <></>
       )}
@@ -162,7 +186,7 @@ export default function GetWalletDLNFTs() {
         </div>
       ) : (
         <div className='flex-row'>
-          <div className='flex-column'>
+          <div className='flex-column claim-free-token'>
             <div className='feature-overview-div'>
               <p>
                 Did you know that you get FREE TOKENS EVERY MONTH just for being
@@ -201,7 +225,8 @@ export default function GetWalletDLNFTs() {
           <div style={{ width: "100%", textAlign: "center" }}>
             <div id='rewardId' style={{ margin: "0 auto" }} />
           </div>
-          {nfts.map((nft) => (
+          {console.log("nfts90909", nfts)}
+          {nfts?.map((nft) => (
             <div className='erc721Card' key={nft.metadata.id}>
               <div className='erc721Card-name'>
                 {nft.metadata.name}

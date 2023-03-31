@@ -30,6 +30,7 @@ function HolderClaimChips() {
   const [nextClaimDate, setNextClaimDate] = useState("Loading...");
   const [OGBalance, setOGBalance] = useState("Loading...");
   const [currentPrice, setCurrentPrice] = useState("Loading...");
+  const [disable, setDisable] = useState(false);
   const sdk = useSDK();
   const address = useAddress();
   const signer = useSigner();
@@ -45,7 +46,11 @@ function HolderClaimChips() {
         .get(`/getNextClaimDate/${address}/holder/${user.id}/0`)
         .then((data) => {
           console.log("setclam=im---", data);
-          setNextClaimDate(data.data.message);
+          if (data.data.success) {
+            setNextClaimDate(data.data.data[0].nextClaimDate);
+          } else {
+            setNextClaimDate(data.data.message);
+          }
           return nextClaimDate;
         });
     }
@@ -73,18 +78,25 @@ function HolderClaimChips() {
   }
 
   const claimTokens = () => {
+    setDisable(true);
+    setTimeout(() => {
+      setDisable(false);
+    }, 4000);
     setBuyLoading(true);
     try {
       marketPlaceInstance()
-        .get(`/claimHolderTokens/${address}/${OGBalance}/${user.id}`)
+        .get(
+          `/claimHolderTokens/${address}/${OGBalance}/${currentPrice}/${user.id}`
+        )
         .then(async (data) => {
           if (data?.data?.code === 200) {
             toast.success("Tokens Claimed: " + data?.data?.data);
+            reward();
           } else {
             toast.error("Tokens Claimed: " + data.data.msg);
           }
           setBuyLoading(false);
-          reward();
+
           zzz();
           //await timeout(4200);
           //window.location.reload();
@@ -149,7 +161,8 @@ function HolderClaimChips() {
                     href={scroogeClient}
                     target='_blank'
                     rel='noreferrer'
-                    alt='claim free tokens to spend in Scrooge Casino'>
+                    alt='claim free tokens to spend in Scrooge Casino'
+                  >
                     Scrooge Casino
                   </a>{" "}
                   tokens just by clicking the CLAIM TOKENS button.
@@ -185,91 +198,120 @@ function HolderClaimChips() {
 
                   <div className='holder-claim-details'>
                     <h4>Scrooge Coin Price:</h4> $
-                    {currentPrice>0 ? parseFloat(currentPrice).toFixed(10):0}
+                    {currentPrice > 0
+                      ? parseFloat(currentPrice).toFixed(10)
+                      : 0}
                   </div>
 
-                  <div className='prizes-chip-count'>
-                    <h3> Your Claimable Monthly Token Rate:</h3>
-                    <div className='additional-info-div'>
-                      <span>
-                        Your Balance ({OGBalance.toLocaleString("en-US")})
-                      </span>{" "}
-                      <div>X</div>
-                      <span>
-                        {" "}
-                        Current Scrooge Coin Price ($
-                        {currentPrice>0 ?parseFloat(currentPrice).toFixed(10):0})
-                      </span>{" "}
-                      <div>X</div>
-                      <span>EARNING RATE (10%)</span> <div>=</div>
-                      {currentPrice>0 ?OGBalance * parseFloat(currentPrice).toFixed(10) * 0.1:0}
+                  <div className='prizes-chip-count prizes-chip-count-grid'>
+                    <div className='prizes-chip-count-box'>
+                      <div className='text-animate'>
+                        <h3> Your Claimable Monthly Token Rate:</h3>
+                      </div>
+                      <div className='additional-info-div'>
+                        <span>
+                          Your Balance ({OGBalance.toLocaleString("en-US")})
+                        </span>{" "}
+                        <div>X</div>
+                        <span>
+                          {" "}
+                          Current Scrooge Coin Price ($
+                          {currentPrice > 0
+                            ? parseFloat(currentPrice).toFixed(10)
+                            : 0}
+                          )
+                        </span>{" "}
+                        <div>X</div>
+                        <span>EARNING RATE (10%)</span> <div>=</div>
+                        {currentPrice > 0
+                          ? OGBalance *
+                            parseFloat(currentPrice).toFixed(10) *
+                            0.1
+                          : 0}
+                      </div>
                     </div>
-                    <h3>
-                      Claim{" "}
-                      {OGBalance > 0 ? (
-                        <>
-                          { currentPrice>0 ?(OGBalance * currentPrice * 0.1)
-                            .toFixed(0)
-                            .toLocaleString("en-US"):0}
-                        </>
-                      ) : (
-                        <>0</>
-                      )}{" "}
-                      FREE Tokens Every 30 Days
-                    </h3>
+                    <div className='prizes-chip-count-box'>
+                      <div className='text-animate'>
+                        <h3>
+                          Claim{" "}
+                          {OGBalance > 0 ? (
+                            <>
+                              {currentPrice > 0
+                                ? (OGBalance * currentPrice * 0.1)
+                                    .toFixed(0)
+                                    .toLocaleString("en-US")
+                                : 0}
+                            </>
+                          ) : (
+                            <>0</>
+                          )}{" "}
+                          FREE Tokens Every 30 Days
+                        </h3>
+                      </div>
+                      <div className='additional-info-div'>
+                        {(new Date(nextClaimDate) <= new Date() ||
+                          nextClaimDate === "No Entries Found") &&
+                        OGBalance > 0 ? (
+                          <div className='new-btn'>
+                            <button
+                              disabled={disable}
+                              // className='submit-btn'
+                              onClick={() => claimTokens()}
+                            >
+                              Claim{" "}
+                              {(OGBalance * currentPrice * 0.1)
+                                .toFixed(0)
+                                .toLocaleString("en-US")}{" "}
+                              Tokens
+                            </button>
+                          </div>
+                        ) : (
+                          <>
+                            <div className='prize-name text-animate'>
+                              {nextClaimDate !== "Loading..." &&
+                              OGBalance > 0 ? (
+                                <>
+                                  <h1>Next Claim Available:</h1>
+
+                                  <Countdown date={nextClaimDate}>
+                                    <button
+                                      disabled={disable}
+                                      className='submit-btn'
+                                      onClick={() => claimTokens()}
+                                    >
+                                      Claim{" "}
+                                      {currentPrice > 0
+                                        ? (OGBalance * currentPrice * 0.1)
+                                            .toFixed(0)
+                                            .toLocaleString("en-US")
+                                        : 0}{" "}
+                                      Tokens
+                                    </button>
+                                  </Countdown>
+                                </>
+                              ) : OGBalance === 0 ? (
+                                "OG Balance is 0"
+                              ) : (
+                                <>
+                                  <img
+                                    src={LoadingPoker}
+                                    alt='game'
+                                    className='imageAnimation'
+                                  />
+                                </>
+                              )}
+                            </div>
+                            <br></br>
+                            <br></br>
+                          </>
+                        )}
+                      </div>
+                    </div>
                   </div>
                   <div style={{ width: "100%", textAlign: "center" }}>
                     <div id='rewardId' style={{ margin: "0 auto" }} />
                   </div>
-                  {(new Date(nextClaimDate) <= new Date() ||
-                    nextClaimDate === "No Entries Found") &&
-                  OGBalance > 0 ? (
-                    <div className='new-btn'>
-                      <button
-                        // className='submit-btn'
-                        onClick={() => claimTokens()}>
-                        Claim{" "}
-                        {(OGBalance * currentPrice * 0.1)
-                          .toFixed(0)
-                          .toLocaleString("en-US")}{" "}
-                        Tokens
-                      </button>
-                    </div>
-                  ) : (
-                    <>
-                      <div className='prize-name text-animate'>
-                        {nextClaimDate !== "Loading..." && OGBalance > 0 ? (
-                          <>
-                            <h1>Next Claim Available:</h1>
 
-                            <Countdown date={nextClaimDate}>
-                              <button
-                                className='submit-btn'
-                                onClick={() => claimTokens()}>
-                                Claim{" "}
-                                {currentPrice>0 ?(OGBalance * currentPrice * 0.1)
-                                  .toFixed(0)
-                                  .toLocaleString("en-US"):0}{" "}
-                                Tokens
-                              </button>
-                            </Countdown>
-                          </>
-                        ) : OGBalance === 0 ? (
-                          "OG Balance is 0"
-                        ) : (
-                          <>
-                            <img
-                              src={LoadingPoker}
-                              alt='game'
-                              className='imageAnimation'
-                            />
-                          </>
-                        )}
-                      </div>
-                      <br></br>
-                      <br></br>
-                    </>
-                  )}
                   <div className='fine-print-txt'>
                     <p>
                       *Your claimed tokens will automatically be added to your
@@ -278,7 +320,8 @@ function HolderClaimChips() {
                         href={scroogeClient}
                         alt='Visit Scrooge Casino'
                         target='_blank'
-                        rel='noreferrer'>
+                        rel='noreferrer'
+                      >
                         Scrooge Casino
                       </a>{" "}
                       account.
