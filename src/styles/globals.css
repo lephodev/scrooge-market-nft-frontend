@@ -2684,6 +2684,7 @@ ul.footer-support li img {
   box-shadow: 0px 20px 20px #00000091;
   width: 80%;
   padding: 20px;
+  border-radius: 10px;
 }
 .earn-token .prizes-card .additional-info-div .daily-reward-bag {
   width: 70%;
@@ -2693,9 +2694,13 @@ ul.footer-support li img {
   border: 1px solid #1c1c1c;
   box-shadow: 0px 20px 20px #00000091;
 }
+.earn-token .prizes-card .next-claim-box {
+  background-image: -webkit-linear-gradient(#d2042d, #f9ff00);
+  padding: 10px;
+}
 
 .earn-token .prizes-card .next-claim-div span {
-  color: #d30101;
+  color: #fff;
 }
 .earn-token .leaderboard-row .leaderboard-left {
   display: flex;
@@ -2754,7 +2759,8 @@ ul.footer-support li img {
 
 .text-animate h4 {
   font-size: 20px;
-
+  margin: 0;
+  color: #f9ff00;
   /* background-image: -webkit-linear-gradient(#d2042d, #f9ff00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
@@ -3005,10 +3011,15 @@ ul.footer-support li img {
 } */
 .claim-free-page .prizes-card .additional-info-div {
   background: transparent;
-  border: 1px solid #1c1c1c;
-  box-shadow: 0px 20px 20px #00000091;
   padding: 30px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1c1c1c;
   border-radius: 10px;
+  box-shadow: 0 20px 20px #00000091;
   width: 100%;
 }
 .claim-free-page .prizes-card .additional-info-div:hover {
@@ -3557,12 +3568,17 @@ ul.footer-support li img {
   color: rgb(255, 255, 255);
   border: 2px solid rgb(38, 38, 39);
   background: rgb(0, 0, 0);
+  height: 100%;
 }
 .crypto-balance-row-text p {
   margin: 0;
   font-weight: 600;
+  color: #fff;
 }
 
+.crypto-card-grid .claim-pending-div {
+  color: #fff;
+}
 .crypto-balance-row-text {
   display: grid;
   gap: 10px;
