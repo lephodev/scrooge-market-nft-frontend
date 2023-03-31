@@ -336,7 +336,7 @@ export default function SharableData() {
         <></>
       )}
 
-      {user && !affUser?.message?.toString() === "User not found." ? (
+      {user && affUser?.message?.toString() === "User not found." ? (
         <div className='affiliate-card-div'>
           <div style={{ textAlign: "center" }}>
             Start earning <strong>FREE CASINO TOKENS</strong>
@@ -410,7 +410,7 @@ export default function SharableData() {
         <></>
       )}
 
-      {showSocialShare ? (
+      {showSocialShare && affUser?.message?.toString() !== "User not found." ? (
         <>
           <div className='close-btn-round-div'>
             <div

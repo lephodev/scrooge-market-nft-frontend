@@ -22,6 +22,7 @@ import { ConnectWallet } from "@thirdweb-dev/react";
 import CookieConsent from "react-cookie-consent";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+import { blackjackUrl, pokerUrl, scroogeClient } from "../config/keys.js";
 
 export const Tooltip = (id, metadata, message) => (
   <Popup
@@ -146,7 +147,7 @@ const Layout = ({ children }) => {
                 </li>
                 <li>
                   <a
-                    href='https://scrooge.casino'
+                    href={scroogeClient}
                     target='_blank'
                     rel='noreferrer'
                   >
@@ -155,7 +156,7 @@ const Layout = ({ children }) => {
                 </li>
                 <li>
                   <a
-                    href='https://poker.scrooge.casino'
+                    href={pokerUrl}
                     target='_blank'
                     rel='noreferrer'
                   >
@@ -164,7 +165,7 @@ const Layout = ({ children }) => {
                 </li>
                 <li>
                   <a
-                    href='https://blackjack.scrooge.casino'
+                    href={blackjackUrl}
                     target='_blank'
                     rel='noreferrer'
                   >
@@ -172,13 +173,9 @@ const Layout = ({ children }) => {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href='https://roulette.scrooge.casino'
-                    target='_blank'
-                    rel='noreferrer'
-                  >
+                 
                     Scrooge Roulette
-                  </a>
+                
                 </li>
               </ul>
             </div>

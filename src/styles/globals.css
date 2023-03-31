@@ -185,7 +185,7 @@ span.wallet-user-name {
 
 .sup {
   position: relative;
-  bottom: 1ex; 
+  bottom: 1ex;
   font-size: 80%;
 }
 
@@ -1813,6 +1813,7 @@ select {
   font-size: 14px;
   min-width: 180px !important;
   height: 44px !important;
+  color: #fff;
 }
 
 .wallet button:hover,
@@ -2177,8 +2178,24 @@ ul.footer-support li img {
 .connect-wallet-inline button,
 .connect-wallet-inline button:hover,
 .connect-wallet-inline button:focus {
-  background: transparent;
-  border-color: transparent;
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  background: rgb(0, 0, 0);
+  border: 2px solid #d2042d;
+  box-shadow: none;
+}
+.nft-card-grid .nft-card-right .connect-wallet-inline {
+  border-radius: 10px;
+  border: none;
 }
 
 .connect-wallet {
@@ -2260,6 +2277,7 @@ ul.footer-support li img {
   align-items: center;
   justify-content: center;
   max-width: 75%;
+  margin: 0 auto;
 }
 .explore-page .subheader-btn:hover,
 .my-wallet-page .min-menu-btn:hover {
@@ -2314,11 +2332,10 @@ ul.footer-support li img {
   cursor: pointer;
   transition: all 0.5s;
   padding: 20px;
-  gap: 20px;
+  gap: 40px;
   flex-wrap: wrap;
 }
-.my-wallet-page
-.wallet-casino-profile-details {
+.my-wallet-page .wallet-casino-profile-details {
   width: 75%;
 }
 
@@ -2581,7 +2598,8 @@ ul.footer-support li img {
   box-shadow: 0px 20px 20px #00000091;
   border-radius: 10px;
 }
-.earn-token .bordered-section .leaderboard-card-box {
+.earn-token .bordered-section .leaderboard-card-box,
+.prizes-chip-count-grid {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2733,6 +2751,7 @@ ul.footer-support li img {
   text-align: center;
   text-transform: uppercase;
 }
+
 .text-animate h4 {
   font-size: 20px;
   margin: 0;
@@ -2740,6 +2759,14 @@ ul.footer-support li img {
   /* background-image: -webkit-linear-gradient(#d2042d, #f9ff00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 30px;
+}
+.text-animate h3 {
+  font-size: 24px;
+  margin: 0;
+  color: #f9ff00;
   font-weight: 700;
   letter-spacing: 0.1em;
   line-height: 30px;
@@ -2863,6 +2890,31 @@ ul.footer-support li img {
   flex-direction: column;
   gap: 20px;
 }
+.nft-card-left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.nft-card-left .nft-token-row-card-image {
+  width: 100%;
+  max-width: 150px;
+}
+.nft-card-left .nft-token-row-desc {
+  max-width: 400px;
+  width: 100%;
+}
+.nft-card-grid .nft-card-right {
+  display: flex;
+  align-items: center;
+  max-width: 300px;
+  width: 100%;
+  gap: 30px;
+}
+
+.nft-card-grid .nft-card-right .nft-token-row-details {
+  width: 100%;
+}
 .nft-page .nft-card-grid p {
   text-align: start;
   font-size: 16px;
@@ -2949,14 +3001,24 @@ ul.footer-support li img {
   width: 100%;
   padding: 30px 20px;
 }
-.claim-free-page .prizes-card:hover {
+/* .claim-free-page .prizes-card:hover {
   background-color: rgba(255, 255, 255, 0.05);
-}
+} */
 .claim-free-page .prizes-card .additional-info-div {
-  background: #000;
+  background: transparent;
+  padding: 30px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border: 1px solid #1c1c1c;
-  box-shadow: 0px 20px 20px #00000091;
-  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 20px 20px #00000091;
+  width: 100%;
+}
+.claim-free-page .prizes-card .additional-info-div:hover {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 .claim-free-page .prizes-card .new-btn {
   max-width: 500px;
@@ -3486,6 +3548,39 @@ ul.footer-support li img {
   align-items: center;
   justify-content: center;
 }
+.connect-wallet-div button {
+  position: relative;
+  width: 100%;
+  border-radius: 0.5em;
+  padding: 0.75em 0.75em 0.75em 1.25em;
+  font-size: 1em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  display: flex;
+  gap: 0.5em;
+  -webkit-box-align: center;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  border: 2px solid rgb(38, 38, 39);
+  background: rgb(0, 0, 0);
+  height: 100%;
+}
+.crypto-balance-row-text p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.crypto-balance-row-text {
+  display: grid;
+  gap: 10px;
+}
+
+.crypto-balance-row-new {
+  text-align: center;
+}
+.prizes-chip-count-grid {
+  padding: 40px 0;
+}
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
@@ -3669,7 +3764,8 @@ ul.footer-support li img {
     align-items: center;
   }
   .earn-token .bordered-section .leaderboard-card-box,
-  .raffles-page .raffles-card-grid {
+  .raffles-page .raffles-card-grid,
+  .prizes-chip-count-grid {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
   .social-share-grid {
@@ -3701,6 +3797,16 @@ ul.footer-support li img {
   }
   .earn-token .prizes-card .next-claim-div {
     width: 65%;
+  }
+  .nft-card-grid .nft-card-right {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+  .nft-card-left {
+    justify-content: center;
+  }
+  .nft-page .nft-card-grid p {
+    text-align: center;
   }
 }
 
@@ -3931,7 +4037,7 @@ ul.footer-support li img {
   }
   .token-ticket-row {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -4210,9 +4316,12 @@ ul.footer-support li img {
   .redeem-prizes-page .page-nav-header-btns-subrow {
     gap: 15px;
   }
-.crypto-card-grid {
-  flex-wrap: wrap;
-}
+  .crypto-card-grid {
+    flex-wrap: wrap;
+  }
+  .wallet-casino-top {
+    flex-wrap: wrap;
+  }
 }
 
 @media screen and (max-width: 480px) {
