@@ -370,6 +370,7 @@ function RedeemPrizes() {
                     </button>
                   </div>
                 </div>
+                {!showConvert &&
                 <div className='page-nav-header-btns-subrow'>
                   <button
                     className='page-nav-header-subbtn'
@@ -402,7 +403,7 @@ function RedeemPrizes() {
                     CATEGORY Z-A
                   </button>
                 </div>
-
+}
                 <div className='prizes-container'>
                   {showConvert && (
                     <>
