@@ -12,6 +12,7 @@ import LoadingGif from "../images/loading1.gif";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactModal from "react-modal";
+import { marketPlaceInstance } from "../config/axios.js";
 
 export default function GetWalletERC1155NFTs() {
   const [showModal, setShowModal] = useState(false);
@@ -62,7 +63,7 @@ export default function GetWalletERC1155NFTs() {
       //alert('Your email is '+emailaddress);
       setShowModal(false);
       setBurnLoading(true);
-      Axios.get(`https://34.237.237.45:9001/api/verifyEmail/${emailaddress}`)
+      await marketPlaceInstance().get(`/verifyEmail/${emailaddress}`)
         .then((data) => {
           //setNFTBalance(data.data);
           //setBurnLoading(false);
@@ -100,8 +101,7 @@ export default function GetWalletERC1155NFTs() {
                 "NFT REDEEMED!! Your chips will be added shortly.",
                 result
               );
-              Axios.get(
-                `https://34.237.237.45:9001/api/redeemTokenNFT/${address}/${token_id}/${user_id}/${qty}`
+              await marketPlaceInstance().get(`redeemTokenNFT/${address}/${token_id}/${user_id}/${qty}`
               ).then((data) => {
                 //setNFTBalance(data.data);
                 setBurnLoading(false);
