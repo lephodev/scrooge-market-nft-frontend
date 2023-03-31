@@ -87,7 +87,8 @@ export default function ClaimJRPending() {
             <div className='new-btn'>
               <button
                 // className='claim-btn'
-                onClick={() => handleClaim()}>
+                onClick={() => handleClaim()}
+              >
                 Claim Pending Rewards
               </button>
             </div>
