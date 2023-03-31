@@ -9,7 +9,7 @@ import ClaimIconBadge from "../images/claimIconBadge.png";
 import PrizesIconBadge from "../images/prizesIconBadge.png";
 import WalletIconBadge from "../images/walletIconBadge.png";
 import TophatIconBadge from "../images/tophatIconBadge.png";
-
+import tokenmobile from "../images/tokenmobile.png";
 import logo from "../images/footer/logo.png";
 import envelope from "../images/footer/envelope.svg";
 import twitter from "../images/footer/twitter.svg";
@@ -111,7 +111,7 @@ const Layout = ({ children }) => {
                   />
                 </Link>
               </div>
-              {console.log("currentPriceOG",currentPriceOG)}
+              {console.log("currentPriceOG", currentPriceOG)}
               <div className='wallet'>
                 <ConnectWallet />
                 <div className={priceColor}>${currentPriceOG}</div>
@@ -146,37 +146,21 @@ const Layout = ({ children }) => {
                   <Link to='/nft-tokens'>NFT Marketplace</Link>
                 </li>
                 <li>
-                  <a
-                    href={scroogeClient}
-                    target='_blank'
-                    rel='noreferrer'
-                  >
+                  <a href={scroogeClient} target='_blank' rel='noreferrer'>
                     Scrooge Casino Home
                   </a>
                 </li>
                 <li>
-                  <a
-                    href={pokerUrl}
-                    target='_blank'
-                    rel='noreferrer'
-                  >
+                  <a href={pokerUrl} target='_blank' rel='noreferrer'>
                     Scrooge Poker
                   </a>
                 </li>
                 <li>
-                  <a
-                    href={blackjackUrl}
-                    target='_blank'
-                    rel='noreferrer'
-                  >
+                  <a href={blackjackUrl} target='_blank' rel='noreferrer'>
                     Scrooge Blackjack
                   </a>
                 </li>
-                <li>
-                 
-                    Scrooge Roulette
-                
-                </li>
+                <li>Scrooge Roulette</li>
               </ul>
             </div>
 
@@ -307,8 +291,8 @@ const Layout = ({ children }) => {
                 </Link>
               </li>
               <li>
-                <Link to='/my-wallet'>
-                  <img src={WalletIconBadge} alt='my wallet' />
+                <Link to='/earn-tokens'>
+                  <img src={tokenmobile} alt='my wallet' />
                 </Link>
               </li>
             </ul>

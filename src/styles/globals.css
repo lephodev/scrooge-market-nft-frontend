@@ -3712,6 +3712,7 @@ ul.footer-support li img {
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid #292d30;
+    z-index: 9;
   }
   .login-page-body {
     padding: 30px 20px;
