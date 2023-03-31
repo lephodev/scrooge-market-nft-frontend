@@ -145,7 +145,8 @@ function DailyRewards() {
               <div className='prizes_container'>
                 <div
                   className='prizes-card'
-                  style={{ width: "95%", margin: "0 auto" }}>
+                  style={{ width: "100%", margin: "0 auto" }}
+                >
                   <div className='pageTitle' style={{ margin: "20px auto" }}>
                     <h1>Claim Your Daily Rewards</h1>
                   </div>
@@ -154,7 +155,8 @@ function DailyRewards() {
                   </div>
                   <div
                     className='prizes-chip-count'
-                    style={{ marginTop: "35px" }}>
+                    style={{ marginTop: "35px" }}
+                  >
                     <div className='additional-info-div'>
                       You have claimed your daily rewards{" "}
                       {nextClaimDate.consecutive_days} day
@@ -280,15 +282,16 @@ function DailyRewards() {
                     </button>
                   ) : (
                     <>
-                      <div className='next-claim-div'>
+                      <div className='next-claim-div next-claim-box'>
                         {nextClaimDate !== "Loading..." ? (
                           <>
-                            Next Claim Available:<br></br>
+                            Next Claim Available :{" "}
                             <Countdown date={nextClaimDate.nextClaimDate}>
                               <div className='new-btn'>
                                 <button
                                   // className='submit-btn'
-                                  onClick={() => claimTokens()}>
+                                  onClick={() => claimTokens()}
+                                >
                                   Claim Tokens
                                 </button>
                               </div>
@@ -314,7 +317,8 @@ function DailyRewards() {
                       href={scroogeClient}
                       alt='Visit Scrooge Casino'
                       target='_blank'
-                      rel='noreferrer'>
+                      rel='noreferrer'
+                    >
                       Scrooge Casino
                     </a>{" "}
                     account.
