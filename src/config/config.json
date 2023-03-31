@@ -3,24 +3,32 @@
     "client": "http://localhost:3000",
     "server": "http://localhost:4242",
     "scroogeServer": "https://dev-api.scrooge.casino",
-    "scroogeClient": "https://dev.scrooge.casino"
+    "scroogeClient": "https://dev.scrooge.casino",
+    "pokerUrl": "https://devpoker.scrooge.casino",
+    "blackjackUrl": "https://devblackjack.scrooge.casino"
   },
   "development": {
     "client": "https://devmarket.scrooge.casino",
     "server": "https://devmarket-api.scrooge.casino",
     "scroogeServer": "https://dev-api.scrooge.casino",
-    "scroogeClient": "https://dev.scrooge.casino"
+    "scroogeClient": "https://dev.scrooge.casino",
+    "pokerUrl": "https://devpoker.scrooge.casino",
+    "blackjackUrl": "https://devblackjack.scrooge.casino"
   },
   "staging": {
     "client": "https://betamarket.scrooge.casino",
     "server": "https://betamarket-api.scrooge.casino",
     "scroogeServer": "https://beta-api.scrooge.casino",
-    "scroogeClient": "https://beta.scrooge.casino"
+    "scroogeClient": "https://beta.scrooge.casino",
+    "pokerUrl": "https://betapoker.scrooge.casino",
+    "blackjackUrl": "https://betablackjack.scrooge.casino"
   },
   "production": {
     "client": "https://market.scrooge.casino/",
     "server": "https://api-market.scrooge.casino",
     "scroogeServer": "https://api.scrooge.casino",
-    "scroogeClient": "https://scrooge.casino"
+    "scroogeClient": "https://scrooge.casino",
+    "pokerUrl": "https://poker.scrooge.casino",
+    "blackjackUrl": "https://blackjack.scrooge.casino"
   }
 }
