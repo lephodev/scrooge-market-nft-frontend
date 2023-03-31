@@ -2754,7 +2754,8 @@ ul.footer-support li img {
 
 .text-animate h4 {
   font-size: 20px;
-
+  margin: 0;
+  color: #f9ff00;
   /* background-image: -webkit-linear-gradient(#d2042d, #f9ff00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
@@ -3557,6 +3558,7 @@ ul.footer-support li img {
   color: rgb(255, 255, 255);
   border: 2px solid rgb(38, 38, 39);
   background: rgb(0, 0, 0);
+  height: 100%;
 }
 .crypto-balance-row-text p {
   margin: 0;
