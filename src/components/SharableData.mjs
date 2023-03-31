@@ -237,7 +237,7 @@ export default function SharableData() {
             ) : (
               <></>
             )}
-            {!showSocialShare ? (
+            {!showSocialShare  && affUser?.message?.toString() !== "User not found."? (
               <>
                 <div className='new-btn'>
                   <button
