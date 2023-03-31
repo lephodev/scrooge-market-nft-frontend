@@ -291,6 +291,7 @@ span.wallet-user-name {
   margin: 0;
   padding: 0;
 }
+
 .header-nav-menu-mobile a {
   display: flex;
 }
@@ -1706,7 +1707,9 @@ select {
   border: 2px solid #fbff12;
   border-radius: 100%;
 }
-
+.header-nav-container-mobile ul li {
+  width: 50px;
+}
 .loading {
   position: fixed;
   top: 0;
