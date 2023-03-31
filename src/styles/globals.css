@@ -2754,7 +2754,8 @@ ul.footer-support li img {
 
 .text-animate h4 {
   font-size: 20px;
-
+  margin: 0;
+  color: #f9ff00;
   /* background-image: -webkit-linear-gradient(#d2042d, #f9ff00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
