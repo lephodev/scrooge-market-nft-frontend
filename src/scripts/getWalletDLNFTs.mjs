@@ -427,7 +427,7 @@ export default function GetWalletDLNFTs() {
                     ) : (
                       <>
                         <div>
-                          NEXT CLAIM AVAILABLE:<br></br>
+                          NEXT CLAIM AVAILABLE:
                           <Countdown
                             date={
                               new Date(

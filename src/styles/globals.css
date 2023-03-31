@@ -2684,6 +2684,7 @@ ul.footer-support li img {
   box-shadow: 0px 20px 20px #00000091;
   width: 80%;
   padding: 20px;
+  border-radius: 10px;
 }
 .earn-token .prizes-card .additional-info-div .daily-reward-bag {
   width: 70%;
@@ -2693,9 +2694,13 @@ ul.footer-support li img {
   border: 1px solid #1c1c1c;
   box-shadow: 0px 20px 20px #00000091;
 }
+.earn-token .prizes-card .next-claim-box {
+  background-image: -webkit-linear-gradient(#d2042d, #f9ff00);
+  padding: 10px;
+}
 
 .earn-token .prizes-card .next-claim-div span {
-  color: #d30101;
+  color: #fff;
 }
 .earn-token .leaderboard-row .leaderboard-left {
   display: flex;
@@ -3568,8 +3573,12 @@ ul.footer-support li img {
 .crypto-balance-row-text p {
   margin: 0;
   font-weight: 600;
+  color: #fff;
 }
 
+.crypto-card-grid .claim-pending-div {
+  color: #fff;
+}
 .crypto-balance-row-text {
   display: grid;
   gap: 10px;
