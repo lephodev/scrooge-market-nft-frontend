@@ -425,7 +425,7 @@ export default function GetWalletDLNFTs() {
                   <span></span>
                 )}
               </div>
-              <div className='erc721Card-4th-col'>
+              {/* <div className='erc721Card-4th-col'>
                 {claimDateArray.length === nfts.length ? (
                   <>
                     {claimDateArray
@@ -441,7 +441,7 @@ export default function GetWalletDLNFTs() {
                     ) : (
                       <>
                         <div>
-                          NEXT CLAIM AVAILABLE:<br></br>
+                          NEXT CLAIM AVAILABLE:
                           <Countdown
                             date={
                               new Date(
@@ -463,7 +463,7 @@ export default function GetWalletDLNFTs() {
                     />
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
           ))}
         </div>
