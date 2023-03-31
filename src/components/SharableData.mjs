@@ -37,10 +37,10 @@ export default function SharableData() {
   const [affUser, setAffUser] = useState({});
   const [affUserID, setAffUserID] = useState("");
   const [creatingAffUser, setCreatingAffUser] = useState(false);
-  const [showAITools, setShowAITools] = useState(false);
-  const [showSocialShare, setShowSocialShare] = useState(false);
-  const [showAffLeaderboards, setShowAffLeaderboards] = useState(false);
-  const [showDailyRewards, setShowDailyRewards] = useState(false);
+  const [showAITools, setShowAITools] = useState(true);
+  const [showSocialShare, setShowSocialShare] = useState(true);
+  const [showAffLeaderboards, setShowAffLeaderboards] = useState(true);
+  const [showDailyRewards, setShowDailyRewards] = useState(true);
 
   const [allMessages, setAllMessages] = useState([]);
   const [messages, setMessages] = useState([]);

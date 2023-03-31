@@ -26,8 +26,6 @@ function RedeemPrizes() {
   const { user, loading, setUser } = useContext(AuthContext);
   console.log("user", user, loading);
 
-
-
   const [redeemLoading, setRedeemLoading] = useState(false);
   const [redeemSuccess, setRedeemSuccess] = useState(false);
   const [allPrizes, setAllPrizes] = useState([]);
@@ -66,7 +64,7 @@ function RedeemPrizes() {
     }
   }
 
-  async function startFetching(){
+  async function startFetching() {
     getCoinGeckoDataOG();
     getCoinGeckoDataJR();
     if (prizesReceived === 0) {
@@ -246,37 +244,41 @@ function RedeemPrizes() {
     }
   };
 
-  useEffect(()=>{
-     async function checkKYCStatus(){
+  useEffect(() => {
+    async function checkKYCStatus() {
       const response = await userKycDetails();
       if (response?.code === 200) {
-        if(response.message !=="accept"){
-           setglobalLoader(false);
-           navigate('/kyc');
-        }else{
-           setglobalLoader(false);
-           startFetching();
+        if (response.message !== "accept") {
+          setglobalLoader(false);
+          navigate("/kyc");
+        } else {
+          setglobalLoader(false);
+          startFetching();
         }
       } else {
         setglobalLoader(false);
-        toast.error(response.message, { toastId: "error-fetching-kyc-details" });
-        navigate('/');
+        toast.error(response.message, {
+          toastId: "error-fetching-kyc-details",
+        });
+        navigate("/");
       }
-     }
-     checkKYCStatus();
-  },[])
+    }
+    checkKYCStatus();
+  }, []);
   // console.log("convertPrice",convertPrice);
 
   return (
     <Layout>
       <main className='main redeem-prizes-page'>
         <div className='container'>
-        {globalLoader && <div className='loading'>
-             <div className='loading-img-div'>
-               <img src={LoadingPoker} alt='game' className='imageAnimation' />
-             </div>
-             </div>}
-          <div className='bordered-section'>  
+          {globalLoader && (
+            <div className='loading'>
+              <div className='loading-img-div'>
+                <img src={LoadingPoker} alt='game' className='imageAnimation' />
+              </div>
+            </div>
+          )}
+          <div className='bordered-section'>
             {redeemLoading ? (
               <div className='pageImgContainer'>
                 <img src={LoadingPoker} alt='game' className='imageAnimation' />
@@ -295,8 +297,7 @@ function RedeemPrizes() {
                     onClick={() => {
                       setRedeemSuccess(false);
                       reward();
-                    }}
-                  >
+                    }}>
                     CLOSE
                   </button>
                 </div>
@@ -304,590 +305,575 @@ function RedeemPrizes() {
             ) : (
               <></>
             )}
-          {!globalLoader && (
-            <>
-            <div className='scrooge-main-heading'>
-              <div className='pageTitle'>
-                <h1 className='title'>Redeem for Prizes</h1>
-              </div>
-              <div className='feature-overview-div'>
-                Ready to cash in on all of your big wins? Browse through our
-                huge list of amazing prizes and find something you just can't
-                live without. Make sure you have enough available tickets for
-                the prize you want, then click the REDEEM PRIZE button!
-              </div>
-            </div>
-
-            <div className='prizes-chip-count'>
-              {user ? (
-                <>
-                  <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
-                </>
-              ) : (
-                <>
-                  <img
-                    src={LoadingPoker}
-                    alt='game'
-                    className='imageAnimation'
-                  />
-                </>
-              )}
-            </div>
-            <div className='page-nav-header-btns-row'>
-              <div className='new-btn'>
-                <button
-                  // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("Badges")}
-                >
-                  BADGES
-                </button>
-              </div>
-              <div className='new-btn'>
-                <button
-                  // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("Crypto")}
-                >
-                  CRYPTO
-                </button>
-              </div>
-              <div className='new-btn'>
-                <button
-                  // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("Merch")}
-                >
-                  MERCH
-                </button>
-              </div>
-              <div className='new-btn'>
-                <button
-                  // className='page-nav-header-btn'
-                  onClick={() => filterPrizes("NFTs")}
-                >
-                  NFTS
-                </button>
-              </div>
-              <div className='new-btn'>
-                <button onClick={() => filterPrizes("convert")}>
-                  Convert ticket to token
-                </button>
-              </div>
-            </div>
-            <div className='page-nav-header-btns-subrow'>
-              <button
-                className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("priceDescending")}
-              >
-                PRICE HIGH TO LOW
-              </button>
-              <button
-                className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("priceAscending")}
-              >
-                PRICE LOW TO HIGH
-              </button>
-              <button
-                className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("nameDescending")}
-              >
-                NAME A-Z
-              </button>
-              <button
-                className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("nameAscending")}
-              >
-                NAME Z-A
-              </button>
-              <button
-                className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("categoryDescending")}
-              >
-                CATEGORY A-Z
-              </button>
-              <button
-                className='page-nav-header-subbtn'
-                onClick={() => sortPrizes("categoryAscending")}
-              >
-                CATEGORY Z-A
-              </button>
-            </div>
-
-            <div className='prizes-container'>
-              {showConvert && (
-                <>
-                  <div className='buy-chips-content'>
-                    <div className='buy-chips-grid'>
-                      <div className='buy-chips-grid-box'>
-                        <img src={coin4} alt='coin' />
-
-                        <div
-                          className='gradient-btn'
-                          onClick={() => convert(500, 510)}
-                        >
-                          <span>500 tickets gets you 510 chips </span>
-                        </div>
-                      </div>
-                      <div className='buy-chips-grid-box'>
-                        {/* <p>25000 </p> */}
-                        <img src={coin3} alt='coin' />
-
-                        <div
-                          className='gradient-btn'
-                          onClick={() => convert(1000, 1025)}
-                        >
-                          <span>1000 tickets gets you 1025 chips </span>
-                        </div>
-                      </div>
-                      <div className='buy-chips-grid-box'>
-                        {/* <p>20000 </p> */}
-
-                        <div className='chips-images'>
-                          <img src={coin4} alt='coin' />
-                          <img src={coin3} alt='coin' />
-                        </div>
-
-                        <div
-                          className='gradient-btn'
-                          onClick={() => convert(2500, 2600)}
-                        >
-                          <span>2500 tickets gets you 2600 chips </span>
-                        </div>
-                      </div>
-                      <div className='buy-chips-grid-box'>
-                        {/* <p>10000 </p> */}
-                        <img src={coin2} alt='coin' />
-
-                        <div
-                          className='gradient-btn'
-                          onClick={() => convert(5000, 5250)}
-                        >
-                          <span>5000 tickets gets you 5250 chips </span>
-                        </div>
-                      </div>
-                      <div className='buy-chips-grid-box'>
-                        {/* <p>5000 </p> */}
-                        <img src={coin1} alt='coin' />
-                        <div
-                          className='gradient-btn'
-                          onClick={() => convert(10000, 10600)}
-                        >
-                          <span>10000 tickets gets you 10600 chips </span>
-                        </div>
-                      </div>
-                      <div className='buy-chips-grid-box'>
-                        {/* <p>2500 </p> */}
-
-                        <div className='chips-images'>
-                          <img src={coin2} alt='coin' />
-                          <img src={coin3} alt='coin' />
-                        </div>
-                        <div
-                          className='gradient-btn'
-                          onClick={() => convert(20000, 21400)}
-                        >
-                          <span>20000 tickets gets you 21400 chips </span>
-                        </div>
-                      </div>
-                      <div className='buy-chips-grid-box'>
-                        {/* <p>1000 </p> */}
-                        <div className='chips-images'>
-                          <img src={coin2} alt='coin' />
-                          <img src={coin2} alt='coin' />
-                        </div>
-                        <div
-                          className='gradient-btn'
-                          onClick={() => convert(25000, 27000)}
-                        >
-                          <span>25000 tickets gets you 27000 chips </span>
-                        </div>
-                      </div>
-                      <div className='buy-chips-grid-box'>
-                        {/* <p>500 </p> */}
-
-                        <div className='chips-images'>
-                          <img src={coin1} alt='coin' />
-                          <img src={coin1} alt='coin' />
-                        </div>
-                        <div
-                          className='gradient-btn'
-                          onClick={() => convert(50000, 55000)}
-                        >
-                          <span>50000 tickets gets you 55000 chips </span>
-                        </div>
-                      </div>
-                    </div>
+            {!globalLoader && (
+              <>
+                <div className='scrooge-main-heading'>
+                  <div className='pageTitle'>
+                    <h1 className='title'>Redeem for Prizes</h1>
                   </div>
-                </>
-              )}
+                  <div className='feature-overview-div'>
+                    Ready to cash in on all of your big wins? Browse through our
+                    huge list of amazing prizes and find something you just
+                    can't live without. Make sure you have enough available
+                    tickets for the prize you want, then click the REDEEM PRIZE
+                    button!
+                  </div>
+                </div>
 
-              <div style={{ width: "100%", textAlign: "center" }}>
-                <div id='rewardId' style={{ margin: "0 auto" }} />
-              </div>
-              {!prizesLoading ? (
-                <>
-                  <div className='prizes_container'>
-                    {prizes.map((prize) => (
-                      <div className='prizes-card' key={prize._id}>
-                        {console.log("prize", prize._id)}
-                        {!prize.isDynamic ? (
-                          <div className='prize-name bold text-animate'>
-                            <h4>{prize.name}</h4>
+                <div className='prizes-chip-count'>
+                  {user ? (
+                    <>
+                      <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
+                    </>
+                  ) : (
+                    <>
+                      <img
+                        src={LoadingPoker}
+                        alt='game'
+                        className='imageAnimation'
+                      />
+                    </>
+                  )}
+                </div>
+                <div className='page-nav-header-btns-row'>
+                  <div className='new-btn'>
+                    <button
+                      // className='page-nav-header-btn'
+                      onClick={() => filterPrizes("Badges")}>
+                      BADGES
+                    </button>
+                  </div>
+                  <div className='new-btn'>
+                    <button
+                      // className='page-nav-header-btn'
+                      onClick={() => filterPrizes("Crypto")}>
+                      CRYPTO
+                    </button>
+                  </div>
+                  {/* <div className='new-btn'>
+                    <button
+                      // className='page-nav-header-btn'
+                      onClick={() => filterPrizes("Merch")}>
+                      MERCH
+                    </button>
+                  </div> */}
+                  <div className='new-btn'>
+                    <button
+                      // className='page-nav-header-btn'
+                      onClick={() => filterPrizes("NFTs")}>
+                      NFTS
+                    </button>
+                  </div>
+                  <div className='new-btn'>
+                    <button onClick={() => filterPrizes("convert")}>
+                      Convert ticket to token
+                    </button>
+                  </div>
+                </div>
+                <div className='page-nav-header-btns-subrow'>
+                  <button
+                    className='page-nav-header-subbtn'
+                    onClick={() => sortPrizes("priceDescending")}>
+                    PRICE HIGH TO LOW
+                  </button>
+                  <button
+                    className='page-nav-header-subbtn'
+                    onClick={() => sortPrizes("priceAscending")}>
+                    PRICE LOW TO HIGH
+                  </button>
+                  <button
+                    className='page-nav-header-subbtn'
+                    onClick={() => sortPrizes("nameDescending")}>
+                    NAME A-Z
+                  </button>
+                  <button
+                    className='page-nav-header-subbtn'
+                    onClick={() => sortPrizes("nameAscending")}>
+                    NAME Z-A
+                  </button>
+                  <button
+                    className='page-nav-header-subbtn'
+                    onClick={() => sortPrizes("categoryDescending")}>
+                    CATEGORY A-Z
+                  </button>
+                  <button
+                    className='page-nav-header-subbtn'
+                    onClick={() => sortPrizes("categoryAscending")}>
+                    CATEGORY Z-A
+                  </button>
+                </div>
+
+                <div className='prizes-container'>
+                  {showConvert && (
+                    <>
+                      <div className='buy-chips-content'>
+                        <div className='buy-chips-grid'>
+                          <div className='buy-chips-grid-box'>
+                            <img src={coin4} alt='coin' />
+
+                            <div
+                              className='gradient-btn'
+                              onClick={() => convert(500, 510)}>
+                              <span>500 tickets gets you 510 chips </span>
+                            </div>
                           </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                          <div className='prize-name bold text-animate'>
-                            <h4>
-                              {" "}
-                              {prize.name.replace(
-                                "xxxValue",
-                                parseInt(OG1000).toLocaleString("en-US")
+                          <div className='buy-chips-grid-box'>
+                            {/* <p>25000 </p> */}
+                            <img src={coin3} alt='coin' />
+
+                            <div
+                              className='gradient-btn'
+                              onClick={() => convert(1000, 1025)}>
+                              <span>1000 tickets gets you 1025 chips </span>
+                            </div>
+                          </div>
+                          <div className='buy-chips-grid-box'>
+                            {/* <p>20000 </p> */}
+
+                            <div className='chips-images'>
+                              <img src={coin4} alt='coin' />
+                              <img src={coin3} alt='coin' />
+                            </div>
+
+                            <div
+                              className='gradient-btn'
+                              onClick={() => convert(2500, 2600)}>
+                              <span>2500 tickets gets you 2600 chips </span>
+                            </div>
+                          </div>
+                          <div className='buy-chips-grid-box'>
+                            {/* <p>10000 </p> */}
+                            <img src={coin2} alt='coin' />
+
+                            <div
+                              className='gradient-btn'
+                              onClick={() => convert(5000, 5250)}>
+                              <span>5000 tickets gets you 5250 chips </span>
+                            </div>
+                          </div>
+                          <div className='buy-chips-grid-box'>
+                            {/* <p>5000 </p> */}
+                            <img src={coin1} alt='coin' />
+                            <div
+                              className='gradient-btn'
+                              onClick={() => convert(10000, 10600)}>
+                              <span>10000 tickets gets you 10600 chips </span>
+                            </div>
+                          </div>
+                          <div className='buy-chips-grid-box'>
+                            {/* <p>2500 </p> */}
+
+                            <div className='chips-images'>
+                              <img src={coin2} alt='coin' />
+                              <img src={coin3} alt='coin' />
+                            </div>
+                            <div
+                              className='gradient-btn'
+                              onClick={() => convert(20000, 21400)}>
+                              <span>20000 tickets gets you 21400 chips </span>
+                            </div>
+                          </div>
+                          <div className='buy-chips-grid-box'>
+                            {/* <p>1000 </p> */}
+                            <div className='chips-images'>
+                              <img src={coin2} alt='coin' />
+                              <img src={coin2} alt='coin' />
+                            </div>
+                            <div
+                              className='gradient-btn'
+                              onClick={() => convert(25000, 27000)}>
+                              <span>25000 tickets gets you 27000 chips </span>
+                            </div>
+                          </div>
+                          <div className='buy-chips-grid-box'>
+                            {/* <p>500 </p> */}
+
+                            <div className='chips-images'>
+                              <img src={coin1} alt='coin' />
+                              <img src={coin1} alt='coin' />
+                            </div>
+                            <div
+                              className='gradient-btn'
+                              onClick={() => convert(50000, 55000)}>
+                              <span>50000 tickets gets you 55000 chips </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  <div style={{ width: "100%", textAlign: "center" }}>
+                    <div id='rewardId' style={{ margin: "0 auto" }} />
+                  </div>
+                  {!prizesLoading ? (
+                    <>
+                      <div className='prizes_container'>
+                        {prizes
+                          .filter((f) => f.redeem_action !== "burn")
+                          .map((prize) => (
+                            <div className='prizes-card' key={prize._id}>
+                              {console.log("prize", prize._id)}
+                              {!prize.isDynamic ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>{prize.name}</h4>
+                                </div>
+                              ) : (
+                                <></>
                               )}
-                            </h4>
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                          <div className='prize-name bold text-animate'>
-                            <h4>
-                              {" "}
-                              {prize.name.replace(
-                                "xxxValue",
-                                parseInt(JR1000).toLocaleString("en-US")
+                              {prize._id === "63b74c51dd789f0383a51d3b" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {" "}
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(OG1000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                </div>
+                              ) : (
+                                <></>
                               )}
-                            </h4>
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                          <div className='prize-name bold text-animate'>
-                            <h4>
-                              {prize.name.replace(
-                                "xxxValue",
-                                parseInt(OG1000).toLocaleString("en-US")
+                              {prize._id === "63b74ce7dd789f0383a51d3c" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {" "}
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(JR1000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                </div>
+                              ) : (
+                                <></>
                               )}
-                            </h4>
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                          <div className='prize-name bold text-animate'>
-                            <h4>
-                              {" "}
-                              {prize.name.replace(
-                                "xxxValue",
-                                parseInt(JR1000).toLocaleString("en-US")
+                              {prize._id === "63b78b42dd789f0383a51d3d" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(OG1000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                </div>
+                              ) : (
+                                <></>
                               )}
-                            </h4>
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                          <div className='prize-name bold text-animate'>
-                            <h4>
-                              {prize.name.replace(
-                                "xxxValue",
-                                parseInt(OG5000).toLocaleString("en-US")
+                              {prize._id === "63b78c0edd789f0383a51d3f" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {" "}
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(JR1000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                </div>
+                              ) : (
+                                <></>
                               )}
-                            </h4>
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                          <div className='prize-name bold text-animate'>
-                            <h4>
-                              {" "}
-                              {prize.name.replace(
-                                "xxxValue",
-                                parseInt(JR5000).toLocaleString("en-US")
+                              {prize._id === "63cedf0d1736630ad01d5f4e" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(OG5000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                </div>
+                              ) : (
+                                <></>
                               )}
-                            </h4>
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedf761736630ad01d5f52" ? (
-                          <div className='prize-name bold text-animate'>
-                            <h4>
-                              {" "}
-                              {prize.name.replace(
-                                "xxxValue",
-                                parseInt(OG5000).toLocaleString("en-US")
+                              {prize._id === "63cedf5a1736630ad01d5f50" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {" "}
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(JR5000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                </div>
+                              ) : (
+                                <></>
                               )}
-                            </h4>
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedfb61736630ad01d5f55" ? (
-                          <div className='prize-name bold text-animate'>
-                            <h4>
-                              {prize.name.replace(
-                                "xxxValue",
-                                parseInt(JR5000).toLocaleString("en-US")
+                              {prize._id === "63cedf761736630ad01d5f52" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {" "}
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(OG5000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                </div>
+                              ) : (
+                                <></>
                               )}
-                            </h4>
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedf301736630ad01d5f4f" ? (
-                          <div className='prize-name bold text-animate'>
-                            <h4>
-                              {" "}
-                              {prize.name.replace(
-                                "xxxValue",
-                                parseInt(OG10000).toLocaleString("en-US")
+                              {prize._id === "63cedfb61736630ad01d5f55" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(JR5000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                </div>
+                              ) : (
+                                <></>
                               )}
-                            </h4>
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedf651736630ad01d5f51" ? (
-                          <div className='prize-name bold text-animate'>
-                            <h4>
-                              {" "}
-                              {prize.name.replace(
-                                "xxxValue",
-                                parseInt(JR10000).toLocaleString("en-US")
+                              {prize._id === "63cedf301736630ad01d5f4f" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {" "}
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(OG10000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                </div>
+                              ) : (
+                                <></>
                               )}
-                            </h4>
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                          <div className='prize-name bold text-animate'>
-                            <h4>
-                              {prize.name.replace(
-                                "xxxValue",
-                                parseInt(OG10000).toLocaleString("en-US")
+                              {prize._id === "63cedf651736630ad01d5f51" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {" "}
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(JR10000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                </div>
+                              ) : (
+                                <></>
                               )}
-                            </h4>
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedfc51736630ad01d5f56" ? (
-                          <div className='prize-name bold text-animate'>
-                            <h4>
-                              {prize.name.replace(
-                                "xxxValue",
-                                parseInt(JR10000).toLocaleString("en-US")
+                              {prize._id === "63cedf9d1736630ad01d5f54" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(OG10000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                </div>
+                              ) : (
+                                <></>
                               )}
-                            </h4>
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
+                              {prize._id === "63cedfc51736630ad01d5f56" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(JR10000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              <img
+                                className='card-img pulse'
+                                src={prize.image_url}
+                                alt={prize.name}
+                              />
+                              <br></br>
+                              <div className='prize-cost'>
+                                <p>Cost: {prize.price} Tickets</p>
+                              </div>
+                              <br></br>
+                              <p>Category: {prize.category}</p>
+                              <br></br>
+
+                              {!prize.isDynamic ? (
+                                <div>
+                                  <p>{prize.description}</p>
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "63b74c51dd789f0383a51d3b" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(OG1000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "63b74ce7dd789f0383a51d3c" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(JR1000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "63b78b42dd789f0383a51d3d" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(OG1000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "63b78c0edd789f0383a51d3f" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(JR1000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "63cedf0d1736630ad01d5f4e" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(OG5000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "63cedf5a1736630ad01d5f50" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(JR5000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "63cedf761736630ad01d5f52" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(OG5000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "63cedfb61736630ad01d5f55" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(JR5000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "63cedf301736630ad01d5f4f" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(OG10000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "63cedf651736630ad01d5f51" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(JR10000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "63cedf9d1736630ad01d5f54" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(OG10000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "63cedfc51736630ad01d5f56" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(JR10000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize.isDynamic ? (
+                                <div className='asterisk-desc'>
+                                  *Amount received is calculated at time of
+                                  redemption and may vary from the amount
+                                  displayed.
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              <br />
+                              <div className='redeem-btn'>
+                                <button
+                                  // className='submit-btn'
+                                  className='gradient-btn'
+                                  onClick={() => RedeemPrize(prize._id)}>
+                                  REDEEM PRIZE
+                                </button>
+                              </div>
+
+                              <br></br>
+                            </div>
+                          ))}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className='loader-img'>
                         <img
-                          className='card-img pulse'
-                          src={prize.image_url}
-                          alt={prize.name}
+                          src={LoadingPoker}
+                          alt='game'
+                          className='imageAnimation'
                         />
-                        <br></br>
-                        <div className='prize-cost'>
-                          <p>Cost: {prize.price} Tickets</p>
-                        </div>
-                        <br></br>
-                        <p>Category: {prize.category}</p>
-                        <br></br>
-
-                        {!prize.isDynamic ? (
-                          <div>
-                            <p>{prize.description}</p>
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                          <div className=''>
-                            {prize.description.replace(
-                              "xxxValue",
-                              parseInt(OG1000).toLocaleString("en-US")
-                            )}
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                          <div className=''>
-                            {prize.description.replace(
-                              "xxxValue",
-                              parseInt(JR1000).toLocaleString("en-US")
-                            )}
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                          <div className=''>
-                            {prize.description.replace(
-                              "xxxValue",
-                              parseInt(OG1000).toLocaleString("en-US")
-                            )}
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                          <div className=''>
-                            {prize.description.replace(
-                              "xxxValue",
-                              parseInt(JR1000).toLocaleString("en-US")
-                            )}
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                          <div className=''>
-                            {prize.description.replace(
-                              "xxxValue",
-                              parseInt(OG5000).toLocaleString("en-US")
-                            )}
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                          <div className=''>
-                            {prize.description.replace(
-                              "xxxValue",
-                              parseInt(JR5000).toLocaleString("en-US")
-                            )}
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedf761736630ad01d5f52" ? (
-                          <div className=''>
-                            {prize.description.replace(
-                              "xxxValue",
-                              parseInt(OG5000).toLocaleString("en-US")
-                            )}
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedfb61736630ad01d5f55" ? (
-                          <div className=''>
-                            {prize.description.replace(
-                              "xxxValue",
-                              parseInt(JR5000).toLocaleString("en-US")
-                            )}
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedf301736630ad01d5f4f" ? (
-                          <div className=''>
-                            {prize.description.replace(
-                              "xxxValue",
-                              parseInt(OG10000).toLocaleString("en-US")
-                            )}
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedf651736630ad01d5f51" ? (
-                          <div className=''>
-                            {prize.description.replace(
-                              "xxxValue",
-                              parseInt(JR10000).toLocaleString("en-US")
-                            )}
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                          <div className=''>
-                            {prize.description.replace(
-                              "xxxValue",
-                              parseInt(OG10000).toLocaleString("en-US")
-                            )}
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize._id === "63cedfc51736630ad01d5f56" ? (
-                          <div className=''>
-                            {prize.description.replace(
-                              "xxxValue",
-                              parseInt(JR10000).toLocaleString("en-US")
-                            )}
-                            *
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        {prize.isDynamic ? (
-                          <div className='asterisk-desc'>
-                            *Amount received is calculated at time of redemption
-                            and may vary from the amount displayed.
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                        <br />
-                        <div className='redeem-btn'>
-                          <button
-                            // className='submit-btn'
-                            className='gradient-btn'
-                            onClick={() => RedeemPrize(prize._id)}
-                          >
-                            REDEEM PRIZE
-                          </button>
-                        </div>
-
-                        <br></br>
                       </div>
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className='loader-img'>
-                    <img
-                      src={LoadingPoker}
-                      alt='game'
-                      className='imageAnimation'
-                    />
-                  </div>
-                </>
-              )}
-            </div>
-
-            </>)}
+                    </>
+                  )}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </main>
