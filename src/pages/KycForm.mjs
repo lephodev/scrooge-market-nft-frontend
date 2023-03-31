@@ -89,15 +89,12 @@ const KYCForm = () => {
     formData.append("IDimageBack", backIdImage[0]);
     formData.append("formValues", JSON.stringify(payload));
     setLoading(true);
-    const response = await createKYC(formData);
+    const res = await createKYC(formData);
     setLoading(false);
-    if (response.code === 201) {
-      setstatusKyc("idle");
-      toast.success(response.message, {
-        toastId: "successfylly-submitted-kyc",
-      });
+    if (res.status === 201) {
+      getKYCStatus();      
     } else {
-      toast.error(response.message);
+      toast.error("Unable to Upload the Kyc")
     }
   };
 
