@@ -9,7 +9,7 @@ import ClaimIconBadge from "../images/claimIconBadge.png";
 import PrizesIconBadge from "../images/prizesIconBadge.png";
 import WalletIconBadge from "../images/walletIconBadge.png";
 import TophatIconBadge from "../images/tophatIconBadge.png";
-
+import tokenmobile from "../images/tokenmobile.png";
 import logo from "../images/footer/logo.png";
 import envelope from "../images/footer/envelope.svg";
 import twitter from "../images/footer/twitter.svg";
@@ -283,8 +283,8 @@ const Layout = ({ children }) => {
                 </Link>
               </li>
               <li>
-                <Link to='/my-wallet'>
-                  <img src={WalletIconBadge} alt='my wallet' />
+                <Link to='/earn-tokens'>
+                  <img src={tokenmobile} alt='my wallet' />
                 </Link>
               </li>
             </ul>
