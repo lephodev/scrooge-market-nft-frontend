@@ -22,7 +22,8 @@ export default function ClaimJRPending() {
   const sdk = useSDK();
   const address = useAddress();
   const JRContractAddress = "0x2e9F79aF51dD1bb56Bbb1627FBe4Cc90aa8985Dd";
-  const contractClaim = async () =>
+  const contractClaim = async () => {
+    console.log("contractClaimcalled");
     await sdk
       .getContractFromAbi(JRContractAddress, JR_ABI)
       .then(async (contract) => {
@@ -44,6 +45,7 @@ export default function ClaimJRPending() {
             setTotalClaimed((parseInt(divInfo[4]) / 10 ** 18).toFixed(4));
           });
       });
+  };
 
   const handleClaim = async () => {
     setIsClaiming(true);
