@@ -22,27 +22,30 @@ export default function ClaimJRPending() {
   const sdk = useSDK();
   const address = useAddress();
   const JRContractAddress = "0x2e9F79aF51dD1bb56Bbb1627FBe4Cc90aa8985Dd";
-  const contractClaim = async () =>
-    await sdk
-      .getContractFromAbi(JRContractAddress, JR_ABI)
-      .then(async (contract) => {
-        //console.log(contract);
-        setContractObj(contract);
-        const divCall = await contract
-          .call("getAccountDividendsInfo", address)
-          .then((divInfo) => {
-            setClaimableAmount((parseInt(divInfo[3]) / 10 ** 18).toFixed(4));
-            setSecondsUntilClaim(parseInt(divInfo[7]));
-            var t = new Date();
-            /*if(parseInt(divInfo[7]) > 0){
-                t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
-            }*/
-            t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
-            setClaimableIn(t.toString());
-            setClaimableInTime(t.getTime());
-            setTotalClaimed((parseInt(divInfo[4]) / 10 ** 18).toFixed(4));
-          });
-      });
+
+  const contractClaim = async () => {
+    try {
+      console.log("contractClaimcalled");
+      const contract = await sdk.getContract(JRContractAddress, JR_ABI);
+      console.log("claimJRPEnding contract", contract);
+      setContractObj(contract);
+      const divInfo = await contract.call("getAccountDividendsInfo", address);
+      // const divInfo = await contract.call("getAccountDividendsInfo", address);
+      console.log("claimjrpending divInfo", divInfo);
+      setClaimableAmount((parseInt(divInfo[3]) / 10 ** 18).toFixed(4));
+      setSecondsUntilClaim(parseInt(divInfo[7]));
+      var t = new Date();
+      /*if(parseInt(divInfo[7]) > 0){
+              t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
+          }*/
+      t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
+      setClaimableIn(t.toString());
+      setClaimableInTime(t.getTime());
+      setTotalClaimed((parseInt(divInfo[4]) / 10 ** 18).toFixed(4));
+    } catch (error) {
+      console.log("errrrr", error);
+    }
+  };
 
   const handleClaim = async () => {
     setIsClaiming(true);
@@ -87,8 +90,7 @@ export default function ClaimJRPending() {
             <div className='new-btn'>
               <button
                 // className='claim-btn'
-                onClick={() => handleClaim()}
-              >
+                onClick={() => handleClaim()}>
                 Claim Pending Rewards
               </button>
             </div>
