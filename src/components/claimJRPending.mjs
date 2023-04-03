@@ -26,10 +26,11 @@ export default function ClaimJRPending() {
   const contractClaim = async () => {
     try {
       console.log("contractClaimcalled");
-      const contract = await sdk.getContractFromAbi(JRContractAddress, JR_ABI);
+      const contract = await sdk.getContract(JRContractAddress, JR_ABI);
       console.log("claimJRPEnding contract", contract);
       setContractObj(contract);
       const divInfo = await contract.call("getAccountDividendsInfo", address);
+      // const divInfo = await contract.call("getAccountDividendsInfo", address);
       console.log("claimjrpending divInfo", divInfo);
       setClaimableAmount((parseInt(divInfo[3]) / 10 ** 18).toFixed(4));
       setSecondsUntilClaim(parseInt(divInfo[7]));
