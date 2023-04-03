@@ -34,7 +34,6 @@ import LoadingPoker from "./images/scroogeHatLogo.png";
 import PaymentSuccess from "./pages/PaymentSuccess.mjs";
 import KycForm from "./pages/KycForm.mjs";
 
-
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
     ChainId.BinanceSmartChainMainnet
@@ -95,8 +94,7 @@ export default function App() {
         loading,
         setLoading,
         setUser,
-      }}
-    >
+      }}>
       {loading ? (
         <div className='loading'>
           <div className='loading-img-div'>
@@ -115,8 +113,7 @@ export default function App() {
               logoUrl:
                 "https://casino-nft-marketplace.s3.amazonaws.com/highRollerBasic.png",
               url: "https://market.scrooge.casino",
-            }}
-          >
+            }}>
             <BrowserRouter>
               <Routes>
                 {/* Protectde Route */}
@@ -137,15 +134,15 @@ export default function App() {
                   path='/redeem-prizes'
                   element={<ProtectedRoute component={<RedeemPrizes />} />}
                 />
-                <Route
+                {/* <Route
                   path='/claim-free-tokens'
                   element={<ProtectedRoute component={<HolderClaimChips />} />}
-                />
+                /> */}
                 {/* <Route
                   path='/kyc'
                   element={<ProtectedRoute component={<KycForm />} />}
                 /> */}
-          
+
                 <Route
                   path='/ducky-lucks-claim-tokens'
                   element={
