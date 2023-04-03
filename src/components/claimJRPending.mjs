@@ -26,11 +26,12 @@ export default function ClaimJRPending() {
     await sdk
       .getContractFromAbi(JRContractAddress, JR_ABI)
       .then(async (contract) => {
-        //console.log(contract);
+        console.log("claimJRPEnding contract", contract);
         setContractObj(contract);
         const divCall = await contract
           .call("getAccountDividendsInfo", address)
           .then((divInfo) => {
+            console.log("claimjrpending divInfo", divInfo);
             setClaimableAmount((parseInt(divInfo[3]) / 10 ** 18).toFixed(4));
             setSecondsUntilClaim(parseInt(divInfo[7]));
             var t = new Date();
@@ -87,8 +88,7 @@ export default function ClaimJRPending() {
             <div className='new-btn'>
               <button
                 // className='claim-btn'
-                onClick={() => handleClaim()}
-              >
+                onClick={() => handleClaim()}>
                 Claim Pending Rewards
               </button>
             </div>
