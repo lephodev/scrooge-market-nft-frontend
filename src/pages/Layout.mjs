@@ -29,8 +29,7 @@ export const Tooltip = (id, metadata, message) => (
     trigger={<ThirdwebNftMedia key={id} metadata={metadata} height={200} />}
     position='bottom center'
     on={["hover", "focus"]}
-    closeOnDocumentClick
-  >
+    closeOnDocumentClick>
     <span> {message} </span>
   </Popup>
 );
@@ -82,9 +81,9 @@ const Layout = ({ children }) => {
                 <li>
                   <Link to='/nft-tokens'>Casino NFT Shop</Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to='/claim-free-tokens'>Claim Monthly Tokens</Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to='/redeem-prizes'>Redeem Prizes</Link>
                 </li>
@@ -111,7 +110,7 @@ const Layout = ({ children }) => {
                   />
                 </Link>
               </div>
-              {console.log("currentPriceOG",currentPriceOG)}
+              {console.log("currentPriceOG", currentPriceOG)}
               <div className='wallet'>
                 <ConnectWallet />
                 <div className={priceColor}>${currentPriceOG}</div>
@@ -146,37 +145,21 @@ const Layout = ({ children }) => {
                   <Link to='/nft-tokens'>NFT Marketplace</Link>
                 </li>
                 <li>
-                  <a
-                    href={scroogeClient}
-                    target='_blank'
-                    rel='noreferrer'
-                  >
+                  <a href={scroogeClient} target='_blank' rel='noreferrer'>
                     Scrooge Casino Home
                   </a>
                 </li>
                 <li>
-                  <a
-                    href={pokerUrl}
-                    target='_blank'
-                    rel='noreferrer'
-                  >
+                  <a href={pokerUrl} target='_blank' rel='noreferrer'>
                     Scrooge Poker
                   </a>
                 </li>
                 <li>
-                  <a
-                    href={blackjackUrl}
-                    target='_blank'
-                    rel='noreferrer'
-                  >
+                  <a href={blackjackUrl} target='_blank' rel='noreferrer'>
                     Scrooge Blackjack
                   </a>
                 </li>
-                <li>
-                 
-                    Scrooge Roulette
-                
-                </li>
+                <li>Scrooge Roulette</li>
               </ul>
             </div>
 
@@ -203,8 +186,7 @@ const Layout = ({ children }) => {
                   <a
                     href='https://www.facebook.com/scroogegold/'
                     target='_blank'
-                    rel='noopener noreferrer'
-                  >
+                    rel='noopener noreferrer'>
                     <img src={facebook} alt='' />
                   </a>
                 </li>
@@ -212,8 +194,7 @@ const Layout = ({ children }) => {
                   <a
                     href='https://twitter.com/scrooge_coin'
                     target='_blank'
-                    rel='noopener noreferrer'
-                  >
+                    rel='noopener noreferrer'>
                     <img src={twitter} alt='' />
                   </a>
                 </li>
@@ -221,8 +202,7 @@ const Layout = ({ children }) => {
                   <a
                     href='http://t.me/scroogecoingold'
                     target='_blank'
-                    rel='noopener noreferrer'
-                  >
+                    rel='noopener noreferrer'>
                     <img src={telegram} alt='' />
                   </a>
                 </li>
@@ -230,8 +210,7 @@ const Layout = ({ children }) => {
                   <a
                     href='https://discord.gg/scroogecoin'
                     target='_blank'
-                    rel='noopener noreferrer'
-                  >
+                    rel='noopener noreferrer'>
                     <img src={discord} alt='' />
                   </a>
                 </li>
@@ -239,8 +218,7 @@ const Layout = ({ children }) => {
                   <a
                     href='https://www.reddit.com/r/scroogecoin/'
                     target='_blank'
-                    rel='noopener noreferrer'
-                  >
+                    rel='noopener noreferrer'>
                     <img src={reddit} alt='' />
                   </a>
                 </li>
@@ -251,8 +229,7 @@ const Layout = ({ children }) => {
                   <a
                     href='mailto:support@scroogegold.com'
                     target='_blank'
-                    rel='noopener noreferrer'
-                  >
+                    rel='noopener noreferrer'>
                     <img src={envelope} alt='' />
                     support@scroogegold.com
                   </a>
@@ -267,8 +244,7 @@ const Layout = ({ children }) => {
         location='bottom'
         buttonText='ACCEPT'
         cookieName='nftMarketCookieConsent'
-        expires={150}
-      >
+        expires={150}>
         <h4>Cookies Policy</h4>
         <p>
           This website uses delicious cookies to enhance the user experience.
