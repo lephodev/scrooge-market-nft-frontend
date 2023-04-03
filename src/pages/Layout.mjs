@@ -266,14 +266,14 @@ const Layout = ({ children }) => {
                   <img src={StoreIconBadge} alt='shop casino NFTs' />
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to='/claim-free-tokens'>
                   <img
                     src={ClaimIconBadge}
                     alt='claim monthly casino free tokens'
                   />
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link to='/redeem-prizes'>
                   <img
