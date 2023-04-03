@@ -29,21 +29,18 @@ export default function ClaimJRPending() {
       .then(async (contract) => {
         console.log("claimJRPEnding contract", contract);
         setContractObj(contract);
-        const divCall = await contract
-          .call("getAccountDividendsInfo", address)
-          .then((divInfo) => {
-            console.log("claimjrpending divInfo", divInfo);
-            setClaimableAmount((parseInt(divInfo[3]) / 10 ** 18).toFixed(4));
-            setSecondsUntilClaim(parseInt(divInfo[7]));
-            var t = new Date();
-            /*if(parseInt(divInfo[7]) > 0){
+        const divInfo = await contract.call("getAccountDividendsInfo", address);
+        console.log("claimjrpending divInfo", divInfo);
+        setClaimableAmount((parseInt(divInfo[3]) / 10 ** 18).toFixed(4));
+        setSecondsUntilClaim(parseInt(divInfo[7]));
+        var t = new Date();
+        /*if(parseInt(divInfo[7]) > 0){
                 t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
             }*/
-            t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
-            setClaimableIn(t.toString());
-            setClaimableInTime(t.getTime());
-            setTotalClaimed((parseInt(divInfo[4]) / 10 ** 18).toFixed(4));
-          });
+        t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
+        setClaimableIn(t.toString());
+        setClaimableInTime(t.getTime());
+        setTotalClaimed((parseInt(divInfo[4]) / 10 ** 18).toFixed(4));
       });
   };
 
