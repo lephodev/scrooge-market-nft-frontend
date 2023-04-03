@@ -22,26 +22,28 @@ export default function ClaimJRPending() {
   const sdk = useSDK();
   const address = useAddress();
   const JRContractAddress = "0x2e9F79aF51dD1bb56Bbb1627FBe4Cc90aa8985Dd";
+
   const contractClaim = async () => {
-    console.log("contractClaimcalled");
-    await sdk
-      .getContractFromAbi(JRContractAddress, JR_ABI)
-      .then(async (contract) => {
-        console.log("claimJRPEnding contract", contract);
-        setContractObj(contract);
-        const divInfo = await contract.call("getAccountDividendsInfo", address);
-        console.log("claimjrpending divInfo", divInfo);
-        setClaimableAmount((parseInt(divInfo[3]) / 10 ** 18).toFixed(4));
-        setSecondsUntilClaim(parseInt(divInfo[7]));
-        var t = new Date();
-        /*if(parseInt(divInfo[7]) > 0){
-                t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
-            }*/
-        t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
-        setClaimableIn(t.toString());
-        setClaimableInTime(t.getTime());
-        setTotalClaimed((parseInt(divInfo[4]) / 10 ** 18).toFixed(4));
-      });
+    try {
+      console.log("contractClaimcalled");
+      const contract = await sdk.getContractFromAbi(JRContractAddress, JR_ABI);
+      console.log("claimJRPEnding contract", contract);
+      setContractObj(contract);
+      const divInfo = await contract.call("getAccountDividendsInfo", address);
+      console.log("claimjrpending divInfo", divInfo);
+      setClaimableAmount((parseInt(divInfo[3]) / 10 ** 18).toFixed(4));
+      setSecondsUntilClaim(parseInt(divInfo[7]));
+      var t = new Date();
+      /*if(parseInt(divInfo[7]) > 0){
+              t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
+          }*/
+      t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
+      setClaimableIn(t.toString());
+      setClaimableInTime(t.getTime());
+      setTotalClaimed((parseInt(divInfo[4]) / 10 ** 18).toFixed(4));
+    } catch (error) {
+      console.log("errrrr", error);
+    }
   };
 
   const handleClaim = async () => {
