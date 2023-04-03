@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import failed from "../images/failed.png";
 // import submit from "../images/submit.png";
 import success from "../images/success.png";
+import pending from "../images/pending.png";
 import "../styles/kyc.css";
 
 const KYCForm = () => {
@@ -68,7 +69,7 @@ const KYCForm = () => {
       });
       return;
     }
-     let mbLimit = 10*1024*1024
+    let mbLimit = 10 * 1024 * 1024
 
     if (frontIdImage[0]?.size > mbLimit) {
       setError("IDimageFront", {
@@ -82,7 +83,7 @@ const KYCForm = () => {
         message: "Selfie with your Id image size should not be greater than 10 MB.",
       });
       return;
-    }    
+    }
 
     payload.gender = activeRatioType;
     formData.append("IDimageFront", frontIdImage[0]);
@@ -92,7 +93,7 @@ const KYCForm = () => {
     const res = await createKYC(formData);
     setLoading(false);
     if (res.status === 201) {
-      getKYCStatus();      
+      getKYCStatus();
     } else {
       toast.error("Unable to Upload the Kyc")
     }
@@ -151,7 +152,7 @@ const KYCForm = () => {
                 </div>
               </div>
             )}
-           {!globalLoader &&  <div className='kycForm marketPlace_kycForm'>
+            {!globalLoader && <div className='kycForm marketPlace_kycForm'>
               {statusKyc === "NotApplied" && (
                 <div className='login-form'>
                   <h1>Know Your Customer</h1>
@@ -200,9 +201,8 @@ const KYCForm = () => {
                         <Form.Label>Gender</Form.Label>
                         <div className='select-banner-option'>
                           <Form.Group
-                            className={`form-group ${
-                              activeRatioType === "Male" ? "active" : ""
-                            } deposit-cash-app`}
+                            className={`form-group ${activeRatioType === "Male" ? "active" : ""
+                              } deposit-cash-app`}
                             htmlFor='Male'>
                             <Form.Check
                               label='Male'
@@ -217,9 +217,8 @@ const KYCForm = () => {
                             />
                           </Form.Group>
                           <Form.Group
-                            className={`form-group ${
-                              activeRatioType === "Female" ? "active" : ""
-                            } deposit-cash-app`}
+                            className={`form-group ${activeRatioType === "Female" ? "active" : ""
+                              } deposit-cash-app`}
                             htmlFor='Female'>
                             <Form.Check
                               label='Female'
@@ -440,7 +439,7 @@ const SubmitKYC = ({ handleLogOut }) => {
     <div className='kyc-msg-grid failedErrorBox'>
       <div className='kyc-form-msg'>
         <h4>Pending Verification </h4>
-        <img src={success} alt='failed' />
+        <img src={pending} alt='failed' />
         <p>Your Documents have been submitted</p>
         {/* <span onClick={handleLogOut}>Logout</span> */}
       </div>

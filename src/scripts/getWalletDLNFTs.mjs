@@ -2,10 +2,12 @@ import {
   useAddress,
   useOwnedNFTs,
   useContract,
+  useNFTs,
   useContractMetadata,
   ThirdwebNftMedia,
   ChainId,
   useSDK,
+  useActiveListings,
 } from "@thirdweb-dev/react";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
 
@@ -37,34 +39,31 @@ export default function GetWalletDLNFTs() {
     [String(ChainId.BinanceSmartChainMainnet)]: "",
   };
 
-  console.log("addressesaddresses", addresses);
   const address = useAddress();
   const sdk = useSDK();
   const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("");
   const [nfts, setNFTs] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingg, setIsLoadingg] = useState(false);
   const [tokensClaimDate, setTokensClaimDate] = useState([
     { token_id: "", nextClaimDate: "" },
   ]);
 
-  const { contract, error } = useContract(
-    "0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768"
+  const { contract } = useContract(
+    "0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768",
+    "marketplace"
   );
-  //console.log("error", error);
-  //console.log("contract---->>>", contract);
-  //const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
-  //console.log("nfts", nfts);
+  const { data, isLoading, error } = useOwnedNFTs(contract, address);
 
   const getContrat = async () => {
-    setIsLoading(true);
+    setIsLoadingg(true);
     console.log("--callled getcont---");
     try {
       const NFTs = await marketPlaceInstance().get(`/getDLNFTs/${address}`);
       console.log(NFTs.data.allNFTs);
       let nft = NFTs.data.allNFTs.filter((n) => n.owner === address);
       setNFTs(nft);
-      setIsLoading(false);
+      setIsLoadingg(false);
       console.log("nfttt---", nft);
     } catch (error) {
       console.log(error);
@@ -188,7 +187,7 @@ export default function GetWalletDLNFTs() {
         <></>
       )}
 
-      {isLoading && selectedChain === ChainId.Mainnet ? (
+      {isLoadingg && selectedChain === ChainId.Mainnet ? (
         <div className='button-section'>
           <div style={{ fontFamily: "Poppins" }}>
             LOADING YOUR DUCKY LUCKS NFTS
