@@ -16,6 +16,7 @@ import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
 import { authInstance, marketPlaceInstance } from "../config/axios.js";
 import { async } from "q";
+import { Button } from "react-bootstrap";
 
 function RedeemPrizes() {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ function RedeemPrizes() {
   const [currentPriceJR, setCurrentPriceJR] = useState("Loading...");
   const [showConvert, setShowConvert] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
+  const [buyTokenTab, setBuyTokenTab] = useState(false);
 
   const [OG1000, setOG1000] = useState();
   const [OG5000, setOG5000] = useState();
@@ -112,6 +114,13 @@ function RedeemPrizes() {
         setShowConvert(false);
       } else if (filterOn === "convert") {
         setShowConvert(true);
+        setBuyTokenTab(false);
+        setPrizes([]);
+        // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
+        //console.log('nfts: ',prizes);
+      } else if (filterOn === "buy_token") {
+        setBuyTokenTab(true);
+        setShowConvert(false);
         setPrizes([]);
         // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
@@ -369,40 +378,54 @@ function RedeemPrizes() {
                       Convert ticket to token
                     </button>
                   </div>
-                </div>
-                <div className='page-nav-header-btns-subrow'>
-                  <button
-                    className='page-nav-header-subbtn'
-                    onClick={() => sortPrizes("priceDescending")}>
-                    PRICE HIGH TO LOW
-                  </button>
-                  <button
-                    className='page-nav-header-subbtn'
-                    onClick={() => sortPrizes("priceAscending")}>
-                    PRICE LOW TO HIGH
-                  </button>
-                  <button
-                    className='page-nav-header-subbtn'
-                    onClick={() => sortPrizes("nameDescending")}>
-                    NAME A-Z
-                  </button>
-                  <button
-                    className='page-nav-header-subbtn'
-                    onClick={() => sortPrizes("nameAscending")}>
-                    NAME Z-A
-                  </button>
-                  <button
-                    className='page-nav-header-subbtn'
-                    onClick={() => sortPrizes("categoryDescending")}>
-                    CATEGORY A-Z
-                  </button>
-                  <button
-                    className='page-nav-header-subbtn'
-                    onClick={() => sortPrizes("categoryAscending")}>
-                    CATEGORY Z-A
-                  </button>
+                  {/* <div className='new-btn'>
+                    <button onClick={() => filterPrizes("buy_token")}>
+                      Buy Tokens
+                    </button>
+                  </div> */}
                 </div>
 
+                {buyTokenTab && (
+                  <div className='buyTokenTab'>
+                    <h2>Buy Tokens Here .. </h2>
+                    <Button className='buyTokensBtn'>Buy Tokens</Button>
+                  </div>
+                )}
+
+                {!showConvert && (
+                  <div className='page-nav-header-btns-subrow'>
+                    <button
+                      className='page-nav-header-subbtn'
+                      onClick={() => sortPrizes("priceDescending")}>
+                      PRICE HIGH TO LOW
+                    </button>
+                    <button
+                      className='page-nav-header-subbtn'
+                      onClick={() => sortPrizes("priceAscending")}>
+                      PRICE LOW TO HIGH
+                    </button>
+                    <button
+                      className='page-nav-header-subbtn'
+                      onClick={() => sortPrizes("nameDescending")}>
+                      NAME A-Z
+                    </button>
+                    <button
+                      className='page-nav-header-subbtn'
+                      onClick={() => sortPrizes("nameAscending")}>
+                      NAME Z-A
+                    </button>
+                    <button
+                      className='page-nav-header-subbtn'
+                      onClick={() => sortPrizes("categoryDescending")}>
+                      CATEGORY A-Z
+                    </button>
+                    <button
+                      className='page-nav-header-subbtn'
+                      onClick={() => sortPrizes("categoryAscending")}>
+                      CATEGORY Z-A
+                    </button>
+                  </div>
+                )}
                 <div className='prizes-container'>
                   {showConvert && (
                     <>
