@@ -26,7 +26,7 @@ export default function ClaimJRPending() {
   const contractClaim = async () => {
     try {
       console.log("contractClaimcalled");
-      const contract = await sdk.getContract(JRContractAddress, JR_ABI);
+      const contract = await sdk.getContractFromAbi(JRContractAddress, JR_ABI);
       console.log("claimJRPEnding contract", contract);
       setContractObj(contract);
       const divInfo = await contract.call("getAccountDividendsInfo", address);
@@ -50,16 +50,16 @@ export default function ClaimJRPending() {
   const handleClaim = async () => {
     setIsClaiming(true);
     try {
-      const claimCall = await contractObj.call("claim").then((claim) => {
-        //console.log('claimed');
-      });
+      const claimCall = await contractObj.call("claim");
+      setIsClaiming(false);
+      //console.log('claimed');
+      notify("Your pending BUSD rewards have been successfully claimed!");
+      reward();
+      contractClaim();
     } catch (error) {
-      alert("Error claiming rewards. Please try again.");
+      toast.error("Error claiming rewards. Please try again.");
+      setIsClaiming(false);
     }
-    setIsClaiming(false);
-    notify("Your pending BUSD rewards have been successfully claimed!");
-    reward();
-    contractClaim();
   };
 
   function getCountdown(claimableIn) {
