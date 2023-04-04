@@ -350,13 +350,13 @@ function RedeemPrizes() {
                       CRYPTO
                     </button>
                   </div>
-                  {/* <div className='new-btn'>
+                  <div className='new-btn'>
                     <button
                       // className='page-nav-header-btn'
                       onClick={() => filterPrizes("Merch")}>
                       MERCH
                     </button>
-                  </div> */}
+                  </div>
                   <div className='new-btn'>
                     <button
                       // className='page-nav-header-btn'
@@ -370,7 +370,6 @@ function RedeemPrizes() {
                     </button>
                   </div>
                 </div>
-                {!showConvert &&
                 <div className='page-nav-header-btns-subrow'>
                   <button
                     className='page-nav-header-subbtn'
@@ -403,7 +402,7 @@ function RedeemPrizes() {
                     CATEGORY Z-A
                   </button>
                 </div>
-}
+
                 <div className='prizes-container'>
                   {showConvert && (
                     <>
@@ -510,355 +509,353 @@ function RedeemPrizes() {
                   {!prizesLoading ? (
                     <>
                       <div className='prizes_container'>
-                        {prizes
-                          .filter((f) => f.redeem_action !== "burn")
-                          .map((prize) => (
-                            <div className='prizes-card' key={prize._id}>
-                              {console.log("prize", prize._id)}
-                              {!prize.isDynamic ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>{prize.name}</h4>
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG1000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(JR1000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG1000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(JR1000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG5000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(JR5000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf761736630ad01d5f52" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG5000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedfb61736630ad01d5f55" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(JR5000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf301736630ad01d5f4f" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG10000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf651736630ad01d5f51" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(JR10000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG10000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedfc51736630ad01d5f56" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(JR10000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              <img
-                                className='card-img pulse'
-                                src={prize.image_url}
-                                alt={prize.name}
-                              />
-                              <br></br>
-                              <div className='prize-cost'>
-                                <p>Cost: {prize.price} Tickets</p>
+                        {prizes.map((prize) => (
+                          <div className='prizes-card' key={prize._id}>
+                            {console.log("prize", prize._id)}
+                            {!prize.isDynamic ? (
+                              <div className='prize-name bold text-animate'>
+                                <h4>{prize.name}</h4>
                               </div>
-                              <br></br>
-                              <p>Category: {prize.category}</p>
-                              <br></br>
-
-                              {!prize.isDynamic ? (
-                                <div>
-                                  <p>{prize.description}</p>
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                                <div className=''>
-                                  {prize.description.replace(
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63b74c51dd789f0383a51d3b" ? (
+                              <div className='prize-name bold text-animate'>
+                                <h4>
+                                  {" "}
+                                  {prize.name.replace(
                                     "xxxValue",
                                     parseInt(OG1000).toLocaleString("en-US")
                                   )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                                <div className=''>
-                                  {prize.description.replace(
+                                </h4>
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63b74ce7dd789f0383a51d3c" ? (
+                              <div className='prize-name bold text-animate'>
+                                <h4>
+                                  {" "}
+                                  {prize.name.replace(
                                     "xxxValue",
                                     parseInt(JR1000).toLocaleString("en-US")
                                   )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                                <div className=''>
-                                  {prize.description.replace(
+                                </h4>
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63b78b42dd789f0383a51d3d" ? (
+                              <div className='prize-name bold text-animate'>
+                                <h4>
+                                  {prize.name.replace(
                                     "xxxValue",
                                     parseInt(OG1000).toLocaleString("en-US")
                                   )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                                <div className=''>
-                                  {prize.description.replace(
+                                </h4>
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63b78c0edd789f0383a51d3f" ? (
+                              <div className='prize-name bold text-animate'>
+                                <h4>
+                                  {" "}
+                                  {prize.name.replace(
                                     "xxxValue",
                                     parseInt(JR1000).toLocaleString("en-US")
                                   )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(OG5000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(JR5000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf761736630ad01d5f52" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(OG5000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedfb61736630ad01d5f55" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(JR5000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf301736630ad01d5f4f" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(OG10000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf651736630ad01d5f51" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(JR10000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(OG10000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedfc51736630ad01d5f56" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(JR10000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize.isDynamic ? (
-                                <div className='asterisk-desc'>
-                                  *Amount received is calculated at time of
-                                  redemption and may vary from the amount
-                                  displayed.
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              <br />
-                              <div className='redeem-btn'>
-                                <button
-                                  // className='submit-btn'
-                                  className='gradient-btn'
-                                  onClick={() => RedeemPrize(prize._id)}>
-                                  REDEEM PRIZE
-                                </button>
+                                </h4>
+                                *
                               </div>
-
-                              <br></br>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedf0d1736630ad01d5f4e" ? (
+                              <div className='prize-name bold text-animate'>
+                                <h4>
+                                  {prize.name.replace(
+                                    "xxxValue",
+                                    parseInt(OG5000).toLocaleString("en-US")
+                                  )}
+                                </h4>
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedf5a1736630ad01d5f50" ? (
+                              <div className='prize-name bold text-animate'>
+                                <h4>
+                                  {" "}
+                                  {prize.name.replace(
+                                    "xxxValue",
+                                    parseInt(JR5000).toLocaleString("en-US")
+                                  )}
+                                </h4>
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedf761736630ad01d5f52" ? (
+                              <div className='prize-name bold text-animate'>
+                                <h4>
+                                  {" "}
+                                  {prize.name.replace(
+                                    "xxxValue",
+                                    parseInt(OG5000).toLocaleString("en-US")
+                                  )}
+                                </h4>
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedfb61736630ad01d5f55" ? (
+                              <div className='prize-name bold text-animate'>
+                                <h4>
+                                  {prize.name.replace(
+                                    "xxxValue",
+                                    parseInt(JR5000).toLocaleString("en-US")
+                                  )}
+                                </h4>
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedf301736630ad01d5f4f" ? (
+                              <div className='prize-name bold text-animate'>
+                                <h4>
+                                  {" "}
+                                  {prize.name.replace(
+                                    "xxxValue",
+                                    parseInt(OG10000).toLocaleString("en-US")
+                                  )}
+                                </h4>
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedf651736630ad01d5f51" ? (
+                              <div className='prize-name bold text-animate'>
+                                <h4>
+                                  {" "}
+                                  {prize.name.replace(
+                                    "xxxValue",
+                                    parseInt(JR10000).toLocaleString("en-US")
+                                  )}
+                                </h4>
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedf9d1736630ad01d5f54" ? (
+                              <div className='prize-name bold text-animate'>
+                                <h4>
+                                  {prize.name.replace(
+                                    "xxxValue",
+                                    parseInt(OG10000).toLocaleString("en-US")
+                                  )}
+                                </h4>
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedfc51736630ad01d5f56" ? (
+                              <div className='prize-name bold text-animate'>
+                                <h4>
+                                  {prize.name.replace(
+                                    "xxxValue",
+                                    parseInt(JR10000).toLocaleString("en-US")
+                                  )}
+                                </h4>
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            <img
+                              className='card-img pulse'
+                              src={prize.image_url}
+                              alt={prize.name}
+                            />
+                            <br></br>
+                            <div className='prize-cost'>
+                              <p>Cost: {prize.price} Tickets</p>
                             </div>
-                          ))}
+                            <br></br>
+                            <p>Category: {prize.category}</p>
+                            <br></br>
+
+                            {!prize.isDynamic ? (
+                              <div>
+                                <p>{prize.description}</p>
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63b74c51dd789f0383a51d3b" ? (
+                              <div className=''>
+                                {prize.description.replace(
+                                  "xxxValue",
+                                  parseInt(OG1000).toLocaleString("en-US")
+                                )}
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63b74ce7dd789f0383a51d3c" ? (
+                              <div className=''>
+                                {prize.description.replace(
+                                  "xxxValue",
+                                  parseInt(JR1000).toLocaleString("en-US")
+                                )}
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63b78b42dd789f0383a51d3d" ? (
+                              <div className=''>
+                                {prize.description.replace(
+                                  "xxxValue",
+                                  parseInt(OG1000).toLocaleString("en-US")
+                                )}
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63b78c0edd789f0383a51d3f" ? (
+                              <div className=''>
+                                {prize.description.replace(
+                                  "xxxValue",
+                                  parseInt(JR1000).toLocaleString("en-US")
+                                )}
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedf0d1736630ad01d5f4e" ? (
+                              <div className=''>
+                                {prize.description.replace(
+                                  "xxxValue",
+                                  parseInt(OG5000).toLocaleString("en-US")
+                                )}
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedf5a1736630ad01d5f50" ? (
+                              <div className=''>
+                                {prize.description.replace(
+                                  "xxxValue",
+                                  parseInt(JR5000).toLocaleString("en-US")
+                                )}
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedf761736630ad01d5f52" ? (
+                              <div className=''>
+                                {prize.description.replace(
+                                  "xxxValue",
+                                  parseInt(OG5000).toLocaleString("en-US")
+                                )}
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedfb61736630ad01d5f55" ? (
+                              <div className=''>
+                                {prize.description.replace(
+                                  "xxxValue",
+                                  parseInt(JR5000).toLocaleString("en-US")
+                                )}
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedf301736630ad01d5f4f" ? (
+                              <div className=''>
+                                {prize.description.replace(
+                                  "xxxValue",
+                                  parseInt(OG10000).toLocaleString("en-US")
+                                )}
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedf651736630ad01d5f51" ? (
+                              <div className=''>
+                                {prize.description.replace(
+                                  "xxxValue",
+                                  parseInt(JR10000).toLocaleString("en-US")
+                                )}
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedf9d1736630ad01d5f54" ? (
+                              <div className=''>
+                                {prize.description.replace(
+                                  "xxxValue",
+                                  parseInt(OG10000).toLocaleString("en-US")
+                                )}
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize._id === "63cedfc51736630ad01d5f56" ? (
+                              <div className=''>
+                                {prize.description.replace(
+                                  "xxxValue",
+                                  parseInt(JR10000).toLocaleString("en-US")
+                                )}
+                                *
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {prize.isDynamic ? (
+                              <div className='asterisk-desc'>
+                                *Amount received is calculated at time of
+                                redemption and may vary from the amount
+                                displayed.
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            <br />
+                            <div className='redeem-btn'>
+                              <button
+                                // className='submit-btn'
+                                className='gradient-btn'
+                                onClick={() => RedeemPrize(prize._id)}>
+                                REDEEM PRIZE
+                              </button>
+                            </div>
+
+                            <br></br>
+                          </div>
+                        ))}
                       </div>
                     </>
                   ) : (
