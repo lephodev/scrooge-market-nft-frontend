@@ -85,6 +85,9 @@ const Layout = ({ children }) => {
                   <Link to='/claim-free-tokens'>Claim Monthly Tokens</Link>
                 </li> */}
                 <li>
+                  <Link to='/crypto-to-tokens'>Crypto To Token</Link>
+                </li>
+                <li>
                   <Link to='/redeem-prizes'>Redeem Prizes</Link>
                 </li>
                 <li>
@@ -267,13 +270,21 @@ const Layout = ({ children }) => {
                 </Link>
               </li>
               <li>
-                <Link to='/claim-free-tokens'>
+                <Link to='/crypto-to-tokens'>
                   <img
                     src={ClaimIconBadge}
                     alt='claim monthly casino free tokens'
                   />
                 </Link>
               </li>
+              {/* <li>
+                <Link to='/claim-free-tokens'>
+                  <img
+                    src={ClaimIconBadge}
+                    alt='claim monthly casino free tokens'
+                  />
+                </Link>
+              </li> */}
               <li>
                 <Link to='/redeem-prizes'>
                   <img

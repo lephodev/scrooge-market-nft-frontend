@@ -47,16 +47,15 @@ export default function ClaimOGPending() {
   const handleClaim = async () => {
     setIsClaiming(true);
     try {
-      const claimCall = await contractObj.call("claim").then((claim) => {
-        //console.log('claimed');
-      });
+      const claimCall = await contractObj.call("claim");
+      setIsClaiming(false);
+      notify("Your pending BUSD rewards have been successfully claimed!");
+      reward();
+      contractClaim();
     } catch (error) {
-      alert("Error claiming rewards. Please try again.");
+      toast.error("Error claiming rewards. Please try again.");
+      setIsClaiming(false);
     }
-    setIsClaiming(false);
-    notify("Your pending BUSD rewards have been successfully claimed!");
-    reward();
-    contractClaim();
   };
 
   function getCountdown(claimableIn) {
@@ -87,8 +86,7 @@ export default function ClaimOGPending() {
             <div className='new-btn'>
               <button
                 // className='claim-btn'
-                onClick={() => handleClaim()}
-              >
+                onClick={() => handleClaim()}>
                 Claim Pending Rewards
               </button>
             </div>
