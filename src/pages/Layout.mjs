@@ -81,9 +81,9 @@ const Layout = ({ children }) => {
                 <li>
                   <Link to='/nft-tokens'>Casino NFT Shop</Link>
                 </li>
-                {/* <li>
+                <li>
                   <Link to='/claim-free-tokens'>Claim Monthly Tokens</Link>
-                </li> */}
+                </li>
                 <li>
                   <Link to='/crypto-to-tokens'>Crypto To Token</Link>
                 </li>
@@ -272,19 +272,19 @@ const Layout = ({ children }) => {
               <li>
                 <Link to='/crypto-to-tokens'>
                   <img
-                    src={ClaimIconBadge}
+                    src={WalletIconBadge}
                     alt='claim monthly casino free tokens'
                   />
                 </Link>
               </li>
-              {/* <li>
+              <li>
                 <Link to='/claim-free-tokens'>
                   <img
                     src={ClaimIconBadge}
                     alt='claim monthly casino free tokens'
                   />
                 </Link>
-              </li> */}
+              </li>
               <li>
                 <Link to='/redeem-prizes'>
                   <img

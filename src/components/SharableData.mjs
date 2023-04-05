@@ -363,7 +363,7 @@ export default function SharableData() {
         <></>
       )}
       {console.log(affUser?.success)}
-      {/* {user && affUser?.success && showDailyRewards ? (
+      {user && affUser?.success && showDailyRewards ? (
         <>
           <div className='close-btn-round-div'>
             <div
@@ -377,7 +377,7 @@ export default function SharableData() {
         </>
       ) : (
         <></>
-      )} */}
+      )}
 
       {showAffLeaderboards ? (
         <>
