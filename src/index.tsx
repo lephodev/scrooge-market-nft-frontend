@@ -139,10 +139,10 @@ export default function App() {
                   path='/crypto-to-tokens'
                   element={<ProtectedRoute component={<BuyTokenFromOGJR />} />}
                 />
-                {/* <Route
+                <Route
                   path='/claim-free-tokens'
                   element={<ProtectedRoute component={<HolderClaimChips />} />}
-                /> */}
+                />
                 {/* <Route
                   path='/kyc'
                   element={<ProtectedRoute component={<KycForm />} />}
