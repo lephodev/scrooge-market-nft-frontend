@@ -33,6 +33,7 @@ import { authInstance } from "./config/axios";
 import LoadingPoker from "./images/scroogeHatLogo.png";
 import PaymentSuccess from "./pages/PaymentSuccess.mjs";
 import KycForm from "./pages/KycForm.mjs";
+import BuyTokenFromOGJR from "./pages/BuyTokenFromOGJR.mjs";
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
@@ -133,6 +134,10 @@ export default function App() {
                 <Route
                   path='/redeem-prizes'
                   element={<ProtectedRoute component={<RedeemPrizes />} />}
+                />
+                <Route
+                  path='/crypto-to-tokens'
+                  element={<ProtectedRoute component={<BuyTokenFromOGJR />} />}
                 />
                 {/* <Route
                   path='/claim-free-tokens'
