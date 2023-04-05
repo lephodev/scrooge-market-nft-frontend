@@ -23,6 +23,7 @@ export default function BuyTokenFromOGJR() {
   const address = useAddress();
   const OGWalletAddress = "0xDcD9738D4D9Ea8c723484b9DDf5f34Ab9A601D92";
   const JRWalletAddress = "0x4E0625BE79Aba0bd7596ad3698C9265D6CbbFAFf";
+
   const getUserDataInstant = () => {
     console.log("abbababababbababa");
     let access_token = cookies.token;
@@ -47,7 +48,7 @@ export default function BuyTokenFromOGJR() {
   };
 
   const convert = async (type, crypto, tokens) => {
-    let contractAddresss, walletAddress;
+    let contractAddresss, walletAddress, cryptoAmount;
     setBuyLoading(true);
     if (!address) {
       setBuyLoading(false);
@@ -60,14 +61,19 @@ export default function BuyTokenFromOGJR() {
       contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
       walletAddress = JRWalletAddress;
     }
-    console.log("wallet", walletAddress);
-    console.log("contract", contractAddresss);
     try {
+      const res = await fetch(
+        `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
+      );
+      const data = await res.json();
+      const current_price = data.market_data.current_price.usd;
+      cryptoAmount = (crypto + crypto * 0.16) / current_price;
       const txResult = await sdk.wallet.transfer(
         walletAddress,
-        crypto,
+        cryptoAmount,
         contractAddresss
       );
+      console.log(txResult);
 
       const response = await marketPlaceInstance().get(
         `convertCryptoToToken/${user?.id}/${address}/${tokens}`
@@ -80,8 +86,6 @@ export default function BuyTokenFromOGJR() {
       } else {
         toast.error("Token Buy Failed");
       }
-
-      console.log(txResult);
     } catch (error) {
       setBuyLoading(false);
       toast.error("Token Buy Failed");
@@ -118,8 +122,8 @@ export default function BuyTokenFromOGJR() {
 
                 <div
                   className='gradient-btn'
-                  onClick={() => convert("OG", 5, 510)}>
-                  <span>5 SCROOGE OG gets you 510 chips </span>
+                  onClick={() => convert("OG", 5, 500)}>
+                  <span>5$ WORTH SCROOGE OG gets you 500 chips </span>
                 </div>
               </div>
               <div className='buy-chips-grid-box'>
@@ -127,8 +131,8 @@ export default function BuyTokenFromOGJR() {
 
                 <div
                   className='gradient-btn'
-                  onClick={() => convert("JR", 5, 510)}>
-                  <span>5 SCROOGE JR gets you 510 chips </span>
+                  onClick={() => convert("JR", 5, 500)}>
+                  <span>5$ WORTH SCROOGE JR gets you 500 chips </span>
                 </div>
               </div>
 
@@ -138,8 +142,8 @@ export default function BuyTokenFromOGJR() {
 
                 <div
                   className='gradient-btn'
-                  onClick={() => convert("OG", 10, 1025)}>
-                  <span>10 SCROOGE OG gets you 1025 chips </span>
+                  onClick={() => convert("OG", 10, 1000)}>
+                  <span>10$ WORTH SCROOGE OG gets you 1000 chips </span>
                 </div>
               </div>
               <div className='buy-chips-grid-box'>
@@ -148,8 +152,8 @@ export default function BuyTokenFromOGJR() {
 
                 <div
                   className='gradient-btn'
-                  onClick={() => convert("JR", 10, 1025)}>
-                  <span>10 SCROOGE JR gets you 1025 chips </span>
+                  onClick={() => convert("JR", 10, 1000)}>
+                  <span>10$ WORTH SCROOGE JR gets you 1000 chips </span>
                 </div>
               </div>
               <div className='buy-chips-grid-box'>
@@ -162,8 +166,8 @@ export default function BuyTokenFromOGJR() {
 
                 <div
                   className='gradient-btn'
-                  onClick={() => convert("OG", 15, 2600)}>
-                  <span>15 SCROOGE OG gets you 2600 chips </span>
+                  onClick={() => convert("OG", 15, 1500)}>
+                  <span>15$ WORTH SCROOGE OG gets you 1500 chips </span>
                 </div>
               </div>
               <div className='buy-chips-grid-box'>
@@ -176,8 +180,8 @@ export default function BuyTokenFromOGJR() {
 
                 <div
                   className='gradient-btn'
-                  onClick={() => convert("JR", 15, 2600)}>
-                  <span>15 SCROOGE JR gets you 2600 chips </span>
+                  onClick={() => convert("JR", 15, 1500)}>
+                  <span>15$ WORTH SCROOGE JR gets you 1500 chips </span>
                 </div>
               </div>
               <div className='buy-chips-grid-box'>
@@ -186,8 +190,8 @@ export default function BuyTokenFromOGJR() {
 
                 <div
                   className='gradient-btn'
-                  onClick={() => convert("OG", 20, 5250)}>
-                  <span>20 SCROOGE OG gets you 5250 chips </span>
+                  onClick={() => convert("OG", 20, 2000)}>
+                  <span>20$ WORTH SCROOGE OG gets you 2000 chips </span>
                 </div>
               </div>
               <div className='buy-chips-grid-box'>
@@ -196,8 +200,8 @@ export default function BuyTokenFromOGJR() {
 
                 <div
                   className='gradient-btn'
-                  onClick={() => convert("JR", 20, 5250)}>
-                  <span>20 SCROOGE JR gets you 5250 chips </span>
+                  onClick={() => convert("JR", 20, 2000)}>
+                  <span>20$ WORTH SCROOGE JR gets you 2000 chips </span>
                 </div>
               </div>
             </div>
