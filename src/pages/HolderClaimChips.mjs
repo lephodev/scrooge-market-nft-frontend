@@ -161,8 +161,7 @@ function HolderClaimChips() {
                     href={scroogeClient}
                     target='_blank'
                     rel='noreferrer'
-                    alt='claim free tokens to spend in Scrooge Casino'
-                  >
+                    alt='claim free tokens to spend in Scrooge Casino'>
                     Scrooge Casino
                   </a>{" "}
                   tokens just by clicking the CLAIM TOKENS button.
@@ -222,11 +221,9 @@ function HolderClaimChips() {
                           )
                         </span>{" "}
                         <div>X</div>
-                        <span>EARNING RATE (10%)</span> <div>=</div>
+                        <span>EARNING RATE (100%)</span> <div>=</div>
                         {currentPrice > 0
-                          ? OGBalance *
-                            parseFloat(currentPrice).toFixed(10) *
-                            0.1
+                          ? OGBalance * parseFloat(currentPrice).toFixed(10)
                           : 0}
                       </div>
                     </div>
@@ -237,7 +234,7 @@ function HolderClaimChips() {
                           {OGBalance > 0 ? (
                             <>
                               {currentPrice > 0
-                                ? (OGBalance * currentPrice * 0.1)
+                                ? (OGBalance * currentPrice)
                                     .toFixed(0)
                                     .toLocaleString("en-US")
                                 : 0}
@@ -256,10 +253,9 @@ function HolderClaimChips() {
                             <button
                               disabled={disable}
                               // className='submit-btn'
-                              onClick={() => claimTokens()}
-                            >
+                              onClick={() => claimTokens()}>
                               Claim{" "}
-                              {(OGBalance * currentPrice * 0.1)
+                              {(OGBalance * currentPrice)
                                 .toFixed(0)
                                 .toLocaleString("en-US")}{" "}
                               Tokens
@@ -277,8 +273,7 @@ function HolderClaimChips() {
                                     <button
                                       disabled={disable}
                                       className='submit-btn'
-                                      onClick={() => claimTokens()}
-                                    >
+                                      onClick={() => claimTokens()}>
                                       Claim{" "}
                                       {currentPrice > 0
                                         ? (OGBalance * currentPrice * 0.1)
@@ -320,8 +315,7 @@ function HolderClaimChips() {
                         href={scroogeClient}
                         alt='Visit Scrooge Casino'
                         target='_blank'
-                        rel='noreferrer'
-                      >
+                        rel='noreferrer'>
                         Scrooge Casino
                       </a>{" "}
                       account.
