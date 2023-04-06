@@ -21,7 +21,9 @@ export default function ClaimOGPending() {
   });
   const sdk = useSDK();
   const address = useAddress();
+  console.log("addedee24",address);
   const OGContractAddress = process.env.REACT_APP_OGCONTRACT_ADDRESS;
+  console.log("OGContractAddressOGContractAddress25",OGContractAddress);
   const contractClaim = async () =>
     await sdk
       .getContractFromAbi(OGContractAddress, OG_ABI)
