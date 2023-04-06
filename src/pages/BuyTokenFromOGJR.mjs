@@ -68,12 +68,13 @@ export default function BuyTokenFromOGJR() {
       const data = await res.json();
       const current_price = data.market_data.current_price.usd;
       cryptoAmount = (crypto + crypto * 0.16) / current_price;
+      console.log("fdfdfd");
       const txResult = await sdk.wallet.transfer(
         walletAddress,
         cryptoAmount,
         contractAddresss
       );
-      console.log(txResult);
+      console.log("insidetryerror", txResult.data);
 
       const response = await marketPlaceInstance().get(
         `convertCryptoToToken/${user?.id}/${address}/${tokens}`
@@ -89,7 +90,7 @@ export default function BuyTokenFromOGJR() {
     } catch (error) {
       setBuyLoading(false);
       toast.error("Token Buy Failed");
-      console.log(error);
+      console.log("errordata", error);
     }
   };
   return (
@@ -123,7 +124,7 @@ export default function BuyTokenFromOGJR() {
                 <div
                   className='gradient-btn'
                   onClick={() => convert("OG", 5, 500)}>
-                  <span>5$ WORTH SCROOGE OG gets you 500 chips </span>
+                  <span>5$ WORTH SCROOGE OG gets you 500 Tokens </span>
                 </div>
               </div>
               <div className='buy-chips-grid-box'>
@@ -132,7 +133,7 @@ export default function BuyTokenFromOGJR() {
                 <div
                   className='gradient-btn'
                   onClick={() => convert("JR", 5, 500)}>
-                  <span>5$ WORTH SCROOGE JR gets you 500 chips </span>
+                  <span>5$ WORTH SCROOGE JR gets you 500 Tokens </span>
                 </div>
               </div>
 
@@ -143,7 +144,7 @@ export default function BuyTokenFromOGJR() {
                 <div
                   className='gradient-btn'
                   onClick={() => convert("OG", 10, 1000)}>
-                  <span>10$ WORTH SCROOGE OG gets you 1000 chips </span>
+                  <span>10$ WORTH SCROOGE OG gets you 1000 Tokens </span>
                 </div>
               </div>
               <div className='buy-chips-grid-box'>
@@ -153,7 +154,7 @@ export default function BuyTokenFromOGJR() {
                 <div
                   className='gradient-btn'
                   onClick={() => convert("JR", 10, 1000)}>
-                  <span>10$ WORTH SCROOGE JR gets you 1000 chips </span>
+                  <span>10$ WORTH SCROOGE JR gets you 1000 Tokens </span>
                 </div>
               </div>
               <div className='buy-chips-grid-box'>
@@ -167,7 +168,7 @@ export default function BuyTokenFromOGJR() {
                 <div
                   className='gradient-btn'
                   onClick={() => convert("OG", 15, 1500)}>
-                  <span>15$ WORTH SCROOGE OG gets you 1500 chips </span>
+                  <span>15$ WORTH SCROOGE OG gets you 1500 Tokens </span>
                 </div>
               </div>
               <div className='buy-chips-grid-box'>
@@ -181,7 +182,7 @@ export default function BuyTokenFromOGJR() {
                 <div
                   className='gradient-btn'
                   onClick={() => convert("JR", 15, 1500)}>
-                  <span>15$ WORTH SCROOGE JR gets you 1500 chips </span>
+                  <span>15$ WORTH SCROOGE JR gets you 1500 Tokens </span>
                 </div>
               </div>
               <div className='buy-chips-grid-box'>
@@ -191,7 +192,7 @@ export default function BuyTokenFromOGJR() {
                 <div
                   className='gradient-btn'
                   onClick={() => convert("OG", 20, 2000)}>
-                  <span>20$ WORTH SCROOGE OG gets you 2000 chips </span>
+                  <span>20$ WORTH SCROOGE OG gets you 2000 Tokens </span>
                 </div>
               </div>
               <div className='buy-chips-grid-box'>
@@ -201,7 +202,7 @@ export default function BuyTokenFromOGJR() {
                 <div
                   className='gradient-btn'
                   onClick={() => convert("JR", 20, 2000)}>
-                  <span>20$ WORTH SCROOGE JR gets you 2000 chips </span>
+                  <span>20$ WORTH SCROOGE JR gets you 2000 Tokens </span>
                 </div>
               </div>
             </div>
