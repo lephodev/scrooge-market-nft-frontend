@@ -89,7 +89,12 @@ export default function BuyTokenFromOGJR() {
       }
     } catch (error) {
       setBuyLoading(false);
-      toast.error("Token Buy Failed");
+      if(error?.reason === 'ERC20: transfer amount exceeds balance'){
+        toast.error("You don't have sufficient balance in your Scrooge")
+      }else{
+        toast.error(error?.reason);
+      }
+      //toast.error("Token Buy Failed");
       console.log("errordata", error);
     }
   };
