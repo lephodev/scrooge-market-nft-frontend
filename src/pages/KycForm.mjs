@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Form, Spinner } from "react-bootstrap";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import cross from "../images/close-icon.svg";
-import { createKYC, userKycDetails } from "../utils/api.mjs";
+import { createKYC, userKycDetails,reApply } from "../utils/api.mjs";
 import { createKYCSchema } from "../utils/validationSchema.mjs";
 import { toast } from "react-toastify";
 import Layout from "./Layout.mjs";
@@ -110,6 +110,18 @@ const KYCForm = () => {
       }
     }
   };
+
+  const reapply=async()=>{
+    const response = await reApply();
+    setglobalLoader(true);
+    if(response?.code===200){
+      setglobalLoader(false);
+      setstatusKyc(response.message);
+    }else{
+      setglobalLoader(false);
+      toast.error(response.message, { toastId: "error-fetching-kyc-details" });
+    }
+  }
 
   const getKYCStatus = async () => {
     const response = await userKycDetails();
@@ -420,7 +432,7 @@ const KYCForm = () => {
                 <SubmitKYC handleLogOut={handleLogOut} />
               )}
               {statusKyc === "reject" && (
-                <FailedKYC handleLogOut={handleLogOut} />
+                <FailedKYC handleLogOut={handleLogOut} reapply={reapply}/>
               )}
               {statusKyc === "accept" && (
                 <SuccessKYC handleLogOut={handleLogOut} />
@@ -447,7 +459,7 @@ const SubmitKYC = ({ handleLogOut }) => {
   );
 };
 
-const FailedKYC = ({ handleLogOut }) => {
+const FailedKYC = ({ handleLogOut, reapply}) => {
   return (
     <div className='kyc-msg-grid failedErrorBox'>
       <div className='kyc-form-msg'>
@@ -457,6 +469,7 @@ const FailedKYC = ({ handleLogOut }) => {
           You already have an account with us, please contact support to get
           more information.
         </p>
+        <button onClick={reapply}>Re-Apply</button>
         {/* <Link to="/">Contact Support</Link>
         <span onClick={handleLogOut}>Logout</span> */}
       </div>
