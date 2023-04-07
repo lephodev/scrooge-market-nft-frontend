@@ -29,7 +29,9 @@ export default function ClaimJRPending() {
       const contract = await sdk.getContractFromAbi(JRContractAddress, JR_ABI);
       console.log("claimJRPEnding contract", contract);
       setContractObj(contract);
-      const divInfo = await contract.call("getAccountDividendsInfo", address);
+      const accBal = await contract.erc20.balance(address);
+      console.log("accBal", accBal);
+      const divInfo = await contract.call("getAccountDividendsInfo", [address]);
       // const divInfo = await contract.call("getAccountDividendsInfo", address);
       console.log("claimjrpending divInfo", divInfo);
       setClaimableAmount((parseInt(divInfo[3]) / 10 ** 18).toFixed(4));
