@@ -255,6 +255,15 @@ function HolderClaimChips() {
                         )}
                       </div>
                       <div className='additional-info-div'>
+                        <div className='disclaimer-Box'>
+                          <h4>Disclaimer</h4>
+                          <p>
+                            Maximum allowable claim every 30 days is 3000
+                            tokens. Minimum allowable claim is 50 tokens. This
+                            amount is subject to increase/decrease based upon
+                            current market conditions.
+                          </p>
+                        </div>
                         {(new Date(nextClaimDate) <= new Date() ||
                           nextClaimDate === "No Entries Found") &&
                         OGBalance >= 0 ? (
@@ -274,13 +283,19 @@ function HolderClaimChips() {
                               </button>
                             ) : (
                               <>
-                                <button disabled={true}>
+                                <button
+                                  disabled={disable}
+                                  onClick={() => {
+                                    setDisable(true);
+                                    setTimeout(() => {
+                                      setDisable(false);
+                                    }, 4000);
+                                    toast.error(
+                                      "You Must Have $50 or Greater in Scrooge to Claim Monthly Tokens"
+                                    );
+                                  }}>
                                   Claim Unavailable
                                 </button>
-                                <p>
-                                  * you must have $50 or greater in Scrooge to
-                                  claim monthly tokens.
-                                </p>
                               </>
                             )}
                           </div>
