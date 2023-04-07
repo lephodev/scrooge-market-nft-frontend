@@ -36,7 +36,7 @@ function RedeemPrizes() {
   const [currentPriceJR, setCurrentPriceJR] = useState("Loading...");
   const [showConvert, setShowConvert] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
-  const [buyTokenTab, setBuyTokenTab] = useState(false)
+  const [buyTokenTab, setBuyTokenTab] = useState(false);
 
   const [OG1000, setOG1000] = useState();
   const [OG5000, setOG5000] = useState();
@@ -118,8 +118,7 @@ function RedeemPrizes() {
         setPrizes([]);
         // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
-      }
-      else if (filterOn === "buy_token") {
+      } else if (filterOn === "buy_token") {
         setBuyTokenTab(true);
         setShowConvert(false);
         setPrizes([]);
@@ -387,13 +386,13 @@ function RedeemPrizes() {
                 </div>
 
                 {buyTokenTab && (
-                  <div className="buyTokenTab">
+                  <div className='buyTokenTab'>
                     <h2>Buy Tokens Here .. </h2>
-                    <Button className="buyTokensBtn">Buy Tokens</Button>
+                    <Button className='buyTokensBtn'>Buy Tokens</Button>
                   </div>
                 )}
 
-                {!showConvert &&
+                {!showConvert && (
                   <div className='page-nav-header-btns-subrow'>
                     <button
                       className='page-nav-header-subbtn'
@@ -426,7 +425,7 @@ function RedeemPrizes() {
                       CATEGORY Z-A
                     </button>
                   </div>
-                }
+                )}
                 <div className='prizes-container'>
                   {showConvert && (
                     <>
