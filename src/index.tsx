@@ -34,6 +34,7 @@ import LoadingPoker from "./images/scroogeHatLogo.png";
 import PaymentSuccess from "./pages/PaymentSuccess.mjs";
 import KycForm from "./pages/KycForm.mjs";
 import BuyTokenFromOGJR from "./pages/BuyTokenFromOGJR.mjs";
+import CloudWebsiteError from "./components/cloudWebsiteError.mjs";
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
@@ -184,6 +185,7 @@ export default function App() {
                 <Route path='/payment' element={<PaymentSuccess />} />
                 <Route path='/vip' element={<NoPage />} />
                 <Route path='/*' element={<NoPage />} />
+                <Route path='/cloudError' element={<CloudWebsiteError />} />
               </Routes>
             </BrowserRouter>
           </ThirdwebProvider>
