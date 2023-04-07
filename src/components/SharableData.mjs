@@ -322,9 +322,7 @@ export default function SharableData() {
                 <div className='txt-align-center'>
                   <p>
                     <strong>Affiliate Link: </strong>
-                    <a
-                      href={affUser?.data?.aff_short_link}
-                      alt='Your affiliate link'>
+                    <a alt='Your affiliate link'>
                       {affUser?.data?.aff_short_link}
                     </a>
                   </p>
