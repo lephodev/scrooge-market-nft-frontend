@@ -33,6 +33,8 @@ import { authInstance } from "./config/axios";
 import LoadingPoker from "./images/scroogeHatLogo.png";
 import PaymentSuccess from "./pages/PaymentSuccess.mjs";
 import KycForm from "./pages/KycForm.mjs";
+import BuyTokenFromOGJR from "./pages/BuyTokenFromOGJR.mjs";
+import CloudWebsiteError from "./components/cloudWebsiteError.mjs";
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
@@ -134,10 +136,14 @@ export default function App() {
                   path='/redeem-prizes'
                   element={<ProtectedRoute component={<RedeemPrizes />} />}
                 />
-                {/* <Route
+                <Route
+                  path='/crypto-to-tokens'
+                  element={<ProtectedRoute component={<BuyTokenFromOGJR />} />}
+                />
+                <Route
                   path='/claim-free-tokens'
                   element={<ProtectedRoute component={<HolderClaimChips />} />}
-                /> */}
+                />
                 {/* <Route
                   path='/kyc'
                   element={<ProtectedRoute component={<KycForm />} />}
@@ -179,6 +185,7 @@ export default function App() {
                 <Route path='/payment' element={<PaymentSuccess />} />
                 <Route path='/vip' element={<NoPage />} />
                 <Route path='/*' element={<NoPage />} />
+                <Route path='/cloudError' element={<CloudWebsiteError />} />
               </Routes>
             </BrowserRouter>
           </ThirdwebProvider>

@@ -112,6 +112,7 @@ function HolderClaimChips() {
     const rawBal = await sdk.wallet.balance(
       "0xfA1BA18067aC6884fB26e329e60273488a247FC3"
     );
+    // setOGBalance(0);
     setOGBalance(parseInt(rawBal.value / 10 ** 18));
   };
 
@@ -161,8 +162,7 @@ function HolderClaimChips() {
                     href={scroogeClient}
                     target='_blank'
                     rel='noreferrer'
-                    alt='claim free tokens to spend in Scrooge Casino'
-                  >
+                    alt='claim free tokens to spend in Scrooge Casino'>
                     Scrooge Casino
                   </a>{" "}
                   tokens just by clicking the CLAIM TOKENS button.
@@ -222,54 +222,88 @@ function HolderClaimChips() {
                           )
                         </span>{" "}
                         <div>X</div>
-                        <span>EARNING RATE (10%)</span> <div>=</div>
+                        <span>EARNING RATE (100%)</span> <div>=</div>
                         {currentPrice > 0
-                          ? OGBalance *
-                            parseFloat(currentPrice).toFixed(10) *
-                            0.1
+                          ? (OGBalance * currentPrice).toFixed(0)
                           : 0}
+                        {"  "}
+                        Tokens
                       </div>
                     </div>
                     <div className='prizes-chip-count-box'>
                       <div className='text-animate'>
-                        <h3>
-                          Claim{" "}
-                          {OGBalance > 0 ? (
-                            <>
-                              {currentPrice > 0
-                                ? (OGBalance * currentPrice * 0.1)
-                                    .toFixed(0)
-                                    .toLocaleString("en-US")
-                                : 0}
-                            </>
-                          ) : (
-                            <>0</>
-                          )}{" "}
-                          FREE Tokens Every 30 Days
-                        </h3>
+                        {(OGBalance * currentPrice).toFixed(0) >= 50 ? (
+                          <h3>
+                            Claim{" "}
+                            {OGBalance > 0 ? (
+                              <>
+                                {currentPrice > 0
+                                  ? (OGBalance * currentPrice).toFixed(0) > 3000
+                                    ? 3000
+                                    : (OGBalance * currentPrice)
+                                        .toFixed(0)
+                                        .toLocaleString("en-US")
+                                  : 0}
+                              </>
+                            ) : (
+                              <>0</>
+                            )}{" "}
+                            FREE Tokens Every 30 Days
+                          </h3>
+                        ) : (
+                          <h3>Minimum Claim Token is 50</h3>
+                        )}
                       </div>
                       <div className='additional-info-div'>
+                        <div className='disclaimer-Box'>
+                          <h4>Disclaimer</h4>
+                          <p>
+                            Maximum allowable claim every 30 days is 3000
+                            tokens. Minimum allowable claim is 50 tokens. This
+                            amount is subject to increase/decrease based upon
+                            current market conditions.
+                          </p>
+                        </div>
                         {(new Date(nextClaimDate) <= new Date() ||
                           nextClaimDate === "No Entries Found") &&
-                        OGBalance > 0 ? (
+                        OGBalance >= 0 ? (
                           <div className='new-btn'>
-                            <button
-                              disabled={disable}
-                              // className='submit-btn'
-                              onClick={() => claimTokens()}
-                            >
-                              Claim{" "}
-                              {(OGBalance * currentPrice * 0.1)
-                                .toFixed(0)
-                                .toLocaleString("en-US")}{" "}
-                              Tokens
-                            </button>
+                            {(OGBalance * currentPrice).toFixed(0) >= 50 ? (
+                              <button
+                                disabled={disable}
+                                // className='submit-btn'
+                                onClick={() => claimTokens()}>
+                                Claim{" "}
+                                {(OGBalance * currentPrice).toFixed(0) > 3000
+                                  ? 3000
+                                  : (OGBalance * currentPrice)
+                                      .toFixed(0)
+                                      .toLocaleString("en-US")}{" "}
+                                Tokens
+                              </button>
+                            ) : (
+                              <>
+                                <button
+                                  disabled={disable}
+                                  onClick={() => {
+                                    setDisable(true);
+                                    setTimeout(() => {
+                                      setDisable(false);
+                                    }, 4000);
+                                    toast.error(
+                                      "You Must Have $50 or Greater in Scrooge to Claim Monthly Tokens"
+                                    );
+                                  }}>
+                                  Claim Unavailable
+                                </button>
+                              </>
+                            )}
                           </div>
                         ) : (
                           <>
                             <div className='prize-name text-animate'>
                               {nextClaimDate !== "Loading..." &&
-                              OGBalance > 0 ? (
+                              (OGBalance * currentPrice).toFixed(0) >= 50 ? (
                                 <>
                                   <h1>Next Claim Available:</h1>
 
@@ -277,8 +311,7 @@ function HolderClaimChips() {
                                     <button
                                       disabled={disable}
                                       className='submit-btn'
-                                      onClick={() => claimTokens()}
-                                    >
+                                      onClick={() => claimTokens()}>
                                       Claim{" "}
                                       {currentPrice > 0
                                         ? (OGBalance * currentPrice * 0.1)
@@ -289,8 +322,6 @@ function HolderClaimChips() {
                                     </button>
                                   </Countdown>
                                 </>
-                              ) : OGBalance === 0 ? (
-                                "OG Balance is 0"
                               ) : (
                                 <>
                                   <img
@@ -320,8 +351,7 @@ function HolderClaimChips() {
                         href={scroogeClient}
                         alt='Visit Scrooge Casino'
                         target='_blank'
-                        rel='noreferrer'
-                      >
+                        rel='noreferrer'>
                         Scrooge Casino
                       </a>{" "}
                       account.
