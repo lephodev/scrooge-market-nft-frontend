@@ -1762,7 +1762,7 @@ select {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  gap: 50px;
+  gap: 30px;
 }
 
 .header-menu ul li a {
@@ -1806,7 +1806,9 @@ select {
   top: 50%;
   transform: translateY(-50%);
 }
-
+.icon-links svg {
+  fill: #f9ff00;
+}
 .wallet button {
   letter-spacing: 0;
   font-family: "Poppins", sans-serif !important;
@@ -4517,12 +4519,30 @@ span.input-range__label.input-range__label--value
   .page-nav-header-btns-row {
     gap: 10px;
   }
-
+  .wallet button {
+    gap: 6px !important;
+    padding: 8px 6px !important;
+    min-width: 160px !important;
+  }
   .page-nav-header-subbtn {
     width: 48%;
     margin: 0;
   }
-
+  .header-action a {
+    width: 35px;
+    height: 35px;
+  }
+  .icon-links {
+    left: 56px;
+    gap: 2px;
+  }
+  .wallet {
+    margin-top: 6px;
+    max-width: 170px !important;
+  }
+  .menu-logo-img {
+    width: 60px;
+  }
   .page-nav-header-btns-subrow {
     gap: 10px;
   }
