@@ -22,6 +22,10 @@ import { marketPlaceInstance } from "../config/axios.js";
 const stripePromise = loadStripe(
   "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT"
 );
+
+// const stripePromise = loadStripe(
+//   "pk_live_51Mo3YgIintOuilEoqh3MvPlytP8mgx59iCnvobhQqQ3ZO9vM34YxCHuzbyjmkGlIdSsAv5sHoVdIWTtsUPnK5XhD00vbhc88hl"
+// );
 export default function ShowAllTokenNFTs() {
   const [buyLoading, setBuyLoading] = useState(false);
   const [buySuccess, setBuySuccess] = useState(false);
@@ -86,7 +90,7 @@ export default function ShowAllTokenNFTs() {
         });
     } catch (err) {
       console.log("err", err);
-      toast.error("Error purchasing NFT!", { containerId: "authenticate" });
+      toast.error(err?.reason, { containerId: "authenticate" });
       setBuyLoading(false);
     }
 
