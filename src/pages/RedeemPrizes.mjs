@@ -11,6 +11,7 @@ import coin1 from "../images/4.png";
 import coin2 from "../images/3.png";
 import coin3 from "../images/2.png";
 import coin4 from "../images/1.png";
+import InputRange from "react-input-range";
 import { userKycDetails } from "../utils/api.mjs";
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
@@ -37,6 +38,7 @@ function RedeemPrizes() {
   const [globalLoader, setglobalLoader] = useState(true);
   const [buyTokenTab, setBuyTokenTab] = useState(false);
   const [show, setShow] = useState(false);
+  const [sliderValue, setSliderValue] = useState(499);
   const [tickets, setTickets] = useState("");
   const [tokens, setTokens] = useState("");
   const [prizeId, setPrizeId] = useState("");
@@ -475,6 +477,27 @@ function RedeemPrizes() {
                           <div className='buy-chips-grid-box'>
                             <img src={coin4} alt='coin' />
 
+                            <InputRange
+                              maxValue={499}
+                              minValue={10}
+                              value={sliderValue}
+                              onChange={(value) => setSliderValue(value)}
+                            />
+                            <div
+                              className='gradient-btn'
+                              //  onClick={() => convert(500, 510)}
+                              onClick={() =>
+                                handleShow(sliderValue, sliderValue, "")
+                              }>
+                              <span>
+                                {sliderValue} tickets gets you {sliderValue}{" "}
+                                chips{" "}
+                              </span>
+                            </div>
+                          </div>
+                          <div className='buy-chips-grid-box'>
+                            <img src={coin4} alt='coin' />
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
                               //  onClick={() => convert(500, 510)}
@@ -485,7 +508,7 @@ function RedeemPrizes() {
                           <div className='buy-chips-grid-box'>
                             {/* <p>25000 </p> */}
                             <img src={coin3} alt='coin' />
-
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
                               // onClick={() => convert(1000, 1025)}
@@ -500,7 +523,7 @@ function RedeemPrizes() {
                               <img src={coin4} alt='coin' />
                               <img src={coin3} alt='coin' />
                             </div>
-
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
                               // onClick={() => convert(2500, 2600)}
@@ -511,7 +534,7 @@ function RedeemPrizes() {
                           <div className='buy-chips-grid-box'>
                             {/* <p>10000 </p> */}
                             <img src={coin2} alt='coin' />
-
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
                               // onClick={() => convert(5000, 5250)}
@@ -522,6 +545,7 @@ function RedeemPrizes() {
                           <div className='buy-chips-grid-box'>
                             {/* <p>5000 </p> */}
                             <img src={coin1} alt='coin' />
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
                               // onClick={() => convert(10000, 10600)}
@@ -536,6 +560,7 @@ function RedeemPrizes() {
                               <img src={coin2} alt='coin' />
                               <img src={coin3} alt='coin' />
                             </div>
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
                               // onClick={() => convert(20000, 21400)}
@@ -549,6 +574,7 @@ function RedeemPrizes() {
                               <img src={coin2} alt='coin' />
                               <img src={coin2} alt='coin' />
                             </div>
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
                               // onClick={() => convert(25000, 27000)}
@@ -563,6 +589,7 @@ function RedeemPrizes() {
                               <img src={coin1} alt='coin' />
                               <img src={coin1} alt='coin' />
                             </div>
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
                               // onClick={() => convert(50000, 55000)}
@@ -607,6 +634,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(OG1000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -621,6 +655,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(JR1000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -633,6 +674,13 @@ function RedeemPrizes() {
                                       parseInt(OG1000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  *
+                                  <h4>
+                                    {(
+                                      parseInt(OG1000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
                                   *
                                 </div>
                               ) : (
@@ -648,6 +696,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(JR1000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -660,6 +715,13 @@ function RedeemPrizes() {
                                       parseInt(OG5000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  *
+                                  <h4>
+                                    {(
+                                      parseInt(OG5000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
                                   *
                                 </div>
                               ) : (
@@ -675,6 +737,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(JR5000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -689,6 +758,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(OG5000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -701,6 +777,13 @@ function RedeemPrizes() {
                                       parseInt(JR5000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  *
+                                  <h4>
+                                    {(
+                                      parseInt(JR5000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
                                   *
                                 </div>
                               ) : (
@@ -716,6 +799,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(OG10000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -730,6 +820,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(JR10000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -743,6 +840,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(OG10000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -755,6 +859,13 @@ function RedeemPrizes() {
                                       parseInt(JR10000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  *
+                                  <h4>
+                                    {(
+                                      parseInt(JR10000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
                                   *
                                 </div>
                               ) : (
@@ -916,7 +1027,9 @@ function RedeemPrizes() {
                                 <div className='asterisk-desc'>
                                   *Amount received is calculated at time of
                                   redemption and may vary from the amount
-                                  displayed.
+                                  displayed.<br></br>
+                                  *Value received on each item will be 2% less
+                                  to cover Blockchain Fees.
                                 </div>
                               ) : (
                                 <></>
