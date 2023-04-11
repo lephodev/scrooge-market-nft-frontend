@@ -157,7 +157,7 @@ export default function ShowAllTokenNFTs() {
       if (q) {
         setAffID(q);
         const aff_id = Cookies.set("aff_id", q);
-        // console.log("cookie: ", aff_id);
+         console.log("cookie: ", aff_id);
       } else {
         const aff_id = Cookies.get("aff_id", { domain: scroogeClient }); //change before going live
         // console.log("cookie=====>>>>>: ", aff_id);

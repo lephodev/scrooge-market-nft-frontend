@@ -6,12 +6,12 @@ import "../styles/Home.css";
 //import GetWalletERC1155NFTs from "../scripts/getWalletERC1155NFTs.mjs";
 //import ShowCasinoTokenNFTs from "../scripts/showCasinoTokenNFTs.mjs";
 import {
-  useAddress,
-  useOwnedNFTs,
-  useContract,
-  useContractRead,
-  ThirdwebNftMedia,
-  useNetwork,
+  // useAddress,
+  // useOwnedNFTs,
+  // useContract,
+  // useContractRead,
+  // ThirdwebNftMedia,
+  // useNetwork,
   ChainId,
 } from "@thirdweb-dev/react";
 import ChainContext from "../context/Chain.ts";

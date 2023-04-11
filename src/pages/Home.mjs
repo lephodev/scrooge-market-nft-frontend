@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   ConnectWallet,
   useAddress,
@@ -5,7 +6,7 @@ import {
   ChainId,
 } from "@thirdweb-dev/react";
 import { useEffect } from "react";
-import ScroogeCasino from "../images/scroogeCasinoLogo.png";
+// import ScroogeCasino from "../images/scroogeCasinoLogo.png";
 import TicketsGIF from "../images/ticketsGif.gif";
 import SlotsGIF from "../images/slotsGif.gif";
 import ShowCasinoTokenNFTs from "../scripts/showCasinoTokenNFTs.mjs";

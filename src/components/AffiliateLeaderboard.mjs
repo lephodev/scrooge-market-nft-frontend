@@ -4,8 +4,8 @@ import { marketPlaceInstance } from "../config/axios.js";
 
 export default function AffiliateLeaderboard() {
   const { user } = useContext(AuthContext);
-  const [leaderboard, setLeaderboard] = useState([]);
-  const [showLeaderboards, setShowLeaderboards] = useState(true);
+  // const [leaderboard, setLeaderboard] = useState([]);
+  const [showLeaderboards] = useState(true);
   const [leaderboardByCount, setLeaderboardByCount] = useState([]);
   const [leaderboardByTokens, setLeaderboardByTokens] = useState([]);
   const [leaderboardHottestNewcomers, setLeaderboardHottestNewcomers] =

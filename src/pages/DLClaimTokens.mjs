@@ -1,6 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //import GetWalletDLNFTs from "../scripts/getWalletDLNFTs.mjs"
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import "react-toastify/dist/ReactToastify.css";
 import { useAddress, ConnectWallet } from "@thirdweb-dev/react";

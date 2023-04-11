@@ -1,12 +1,11 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingPoker from "../images/scroogeHatLogo.png";
-import RobotAI from "../images/robotAI.gif";
 import DiceGif from "../images/diceGif.gif";
 import AffiliateLeaderboard from "../components/AffiliateLeaderboard.mjs";
-import { TypeAnimation } from "react-type-animation";
-import AffiliateAITools from "./AffiliateAITools.mjs";
 import DailyRewards from "../components/DailyRewards.mjs";
 import profile from "../images/profile.png";
 import {
@@ -24,7 +23,8 @@ import {
   TumblrIcon,
   TwitterIcon,
   WhatsappIcon,
-  PinterestShareCount,
+  // PinterestShareCount,
+  // FacebookShareCount,
 } from "react-share";
 import getAffiliateUser from "../scripts/getAffilateUser.mjs";
 import { createAffiliateUser } from "../scripts/getAffilateUser.mjs";
@@ -35,7 +35,7 @@ import { scroogeClient } from "../config/keys.js";
 export default function SharableData() {
   const { user } = useContext(AuthContext);
   const [affUser, setAffUser] = useState({});
-  const [affUserID, setAffUserID] = useState("");
+  const [/* affUserID */, setAffUserID] = useState("");
   const [creatingAffUser, setCreatingAffUser] = useState(false);
   const [showAITools, setShowAITools] = useState(true);
   const [showSocialShare, setShowSocialShare] = useState(true);
@@ -43,7 +43,7 @@ export default function SharableData() {
   const [showDailyRewards, setShowDailyRewards] = useState(true);
   const [shareCount,setShareCount]=useState(0)
 
-  const [allMessages, setAllMessages] = useState([]);
+  const [/* allMessages */, setAllMessages] = useState([]);
   const [messages, setMessages] = useState([]);
   const [randomMessage, setRandomMessage] = useState([]);
   const getMessages = () => {
@@ -91,34 +91,34 @@ export default function SharableData() {
         };
     }*/
 
-  const shortLink = (link) => {
-    const uri = "https://mozilla.org/?x=шеллы";
-    const encoded = encodeURIComponent(uri);
-    try {
-      marketPlaceInstance()
-        .get(`/getShortLink/${encoded}`)
-        .then((data) => {
-          //console.log("short link: ", data.data);
-          return data.data;
-        });
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // const shortLink = (link) => {
+  //   const uri = "https://mozilla.org/?x=шеллы";
+  //   const encoded = encodeURIComponent(uri);
+  //   try {
+  //     marketPlaceInstance()
+  //       .get(`/getShortLink/${encoded}`)
+  //       .then((data) => {
+  //         //console.log("short link: ", data.data);
+  //         return data.data;
+  //       });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
-  const filterMessages = (filterOn) => {
-    if (allMessages.length > 2) {
-      if (filterOn === "facebook") {
-        setMessages(
-          [...allMessages].filter((message) => message.target === "facebook")
-        );
-      } else if (filterOn === "twitter") {
-        setMessages(
-          [...allMessages].filter((message) => message.target === "twitter")
-        );
-      }
-    }
-  };
+  // const filterMessages = (filterOn) => {
+  //   if (allMessages.length > 2) {
+  //     if (filterOn === "facebook") {
+  //       setMessages(
+  //         [...allMessages].filter((message) => message.target === "facebook")
+  //       );
+  //     } else if (filterOn === "twitter") {
+  //       setMessages(
+  //         [...allMessages].filter((message) => message.target === "twitter")
+  //       );
+  //     }
+  //   }
+  // };
 
   const getRandomMessage = () => {
     var randomValue = messages[Math.floor(Math.random() * messages.length)];
@@ -152,37 +152,36 @@ export default function SharableData() {
     setAffUser(getAff);
   };
 
-  const decrementAITickets = () => {
-    affUser.data.ai_tickets = affUser?.data?.ai_tickets - 1;
-  };
+  // const decrementAITickets = () => {
+  //   affUser.data.ai_tickets = affUser?.data?.ai_tickets - 1;
+  // };
 
-  const [AIMessage, setAIMessage] = useState();
-  async function getAIMessage() {
-    setAIMessage([]);
-    const prompt =
-      "Give me a tweet about Scrooge Casino, an online casino where you can win awesome prizes playing live poker, blackjack, slots, and other games.";
-    try {
-      marketPlaceInstance()
-        .get(`/getAIMessage/${prompt}/${user?.id}/message`)
-        .then((data) => {
-          //console.log("getAIMessage: ", data.data);
-          affUser.data.ai_tickets = affUser?.data?.ai_tickets - 1;
-          //setAIMessage(data.data);
-          setAIMessage(
-            <TypeAnimation
-              sequence={[data.data + " #ScroogeCasino 👉"]}
-              wrapper='span'
-              cursor={true}
-            />
-          );
-          //refreshAffData();
+  // async function getAIMessage() {
+  //   setAIMessage([]);
+  //   const prompt =
+  //     "Give me a tweet about Scrooge Casino, an online casino where you can win awesome prizes playing live poker, blackjack, slots, and other games.";
+  //   try {
+  //     marketPlaceInstance()
+  //       .get(`/getAIMessage/${prompt}/${user?.id}/message`)
+  //       .then((data) => {
+  //         //console.log("getAIMessage: ", data.data);
+  //         affUser.data.ai_tickets = affUser?.data?.ai_tickets - 1;
+  //         //setAIMessage(data.data);
+  //         setAIMessage(
+  //           <TypeAnimation
+  //             sequence={[data.data + " #ScroogeCasino 👉"]}
+  //             wrapper='span'
+  //             cursor={true}
+  //           />
+  //         );
+  //         //refreshAffData();
 
-          return true;
-        });
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  //         return true;
+  //       });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }
 
   useEffect(() => {
     getMessages();
@@ -215,7 +214,9 @@ export default function SharableData() {
       
     }
   }
-
+const CheckIfShow=(e)=>{
+  console.log("after close popup",e);
+}
   return (
     <>
       {creatingAffUser ? (
@@ -525,6 +526,7 @@ export default function SharableData() {
                               className='social-share-btn'>
                               <PinterestIcon size={40} round />
                             </PinterestShareButton>
+                            
                             <TumblrShareButton
                             disabled={shareCount===20}
                               title={randomMessage.message}
@@ -590,7 +592,6 @@ export default function SharableData() {
                     {messages.map((message) => (
                       <div className='social-share-card' key={message._id}>
                         <div className='card-color' />
-{console.log({message})}
                         <div className='social-share-message'>
                           {message.message}
                         </div>
@@ -600,10 +601,13 @@ export default function SharableData() {
                           disabled={shareCount===20}
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             quote={message.message}
-                            
+                            onShareWindowClose={(e)=>CheckIfShow(e)}
                             className='social-share-btn'>
                             <FacebookIcon size={40} round />
+                            
                           </FacebookShareButton>
+                          {/* <PinterestShareCount url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`} /> */}
+                      
                           </div>
                           <div onClick={()=>clickevt(message._id)} >
                           <TwitterShareButton
