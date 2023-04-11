@@ -1762,7 +1762,7 @@ select {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  gap: 50px;
+  gap: 30px;
 }
 
 .header-menu ul li a {
@@ -1806,7 +1806,9 @@ select {
   top: 50%;
   transform: translateY(-50%);
 }
-
+.icon-links svg {
+  fill: #f9ff00;
+}
 .wallet button {
   letter-spacing: 0;
   font-family: "Poppins", sans-serif !important;
@@ -3645,6 +3647,126 @@ ul.footer-support li img {
   color: #f3b484;
 }
 
+.popupBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 30px 35px;
+  font-size: 22px;
+  font-weight: 600;
+  background: hsla(0, 0%, 13%, 1);
+  box-shadow: 0px 2px 10px hsla(0, 0%, 13%, 1);
+
+  color: #f9ff00;
+  text-transform: capitalize;
+}
+.popupBtn {
+  display: flex;
+  gap: 10px;
+}
+button.yellowBtn {
+  width: 110px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  height: 38px;
+  border: none !important;
+  background: #f9ff00;
+  color: black;
+  cursor: pointer;
+}
+button.greyBtn {
+  width: 110px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  height: 38px;
+  border: none !important;
+  background: #5e6266;
+  color: #fff;
+  cursor: pointer;
+}
+
+.inputRange-Box {
+  position: relative;
+  max-width: calc(100% - 110px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-range {
+  height: 3rem;
+  position: relative;
+  width: 86% !important;
+}
+
+.inputRangeSlider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+span.input-range__label.input-range__label--min {
+}
+span.input-range__label.input-range__label--max {
+  right: -5%;
+  position: absolute;
+  top: -1%;
+}
+.input-range__slider {
+  appearance: none;
+  background: #f9ff00 !important;
+  border: 1px solid #f9ff01 !important;
+  border-radius: 100%;
+  cursor: pointer;
+  display: block;
+  height: 20px !important;
+  width: 20px !important;
+  margin-left: -0.5rem;
+  margin-top: -9px;
+  outline: none;
+  position: absolute;
+  top: 8%;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.input-range__track {
+  background: #eeeeee;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  display: block;
+  height: 10px !important;
+  position: relative;
+  transition: left 0.3s ease-out, width 0.3s ease-out;
+}
+.input-range__slider-container {
+  top: 30% !important;
+}
+.input-range__track.input-range__track--active {
+  background: #f9ff00;
+}
+.input-range__label-container {
+  left: 15% !important;
+}
+span.input-range__label.input-range__label--value {
+  position: relative;
+}
+span.input-range__label.input-range__label--value
+  span.input-range__label-container {
+  position: absolute;
+  top: -26px;
+  background: #f9ff00;
+  border-radius: 10px;
+  padding: 2px 6px;
+  color: black;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 99;
+}
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
@@ -4397,12 +4519,30 @@ ul.footer-support li img {
   .page-nav-header-btns-row {
     gap: 10px;
   }
-
+  .wallet button {
+    gap: 6px !important;
+    padding: 8px 6px !important;
+    min-width: 160px !important;
+  }
   .page-nav-header-subbtn {
     width: 48%;
     margin: 0;
   }
-
+  .header-action a {
+    width: 35px;
+    height: 35px;
+  }
+  .icon-links {
+    left: 56px;
+    gap: 2px;
+  }
+  .wallet {
+    margin-top: 6px;
+    max-width: 170px !important;
+  }
+  .menu-logo-img {
+    width: 60px;
+  }
   .page-nav-header-btns-subrow {
     gap: 10px;
   }

@@ -24,14 +24,15 @@ const KYCForm = () => {
   const [globalLoader, setglobalLoader] = useState(true);
   // const [successMsg, setSuccessMsg] = useState("");
   const [activeRatioType, setActiveRatioType] = useState("Male");
+  
 
   const {
     handleSubmit,
     register,
     setError,
+    setValue,
     formState: { errors },
     clearErrors,
-    //reset,
   } = useForm({ resolver: yupResolver(createKYCSchema) });
 
   const handleImageChange = (e) => {
@@ -95,7 +96,7 @@ const KYCForm = () => {
     if (res.status === 201) {
       getKYCStatus();
     } else {
-      toast.error("Unable to Upload the Kyc")
+      toast.error("Unable to Upload the Kyc");
     }
   };
 
@@ -127,6 +128,8 @@ const KYCForm = () => {
     const response = await userKycDetails();
     if (response?.code === 200) {
       setstatusKyc(response.message);
+      setValue('firstName', response?.userDetails?.firstName);
+      setValue('lastName', response?.userDetails?.lastName);
       setglobalLoader(false);
     } else {
       setglobalLoader(false);
@@ -350,7 +353,7 @@ const KYCForm = () => {
                                 </>
                               ) : (
                                 <p>
-                                  Drag & Drop or <span> Upload </span> the
+                                  <span> Upload </span> the
                                   Image.
                                 </p>
                               )}
@@ -402,7 +405,7 @@ const KYCForm = () => {
                                 </>
                               ) : (
                                 <p>
-                                  Drag & Drop or <span> Upload </span> the
+                                  <span> Upload </span> the
                                   Image.
                                 </p>
                               )}
