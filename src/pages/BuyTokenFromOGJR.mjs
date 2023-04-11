@@ -69,12 +69,12 @@ export default function BuyTokenFromOGJR() {
       const current_price = data.market_data.current_price.usd;
       cryptoAmount = (crypto + crypto * 0.16) / current_price;
       console.log("fdfdfd");
-      const txResult = await sdk.wallet.transfer(
-        walletAddress,
-        cryptoAmount,
-        contractAddresss
-      );
-      console.log("insidetryerror", txResult.data);
+      // const txResult = await sdk.wallet.transfer(
+      //   walletAddress,
+      //   cryptoAmount,
+      //   contractAddresss
+      // );
+      // console.log("insidetryerror", txResult.data);
 
       const response = await marketPlaceInstance().get(
         `convertCryptoToToken/${user?.id}/${address}/${tokens}`

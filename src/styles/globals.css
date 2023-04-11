@@ -2518,6 +2518,9 @@ ul.footer-support li img {
   align-items: center;
   justify-content: center;
 }
+.social-share-btn-div button.disabled {
+  background-color: transparent !important;
+}
 
 .social-share-card .card-color {
   height: 128px;
