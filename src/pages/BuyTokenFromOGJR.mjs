@@ -70,33 +70,39 @@ export default function BuyTokenFromOGJR() {
       const data = await res.json();
       const current_price = data.market_data.current_price.usd;
       cryptoAmount = (crypto + crypto * 0.16) / current_price;
-      console.log("fdfdfd");
-      const txResult = await sdk.wallet.transfer(
-        walletAddress,
-        cryptoAmount,
-        contractAddresss
-      );
-      // console.log("insidetryerror", txResult.data);
 
-      const response = await marketPlaceInstance().get(
-        `convertCryptoToToken/${user?.id}/${address}/${tokens}`
-      );
-      setBuyLoading(false);
-      if (response.data.success) {
-        toast.success(`Successfully Purchased ${tokens} Tokens`);
-        reward();
-        getUserDataInstant();
-      } else {
-        toast.error("Token Buy Failed");
-      }
+      sdk.wallet
+        .transfer(walletAddress, cryptoAmount, contractAddresss)
+        .then((txResult) => {
+          marketPlaceInstance()
+            .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}`)
+            .then((response) => {
+              setBuyLoading(false);
+              if (response.data.success) {
+                toast.success(`Successfully Purchased ${tokens} Tokens`);
+                reward();
+                getUserDataInstant();
+              } else {
+                toast.error("Token Buy Failed");
+              }
+            })
+            .catch((error) => {
+              setBuyLoading(false);
+              toast.error("Token Buy Failed");
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+          setBuyLoading(false);
+          if (error?.reason === "ERC20: transfer amount exceeds balance") {
+            toast.error("You don't have sufficient balance in your Scrooge");
+          } else {
+            toast.error(error?.reason);
+          }
+        });
     } catch (error) {
-      setBuyLoading(false);
-      if(error?.reason === 'ERC20: transfer amount exceeds balance'){
-        toast.error("You don't have sufficient balance in your Scrooge")
-      }else{
-        toast.error(error?.reason);
-      }
-      //toast.error("Token Buy Failed");
+      toast.error("Token Buy Failed");
       console.log("errordata", error);
     }
   };
@@ -122,10 +128,14 @@ export default function BuyTokenFromOGJR() {
               without. Make sure you have enough available tickets for the prize
               you want, then click the REDEEM PRIZE button!
             </div>
+            <div className='asterisk-desc cryptoTotoken'>
+              Disclaimer : +16% will be added to the transaction to cover
+              blockchain fees and contract taxes!
+            </div>
           </div>
           <div className='buy-chips-content'>
             <div className='buy-chips-grid'>
-              <div className='buy-chips-grid-box'>
+              {/* <div className='buy-chips-grid-box'>
                 <img src={coin4} alt='coin' />
 
                 <div
@@ -142,7 +152,7 @@ export default function BuyTokenFromOGJR() {
                   onClick={() => convert("JR", 5, 500)}>
                   <span>5$ WORTH SCROOGE JR gets you 500 Tokens </span>
                 </div>
-              </div>
+              </div> */}
 
               <div className='buy-chips-grid-box'>
                 {/* <p>25000 </p> */}
@@ -174,8 +184,8 @@ export default function BuyTokenFromOGJR() {
 
                 <div
                   className='gradient-btn'
-                  onClick={() => convert("OG", 15, 1500)}>
-                  <span>15$ WORTH SCROOGE OG gets you 1500 Tokens </span>
+                  onClick={() => convert("OG", 20, 2000)}>
+                  <span>20$ WORTH SCROOGE OG gets you 2000 Tokens </span>
                 </div>
               </div>
               <div className='buy-chips-grid-box'>
@@ -188,28 +198,28 @@ export default function BuyTokenFromOGJR() {
 
                 <div
                   className='gradient-btn'
-                  onClick={() => convert("JR", 15, 1500)}>
-                  <span>15$ WORTH SCROOGE JR gets you 1500 Tokens </span>
-                </div>
-              </div>
-              <div className='buy-chips-grid-box'>
-                {/* <p>10000 </p> */}
-                <img src={coin2} alt='coin' />
-
-                <div
-                  className='gradient-btn'
-                  onClick={() => convert("OG", 20, 2000)}>
-                  <span>20$ WORTH SCROOGE OG gets you 2000 Tokens </span>
-                </div>
-              </div>
-              <div className='buy-chips-grid-box'>
-                {/* <p>10000 </p> */}
-                <img src={coin2} alt='coin' />
-
-                <div
-                  className='gradient-btn'
                   onClick={() => convert("JR", 20, 2000)}>
                   <span>20$ WORTH SCROOGE JR gets you 2000 Tokens </span>
+                </div>
+              </div>
+              <div className='buy-chips-grid-box'>
+                {/* <p>10000 </p> */}
+                <img src={coin2} alt='coin' />
+
+                <div
+                  className='gradient-btn'
+                  onClick={() => convert("OG", 50, 5000)}>
+                  <span>50$ WORTH SCROOGE OG gets you 5000 Tokens </span>
+                </div>
+              </div>
+              <div className='buy-chips-grid-box'>
+                {/* <p>10000 </p> */}
+                <img src={coin2} alt='coin' />
+
+                <div
+                  className='gradient-btn'
+                  onClick={() => convert("JR", 50, 5000)}>
+                  <span>50$ WORTH SCROOGE JR gets you 5000 Tokens </span>
                 </div>
               </div>
             </div>
