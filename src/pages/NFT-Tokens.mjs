@@ -1,8 +1,7 @@
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "../styles/Home.css";
 //import { Link } from "react-router-dom";
-import { useSearchParams, useLocation, useNavigate } from "react-router-dom";
 import ShowAllTokenNFTs from "../scripts/showAllTokenNFTs.mjs";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import { useNetworkMismatch } from "@thirdweb-dev/react";
