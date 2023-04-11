@@ -1,5 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useContext } from "react";
-import Axios from "axios";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import { useAddress } from "@thirdweb-dev/react";
 import { toast } from "react-toastify";
@@ -16,7 +16,6 @@ import { userKycDetails } from "../utils/api.mjs";
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
 import { authInstance, marketPlaceInstance } from "../config/axios.js";
-import { async } from "q";
 import { Button, Modal } from "react-bootstrap";
 function RedeemPrizes() {
   const navigate = useNavigate();
