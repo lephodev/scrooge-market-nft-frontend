@@ -50,14 +50,19 @@ export default function GetWalletDLNFTs() {
   ]);
 
   const { contract } = useContract(
-    "0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768",
-    "marketplace"
+    "0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768"
   );
-  const { data, isLoading, error } = useOwnedNFTs(contract, address);
+  console.log("contracttttt", contract);
+  const {
+    data: ownedNFTs,
+    isLoading: isLoading,
+    error,
+  } = useOwnedNFTs(contract, "0x372d6c56c6734995C1F73968c8434B8DfC3c146F");
+  console.log("data", ownedNFTs);
+  console.log("error", error);
 
-  const getContrat = async () => {
+  const getDLNFTs = async () => {
     setIsLoadingg(true);
-    console.log("--callled getcont---");
     try {
       const NFTs = await marketPlaceInstance().get(`/getDLNFTs/${address}`);
       console.log(NFTs.data.allNFTs);
@@ -71,7 +76,7 @@ export default function GetWalletDLNFTs() {
   };
 
   useEffect(() => {
-    getContrat();
+    getDLNFTs();
   }, []);
 
   const claimTokens = (token_id) => {
