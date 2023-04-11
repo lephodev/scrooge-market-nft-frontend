@@ -1,19 +1,21 @@
-import { useState, useEffect, useContext } from "react";
+/* eslint-disable no-unused-vars */
+import { useState, useContext } from "react";
 import Layout from "./Layout.mjs";
 import LoadingPoker from "../images/scroogeHatLogo.png";
-import coin1 from "../images/4.png";
+// import coin1 from "../images/4.png";
 import coin2 from "../images/3.png";
 import coin3 from "../images/2.png";
 import coin4 from "../images/1.png";
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
-import { useAddress, useSDK, useSDKContext } from "@thirdweb-dev/react";
+
+import { useAddress,useSDK } from "@thirdweb-dev/react";
 import { marketPlaceInstance, authInstance } from "../config/axios.js";
 import { toast } from "react-toastify";
 import { useReward } from "react-rewards";
 
 export default function BuyTokenFromOGJR() {
-  const { user, loading, setUser } = useContext(AuthContext);
+  const { user,  setUser } = useContext(AuthContext);
   const [buyLoading, setBuyLoading] = useState(false);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],

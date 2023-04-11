@@ -1,51 +1,52 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   useAddress,
-  useOwnedNFTs,
-  useContract,
-  useNFTs,
-  useContractMetadata,
+   useOwnedNFTs,
+   useContract,
+  // useNFTs,
+  // useContractMetadata,
   ThirdwebNftMedia,
   ChainId,
-  useSDK,
-  useActiveListings,
+  // useSDK,
+  // useActiveListings,
 } from "@thirdweb-dev/react";
-import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
+// import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
 
 import { useState, useEffect, useContext } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ChainContext from "../context/Chain.ts";
 import DLBigD from "../images/DLBigD.png";
-import Countdown from "react-countdown";
-import { useReward } from "react-rewards";
+// import Countdown from "react-countdown";
+// import { useReward } from "react-rewards";
 import AuthContext from "../context/authContext.ts";
 import { scroogeClient } from "../config/keys.js";
 import { marketPlaceInstance } from "../config/axios.js";
 
 export default function GetWalletDLNFTs() {
   const { user } = useContext(AuthContext);
-  const { reward } = useReward("rewardId", "confetti", {
-    colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
-  });
-  function notify(message) {
-    toast.success("🎩 " + message);
-  }
+  // const { reward } = useReward("rewardId", "confetti", {
+  //   colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
+  // });
+  // function notify(message) {
+  //   toast.success("🎩 " + message);
+  // }
 
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   setSelectedChain(ChainId.Mainnet);
   console.log("ChainId.Mainnet", ChainId.Mainnet);
-  const addresses = {
-    [String(ChainId.Mainnet)]: process.env.REACT_APP_MAINNET_ADDRESS,
-    [String(ChainId.BinanceSmartChainMainnet)]: "",
-  };
+  // const addresses = {
+  //   [String(ChainId.Mainnet)]: process.env.REACT_APP_MAINNET_ADDRESS,
+  //   [String(ChainId.BinanceSmartChainMainnet)]: "",
+  // };
 
   const address = useAddress();
-  const sdk = useSDK();
-  const [buyLoading, setBuyLoading] = useState(false);
+  // const sdk = useSDK();
+  const [buyLoading, /* setBuyLoading */] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("");
   const [nfts, setNFTs] = useState([]);
   const [isLoadingg, setIsLoadingg] = useState(false);
-  const [tokensClaimDate, setTokensClaimDate] = useState([
+  const [/* tokensClaimDate */, setTokensClaimDate] = useState([
     { token_id: "", nextClaimDate: "" },
   ]);
 
@@ -55,10 +56,10 @@ export default function GetWalletDLNFTs() {
   console.log("contracttttt", contract);
   const {
     data: ownedNFTs,
-    isLoading: isLoading,
+    isLoading,
     error,
   } = useOwnedNFTs(contract, "0x372d6c56c6734995C1F73968c8434B8DfC3c146F");
-  console.log("data", ownedNFTs);
+  console.log("data", ownedNFTs,isLoading);
   console.log("error", error);
 
   const getDLNFTs = async () => {
@@ -79,26 +80,26 @@ export default function GetWalletDLNFTs() {
     getDLNFTs();
   }, []);
 
-  const claimTokens = (token_id) => {
-    setBuyLoading(true);
-    try {
-      marketPlaceInstance()
-        .get(`/claimDLTokens/${address}/${user?.id}/${token_id}`)
-        .then(async (data) => {
-          mapClaimDates(nfts);
-          notify("Tokens Claimed: " + data.data);
-          setBuyLoading(false);
-          reward();
+  // const claimTokens = (token_id) => {
+  //   setBuyLoading(true);
+  //   try {
+  //     marketPlaceInstance()
+  //       .get(`/claimDLTokens/${address}/${user?.id}/${token_id}`)
+  //       .then(async (data) => {
+  //         mapClaimDates(nfts);
+  //         notify("Tokens Claimed: " + data.data);
+  //         setBuyLoading(false);
+  //         reward();
 
-          //await timeout(4200);
-          //window.location.reload();
-        });
-    } catch (err) {
-      console.error(err);
-      toast.error("Error claiming tokens!", { containerId: "claim-error" });
-      setBuyLoading(false);
-    }
-  };
+  //         //await timeout(4200);
+  //         //window.location.reload();
+  //       });
+  //   } catch (err) {
+  //     console.error(err);
+  //     toast.error("Error claiming tokens!", { containerId: "claim-error" });
+  //     setBuyLoading(false);
+  //   }
+  // };
 
   async function getNextClaimDate(token_id) {
     console.log("--called nextcD");
@@ -118,21 +119,21 @@ export default function GetWalletDLNFTs() {
     return nextClaimDate;
   }
 
-  async function getCountdown(token_id) {
-    const thisNextClaimDate = await getNextClaimDate(token_id).then((data) => {
-      //console.log("thisNextClaimDate: ", data);
-      let t;
-      if (data !== "CLAIM NOW") {
-        t = new Date(data);
-        t = t.getTime();
-      } else {
-        t = 0;
-      }
+  // async function getCountdown(token_id) {
+  //   const thisNextClaimDate = await getNextClaimDate(token_id).then((data) => {
+  //     //console.log("thisNextClaimDate: ", data);
+  //     let t;
+  //     if (data !== "CLAIM NOW") {
+  //       t = new Date(data);
+  //       t = t.getTime();
+  //     } else {
+  //       t = 0;
+  //     }
 
-      //console.log("in get countdown: ", parseInt(t));
-      return <Countdown date={new Date(t)}></Countdown>;
-    });
-  }
+  //     //console.log("in get countdown: ", parseInt(t));
+  //     return <Countdown date={new Date(t)}></Countdown>;
+  //   });
+  // }
 
   useEffect(() => {
     console.log(
@@ -142,7 +143,7 @@ export default function GetWalletDLNFTs() {
     return () => setSelectedChain(ChainId.BinanceSmartChainMainnet);
   }, [address]);
   let dataArray = [];
-  const [claimDateArray, setClaimDateArray] = useState([]);
+  const [/* claimDateArray */, setClaimDateArray] = useState([]);
   useEffect(() => {
     if (nfts) {
       if (nfts.length > 0) {
@@ -156,7 +157,7 @@ export default function GetWalletDLNFTs() {
     nfts.map((nft) => foo(nft.metadata.id));
     async function foo(id) {
       //console.log('nft: ', id);
-      const thisNextClaimDate = await getNextClaimDate(id);
+      await getNextClaimDate(id);
     }
   }
 

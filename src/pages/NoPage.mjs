@@ -1,4 +1,3 @@
-import LoadingPoker from "../images/scroogeHatLogo.png";
 import nft from "../images/404.svg";
 import opps from "../images/opps.svg";
 
