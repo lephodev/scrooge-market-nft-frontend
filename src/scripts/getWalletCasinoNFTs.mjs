@@ -18,8 +18,8 @@ import { toast } from "react-toastify";
 export default function GetWalletERC1155NFTs() {
   const { user } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
-  const [NFTRedeemID, setNFTRedeemID] = useState("");
-  const [NFTRedeemName, setNFTRedeemName] = useState("");
+  const [NFTRedeemID, /* setNFTRedeemID */] = useState("");
+  const [NFTRedeemName, /* setNFTRedeemName */] = useState("");
   const [email, setEmail] = useState("");
   const handleChange = (event) => {
     setEmail(event.target.value);
@@ -31,7 +31,7 @@ export default function GetWalletERC1155NFTs() {
   }
   const { contract } = useContract(process.env.REACT_APP_BSC_MAINNET);
   const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
-  const { mutate: burnNft, isLoadingBurn, error } = useBurnNFT(contract);
+  const { mutate: /* burnNft *//*  isLoadingBurn */ error } = useBurnNFT(contract);
 
   const [burnloading, setBurnLoading] = useState(false);
 
@@ -39,11 +39,11 @@ export default function GetWalletERC1155NFTs() {
     console.error("failed to burn nft", error);
   }
 
-  function getEmailAddress(NFT_ID, NFT_Name) {
-    setShowModal(true);
-    setNFTRedeemID(NFT_ID);
-    setNFTRedeemName(NFT_Name);
-  }
+  // function getEmailAddress(NFT_ID, NFT_Name) {
+  //   setShowModal(true);
+  //   setNFTRedeemID(NFT_ID);
+  //   setNFTRedeemName(NFT_Name);
+  // }
 
   async function handleBurnNft(token_id, qty, emailaddress) {
     let usernameConfirmed = false;

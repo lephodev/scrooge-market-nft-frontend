@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useContext } from "react";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import {
@@ -5,7 +6,6 @@ import {
   useNetworkMismatch,
   useAddress,
   useSDK,
-  useSigner,
 } from "@thirdweb-dev/react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,7 +33,7 @@ function HolderClaimChips() {
   const [disable, setDisable] = useState(false);
   const sdk = useSDK();
   const address = useAddress();
-  const signer = useSigner();
+  // const signer = useSigner();
 
   const isMismatched = useNetworkMismatch();
   function notify(message) {
@@ -73,9 +73,9 @@ function HolderClaimChips() {
       });
   }
 
-  function timeout(delay) {
-    return new Promise((res) => setTimeout(res, delay));
-  }
+  // function timeout(delay) {
+  //   return new Promise((res) => setTimeout(res, delay));
+  // }
 
   const claimTokens = () => {
     setDisable(true);

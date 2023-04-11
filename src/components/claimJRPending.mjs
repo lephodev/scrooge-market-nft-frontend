@@ -1,9 +1,10 @@
-import { useContext, useEffect, useState } from "react";
-import { useAddress, useSDK, useSDKContext } from "@thirdweb-dev/react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
+import { useAddress, useSDK } from "@thirdweb-dev/react";
 import JR_ABI from "../config/JR_ABI.json";
 import Countdown from "react-countdown";
 import LoadingPoker from "../images/scroogeHatLogo.png";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useReward } from "react-rewards";
 
@@ -12,11 +13,11 @@ export default function ClaimJRPending() {
   const [claimableAmount, setClaimableAmount] = useState("");
   const [totalClaimed, setTotalClaimed] = useState("");
   const [secondsUntilClaim, setSecondsUntilClaim] = useState("");
-  const [claimableIn, setClaimableIn] = useState("");
+  const [ setClaimableIn] = useState("");
   const [claimableInTime, setClaimableInTime] = useState();
   const [isClaiming, setIsClaiming] = useState(false);
 
-  const { reward, isAnimating } = useReward("rewardId", "confetti", {
+  const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
   const sdk = useSDK();
@@ -52,7 +53,7 @@ export default function ClaimJRPending() {
   const handleClaim = async () => {
     setIsClaiming(true);
     try {
-      const claimCall = await contractObj.call("claim");
+      await contractObj.call("claim");
       setIsClaiming(false);
       //console.log('claimed');
       notify("Your pending BUSD rewards have been successfully claimed!");
