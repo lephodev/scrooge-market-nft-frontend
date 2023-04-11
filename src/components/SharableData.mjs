@@ -41,6 +41,7 @@ export default function SharableData() {
   const [showSocialShare, setShowSocialShare] = useState(true);
   const [showAffLeaderboards, setShowAffLeaderboards] = useState(true);
   const [showDailyRewards, setShowDailyRewards] = useState(true);
+  const [shareCount,setShareCount]=useState(0)
 
   const [allMessages, setAllMessages] = useState([]);
   const [messages, setMessages] = useState([]);
@@ -60,6 +61,25 @@ export default function SharableData() {
       console.error(err);
     }
   };
+
+  const getSocialShare=()=>{
+    console.log("abvvv");
+    try {
+      marketPlaceInstance()
+        .get(`/getSocialShare/${user?.id}`)
+        .then((data) => {
+          console.log("getSocialShare", data);
+          if (data.data.success) {
+            setShareCount(data?.data?.count)
+            // setAllMessages(data.data.data);
+            // setMessages(data.data.data);
+          }
+        });
+    } catch (err) {
+      console.log({err});
+    }
+
+  }
 
   /*const sendEmail = () => {
         try {
@@ -167,11 +187,34 @@ export default function SharableData() {
   useEffect(() => {
     getMessages();
     refreshAffData();
+    getSocialShare()
   }, []);
 
   console.log("affUser", affUser);
 
   console.log("user>>>>", user);
+  const clickevt=(message_id)=>{
+    console.log("message_id",message_id);
+    try {
+      marketPlaceInstance()
+      .get(`/shareReward/${user?.id}/${message_id}`)
+        .then((data) => {
+        console.log("shareableamessage", data);
+        if (data.data.success) {
+          getSocialShare()
+          toast.error(data.data.message, {
+            containerId: "aff-member",
+          });
+          
+          // setAllMessages(data.data.data);
+          // setMessages(data.data.data);
+        }
+      });
+      
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <>
@@ -461,18 +504,21 @@ export default function SharableData() {
                           </div>
                           <div className='social-share-btn-div'>
                             <FacebookShareButton
+                              disabled={shareCount===20}
                               url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                               quote={randomMessage.message}
                               className='social-share-btn'>
                               <FacebookIcon size={40} round />
                             </FacebookShareButton>
                             <TwitterShareButton
+                            disabled={shareCount===20}
                               url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                               title={randomMessage.message}
                               className='social-share-btn'>
                               <TwitterIcon size={40} round />
                             </TwitterShareButton>
                             <PinterestShareButton
+                            disabled={shareCount===20}
                               url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                               description={randomMessage.message}
                               media='https://casino-nft-marketplace.s3.amazonaws.com/affPinterest.jpg'
@@ -480,6 +526,7 @@ export default function SharableData() {
                               <PinterestIcon size={40} round />
                             </PinterestShareButton>
                             <TumblrShareButton
+                            disabled={shareCount===20}
                               title={randomMessage.message}
                               url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                               caption='Join me for free at Scrooge Casino and WIN REAL PRIZES!'
@@ -487,18 +534,21 @@ export default function SharableData() {
                               <TumblrIcon size={40} round />
                             </TumblrShareButton>
                             <TelegramShareButton
+                            disabled={shareCount===20}
                               url={`${scroogeClient}/?aff_id=${affUser?.data.user_id}`}
                               title={randomMessage.message}
                               className='social-share-btn'>
                               <TelegramIcon size={40} round />
                             </TelegramShareButton>
                             <WhatsappShareButton
+                            disabled={shareCount===20}
                               title={randomMessage.message}
                               url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                               className='social-share-btn'>
                               <WhatsappIcon size={40} round />
                             </WhatsappShareButton>
                             <EmailShareButton
+                            disabled={shareCount===20}
                               subject={randomMessage.message}
                               body={randomMessage.message}
                               url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}
@@ -540,50 +590,71 @@ export default function SharableData() {
                     {messages.map((message) => (
                       <div className='social-share-card' key={message._id}>
                         <div className='card-color' />
-
+{console.log({message})}
                         <div className='social-share-message'>
                           {message.message}
                         </div>
                         <div className='social-share-btn-div'>
+                          <div onClick={()=>clickevt(message._id)} >
                           <FacebookShareButton
+                          disabled={shareCount===20}
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             quote={message.message}
+                            
                             className='social-share-btn'>
                             <FacebookIcon size={40} round />
                           </FacebookShareButton>
+                          </div>
+                          <div onClick={()=>clickevt(message._id)} >
                           <TwitterShareButton
+                          disabled={shareCount===20}
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             title={message.message}
                             className='social-share-btn'>
                             <TwitterIcon size={40} round />
                           </TwitterShareButton>
+                          </div>
+                          <div onClick={()=>clickevt(message._id)} >
                           <PinterestShareButton
+                          disabled={shareCount===20}
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             description={message.message}
                             media='https://casino-nft-marketplace.s3.amazonaws.com/affPinterest.jpg'
                             className='social-share-btn'>
                             <PinterestIcon size={40} round />
                           </PinterestShareButton>
+                          </div>
+                          <div onClick={()=>clickevt(message._id)} >
                           <TumblrShareButton
+                          disabled={shareCount===20}
                             title={message.message}
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             caption='Join me for free at Scrooge Casino and WIN REAL PRIZES!'
                             className='social-share-btn'>
                             <TumblrIcon size={40} round />
                           </TumblrShareButton>
+                          </div>
+                          <div onClick={()=>clickevt(message._id)} >
                           <TelegramShareButton
+                          disabled={shareCount===20}
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             title={message.message}
                             className='social-share-btn'>
                             <TelegramIcon size={40} round />
                           </TelegramShareButton>
+                          </div>
+                          <div onClick={()=>clickevt(message._id)} >
                           <WhatsappShareButton
+                          disabled={shareCount===20}
                             title={message.message}
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             className='social-share-btn'>
                             <WhatsappIcon size={40} round />
                           </WhatsappShareButton>
+                          </div>
+                          <div onClick={()=>clickevt(message._id)} >
                           <EmailShareButton
+                          disabled={shareCount===20}
                             subject={message.message}
                             body={message.message}
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}
@@ -592,6 +663,7 @@ export default function SharableData() {
                             className='social-share-btn'>
                             <EmailIcon size={40} round />
                           </EmailShareButton>
+                          </div>
                         </div>
                       </div>
                     ))}
