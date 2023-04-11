@@ -45,9 +45,11 @@ function RedeemPrizes() {
   const [OG1000, setOG1000] = useState();
   const [OG5000, setOG5000] = useState();
   const [OG10000, setOG10000] = useState();
+  const [OG20000, setOG20000] = useState();
   const [JR1000, setJR1000] = useState();
   const [JR5000, setJR5000] = useState();
   const [JR10000, setJR10000] = useState();
+  const [JR20000, setJR20000] = useState();
   const [cookies] = useCookies(["token"]);
   const address = useAddress();
 
@@ -159,8 +161,9 @@ function RedeemPrizes() {
         const current_price = data.market_data.current_price.usd;
         setCurrentPriceOG(current_price);
         setOG1000((10 / current_price / 2).toFixed(0));
-        setOG5000((50 / current_price / 2).toFixed(0));
+        setOG5000((40 / current_price / 2).toFixed(0));
         setOG10000((100 / current_price / 2).toFixed(0));
+        setOG20000((200 / current_price / 2).toFixed(0));
         //console.log(OG1000, OG5000, OG10000);
         return current_price;
       })
@@ -179,8 +182,9 @@ function RedeemPrizes() {
         const current_price = data.market_data.current_price.usd;
         setCurrentPriceJR(current_price);
         setJR1000((10 / current_price / 2).toFixed(0));
-        setJR5000((50 / current_price / 2).toFixed(0));
+        setJR5000((40 / current_price / 2).toFixed(0));
         setJR10000((100 / current_price / 2).toFixed(0));
+        setJR20000((200 / current_price / 2).toFixed(0));
         //console.log(JR1000, JR5000, JR10000);
         return current_price;
       })
@@ -612,7 +616,8 @@ function RedeemPrizes() {
                           .filter(
                             (f) =>
                               f.redeem_action !== "burn" &&
-                              f.category !== "Merch"
+                              f.category !== "Merch" &&
+                              f.price !== 500
                           )
                           .map((prize) => (
                             <div className='prizes-card' key={prize._id}>
@@ -871,6 +876,48 @@ function RedeemPrizes() {
                               ) : (
                                 <></>
                               )}
+                              {prize._id === "6434f2f5f6bfb431f290a691" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {" "}
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(OG20000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                  <h4>
+                                    {(
+                                      parseInt(OG20000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "6434f46cf6bfb431f290a692" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {" "}
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(JR20000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                  <h4>
+                                    {(
+                                      parseInt(JR20000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
                               <img
                                 className='card-img pulse'
                                 src={prize.image_url}
@@ -1017,6 +1064,28 @@ function RedeemPrizes() {
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR10000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "6434f2f5f6bfb431f290a691" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(OG20000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "6434f46cf6bfb431f290a692" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(JR20000).toLocaleString("en-US")
                                   )}
                                   *
                                 </div>
