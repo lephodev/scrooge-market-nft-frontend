@@ -1,5 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useContext } from "react";
-import Axios from "axios";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import { useAddress } from "@thirdweb-dev/react";
 import { toast } from "react-toastify";
@@ -11,13 +11,12 @@ import coin1 from "../images/4.png";
 import coin2 from "../images/3.png";
 import coin3 from "../images/2.png";
 import coin4 from "../images/1.png";
+import InputRange from "react-input-range";
 import { userKycDetails } from "../utils/api.mjs";
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
 import { authInstance, marketPlaceInstance } from "../config/axios.js";
-import { async } from "q";
-import { Button } from "react-bootstrap";
-
+import { Button, Modal } from "react-bootstrap";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -37,15 +36,39 @@ function RedeemPrizes() {
   const [showConvert, setShowConvert] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
   const [buyTokenTab, setBuyTokenTab] = useState(false);
-
+  const [show, setShow] = useState(false);
+  const [sliderValue, setSliderValue] = useState(499);
+  const [tickets, setTickets] = useState("");
+  const [tokens, setTokens] = useState("");
+  const [prizeId, setPrizeId] = useState("");
   const [OG1000, setOG1000] = useState();
   const [OG5000, setOG5000] = useState();
   const [OG10000, setOG10000] = useState();
+  const [OG20000, setOG20000] = useState();
   const [JR1000, setJR1000] = useState();
   const [JR5000, setJR5000] = useState();
   const [JR10000, setJR10000] = useState();
+  const [JR20000, setJR20000] = useState();
   const [cookies] = useCookies(["token"]);
   const address = useAddress();
+
+  const handleClose = () => setShow(false);
+  const handleShow = (ticket, token, prizeid) => {
+    setTickets(ticket);
+    setTokens(token);
+    setPrizeId(prizeid);
+    setShow(true);
+  };
+
+  const confirmBuy = async () => {
+    if (tickets !== "" && tokens !== "") {
+      await convert(tickets, tokens);
+    }
+    if (prizeId !== "") {
+      await RedeemPrize(prizeId);
+    }
+    handleClose();
+  };
 
   async function getPrizes() {
     setPrizesLoading(true);
@@ -137,8 +160,9 @@ function RedeemPrizes() {
         const current_price = data.market_data.current_price.usd;
         setCurrentPriceOG(current_price);
         setOG1000((10 / current_price / 2).toFixed(0));
-        setOG5000((50 / current_price / 2).toFixed(0));
+        setOG5000((40 / current_price / 2).toFixed(0));
         setOG10000((100 / current_price / 2).toFixed(0));
+        setOG20000((200 / current_price / 2).toFixed(0));
         //console.log(OG1000, OG5000, OG10000);
         return current_price;
       })
@@ -157,8 +181,9 @@ function RedeemPrizes() {
         const current_price = data.market_data.current_price.usd;
         setCurrentPriceJR(current_price);
         setJR1000((10 / current_price / 2).toFixed(0));
-        setJR5000((50 / current_price / 2).toFixed(0));
+        setJR5000((40 / current_price / 2).toFixed(0));
         setJR10000((100 / current_price / 2).toFixed(0));
+        setJR20000((200 / current_price / 2).toFixed(0));
         //console.log(JR1000, JR5000, JR10000);
         return current_price;
       })
@@ -207,6 +232,7 @@ function RedeemPrizes() {
     marketPlaceInstance()
       .get(`/redeemPrize/${address}/${user.id}/${prize_id}`)
       .then((data) => {
+        setPrizeId("");
         console.log("redeemdata", data);
         setRedeemLoading(false);
         if (!data.data.success) {
@@ -237,6 +263,8 @@ function RedeemPrizes() {
             `/coverttickettotoken/${ticketPrice}/${tokenPrice}/${user.id}`
           );
           const { message, code, data } = res.data;
+          setTickets("");
+          setTokens("");
           if (code === 200) {
             console.log("datattat", data);
             getUserDataInstant();
@@ -280,6 +308,24 @@ function RedeemPrizes() {
     <Layout>
       <main className='main redeem-prizes-page'>
         <div className='container'>
+          <Modal show={show} onHide={handleClose} centered animation={false}>
+            <Modal.Body className='popupBody'>
+              <div>Do You Want To Redeem?</div>
+              <div className='popupBtn'>
+                <button className='greyBtn' onClick={handleClose}>
+                  Cancel
+                </button>
+                <button className='yellowBtn' onClick={confirmBuy}>
+                  Confirm
+                </button>
+              </div>
+            </Modal.Body>
+          </Modal>
+          {/* {show && (
+            <div className='convertChips'>
+             
+            </div>
+          )} */}
           {globalLoader && (
             <div className='loading'>
               <div className='loading-img-div'>
@@ -434,19 +480,42 @@ function RedeemPrizes() {
                           <div className='buy-chips-grid-box'>
                             <img src={coin4} alt='coin' />
 
+                            <InputRange
+                              maxValue={499}
+                              minValue={10}
+                              value={sliderValue}
+                              onChange={(value) => setSliderValue(value)}
+                            />
                             <div
                               className='gradient-btn'
-                              onClick={() => convert(500, 510)}>
+                              //  onClick={() => convert(500, 510)}
+                              onClick={() =>
+                                handleShow(sliderValue, sliderValue, "")
+                              }>
+                              <span>
+                                {sliderValue} tickets gets you {sliderValue}{" "}
+                                chips{" "}
+                              </span>
+                            </div>
+                          </div>
+                          <div className='buy-chips-grid-box'>
+                            <img src={coin4} alt='coin' />
+                            <div className='input-range'></div>
+                            <div
+                              className='gradient-btn'
+                              //  onClick={() => convert(500, 510)}
+                              onClick={() => handleShow(500, 510, "")}>
                               <span>500 tickets gets you 510 chips </span>
                             </div>
                           </div>
                           <div className='buy-chips-grid-box'>
                             {/* <p>25000 </p> */}
                             <img src={coin3} alt='coin' />
-
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
-                              onClick={() => convert(1000, 1025)}>
+                              // onClick={() => convert(1000, 1025)}
+                              onClick={() => handleShow(1000, 1025, "")}>
                               <span>1000 tickets gets you 1025 chips </span>
                             </div>
                           </div>
@@ -457,29 +526,33 @@ function RedeemPrizes() {
                               <img src={coin4} alt='coin' />
                               <img src={coin3} alt='coin' />
                             </div>
-
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
-                              onClick={() => convert(2500, 2600)}>
+                              // onClick={() => convert(2500, 2600)}
+                              onClick={() => handleShow(2500, 2600, "")}>
                               <span>2500 tickets gets you 2600 chips </span>
                             </div>
                           </div>
                           <div className='buy-chips-grid-box'>
                             {/* <p>10000 </p> */}
                             <img src={coin2} alt='coin' />
-
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
-                              onClick={() => convert(5000, 5250)}>
+                              // onClick={() => convert(5000, 5250)}
+                              onClick={() => handleShow(5000, 5250, "")}>
                               <span>5000 tickets gets you 5250 chips </span>
                             </div>
                           </div>
                           <div className='buy-chips-grid-box'>
                             {/* <p>5000 </p> */}
                             <img src={coin1} alt='coin' />
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
-                              onClick={() => convert(10000, 10600)}>
+                              // onClick={() => convert(10000, 10600)}
+                              onClick={() => handleShow(10000, 10600, "")}>
                               <span>10000 tickets gets you 10600 chips </span>
                             </div>
                           </div>
@@ -490,9 +563,11 @@ function RedeemPrizes() {
                               <img src={coin2} alt='coin' />
                               <img src={coin3} alt='coin' />
                             </div>
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
-                              onClick={() => convert(20000, 21400)}>
+                              // onClick={() => convert(20000, 21400)}
+                              onClick={() => handleShow(20000, 21400, "")}>
                               <span>20000 tickets gets you 21400 chips </span>
                             </div>
                           </div>
@@ -502,9 +577,11 @@ function RedeemPrizes() {
                               <img src={coin2} alt='coin' />
                               <img src={coin2} alt='coin' />
                             </div>
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
-                              onClick={() => convert(25000, 27000)}>
+                              // onClick={() => convert(25000, 27000)}
+                              onClick={() => handleShow(25000, 27000, "")}>
                               <span>25000 tickets gets you 27000 chips </span>
                             </div>
                           </div>
@@ -515,9 +592,11 @@ function RedeemPrizes() {
                               <img src={coin1} alt='coin' />
                               <img src={coin1} alt='coin' />
                             </div>
+                            <div className='input-range'></div>
                             <div
                               className='gradient-btn'
-                              onClick={() => convert(50000, 55000)}>
+                              // onClick={() => convert(50000, 55000)}
+                              onClick={() => handleShow(50000, 55000, "")}>
                               <span>50000 tickets gets you 55000 chips </span>
                             </div>
                           </div>
@@ -533,7 +612,12 @@ function RedeemPrizes() {
                     <>
                       <div className='prizes_container'>
                         {prizes
-                          .filter((f) => f.redeem_action !== "burn")
+                          .filter(
+                            (f) =>
+                              f.redeem_action !== "burn" &&
+                              f.category !== "Merch" &&
+                              f.price !== 500
+                          )
                           .map((prize) => (
                             <div className='prizes-card' key={prize._id}>
                               {console.log("prize", prize._id)}
@@ -554,6 +638,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(OG1000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -568,6 +659,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(JR1000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -580,6 +678,13 @@ function RedeemPrizes() {
                                       parseInt(OG1000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  *
+                                  <h4>
+                                    {(
+                                      parseInt(OG1000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
                                   *
                                 </div>
                               ) : (
@@ -595,6 +700,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(JR1000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -607,6 +719,13 @@ function RedeemPrizes() {
                                       parseInt(OG5000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  *
+                                  <h4>
+                                    {(
+                                      parseInt(OG5000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
                                   *
                                 </div>
                               ) : (
@@ -622,6 +741,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(JR5000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -636,6 +762,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(OG5000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -648,6 +781,13 @@ function RedeemPrizes() {
                                       parseInt(JR5000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  *
+                                  <h4>
+                                    {(
+                                      parseInt(JR5000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
                                   *
                                 </div>
                               ) : (
@@ -663,6 +803,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(OG10000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -677,6 +824,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(JR10000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -690,6 +844,13 @@ function RedeemPrizes() {
                                     )}
                                   </h4>
                                   *
+                                  <h4>
+                                    {(
+                                      parseInt(OG10000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
                                 </div>
                               ) : (
                                 <></>
@@ -702,6 +863,55 @@ function RedeemPrizes() {
                                       parseInt(JR10000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  *
+                                  <h4>
+                                    {(
+                                      parseInt(JR10000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "6434f2f5f6bfb431f290a691" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {" "}
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(OG20000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                  <h4>
+                                    {(
+                                      parseInt(OG20000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "6434f46cf6bfb431f290a692" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {" "}
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(JR20000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                  <h4>
+                                    {(
+                                      parseInt(JR20000) * currentPriceJR
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
                                   *
                                 </div>
                               ) : (
@@ -859,11 +1069,35 @@ function RedeemPrizes() {
                               ) : (
                                 <></>
                               )}
+                              {prize._id === "6434f2f5f6bfb431f290a691" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(OG20000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                              {prize._id === "6434f46cf6bfb431f290a692" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(JR20000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
                               {prize.isDynamic ? (
                                 <div className='asterisk-desc'>
                                   *Amount received is calculated at time of
                                   redemption and may vary from the amount
-                                  displayed.
+                                  displayed.<br></br>
+                                  *Value received on each item will be 2% less
+                                  to cover Blockchain Fees.
                                 </div>
                               ) : (
                                 <></>
@@ -873,7 +1107,7 @@ function RedeemPrizes() {
                                 <button
                                   // className='submit-btn'
                                   className='gradient-btn'
-                                  onClick={() => RedeemPrize(prize._id)}>
+                                  onClick={() => handleShow("", "", prize._id)}>
                                   REDEEM PRIZE
                                 </button>
                               </div>

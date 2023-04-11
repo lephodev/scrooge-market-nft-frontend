@@ -18,7 +18,7 @@ jobs:
     - name: Use Node.js 16
       uses: actions/setup-node@v3
 
-    - run: npm install
+    - run: npm install --force
     - run: CI= npm run build:staging
     - name: Deploy to ec2
       uses: easingthemes/ssh-deploy@main

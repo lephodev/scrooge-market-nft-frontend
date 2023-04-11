@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-undef */
 import { useState, useEffect, useContext } from "react";
-import Axios from "axios";
+// import Axios from "axios";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import MoneyBagGreen from "../images/moneybagGreen.png";
 import MoneyBagGray from "../images/moneybagGray.png";
@@ -15,7 +17,7 @@ import { marketPlaceInstance } from "../config/axios.js";
 function DailyRewards() {
   const { user } = useContext(AuthContext);
   console.log("useruser", user);
-  const { reward, isAnimating } = useReward("rewardId", "confetti", {
+  const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
   const [buyLoading, setBuyLoading] = useState(false);
@@ -28,7 +30,6 @@ function DailyRewards() {
     const handleChange = event => {
         setEmail(event.target.value);
       };*/
-  let user_id = "";
   const address = useAddress();
   //const isMismatched = useNetworkMismatch();
   function notify(message) {
@@ -61,9 +62,9 @@ function DailyRewards() {
     }
   }
 
-  function timeout(delay) {
-    return new Promise((res) => setTimeout(res, delay));
-  }
+  // function timeout(delay) {
+  //   return new Promise((res) => setTimeout(res, delay));
+  // }
 
   const claimTokens = async () => {
     console.log("user+++", user.id);
