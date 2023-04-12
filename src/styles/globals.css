@@ -421,6 +421,13 @@ span.wallet-user-name {
   font-size: 14px;
   color: #d2042d;
 }
+.asterisk-desc.cryptoTotoken {
+  margin-top: 25px;
+  font-size: 18px;
+  color: #ff0000;
+  text-align: center;
+  font-weight: 600;
+}
 .bordered-section {
   margin: 0px auto;
   width: 100%;
@@ -2519,6 +2526,9 @@ ul.footer-support li img {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+}
+.social-share-btn-div button.disabled {
+  background-color: transparent !important;
 }
 
 .social-share-card .card-color {

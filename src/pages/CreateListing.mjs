@@ -1,19 +1,17 @@
 import { useContext, useState } from "react";
 import GetWalletNFTs from "../scripts/getWalletNFTs.mjs";
 //import GetWalletERC1155NFTs from "./scripts/getWalletERC1155NFTs.mjs";
-import MarketplaceShowActiveListings from "../scripts/marketplaceShowActiveListings.mjs";
 import "../styles/Home.css";
 import GetWalletERC1155NFTs from "../scripts/getWalletERC1155NFTs.mjs";
-import ShowCasinoTokenNFTs from "../scripts/showCasinoTokenNFTs.mjs";
-import { useAddress, useOwnedNFTs, useContract, useContractRead, ThirdwebNftMedia, useNetwork, ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
+import { useAddress, useOwnedNFTs, useContract,  ChainId } from "@thirdweb-dev/react";
 import ChainContext from "../context/Chain.ts";
 
 export default function CreateListing() {
-  const NATIVE_TOKEN_ADDRESS = '0xe9e7cea3dedca5984780bafc599bd69add087d56';
+  // const NATIVE_TOKEN_ADDRESS = '0xe9e7cea3dedca5984780bafc599bd69add087d56';
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   const address = useAddress();
   const { contract } = useContract("0xD831267dDF05156Da33e35EaD05DDBf9ffE1F93E");
-  const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
+  const { data: nfts } = useOwnedNFTs(contract, address);
   const [buyoutPricePerToken, setBuyoutPricePerToken] = useState("");
   const [reservePricePerToken, setReservePricePerToken] = useState("");
   const [listingDurationInSeconds, setListingDurationInSeconds] = useState("");
@@ -22,27 +20,27 @@ export default function CreateListing() {
     event.preventDefault();
     alert(`Buy Now: ${buyoutPricePerToken} and Reserve: ${reservePricePerToken} and Duration: ${listingDurationInSeconds}`);
     // Data of the auction you want to create
-    const auction = {
-      // address of the contract the asset you want to list is on
-      assetContractAddress: "0x...",
-      // token ID of the asset you want to list
-      tokenId: "0",
-    // when should the listing open up for offers
-      startTimestamp: new Date(),
-      // how long the listing will be open for
-      listingDurationInSeconds: listingDurationInSeconds,
-      // how many of the asset you want to list
-      quantity: 1,
-      // address of the currency contract that will be used to pay for the listing
-      currencyContractAddress: NATIVE_TOKEN_ADDRESS,
-      // how much people would have to bid to instantly buy the asset
-      buyoutPricePerToken: buyoutPricePerToken,
-      // the minimum bid that will be accepted for the token
-      reservePricePerToken: reservePricePerToken,
-    }
-    const tx = await contract.auction.createListing(auction);
-    const receipt = tx.receipt; // the transaction receipt
-    const listingId = tx.id; // the id of the newly created listing
+    // const auction = {
+    //   // address of the contract the asset you want to list is on
+    //   assetContractAddress: "0x...",
+    //   // token ID of the asset you want to list
+    //   tokenId: "0",
+    // // when should the listing open up for offers
+    //   startTimestamp: new Date(),
+    //   // how long the listing will be open for
+    //   listingDurationInSeconds: listingDurationInSeconds,
+    //   // how many of the asset you want to list
+    //   quantity: 1,
+    //   // address of the currency contract that will be used to pay for the listing
+    //   currencyContractAddress: NATIVE_TOKEN_ADDRESS,
+    //   // how much people would have to bid to instantly buy the asset
+    //   buyoutPricePerToken: buyoutPricePerToken,
+    //   // the minimum bid that will be accepted for the token
+    //   reservePricePerToken: reservePricePerToken,
+    // }
+    // const tx = await contract.auction.createListing(auction);
+    // const receipt = tx.receipt; // the transaction receipt
+    // const listingId = tx.id; // the id of the newly created listing
   }
 
   return (

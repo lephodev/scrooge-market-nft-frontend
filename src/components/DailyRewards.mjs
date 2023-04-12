@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-undef */
 import { useState, useEffect, useContext } from "react";
-import Axios from "axios";
+// import Axios from "axios";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import MoneyBagGreen from "../images/moneybagGreen.png";
 import MoneyBagGray from "../images/moneybagGray.png";
@@ -15,7 +17,7 @@ import { marketPlaceInstance } from "../config/axios.js";
 function DailyRewards() {
   const { user } = useContext(AuthContext);
   console.log("useruser", user);
-  const { reward, isAnimating } = useReward("rewardId", "confetti", {
+  const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
   const [buyLoading, setBuyLoading] = useState(false);
@@ -28,7 +30,6 @@ function DailyRewards() {
     const handleChange = event => {
         setEmail(event.target.value);
       };*/
-  let user_id = "";
   const address = useAddress();
   //const isMismatched = useNetworkMismatch();
   function notify(message) {
@@ -61,14 +62,13 @@ function DailyRewards() {
     }
   }
 
-  function timeout(delay) {
-    return new Promise((res) => setTimeout(res, delay));
-  }
+  // function timeout(delay) {
+  //   return new Promise((res) => setTimeout(res, delay));
+  // }
 
   const claimTokens = async () => {
     console.log("user+++", user.id);
     setBuyLoading(true);
-    user_id = user.id;
     console.log("user_id", user.id);
     try {
       const data = await marketPlaceInstance().get(
@@ -145,8 +145,7 @@ function DailyRewards() {
               <div className='prizes_container'>
                 <div
                   className='prizes-card'
-                  style={{ width: "100%", margin: "0 auto" }}
-                >
+                  style={{ width: "100%", margin: "0 auto" }}>
                   <div className='pageTitle' style={{ margin: "20px auto" }}>
                     <h1>Claim Your Daily Rewards</h1>
                   </div>
@@ -155,8 +154,7 @@ function DailyRewards() {
                   </div>
                   <div
                     className='prizes-chip-count'
-                    style={{ marginTop: "35px" }}
-                  >
+                    style={{ marginTop: "35px" }}>
                     <div className='additional-info-div'>
                       You have claimed your daily rewards{" "}
                       {nextClaimDate.consecutive_days} day
@@ -279,12 +277,10 @@ function DailyRewards() {
                   nextClaimDate === "CLAIM NOW" ? (
                     <div
                       className='new-btn'
-                      style={{ width: "50%", margin: "0 auto" }}
-                    >
+                      style={{ width: "50%", margin: "0 auto" }}>
                       <button
                         //  className='button2'
-                        onClick={() => claimTokens()}
-                      >
+                        onClick={() => claimTokens()}>
                         Claim Tokens
                       </button>
                     </div>
@@ -298,8 +294,7 @@ function DailyRewards() {
                               <div className='new-btn'>
                                 <button
                                   // className='submit-btn'
-                                  onClick={() => claimTokens()}
-                                >
+                                  onClick={() => claimTokens()}>
                                   Claim Tokens
                                 </button>
                               </div>
@@ -325,8 +320,7 @@ function DailyRewards() {
                       href={scroogeClient}
                       alt='Visit Scrooge Casino'
                       target='_blank'
-                      rel='noreferrer'
-                    >
+                      rel='noreferrer'>
                       Scrooge Casino
                     </a>{" "}
                     account.
