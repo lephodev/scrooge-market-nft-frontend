@@ -79,6 +79,7 @@ export default function BuyTokenFromOGJR() {
             .then((response) => {
               setBuyLoading(false);
               if (response.data.success) {
+                setUser(response?.data?.user)
                 toast.success(`Successfully Purchased ${tokens} Tokens`);
                 reward();
                 getUserDataInstant();
