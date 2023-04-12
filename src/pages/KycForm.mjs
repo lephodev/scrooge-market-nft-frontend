@@ -113,8 +113,8 @@ const KYCForm = () => {
   };
 
   const reapply=async()=>{
-    const response = await reApply();
     setglobalLoader(true);
+    const response = await reApply();
     if(response?.code===200){
       setglobalLoader(false);
       setstatusKyc(response.message);
