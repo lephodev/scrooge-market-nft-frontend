@@ -5,7 +5,9 @@
     "scroogeServer": "https://dev-api.scrooge.casino",
     "scroogeClient": "https://dev.scrooge.casino",
     "pokerUrl": "https://devpoker.scrooge.casino",
-    "blackjackUrl": "https://devblackjack.scrooge.casino"
+    "blackjackUrl": "https://devblackjack.scrooge.casino",
+    "stripeKey": "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT"
+
   },
   "development": {
     "client": "https://devmarket.scrooge.casino",
@@ -13,7 +15,9 @@
     "scroogeServer": "https://dev-api.scrooge.casino",
     "scroogeClient": "https://dev.scrooge.casino",
     "pokerUrl": "https://devpoker.scrooge.casino",
-    "blackjackUrl": "https://devblackjack.scrooge.casino"
+    "blackjackUrl": "https://devblackjack.scrooge.casino",
+    "stripeKey": "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT"
+
   },
   "staging": {
     "client": "https://betamarket.scrooge.casino",
@@ -21,7 +25,9 @@
     "scroogeServer": "https://beta-api.scrooge.casino",
     "scroogeClient": "https://beta.scrooge.casino",
     "pokerUrl": "https://betapoker.scrooge.casino",
-    "blackjackUrl": "https://betablackjack.scrooge.casino"
+    "blackjackUrl": "https://betablackjack.scrooge.casino",
+    "stripeKey": "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT"
+
   },
   "production": {
     "client": "https://market.scrooge.casino/",
@@ -29,6 +35,8 @@
     "scroogeServer": "https://api.scrooge.casino",
     "scroogeClient": "https://scrooge.casino",
     "pokerUrl": "https://poker.scrooge.casino",
-    "blackjackUrl": "https://blackjack.scrooge.casino"
+    "blackjackUrl": "https://blackjack.scrooge.casino",
+    "stripeKey": "pk_live_51Mo3YgIintOuilEoqh3MvPlytP8mgx59iCnvobhQqQ3ZO9vM34YxCHuzbyjmkGlIdSsAv5sHoVdIWTtsUPnK5XhD00vbhc88hl"
+
   }
 }
