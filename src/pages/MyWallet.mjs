@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import GetWalletCasinoNFTs from "../scripts/getWalletCasinoNFTs.mjs";
 import {
   ConnectWallet,
@@ -22,14 +23,14 @@ import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
 import { marketPlaceInstance } from "../config/axios.js";
 import profile from "../images/profile.png";
-import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses.js";
+// import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses.js";
 export default function MyWallet() {
   const [OGBalance, setOGBalance] = useState("Loading...");
   const [JRBalance, setJRBalance] = useState("Loading...");
   const [JRValue, setJRValue] = useState("Loading...");
   const [OGValue, setOGValue] = useState("Loading...");
-  const [currentPriceOG, setCurrentPriceOG] = useState("Loading...");
-  const [currentPriceJR, setCurrentPriceJR] = useState("Loading...");
+  const [/* currentPriceOG */, setCurrentPriceOG] = useState("Loading...");
+  const [/* currentPriceJR */, setCurrentPriceJR] = useState("Loading...");
   const { user } = useContext(AuthContext);
   const [userRedeemed, setUserRedeemed] = useState([]);
   const [showMerchRedeemed, setShowMerchRedeemed] = useState(false);

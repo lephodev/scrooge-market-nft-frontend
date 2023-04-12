@@ -7,7 +7,6 @@ import {
 } from "@thirdweb-dev/react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Axios from "axios";
 import LoadingGif from "../images/loading1.gif";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
