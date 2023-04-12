@@ -33,7 +33,7 @@ import { marketPlaceInstance } from "../config/axios.js";
 import { scroogeClient } from "../config/keys.js";
 
 export default function SharableData() {
-  const { user } = useContext(AuthContext);
+  const { user,setUser } = useContext(AuthContext);
   const [affUser, setAffUser] = useState({});
   const [/* affUserID */, setAffUserID] = useState("");
   const [creatingAffUser, setCreatingAffUser] = useState(false);
@@ -200,6 +200,7 @@ export default function SharableData() {
         .then((data) => {
         console.log("shareableamessage", data);
         if (data.data.success) {
+          setUser(data?.data?.user)
           getSocialShare()
           toast.error(data.data.message, {
             containerId: "aff-member",
