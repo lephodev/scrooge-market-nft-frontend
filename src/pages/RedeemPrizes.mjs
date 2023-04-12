@@ -30,6 +30,7 @@ function RedeemPrizes() {
   const [redeemSuccess, setRedeemSuccess] = useState(false);
   const [allPrizes, setAllPrizes] = useState([]);
   const [prizes, setPrizes] = useState([]);
+  const [disable, setDisable] = useState(false);
   const [prizesLoading, setPrizesLoading] = useState([]);
   const [currentPriceOG, setCurrentPriceOG] = useState("Loading...");
   const [currentPriceJR, setCurrentPriceJR] = useState("Loading...");
@@ -61,12 +62,18 @@ function RedeemPrizes() {
   };
 
   const confirmBuy = async () => {
-    if (tickets !== "" && tokens !== "") {
-      await convert(tickets, tokens);
+    setDisable(true);
+    try {
+      if (tickets !== "" && tokens !== "") {
+        await convert(tickets, tokens);
+      }
+      if (prizeId !== "") {
+        await RedeemPrize(prizeId);
+      }
+    } catch (error) {
+      console.log(error);
     }
-    if (prizeId !== "") {
-      await RedeemPrize(prizeId);
-    }
+    setDisable(false);
     handleClose();
   };
 
@@ -315,7 +322,10 @@ function RedeemPrizes() {
                 <button className='greyBtn' onClick={handleClose}>
                   Cancel
                 </button>
-                <button className='yellowBtn' onClick={confirmBuy}>
+                <button
+                  className='yellowBtn'
+                  disabled={disable}
+                  onClick={confirmBuy}>
                   Confirm
                 </button>
               </div>
@@ -494,7 +504,7 @@ function RedeemPrizes() {
                               }>
                               <span>
                                 {sliderValue} tickets gets you {sliderValue}{" "}
-                                chips{" "}
+                                tokens{" "}
                               </span>
                             </div>
                           </div>
@@ -505,7 +515,7 @@ function RedeemPrizes() {
                               className='gradient-btn'
                               //  onClick={() => convert(500, 510)}
                               onClick={() => handleShow(500, 510, "")}>
-                              <span>500 tickets gets you 510 chips </span>
+                              <span>500 tickets gets you 510 tokens </span>
                             </div>
                           </div>
                           <div className='buy-chips-grid-box'>
@@ -516,7 +526,7 @@ function RedeemPrizes() {
                               className='gradient-btn'
                               // onClick={() => convert(1000, 1025)}
                               onClick={() => handleShow(1000, 1025, "")}>
-                              <span>1000 tickets gets you 1025 chips </span>
+                              <span>1000 tickets gets you 1025 tokens </span>
                             </div>
                           </div>
                           <div className='buy-chips-grid-box'>
@@ -531,7 +541,7 @@ function RedeemPrizes() {
                               className='gradient-btn'
                               // onClick={() => convert(2500, 2600)}
                               onClick={() => handleShow(2500, 2600, "")}>
-                              <span>2500 tickets gets you 2600 chips </span>
+                              <span>2500 tickets gets you 2600 tokens </span>
                             </div>
                           </div>
                           <div className='buy-chips-grid-box'>
@@ -542,7 +552,7 @@ function RedeemPrizes() {
                               className='gradient-btn'
                               // onClick={() => convert(5000, 5250)}
                               onClick={() => handleShow(5000, 5250, "")}>
-                              <span>5000 tickets gets you 5250 chips </span>
+                              <span>5000 tickets gets you 5250 tokens </span>
                             </div>
                           </div>
                           <div className='buy-chips-grid-box'>
@@ -553,7 +563,7 @@ function RedeemPrizes() {
                               className='gradient-btn'
                               // onClick={() => convert(10000, 10600)}
                               onClick={() => handleShow(10000, 10600, "")}>
-                              <span>10000 tickets gets you 10600 chips </span>
+                              <span>10000 tickets gets you 10600 tokens </span>
                             </div>
                           </div>
                           <div className='buy-chips-grid-box'>
@@ -568,7 +578,7 @@ function RedeemPrizes() {
                               className='gradient-btn'
                               // onClick={() => convert(20000, 21400)}
                               onClick={() => handleShow(20000, 21400, "")}>
-                              <span>20000 tickets gets you 21400 chips </span>
+                              <span>20000 tickets gets you 21400 tokens </span>
                             </div>
                           </div>
                           <div className='buy-chips-grid-box'>
@@ -582,7 +592,7 @@ function RedeemPrizes() {
                               className='gradient-btn'
                               // onClick={() => convert(25000, 27000)}
                               onClick={() => handleShow(25000, 27000, "")}>
-                              <span>25000 tickets gets you 27000 chips </span>
+                              <span>25000 tickets gets you 27000 tokens </span>
                             </div>
                           </div>
                           <div className='buy-chips-grid-box'>
@@ -597,7 +607,7 @@ function RedeemPrizes() {
                               className='gradient-btn'
                               // onClick={() => convert(50000, 55000)}
                               onClick={() => handleShow(50000, 55000, "")}>
-                              <span>50000 tickets gets you 55000 chips </span>
+                              <span>50000 tickets gets you 55000 tokens </span>
                             </div>
                           </div>
                         </div>
