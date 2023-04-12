@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   useAddress,
-   useOwnedNFTs,
-   useContract,
+  useOwnedNFTs,
+  useContract,
   // useNFTs,
   // useContractMetadata,
   ThirdwebNftMedia,
@@ -13,15 +13,15 @@ import {
 // import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
 
 import { useState, useEffect, useContext } from "react";
-// import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ChainContext from "../context/Chain.ts";
 import DLBigD from "../images/DLBigD.png";
-// import Countdown from "react-countdown";
-// import { useReward } from "react-rewards";
+//import Countdown from "react-countdown";
+//import { useReward } from "react-rewards";
 import AuthContext from "../context/authContext.ts";
 import { scroogeClient } from "../config/keys.js";
 import { marketPlaceInstance } from "../config/axios.js";
+//import { toast } from "react-toastify";
 
 export default function GetWalletDLNFTs() {
   const { user } = useContext(AuthContext);
@@ -42,43 +42,23 @@ export default function GetWalletDLNFTs() {
 
   const address = useAddress();
   // const sdk = useSDK();
-  const [buyLoading, /* setBuyLoading */] = useState(false);
+  //const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("");
   const [nfts, setNFTs] = useState([]);
-  const [isLoadingg, setIsLoadingg] = useState(false);
-  const [/* tokensClaimDate */, setTokensClaimDate] = useState([
+  const [tokensClaimDate, setTokensClaimDate] = useState([
     { token_id: "", nextClaimDate: "" },
   ]);
-
+  const [claimDateArray, setClaimDateArray] = useState([]);
+  console.log(tokensClaimDate);
+  console.log(claimDateArray);
   const { contract } = useContract(
     "0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768"
   );
   console.log("contracttttt", contract);
-  const {
-    data: ownedNFTs,
-    isLoading,
-    error,
-  } = useOwnedNFTs(contract, "0x372d6c56c6734995C1F73968c8434B8DfC3c146F");
-  console.log("data", ownedNFTs,isLoading);
+  const { data: ownedNFTs, isLoading, error } = useOwnedNFTs(contract, address);
+  // setNFTs(ownedNFTs);
+  console.log("data", ownedNFTs, isLoading);
   console.log("error", error);
-
-  const getDLNFTs = async () => {
-    setIsLoadingg(true);
-    try {
-      const NFTs = await marketPlaceInstance().get(`/getDLNFTs/${address}`);
-      console.log(NFTs.data.allNFTs);
-      let nft = NFTs.data.allNFTs.filter((n) => n.owner === address);
-      setNFTs(nft);
-      setIsLoadingg(false);
-      console.log("nfttt---", nft);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getDLNFTs();
-  }, []);
 
   // const claimTokens = (token_id) => {
   //   setBuyLoading(true);
@@ -140,10 +120,10 @@ export default function GetWalletDLNFTs() {
       "ChainId.BinanceSmartChainMainnet",
       ChainId.BinanceSmartChainMainnet
     );
+    setNFTs(ownedNFTs);
     return () => setSelectedChain(ChainId.BinanceSmartChainMainnet);
-  }, [address]);
+  }, [address, ownedNFTs]);
   let dataArray = [];
-  const [/* claimDateArray */, setClaimDateArray] = useState([]);
   useEffect(() => {
     if (nfts) {
       if (nfts.length > 0) {
@@ -163,7 +143,7 @@ export default function GetWalletDLNFTs() {
 
   return (
     <div>
-      {buyLoading ? (
+      {/* {buyLoading ? (
         <div className='pageImgContainer-dl bg-animated'>
           <img
             className='spin dl-loader-img'
@@ -175,7 +155,7 @@ export default function GetWalletDLNFTs() {
         </div>
       ) : (
         <></>
-      )}
+      )} */}
       {selectedChain !== ChainId.Mainnet ? (
         <>
           <div className='new-btn claim-token-btn'>
@@ -193,7 +173,7 @@ export default function GetWalletDLNFTs() {
         <></>
       )}
 
-      {isLoadingg && selectedChain === ChainId.Mainnet ? (
+      {isLoading && selectedChain === ChainId.Mainnet ? (
         <div className='button-section'>
           <div style={{ fontFamily: "Poppins" }}>
             LOADING YOUR DUCKY LUCKS NFTS
