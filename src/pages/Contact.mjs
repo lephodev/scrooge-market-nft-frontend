@@ -12,7 +12,7 @@ export default function Contact() {
             Have a question? Need to raise a concern? Wanna tell us a joke?
           </p>
           <div className='contact-div'>
-            Send us an email at support@scrooge.casino<br></br>
+            Send us an email at utilities@scroogegold.com <br></br>
             <br></br>
             <a
               href='https://t.me/ScroogeJRverify'
