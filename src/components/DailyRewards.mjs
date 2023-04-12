@@ -69,7 +69,6 @@ function DailyRewards() {
   const claimTokens = async () => {
     console.log("user+++", user.id);
     setBuyLoading(true);
-    user_id = user.id;
     console.log("user_id", user.id);
     try {
       const data = await marketPlaceInstance().get(
@@ -146,8 +145,7 @@ function DailyRewards() {
               <div className='prizes_container'>
                 <div
                   className='prizes-card'
-                  style={{ width: "100%", margin: "0 auto" }}
-                >
+                  style={{ width: "100%", margin: "0 auto" }}>
                   <div className='pageTitle' style={{ margin: "20px auto" }}>
                     <h1>Claim Your Daily Rewards</h1>
                   </div>
@@ -156,8 +154,7 @@ function DailyRewards() {
                   </div>
                   <div
                     className='prizes-chip-count'
-                    style={{ marginTop: "35px" }}
-                  >
+                    style={{ marginTop: "35px" }}>
                     <div className='additional-info-div'>
                       You have claimed your daily rewards{" "}
                       {nextClaimDate.consecutive_days} day
@@ -280,12 +277,10 @@ function DailyRewards() {
                   nextClaimDate === "CLAIM NOW" ? (
                     <div
                       className='new-btn'
-                      style={{ width: "50%", margin: "0 auto" }}
-                    >
+                      style={{ width: "50%", margin: "0 auto" }}>
                       <button
                         //  className='button2'
-                        onClick={() => claimTokens()}
-                      >
+                        onClick={() => claimTokens()}>
                         Claim Tokens
                       </button>
                     </div>
@@ -299,8 +294,7 @@ function DailyRewards() {
                               <div className='new-btn'>
                                 <button
                                   // className='submit-btn'
-                                  onClick={() => claimTokens()}
-                                >
+                                  onClick={() => claimTokens()}>
                                   Claim Tokens
                                 </button>
                               </div>
@@ -326,8 +320,7 @@ function DailyRewards() {
                       href={scroogeClient}
                       alt='Visit Scrooge Casino'
                       target='_blank'
-                      rel='noreferrer'
-                    >
+                      rel='noreferrer'>
                       Scrooge Casino
                     </a>{" "}
                     account.
