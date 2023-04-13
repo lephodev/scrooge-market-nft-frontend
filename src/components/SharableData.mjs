@@ -201,7 +201,7 @@ export default function SharableData() {
         console.log("shareableamessage", data);
         if (data.data.success) {
           console.log("userrrrr12",data?.data?.user);
-          data.data.user.id=data?.data?.user._id
+          // data.data.user.id=data?.data?.user?._id
            setUser(data?.data?.user)
           getSocialShare()
           toast.error(data.data.message, {
