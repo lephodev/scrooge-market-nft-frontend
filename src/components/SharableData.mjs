@@ -195,7 +195,7 @@ export default function SharableData() {
 
   console.log("user>>>>", user);
   const clickevt=(message_id)=>{
-    console.log("message_id",message_id,affUser?.data?.user_id,"afff",affUser);
+    console.count("ggg");
     try {
       marketPlaceInstance()
       .get(`/shareReward/${affUser?.data?.user_id}/${message_id}`)
@@ -634,8 +634,8 @@ const handleShareError = () => {
                           {message.message}
                           {/* {console.log("messaddadad---->>>",message)} */}
                         </div>
-                        <div className='social-share-btn-div' onClick={()=>clickevt(message._id)}>
-                          
+                        <div className='social-share-btn-div' >
+                          <div onClick={()=>clickevt(message._id)}>
                           
                           {/* <FacebookProvider appId={590649203004238}>
                           
@@ -655,6 +655,7 @@ const handleShareError = () => {
                             <FacebookIcon size={40} round />
                             
                           </FacebookShareButton>
+                          </div>
                           {/* <PinterestShareCount url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`} /> */}
                       
                           
