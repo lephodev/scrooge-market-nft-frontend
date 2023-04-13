@@ -71,10 +71,10 @@ export default function SharableData() {
           console.log("getSocialShare", data);
           if (data.data.success) {
             setShareCount(data?.data?.count)
-            // setAllMessages(data.data.data);
-            // setMessages(data.data.data);
           }
         });
+        refreshAffData();
+
     } catch (err) {
       console.log({err});
     }
@@ -146,7 +146,7 @@ export default function SharableData() {
   };
 
   const refreshAffData = async () => {
-    console.log("user?.id---->>>>", user?.id);
+    console.log("user?.id---->>>>", user);
     const getAff = await getAffiliateUser(user?.id);
     console.log("getAff000000000", getAff);
     setAffUser(getAff);
@@ -193,17 +193,21 @@ export default function SharableData() {
 
   console.log("user>>>>", user);
   const clickevt=(message_id)=>{
-    console.log("message_id",message_id);
+    console.log("message_id",message_id,affUser?.data?.user_id,"afff",affUser);
     try {
       marketPlaceInstance()
-      .get(`/shareReward/${user?.id}/${message_id}`)
+      .get(`/shareReward/${affUser?.data?.user_id}/${message_id}`)
         .then((data) => {
         console.log("shareableamessage", data);
         if (data.data.success) {
-          setUser(data?.data?.user)
+          console.log("userrrrr12",data?.data?.user);
+          // data.data.user.id=data?.data?.user?._id
+           setUser(data?.data?.user)
           getSocialShare()
           toast.error(data.data.message, {
             containerId: "aff-member",
+             id: "A" 
+
           });
           
           // setAllMessages(data.data.data);
@@ -218,6 +222,12 @@ export default function SharableData() {
 const CheckIfShow=(e)=>{
   console.log("after close popup",e);
 }
+const handleShareSuccess = () => {
+  console.log('Content shared successfully');
+};
+const handleShareError = () => {
+  console.log('Error sharing content');
+};
   return (
     <>
       {creatingAffUser ? (
@@ -379,7 +389,7 @@ const CheckIfShow=(e)=>{
       ) : (
         <></>
       )}
-
+{console.log("affUser?.message",affUser?.message)}
       {user && affUser?.message?.toString() === "User not found." ? (
         <div className='affiliate-card-div'>
           <div style={{ textAlign: "center" }}>
@@ -505,6 +515,7 @@ const CheckIfShow=(e)=>{
                               href={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}>{`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}</a>
                           </div>
                           <div className='social-share-btn-div'>
+                          <span onClick={()=>clickevt(randomMessage._id)} >
                             <FacebookShareButton
                               disabled={shareCount===20}
                               url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
@@ -512,6 +523,8 @@ const CheckIfShow=(e)=>{
                               className='social-share-btn'>
                               <FacebookIcon size={40} round />
                             </FacebookShareButton>
+                            </span>
+                            <span onClick={()=>clickevt(randomMessage._id)} >
                             <TwitterShareButton
                             disabled={shareCount===20}
                               url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
@@ -519,6 +532,8 @@ const CheckIfShow=(e)=>{
                               className='social-share-btn'>
                               <TwitterIcon size={40} round />
                             </TwitterShareButton>
+                            </span>
+                            <span onClick={()=>clickevt(randomMessage._id)} >
                             <PinterestShareButton
                             disabled={shareCount===20}
                               url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
@@ -527,7 +542,8 @@ const CheckIfShow=(e)=>{
                               className='social-share-btn'>
                               <PinterestIcon size={40} round />
                             </PinterestShareButton>
-                            
+                            </span>
+                            <span onClick={()=>clickevt(randomMessage._id)} >
                             <TumblrShareButton
                             disabled={shareCount===20}
                               title={randomMessage.message}
@@ -536,6 +552,8 @@ const CheckIfShow=(e)=>{
                               className='social-share-btn'>
                               <TumblrIcon size={40} round />
                             </TumblrShareButton>
+                            </span>
+                            <span onClick={()=>clickevt(randomMessage._id)} >
                             <TelegramShareButton
                             disabled={shareCount===20}
                               url={`${scroogeClient}/?aff_id=${affUser?.data.user_id}`}
@@ -543,6 +561,8 @@ const CheckIfShow=(e)=>{
                               className='social-share-btn'>
                               <TelegramIcon size={40} round />
                             </TelegramShareButton>
+                            </span>
+                            <span onClick={()=>clickevt(randomMessage._id)} >
                             <WhatsappShareButton
                             disabled={shareCount===20}
                               title={randomMessage.message}
@@ -550,6 +570,8 @@ const CheckIfShow=(e)=>{
                               className='social-share-btn'>
                               <WhatsappIcon size={40} round />
                             </WhatsappShareButton>
+                            </span>
+                            <span onClick={()=>clickevt(randomMessage._id)} >
                             <EmailShareButton
                             disabled={shareCount===20}
                               subject={randomMessage.message}
@@ -560,6 +582,7 @@ const CheckIfShow=(e)=>{
                               className='social-share-btn'>
                               <EmailIcon size={40} round />
                             </EmailShareButton>
+                            </span>
                           </div>
                           <div className='close-btn-round-div'>
                             <div
@@ -595,6 +618,7 @@ const CheckIfShow=(e)=>{
                         <div className='card-color' />
                         <div className='social-share-message'>
                           {message.message}
+                          {/* {console.log("messaddadad---->>>",message)} */}
                         </div>
                         <div className='social-share-btn-div'>
                           <div onClick={()=>clickevt(message._id)} >
@@ -602,6 +626,8 @@ const CheckIfShow=(e)=>{
                           disabled={shareCount===20}
                             url={`${scroogeClient}/?aff_id=${affUser?.data?.user_id}`}
                             quote={message.message}
+                            onShareSuccess={handleShareSuccess}
+                            onShareError={()=>handleShareError()}
                             onShareWindowClose={(e)=>CheckIfShow(e)}
                             className='social-share-btn'>
                             <FacebookIcon size={40} round />
