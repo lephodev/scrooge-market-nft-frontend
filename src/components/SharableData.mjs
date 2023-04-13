@@ -71,10 +71,10 @@ export default function SharableData() {
           console.log("getSocialShare", data);
           if (data.data.success) {
             setShareCount(data?.data?.count)
-            // setAllMessages(data.data.data);
-            // setMessages(data.data.data);
           }
         });
+        refreshAffData();
+
     } catch (err) {
       console.log({err});
     }
@@ -146,7 +146,7 @@ export default function SharableData() {
   };
 
   const refreshAffData = async () => {
-    console.log("user?.id---->>>>", user?.id);
+    console.log("user?.id---->>>>", user);
     const getAff = await getAffiliateUser(user?.id);
     console.log("getAff000000000", getAff);
     setAffUser(getAff);
@@ -193,14 +193,16 @@ export default function SharableData() {
 
   console.log("user>>>>", user);
   const clickevt=(message_id)=>{
-    console.log("message_id",message_id);
+    console.log("message_id",message_id,affUser?.data?.user_id,"afff",affUser);
     try {
       marketPlaceInstance()
-      .get(`/shareReward/${user?.id}/${message_id}`)
+      .get(`/shareReward/${affUser?.data?.user_id}/${message_id}`)
         .then((data) => {
         console.log("shareableamessage", data);
         if (data.data.success) {
-          setUser(data?.data?.user)
+          console.log("userrrrr12",data?.data?.user);
+          data.data.user.id=data?.data?.user._id
+           setUser(data?.data?.user)
           getSocialShare()
           toast.error(data.data.message, {
             containerId: "aff-member",
@@ -379,7 +381,7 @@ const CheckIfShow=(e)=>{
       ) : (
         <></>
       )}
-
+{console.log("affUser?.message",affUser?.message)}
       {user && affUser?.message?.toString() === "User not found." ? (
         <div className='affiliate-card-div'>
           <div style={{ textAlign: "center" }}>
@@ -595,6 +597,7 @@ const CheckIfShow=(e)=>{
                         <div className='card-color' />
                         <div className='social-share-message'>
                           {message.message}
+                          {/* {console.log("messaddadad---->>>",message)} */}
                         </div>
                         <div className='social-share-btn-div'>
                           <div onClick={()=>clickevt(message._id)} >
