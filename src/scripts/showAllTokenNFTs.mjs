@@ -7,7 +7,7 @@ import {
   useAddress,
 } from "@thirdweb-dev/react";
 import SaleBadge from "../images/saleBadge1.png";
-import StripeBadge from "../images/buyWithStripe.jpg";
+// import StripeBadge from "../images/buyWithStripe.jpg";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams } from "react-router-dom";
@@ -15,11 +15,11 @@ import Cookies from "js-cookie";
 import { useReward } from "react-rewards";
 import AuthContext from "../context/authContext.ts";
 import { toast } from "react-toastify";
-import { loadStripe } from "@stripe/stripe-js";
-import { scroogeClient, stripeKey } from "../config/keys.js";
+// import { loadStripe } from "@stripe/stripe-js";
+import { scroogeClient, /* stripeKey */ } from "../config/keys.js";
 import { marketPlaceInstance } from "../config/axios.js";
 
-const stripePromise = loadStripe(stripeKey);
+// const stripePromise = loadStripe(stripeKey);
 
 // const stripePromise = loadStripe(
 //   "pk_live_51Mo3YgIintOuilEoqh3MvPlytP8mgx59iCnvobhQqQ3ZO9vM34YxCHuzbyjmkGlIdSsAv5sHoVdIWTtsUPnK5XhD00vbhc88hl"
@@ -120,33 +120,33 @@ export default function ShowAllTokenNFTs() {
   //   );
   // };
 
-  const handleBuyStripe = async (item) => {
-    console.log("itemitemitem", item);
-    let stripe;
-    stripe = await stripePromise;
-    const response = await marketPlaceInstance().post("/user/depositMoney", {
-      ...item,
-      userId: user?.id,
-      address,
-      affID,
-    });
-    const { code, msg } = response?.data;
-    // console.log("response", response);
-    if (code === 200) {
-      const session = await response.data.id;
-      // When the customer clicks on the button, redirect them to Checkout.
-      const result = await stripe.redirectToCheckout({
-        sessionId: session,
-      });
+  // const handleBuyStripe = async (item) => {
+  //   console.log("itemitemitem", item);
+  //   let stripe;
+  //   stripe = await stripePromise;
+  //   const response = await marketPlaceInstance().post("/user/depositMoney", {
+  //     ...item,
+  //     userId: user?.id,
+  //     address,
+  //     affID,
+  //   });
+  //   const { code, msg } = response?.data;
+  //   // console.log("response", response);
+  //   if (code === 200) {
+  //     const session = await response.data.id;
+  //     // When the customer clicks on the button, redirect them to Checkout.
+  //     const result = await stripe.redirectToCheckout({
+  //       sessionId: session,
+  //     });
 
-      // console.log(result);
-      if (result.error) {
-        console.log(result.error);
-      }
-    } else {
-      return toast.error(msg, { id: "A" });
-    }
-  };
+  //     // console.log(result);
+  //     if (result.error) {
+  //       console.log(result.error);
+  //     }
+  //   } else {
+  //     return toast.error(msg, { id: "A" });
+  //   }
+  // };
 
   useEffect(() => {
     function getAffData() {
@@ -285,7 +285,7 @@ export default function ShowAllTokenNFTs() {
                           </button>
                         )}
                       </div>
-                      <div
+                      {/* <div
                         className='nft-token-stripe-badge-div'
                         onClick={() => handleBuyStripe(el)}
                       >
@@ -294,7 +294,7 @@ export default function ShowAllTokenNFTs() {
                           src={StripeBadge}
                           alt='Buy NFT with Stripe'
                         />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </>
