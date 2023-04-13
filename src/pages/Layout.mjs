@@ -112,7 +112,7 @@ const Layout = ({ children }) => {
                     alt='my wallet'
                   />
                 </Link>
-                <Link to={scroogeClient}  target="_blank" rel="noopener noreferrer">
+                <Link to={scroogeClient}>
                   <HomeSVG />
                 </Link>
               </div>
