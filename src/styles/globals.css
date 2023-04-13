@@ -2530,7 +2530,13 @@ ul.footer-support li img {
 .social-share-btn-div button.disabled {
   background-color: transparent !important;
 }
-
+button.shareBtn-disabled{
+  opacity: 0.6;
+}
+.social-share-btn-div button{
+  background: none !important;
+  border: none !important;
+}
 .social-share-card .card-color {
   height: 128px;
   width: 128px;
