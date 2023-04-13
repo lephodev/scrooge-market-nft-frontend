@@ -233,11 +233,11 @@ const Layout = ({ children }) => {
               <ul className='footer-support'>
                 <li>
                   <a
-                    href='mailto:support@scroogegold.com'
+                    href='mailto:utilities@scroogegold.com'
                     target='_blank'
                     rel='noopener noreferrer'>
                     <img src={envelope} alt='' />
-                    support@scroogegold.com
+                    utilities@scroogegold.com                    {/* support@scroogegold.com */}
                   </a>
                 </li>
               </ul>
