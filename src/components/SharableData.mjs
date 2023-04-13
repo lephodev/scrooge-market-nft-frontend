@@ -206,6 +206,8 @@ export default function SharableData() {
           getSocialShare()
           toast.error(data.data.message, {
             containerId: "aff-member",
+             id: "A" 
+
           });
           
           // setAllMessages(data.data.data);
