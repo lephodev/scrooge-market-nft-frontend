@@ -143,8 +143,8 @@ export default function PrivacyPolicy() {
             <br></br>
             <br></br>
             If you have any questions, please contact us at
-            support@scrooge.casino
-          </div>
+            utilities@scroogegold.com 
+                      </div>
 
           <br></br>
           <br></br>
