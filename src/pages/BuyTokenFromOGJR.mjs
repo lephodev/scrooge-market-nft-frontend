@@ -74,17 +74,19 @@ export default function BuyTokenFromOGJR() {
       sdk.wallet
         .transfer(walletAddress, cryptoAmount, contractAddresss)
         .then((txResult) => {
+          console.log("txResult",txResult);
           marketPlaceInstance()
             .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}`)
             .then((response) => {
               setBuyLoading(false);
               if (response.data.success) {
+                console.log("");
                 setUser(response?.data?.user)
                 toast.success(`Successfully Purchased ${tokens} Tokens`);
                 reward();
                 getUserDataInstant();
               } else {
-                toast.error("Token Buy Failed");
+                toast.error("Failed to buy");
               }
             })
             .catch((error) => {
@@ -103,7 +105,8 @@ export default function BuyTokenFromOGJR() {
           }
         });
     } catch (error) {
-      toast.error("Token Buy Failed");
+      setBuyLoading(false)
+      toast.error("Token Buy Fail");
       console.log("errordata", error);
     }
   };
