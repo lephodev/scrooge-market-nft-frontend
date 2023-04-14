@@ -1714,8 +1714,27 @@ select {
   border: 2px solid #fbff12;
   border-radius: 100%;
 }
+.mobile-menu .header-nav-container-mobile ul li svg {
+  width: 50px;
+  height: 50px;
+  background-color: #fbff12;
+  border: 2px solid #fbff12;
+  border-radius: 100%;
+}
+.header-nav-container-mobile {
+  padding: 0;
+}
+.mobile-menu {
+  padding: 15px 10px !important;
+}
 .header-nav-container-mobile ul li {
   width: 50px;
+}
+.header-nav-container-mobile ul li.active svg {
+  background-color: #000;
+}
+.header-nav-container-mobile ul li.active svg path {
+  fill: #fbff12;
 }
 .loading {
   position: fixed;
@@ -2530,10 +2549,10 @@ ul.footer-support li img {
 .social-share-btn-div button.disabled {
   background-color: transparent !important;
 }
-button.shareBtn-disabled{
+button.shareBtn-disabled {
   opacity: 0.6;
 }
-.social-share-btn-div button{
+.social-share-btn-div button {
   background: none !important;
   border: none !important;
 }
