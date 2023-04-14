@@ -80,6 +80,7 @@ export default function BuyTokenFromOGJR() {
             .then((response) => {
               setBuyLoading(false);
               if (response.data.success) {
+                console.log("");
                 setUser(response?.data?.user)
                 toast.success(`Successfully Purchased ${tokens} Tokens`);
                 reward();
@@ -105,7 +106,7 @@ export default function BuyTokenFromOGJR() {
         });
     } catch (error) {
       setBuyLoading(false)
-      toast.error("Token Buy Failed");
+      toast.error("Token Buy Fail");
       console.log("errordata", error);
     }
   };
