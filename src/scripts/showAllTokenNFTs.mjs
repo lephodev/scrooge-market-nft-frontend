@@ -27,7 +27,7 @@ import { marketPlaceInstance } from "../config/axios.js";
 export default function ShowAllTokenNFTs() {
   const [buyLoading, setBuyLoading] = useState(false);
   const [buySuccess, setBuySuccess] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user,setUser } = useContext(AuthContext);
   const address = useAddress();
   const [searchParams] = useSearchParams();
   const [affID, setAffID] = useState("");
@@ -66,8 +66,8 @@ export default function ShowAllTokenNFTs() {
         affID
       );
       console.log();
-      const buyout = await contract.buyoutListing(token_id, qty);
-      console.log("buyoutbuyoutbuyout", buyout);
+      // const buyout = await contract.buyoutListing(token_id, qty);
+      // console.log("buyoutbuyoutbuyout", buyout);
       marketPlaceInstance()
         .post(`/getFreeTokens`, {
           address: address,
@@ -77,9 +77,11 @@ export default function ShowAllTokenNFTs() {
           affID: affID,
         })
         .then((data) => {
+          console.log("data",data);
+          setUser(data?.data?.user)
           toast.success(
             "You have successfully purchased your NFT and " +
-              data.data +
+              data?.data?.data +
               " chips have been added to your casino account!",
             { containerId: "purchased" }
           );
@@ -208,7 +210,6 @@ export default function ShowAllTokenNFTs() {
             of FREE TOKENS to be used in {""}
             <a
               href={scroogeClient}
-              target='_blank'
               rel='noreferrer'
               alt='buy your Scrooge Casino NFTs today'
             >
