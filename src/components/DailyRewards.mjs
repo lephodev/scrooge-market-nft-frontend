@@ -319,7 +319,7 @@ function DailyRewards() {
                     <a
                       href={scroogeClient}
                       alt='Visit Scrooge Casino'
-                      target='_blank'
+                      // target='_blank'
                       rel='noreferrer'>
                       Scrooge Casino
                     </a>{" "}
