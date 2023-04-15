@@ -160,7 +160,7 @@ function HolderClaimChips() {
                   come right to this page and claim your free{" "}
                   <a
                     href={scroogeClient}
-                    target='_blank'
+                    // target='_blank'
                     rel='noreferrer'
                     alt='claim free tokens to spend in Scrooge Casino'>
                     Scrooge Casino
@@ -350,7 +350,7 @@ function HolderClaimChips() {
                       <a
                         href={scroogeClient}
                         alt='Visit Scrooge Casino'
-                        target='_blank'
+                        // target='_blank'
                         rel='noreferrer'>
                         Scrooge Casino
                       </a>{" "}
