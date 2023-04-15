@@ -66,8 +66,8 @@ export default function ShowAllTokenNFTs() {
         affID
       );
       console.log();
-      // const buyout = await contract.buyoutListing(token_id, qty);
-      // console.log("buyoutbuyoutbuyout", buyout);
+      const buyout = await contract.buyoutListing(token_id, qty);
+      console.log("buyoutbuyoutbuyout", buyout);
       marketPlaceInstance()
         .post(`/getFreeTokens`, {
           address: address,
