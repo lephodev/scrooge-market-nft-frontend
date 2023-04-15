@@ -164,7 +164,7 @@ const Layout = ({ children }) => {
                   <Link to='/nft-tokens'>NFT Marketplace</Link>
                 </li>
                 <li>
-                  <a href={scroogeClient} target='_blank' rel='noreferrer'>
+                  <a href={scroogeClient} /* target='_blank' */ rel='noreferrer'>
                     Scrooge Casino Home
                   </a>
                 </li>
