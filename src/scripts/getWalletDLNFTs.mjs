@@ -255,7 +255,7 @@ export default function GetWalletDLNFTs() {
           </div>
           {console.log("nfts90909", nfts)}
           {nfts?.map((nft) => (
-            <div className='erc721Card' key={nft.metadata.id}>
+            <div className='erc721Card dlNft-grid' key={nft.metadata.id}>
               <div className='erc721Card-name'>
                 {nft.metadata.name}
                 <br></br>
