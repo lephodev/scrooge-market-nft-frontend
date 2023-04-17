@@ -3,46 +3,41 @@ import {
   useAddress,
   useOwnedNFTs,
   useContract,
-  // useNFTs,
-  // useContractMetadata,
   ThirdwebNftMedia,
   ChainId,
-  // useSDK,
-  // useActiveListings,
+  useSDK,
 } from "@thirdweb-dev/react";
-// import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
 
 import { useState, useEffect, useContext } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import ChainContext from "../context/Chain.ts";
 import DLBigD from "../images/DLBigD.png";
-//import Countdown from "react-countdown";
-//import { useReward } from "react-rewards";
+import Countdown from "react-countdown";
+import { useReward } from "react-rewards";
 import AuthContext from "../context/authContext.ts";
 import { scroogeClient } from "../config/keys.js";
 import { marketPlaceInstance } from "../config/axios.js";
-//import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function GetWalletDLNFTs() {
   const { user } = useContext(AuthContext);
-  // const { reward } = useReward("rewardId", "confetti", {
-  //   colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
-  // });
-  // function notify(message) {
-  //   toast.success("🎩 " + message);
-  // }
+  const { reward } = useReward("rewardId", "confetti", {
+    colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
+  });
+  function notify(message) {
+    toast.success("🎩 " + message);
+  }
 
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   setSelectedChain(ChainId.Mainnet);
   console.log("ChainId.Mainnet", ChainId.Mainnet);
-  // const addresses = {
-  //   [String(ChainId.Mainnet)]: process.env.REACT_APP_MAINNET_ADDRESS,
-  //   [String(ChainId.BinanceSmartChainMainnet)]: "",
-  // };
+  const addresses = {
+    [String(ChainId.Mainnet)]: process.env.REACT_APP_MAINNET_ADDRESS,
+    [String(ChainId.BinanceSmartChainMainnet)]: "",
+  };
 
   const address = useAddress();
-  // const sdk = useSDK();
-  //const [buyLoading, setBuyLoading] = useState(false);
+  const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("");
   const [nfts, setNFTs] = useState([]);
   const [tokensClaimDate, setTokensClaimDate] = useState([
@@ -56,30 +51,30 @@ export default function GetWalletDLNFTs() {
   );
   console.log("contracttttt", contract);
   const { data: ownedNFTs, isLoading, error } = useOwnedNFTs(contract, address);
-  // setNFTs(ownedNFTs);
+  //setNFTs(ownedNFTs);
   console.log("data", ownedNFTs, isLoading);
   console.log("error", error);
 
-  // const claimTokens = (token_id) => {
-  //   setBuyLoading(true);
-  //   try {
-  //     marketPlaceInstance()
-  //       .get(`/claimDLTokens/${address}/${user?.id}/${token_id}`)
-  //       .then(async (data) => {
-  //         mapClaimDates(nfts);
-  //         notify("Tokens Claimed: " + data.data);
-  //         setBuyLoading(false);
-  //         reward();
+  const claimTokens = (token_id) => {
+    setBuyLoading(true);
+    try {
+      marketPlaceInstance()
+        .get(`/claimDLTokens/${address}/${user?.id}/${token_id}`)
+        .then(async (data) => {
+          mapClaimDates(nfts);
+          notify("Tokens Claimed: " + data.data);
+          setBuyLoading(false);
+          reward();
 
-  //         //await timeout(4200);
-  //         //window.location.reload();
-  //       });
-  //   } catch (err) {
-  //     console.error(err);
-  //     toast.error("Error claiming tokens!", { containerId: "claim-error" });
-  //     setBuyLoading(false);
-  //   }
-  // };
+          //await timeout(4200);
+          //window.location.reload();
+        });
+    } catch (err) {
+      console.error(err);
+      toast.error("Error claiming tokens!", { containerId: "claim-error" });
+      setBuyLoading(false);
+    }
+  };
 
   async function getNextClaimDate(token_id) {
     console.log("--called nextcD");
@@ -87,33 +82,45 @@ export default function GetWalletDLNFTs() {
       .get(`/getNextClaimDate/${address}/dl/${user?.id}/${token_id}`)
       .then(async (data) => {
         console.log("next claim: ", data.data);
-        dataArray.push([token_id, data.data]);
-        //console.log('foo: ', dataArray);
-        setClaimDateArray(dataArray);
-        //console.log('setClaimDateArray: ', claimDateArray);
-        setTokensClaimDate((tokensClaimDate) => [
-          { token_id: token_id.toString(), nextClaimDate: data.data },
-        ]);
-        setNextClaimDate(data.data);
+        if (data.data.success) {
+          dataArray.push([token_id, data.data.data[0].nextClaimDate]);
+          console.log("foo: ", dataArray);
+          setClaimDateArray(dataArray);
+          console.log("setClaimDateArray: ", claimDateArray);
+          setTokensClaimDate((tokensClaimDate) => [
+            {
+              token_id: token_id.toString(),
+              nextClaimDate: data.data.data[0].nextClaimDate,
+            },
+          ]);
+          setNextClaimDate(data.data.data[0].nextClaimDate);
+        } else {
+          dataArray.push([token_id, data.data.message]);
+          setClaimDateArray(dataArray);
+          setTokensClaimDate((tokensClaimDate) => [
+            { token_id: token_id.toString(), nextClaimDate: data.data.message },
+          ]);
+          setNextClaimDate(data.data.message);
+        }
       });
     return nextClaimDate;
   }
 
-  // async function getCountdown(token_id) {
-  //   const thisNextClaimDate = await getNextClaimDate(token_id).then((data) => {
-  //     //console.log("thisNextClaimDate: ", data);
-  //     let t;
-  //     if (data !== "CLAIM NOW") {
-  //       t = new Date(data);
-  //       t = t.getTime();
-  //     } else {
-  //       t = 0;
-  //     }
+  async function getCountdown(token_id) {
+    const thisNextClaimDate = await getNextClaimDate(token_id).then((data) => {
+      //console.log("thisNextClaimDate: ", data);
+      let t;
+      if (data !== "CLAIM NOW") {
+        t = new Date(data);
+        t = t.getTime();
+      } else {
+        t = 0;
+      }
 
-  //     //console.log("in get countdown: ", parseInt(t));
-  //     return <Countdown date={new Date(t)}></Countdown>;
-  //   });
-  // }
+      //console.log("in get countdown: ", parseInt(t));
+      return <Countdown date={new Date(t)}></Countdown>;
+    });
+  }
 
   useEffect(() => {
     console.log(
@@ -143,7 +150,7 @@ export default function GetWalletDLNFTs() {
 
   return (
     <div>
-      {/* {buyLoading ? (
+      {buyLoading ? (
         <div className='pageImgContainer-dl bg-animated'>
           <img
             className='spin dl-loader-img'
@@ -155,7 +162,7 @@ export default function GetWalletDLNFTs() {
         </div>
       ) : (
         <></>
-      )} */}
+      )}
       {selectedChain !== ChainId.Mainnet ? (
         <>
           <div className='new-btn claim-token-btn'>
@@ -409,12 +416,12 @@ export default function GetWalletDLNFTs() {
                   <span></span>
                 )}
               </div>
-              {/* <div className='erc721Card-4th-col'>
+              <div className='erc721Card-4th-col'>
                 {claimDateArray.length === nfts.length ? (
                   <>
                     {claimDateArray
                       .find((element) => element[0] === nft.metadata.id)[1]
-                      .toString() === "CLAIM NOW" ? (
+                      .toString() === "No Entries Found" ? (
                       <>
                         <button
                           className='subheader-btn'
@@ -447,7 +454,7 @@ export default function GetWalletDLNFTs() {
                     />
                   </div>
                 )}
-              </div> */}
+              </div>
             </div>
           ))}
         </div>
