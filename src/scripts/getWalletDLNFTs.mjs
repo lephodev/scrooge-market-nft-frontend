@@ -5,8 +5,8 @@ import {
   useContract,
   ThirdwebNftMedia,
   ChainId,
-  useSDK,
 } from "@thirdweb-dev/react";
+import { useCookies } from "react-cookie";
 
 import { useState, useEffect, useContext } from "react";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,25 +16,25 @@ import Countdown from "react-countdown";
 import { useReward } from "react-rewards";
 import AuthContext from "../context/authContext.ts";
 import { scroogeClient } from "../config/keys.js";
-import { marketPlaceInstance } from "../config/axios.js";
+import { authInstance, marketPlaceInstance } from "../config/axios.js";
 import { toast } from "react-toastify";
 
 export default function GetWalletDLNFTs() {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
   function notify(message) {
     toast.success("🎩 " + message);
   }
-
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   setSelectedChain(ChainId.Mainnet);
   console.log("ChainId.Mainnet", ChainId.Mainnet);
-  const addresses = {
-    [String(ChainId.Mainnet)]: process.env.REACT_APP_MAINNET_ADDRESS,
-    [String(ChainId.BinanceSmartChainMainnet)]: "",
-  };
+  // const addresses = {
+  //   [String(ChainId.Mainnet)]: process.env.REACT_APP_MAINNET_ADDRESS,
+  //   [String(ChainId.BinanceSmartChainMainnet)]: "",
+  // };
+  const [cookies] = useCookies(["token"]);
 
   const address = useAddress();
   const [buyLoading, setBuyLoading] = useState(false);
@@ -65,7 +65,7 @@ export default function GetWalletDLNFTs() {
           notify("Tokens Claimed: " + data.data);
           setBuyLoading(false);
           reward();
-
+          getUserDataInstant();
           //await timeout(4200);
           //window.location.reload();
         });
@@ -106,21 +106,44 @@ export default function GetWalletDLNFTs() {
     return nextClaimDate;
   }
 
-  async function getCountdown(token_id) {
-    const thisNextClaimDate = await getNextClaimDate(token_id).then((data) => {
-      //console.log("thisNextClaimDate: ", data);
-      let t;
-      if (data !== "CLAIM NOW") {
-        t = new Date(data);
-        t = t.getTime();
-      } else {
-        t = 0;
-      }
+  // async function getCountdown(token_id) {
+  //   const thisNextClaimDate = await getNextClaimDate(token_id).then((data) => {
+  //     //console.log("thisNextClaimDate: ", data);
+  //     let t;
+  //     if (data !== "CLAIM NOW") {
+  //       t = new Date(data);
+  //       t = t.getTime();
+  //     } else {
+  //       t = 0;
+  //     }
 
-      //console.log("in get countdown: ", parseInt(t));
-      return <Countdown date={new Date(t)}></Countdown>;
-    });
-  }
+  //     //console.log("in get countdown: ", parseInt(t));
+  //     return <Countdown date={new Date(t)}></Countdown>;
+  //   });
+  // }
+
+  const getUserDataInstant = () => {
+    console.log("abbababababbababa");
+    let access_token = cookies.token;
+    authInstance()
+      .get("/auth/check-auth", {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((res) => {
+        console.log("convertedData", res);
+        if (res.data.user) {
+          console.log("user", res.data);
+          setUser({
+            ...res.data.user,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log("error ", err);
+      });
+  };
 
   useEffect(() => {
     console.log(
