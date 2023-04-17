@@ -107,7 +107,7 @@ export default function App() {
       ) : (
         <ChainContext.Provider value={{ selectedChain, setSelectedChain }}>
           <ThirdwebProvider
-            activeChain={ChainId.BinanceSmartChainMainnet}
+            activeChain={selectedChain}
             dAppMeta={{
               name: "Scrooge Casino NFT Marketplace",
               description:
