@@ -1,37 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   useAddress,
-   useOwnedNFTs,
-   useContract,
-  // useNFTs,
-  // useContractMetadata,
+  useOwnedNFTs,
+  useContract,
   ThirdwebNftMedia,
   ChainId,
-  // useSDK,
-  // useActiveListings,
 } from "@thirdweb-dev/react";
-// import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
+import { useCookies } from "react-cookie";
 
 import { useState, useEffect, useContext } from "react";
-// import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ChainContext from "../context/Chain.ts";
 import DLBigD from "../images/DLBigD.png";
-// import Countdown from "react-countdown";
-// import { useReward } from "react-rewards";
+import Countdown from "react-countdown";
+import { useReward } from "react-rewards";
 import AuthContext from "../context/authContext.ts";
 import { scroogeClient } from "../config/keys.js";
-import { marketPlaceInstance } from "../config/axios.js";
+import { authInstance, marketPlaceInstance } from "../config/axios.js";
+import { toast } from "react-toastify";
 
 export default function GetWalletDLNFTs() {
-  const { user } = useContext(AuthContext);
-  // const { reward } = useReward("rewardId", "confetti", {
-  //   colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
-  // });
-  // function notify(message) {
-  //   toast.success("🎩 " + message);
-  // }
-
+  const { user, setUser } = useContext(AuthContext);
+  const { reward } = useReward("rewardId", "confetti", {
+    colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
+  });
+  function notify(message) {
+    toast.success("🎩 " + message);
+  }
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   setSelectedChain(ChainId.Mainnet);
   console.log("ChainId.Mainnet", ChainId.Mainnet);
@@ -39,67 +34,47 @@ export default function GetWalletDLNFTs() {
   //   [String(ChainId.Mainnet)]: process.env.REACT_APP_MAINNET_ADDRESS,
   //   [String(ChainId.BinanceSmartChainMainnet)]: "",
   // };
+  const [cookies] = useCookies(["token"]);
 
   const address = useAddress();
-  // const sdk = useSDK();
-  const [buyLoading, /* setBuyLoading */] = useState(false);
+  const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("");
   const [nfts, setNFTs] = useState([]);
-  const [isLoadingg, setIsLoadingg] = useState(false);
-  const [/* tokensClaimDate */, setTokensClaimDate] = useState([
+  const [tokensClaimDate, setTokensClaimDate] = useState([
     { token_id: "", nextClaimDate: "" },
   ]);
-
+  const [claimDateArray, setClaimDateArray] = useState([]);
+  console.log(tokensClaimDate);
+  console.log(claimDateArray);
   const { contract } = useContract(
     "0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768"
   );
   console.log("contracttttt", contract);
-  const {
-    data: ownedNFTs,
-    isLoading,
-    error,
-  } = useOwnedNFTs(contract, "0x372d6c56c6734995C1F73968c8434B8DfC3c146F");
-  console.log("data", ownedNFTs,isLoading);
+  const { data: ownedNFTs, isLoading, error } = useOwnedNFTs(contract, address);
+  //setNFTs(ownedNFTs);
+  console.log("data", ownedNFTs, isLoading);
   console.log("error", error);
 
-  const getDLNFTs = async () => {
-    setIsLoadingg(true);
+  const claimTokens = (token_id) => {
+    setBuyLoading(true);
     try {
-      const NFTs = await marketPlaceInstance().get(`/getDLNFTs/${address}`);
-      console.log(NFTs.data.allNFTs);
-      let nft = NFTs.data.allNFTs.filter((n) => n.owner === address);
-      setNFTs(nft);
-      setIsLoadingg(false);
-      console.log("nfttt---", nft);
-    } catch (error) {
-      console.log(error);
+      marketPlaceInstance()
+        .get(`/claimDLTokens/${address}/${user?.id}/${token_id}`)
+        .then(async (data) => {
+          mapClaimDates(nfts);
+          notify("Tokens Claimed: " + data.data);
+          setBuyLoading(false);
+          reward();
+          getUserDataInstant();
+          //await timeout(4200);
+          //window.location.reload();
+        });
+    } catch (err) {
+      console.error(err);
+      toast.error("Error claiming tokens!", { containerId: "claim-error" });
+      setBuyLoading(false);
     }
   };
-
-  useEffect(() => {
-    getDLNFTs();
-  }, []);
-
-  // const claimTokens = (token_id) => {
-  //   setBuyLoading(true);
-  //   try {
-  //     marketPlaceInstance()
-  //       .get(`/claimDLTokens/${address}/${user?.id}/${token_id}`)
-  //       .then(async (data) => {
-  //         mapClaimDates(nfts);
-  //         notify("Tokens Claimed: " + data.data);
-  //         setBuyLoading(false);
-  //         reward();
-
-  //         //await timeout(4200);
-  //         //window.location.reload();
-  //       });
-  //   } catch (err) {
-  //     console.error(err);
-  //     toast.error("Error claiming tokens!", { containerId: "claim-error" });
-  //     setBuyLoading(false);
-  //   }
-  // };
 
   async function getNextClaimDate(token_id) {
     console.log("--called nextcD");
@@ -107,14 +82,26 @@ export default function GetWalletDLNFTs() {
       .get(`/getNextClaimDate/${address}/dl/${user?.id}/${token_id}`)
       .then(async (data) => {
         console.log("next claim: ", data.data);
-        dataArray.push([token_id, data.data]);
-        //console.log('foo: ', dataArray);
-        setClaimDateArray(dataArray);
-        //console.log('setClaimDateArray: ', claimDateArray);
-        setTokensClaimDate((tokensClaimDate) => [
-          { token_id: token_id.toString(), nextClaimDate: data.data },
-        ]);
-        setNextClaimDate(data.data);
+        if (data.data.success) {
+          dataArray.push([token_id, data.data.data[0].nextClaimDate]);
+          console.log("foo: ", dataArray);
+          setClaimDateArray(dataArray);
+          console.log("setClaimDateArray: ", claimDateArray);
+          setTokensClaimDate((tokensClaimDate) => [
+            {
+              token_id: token_id.toString(),
+              nextClaimDate: data.data.data[0].nextClaimDate,
+            },
+          ]);
+          setNextClaimDate(data.data.data[0].nextClaimDate);
+        } else {
+          dataArray.push([token_id, data.data.message]);
+          setClaimDateArray(dataArray);
+          setTokensClaimDate((tokensClaimDate) => [
+            { token_id: token_id.toString(), nextClaimDate: data.data.message },
+          ]);
+          setNextClaimDate(data.data.message);
+        }
       });
     return nextClaimDate;
   }
@@ -135,15 +122,38 @@ export default function GetWalletDLNFTs() {
   //   });
   // }
 
+  const getUserDataInstant = () => {
+    console.log("abbababababbababa");
+    let access_token = cookies.token;
+    authInstance()
+      .get("/auth/check-auth", {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((res) => {
+        console.log("convertedData", res);
+        if (res.data.user) {
+          console.log("user", res.data);
+          setUser({
+            ...res.data.user,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log("error ", err);
+      });
+  };
+
   useEffect(() => {
     console.log(
       "ChainId.BinanceSmartChainMainnet",
       ChainId.BinanceSmartChainMainnet
     );
+    setNFTs(ownedNFTs);
     return () => setSelectedChain(ChainId.BinanceSmartChainMainnet);
-  }, [address]);
+  }, [address, ownedNFTs]);
   let dataArray = [];
-  const [/* claimDateArray */, setClaimDateArray] = useState([]);
   useEffect(() => {
     if (nfts) {
       if (nfts.length > 0) {
@@ -193,7 +203,7 @@ export default function GetWalletDLNFTs() {
         <></>
       )}
 
-      {isLoadingg && selectedChain === ChainId.Mainnet ? (
+      {isLoading && selectedChain === ChainId.Mainnet ? (
         <div className='button-section'>
           <div style={{ fontFamily: "Poppins" }}>
             LOADING YOUR DUCKY LUCKS NFTS
@@ -245,7 +255,7 @@ export default function GetWalletDLNFTs() {
           </div>
           {console.log("nfts90909", nfts)}
           {nfts?.map((nft) => (
-            <div className='erc721Card' key={nft.metadata.id}>
+            <div className='erc721Card dlNft-grid' key={nft.metadata.id}>
               <div className='erc721Card-name'>
                 {nft.metadata.name}
                 <br></br>
@@ -429,12 +439,12 @@ export default function GetWalletDLNFTs() {
                   <span></span>
                 )}
               </div>
-              {/* <div className='erc721Card-4th-col'>
+              <div className='erc721Card-4th-col'>
                 {claimDateArray.length === nfts.length ? (
                   <>
                     {claimDateArray
                       .find((element) => element[0] === nft.metadata.id)[1]
-                      .toString() === "CLAIM NOW" ? (
+                      .toString() === "No Entries Found" ? (
                       <>
                         <button
                           className='subheader-btn'
@@ -467,7 +477,7 @@ export default function GetWalletDLNFTs() {
                     />
                   </div>
                 )}
-              </div> */}
+              </div>
             </div>
           ))}
         </div>
