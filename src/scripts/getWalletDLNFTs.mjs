@@ -203,7 +203,6 @@ export default function GetWalletDLNFTs() {
                 page and claim your free{" "}
                 <a
                   href={scroogeClient}
-                  target='_blank'
                   rel='noreferrer'
                   alt='claim free tokens to spend in Scrooge Casino'>
                   Scrooge Casino
