@@ -167,7 +167,9 @@ export default function GetWalletDLNFTs() {
     nfts.map((nft) => foo(nft.metadata.id));
     async function foo(id) {
       //console.log('nft: ', id);
-      await getNextClaimDate(id);
+      setTimeout(async () => {
+        await getNextClaimDate(id);
+      }, 900000000000000000);
     }
   }
 
@@ -439,7 +441,7 @@ export default function GetWalletDLNFTs() {
                   <span></span>
                 )}
               </div>
-              <div className='erc721Card-4th-col'>
+              <div className='erc721Card-4th-col' style={{ display: "none" }}>
                 {claimDateArray.length === nfts.length ? (
                   <>
                     {claimDateArray
