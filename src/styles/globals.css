@@ -26,33 +26,42 @@ html {
 .pink {
   color: #d2042d;
 }
+
 .red {
   color: #d30101;
 }
+
 .gold {
   color: #f8d761;
 }
+
 .green {
   color: #0dff00;
 }
+
 .teal {
   color: #41ead4;
 }
+
 .yellow {
   color: #fbff12;
 }
+
 .font-martian {
   /* font-family: "Poppins"; */
 }
+
 .header-nav-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 20px 20px;
 }
+
 .header-nav-menu {
   width: 70%;
 }
+
 .header-nav-container ul {
   width: 100%;
   display: flex;
@@ -62,6 +71,7 @@ html {
   text-transform: uppercase;
   font-size: 18px;
 }
+
 .header-nav-menu a {
   /* font-family: "Poppins"; */
   color: #d2042d;
@@ -69,9 +79,11 @@ html {
   padding: 10px;
   font-weight: bold;
 }
+
 .header-nav-menu a:hover {
   background-color: #fbff12;
 }
+
 .header-nav-logo-div {
   text-align: center;
   font-family: "Unica One";
@@ -80,17 +92,21 @@ html {
 .menu-logo-img {
   width: 50px;
 }
+
 .connect-wallet-header {
   border: 2px solid #d2042d;
   border-radius: 10px;
 }
+
 .wallet-icon-img {
   height: 50px;
   width: 50px;
 }
+
 .wallet-icon-img:hover {
   transform: rotate(-20deg);
 }
+
 .connect-wallet-div {
   margin: 30px auto;
   width: 250px;
@@ -98,6 +114,7 @@ html {
   border-radius: 10px;
   margin-bottom: 50px;
 }
+
 .wallet-casino-profile-div {
   width: 100%;
   margin: 30px 0 40px 0;
@@ -110,11 +127,13 @@ html {
   background-color: transparent;
   /* font-family: "Poppins"; */
 }
+
 .wallet-casino-profile-img {
   width: 150px;
   border-radius: 100%;
   border: 5px solid #fbff12;
 }
+
 .wallet-casino-profile-details {
   width: 50%;
   margin: 0 50px;
@@ -127,47 +146,57 @@ html {
   color: #fff;
   font-size: 24px;
 }
+
 .wallet-casino-profile-username {
   color: #d2042d;
   font-size: 32px;
   text-shadow: 1px 1px #fbff12;
 }
+
 .wallet-casino-profile-img-div {
   display: flex;
   align-items: center;
 }
+
 .button-section {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
 .bottom-margin-100 {
   margin-bottom: 100px;
 }
+
 .token-small {
   width: 45px;
   margin-right: 10px;
 }
+
 .token-nav {
   width: 25px;
   margin-right: 10px;
   vertical-align: top;
 }
+
 .token-nav-div {
   display: flex;
   flex-direction: row;
   align-items: top;
 }
+
 .ticket-small {
   width: 60px;
   margin-right: 10px;
 }
+
 .token-logo {
   width: 60px;
   margin-right: 15px;
   border-radius: 100%;
 }
+
 .token-ticket-row {
   display: flex;
   flex-direction: row;
@@ -177,6 +206,7 @@ html {
   font-size: 20px;
   padding: 5px 0px;
 }
+
 span.wallet-user-name {
   font-weight: 500;
   font-size: 20px;
@@ -196,9 +226,11 @@ span.wallet-user-name {
   align-items: center;
   line-height: 0.08;
 }
+
 .width-100 {
   width: 100%;
 }
+
 .crypto-balance-div {
   width: 30%;
   margin: 10px 0 10px 0;
@@ -211,6 +243,7 @@ span.wallet-user-name {
   font-weight: bold;
   font-size: 16px;
 }
+
 .crypto-balance-header {
   text-align: center;
   font-weight: bold;
@@ -218,17 +251,20 @@ span.wallet-user-name {
   color: #fbff12;
   margin-bottom: 10px;
 }
+
 .claim-pending-div {
   text-align: center;
   font-weight: 200;
   font-size: 14px;
   margin-top: 40px;
 }
+
 .claim-countdown {
   margin-top: 15px;
   color: #fbff12;
   font-size: 18px;
 }
+
 .claim-btn {
   margin-top: 20px;
   padding: 10px 20px !important;
@@ -239,15 +275,18 @@ span.wallet-user-name {
   border-radius: 5px;
   text-transform: uppercase;
 }
+
 .claim-btn:hover {
   cursor: pointer;
   background-color: #d2042d;
   border: 2px solid #fbff12;
   border-radius: 5px;
 }
+
 .daily-reward-bag {
   width: 100%;
 }
+
 .daily-reward-bag-div {
   margin-top: 45px;
   margin-bottom: 10px;
@@ -255,11 +294,13 @@ span.wallet-user-name {
   flex-direction: row;
   justify-content: center;
 }
+
 .daily-rewards-bag-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
 .next-claim-div {
   border: 2px solid #d2042d;
   border-radius: 5px;
@@ -269,6 +310,7 @@ span.wallet-user-name {
   /* font-family: "Poppins"; */
   font-size: 24px;
 }
+
 .header-nav-container-mobile {
   width: 100%;
   bottom: 0;
@@ -278,9 +320,11 @@ span.wallet-user-name {
   text-align: center;
   padding: 0px 10px;
 }
+
 .header-nav-menu-mobile {
   width: 100%;
 }
+
 .header-nav-container-mobile ul {
   width: 100%;
   display: flex;
@@ -295,6 +339,7 @@ span.wallet-user-name {
 .header-nav-menu-mobile a {
   display: flex;
 }
+
 .wallet-icon-img-mobile {
   max-width: 60px;
 
@@ -308,9 +353,11 @@ span.wallet-user-name {
   justify-content: center;
   padding: 20px;
 }
+
 .loading-img {
   width: 200px;
 }
+
 .switch-network-div {
   text-align: center;
   /* font-family: "Poppins"; */
@@ -321,6 +368,7 @@ span.wallet-user-name {
   border-radius: 5px;
   padding: 40px;
 }
+
 .footer-nav {
   width: 100%;
   display: flex;
@@ -330,13 +378,16 @@ span.wallet-user-name {
   margin: 100px 0 0 0;
   padding: 60px 20px 20px 10px;
 }
+
 .footer-inner-div {
   padding: 0 50px;
 }
+
 .footer-div {
   text-align: center;
   padding: 30px 0;
 }
+
 .transaction-div {
   display: flex;
   flex-direction: row;
@@ -350,6 +401,7 @@ span.wallet-user-name {
   padding: 20px;
   margin: 5px auto 30px auto;
 }
+
 .transaction-div-title {
   width: 100%;
   text-align: center;
@@ -358,6 +410,7 @@ span.wallet-user-name {
   padding: 10px 0 30px 0;
   text-transform: uppercase;
 }
+
 .transaction-card {
   display: flex;
   flex-direction: column;
@@ -372,12 +425,14 @@ span.wallet-user-name {
   border-radius: 5px;
   /* font-family: "Poppins"; */
 }
+
 .transaction-card-coupon-code {
   margin-top: 15px;
   font-weight: bold;
   background-color: #d2042d;
   padding: 6px;
 }
+
 .page-nav-header-btns-row {
   display: flex;
   flex-direction: row;
@@ -386,6 +441,7 @@ span.wallet-user-name {
   /* font-family: "Poppins"; */
   padding: 20px 0 0 0;
 }
+
 .page-nav-header-btns-subrow {
   display: flex;
   flex-direction: row;
@@ -394,6 +450,7 @@ span.wallet-user-name {
   padding: 10px 0 0 0;
   /* font-family: "Poppins"; */
 }
+
 .page-nav-header-btn {
   padding: 10px 5px;
   margin: 0 10px;
@@ -404,6 +461,7 @@ span.wallet-user-name {
   border-radius: 5px;
   font-size: 22px;
 }
+
 .page-nav-header-subbtn {
   padding: 10px 25px;
   margin: 0 10px;
@@ -412,15 +470,18 @@ span.wallet-user-name {
   border: none;
   border-radius: 5px;
 }
+
 .disabled {
   background-color: #d2042d8c !important;
   color: #8d8a8a;
 }
+
 .asterisk-desc {
   margin-top: 25px;
   font-size: 14px;
   color: #d2042d;
 }
+
 .asterisk-desc.cryptoTotoken {
   margin-top: 25px;
   font-size: 18px;
@@ -428,11 +489,13 @@ span.wallet-user-name {
   text-align: center;
   font-weight: 600;
 }
+
 .bordered-section {
   margin: 0px auto;
   width: 100%;
   background-color: transparent;
 }
+
 .pageTitle {
   text-align: center;
   margin-bottom: 50px;
@@ -440,11 +503,13 @@ span.wallet-user-name {
   text-shadow: 2px 2px #d2042d;
   text-transform: uppercase;
 }
+
 .inlineTitle {
   color: #fbff12;
   text-shadow: 2px 2px #d2042d;
   text-transform: uppercase;
 }
+
 .subheader-btn {
   margin: 30px;
   background-color: #000;
@@ -455,40 +520,48 @@ span.wallet-user-name {
   /* font-family: "Poppins"; */
   font-weight: bold;
 }
+
 .subheader-btn:hover {
   background-color: #000;
   color: #d2042d;
   cursor: pointer;
 }
+
 .card-img {
   width: 100px;
   height: 100px;
   margin: 15px 0 0 0;
   border-radius: 5px;
 }
+
 .card-img:hover {
   transform: rotate(-20deg);
 }
+
 .raffle-img {
   width: 200px;
   height: 200px;
   margin: 0;
   border-radius: 5px;
 }
+
 .raffle-img:hover {
   transform: rotate(-20deg);
 }
+
 .raffle-data-box {
   border: 2px solid #d2042d;
   border-radius: 5px;
   padding: 20px;
   width: 25%;
 }
+
 .fine-print-txt {
   text-align: center;
   font-size: 16px;
   /* font-family: "Poppins"; */
 }
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -496,6 +569,7 @@ span.wallet-user-name {
   justify-content: space-evenly;
   margin-bottom: 80px;
 }
+
 .flex-row-no-margin {
   display: flex;
   flex-direction: row;
@@ -503,6 +577,7 @@ span.wallet-user-name {
   justify-content: space-evenly;
   align-items: center;
 }
+
 .nft-home-sell-div {
   margin: 20px auto;
   padding: 15px;
@@ -511,6 +586,7 @@ span.wallet-user-name {
   border-radius: 5px;
   background-color: transparent;
 }
+
 .nft-home-sell-title {
   text-align: center;
   margin-bottom: 50px;
@@ -518,11 +594,13 @@ span.wallet-user-name {
   text-shadow: 2px 2px #d2042d;
   text-transform: uppercase;
 }
+
 .nft-home-sell-more {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .nft-home-sell-more-btn {
   background-color: #000;
   padding: 10px 20px;
@@ -533,11 +611,13 @@ span.wallet-user-name {
   /* font-family: "Poppins"; */
   font-weight: bold;
 }
+
 .nft-home-sell-more-btn:hover {
   background-color: #000;
   color: #d2042d;
   cursor: pointer;
 }
+
 .nft-home-sell-card {
   padding: 10px;
   margin: 10px 15px;
@@ -550,9 +630,11 @@ span.wallet-user-name {
   color: #fbff12;
   width: 16%;
 }
+
 .nft-home-sell-details {
   text-align: center;
 }
+
 .contact-div {
   padding: 50px;
   margin: 30px 0;
@@ -561,6 +643,7 @@ span.wallet-user-name {
   border-radius: 5px;
   /* font-family: "Poppins"; */
 }
+
 .full-page-container {
   min-width: 100%;
   background-color: #1b2129;
@@ -569,6 +652,7 @@ span.wallet-user-name {
   border-radius: 10px;
   /* font-family: "Poppins"; */
 }
+
 .modal-popup {
   display: flex;
   flex-direction: column;
@@ -577,6 +661,7 @@ span.wallet-user-name {
   padding: 30px;
   height: 100%;
 }
+
 .modal-header {
   /* font-family: "Poppins"; */
   color: #fbff12;
@@ -584,12 +669,14 @@ span.wallet-user-name {
   margin-bottom: 25px;
   font-size: 22px;
 }
+
 .modal-popup input {
   padding: 15px;
   border: 2px solid #fbff12;
   font-size: 20px;
   color: #fff;
 }
+
 .modal-popup-btn {
   margin-top: 30px;
   padding: 15px 30px !important;
@@ -601,6 +688,7 @@ span.wallet-user-name {
   border-radius: 5px;
   cursor: pointer;
 }
+
 .modal-popup-btn:hover {
   background-color: #d2042d;
   border: 2px solid #fbff12;
@@ -613,9 +701,11 @@ span.wallet-user-name {
   width: 100%;
   padding: 5px;
 }
+
 .popup-arrow {
   color: #fbff12;
 }
+
 [role="tooltip"].popup-content {
   width: 500px;
   padding: 15px;
@@ -636,6 +726,7 @@ span.wallet-user-name {
 .popup-overlay {
   background: rgba(0, 0, 0, 0.5);
 }
+
 [data-popup="tooltip"].popup-overlay {
   background: transparent;
 }
@@ -644,12 +735,15 @@ span.wallet-user-name {
   border: 2px solid #d2042d;
   border-radius: 5px;
 }
+
 .connect-wallet-inline:hover {
   border: 2px solid #fbff12;
 }
+
 .nft-token-row-div {
   width: 100%;
 }
+
 .nft-token-row-card {
   width: 100%;
   border: 3px solid #d2042d;
@@ -662,32 +756,40 @@ span.wallet-user-name {
   align-items: center;
   gap: 20px;
 }
+
 .nft-token-stripe-badge-div {
   height: 100%;
   text-align: center;
   padding: 0 0px 0 0;
 }
+
 .stripe-badge-img {
   width: 100px;
   height: 100px;
   border-radius: 10px;
   cursor: pointer;
 }
+
 .green-border-6px {
   border: 3px solid #5ee47e !important;
 }
+
 .pink-border-6px {
   border: 3px solid #ff206e !important;
 }
+
 .blue-border-6px {
   border: 3px solid #3a86ff !important;
 }
+
 .nft-token-row-card-image {
   width: 15%;
 }
+
 .nft-token-row-desc {
   width: 50%;
 }
+
 .nft-token-row-details {
   width: 20%;
   display: flex;
@@ -696,6 +798,7 @@ span.wallet-user-name {
   align-items: center;
   line-height: 0.9;
 }
+
 .nft-token-row-name {
   font-size: 26px;
   color: #fbff12;
@@ -704,6 +807,7 @@ span.wallet-user-name {
   padding-bottom: 15px;
   font-weight: 500;
 }
+
 .nft-token-row-sale {
   text-align: center;
   line-height: 2;
@@ -711,9 +815,11 @@ span.wallet-user-name {
   color: #5ee47e;
   text-shadow: 1px 1px #d2042d;
 }
+
 .sale-badge-img {
   width: 140px;
 }
+
 .qty-badge {
   border-radius: 100%;
   background-color: #0dff00;
@@ -721,12 +827,14 @@ span.wallet-user-name {
   height: 30px;
   color: #d2042d;
 }
+
 .bottom-row-btns-div {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
+
 .erc721Card {
   border: 2px solid #d2042d;
   border-radius: 5px;
@@ -743,6 +851,7 @@ span.wallet-user-name {
   width: 100%;
   line-height: 1.5;
 }
+
 .erc721Card-name {
   display: flex;
   flex-direction: column;
@@ -750,29 +859,35 @@ span.wallet-user-name {
   font-size: 24px;
   line-height: 1;
 }
+
 .erc721Card-image {
   border: 3px solid #fbff12;
   margin: 0 15px;
   border-radius: 5px;
 }
+
 .erc721Card-image:hover {
   border: 3px solid #d2042d;
   transform: rotate(-10deg);
 }
+
 .erc721Card-details {
   padding-left: 15px;
   width: 30%;
 }
+
 .erc721Card-col-title {
   font-size: 24px;
   color: #d2042d;
   background-color: #fbff12;
   padding: 4px 8px;
 }
+
 .erc721Card-3rd-col {
   padding-left: 15px;
   width: 30%;
 }
+
 .erc721Card-4th-col {
   width: 15%;
   text-align: center;
@@ -781,20 +896,72 @@ span.wallet-user-name {
   border-radius: 5px;
   padding: 10px 0;
 }
-.erc721Card-rarity-subsection {
+
+.dlNft-grid .erc721Card-4th-col {
+  width: 18%;
+  text-align: center;
+  font-size: 16px;
+  border: 2px solid #d2042d;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 0px auto;
 }
+.dlNft-grid .erc721Card-4th-col 
+.subheader-btn {
+  margin: 0px;
+}
+.erc721Card.dlNft-grid {
+  border: 2px solid #d2042d;
+  border-radius: 5px;
+  background-color: #1b2129;
+  padding: 30px;
+  margin: 10px 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* font-family: "Poppins"; */
+  color: #fff;
+  width: 100%;
+  gap: 30px;
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 1200px) {
+  .dlNft-grid .erc721Card-4th-col {
+    width: 25%;
+  }
+}
+@media screen and (max-width: 991px) {
+  .dlNft-grid .erc721Card-4th-col {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .dlNft-grid .erc721Card-4th-col {
+    width: 200px;
+  }
+}
+
+.erc721Card-rarity-subsection {}
+
 .rarity-pct-1 {
   color: rgb(245, 168, 168);
 }
+
 .rarity-pct-2 {
   color: rgb(248, 135, 135);
 }
+
 .rarity-pct-3 {
   color: rgb(250, 63, 209);
 }
+
 .rarity-pct-4 {
   color: rgb(86, 250, 174);
 }
+
 .rarity-pct-6 {
   background: linear-gradient(270deg, #ff0000, #0dff00, #f9ff00, #00b9ff);
   background-size: 800% 800%;
@@ -811,35 +978,44 @@ span.wallet-user-name {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
+
 @-moz-keyframes AnimationName {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
+
 @keyframes AnimationName {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
+
 .rarity-pct-5 {
   background: #ff0000;
   background: linear-gradient(to left, #ff0000 0%, #ffff00 50%, #ff0000 100%);
@@ -847,6 +1023,7 @@ span.wallet-user-name {
   -webkit-text-fill-color: transparent;
   font-weight: bold;
 }
+
 .erc1155Card {
   padding: 20px;
   margin: 10px 30px;
@@ -860,6 +1037,7 @@ span.wallet-user-name {
   color: #fbff12;
   width: 40%;
 }
+
 .erc1155-buy-btn {
   background-color: #d2042d;
   padding: 10px 20px;
@@ -870,17 +1048,20 @@ span.wallet-user-name {
   /* font-family: "Poppins"; */
   font-weight: bold;
 }
+
 .erc1155-buy-btn:hover {
   background-color: #000;
   border: 2px solid #fbff12;
   color: #5ee47e;
   cursor: pointer;
 }
-.erc1155Card-details {
-}
+
+.erc1155Card-details {}
+
 .erc1155-price {
   color: #5ee47e;
 }
+
 .create-listing-form {
   display: flex;
   flex-direction: column;
@@ -889,21 +1070,25 @@ span.wallet-user-name {
   width: 50%;
   line-height: 2.5;
 }
+
 .create-listing-form input,
 select {
   margin-left: 25px;
   padding: 5px;
 }
+
 .large-header-div {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
 .large-header-img {
   width: 70%;
   margin: 0 auto 35px auto;
 }
+
 .detecting-dl-img {
   margin: 0px auto 50px;
   border: 7px solid #fbff12;
@@ -912,40 +1097,50 @@ select {
   max-width: 400px;
   width: 100%;
 }
+
 @keyframes security {
   0% {
     border-color: #5ee47e;
   }
+
   25% {
     border-color: #d2042d;
   }
+
   75% {
     border-color: #fbff12;
   }
+
   100% {
     border-color: #5ee47e;
   }
 }
+
 @-webkit-keyframes security {
   0% {
     border-color: #5ee47e;
   }
+
   25% {
     border-color: #d2042d;
   }
+
   75% {
     border-color: #fbff12;
   }
+
   100% {
     border-color: #5ee47e;
   }
 }
+
 .white-txt {
   /* font-family: "Poppins"; */
   text-transform: uppercase;
   font-size: 20px;
   margin-bottom: 20px;
 }
+
 .detecting-txt {
   /* font-family: "Poppins"; */
   text-transform: uppercase;
@@ -953,34 +1148,43 @@ select {
   margin-bottom: 20px;
   animation: 2s infinite text-color;
 }
+
 @keyframes text-color {
   0% {
     color: #5ee47e;
   }
+
   25% {
     color: #d2042d;
   }
+
   75% {
     color: #fbff12;
   }
+
   100% {
     color: #5ee47e;
   }
 }
+
 @-webkit-keyframes text-color {
   0% {
     color: #5ee47e;
   }
+
   25% {
     color: #d2042d;
   }
+
   75% {
     color: #fbff12;
   }
+
   100% {
     color: #5ee47e;
   }
 }
+
 .submit-btn {
   margin-top: 45px;
   padding: 15px 30px !important;
@@ -990,11 +1194,13 @@ select {
   border: 2px solid #d2042d;
   border-radius: 5px;
 }
+
 .submit-btn:hover {
   cursor: pointer;
   color: #fff;
   background-color: #d2042d;
 }
+
 .button1 {
   padding: 15px 30px !important;
   /* font-family: "Poppins"; */
@@ -1003,11 +1209,13 @@ select {
   border: 2px solid #d2042d;
   border-radius: 5px;
 }
+
 .button1:hover {
   cursor: pointer;
   color: #fff;
   background-color: #d2042d;
 }
+
 .button2 {
   padding: 15px 30px !important;
   /* font-family: "Poppins"; */
@@ -1017,11 +1225,13 @@ select {
   border-radius: 5px;
   text-transform: uppercase;
 }
+
 .button2:hover {
   cursor: pointer;
   color: #fff;
   background-color: #d2042d;
 }
+
 .button3 {
   padding: 15px 30px !important;
   /* font-family: "Poppins"; */
@@ -1031,6 +1241,7 @@ select {
   border-radius: 5px;
   text-transform: uppercase;
 }
+
 .button3:hover {
   cursor: pointer;
   color: #000;
@@ -1038,6 +1249,7 @@ select {
   background-color: #0dff00;
   font-weight: bold;
 }
+
 .button4 {
   padding: 10px 25px !important;
   font-size: 30px;
@@ -1049,12 +1261,14 @@ select {
   /* font-family: "Poppins"; */
   color: #000;
 }
+
 .button4:hover {
   cursor: pointer;
   color: #0dff00;
   border: 2px solid #0dff00;
   background-color: #1b2129;
 }
+
 .button-inline {
   padding: 5px 10px !important;
   /* font-family: "Poppins"; */
@@ -1064,14 +1278,17 @@ select {
   border-radius: 5px;
   text-transform: uppercase;
 }
+
 .button-inline:hover {
   cursor: pointer;
   color: #fff;
   background-color: #d2042d;
 }
+
 .bold {
   font-weight: bold;
 }
+
 .feature-overview-div {
   margin: 0 auto;
   padding: 20px 20px;
@@ -1080,6 +1297,7 @@ select {
   border-radius: 5px;
   text-align: center;
 }
+
 .feature-overview-div1 {
   margin: 0 20%;
   padding: 20px 20px;
@@ -1087,6 +1305,7 @@ select {
   border: 3px solid #0dff00;
   border-radius: 5px;
 }
+
 .feature-overview-div2 {
   margin: 0 20%;
   padding: 20px 20px;
@@ -1094,6 +1313,7 @@ select {
   border: 3px solid #fbff12;
   border-radius: 5px;
 }
+
 .feature-overview-div3 {
   margin: 0 20%;
   padding: 20px 20px;
@@ -1102,12 +1322,14 @@ select {
   border-radius: 5px;
   text-align: center;
 }
+
 .feature-overview-block {
   padding: 20px 20px;
   background-color: #d2042d;
   border-radius: 5px;
   border: 2px solid #d2042d;
 }
+
 .feature-overview-block {
   padding: 10px 20px;
   color: #fff;
@@ -1119,17 +1341,21 @@ select {
   font-weight: bold;
   transition: all 0.5s;
 }
+
 .feature-overview-block:hover {
   color: #5ee47e;
   background-color: transparent;
 }
+
 .flex-row-no-margin {
   gap: 20px;
 }
+
 .flex-row-no-margin .feature-overview-block:last-child {
   border: none;
   color: #fff;
 }
+
 .half-page-menu-wrapper {
   /* display: flex; */
   /* align-items: center; */
@@ -1138,6 +1364,7 @@ select {
   /* padding: 50px 10px 50px 15%; */
   padding: 50px 0;
 }
+
 .half-page-card-menu-div {
   display: flex;
   justify-content: center;
@@ -1148,6 +1375,7 @@ select {
   width: 100%;
   gap: 20px;
 }
+
 .half-page-card-menu-div .feature-overview-div1,
 .half-page-card-menu-div .feature-overview-div3 {
   margin: 0 auto !important;
@@ -1160,16 +1388,19 @@ select {
   transition: all 0.5s;
   cursor: pointer;
 }
+
 .half-page-card-menu-div .feature-overview-div1:hover,
 .half-page-card-menu-div .feature-overview-div3:hover {
   background-color: rgba(255, 255, 255, 0.05);
   color: #fff;
 }
+
 .raffles-page .half-page-menu-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
 }
+
 .raffles-page .leaderboard-card-div {
   width: 100%;
   border: 1px solid #1c1c1c;
@@ -1181,18 +1412,20 @@ select {
   display: flex;
   gap: 10px;
 }
-.raffles-page .leaderboard-card-div {
-}
+
+.raffles-page .leaderboard-card-div {}
 
 .raffles-page .leaderboard-card-div h1 {
   margin: 30px 0;
 }
+
 .prizes_container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .prizes-card {
   margin: 20px;
   width: 80%;
@@ -1207,9 +1440,11 @@ select {
   font-size: 20px;
   background-color: #000;
 }
+
 .prizes-card:hover {
   border: 4px solid #fbff12;
 }
+
 .prizes-chip-count {
   text-align: center;
   margin-bottom: 25px;
@@ -1218,6 +1453,7 @@ select {
   font-size: 26px;
   text-transform: uppercase;
 }
+
 .prize-name {
   font-size: 30px;
   color: #fff;
@@ -1227,10 +1463,12 @@ select {
   border: 2px solid #fbff12;
   border-radius: 3px;
 }
+
 .prize-cost {
   color: #0dff00;
   font-size: 26px;
 }
+
 .holder-claim-details {
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
@@ -1239,6 +1477,7 @@ select {
   text-transform: uppercase;
   font-weight: bold;
 }
+
 .additional-info-div {
   width: 50%;
   color: #fff;
@@ -1249,10 +1488,12 @@ select {
   border-radius: 5px;
   padding: 10px;
 }
+
 .title {
   font-weight: bold;
   font-size: 20px;
 }
+
 .earn-free-tokens-desc-div {
   padding: 20px;
   width: 45%;
@@ -1264,6 +1505,7 @@ select {
   justify-content: center;
   align-items: center;
 }
+
 .earn-free-tokens-desc-div-full {
   padding: 60px;
   width: 85%;
@@ -1275,16 +1517,19 @@ select {
   justify-content: center;
   align-items: center;
 }
+
 .earn-free-tokens-desc-header {
   text-align: center;
   font-size: 24px;
   /* font-family: "Poppins"; */
 }
+
 .earn-free-tokens-desc {
   text-align: center;
   /* font-family: "Poppins"; */
   margin-bottom: 20px;
 }
+
 .social-share-card {
   display: flex;
   flex-direction: column;
@@ -1295,25 +1540,31 @@ select {
   border: 2px solid #d2042d;
   font-size: 20px;
 }
+
 .social-share-btn {
   margin-right: 15px;
   margin-left: 15px;
 }
+
 .social-share-btn-div {
   margin-top: 20px;
 }
+
 .social-share-filter-btn {
   margin: 0 10px;
   cursor: pointer;
   border: 3px solid #1b2129;
 }
+
 .social-share-filter-btn:hover {
   border: 3px solid #d2042d;
   border-radius: 100%;
 }
+
 .txt-align-center {
   text-align: center;
 }
+
 .leaderboard-card-div {
   width: 45%;
   margin: 5px auto;
@@ -1326,12 +1577,14 @@ select {
   font-size: 18px;
   text-align: center;
 }
+
 .leaderboard-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 10px 30px;
 }
+
 .affiliate-card-div {
   width: 85%;
   margin: 5px auto;
@@ -1343,12 +1596,14 @@ select {
   border-radius: 5px;
   font-size: 20px;
 }
+
 .affiliate-card-row {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   margin-bottom: 20px;
 }
+
 .daily-reward-card-div {
   width: 85%;
   margin: 5px auto;
@@ -1362,19 +1617,25 @@ select {
   font-size: 20px;
   color: #888888;
 }
+
 .pulse {
   animation: pulse-animation 2s infinite;
 }
 
 @keyframes pulse-animation {
   0% {
-    transform: scale(0.9); /* scaling to 0 */
+    transform: scale(0.9);
+    /* scaling to 0 */
   }
+
   50% {
-    transform: scale(1.1); /* increasing the size */
+    transform: scale(1.1);
+    /* increasing the size */
   }
+
   100% {
-    transform: scale(0.9); /* seeting back to initial size */
+    transform: scale(0.9);
+    /* seeting back to initial size */
   }
 }
 
@@ -1384,13 +1645,18 @@ select {
 
 @keyframes teeter-animation {
   0% {
-    transform: rotate(5deg); /* increasing the size */
+    transform: rotate(5deg);
+    /* increasing the size */
   }
+
   50% {
-    transform: rotate(-5deg); /* increasing the size */
+    transform: rotate(-5deg);
+    /* increasing the size */
   }
+
   100% {
-    transform: rotate(5deg); /* increasing the size */
+    transform: rotate(5deg);
+    /* increasing the size */
   }
 }
 
@@ -1400,13 +1666,11 @@ select {
 
 .bg-animated {
   background-size: 300% 300%;
-  background-image: linear-gradient(
-    -45deg,
-    rgba(59, 173, 227, 1) 0%,
-    rgba(87, 111, 230, 1) 25%,
-    rgba(152, 68, 183, 1) 51%,
-    rgba(255, 53, 127, 1) 100%
-  );
+  background-image: linear-gradient(-45deg,
+      rgba(59, 173, 227, 1) 0%,
+      rgba(87, 111, 230, 1) 25%,
+      rgba(152, 68, 183, 1) 51%,
+      rgba(255, 53, 127, 1) 100%);
   animation: AnimateBG 5s ease infinite;
 }
 
@@ -1414,9 +1678,11 @@ select {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -1424,25 +1690,21 @@ select {
 
 .bg-animated2 {
   background-size: 300% 300%;
-  background-image: linear-gradient(
-    -45deg,
-    rgb(29, 196, 93) 0%,
-    rgb(40, 168, 14) 25%,
-    rgb(15, 155, 15) 51%,
-    rgb(34, 233, 77) 100%
-  );
+  background-image: linear-gradient(-45deg,
+      rgb(29, 196, 93) 0%,
+      rgb(40, 168, 14) 25%,
+      rgb(15, 155, 15) 51%,
+      rgb(34, 233, 77) 100%);
   animation: AnimateBG 5s ease infinite;
 }
 
 .bg-animated3 {
   background-size: 300% 300%;
-  background-image: linear-gradient(
-    45deg,
-    rgb(211, 69, 13) 0%,
-    rgb(235, 134, 19) 20%,
-    rgb(241, 8, 8) 71%,
-    rgb(248, 232, 12) 100%
-  );
+  background-image: linear-gradient(45deg,
+      rgb(211, 69, 13) 0%,
+      rgb(235, 134, 19) 20%,
+      rgb(241, 8, 8) 71%,
+      rgb(248, 232, 12) 100%);
   animation: AnimateBG 5s ease infinite;
 }
 
@@ -1450,6 +1712,7 @@ select {
   width: 75px;
   height: 75px;
 }
+
 .spin {
   display: inline-block;
   animation: spin 1s linear infinite;
@@ -1459,6 +1722,7 @@ select {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -1473,9 +1737,11 @@ select {
   background: #000000;
   z-index: 9999999;
 }
+
 .z1001 {
   z-index: 1001;
 }
+
 .pageImgContainer {
   top: 0;
   left: 0;
@@ -1496,6 +1762,7 @@ select {
   border-radius: 5px;
   z-index: 1000;
 }
+
 .pageImgContainer-dl {
   top: 0;
   left: 0;
@@ -1515,18 +1782,21 @@ select {
   border-radius: 5px;
   z-index: 1000;
 }
+
 .social-share-filter-btns-div {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-bottom: 25px;
 }
+
 .mint-DL-div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 0 auto 50px auto;
 }
+
 .min-menu-div {
   width: 100%;
   display: flex;
@@ -1536,6 +1806,7 @@ select {
   margin: 15px auto 10px auto;
   padding: 10px;
 }
+
 .min-menu-btn {
   background-color: #d2042d;
   border: 2px solid #d2042d;
@@ -1547,10 +1818,12 @@ select {
   font-size: 20px;
   cursor: pointer;
 }
+
 .min-menu-btn:hover {
   background-color: #000000;
   color: #d2042d;
 }
+
 .raffles-header-shop-card {
   background-color: #000;
   border: 2px solid #d2042d;
@@ -1563,6 +1836,7 @@ select {
   width: 20%;
   max-width: 20%;
 }
+
 .raffles-header-shop-div {
   background-color: #1b2129;
   border: 4px solid #d2042d;
@@ -1574,6 +1848,7 @@ select {
   flex-wrap: wrap;
   width: 90%;
 }
+
 .ending-soon {
   padding: 10px 30px;
   margin: 15px auto -5px auto;
@@ -1582,6 +1857,7 @@ select {
   border-radius: 5px;
   width: 30%;
 }
+
 .close-btn-round-div {
   margin: 25px 0 -15px 0;
   display: flex;
@@ -1589,6 +1865,7 @@ select {
   justify-content: flex-start;
   width: 90%;
 }
+
 .close-btn-round {
   padding: 7px 16px;
   background-color: #1b2129;
@@ -1599,18 +1876,22 @@ select {
   font-weight: bold;
   cursor: pointer;
 }
+
 .close-btn-round:hover {
   background-color: #d2042d;
   color: #1b2129;
   font-weight: bold;
 }
+
 .imageAnimation {
   margin: 0 auto;
   width: 200px;
   height: 200px;
   animation: spinner5 1s infinite ease-in-out;
 }
+
 @keyframes spinner5 {
+
   from,
   0% {
     -moz-transform: rotateY(0);
@@ -1618,48 +1899,56 @@ select {
     transform: rotateY(0);
     animation-timing-function: ease;
   }
+
   13% {
     -moz-transform: rotateY(45deg);
     -ms-transform: rotateY(45deg);
     transform: rotateY(45deg);
     animation-timing-function: ease;
   }
+
   26% {
     -moz-transform: rotateY(90deg);
     -ms-transform: rotateY(90deg);
     transform: rotateY(90deg);
     animation-timing-function: ease;
   }
+
   39% {
     -moz-transform: rotateY(135deg);
     -ms-transform: rotateY(135deg);
     transform: rotateY(135deg);
     animation-timing-function: ease;
   }
+
   52% {
     -moz-transform: rotateY(180deg);
     -ms-transform: rotateY(180deg);
     transform: rotateY(180deg);
     animation-timing-function: ease;
   }
+
   65% {
     -moz-transform: rotateY(225deg);
     -ms-transform: rotateY(225deg);
     transform: rotateY(225deg);
     animation-timing-function: ease;
   }
+
   78% {
     -moz-transform: rotateY(270deg);
     -ms-transform: rotateY(270deg);
     transform: rotateY(270deg);
     animation-timing-function: ease;
   }
+
   91% {
     -moz-transform: rotateY(315deg);
     -ms-transform: rotateY(315deg);
     transform: rotateY(315deg);
     animation-timing-function: ease;
   }
+
   to,
   100% {
     -moz-transform: rotateY(360deg);
@@ -1714,6 +2003,7 @@ select {
   border: 2px solid #fbff12;
   border-radius: 100%;
 }
+
 .mobile-menu .header-nav-container-mobile ul li svg {
   width: 50px;
   height: 50px;
@@ -1721,21 +2011,27 @@ select {
   border: 2px solid #fbff12;
   border-radius: 100%;
 }
+
 .header-nav-container-mobile {
   padding: 0;
 }
+
 .mobile-menu {
   padding: 15px 10px !important;
 }
+
 .header-nav-container-mobile ul li {
   width: 50px;
 }
+
 .header-nav-container-mobile ul li.active svg {
   background-color: #000;
 }
+
 .header-nav-container-mobile ul li.active svg path {
   fill: #fbff12;
 }
+
 .loading {
   position: fixed;
   top: 0;
@@ -1832,9 +2128,11 @@ select {
   top: 50%;
   transform: translateY(-50%);
 }
+
 .icon-links svg {
   fill: #f9ff00;
 }
+
 .wallet button {
   letter-spacing: 0;
   font-family: "Poppins", sans-serif !important;
@@ -2007,10 +2305,12 @@ ul.footer-social li a {
   justify-content: center;
   transition: all 0.5s;
 }
+
 ul.footer-social li a img {
   width: 20px;
   height: 20px;
 }
+
 ul.footer-social li a:hover img {
   filter: invert(1);
 }
@@ -2045,6 +2345,7 @@ ul.footer-support li a {
 ul.footer-support li a:hover {
   color: #fff;
 }
+
 ul.footer-support li img {
   margin-right: 3px;
 }
@@ -2224,6 +2525,7 @@ ul.footer-support li img {
   border: 2px solid #d2042d;
   box-shadow: none;
 }
+
 .nft-card-grid .nft-card-right .connect-wallet-inline {
   border-radius: 10px;
   border: none;
@@ -2232,22 +2534,27 @@ ul.footer-support li img {
 .connect-wallet {
   text-align: center;
 }
+
 /* ****************** new css  ********************** */
 .scrooge-main-heading,
 .scrooge-second-heading {
   padding-bottom: 50px;
 }
+
 .explore-page .flex-row {
   justify-content: center;
   margin-bottom: 40px;
 }
+
 .explore-page .pageTitle {
   margin: 0;
 }
+
 .raffles-page .half-page-card-menu-div {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+
 .contact-us .contact-div {
   text-align: center;
   background-color: transparent;
@@ -2264,23 +2571,27 @@ ul.footer-support li img {
   border: none;
   padding: 0;
 }
+
 .privacy-page .contact-div h4 {
   margin: 0;
   /* color: #fff; */
   font-size: 22px;
 }
+
 .raffles-page .raffles-page-card {
   width: 100px;
   height: 100px;
   border-radius: 100%;
   border: 5px solid #fbff12;
 }
+
 .raffles-page .raffles-page-card img {
   width: 100px;
   height: 100px;
   object-fit: cover;
   border: none;
 }
+
 .explore-page .subheader-btn,
 .my-wallet-page .min-menu-btn {
   border-radius: 5px;
@@ -2293,6 +2604,7 @@ ul.footer-support li img {
   font-size: 14px;
   transition: all 0.5s;
 }
+
 .crypto-card-grid {
   display: flex;
   align-items: center;
@@ -2302,6 +2614,7 @@ ul.footer-support li img {
   max-width: 900px;
   width: 100%;
 }
+
 .wallet-casino-top {
   width: 100%;
   display: flex;
@@ -2310,18 +2623,22 @@ ul.footer-support li img {
   max-width: 75%;
   margin: 0 auto;
 }
+
 .explore-page .subheader-btn:hover,
 .my-wallet-page .min-menu-btn:hover {
   background-color: transparent;
   color: #5ee47e;
 }
+
 .my-wallet-page .min-menu-div {
   gap: 20px;
   flex-wrap: wrap;
 }
+
 .my-wallet-page .connect-wallet-div {
   margin-bottom: 66px;
 }
+
 .my-wallet-page .transaction-card,
 .my-wallet-page .casino-card {
   border: 1px solid #1c1c1c;
@@ -2349,10 +2666,12 @@ ul.footer-support li img {
 .my-wallet-page .transaction-card p {
   color: #fff;
 }
+
 .my-wallet-page .transaction-card:hover,
 .my-wallet-page .casino-card:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
+
 .my-wallet-page .wallet-casino-profile-div {
   border: 1px solid #1c1c1c;
   background-color: transparent;
@@ -2366,6 +2685,7 @@ ul.footer-support li img {
   gap: 40px;
   flex-wrap: wrap;
 }
+
 .my-wallet-page .wallet-casino-profile-details {
   width: 75%;
 }
@@ -2380,12 +2700,14 @@ ul.footer-support li img {
   display: block;
   position: relative;
 }
+
 .my-wallet-page .transaction-card-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
   margin-bottom: 40px;
 }
+
 /* .my-wallet-page .transaction-div-title {
   padding: 30px 0;
 } */
@@ -2403,47 +2725,58 @@ ul.footer-support li img {
   border: 5px solid #fbff12;
   object-fit: cover;
 }
+
 .my-wallet-page .token-ticket-row {
   font-size: 18px;
   gap: 10px;
 }
+
 .explore-page .erc-card-box {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+
 .explore-page .erc-card-box .erc1155Card {
   width: 100%;
 }
+
 .nft-page .feature-overview-div {
   border: none;
   background-color: transparent;
 }
+
 .nft-page .nft-home-sell-title,
 .nft-page .nft-home-sell-title h1 {
   margin: 0px;
 }
+
 .claim-free-page .feature-overview-div,
 .redeem-prizes-page .feature-overview-div {
   border: none;
   background-color: transparent;
   padding: 0;
 }
+
 .redeem-prizes-page .prizes-chip-count h3 {
   font-size: 22px;
   font-weight: 600;
 }
+
 .claim-free-page .pageTitle,
 .redeem-prizes-page .pageTitle {
   margin: 0;
 }
+
 .redeem-prizes-page .page-nav-header-btns-subrow {
   padding-top: 30px;
 }
+
 .redeem-prizes-page .page-nav-header-btns-subrow,
 .redeem-prizes-page .page-nav-header-btns-row {
   gap: 20px;
 }
+
 .redeem-prizes-page .page-nav-header-subbtn {
   background-color: transparent;
   border: 1px solid #fbff12;
@@ -2451,10 +2784,12 @@ ul.footer-support li img {
   transition: all 0.5s;
   margin: 0;
 }
+
 .redeem-prizes-page .page-nav-header-subbtn:hover {
   background-color: #000;
   color: #fbff12;
 }
+
 .redeem-prizes-page .prizes-container .redeem-btn {
   padding: 30px 0;
   gap: 20px;
@@ -2473,12 +2808,11 @@ ul.footer-support li img {
   width: 100%;
   height: 44px !important;
 }
-.redeem-prizes-page
-  .prizes-container
-  .redeem-btn
-  input[type="Number"]:focus-visible {
+
+.redeem-prizes-page .prizes-container .redeem-btn input[type="Number"]:focus-visible {
   outline: none;
 }
+
 .home-page .nft-home-sell-div {
   border: 1px solid #1c1c1c;
   background: transparent;
@@ -2486,9 +2820,11 @@ ul.footer-support li img {
   position: relative;
   overflow: hidden;
 }
+
 .home-page .text-animate h1 {
   margin: 40px 0;
 }
+
 .my-wallet-page .wallet-casino-profile-div .crypto-balance-div,
 .explore-page .erc-card-box .erc1155Card {
   border: 1px solid #1c1c1c;
@@ -2502,10 +2838,12 @@ ul.footer-support li img {
   margin: 0;
   width: 100%;
 }
+
 .my-wallet-page .wallet-casino-profile-div .crypto-balance-div:hover,
 .explore-page .erc-card-box .erc1155Card:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
+
 .my-wallet-page .wallet-casino-profile-div .crypto-balance-div:hover:before {
   content: "";
   position: absolute;
@@ -2517,6 +2855,7 @@ ul.footer-support li img {
   clip-path: circle(10% at 5% 5%);
   transition: all 0.5s;
 }
+
 /* ************************** social-card ************************** */
 
 .social-share-grid {
@@ -2546,16 +2885,20 @@ ul.footer-support li img {
   align-items: center;
   justify-content: center;
 }
+
 .social-share-btn-div button.disabled {
   background-color: transparent !important;
 }
+
 button.shareBtn-disabled {
   opacity: 0.6;
 }
+
 .social-share-btn-div button {
   background: none !important;
   border: none !important;
 }
+
 .social-share-card .card-color {
   height: 128px;
   width: 128px;
@@ -2569,12 +2912,14 @@ button.shareBtn-disabled {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .social-share-card:hover .card-color {
   -webkit-transform: scale(10);
   -ms-transform: scale(10);
   transform: scale(10);
   z-index: -1;
 }
+
 .social-share-message {
   transition: all 0.2s ease;
 }
@@ -2582,23 +2927,28 @@ button.shareBtn-disabled {
 .social-share-card:hover .social-share-message {
   color: #fff;
 }
+
 .social-share-card:nth-child(2n + 1) .card-color {
   /* background-color: #3ecd5e; */
   background-color: rgba(59, 173, 227, 1);
 }
+
 .social-share-card:nth-child(2n) .card-color {
   /* background-color: #e44002; */
   background-color: rgba(87, 111, 230, 1);
 }
+
 .social-share-card:nth-child(5n - 1) .card-color {
   /* background-color: #f9b234; */
   background-color: rgba(152, 68, 183, 1);
 }
+
 .earn-token .affiliate-card-div {
   border: none;
   padding: 0;
   margin: 0 auto;
 }
+
 .earn-token .daily-reward-card-div {
   margin: 0;
   width: 100%;
@@ -2610,6 +2960,7 @@ button.shareBtn-disabled {
   flex-wrap: wrap;
   gap: 20px;
 }
+
 .earn-token .close-btn-round-div {
   margin: 0;
   width: 100%;
@@ -2617,6 +2968,7 @@ button.shareBtn-disabled {
   margin-bottom: -60px;
   z-index: 9;
 }
+
 .earn-token .close-btn-round-div .close-btn-round {
   width: 45px;
   height: 45px;
@@ -2625,6 +2977,7 @@ button.shareBtn-disabled {
   justify-content: center;
   padding: 0;
 }
+
 .earn-token {
   display: flex;
   flex-direction: column;
@@ -2638,12 +2991,14 @@ button.shareBtn-disabled {
   box-shadow: 0px 20px 20px #00000091;
   border-radius: 10px;
 }
+
 .earn-token .bordered-section .leaderboard-card-box,
 .prizes-chip-count-grid {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+
 .earn-token .bordered-section .leaderboard-card-div {
   margin: 0;
   max-width: 49%;
@@ -2655,6 +3010,7 @@ button.shareBtn-disabled {
   text-align: start;
   padding: 20px 10px;
 }
+
 .earn-token .bordered-section .leaderboard-card-div h4 {
   color: #f9ff00;
   font-size: 20px;
@@ -2665,17 +3021,21 @@ button.shareBtn-disabled {
   text-align: center;
   text-transform: uppercase;
 }
+
 .earn-token .bordered-section .leaderboard-card-div:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
+
 .earn-token .leaderboard-row {
   align-items: flex-start;
   flex-wrap: wrap;
 }
+
 .earn-token .leaderboard-row p {
   margin: 0;
   font-size: 16px;
 }
+
 .earn-token .daily-reward-card-div span {
   font-size: 18px;
   font-weight: 700;
@@ -2685,23 +3045,28 @@ button.shareBtn-disabled {
   margin: 0;
   font-size: 16px;
 }
+
 .earn-token .no-data {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .earn-token .rewards {
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
 .earn-token .bordered-section .leaderboard-card-div:hover {
   color: #fff;
 }
+
 .earn-token .bordered-section .flex-row-no-margin {
   align-items: flex-start;
   padding-top: 20px;
 }
+
 .earn-token .prizes-card {
   width: 100%;
   border: 1px solid #1c1c1c;
@@ -2710,9 +3075,11 @@ button.shareBtn-disabled {
   margin: 0;
   transition: all 0.5s;
 }
+
 .earn-token .prizes-card:hover {
   background: rgba(255, 255, 255, 0.05);
 }
+
 .earn-token .prizes-card .cliam-token-btn {
   max-width: 500px;
   margin: 0 auto;
@@ -2726,14 +3093,17 @@ button.shareBtn-disabled {
   padding: 20px;
   border-radius: 10px;
 }
+
 .earn-token .prizes-card .additional-info-div .daily-reward-bag {
   width: 70%;
 }
+
 .earn-token .prizes-card .next-claim-div {
   background: #000;
   border: 1px solid #1c1c1c;
   box-shadow: 0px 20px 20px #00000091;
 }
+
 .earn-token .prizes-card .next-claim-box {
   background-image: -webkit-linear-gradient(#d2042d, #f9ff00);
   padding: 10px;
@@ -2742,29 +3112,27 @@ button.shareBtn-disabled {
 .earn-token .prizes-card .next-claim-div span {
   color: #fff;
 }
+
 .earn-token .leaderboard-row .leaderboard-left {
   display: flex;
   gap: 20px;
 }
-.earn-token
-  .earn-free-tokens-desc-div
-  .social-share-card
-  .social-share-message {
+
+.earn-token .earn-free-tokens-desc-div .social-share-card .social-share-message {
   font-size: 16px;
   text-align: center;
 }
 
-.earn-token
-  .earn-free-tokens-desc-div
-  .social-share-card
-  .social-share-btn-div {
+.earn-token .earn-free-tokens-desc-div .social-share-card .social-share-btn-div {
   max-width: 300px;
   width: 100%;
   text-align: center;
 }
+
 .earn-token .earn-free-tokens-desc-div .social-share-card {
   gap: 20px;
 }
+
 /* .text-animate {
   animation: color-change 5s infinite;
 }
@@ -2808,6 +3176,7 @@ button.shareBtn-disabled {
   letter-spacing: 0.1em;
   line-height: 30px;
 }
+
 .text-animate h3 {
   font-size: 24px;
   margin: 0;
@@ -2816,16 +3185,19 @@ button.shareBtn-disabled {
   letter-spacing: 0.1em;
   line-height: 30px;
 }
+
 .redeem-prizes-page .prizes-card p {
   margin: 0;
   font-size: 18px;
 }
+
 .earn-token .earn-free-tokens-desc-div-full {
   border: none;
   background: transparent;
   margin: 0;
   padding: 0;
 }
+
 .earn-token .earn-free-tokens-desc-div {
   border: 1px solid #1c1c1c;
   background-color: transparent;
@@ -2836,6 +3208,7 @@ button.shareBtn-disabled {
   cursor: pointer;
   transition: all 0.5s;
 }
+
 .earn-token .earn-free-tokens-desc-div:hover,
 .redeem-prizes-page .prizes_container .prizes-card:hover,
 .raffles-page .leaderboard-card-div:hover,
@@ -2844,6 +3217,7 @@ button.shareBtn-disabled {
 .home-page .nft-home-sell-div:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
+
 .raffles-page .min-menu-div {
   margin: 40px 0;
   padding: 0;
@@ -2857,10 +3231,12 @@ button.shareBtn-disabled {
   padding: 8px 24px;
   font-size: 16px;
 }
+
 .raffles-page .min-menu-div .min-menu-btn:hover {
   color: #fbff12;
   background-color: #000;
 }
+
 .earn-token .earn-free-tokens-desc-div:hover::before {
   content: "";
   position: absolute;
@@ -2869,15 +3245,14 @@ button.shareBtn-disabled {
   width: 100%;
   height: 100%;
   /* background: linear-gradient(#2196f3, #e91e63); */
-  background-image: linear-gradient(
-    45deg,
-    #ff512f 0%,
-    #f09819 51%,
-    #ff512f 100%
-  );
+  background-image: linear-gradient(45deg,
+      #ff512f 0%,
+      #f09819 51%,
+      #ff512f 100%);
   clip-path: circle(15% at 5% 7%);
   transition: all 0.5s;
 }
+
 .raffles-page .raffles-header-shop-div {
   display: grid;
   gap: 20px;
@@ -2890,6 +3265,7 @@ button.shareBtn-disabled {
   width: 100%;
   padding: 40px;
 }
+
 .raffles-page .raffles-header-shop-div .raffles-header-shop-card {
   max-width: 100%;
   width: 100%;
@@ -2901,6 +3277,7 @@ button.shareBtn-disabled {
   position: relative;
   overflow: hidden;
 }
+
 .raffles-page .raffles-header-shop-div .raffles-header-shop-card:hover:before {
   content: "";
   position: absolute;
@@ -2911,18 +3288,22 @@ button.shareBtn-disabled {
   background: linear-gradient(#2196f3, #e91e63);
   clip-path: circle(10% at 5% 5%);
 }
+
 .raffles-page .raffles-card-grid {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   padding: 40px 0;
 }
+
 .raffles-page .raffles-card-grid h4 {
   margin: 30px 0;
 }
+
 .raffles-page .leaderboard-card-div .ending-soon {
   color: #fff;
 }
+
 .nft-card-grid .nft-token-row-card {
   border: 1px solid #1c1c1c;
   background: transparent;
@@ -2935,20 +3316,24 @@ button.shareBtn-disabled {
   flex-direction: column;
   gap: 20px;
 }
+
 .nft-card-left {
   display: flex;
   align-items: center;
   gap: 30px;
   flex-wrap: wrap;
 }
+
 .nft-card-left .nft-token-row-card-image {
   width: 100%;
   max-width: 150px;
 }
+
 .nft-card-left .nft-token-row-desc {
   max-width: 400px;
   width: 100%;
 }
+
 .nft-card-grid .nft-card-right {
   display: flex;
   align-items: center;
@@ -2960,11 +3345,13 @@ button.shareBtn-disabled {
 .nft-card-grid .nft-card-right .nft-token-row-details {
   width: 100%;
 }
+
 .nft-page .nft-card-grid p {
   text-align: start;
   font-size: 16px;
   padding: 10px 0;
 }
+
 .claim-free-page .feature-overview-div p {
   line-height: 1.5;
   text-align: center;
@@ -2972,15 +3359,19 @@ button.shareBtn-disabled {
   color: #878d93;
   margin: 0;
 }
+
 .nft-card-grid .green-border-6px {
   border: 1px solid #5ee47e !important;
 }
+
 .nft-card-grid .pink-border-6px {
   border: 1px solid #ff206e !important;
 }
+
 .nft-card-grid .blue-border-6px {
   border: 1px solid #3a86ff !important;
 }
+
 /* ***************************************************************************************** */
 .redeem-prizes-page .prizes_container {
   display: grid;
@@ -3003,6 +3394,7 @@ button.shareBtn-disabled {
   width: 100%;
   padding: 30px 20px;
 }
+
 .redeem-prizes-page .prizes_container .prizes-card:hover::before {
   content: "";
   position: absolute;
@@ -3011,15 +3403,14 @@ button.shareBtn-disabled {
   width: 100%;
   height: 100%;
   /* background: linear-gradient(#f00, #f0f); */
-  background-image: linear-gradient(
-    45deg,
-    #ff512f 0%,
-    #f09819 51%,
-    #ff512f 100%
-  );
+  background-image: linear-gradient(45deg,
+      #ff512f 0%,
+      #f09819 51%,
+      #ff512f 100%);
   clip-path: circle(10% at right 100%);
   transition: all 0.5s;
 }
+
 .redeem-prizes-page .prizes_container .prizes-card .prize-name {
   border: none;
   background-color: transparent;
@@ -3032,6 +3423,7 @@ button.shareBtn-disabled {
   justify-content: center;
   padding: 100px 0;
 }
+
 .claim-free-page .prizes-card {
   margin: 0;
   border: 1px solid #1c1c1c;
@@ -3046,6 +3438,7 @@ button.shareBtn-disabled {
   width: 100%;
   padding: 30px 20px;
 }
+
 /* .claim-free-page .prizes-card:hover {
   background-color: rgba(255, 255, 255, 0.05);
 } */
@@ -3062,14 +3455,17 @@ button.shareBtn-disabled {
   box-shadow: 0 20px 20px #00000091;
   width: 100%;
 }
+
 .claim-free-page .prizes-card .additional-info-div:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
+
 .claim-free-page .prizes-card .new-btn {
   max-width: 500px;
   width: 100%;
   margin: 0 auto;
 }
+
 .claim-free-page .prizes-card .new-btn button {
   height: 60px;
 }
@@ -3092,6 +3488,7 @@ button.shareBtn-disabled {
   margin: 0;
   color: #fbff12;
 }
+
 .claim-free-page .pageImgContainer,
 .my-wallet-page .pageImgContainer,
 .redeem-prizes-page .pageImgContainer,
@@ -3116,6 +3513,7 @@ button.shareBtn-disabled {
   height: 100vh;
   margin: 0;
 }
+
 .my-wallet-page .full-page-container,
 .earn-token .social-share-card,
 .claim-free-page .prizes-card .prize-name,
@@ -3126,13 +3524,16 @@ button.shareBtn-disabled {
   box-shadow: 0px 20px 20px #00000091;
   border-radius: 10px;
 }
+
 .my-wallet-page .full-page-container {
   padding: 30px;
 }
+
 .claim-free-page .prizes-card .prize-name {
   background-color: #000;
   padding: 20px;
 }
+
 .claim-free-page .prizes-card .prize-name h4 {
   color: #f9ff00;
   font-size: 32px;
@@ -3143,15 +3544,18 @@ button.shareBtn-disabled {
   text-align: center;
   /* text-transform: uppercase; */
 }
+
 .earn-token .social-share-card {
   background: #000;
   color: #fff;
 }
+
 .earn-token .earn-affiliate-card {
   margin: 0;
   width: 100%;
   padding: 30px;
 }
+
 .earn-token .earn-affiliate-card .earn-card-profile {
   max-width: 350px;
   width: 100%;
@@ -3161,10 +3565,12 @@ button.shareBtn-disabled {
   justify-content: center;
   gap: 20px;
 }
+
 .earn-token .earn-affiliate-card .affiliate-card-row {
   margin: 0;
   gap: 20px;
 }
+
 /* .earn-token .social-share-card {
   background-color: rgba(255, 255, 255, 0.05);
 } */
@@ -3190,6 +3596,7 @@ button.shareBtn-disabled {
   flex-wrap: wrap;
   flex-direction: column;
 }
+
 .earn-token .earn-card-box .affiliate-card-row p strong,
 .earn-token .earn-card-box .affiliate-card-row strong {
   color: #f9ff01;
@@ -3202,6 +3609,7 @@ button.shareBtn-disabled {
 
   margin-bottom: -20px;
 }
+
 .my-wallet-page .close-btn-round {
   width: 45px;
   height: 45px;
@@ -3222,12 +3630,15 @@ button.shareBtn-disabled {
 
   gap: 20px;
 }
+
 .raffles-page .leaderboard-card-div .new-btn button {
   height: 60px;
 }
+
 .redeem-nfts-page .text-animate {
   text-align: center;
 }
+
 .explore-page .explore-btn {
   display: flex;
   gap: 30px;
@@ -3239,6 +3650,7 @@ button.shareBtn-disabled {
   align-items: center;
   gap: 10px;
 }
+
 .new-btn button {
   color: #000 !important;
   background-color: #ffd712 !important;
@@ -3259,18 +3671,18 @@ button.shareBtn-disabled {
 }
 
 .gradient-btn {
-  background-image: linear-gradient(
-    45deg,
-    #ff512f 0%,
-    #f09819 51%,
-    #ff512f 100%
-  );
+  background-image: linear-gradient(45deg,
+      #ff512f 0%,
+      #f09819 51%,
+      #ff512f 100%);
 }
+
 .card-btn {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .gradient-btn {
   margin: 10px;
   padding: 15px 30px;
@@ -3297,11 +3709,13 @@ button.shareBtn-disabled {
 .gradient-btn:active {
   transform: scale(0.95);
 }
+
 .redeem-btn {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .earn-affiliate-btn {
   display: flex;
   align-items: center;
@@ -3325,6 +3739,7 @@ button.shareBtn-disabled {
   font-weight: 600;
   color: #fbff12;
 }
+
 .requestNotFound {
   align-items: center;
   display: flex;
@@ -3342,6 +3757,7 @@ button.shareBtn-disabled {
   text-align: center;
   text-transform: uppercase;
 }
+
 .requestNotFound span {
   font-size: 16px;
   font-weight: 900;
@@ -3352,18 +3768,21 @@ button.shareBtn-disabled {
   margin-top: 50px;
   display: block;
 }
+
 /* ************************** success page *************************************** */
 .payment-success {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .payment-success i {
   color: #9abc66;
   font-size: 100px;
   line-height: 200px;
   margin-left: -15px;
 }
+
 .payment-success .card-check {
   border-radius: 200px;
   height: 150px;
@@ -3371,6 +3790,7 @@ button.shareBtn-disabled {
   margin: 0 auto;
   /* background-color: #9abc663d; */
 }
+
 .payment-success .payment-success-card {
   background: #000;
   border: 1px solid #1c1c1c;
@@ -3382,15 +3802,18 @@ button.shareBtn-disabled {
   text-align: center;
   margin: 40px 0;
 }
+
 .payment-success svg {
   display: block;
   color: #9abc66;
 }
+
 .payment-success .circle {
   stroke-dasharray: 76;
   stroke-dashoffset: 76;
   animation: draw 1s forwards;
 }
+
 .payment-success .tick {
   stroke-dasharray: 18;
   stroke-dashoffset: 18;
@@ -3414,6 +3837,7 @@ button.shareBtn-disabled {
   align-items: center;
   justify-content: space-between;
 }
+
 .check-background {
   /* width: 100%;
   height: calc(100% - 1.25rem); */
@@ -3430,6 +3854,7 @@ button.shareBtn-disabled {
   justify-content: center;
   opacity: 0;
 }
+
 .cross-background {
   width: 120px;
   height: 120px;
@@ -3444,6 +3869,7 @@ button.shareBtn-disabled {
   justify-content: center;
   opacity: 0;
 }
+
 .check-container svg {
   width: 50%;
   transform: translateY(0.25rem);
@@ -3451,6 +3877,7 @@ button.shareBtn-disabled {
   stroke-dashoffset: 80;
   animation: animateCheck 0.35s forwards 1.25s ease-out;
 }
+
 .check-shadow {
   bottom: calc(-15% - 5px);
   left: 0;
@@ -3458,6 +3885,7 @@ button.shareBtn-disabled {
   background: radial-gradient(closest-side, rgba(73, 218, 131, 1), transparent);
   animation: animateShadow 0.75s ease-out forwards 0.75s;
 }
+
 .cross-shadow {
   bottom: calc(-15% - 5px);
   left: 0;
@@ -3473,26 +3901,31 @@ button.shareBtn-disabled {
     box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset,
       0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
   }
+
   25% {
     opacity: 1;
     transform: scale(0.9);
     box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset,
       0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
   }
+
   43.75% {
     transform: scale(1.15);
     box-shadow: 0px 0px 0px 43.334px rgba(255, 255, 255, 0.25) inset,
       0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
   }
+
   62.5% {
     transform: scale(1);
     box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset,
       0px 0px 0px 21.667px rgba(255, 255, 255, 0.25) inset;
   }
+
   81.25% {
     box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset,
       0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset;
   }
+
   100% {
     opacity: 1;
     box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset,
@@ -3504,6 +3937,7 @@ button.shareBtn-disabled {
   from {
     stroke-dashoffset: 80;
   }
+
   to {
     stroke-dashoffset: 0;
   }
@@ -3515,20 +3949,24 @@ button.shareBtn-disabled {
     width: 100%;
     height: 15%;
   }
+
   25% {
     opacity: 0.25;
   }
+
   43.75% {
     width: 40%;
     height: 7%;
     opacity: 0.35;
   }
+
   100% {
     width: 85%;
     height: 15%;
     opacity: 0.25;
   }
 }
+
 /* **************************************************************************************** */
 
 .buy-chips-grid {
@@ -3551,6 +3989,7 @@ button.shareBtn-disabled {
   transition: all 0.5s;
   padding: 20px;
 }
+
 .buy-chips-grid .buy-chips-grid-box:hover {
   background-color: hsla(0, 0%, 100%, 0.05);
 }
@@ -3574,6 +4013,7 @@ button.shareBtn-disabled {
   text-transform: uppercase;
   margin: 0;
 }
+
 .chips-images {
   position: relative;
   padding: 10px 0;
@@ -3584,15 +4024,18 @@ button.shareBtn-disabled {
   left: 25px;
   top: 25px;
 }
+
 .earn-token .min-menu-div {
   gap: 20px;
   flex-wrap: wrap;
 }
+
 .claim-token-btn {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .connect-wallet-div button {
   position: relative;
   width: 100%;
@@ -3610,6 +4053,7 @@ button.shareBtn-disabled {
   background: rgb(0, 0, 0);
   height: 100%;
 }
+
 .crypto-balance-row-text p {
   margin: 0;
   font-weight: 600;
@@ -3619,6 +4063,7 @@ button.shareBtn-disabled {
 .crypto-card-grid .claim-pending-div {
   color: #fff;
 }
+
 .crypto-balance-row-text {
   display: grid;
   gap: 10px;
@@ -3627,9 +4072,11 @@ button.shareBtn-disabled {
 .crypto-balance-row-new {
   text-align: center;
 }
+
 .prizes-chip-count-grid {
   padding: 40px 0;
 }
+
 .disclaimer-Box {
   display: flex;
   flex-direction: column;
@@ -3639,13 +4086,16 @@ button.shareBtn-disabled {
   padding: 6px 15px;
   margin-bottom: 20px;
 }
+
 .disclaimer-Box h4 {
   margin: 0px;
 }
+
 .disclaimer-Box p {
   margin: 0px;
   font-size: 14px;
 }
+
 .disclaimer-Box button {
   margin-top: 10px;
   color: #000 !important;
@@ -3661,9 +4111,11 @@ button.shareBtn-disabled {
   border: none;
   cursor: pointer;
 }
+
 .disclaimer-Box button:hover {
   background-image: conic-gradient(from 1turn, #ffd712, #f9ff00) !important;
 }
+
 .cloudError-Page {
   width: 100%;
   height: 100vh;
@@ -3672,12 +4124,14 @@ button.shareBtn-disabled {
   justify-content: center;
   align-items: center;
 }
+
 .cloudError-Page h2 {
   text-align: center;
   margin-top: 40px;
   padding: 0px 20px;
   max-width: 660px;
 }
+
 .cloudError-Page h2 span {
   color: #f3b484;
 }
@@ -3697,10 +4151,12 @@ button.shareBtn-disabled {
   color: #f9ff00;
   text-transform: capitalize;
 }
+
 .popupBtn {
   display: flex;
   gap: 10px;
 }
+
 button.yellowBtn {
   width: 110px;
   font-size: 16px;
@@ -3712,6 +4168,7 @@ button.yellowBtn {
   color: black;
   cursor: pointer;
 }
+
 button.greyBtn {
   width: 110px;
   font-size: 16px;
@@ -3746,13 +4203,14 @@ button.greyBtn {
   width: 100%;
 }
 
-span.input-range__label.input-range__label--min {
-}
+span.input-range__label.input-range__label--min {}
+
 span.input-range__label.input-range__label--max {
   right: -5%;
   position: absolute;
   top: -1%;
 }
+
 .input-range__slider {
   appearance: none;
   background: #f9ff00 !important;
@@ -3769,6 +4227,7 @@ span.input-range__label.input-range__label--max {
   top: 8%;
   transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 }
+
 .input-range__track {
   background: #eeeeee;
   border-radius: 0.3rem;
@@ -3778,20 +4237,24 @@ span.input-range__label.input-range__label--max {
   position: relative;
   transition: left 0.3s ease-out, width 0.3s ease-out;
 }
+
 .input-range__slider-container {
   top: 30% !important;
 }
+
 .input-range__track.input-range__track--active {
   background: #f9ff00;
 }
+
 .input-range__label-container {
   left: 15% !important;
 }
+
 span.input-range__label.input-range__label--value {
   position: relative;
 }
-span.input-range__label.input-range__label--value
-  span.input-range__label-container {
+
+span.input-range__label.input-range__label--value span.input-range__label-container {
   position: absolute;
   top: -26px;
   background: #f9ff00;
@@ -3802,6 +4265,7 @@ span.input-range__label.input-range__label--value
   font-weight: 600;
   z-index: 99;
 }
+
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
@@ -3816,6 +4280,7 @@ span.input-range__label.input-range__label--value
     background-color: #2b333d;
     border-bottom: 2px solid #d2042d;
   }
+
   .header-nav-menu {
     display: none;
   }
@@ -3824,9 +4289,11 @@ span.input-range__label.input-range__label--value
     width: 40%;
     height: 40%;
   }
+
   .wallet-icon-img-mobile {
     max-width: 135px;
   }
+
   .wallet-casino-profile-div {
     width: 100%;
     padding: 20px 10px;
@@ -3835,26 +4302,31 @@ span.input-range__label.input-range__label--value
     text-align: center;
     flex-wrap: wrap;
   }
+
   .wallet-casino-profile-img {
     width: 150px;
     border-radius: 100%;
     border: 5px solid #fbff12;
   }
+
   .wallet-casino-profile-details {
     width: 100%;
     margin: 0;
     flex-direction: column;
   }
+
   .wallet-casino-profile-img-div {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
   }
+
   .balance-column {
     margin-top: 15px;
     color: #fff;
   }
+
   .token-ticket-row {
     display: flex;
     flex-direction: row;
@@ -3862,12 +4334,14 @@ span.input-range__label.input-range__label--value
     align-items: center;
     width: 100%;
   }
+
   .crypto-balance-row {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
+
   .crypto-balance-div {
     width: 100%;
     margin: 30px 0 0px 0;
@@ -3883,6 +4357,7 @@ span.input-range__label.input-range__label--value
     position: relative;
     max-width: 250px;
   }
+
   .header-menu ul {
     gap: 30px;
     text-align: center;
@@ -3897,24 +4372,30 @@ span.input-range__label.input-range__label--value
   .footer-grid {
     padding: 40px 0px 100px;
   }
+
   .footer-menu,
   .footer-contact {
     padding-top: 30px;
     padding-bottom: 15px;
   }
+
   .header-menu {
     display: none;
   }
+
   .menu-logo-img {
     width: 75px;
   }
+
   .wallet .green {
     font-size: 14px;
     padding-top: 5px;
   }
+
   .icon-links {
     left: 80px;
   }
+
   .mobile-menu {
     display: block;
     position: fixed;
@@ -3926,9 +4407,11 @@ span.input-range__label.input-range__label--value
     border: 1px solid #292d30;
     z-index: 9;
   }
+
   .login-page-body {
     padding: 30px 20px;
   }
+
   .grid .card {
     max-width: 100%;
     width: 100%;
@@ -3942,22 +4425,28 @@ span.input-range__label.input-range__label--value
   .nft-home-sell-title h1 {
     font-size: 25px;
   }
+
   .nft-page h2 {
     font-size: 30px;
   }
+
   .main .title {
     font-size: 30px;
   }
+
   .connect-wallet-div {
     margin-bottom: 30px;
   }
+
   .nft-home-sell-title {
     margin-bottom: 30px;
   }
+
   .CookieConsent {
     left: 0rem !important;
     bottom: 0rem !important;
   }
+
   /* ******************** new responsive ******************** */
 
   .raffles-page .half-page-card-menu-div,
@@ -3966,10 +4455,12 @@ span.input-range__label.input-range__label--value
   .buy-chips-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
   .nft-page .nft-token-row-card {
     flex-wrap: wrap;
     width: 60%;
   }
+
   .nft-page .nft-card-grid {
     align-items: center;
   }
@@ -3985,48 +4476,62 @@ span.input-range__label.input-range__label--value
     justify-content: center;
     align-items: center;
   }
+
   .earn-token .bordered-section .leaderboard-card-box,
   .raffles-page .raffles-card-grid,
   .prizes-chip-count-grid {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
+
   .social-share-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
   .text-animate h1 {
     font-size: 28px;
   }
+
   .redeem-prizes-page .prizes_container {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
   .home-page .nft-home-sell-div {
     flex-wrap: wrap;
   }
+
   .nft-home-sell-card {
     width: 45%;
   }
+
   .earn-token .bordered-section .leaderboard-card-div {
     max-width: 100%;
   }
+
   .earn-token .earn-free-tokens-desc-div {
     width: 100%;
   }
+
   .my-wallet-page .transaction-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
   .earn-token .prizes-card .additional-info-div {
     width: 80%;
   }
+
   .earn-token .prizes-card .next-claim-div {
     width: 65%;
   }
+
   .nft-card-grid .nft-card-right {
     max-width: 100%;
     flex-wrap: wrap;
   }
+
   .nft-card-left {
     justify-content: center;
   }
+
   .nft-page .nft-card-grid p {
     text-align: center;
   }
@@ -4042,9 +4547,11 @@ span.input-range__label.input-range__label--value
     background-color: #2b333d;
     border-bottom: 2px solid #d2042d;
   }
+
   .header-nav-menu {
     display: none;
   }
+
   .header-nav-container ul {
     width: 100%;
     display: flex;
@@ -4054,6 +4561,7 @@ span.input-range__label.input-range__label--value
     text-transform: uppercase;
     font-size: 18px;
   }
+
   .header-nav-menu a {
     display: none;
     /* font-family: "Poppins"; */
@@ -4062,9 +4570,11 @@ span.input-range__label.input-range__label--value
     padding: 15px;
     font-weight: bold;
   }
+
   .header-nav-menu a:hover {
     background-color: #fbff12;
   }
+
   .wallet-icon-img {
     display: none;
     height: 50px;
@@ -4080,13 +4590,16 @@ span.input-range__label.input-range__label--value
     margin: 100px 0 0 0;
     padding: 60px 20px 20px 10px;
   }
+
   .footer-inner-div {
     padding: 20px 50px;
   }
+
   .footer-div {
     text-align: center;
     padding: 30px 0 200px 0;
   }
+
   /* .bordered-section{
     margin: 20px auto;
     padding: 15px 5px;
@@ -4103,16 +4616,19 @@ span.input-range__label.input-range__label--value
     border-radius: 10px;
     /* font-family: "Poppins"; */
   }
+
   .prizes-card {
     margin: 20px 0;
     width: 100%;
     padding: 15px 10px;
     font-size: 12px;
   }
+
   .prize-cost {
     color: #0dff00;
     font-size: 26px;
   }
+
   .prize-name {
     width: 90%;
     font-size: 20px;
@@ -4123,12 +4639,14 @@ span.input-range__label.input-range__label--value
     border: 2px solid #fbff12;
     border-radius: 3px;
   }
+
   .holder-claim-details {
     font-size: 16px;
     line-height: 1.4;
     text-transform: uppercase;
     font-weight: 200;
   }
+
   .additional-info-div {
     width: 90%;
     color: #fff;
@@ -4139,6 +4657,7 @@ span.input-range__label.input-range__label--value
     border-radius: 5px;
     padding: 10px;
   }
+
   .nft-token-stripe-badge-div {
     width: 100%;
     margin: 0px auto;
@@ -4146,14 +4665,17 @@ span.input-range__label.input-range__label--value
     justify-content: center;
     padding: 0;
   }
+
   .nft-home-sell-div {
     width: 98%;
   }
+
   .nft-home-sell-more {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   .nft-home-sell-more-btn {
     background-color: #000;
     padding: 10px 20px;
@@ -4164,19 +4686,23 @@ span.input-range__label.input-range__label--value
     /* font-family: "Poppins"; */
     font-weight: bold;
   }
+
   .flex-row {
     flex-direction: column;
     justify-content: space-evenly;
     margin-bottom: 80px;
   }
+
   .flex-row-no-margin {
     flex-direction: column;
     justify-content: space-evenly;
   }
+
   .nft-home-sell-card {
     margin: 10px 0 35px 0;
     width: 100%;
   }
+
   .nft-token-row-card {
     width: 100%;
     padding: 20px 10px;
@@ -4185,35 +4711,43 @@ span.input-range__label.input-range__label--value
     justify-content: center;
     text-align: center;
   }
+
   .nft-token-row-card-image {
     width: 100%;
   }
+
   .nft-token-row-desc {
     width: 95%;
     margin-bottom: 20px;
   }
+
   .nft-token-row-details {
     width: 95%;
   }
+
   .erc1155-price {
     line-height: normal;
     font-size: 20px;
     margin-bottom: 10px;
   }
+
   .nft-token-row-sale {
     text-align: center;
     line-height: 2;
     font-size: 26px;
     margin-top: 10px;
   }
+
   .sale-badge-img {
     width: 160px;
   }
+
   .erc1155Card {
     width: 100%;
     text-align: center;
     margin: 30px 0;
   }
+
   .collection-header-img {
     width: 90%;
   }
@@ -4227,36 +4761,44 @@ span.input-range__label.input-range__label--value
     flex-wrap: wrap;
     border: none;
   }
+
   .min-menu-btn {
     font-size: 16px;
   }
+
   .token-small {
     width: 30px;
   }
+
   .ticket-small {
     width: 50px;
   }
+
   .wallet-casino-profile-img {
     width: 150px;
     border-radius: 100%;
     border: 5px solid #fbff12;
   }
+
   .wallet-casino-profile-details {
     width: 100%;
     margin: 0;
     flex-direction: column;
     padding: 20px 0;
   }
+
   .wallet-casino-profile-img-div {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
   }
+
   .balance-column {
     margin-top: 15px;
     color: #fff;
   }
+
   .token-ticket-row {
     display: flex;
     flex-direction: column;
@@ -4264,6 +4806,7 @@ span.input-range__label.input-range__label--value
     align-items: center;
     width: 100%;
   }
+
   .crypto-balance-row {
     display: flex;
     flex-direction: column;
@@ -4272,6 +4815,7 @@ span.input-range__label.input-range__label--value
     font-size: 18px;
     line-height: 2;
   }
+
   .crypto-balance-div {
     width: 100%;
     margin: 30px 0 0px 0;
@@ -4280,9 +4824,11 @@ span.input-range__label.input-range__label--value
     border: 4px solid #d2042d;
     font-size: 16px;
   }
+
   span.wallet-user-name {
     font-size: 16px;
   }
+
   .affiliate-card-div {
     width: 98%;
     margin: 5px auto;
@@ -4290,16 +4836,19 @@ span.input-range__label.input-range__label--value
     flex-direction: column;
     font-size: 18px;
   }
+
   .affiliate-card-row {
     flex-direction: column;
     justify-content: space-evenly;
     margin-bottom: 20px;
   }
+
   .inlineTitle {
     text-align: center;
     margin-bottom: 10px;
     font-size: 18px;
   }
+
   .daily-reward-card-div {
     width: 98%;
     padding: 10px;
@@ -4308,29 +4857,36 @@ span.input-range__label.input-range__label--value
     color: #888888;
     text-align: center;
   }
+
   .earn-free-tokens-desc-div,
   .earn-free-tokens-desc-div-full {
     width: 98%;
   }
+
   .earn-free-tokens-desc-div-full {
     padding: 20px;
   }
+
   .social-share-card {
     padding: 15px 5px;
     font-size: 16px;
     text-align: center;
     margin: 4px;
   }
+
   .social-share-btn-div {
     margin-top: 25px;
   }
+
   .social-share-filter-btn {
     margin: 0 10px;
     cursor: pointer;
   }
+
   .submit-btn {
     margin-top: 20px;
   }
+
   .erc721Card {
     padding: 30px 3px;
     margin: 10px auto;
@@ -4338,56 +4894,68 @@ span.input-range__label.input-range__label--value
     width: 100%;
     text-align: center;
   }
+
   .erc721Card-name {
     flex-direction: column;
     text-align: center;
   }
+
   .erc721Card-image {
     margin: 0 auto;
   }
+
   .erc721Card-details {
     padding-left: 0px;
     width: 100%;
     margin-top: 30px;
     line-height: 1.8;
   }
+
   .erc721Card-col-title {
     margin-top: 30px;
   }
+
   .erc721Card-3rd-col {
     padding-left: 0px;
     width: 100%;
     margin-top: 30px;
     line-height: 1.8;
   }
+
   .erc721Card-4th-col {
     width: 100%;
     margin-top: 30px;
     border: none;
   }
+
   .large-header-img {
     width: 100%;
     margin: 10px auto 20px auto;
   }
+
   .transaction-div {
     flex-direction: column;
     width: 100%;
     padding: 5px;
     margin: 5px auto 30px auto;
   }
+
   .transaction-div-title {
     font-size: 20px;
   }
+
   .transaction-card {
     flex-direction: column;
     width: 100%;
     margin: 5px auto;
   }
+
   .bottom-row-btns-div {
     width: 100%;
     flex-direction: column;
     text-align: center;
   }
+
   .subheader-btn {
     margin: 15px auto;
     width: 90%;
@@ -4409,6 +4977,7 @@ span.input-range__label.input-range__label--value
     padding: 0;
     border: none;
   }
+
   .explore-page .subheader-btn {
     margin-bottom: 20px;
   }
@@ -4416,38 +4985,49 @@ span.input-range__label.input-range__label--value
   .text-animate h1 {
     font-size: 22px;
   }
+
   .raffles-page .leaderboard-card-div .ending-soon,
   .raffles-page .leaderboard-card-div .raffle-data-box {
     width: 100%;
   }
+
   .raffles-page .min-menu-div {
     flex-wrap: wrap;
     gap: 10px;
   }
+
   .nft-page .nft-token-row-card {
     width: 100%;
   }
+
   .text-animate h4 {
     text-align: center;
   }
+
   .redeem-prizes-page .prizes_container .prizes-card .prize-name {
     width: 100%;
   }
+
   .earn-token .earn-affiliate-card .earn-card-box {
     width: 100%;
   }
+
   .earn-token {
     gap: 20px;
   }
+
   .earn-token .earn-free-tokens-desc {
     padding: 0 !important;
   }
+
   .earn-token .earn-free-tokens-desc-div:hover::before {
     display: none;
   }
+
   .raffles-page .min-menu-div .min-menu-btn {
     margin: 0;
   }
+
   .no-page img.imageAnimation {
     margin: 0;
     width: 100px;
@@ -4466,45 +5046,56 @@ span.input-range__label.input-range__label--value
     font-weight: 600;
     color: #fbff12;
   }
+
   .pageImgContainer {
     font-size: 28px;
   }
+
   .earn-token .prizes-card .additional-info-div .daily-reward-bag-div {
     flex-wrap: wrap;
     gap: 20px;
     margin: 0;
     padding-top: 20px;
   }
+
   .earn-token .bordered-section .leaderboard-card-div {
     padding: 20px;
   }
+
   .earn-token .leaderboard-row {
     padding: 10px;
     justify-content: center;
   }
+
   .earn-token .prizes-card .next-claim-div {
     width: 100%;
     font-size: 18px;
   }
+
   .earn-token .prizes-card .additional-info-div .daily-rewards-bag-card img {
     width: 100px;
   }
+
   .earn-token .prizes-card {
     border: none;
     padding: 0;
   }
+
   .earn-token .earn-card-box .affiliate-card-row p {
     text-align: center;
   }
+
   .earn-token .earn-card-box .affiliate-card-row {
     align-items: center;
   }
+
   .earn-token .leaderboard-row .leaderboard-left {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 10px;
   }
+
   .earn-token .earn-free-tokens-desc-div {
     margin: 20px 0;
   }
@@ -4512,35 +5103,41 @@ span.input-range__label.input-range__label--value
   .earn-token .leaderboard-row p {
     text-align: center;
   }
+
   .earn-token .prizes-card .additional-info-div {
     width: 100%;
     margin: 0 auto;
     margin-bottom: 20px;
   }
+
   .nft-page .nft-card-grid p {
     text-align: center;
   }
-  .my-wallet-page
-    .wallet-casino-profile-div
-    .crypto-balance-div
-    .claim-pending-div {
+
+  .my-wallet-page .wallet-casino-profile-div .crypto-balance-div .claim-pending-div {
     margin-top: 10px;
   }
+
   .my-wallet-page .flex-row {
     margin: 0;
   }
+
   .my-wallet-page .transaction-div {
     padding: 20px;
   }
+
   .my-wallet-page .transaction-card-grid {
     margin-bottom: 20px;
   }
+
   .redeem-prizes-page .page-nav-header-btns-subrow {
     gap: 15px;
   }
+
   .crypto-card-grid {
     flex-wrap: wrap;
   }
+
   .wallet-casino-top {
     flex-wrap: wrap;
   }
@@ -4551,33 +5148,41 @@ span.input-range__label.input-range__label--value
     max-width: 100%;
     padding-top: 0;
   }
+
   .page-nav-header-btns-row {
     gap: 10px;
   }
+
   .wallet button {
     gap: 6px !important;
     padding: 8px 6px !important;
     min-width: 160px !important;
   }
+
   .page-nav-header-subbtn {
     width: 48%;
     margin: 0;
   }
+
   .header-action a {
     width: 35px;
     height: 35px;
   }
+
   .icon-links {
     left: 56px;
     gap: 2px;
   }
+
   .wallet {
     margin-top: 6px;
     max-width: 170px !important;
   }
+
   .menu-logo-img {
     width: 60px;
   }
+
   .page-nav-header-btns-subrow {
     gap: 10px;
   }
@@ -4588,6 +5193,7 @@ span.input-range__label.input-range__label--value
     background-color: transparent;
     font-size: 16px;
   }
+
   .prizes-chip-count {
     margin-bottom: 10px;
     font-weight: 600;
