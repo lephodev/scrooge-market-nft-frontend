@@ -1106,7 +1106,7 @@ function RedeemPrizes() {
                                   *Amount received is calculated at time of
                                   redemption and may vary from the amount
                                   displayed.<br></br>
-                                  *Value received on each item will be 2% less
+                                  *Value received on each item will be 1% less
                                   to cover Blockchain Fees.
                                 </div>
                               ) : (
