@@ -67,7 +67,7 @@ const Layout = ({ children }) => {
 
     window.addEventListener("beforeunload", disconnect);
     return () => window.removeEventListener("beforeunload", disconnect);
-  }, []);
+  }, [disconnect]);
 
   const [active, setActive] = useState(null);
   const handleclick = (value) => {
