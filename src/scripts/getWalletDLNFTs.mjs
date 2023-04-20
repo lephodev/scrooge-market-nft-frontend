@@ -314,8 +314,7 @@ export default function GetWalletDLNFTs() {
                       Monthly Claimable Amount:{" "}
                       <span>
                         {(
-                          1500 *
-                          (nft.metadata.attributes[12].value / 100)
+                          500-nft.metadata.attributes[11].value
                         ).toFixed(0)}{" "}
                         Tokens
                       </span>
@@ -338,8 +337,7 @@ export default function GetWalletDLNFTs() {
                       Monthly Claimable Amount:{" "}
                       <span>
                         {(
-                          1500 *
-                          (nft.metadata.attributes[12].value / 100)
+                          500 -nft.metadata.attributes[11].value
                         ).toFixed(0)}{" "}
                         Tokens
                       </span>
@@ -361,8 +359,7 @@ export default function GetWalletDLNFTs() {
                       Monthly Claimable Amount:{" "}
                       <span>
                         {(
-                          1500 *
-                          (nft.metadata.attributes[12].value / 100)
+                          500 -nft.metadata.attributes[11].value
                         ).toFixed(0)}{" "}
                         Tokens
                       </span>
@@ -384,8 +381,7 @@ export default function GetWalletDLNFTs() {
                       Monthly Claimable Amount:{" "}
                       <span>
                         {(
-                          1500 *
-                          (nft.metadata.attributes[12].value / 100)
+                          500 -nft.metadata.attributes[11].value 
                         ).toFixed(0)}{" "}
                         Tokens
                       </span>
@@ -407,8 +403,7 @@ export default function GetWalletDLNFTs() {
                       Monthly Claimable Amount:{" "}
                       <span>
                         {(
-                          1500 *
-                          (nft.metadata.attributes[12].value / 100)
+                          500-nft.metadata.attributes[11].value
                         ).toFixed(0)}{" "}
                         Tokens
                       </span>
@@ -430,8 +425,7 @@ export default function GetWalletDLNFTs() {
                       Monthly Claimable Amount:{" "}
                       <span>
                         {(
-                          1500 *
-                          (nft.metadata.attributes[12].value / 100)
+                          500 -nft.metadata.attributes[11].value
                         ).toFixed(0)}{" "}
                         Tokens
                       </span>
@@ -441,7 +435,7 @@ export default function GetWalletDLNFTs() {
                   <span></span>
                 )}
               </div>
-              <div className='erc721Card-4th-col' style={{ display: "none" }}>
+              <div className='erc721Card-4th-col'>
                 {claimDateArray.length === nfts.length ? (
                   <>
                     {claimDateArray
