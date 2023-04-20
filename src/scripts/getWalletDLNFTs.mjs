@@ -169,7 +169,7 @@ export default function GetWalletDLNFTs() {
       //console.log('nft: ', id);
       setTimeout(async () => {
         await getNextClaimDate(id);
-      }, 900000000000000000);
+      }, 900);
     }
   }
 
