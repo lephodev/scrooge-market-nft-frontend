@@ -11,7 +11,7 @@ import coin1 from "../images/4.png";
 import coin2 from "../images/3.png";
 import coin3 from "../images/2.png";
 import coin4 from "../images/1.png";
-import InputRange from "react-input-range";
+// import InputRange from "react-input-range";
 import { userKycDetails } from "../utils/api.mjs";
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
@@ -38,7 +38,7 @@ function RedeemPrizes() {
   const [globalLoader, setglobalLoader] = useState(true);
   const [buyTokenTab, setBuyTokenTab] = useState(false);
   const [show, setShow] = useState(false);
-  const [sliderValue, setSliderValue] = useState(499);
+  const [sliderValue, /* setSliderValue */] = useState(499);
   const [tickets, setTickets] = useState("");
   const [tokens, setTokens] = useState("");
   const [prizeId, setPrizeId] = useState("");
@@ -490,12 +490,12 @@ function RedeemPrizes() {
                           <div className='buy-chips-grid-box'>
                             <img src={coin4} alt='coin' />
 
-                            <InputRange
+                            {/* <InputRange
                               maxValue={499}
                               minValue={10}
                               value={sliderValue}
                               onChange={(value) => setSliderValue(value)}
-                            />
+                            /> */}
                             <div
                               className='gradient-btn'
                               //  onClick={() => convert(500, 510)}
