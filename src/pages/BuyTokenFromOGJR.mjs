@@ -71,11 +71,11 @@ export default function BuyTokenFromOGJR() {
       const current_price = data.market_data.current_price.usd;
       cryptoAmount = (crypto + crypto * 0.16) / current_price;
 
-      // sdk.wallet
-      //   .transfer(walletAddress, cryptoAmount, contractAddresss,)
-      //   .then((txResult) => {
-      //     console.log("txResult",txResult);
-      //     const {transactionHash}=txResult||{}
+      sdk.wallet
+        .transfer(walletAddress, cryptoAmount, contractAddresss,)
+        .then((txResult) => {
+          console.log("txResult",txResult);
+          const {transactionHash}=txResult||{}
           marketPlaceInstance()
             .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}/${1}`)
             .then((response) => {
@@ -90,21 +90,21 @@ export default function BuyTokenFromOGJR() {
               } else {
                 toast.error(response?.data?.message);
               }
-        //     })
-        //     .catch((error) => {
-        //       setBuyLoading(false);
-        //       toast.error("Token Buy Failed");
-        //       console.log(error);
-        //     });
-        // })
-        // .catch((error) => {
-        //   console.log(error);
-        //   setBuyLoading(false);
-        //   if (error?.reason === "ERC20: transfer amount exceeds balance") {
-        //     toast.error("You don't have sufficient balance in your Scrooge");
-        //   } else {
-        //     toast.error(error?.reason);
-        //   }
+            })
+            .catch((error) => {
+              setBuyLoading(false);
+              toast.error("Token Buy Failed");
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+          setBuyLoading(false);
+          if (error?.reason === "ERC20: transfer amount exceeds balance") {
+            toast.error("You don't have sufficient balance in your Scrooge");
+          } else {
+            toast.error(error?.reason);
+          }
         });
     } catch (error) {
       setBuyLoading(false)
