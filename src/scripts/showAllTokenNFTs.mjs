@@ -67,7 +67,7 @@ export default function ShowAllTokenNFTs() {
       );
       console.log();
       const buyout = await contract.buyoutListing(token_id, qty);
-      console.log("buyoutbuyoutbuyout", buyout);
+     console.log("buyoutbuyoutbuyout", buyout);
       marketPlaceInstance()
         .post(`/getFreeTokens`, {
           address: address,
@@ -78,6 +78,7 @@ export default function ShowAllTokenNFTs() {
         })
         .then((data) => {
           console.log("data",data);
+          if(data?.data?.success){
           setUser(data?.data?.user)
           toast.success(
             "You have successfully purchased your NFT and " +
@@ -87,6 +88,12 @@ export default function ShowAllTokenNFTs() {
           );
           setBuyLoading(false);
           setBuySuccess(true);
+          }
+          else {
+            setBuyLoading(false);
+            toast.error(data?.data?.message);
+          }
+          
         });
     } catch (err) {
       console.log("err", err);
