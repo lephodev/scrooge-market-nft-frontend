@@ -17,6 +17,8 @@ import { useReward } from "react-rewards";
 
 export default function BuyTokenFromOGJR() {
   const { user,  setUser } = useContext(AuthContext);
+  const [selectedDropdown, setSelectedDropdown] = useState("");
+
   const [buyLoading, setBuyLoading] = useState(false);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
@@ -113,6 +115,10 @@ export default function BuyTokenFromOGJR() {
       console.log("errordata", error);
     }
   };
+
+  const handleChange=(value)=>{
+    setSelectedDropdown(value);
+  }
   return (
     <Layout>
       <main className='main redeem-prizes-page'>
@@ -142,25 +148,25 @@ export default function BuyTokenFromOGJR() {
            
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic-transition">
-                {"Select"}
+              {!selectedDropdown ? "select" : selectedDropdown}
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
                 <Dropdown.Item
                   eventKey="busd"
-                  // onClick={() => handleTransactionChange("")}
+                  onClick={() => handleChange("BUSD")}
                 >
                   BUSD
                 </Dropdown.Item>
                 <Dropdown.Item
                   eventKey="og"
-                  // onClick={() => handleTransactionChange("poker")}
+                  onClick={() => handleChange("Scrooge")}
                 >
                   Scrooge
                 </Dropdown.Item>
                 <Dropdown.Item
                   eventKey="jr"
-                  // onClick={() => handleTransactionChange("poker")}
+                   onClick={() => handleChange("Scrooge JR")}
                 >
                   Scrooge JR
                 </Dropdown.Item>
