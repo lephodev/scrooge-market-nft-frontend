@@ -12,7 +12,8 @@ import { DLGate } from "./components/DLGate";
 import Home from "./pages/Home.mjs";
 import NoPage from "./pages/NoPage.mjs";
 import Login from "./pages/Login.mjs";
-import NFTTokens from "./pages/NFT-Tokens.mjs";
+// import NFTTokens from "./pages/NFT-Tokens.mjs";
+import CryptoToGC from "./pages/CryptoToGC.mjs";
 import MyWallet from "./pages/MyWallet.mjs";
 import CreateListing from "./pages/CreateListing.mjs";
 import Contact from "./pages/Contact.mjs";
@@ -21,7 +22,7 @@ import Terms from "./pages/TermsandConditions.mjs";
 import Explore from "./pages/Explore.mjs";
 import CreatePost from "./pages/CreatePosts.mjs";
 import BlogPosts from "./pages/BlogPosts.mjs";
-import RedeemNFTs from "./pages/RedeemNFTs.mjs";
+// import RedeemNFTs from "./pages/RedeemNFTs.mjs";
 import RedeemPrizes from "./pages/RedeemPrizes.mjs";
 import HolderClaimChips from "./pages/HolderClaimChips.mjs";
 import DLClaimTokens from "./pages/DLClaimTokens.mjs";
@@ -129,9 +130,13 @@ export default function App() {
                   path='/my-wallet'
                   element={<ProtectedRoute component={<MyWallet />} />}
                 />
-                <Route
+                {/* <Route
                   path='/redeem-nfts'
                   element={<ProtectedRoute component={<RedeemNFTs />} />}
+                /> */}
+                <Route
+                  path='/crypto-to-gc'
+                  element={<ProtectedRoute component={<CryptoToGC />} />}
                 />
                 <Route
                   path='/redeem-prizes'
@@ -182,7 +187,7 @@ export default function App() {
                 <Route path='/create-listing' element={<CreateListing />} />
                 <Route path='/blog-posts' element={<BlogPosts />} />
                 <Route path='/create-posts' element={<CreatePost />} />
-                <Route path='/nft-tokens' element={<NFTTokens />} />
+                {/* <Route path='/nft-tokens' element={<NFTTokens />} /> */}
                 <Route path='/payment' element={<PaymentSuccess />} />
                 <Route path='/vip' element={<NoPage />} />
                 <Route path='/*' element={<NoPage />} />

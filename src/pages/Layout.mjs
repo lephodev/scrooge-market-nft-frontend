@@ -94,8 +94,11 @@ const Layout = ({ children }) => {
 
             <div className='header-menu'>
               <ul>
-                <li>
+                {/* <li>
                   <Link to='/nft-tokens'>Casino NFT Shop</Link>
+                </li> */}
+                <li>
+                  <Link to='/crypto-to-gc'>Crypto To GC</Link>
                 </li>
                 <li>
                   <Link to='/claim-free-tokens'>Claim Monthly Tokens</Link>
@@ -287,11 +290,17 @@ const Layout = ({ children }) => {
                   <img src={TophatIconBadge} alt='logo' />
                 </Link>
               </li>
-              <li
+              {/* <li
                 onClick={() => handleclick("/nft-tokens")}
                 className={active && active === "/nft-tokens" ? "active" : ""}>
                 <Link to='/nft-tokens'>
-                  {/* <img src={StoreIconBadge} alt='shop casino NFTs' /> */}
+                  <StoreSvg />
+                </Link>
+              </li> */}
+              <li
+                onClick={() => handleclick("/nft-tokens")}
+                className={active && active === "/nft-tokens" ? "active" : ""}>
+                <Link to='/crypto-to-gc'>
                   <StoreSvg />
                 </Link>
               </li>
