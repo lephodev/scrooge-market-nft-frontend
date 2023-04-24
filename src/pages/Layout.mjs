@@ -107,7 +107,7 @@ const Layout = ({ children }) => {
                   <Link to='/redeem-prizes'>Redeem Prizes</Link>
                 </li>
                 <li>
-                  <Link to='/earn-tokens'>Earn Free Tokens</Link>
+                  <Link to='/earn-free-coins/tokens'>Earn Free coins/Tokens</Link>
                 </li>
               </ul>
             </div>
