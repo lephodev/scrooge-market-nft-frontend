@@ -75,7 +75,13 @@ function DailyRewards() {
         `/claimDailyRewards/${user.id}`
       );
       console.log("datatatta", data);
-      notify("Tokens Claimed: " + data.data);
+      const {success,message}=data?.data
+      if(success){
+        toast.success(message);
+      }
+      else {
+      toast.error(message);
+      }
       setBuyLoading(false);
       reward();
       zzz();
