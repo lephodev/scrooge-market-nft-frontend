@@ -7,10 +7,44 @@ body {
     font-family: "Poppins", sans-serif !important;
     overflow-x: hidden;
 }
-div#root img {
+
+.maintenance-page {
     width: 100vw;
     height: 100vh;
-    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.maintenancePage-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+    /* margin-left: 5rem; */
+    max-width: 35%;
+}
+
+.maintenancePage-content h1 {
+    font-size: 4rem;
+    color: #fff;
+    margin: 0;
+    line-height: 74px;
+}
+
+.maintenancePage-content h1 span {
+    color: #f9ff00;
+}
+
+.maintenancePage-content p {
+    margin: 0;
+    font-size: 1rem;
+    color: #ddd;
+}
+
+.maintenance-page img {
+    width: 50%;
 }
 
 .pink {
@@ -28,4 +62,33 @@ div#root img {
     font-size: 24px;
     border: 4px solid #FBFF12;
     border-radius: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .maintenancePage-content h1 {
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .maintenance-page {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .maintenancePage-content {
+        max-width: 80%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .maintenance-page img {
+        width: 90%;
+    }
+
+    .maintenancePage-content h1 {
+        font-size: 2rem;
+        line-height: 46px;
+    }
 }
