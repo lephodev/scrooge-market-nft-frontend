@@ -8,6 +8,7 @@ import coin3 from "../images/2.png";
 import coin4 from "../images/1.png";
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
+import { Dropdown} from "react-bootstrap";
 
 import { useAddress,useSDK } from "@thirdweb-dev/react";
 import { marketPlaceInstance, authInstance } from "../config/axios.js";
@@ -72,12 +73,14 @@ export default function BuyTokenFromOGJR() {
       cryptoAmount = (crypto + crypto * 0.16) / current_price;
 
       sdk.wallet
-        .transfer(walletAddress, cryptoAmount, contractAddresss)
+        .transfer(walletAddress, cryptoAmount, contractAddresss,)
         .then((txResult) => {
           console.log("txResult",txResult);
+          const {transactionHash}=txResult||{}
           marketPlaceInstance()
-            .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}`)
+            .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}/${1}`)
             .then((response) => {
+              console.log("responseresponseresponse",response);
               setBuyLoading(false);
               if (response.data.success) {
                 console.log("");
@@ -86,7 +89,7 @@ export default function BuyTokenFromOGJR() {
                 reward();
                 getUserDataInstant();
               } else {
-                toast.error("Failed to buy");
+                toast.error(response?.data?.message);
               }
             })
             .catch((error) => {
@@ -136,6 +139,34 @@ export default function BuyTokenFromOGJR() {
               Disclaimer : +16% will be added to the transaction to cover
               blockchain fees and contract taxes!
             </div>
+           
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic-transition">
+                {"Select"}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item
+                  eventKey="busd"
+                  // onClick={() => handleTransactionChange("")}
+                >
+                  BUSD
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="og"
+                  // onClick={() => handleTransactionChange("poker")}
+                >
+                  Scrooge
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="jr"
+                  // onClick={() => handleTransactionChange("poker")}
+                >
+                  Scrooge JR
+                </Dropdown.Item>
+                
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
           <div className='buy-chips-content'>
             <div className='buy-chips-grid'>

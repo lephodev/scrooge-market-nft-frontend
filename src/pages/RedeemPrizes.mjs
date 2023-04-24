@@ -24,7 +24,7 @@ function RedeemPrizes() {
   });
   let prizesReceived = 0;
   const { user, loading, setUser } = useContext(AuthContext);
-  console.log("user", user, loading);
+  console.log( loading);
 
   const [redeemLoading, setRedeemLoading] = useState(false);
   const [redeemSuccess, setRedeemSuccess] = useState(false);
@@ -82,7 +82,7 @@ function RedeemPrizes() {
     if (prizes.length < 2) {
       try {
         const res = await marketPlaceInstance().get(`/getPrizes`);
-        console.log("res", res);
+        // console.log("res", res);
         if (res.data) {
           if (prizes.length < 2) {
             setPrizes(res.data || []);
@@ -212,7 +212,6 @@ function RedeemPrizes() {
       .then((res) => {
         console.log("convertedData", res);
         if (res.data.user) {
-          console.log("user", res.data);
           setUser({
             ...res.data.user,
           });
@@ -223,24 +222,24 @@ function RedeemPrizes() {
       });
   };
   const RedeemPrize = async (prize_id) => {
-    console.log("prize_id", prize_id);
+    // console.log("prize_id", prize_id);
     if (!user)
       return toast.error("Please login first", { containerId: "login" });
     if (!address)
       return toast.error("Please connect wallet first", {
         containerId: "connect-wallet",
       });
-    console.log("user", user, prize_id);
-    console.log("add", address);
-    console.log("user.id", user.id);
-    console.log("prize_id", prize_id);
-    console.log("address", address);
+    // console.log("user", user, prize_id);
+    // console.log("add", address);
+    // console.log("user.id", user.id);
+    // console.log("prize_id", prize_id);
+    // console.log("address", address);
     setRedeemLoading(true);
     marketPlaceInstance()
       .get(`/redeemPrize/${address}/${user.id}/${prize_id}`)
       .then((data) => {
         setPrizeId("");
-        console.log("redeemdata", data);
+        // console.log("redeemdata", data);
         setRedeemLoading(false);
         if (!data.data.success) {
           toast.error("ERROR! - " + data.data.message, {
@@ -262,13 +261,14 @@ function RedeemPrizes() {
   };
 
   const convert = async (ticketPrice, tokenPrice) => {
-    console.log("convertPrice", ticketPrice, tokenPrice);
+    // console.log("convertPrice", ticketPrice, tokenPrice);
     try {
       if (parseInt(ticketPrice) > 0) {
         if (user?.ticket >= parseInt(ticketPrice)) {
           const res = await marketPlaceInstance().get(
             `/coverttickettotoken/${ticketPrice}/${tokenPrice}/${user.id}`
           );
+          console.log("res272",res);
           const { message, code, data } = res.data;
           setTickets("");
           setTokens("");
@@ -277,6 +277,11 @@ function RedeemPrizes() {
             getUserDataInstant();
             toast.success(message, { id: "A" });
           }
+          else {
+            toast.error(message, { id: "A" });
+
+          }
+          
         } else {
           toast.error("Not sufficent tokens", { id: "A" });
         }
@@ -631,7 +636,7 @@ function RedeemPrizes() {
                           )
                           .map((prize) => (
                             <div className='prizes-card' key={prize._id}>
-                              {console.log("prize", prize._id)}
+                              {/* {console.log("prize", prize._id)} */}
                               {!prize.isDynamic ? (
                                 <div className='prize-name bold text-animate'>
                                   <h4>{prize.name}</h4>
