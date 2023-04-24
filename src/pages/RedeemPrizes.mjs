@@ -38,7 +38,7 @@ function RedeemPrizes() {
   const [globalLoader, setglobalLoader] = useState(true);
   const [buyTokenTab, setBuyTokenTab] = useState(false);
   const [show, setShow] = useState(false);
-  const [sliderValue, /* setSliderValue */] = useState(499);
+  const [sliderValue /* setSliderValue */] = useState(499);
   const [tickets, setTickets] = useState("");
   const [tokens, setTokens] = useState("");
   const [prizeId, setPrizeId] = useState("");
@@ -406,13 +406,13 @@ function RedeemPrizes() {
                   )}
                 </div>
                 <div className='page-nav-header-btns-row'>
-                  <div className='new-btn'>
+                  {/* <div className='new-btn'>
                     <button
                       // className='page-nav-header-btn'
                       onClick={() => filterPrizes("Badges")}>
                       BADGES
                     </button>
-                  </div>
+                  </div> */}
                   <div className='new-btn'>
                     <button
                       // className='page-nav-header-btn'
@@ -631,6 +631,7 @@ function RedeemPrizes() {
                             (f) =>
                               f.redeem_action !== "burn" &&
                               f.category !== "Merch" &&
+                              f.category !== "Badges" &&
                               f.price !== 500
                           )
                           .map((prize) => (
