@@ -163,7 +163,7 @@ export default function App() {
                   }
                 />
                 <Route
-                  path='/earn-free-coins/tokens'
+                  path='/earn-tokens'
                   element={<ProtectedRoute component={<EarnTokens />} />}
                 />
                 <Route
