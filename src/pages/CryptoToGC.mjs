@@ -73,7 +73,7 @@ export default function CryptoToGC() {
     }
   }
 
-  const convert = async (busd, gc) => {
+  const convert = async (busd, gc,pid) => {
     console.log(busd);
     setBuyLoading(true);
     if (!address) {
@@ -87,9 +87,10 @@ export default function CryptoToGC() {
       ]);
       console.log("txResult", txResult);
       if (txResult.receipt) {
+        const {transactionHash}=txResult?.receipt||{}
         marketPlaceInstance()
           .get(
-            `convertCryptoToGoldCoin/${user?.id}/${address}/${txResult.receipt}/${busd}`
+            `convertCryptoToGoldCoin/${user?.id}/${address}/${transactionHash}/${pid}`
           )
           .then((response) => {
             setBuyLoading(false);
@@ -151,12 +152,14 @@ export default function CryptoToGC() {
             <div className='buy-chips-content'>
               <div className='buy-chips-grid'>
                 {allPrizes.map((prize) => (
+                  
                   <div className='buy-chips-grid-box'>
                     <img src={coin3} alt='coin' />
+                    {console.log("prize",prize)}
                     <div
                       className='gradient-btn'
                       onClick={() =>
-                        convert(prize.priceInBUSD, prize.gcAmount)
+                        convert(prize.priceInBUSD, prize.gcAmount,prize._id)
                       }>
                       <span>
                         {prize.priceInBUSD} BUSD gets you {prize.gcAmount} GOLD
