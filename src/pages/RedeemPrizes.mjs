@@ -24,13 +24,14 @@ function RedeemPrizes() {
   });
   let prizesReceived = 0;
   const { user, loading, setUser } = useContext(AuthContext);
-  console.log( loading);
+  console.log(loading);
 
   const [redeemLoading, setRedeemLoading] = useState(false);
   const [redeemSuccess, setRedeemSuccess] = useState(false);
   const [allPrizes, setAllPrizes] = useState([]);
   const [cryptoTotoken,setCryptoToToken]=useState([])
   const [prizes, setPrizes] = useState([]);
+  const [ticketPrizes, setTicketPrizes] = useState([]);
   const [disable, setDisable] = useState(false);
   const [prizesLoading, setPrizesLoading] = useState([]);
   const [currentPriceOG, setCurrentPriceOG] = useState("Loading...");
@@ -39,7 +40,7 @@ function RedeemPrizes() {
   const [globalLoader, setglobalLoader] = useState(true);
   const [buyTokenTab, setBuyTokenTab] = useState(false);
   const [show, setShow] = useState(false);
-  const [sliderValue /* setSliderValue */] = useState(499);
+  // const [sliderValue /* setSliderValue */] = useState(499);
   const [tickets, setTickets] = useState("");
   const [tokens, setTokens] = useState("");
   const [prizeId, setPrizeId] = useState("");
@@ -78,6 +79,24 @@ function RedeemPrizes() {
     handleClose();
   };
 
+  async function getTicketToTokenPrizes() {
+    setPrizesLoading(true);
+    if (prizes.length < 2) {
+      try {
+        const res = await marketPlaceInstance().get(`/getTicketToToken`);
+        console.log("restikettotoken", res);
+        if (res.data) {
+          if (prizes.length < 2) {
+            setPrizesLoading(false);
+            setTicketPrizes(res.data || []);
+          }
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
   async function getPrizes() {
     setPrizesLoading(true);
     if (prizes.length < 2) {
@@ -101,6 +120,7 @@ function RedeemPrizes() {
     getCoinGeckoDataOG();
     getCoinGeckoDataJR();
     if (prizesReceived === 0) {
+      getTicketToTokenPrizes();
       getPrizes();
     }
     prizesReceived = 1;
@@ -269,7 +289,7 @@ function RedeemPrizes() {
           const res = await marketPlaceInstance().get(
             `/coverttickettotoken/${ticketPrice}/${tokenPrice}/${user.id}`
           );
-          console.log("res272",res);
+          console.log("res272", res);
           const { message, code, data } = res.data;
           setTickets("");
           setTokens("");
@@ -277,12 +297,9 @@ function RedeemPrizes() {
             console.log("datattat", data);
             getUserDataInstant();
             toast.success(message, { id: "A" });
-          }
-          else {
+          } else {
             toast.error(message, { id: "A" });
-
           }
-          
         } else {
           toast.error("Not sufficent tokens", { id: "A" });
         }
@@ -517,15 +534,15 @@ function RedeemPrizes() {
                       })} */}
                       <div className='buy-chips-content'>
                         <div className='buy-chips-grid'>
-                          <div className='buy-chips-grid-box'>
+                          {/* <div className='buy-chips-grid-box'>
                             <img src={coin4} alt='coin' />
 
-                            {/* <InputRange
+                            <InputRange
                               maxValue={499}
                               minValue={10}
                               value={sliderValue}
                               onChange={(value) => setSliderValue(value)}
-                            /> */}
+                            />
                             <div
                               className='gradient-btn'
                               //  onClick={() => convert(500, 510)}
@@ -537,109 +554,41 @@ function RedeemPrizes() {
                                 tokens{" "}
                               </span>
                             </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            <img src={coin4} alt='coin' />
-                            <div className='input-range'></div>
+                          </div> */}
+                          {ticketPrizes.map((prize) => (
                             <div
-                              className='gradient-btn'
-                              //  onClick={() => convert(500, 510)}
-                              onClick={() => handleShow(500, 510, "")}>
-                              <span>500 tickets gets you 510 tokens </span>
+                              key={prize.ticket}
+                              className='buy-chips-grid-box'>
+                              {(prize.ticket === "500" ||
+                                prize.ticket === "1000") && (
+                                <img src={coin4} alt='coin' />
+                              )}
+                              {(prize.ticket === "25000" ||
+                                prize.ticket === "50000") && (
+                                <img src={coin1} alt='coin' />
+                              )}
+                              {(prize.ticket === "2500" ||
+                                prize.ticket === "5000") && (
+                                <img src={coin3} alt='coin' />
+                              )}
+                              {(prize.ticket === "10000" ||
+                                prize.ticket === "20000") && (
+                                <img src={coin2} alt='coin' />
+                              )}
+                              {/* <div className='input-range'></div> */}
+                              <div
+                                className='gradient-btn'
+                                //  onClick={() => convert(500, 510)}
+                                onClick={() =>
+                                  handleShow(prize.ticket, prize.token, "")
+                                }>
+                                <span>
+                                  {prize.ticket} tickets gets you {prize.token}{" "}
+                                  tokens{" "}
+                                </span>
+                              </div>
                             </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>25000 </p> */}
-                            <img src={coin3} alt='coin' />
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(1000, 1025)}
-                              onClick={() => handleShow(1000, 1025, "")}>
-                              <span>1000 tickets gets you 1025 tokens </span>
-                            </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>20000 </p> */}
-
-                            <div className='chips-images'>
-                              <img src={coin4} alt='coin' />
-                              <img src={coin3} alt='coin' />
-                            </div>
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(2500, 2600)}
-                              onClick={() => handleShow(2500, 2600, "")}>
-                              <span>2500 tickets gets you 2600 tokens </span>
-                            </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>10000 </p> */}
-                            <img src={coin2} alt='coin' />
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(5000, 5250)}
-                              onClick={() => handleShow(5000, 5250, "")}>
-                              <span>5000 tickets gets you 5250 tokens </span>
-                            </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>5000 </p> */}
-                            <img src={coin1} alt='coin' />
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(10000, 10600)}
-                              onClick={() => handleShow(10000, 10600, "")}>
-                              <span>10000 tickets gets you 10600 tokens </span>
-                            </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>2500 </p> */}
-
-                            <div className='chips-images'>
-                              <img src={coin2} alt='coin' />
-                              <img src={coin3} alt='coin' />
-                            </div>
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(20000, 21400)}
-                              onClick={() => handleShow(20000, 21400, "")}>
-                              <span>20000 tickets gets you 21400 tokens </span>
-                            </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>1000 </p> */}
-                            <div className='chips-images'>
-                              <img src={coin2} alt='coin' />
-                              <img src={coin2} alt='coin' />
-                            </div>
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(25000, 27000)}
-                              onClick={() => handleShow(25000, 27000, "")}>
-                              <span>25000 tickets gets you 27000 tokens </span>
-                            </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>500 </p> */}
-
-                            <div className='chips-images'>
-                              <img src={coin1} alt='coin' />
-                              <img src={coin1} alt='coin' />
-                            </div>
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(50000, 55000)}
-                              onClick={() => handleShow(50000, 55000, "")}>
-                              <span>50000 tickets gets you 55000 tokens </span>
-                            </div>
-                          </div>
+                          ))}
                         </div>
                       </div>
                     </>
