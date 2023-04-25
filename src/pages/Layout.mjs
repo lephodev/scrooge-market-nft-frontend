@@ -103,9 +103,9 @@ const Layout = ({ children }) => {
                 <li>
                   <Link to='/claim-free-tokens'>Claim Monthly Tokens</Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to='/crypto-to-tokens'>Crypto To Token</Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to='/redeem-prizes'>Redeem Prizes</Link>
                 </li>
