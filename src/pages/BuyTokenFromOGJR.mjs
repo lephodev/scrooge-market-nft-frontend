@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Layout from "./Layout.mjs";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 // import coin1 from "../images/4.png";
@@ -52,6 +52,8 @@ export default function BuyTokenFromOGJR() {
       });
   };
 
+  
+
   const convert = async (type, crypto, tokens) => {
     let contractAddresss, walletAddress, cryptoAmount;
     setBuyLoading(true);
@@ -78,9 +80,10 @@ export default function BuyTokenFromOGJR() {
         .transfer(walletAddress, cryptoAmount, contractAddresss,)
         .then((txResult) => {
           console.log("txResult",txResult);
-          const {transactionHash}=txResult||{}
+          const {transactionHash}=txResult?.receipt||{}
+          console.log("transactionHash",transactionHash);
           marketPlaceInstance()
-            .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}/${1}`)
+            .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}/${transactionHash}`)
             .then((response) => {
               console.log("responseresponseresponse",response);
               setBuyLoading(false);
