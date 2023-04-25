@@ -29,6 +29,7 @@ function RedeemPrizes() {
   const [redeemLoading, setRedeemLoading] = useState(false);
   const [redeemSuccess, setRedeemSuccess] = useState(false);
   const [allPrizes, setAllPrizes] = useState([]);
+  const [cryptoTotoken,setCryptoToToken]=useState([])
   const [prizes, setPrizes] = useState([]);
   const [ticketPrizes, setTicketPrizes] = useState([]);
   const [disable, setDisable] = useState(false);
@@ -332,6 +333,24 @@ function RedeemPrizes() {
     checkKYCStatus();
   }, []);
   // console.log("convertPrice",convertPrice);
+  // getTiketToTokenPackages
+  async function getTicketToTokenPackages() {
+    console.log("dfdfdfdfd");
+    try {
+      const res = await marketPlaceInstance().get(`/getTicketToTokenPackages`);
+      console.log("res", res);
+      if (res.data) {
+        // setAllPrizes(res.data || []);
+        setCryptoToToken(res.data||[])
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    getTicketToTokenPackages();
+  }, []);
 
   return (
     <Layout>
@@ -507,6 +526,12 @@ function RedeemPrizes() {
                 <div className='prizes-container'>
                   {showConvert && (
                     <>
+                    {console.log("cryptoTotoken512",cryptoTotoken)}
+                    {/* {cryptoTotoken?.map((el)=>{
+                      return (
+                        <>hhhh</>
+                      )
+                      })} */}
                       <div className='buy-chips-content'>
                         <div className='buy-chips-grid'>
                           {/* <div className='buy-chips-grid-box'>
