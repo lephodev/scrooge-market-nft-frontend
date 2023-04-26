@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import GetWalletCasinoNFTs from "../scripts/getWalletCasinoNFTs.mjs";
 import {
   ConnectWallet,
   useNetworkMismatch,
@@ -407,7 +406,7 @@ export default function MyWallet() {
             <span></span>
           )}
 
-          {!isMismatched && address && showCasinoNFTs ? (
+          {/* {!isMismatched && address && showCasinoNFTs ? (
             <div className='bottom-margin-100'>
               <div
                 className='close-btn-round-div'
@@ -424,7 +423,7 @@ export default function MyWallet() {
             </div>
           ) : (
             <span></span>
-          )}
+          )} */}
 
           <ShowBottomNavCards />
         </main>
