@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import WalletIcon from "../images/walletIcon.png";
 import PokerChips from "../images/pokerChips.png";
-import Casino from "../images/casino200.png";
+// import Casino from "../images/casino200.png";
 import "../styles/Home.css";
 import { scroogeClient } from "../config/keys.js";
 
 export default function ShowBottomNavCards() {
   return (
     <div className='grid'>
-      <Link to='/nft-tokens' className='card'>
+      {/* <Link to='/nft-tokens' className='card'>
         <h2>BUY CASINO NFTS &rarr;</h2>
         <p>
           Ready to step up to the table? Get everything you need to be a Scrooge
@@ -19,7 +19,7 @@ export default function ShowBottomNavCards() {
           src={Casino}
           alt='scrooge casino nft token packages'
         />
-      </Link>
+      </Link> */}
 
       <a href={scroogeClient} className='card' rel='noreferrer'>
         <h2>VISIT THE CASINO &rarr;</h2>

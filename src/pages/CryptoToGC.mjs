@@ -14,16 +14,19 @@ import {
   ConnectWallet,
   useContractWrite,
   useContract,
+  useNetworkMismatch,
 } from "@thirdweb-dev/react";
 import { marketPlaceInstance, authInstance } from "../config/axios.js";
 import { toast } from "react-toastify";
 import { useReward } from "react-rewards";
+import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 
 export default function CryptoToGC() {
   const { user, setUser } = useContext(AuthContext);
   const [prizesLoading, setPrizesLoading] = useState([]);
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
+  const isMismatched = useNetworkMismatch();
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
@@ -148,7 +151,7 @@ export default function CryptoToGC() {
               blockchain fees and contract taxes!
             </div>
           </div>
-          {address ? (
+          {isMismatched ? <SwitchNetworkBSC /> : address ? (
             <div className='buy-chips-content'>
               <div className='buy-chips-grid'>
                 {allPrizes.map((prize) => (
