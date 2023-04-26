@@ -1,16 +1,11 @@
 import {
   useAddress,
-  useOwnedNFTs,
   useContract,
   useBurnNFT,
 } from "@thirdweb-dev/react";
-import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import LoadingGif from "../images/loading1.gif";
-import LoadingPoker from "../images/scroogeHatLogo.png";
 
 import ReactModal from "react-modal";
-import { Tooltip } from "../pages/Layout.mjs";
 import { marketPlaceInstance } from "../config/axios.js";
 import AuthContext from "../context/authContext.ts";
 import { toast } from "react-toastify";
@@ -30,10 +25,9 @@ export default function GetWalletERC1155NFTs() {
     toast.success("🎩 " + message);
   }
   const { contract } = useContract(process.env.REACT_APP_BSC_MAINNET);
-  const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
   const { mutate: /* burnNft *//*  isLoadingBurn */ error } = useBurnNFT(contract);
 
-  const [burnloading, setBurnLoading] = useState(false);
+  const [setBurnLoading] = useState(false);
 
   if (error) {
     console.error("failed to burn nft", error);
@@ -190,22 +184,22 @@ export default function GetWalletERC1155NFTs() {
           </button>
         </div>
       </ReactModal>
-      {burnloading ? (
+      {/* {burnloading ? (
         <div className='loading-img-div'>
           <img className='loading-img' src={LoadingGif} alt='Loading...' />
         </div>
       ) : (
         <></>
-      )}
-      <div
+      )} */}
+      {/* <div
         className='
        pageTitless 
       text-animate'
       >
         <h1>My Scrooge Casino NFTs</h1>
-      </div>
+      </div> */}
 
-      {isLoading ? (
+      {/* {isLoading ? (
         <div className='pageImgContainer'>
           <img src={LoadingPoker} alt='game' className='imageAnimation' />
           <div className='loading-txt pulse'>LOADING WALLET...</div>
@@ -232,13 +226,12 @@ export default function GetWalletERC1155NFTs() {
             </div>
           ))}
         </div>
-      )}
+      )} */}
 
-      <div className='bottom-row-btns-div'>
+      {/* <div className='bottom-row-btns-div'>
         <Link to='/nft-tokens'>
           <div className='new-btn'>
             <button
-            //  className='subheader-btn'
             >
               BUY MORE NFTS
             </button>
@@ -247,13 +240,12 @@ export default function GetWalletERC1155NFTs() {
         <Link to='/redeem-prizes'>
           <div className='new-btn'>
             <button
-            //  className='subheader-btn'
             >
               REDEEM MORE REWARDS
             </button>
           </div>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }
