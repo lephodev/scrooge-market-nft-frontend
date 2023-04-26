@@ -104,7 +104,7 @@ function DailyRewards() {
     <>
       {!loader && !fullDailyRewards ? (
         <>
-          <div className='daily-reward-card-div'>
+          {/* <div className='daily-reward-card-div'>
             {console.log("nextclaimdate", nextClaimDate)}
             <div className='inlineTitle'>DAILY REWARDS</div>
             <div className='rewards'>
@@ -123,18 +123,12 @@ function DailyRewards() {
             <div className='available-btn'>
               <span>Available:</span>{" "}
               <Countdown date={nextClaimDate.nextClaimDate}>
-                {/* <button
-                          className='button-inline'
-                          style={{ marginLeft: "20px" }}
-                          onClick={() => claimTokens()}>
-                          Claim NOW
-                        </button> */}
                 <div className='new-btn'>
                   <button onClick={() => claimTokens()}>Claim NOW</button>
                 </div>
               </Countdown>
             </div>
-          </div>
+          </div> */}
         </>
       ) : (
         <>
