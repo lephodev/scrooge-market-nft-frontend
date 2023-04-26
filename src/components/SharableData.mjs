@@ -8,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import DiceGif from "../images/diceGif.gif";
 import AffiliateLeaderboard from "../components/AffiliateLeaderboard.mjs";
-import DailyRewards from "../components/DailyRewards.mjs";
 import profile from "../images/profile.png";
 import {
   EmailShareButton,
@@ -431,7 +430,7 @@ const handleShareError = () => {
         <></>
       )}
       {console.log(affUser?.success)}
-      {user && affUser?.success && showDailyRewards ? (
+      {/* {user && affUser?.success && showDailyRewards ? (
         <>
           <div className='close-btn-round-div'>
             <div
@@ -445,7 +444,7 @@ const handleShareError = () => {
         </>
       ) : (
         <></>
-      )}
+      )} */}
 
       {showAffLeaderboards ? (
         <>
