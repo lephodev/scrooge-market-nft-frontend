@@ -2090,8 +2090,9 @@ select {
 }
 
 .header-nav-logo {
-  max-width: 180px;
+  max-width: 92px;
   width: 100%;
+  cursor: pointer;
 }
 
 .header-nav {
