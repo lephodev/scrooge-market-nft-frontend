@@ -30,7 +30,7 @@ export default function CryptoToGC() {
   const [prizesLoading, setPrizesLoading] = useState([]);
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
-  const [selectedDropdown, setSelectedDropdown] = useState("");
+  const [selectedDropdown, setSelectedDropdown] = useState("BUSD");
   const isMismatched = useNetworkMismatch();
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
@@ -163,12 +163,12 @@ export default function CryptoToGC() {
                 <h4>Purchased with</h4>
                 <Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  {!selectedDropdown ? "select" : selectedDropdown}
+                  {!selectedDropdown ? "BUSD" : selectedDropdown}
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1" onClick={()=>handleChange("Scrooge")}>Scrooge</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2" onClick={()=>handleChange("BUSD")}>BUSD</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3" onClick={()=>handleChange("Scrooge Jr")}>Scrooge Jr</Dropdown.Item>
+                    <Dropdown.Item  onClick={()=>handleChange("Scrooge")}>Scrooge</Dropdown.Item>
+                    <Dropdown.Item  onClick={()=>handleChange("BUSD")}>BUSD</Dropdown.Item>
+                    <Dropdown.Item  onClick={()=>handleChange("Scrooge Jr")}>Scrooge Jr</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
                 </div>
@@ -191,7 +191,7 @@ export default function CryptoToGC() {
                             )
                           }
                         >
-                          Buy BUSD {prize.priceInBUSD}
+                          <p>Buy {selectedDropdown}</p> <span>{prize.priceInBUSD}</span>
                         </Button>
                       </Card.Body>
                       <div className="goldPurchase-offers">Free ST 51.50</div>
