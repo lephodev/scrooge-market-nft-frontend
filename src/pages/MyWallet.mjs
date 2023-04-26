@@ -12,6 +12,7 @@ import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import ChainContext from "../context/Chain.ts";
 import Token from "../images/token.png";
+import GoldCoin from "../images/goldCoin.png";
 import Ticket from "../images/ticket.png";
 import ScroogeHatLogo from "../images/scroogeHatLogo.png";
 import scroogejr from "../images/scroogejr.jpeg";
@@ -248,6 +249,14 @@ export default function MyWallet() {
                         alt='Scrooge Casino balances'
                       />
                       TICKETS: {user?.ticket?.toLocaleString("en-US")}
+                    </div>
+                    <div className='token-ticket-row'>
+                      <img
+                        className='token-small'
+                        src={GoldCoin}
+                        alt='Scrooge Casino balances'
+                      />
+                      GOLD COIN: {user?.goldCoin?.toLocaleString("en-US")}
                     </div>
                   </div>
                 </div>
