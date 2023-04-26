@@ -87,7 +87,7 @@ const Layout = ({ children }) => {
         <div className='container'>
           <nav className='header-nav'>
             <div className='header-nav-logo'>
-              <Link to='/'>
+              <Link to={scroogeClient}>
                 <img src={Logo} alt='logo' className='menu-logo-img' />
               </Link>
             </div>
