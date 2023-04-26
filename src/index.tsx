@@ -145,7 +145,7 @@ export default function App() {
                   element={<ProtectedRoute component={<BuyTokenFromOGJR />} />}
                 />
                 <Route
-                  path='/earn-free-coins'
+                  path='/claim-free-tokens'
                   element={<ProtectedRoute component={<EarnFreeCoins />} />}
                 />
                 {/* <Route
