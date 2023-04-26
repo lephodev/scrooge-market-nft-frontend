@@ -86,10 +86,8 @@ const Layout = ({ children }) => {
       <div className='header'>
         <div className='container'>
           <nav className='header-nav'>
-            <div className='header-nav-logo'>
-              <Link to='/'>
+            <div className='header-nav-logo' onClick={() => window.open(scroogeClient, "_self")}>
                 <img src={Logo} alt='logo' className='menu-logo-img' />
-              </Link>
             </div>
 
             <div className='header-menu'>
@@ -131,9 +129,6 @@ const Layout = ({ children }) => {
                     alt='my wallet'
                   />
                 </Link> */}
-                <Link to={scroogeClient}>
-                  <HomeSVG />
-                </Link>
               </div>
               {console.log("currentPriceOG", currentPriceOG)}
               <div className='wallet'>

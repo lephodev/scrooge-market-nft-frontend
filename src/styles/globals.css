@@ -929,6 +929,27 @@ span.wallet-user-name {
   line-height: 1.5;
 }
 
+
+.tab-btn {
+  justify-content: center;
+  gap: 12px;
+  display: flex;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+.tab-btn button, .tab-btn button:hover, .tab-btn button:focus {
+  background: transparent;
+  border: 1px solid #4d4e4f;
+  font-size: 14px;
+  padding: 8px 20px;
+}
+button.active-btn.btn.btn-primary {
+  background: #fbff14;
+  color: black;
+  font-weight: 600;
+}
+
 @media screen and (max-width: 1200px) {
   .dlNft-grid .erc721Card-4th-col {
     width: 25%;
@@ -5294,6 +5315,12 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
 }
 
 @media screen and (max-width: 480px) {
+  .tab-btn button, .tab-btn button:hover, .tab-btn button:focus {
+    background: transparent;
+    border: 1px solid #4d4e4f;
+    font-size: 12px;
+    padding: 8px 8px;
+}
   .footer-info {
     max-width: 100%;
     padding-top: 0;

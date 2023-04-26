@@ -16,7 +16,6 @@ import { marketPlaceInstance } from "../config/axios.js";
 
 function DailyRewards() {
   const { user } = useContext(AuthContext);
-  console.log("useruser", user);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
@@ -24,14 +23,8 @@ function DailyRewards() {
   const [nextClaimDate, setNextClaimDate] = useState("Loading...");
   const [loader, setLoader] = useState(true);
   const [fullDailyRewards, setFullDailyRewards] = useState(false);
-  /*const [OGBalance, setOGBalance]=useState("Loading...");
-    const [currentPrice, setCurrentPrice]=useState("Loading...");
-    const [email, setEmail]=useState('');
-    const handleChange = event => {
-        setEmail(event.target.value);
-      };*/
+ 
   const address = useAddress();
-  //const isMismatched = useNetworkMismatch();
   function notify(message) {
     toast.success("🎩 " + message);
   }
@@ -109,7 +102,6 @@ function DailyRewards() {
 
   return (
     <>
-      {console.log("fullDR", fullDailyRewards)}
       {!loader && !fullDailyRewards ? (
         <>
           {/* <div className='daily-reward-card-div'>

@@ -39,21 +39,15 @@ export default function GetWalletDLNFTs() {
   const address = useAddress();
   const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("");
-  const [nfts, setNFTs] = useState([]);
-  const [tokensClaimDate, setTokensClaimDate] = useState([
-    { token_id: "", nextClaimDate: "" },
-  ]);
+ 
   const [claimDateArray, setClaimDateArray] = useState([]);
-  console.log(tokensClaimDate);
-  console.log(claimDateArray);
+
   const { contract } = useContract(
     "0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768"
   );
-  console.log("contracttttt", contract);
-  const { data: ownedNFTs, isLoading, error } = useOwnedNFTs(contract, address);
-  //setNFTs(ownedNFTs);
-  console.log("data", ownedNFTs, isLoading);
-  console.log("error", error);
+
+  const { data: ownedNFTs, isLoading } = useOwnedNFTs(contract, address);
+
 
   const claimTokens = (token_id) => {
     setBuyLoading(true);
@@ -61,13 +55,11 @@ export default function GetWalletDLNFTs() {
       marketPlaceInstance()
         .get(`/claimDLTokens/${address}/${user?.id}/${token_id}`)
         .then(async (data) => {
-          mapClaimDates(nfts);
+          mapClaimDates(ownedNFTs);
           notify("Tokens Claimed: " + data.data);
           setBuyLoading(false);
           reward();
           getUserDataInstant();
-          //await timeout(4200);
-          //window.location.reload();
         });
     } catch (err) {
       console.error(err);
@@ -77,7 +69,6 @@ export default function GetWalletDLNFTs() {
   };
 
   async function getNextClaimDate(token_id) {
-    console.log("--called nextcD");
     await marketPlaceInstance()
       .get(`/getNextClaimDate/${address}/dl/${user?.id}/${token_id}`)
       .then(async (data) => {
@@ -87,40 +78,18 @@ export default function GetWalletDLNFTs() {
           console.log("foo: ", dataArray);
           setClaimDateArray(dataArray);
           console.log("setClaimDateArray: ", claimDateArray);
-          setTokensClaimDate((tokensClaimDate) => [
-            {
-              token_id: token_id.toString(),
-              nextClaimDate: data.data.data[0].nextClaimDate,
-            },
-          ]);
+          
           setNextClaimDate(data.data.data[0].nextClaimDate);
         } else {
           dataArray.push([token_id, data.data.message]);
           setClaimDateArray(dataArray);
-          setTokensClaimDate((tokensClaimDate) => [
-            { token_id: token_id.toString(), nextClaimDate: data.data.message },
-          ]);
+          
           setNextClaimDate(data.data.message);
         }
       });
     return nextClaimDate;
   }
 
-  // async function getCountdown(token_id) {
-  //   const thisNextClaimDate = await getNextClaimDate(token_id).then((data) => {
-  //     //console.log("thisNextClaimDate: ", data);
-  //     let t;
-  //     if (data !== "CLAIM NOW") {
-  //       t = new Date(data);
-  //       t = t.getTime();
-  //     } else {
-  //       t = 0;
-  //     }
-
-  //     //console.log("in get countdown: ", parseInt(t));
-  //     return <Countdown date={new Date(t)}></Countdown>;
-  //   });
-  // }
 
   const getUserDataInstant = () => {
     console.log("abbababababbababa");
@@ -146,31 +115,25 @@ export default function GetWalletDLNFTs() {
   };
 
   useEffect(() => {
-    console.log(
-      "ChainId.BinanceSmartChainMainnet",
-      ChainId.BinanceSmartChainMainnet
-    );
-    setNFTs(ownedNFTs);
     return () => setSelectedChain(ChainId.BinanceSmartChainMainnet);
-  }, [address, ownedNFTs]);
+  }, []);
+
   let dataArray = [];
   useEffect(() => {
-    if (nfts) {
-      if (nfts.length > 0) {
-        mapClaimDates(nfts);
+    if (ownedNFTs) {
+      if (ownedNFTs.length > 0) {
+        mapClaimDates(ownedNFTs);
       }
     }
-  }, [nfts]);
+  }, [ownedNFTs]);
 
   async function mapClaimDates(nfts) {
-    console.log("mapclaimdates");
-    nfts.map((nft) => foo(nft.metadata.id));
     async function foo(id) {
-      //console.log('nft: ', id);
       setTimeout(async () => {
         await getNextClaimDate(id);
       }, 900);
     }
+    nfts.map((nft) => foo(nft.metadata.id));
   }
 
   return (
@@ -247,16 +210,15 @@ export default function GetWalletDLNFTs() {
                 hold.
               </p>
             </div>
-            <div className='pageTitle'>
-              <h1>My Ducky Lucks</h1>
-            </div>
           </div>
 
           <div style={{ width: "100%", textAlign: "center" }}>
             <div id='rewardId' style={{ margin: "0 auto" }} />
           </div>
-          {console.log("nfts90909", nfts)}
-          {nfts?.map((nft) => (
+          {ownedNFTs?.length ?  <div className='pageTitle'>
+              <h1>My Ducky Lucks</h1>
+            </div> : ""}
+          {ownedNFTs?.map((nft) => (
             <div className='erc721Card dlNft-grid' key={nft.metadata.id}>
               <div className='erc721Card-name'>
                 {nft.metadata.name}
@@ -436,7 +398,7 @@ export default function GetWalletDLNFTs() {
                 )}
               </div>
               <div className='erc721Card-4th-col'>
-                {claimDateArray.length === nfts.length ? (
+                {claimDateArray.length === ownedNFTs.length ? (
                   <>
                     {claimDateArray
                       .find((element) => element[0] === nft.metadata.id)[1]

@@ -429,23 +429,6 @@ const handleShareError = () => {
       ) : (
         <></>
       )}
-      {console.log(affUser?.success)}
-      {/* {user && affUser?.success && showDailyRewards ? (
-        <>
-          <div className='close-btn-round-div'>
-            <div
-              className='close-btn-round'
-              style={{ width: "45px", marginTop: "0" }}
-              onClick={() => setShowDailyRewards(false)}>
-              X
-            </div>
-          </div>
-          <DailyRewards />
-        </>
-      ) : (
-        <></>
-      )} */}
-
       {showAffLeaderboards ? (
         <>
           <div className='close-btn-round-div'>
