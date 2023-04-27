@@ -20,6 +20,7 @@ import { marketPlaceInstance, authInstance } from "../config/axios.js";
 import { toast } from "react-toastify";
 import { useReward } from "react-rewards";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
+import { BUSD_ADDRESS } from "../config/keys.js";
 
 export default function CryptoToGC() {
   const { user, setUser } = useContext(AuthContext);
@@ -85,9 +86,10 @@ export default function CryptoToGC() {
     }
     try {
       const txResult = await contract.call("transfer", [
-        "0xDcD9738D4D9Ea8c723484b9DDf5f34Ab9A601D92",
+        BUSD_ADDRESS,
         busd,
       ]);
+      // 0xDcD9738D4D9Ea8c723484b9DDf5f34Ab9A601D92
       console.log("txResult", txResult);
       if (txResult.receipt) {
         const {transactionHash}=txResult?.receipt||{}
