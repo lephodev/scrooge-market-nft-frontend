@@ -6,7 +6,7 @@ import coin4 from "../images/4.png";
 import coin3 from "../images/3.png";
 import coin2 from "../images/2.png";
 import coin1 from "../images/1.png";
-import sweep from "../images/sweep.png";
+import sweep from "../images/token.png";
 // import gold from "../images/gold.png";
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
@@ -156,12 +156,12 @@ export default function CryptoToGC() {
           )}
           <div className="scrooge-main-heading">
             <div className="pageTitle">
-              <h1 className="title">Convert Your Crypto To Gold Coins</h1>
+              <h1 className="title">Top up your Gold Coins</h1>
             </div>
-            <div className="feature-overview-div">Top up your Gold Coins</div>
+            {/* <div className="feature-overview-div"></div> */}
             <div className="asterisk-desc cryptoTotoken">
-              Disclaimer : +16% will be added to the transaction to cover
-              blockchain fees and contract taxes!
+              Disclaimer : +16% will be added for Scrooge or JR payment method
+              to cover blockchain fees and contract taxes!
             </div>
           </div>
           {isMismatched ? (
@@ -193,6 +193,7 @@ export default function CryptoToGC() {
                 <div className="purchasemodal-cards">
                   {allPrizes.map((prize) => (
                     <Card>
+                      {console.log("prize", prize)}
                       <Card.Img
                         variant="top"
                         src={
@@ -209,7 +210,7 @@ export default function CryptoToGC() {
                       />
                       <Card.Body>
                         <Card.Title>GC {prize?.gcAmount}</Card.Title>
-                        <Card.Text>$10</Card.Text>
+                        {/* <Card.Text>$10</Card.Text> */}
                         <Button
                           variant="primary"
                           onClick={() =>
@@ -223,7 +224,9 @@ export default function CryptoToGC() {
                           <p>Buy </p> <span>${prize?.priceInBUSD}</span>
                         </Button>
                       </Card.Body>
-                      <div className="goldPurchase-offers">Free ST 51.50</div>
+                      <div className="goldPurchase-offers">
+                        Free ST: <img src={sweep} alt="sweep token" /> {prize?.freeTokenAmount}
+                      </div>
                     </Card>
 
                     // <div className="buy-chips-grid-box">
