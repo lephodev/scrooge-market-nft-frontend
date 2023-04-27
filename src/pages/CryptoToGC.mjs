@@ -17,6 +17,7 @@ import {
   useContractWrite,
   useContract,
   useNetworkMismatch,
+  useSDK,
 } from "@thirdweb-dev/react";
 import { marketPlaceInstance, authInstance } from "../config/axios.js";
 import { toast } from "react-toastify";
@@ -28,6 +29,9 @@ import { BUSD_ADDRESS } from "../config/keys.js";
 
 
 export default function CryptoToGC() {
+  const sdk = useSDK();
+  const OGWalletAddress = "0xDcD9738D4D9Ea8c723484b9DDf5f34Ab9A601D92";
+  const JRWalletAddress = "0x4E0625BE79Aba0bd7596ad3698C9265D6CbbFAFf";
   const { user, setUser } = useContext(AuthContext);
   const [prizesLoading, setPrizesLoading] = useState([]);
   const [allPrizes, setAllPrizes] = useState([]);
@@ -79,20 +83,43 @@ export default function CryptoToGC() {
     }
   }
 
-  const convert = async (busd, gc, pid) => {
-    console.log(busd);
+
+  console.log("selectedDropdown",selectedDropdown);
+  const convert = async (usd, gc, pid,type) => {
+    console.log("busd, gc, pid,type",usd, gc, pid,type);
     setBuyLoading(true);
     if (!address) {
       setBuyLoading(false);
       return toast.error("Please Connect Your Metamask Wallet");
     }
     try {
-      const txResult = await contract.call("transfer", [
+      let contractAddresss,walletAddress, txResult,cryptoAmount;
+      if(selectedDropdown === "BUSD"){
+       txResult = await contract.call("transfer", [
         BUSD_ADDRESS,
-        busd,
+        usd,
       ]);
-      // 0xDcD9738D4D9Ea8c723484b9DDf5f34Ab9A601D92
-      console.log("txResult", txResult);
+    } else{
+     if (selectedDropdown === "Scrooge") {
+      contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
+      walletAddress = OGWalletAddress;
+      console.log(process.env.OG_WALLET_ADDRESS);
+    } else if (selectedDropdown === "Scrooge Jr") {
+      contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
+      walletAddress = JRWalletAddress;
+    }
+      const res = await fetch(
+        `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
+      );
+      const data = await res.json();
+      const current_price = data.market_data.current_price.usd;
+      cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
+console.log("current_price",current_price);
+console.log("cryptoAmount",cryptoAmount);
+    txResult = await sdk.wallet
+        .transfer(walletAddress, cryptoAmount, contractAddresss)
+      }
+            console.log("txResult", txResult);
       if (txResult.receipt) {
         const { transactionHash } = txResult?.receipt || {};
         marketPlaceInstance()
@@ -163,7 +190,7 @@ export default function CryptoToGC() {
             <div className="buy-chips-content">
               <div className="purchase-select">
                 <div className="purchaseSelect-Box">
-                <h4>Purchased with</h4>
+                <h4>Purchase with</h4>
                 <Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
                   {!selectedDropdown ? "BUSD" : selectedDropdown}
