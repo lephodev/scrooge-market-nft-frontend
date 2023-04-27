@@ -96,11 +96,11 @@ function DailyRewards() {
     <>
       {!loader && !fullDailyRewards ? (
         <>
-          {/* <div className='daily-reward-card-div'>
+          <div className='daily-reward-card-div'>
             {console.log("nextclaimdate", nextClaimDate)}
             <div className='inlineTitle'>DAILY REWARDS</div>
             <div className='rewards'>
-              <span>Last Claim Amount:</span> <p>{nextClaimDate.qty} Tokens</p>
+              <span>Last Claim Amount:</span> <p>{nextClaimDate?.qty} Tokens</p>
             </div>
             <div className='rewards'>
               <span>Consecutive:</span>{" "}
@@ -120,7 +120,7 @@ function DailyRewards() {
                 </div>
               </Countdown>
             </div>
-          </div> */}
+          </div>
         </>
       ) : (
         <>
