@@ -22,7 +22,7 @@ import { ConnectWallet } from "@thirdweb-dev/react";
 import CookieConsent from "react-cookie-consent";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import { blackjackUrl, pokerUrl, scroogeClient } from "../config/keys.js";
+import { blackjackUrl, pokerUrl, rouletteUrl, scroogeClient, slotUrl } from "../config/keys.js";
 
 export const Tooltip = (id, metadata, message) => (
   <Popup
@@ -88,7 +88,7 @@ const Layout = ({ children }) => {
           <nav className='header-nav'>
             <div className='header-nav-logo' onClick={() => window.open(scroogeClient, "_self")}>
                 <img src={Logo} alt='logo' className='menu-logo-img' />
-            </div>
+            </div>  
 
             <div className='header-menu'>
               <ul>
@@ -146,7 +146,7 @@ const Layout = ({ children }) => {
         <div className='container'>
           <div className='footer-grid'>
             <div className='footer-info'>
-              <Link to='/'>
+              <Link to={scroogeClient}>
                 <img src={logo} alt='scrooge casino nft token packages' />
               </Link>
               <h6>
@@ -161,9 +161,9 @@ const Layout = ({ children }) => {
             <div className='footer-menu'>
               <h3>Destinations</h3>
               <ul>
-                <li>
+                {/* <li>
                   <Link to='/nft-tokens'>NFT Marketplace</Link>
-                </li>
+                </li> */}
                 <li>
                   <a
                     href={scroogeClient}
@@ -173,15 +173,24 @@ const Layout = ({ children }) => {
                 </li>
                 <li>
                   <a href={pokerUrl} target='_blank' rel='noreferrer'>
-                    Scrooge Poker
+                    Poker
                   </a>
                 </li>
                 <li>
                   <a href={blackjackUrl} target='_blank' rel='noreferrer'>
-                    Scrooge Blackjack
+                    Blackjack
                   </a>
                 </li>
-                <li>Scrooge Roulette</li>
+                <li>
+                  <a href={slotUrl} target='_blank' rel='noreferrer'>
+                    Slot
+                  </a>
+                </li>
+                <li>
+                  <a href={rouletteUrl} target='_blank' rel='noreferrer'>
+                    Roulette
+                  </a>
+                </li>
               </ul>
             </div>
 

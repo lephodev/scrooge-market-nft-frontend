@@ -2,12 +2,12 @@
 import { useState, useContext, useEffect } from "react";
 import Layout from "./Layout.mjs";
 import LoadingPoker from "../images/scroogeHatLogo.png";
-//import coin1 from "../images/4.png";
-// import coin2 from "../images/3.png";
-import coin3 from "../images/2.png";
-import gold from "../images/gold.png";
+import coin4 from "../images/4.png";
+import coin3 from "../images/3.png";
+import coin2 from "../images/2.png";
+import coin1 from "../images/1.png";
 import sweep from "../images/sweep.png";
-//import coin4 from "../images/1.png";
+// import gold from "../images/gold.png";
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
 
@@ -124,9 +124,9 @@ export default function CryptoToGC() {
   useEffect(() => {
     getGCPackages();
   }, []);
-  const handleChange=(value)=>{
+  const handleChange = (value) => {
     setSelectedDropdown(value);
-  }
+  };
   return (
     <Layout>
       <main className="main redeem-prizes-page">
@@ -143,12 +143,7 @@ export default function CryptoToGC() {
             <div className="pageTitle">
               <h1 className="title">Convert Your Crypto To Gold Coins</h1>
             </div>
-            <div className="feature-overview-div">
-              Ready to cash in on all of your big wins? Browse through our huge
-              list of amazing prizes and find something you just can't live
-              without. Make sure you have enough available crypto for the prize
-              you want, then click the REDEEM PRIZE button!
-            </div>
+            <div className="feature-overview-div">Top up your Gold Coins</div>
             <div className="asterisk-desc cryptoTotoken">
               Disclaimer : +16% will be added to the transaction to cover
               blockchain fees and contract taxes!
@@ -160,38 +155,57 @@ export default function CryptoToGC() {
             <div className="buy-chips-content">
               <div className="purchase-select">
                 <div className="purchaseSelect-Box">
-                <h4>Purchased with</h4>
-                <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  {!selectedDropdown ? "BUSD" : selectedDropdown}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item  onClick={()=>handleChange("Scrooge")}>Scrooge</Dropdown.Item>
-                    <Dropdown.Item  onClick={()=>handleChange("BUSD")}>BUSD</Dropdown.Item>
-                    <Dropdown.Item  onClick={()=>handleChange("Scrooge Jr")}>Scrooge Jr</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                  <h4>Purchase with</h4>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                      {!selectedDropdown ? "BUSD" : selectedDropdown}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item onClick={() => handleChange("Scrooge")}>
+                        Scrooge
+                      </Dropdown.Item>
+                      <Dropdown.Item onClick={() => handleChange("BUSD")}>
+                        BUSD
+                      </Dropdown.Item>
+                      <Dropdown.Item onClick={() => handleChange("Scrooge Jr")}>
+                        Scrooge Jr
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </div>
               </div>
               <div className="buy-chips-grid">
                 <div className="purchasemodal-cards">
                   {allPrizes.map((prize) => (
                     <Card>
-                      <Card.Img variant="top" src={gold} />
+                      <Card.Img
+                        variant="top"
+                        src={
+                          prize.priceInBUSD <= 10
+                            ? coin1
+                            : (10 < prize.priceInBUSD && prize.priceInBUSD <= 50)
+                            ? coin2
+                            : 50 < prize.priceInBUSD  && prize.priceInBUSD <= 100
+                            ? coin3
+                            : 100 < prize.priceInBUSD
+                            ? coin4
+                            : ""
+                        }
+                      />
                       <Card.Body>
-                        <Card.Title>GC {prize.gcAmount}</Card.Title>
+                        <Card.Title>GC {prize?.gcAmount}</Card.Title>
                         <Card.Text>$10</Card.Text>
                         <Button
                           variant="primary"
                           onClick={() =>
                             convert(
-                              prize.priceInBUSD,
-                              prize.gcAmount,
-                              prize._id
+                              prize?.priceInBUSD,
+                              prize?.gcAmount,
+                              prize?._id
                             )
                           }
                         >
-                          <p>Buy {selectedDropdown}</p> <span>{prize.priceInBUSD}</span>
+                          <p>Buy </p> <span>${prize?.priceInBUSD}</span>
                         </Button>
                       </Card.Body>
                       <div className="goldPurchase-offers">Free ST 51.50</div>
