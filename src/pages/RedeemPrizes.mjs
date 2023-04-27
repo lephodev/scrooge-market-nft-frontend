@@ -7,16 +7,18 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useReward } from "react-rewards";
 import { useCookies } from "react-cookie";
-import coin1 from "../images/4.png";
-import coin2 from "../images/3.png";
-import coin3 from "../images/2.png";
-import coin4 from "../images/1.png";
+// import coin1 from "../images/4.png";
+// import coin2 from "../images/3.png";
+// import coin3 from "../images/2.png";
+// import coin4 from "../images/1.png";
+import sweep from "../images/token.png";
+import ticket  from "../images/ticket.png";
 // import InputRange from "react-input-range";
 import { userKycDetails } from "../utils/api.mjs";
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
 import { authInstance, marketPlaceInstance } from "../config/axios.js";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Card, Modal } from "react-bootstrap";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -536,7 +538,7 @@ function RedeemPrizes() {
                       )
                       })} */}
                       <div className="buy-chips-content">
-                        <div className="buy-chips-grid">
+                        <div className="buy-chips-grid cryptoTotoken">
                           {/* <div className='buy-chips-grid-box'>
                             <img src={coin4} alt='coin' />
 
@@ -558,42 +560,34 @@ function RedeemPrizes() {
                               </span>
                             </div>
                           </div> */}
-                          {ticketPrizes.map((prize) => (
-                            <div
-                              key={prize.ticket}
-                              className="buy-chips-grid-box"
-                            >
-                              {(prize.ticket === "500" ||
-                                prize.ticket === "1000") && (
-                                <img src={coin4} alt="coin" />
-                              )}
-                              {(prize.ticket === "25000" ||
-                                prize.ticket === "50000") && (
-                                <img src={coin1} alt="coin" />
-                              )}
-                              {(prize.ticket === "2500" ||
-                                prize.ticket === "5000") && (
-                                <img src={coin3} alt="coin" />
-                              )}
-                              {(prize.ticket === "10000" ||
-                                prize.ticket === "20000") && (
-                                <img src={coin2} alt="coin" />
-                              )}
-                              {/* <div className='input-range'></div> */}
-                              <div
-                                className="gradient-btn"
-                                //  onClick={() => convert(500, 510)}
-                                onClick={() =>
-                                  handleShow(prize.ticket, prize.token, "")
-                                }
-                              >
-                                <span>
-                                  {prize.ticket} tickets gets you {prize.token}{" "}
-                                  tokens{" "}
-                                </span>
-                              </div>
+
+                          <div className="buy-chips-grid">
+                            <div className="purchasemodal-cards">
+                              {ticketPrizes.map((prize) => (
+                                <Card>
+                                  <Card.Img
+                                    variant="top"
+                                    src={sweep}
+                                  />
+                                  <Card.Body>
+                                    <Card.Title>
+                                      Token {prize?.token}
+                                    </Card.Title>
+                                    <Card.Text>Buy Ticket</Card.Text>
+                                    <Button
+                                      variant="primary"
+                                      onClick={() =>
+                                        handleShow(prize.ticket, prize.token, "")
+                                      }
+                                    >
+                                      <img src={ticket} alt="ticket"/>
+                                      <h5>{prize?.ticket}</h5>
+                                    </Button>
+                                  </Card.Body>
+                                </Card>
+                              ))}
                             </div>
-                          ))}
+                          </div>
                         </div>
                       </div>
                     </>
