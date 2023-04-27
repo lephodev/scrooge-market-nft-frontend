@@ -120,6 +120,7 @@ export default function CryptoToGC() {
               reward();
               getUserDataInstant();
             } else {
+              setBuyLoading(false);
               toast.error("Failed to buy");
             }
           })
