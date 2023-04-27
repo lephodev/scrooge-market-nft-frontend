@@ -55,6 +55,7 @@ export default function BuyTokenFromOGJR() {
   
 
   const convert = async (type, crypto, tokens) => {
+    console.log("type, crypto, tokens",type, crypto, tokens);
     let contractAddresss, walletAddress, cryptoAmount;
     setBuyLoading(true);
     if (!address) {
