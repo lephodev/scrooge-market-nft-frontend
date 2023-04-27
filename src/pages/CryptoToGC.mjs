@@ -190,7 +190,7 @@ export default function CryptoToGC() {
                   </Dropdown>
                 </div>
               </div>
-              <div className="buy-chips-grid">
+              <div className="buy-chips-grid cryptoToGC">
                 <div className="purchasemodal-cards">
                   {allPrizes.map((prize) => (
                     <Card>
