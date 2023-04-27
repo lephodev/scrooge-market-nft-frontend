@@ -4015,7 +4015,7 @@ button.shareBtn-disabled {
   box-shadow: 0 20px 20px #00000091;
   cursor: pointer;
   transition: all 0.5s;
-  padding: 20px;
+  padding: 14px;
 }
 
 .buy-chips-grid .buy-chips-grid-box:hover {
@@ -4023,6 +4023,7 @@ button.shareBtn-disabled {
 }
 
 .buy-chips-grid .buy-chips-grid-box img {
+  max-width: 200px;
   width: 100%;
 }
 
@@ -4350,6 +4351,10 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   border-radius: 10px 10px 0px 0px;
 }
 
+.buy-chips-grid.cryptoTotoken .purchasemodal-cards .card {
+  border-radius: 10px !important;
+}
+
 .purchasemodal-cards {
   display: flex;
   flex-wrap: wrap;
@@ -4379,8 +4384,11 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   color: #fff;
 }
 
-.purchasemodal-cards .card-body button {
-  background-color: #f9ff00;
+.purchasemodal-cards .card-body button,
+.purchasemodal-cards .card-body button:active,
+.purchasemodal-cards .card-body button:focus,
+.purchasemodal-cards .card-body button:hover {
+  background: #f9ff00;
   color: #000;
   font-size: 16px;
   font-weight: 600;
@@ -4396,10 +4404,19 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   gap: 4px;
 }
 
+.purchasemodal-cards .card-body button img {
+  width: 35px;
+}
+
+.purchasemodal-cards .card-body h5 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0px;
+}
+
 .purchasemodal-cards .card-body p.card-text {
   margin-bottom: 5px !important;
   color: #fa0000;
-  text-decoration: line-through;
   font-size: 18px;
 }
 
