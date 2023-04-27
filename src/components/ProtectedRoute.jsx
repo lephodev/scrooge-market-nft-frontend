@@ -13,7 +13,6 @@ function ProtectedRoute({ component: RouteComponent }) {
   if (user || loading) {
     return RouteComponent;
   }
-  console.log("redirecting", loading, user)
   return <Navigate to="/login" />;
 }
 

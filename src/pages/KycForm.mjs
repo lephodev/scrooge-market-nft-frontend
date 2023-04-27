@@ -53,7 +53,6 @@ const KYCForm = () => {
   };
 
   const saveData = async (value) => {
-    console.log("this is the value", value);
     const formData = new FormData();
     let payload = { ...value };
 

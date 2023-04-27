@@ -22,14 +22,21 @@ import { ConnectWallet } from "@thirdweb-dev/react";
 import CookieConsent from "react-cookie-consent";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import { blackjackUrl, pokerUrl, rouletteUrl, scroogeClient, slotUrl } from "../config/keys.js";
+import {
+  blackjackUrl,
+  pokerUrl,
+  rouletteUrl,
+  scroogeClient,
+  slotUrl,
+} from "../config/keys.js";
 
 export const Tooltip = (id, metadata, message) => (
   <Popup
     trigger={<ThirdwebNftMedia key={id} metadata={metadata} height={200} />}
-    position='bottom center'
+    position="bottom center"
     on={["hover", "focus"]}
-    closeOnDocumentClick>
+    closeOnDocumentClick
+  >
     <span> {message} </span>
   </Popup>
 );
@@ -82,15 +89,18 @@ const Layout = ({ children }) => {
     }
   }, []);
   return (
-    <div className='wrapper'>
-      <div className='header'>
-        <div className='container'>
-          <nav className='header-nav'>
-            <div className='header-nav-logo' onClick={() => window.open(scroogeClient, "_self")}>
-                <img src={Logo} alt='logo' className='menu-logo-img' />
-            </div>  
+    <div className="wrapper">
+      <div className="header">
+        <div className="container">
+          <nav className="header-nav">
+            <div
+              className="header-nav-logo"
+              onClick={() => window.open(scroogeClient, "_self")}
+            >
+              <img src={Logo} alt="logo" className="menu-logo-img" />
+            </div>
 
-            <div className='header-menu'>
+            <div className="header-menu">
               <ul>
                 {/* <li>
                   <Link to='/nft-tokens'>Casino NFT Shop</Link>
@@ -113,8 +123,8 @@ const Layout = ({ children }) => {
               </ul>
             </div>
 
-            <div className='header-action'>
-              <div className='icon-links'>
+            <div className="header-action">
+              <div className="icon-links">
                 {/* <Link to='/ducky-lucks-claim-tokens'>
                   <img
                     src={DLBigD}
@@ -130,8 +140,7 @@ const Layout = ({ children }) => {
                   />
                 </Link> */}
               </div>
-              {console.log("currentPriceOG", currentPriceOG)}
-              <div className='wallet'>
+              <div className="wallet">
                 <ConnectWallet />
                 <div className={priceColor}>${currentPriceOG}</div>
               </div>
@@ -140,14 +149,14 @@ const Layout = ({ children }) => {
         </div>
       </div>
 
-      <div className='content'>{children}</div>
+      <div className="content">{children}</div>
 
-      <div className='footer'>
-        <div className='container'>
-          <div className='footer-grid'>
-            <div className='footer-info'>
+      <div className="footer">
+        <div className="container">
+          <div className="footer-grid">
+            <div className="footer-info">
               <Link to={scroogeClient}>
-                <img src={logo} alt='scrooge casino nft token packages' />
+                <img src={logo} alt="scrooge casino nft token packages" />
               </Link>
               <h6>
                 Want to stay ahead of your competition. Subscribe and be the
@@ -158,110 +167,108 @@ const Layout = ({ children }) => {
               </p>
             </div>
 
-            <div className='footer-menu'>
+            <div className="footer-menu">
               <h3>Destinations</h3>
               <ul>
                 {/* <li>
                   <Link to='/nft-tokens'>NFT Marketplace</Link>
                 </li> */}
                 <li>
-                  <a
-                    href={scroogeClient}
-                    /* target='_blank' */ rel='noreferrer'>
+                  <a href={scroogeClient} rel="noreferrer">
                     Scrooge Casino Home
                   </a>
                 </li>
                 <li>
-                  <a href={pokerUrl} target='_blank' rel='noreferrer'>
+                  <a href={pokerUrl} rel="noreferrer">
                     Poker
                   </a>
                 </li>
                 <li>
-                  <a href={blackjackUrl} target='_blank' rel='noreferrer'>
+                  <a href={blackjackUrl} rel="noreferrer">
                     Blackjack
                   </a>
                 </li>
                 <li>
-                  <a href={slotUrl} target='_blank' rel='noreferrer'>
+                  <a href={slotUrl} rel="noreferrer">
                     Slot
                   </a>
                 </li>
                 <li>
-                  <a href={rouletteUrl} target='_blank' rel='noreferrer'>
+                  <a href={rouletteUrl} rel="noreferrer">
                     Roulette
                   </a>
                 </li>
               </ul>
             </div>
 
-            <div className='footer-menu'>
+            <div className="footer-menu">
               <h3>Policy</h3>
               <ul>
                 <li>
-                  <Link to='/privacy'>Privacy Policy</Link>
+                  <Link to="/privacy">Privacy Policy</Link>
                 </li>
                 <li>
-                  <Link to='/terms'>Terms and Conditions</Link>
+                  <Link to="/terms">Terms and Conditions</Link>
                 </li>
 
                 <li>
-                  <Link to='/contact'>Contact Us</Link>
+                  <Link to="/contact">Contact Us</Link>
                 </li>
               </ul>
             </div>
 
-            <div className='footer-contact'>
+            <div className="footer-contact">
               <h3>Follow us</h3>
-              <ul className='footer-social'>
+              <ul className="footer-social">
                 <li>
                   <a
-                    href='https://www.facebook.com/scroogegold/'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <img src={facebook} alt='' />
+                    href="https://www.facebook.com/scroogegold/"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={facebook} alt="" />
                   </a>
                 </li>
                 <li>
                   <a
-                    href='https://twitter.com/scrooge_coin'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <img src={twitter} alt='' />
+                    href="https://twitter.com/scrooge_coin"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={twitter} alt="" />
                   </a>
                 </li>
                 <li>
                   <a
-                    href='http://t.me/scroogecoingold'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <img src={telegram} alt='' />
+                    href="http://t.me/scroogecoingold"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={telegram} alt="" />
                   </a>
                 </li>
                 <li>
                   <a
-                    href='https://discord.gg/scroogecoin'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <img src={discord} alt='' />
+                    href="https://discord.gg/scroogecoin"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={discord} alt="" />
                   </a>
                 </li>
                 <li>
                   <a
-                    href='https://www.reddit.com/r/scroogecoin/'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <img src={reddit} alt='' />
+                    href="https://www.reddit.com/r/scroogecoin/"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={reddit} alt="" />
                   </a>
                 </li>
               </ul>
               <h3>Contact Us</h3>
-              <ul className='footer-support'>
+              <ul className="footer-support">
                 <li>
                   <a
-                    href='mailto:utilities@scroogegold.com'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <img src={envelope} alt='' />
+                    href="mailto:utilities@scroogegold.com"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={envelope} alt="" />
                     utilities@scroogegold.com {/* support@scroogegold.com */}
                   </a>
                 </li>
@@ -272,10 +279,11 @@ const Layout = ({ children }) => {
       </div>
 
       <CookieConsent
-        location='bottom'
-        buttonText='ACCEPT'
-        cookieName='nftMarketCookieConsent'
-        expires={150}>
+        location="bottom"
+        buttonText="ACCEPT"
+        cookieName="nftMarketCookieConsent"
+        expires={150}
+      >
         <h4>Cookies Policy</h4>
         <p>
           This website uses delicious cookies to enhance the user experience.
@@ -344,7 +352,6 @@ export default Layout;
 //     </svg>
 //   );
 // };
-
 
 // const StoreSvg = () => {
 //   return (
