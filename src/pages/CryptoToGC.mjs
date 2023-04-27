@@ -5,6 +5,8 @@ import LoadingPoker from "../images/scroogeHatLogo.png";
 //import coin1 from "../images/4.png";
 // import coin2 from "../images/3.png";
 import coin3 from "../images/2.png";
+import gold from "../images/gold.png";
+import sweep from "../images/sweep.png";
 //import coin4 from "../images/1.png";
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
@@ -20,13 +22,17 @@ import { marketPlaceInstance, authInstance } from "../config/axios.js";
 import { toast } from "react-toastify";
 import { useReward } from "react-rewards";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
+import { Form } from "react-router-dom";
+import { Button, Card, Dropdown } from "react-bootstrap";
 import { BUSD_ADDRESS } from "../config/keys.js";
+
 
 export default function CryptoToGC() {
   const { user, setUser } = useContext(AuthContext);
   const [prizesLoading, setPrizesLoading] = useState([]);
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
+  const [selectedDropdown, setSelectedDropdown] = useState("BUSD");
   const isMismatched = useNetworkMismatch();
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
@@ -34,10 +40,6 @@ export default function CryptoToGC() {
   const [cookies] = useCookies(["token"]);
   const address = useAddress();
   const { contract } = useContract(process.env.REACT_APP_NATIVE_TOKEN_ADDRESS);
-  console.log("contractbusd", contract);
-
-  console.log(prizesLoading);
-
   const getUserDataInstant = () => {
     console.log("abbababababbababa");
     let access_token = cookies.token;
@@ -77,7 +79,7 @@ export default function CryptoToGC() {
     }
   }
 
-  const convert = async (busd, gc,pid) => {
+  const convert = async (busd, gc, pid) => {
     console.log(busd);
     setBuyLoading(true);
     if (!address) {
@@ -92,7 +94,7 @@ export default function CryptoToGC() {
       // 0xDcD9738D4D9Ea8c723484b9DDf5f34Ab9A601D92
       console.log("txResult", txResult);
       if (txResult.receipt) {
-        const {transactionHash}=txResult?.receipt||{}
+        const { transactionHash } = txResult?.receipt || {};
         marketPlaceInstance()
           .get(
             `convertCryptoToGoldCoin/${user?.id}/${address}/${transactionHash}/${pid}`
@@ -125,62 +127,104 @@ export default function CryptoToGC() {
   useEffect(() => {
     getGCPackages();
   }, []);
-
+  const handleChange=(value)=>{
+    setSelectedDropdown(value);
+  }
   return (
     <Layout>
-      <main className='main redeem-prizes-page'>
-        <div className='container'>
+      <main className="main redeem-prizes-page">
+        <div className="container">
           {buyLoading ? (
-            <div className='pageImgContainer'>
-              <img src={LoadingPoker} alt='game' className='imageAnimation' />
-              <div className='loading-txt pulse'>PURCHASING TOKENS...</div>
+            <div className="pageImgContainer">
+              <img src={LoadingPoker} alt="game" className="imageAnimation" />
+              <div className="loading-txt pulse">PURCHASING TOKENS...</div>
             </div>
           ) : (
             <></>
           )}
-          <div className='scrooge-main-heading'>
-            <div className='pageTitle'>
-              <h1 className='title'>Convert Your Crypto To Gold Coins</h1>
+          <div className="scrooge-main-heading">
+            <div className="pageTitle">
+              <h1 className="title">Convert Your Crypto To Gold Coins</h1>
             </div>
-            <div className='feature-overview-div'>
+            <div className="feature-overview-div">
               Ready to cash in on all of your big wins? Browse through our huge
               list of amazing prizes and find something you just can't live
               without. Make sure you have enough available crypto for the prize
               you want, then click the REDEEM PRIZE button!
             </div>
-            <div className='asterisk-desc cryptoTotoken'>
+            <div className="asterisk-desc cryptoTotoken">
               Disclaimer : +16% will be added to the transaction to cover
               blockchain fees and contract taxes!
             </div>
           </div>
-          {isMismatched ? <SwitchNetworkBSC /> : address ? (
-            <div className='buy-chips-content'>
-              <div className='buy-chips-grid'>
-                {allPrizes.map((prize) => (
-                  
-                  <div className='buy-chips-grid-box'>
-                    <img src={coin3} alt='coin' />
-                    {console.log("prize",prize)}
-                    <div
-                      className='gradient-btn'
-                      onClick={() =>
-                        convert(prize.priceInBUSD, prize.gcAmount,prize._id)
-                      }>
-                      <span>
-                        {prize.priceInBUSD} BUSD gets you {prize.gcAmount} GOLD
-                        COINS
-                      </span>
-                    </div>
-                  </div>
-                ))}
+          {isMismatched ? (
+            <SwitchNetworkBSC />
+          ) : address ? (
+            <div className="buy-chips-content">
+              <div className="purchase-select">
+                <div className="purchaseSelect-Box">
+                <h4>Purchased with</h4>
+                <Dropdown>
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  {!selectedDropdown ? "BUSD" : selectedDropdown}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item  onClick={()=>handleChange("Scrooge")}>Scrooge</Dropdown.Item>
+                    <Dropdown.Item  onClick={()=>handleChange("BUSD")}>BUSD</Dropdown.Item>
+                    <Dropdown.Item  onClick={()=>handleChange("Scrooge Jr")}>Scrooge Jr</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+                </div>
+              </div>
+              <div className="buy-chips-grid">
+                <div className="purchasemodal-cards">
+                  {allPrizes.map((prize) => (
+                    <Card>
+                      <Card.Img variant="top" src={gold} />
+                      <Card.Body>
+                        <Card.Title>GC {prize.gcAmount}</Card.Title>
+                        <Card.Text>$10</Card.Text>
+                        <Button
+                          variant="primary"
+                          onClick={() =>
+                            convert(
+                              prize.priceInBUSD,
+                              prize.gcAmount,
+                              prize._id
+                            )
+                          }
+                        >
+                          <p>Buy {selectedDropdown}</p> <span>{prize.priceInBUSD}</span>
+                        </Button>
+                      </Card.Body>
+                      <div className="goldPurchase-offers">Free ST 51.50</div>
+                    </Card>
+
+                    // <div className="buy-chips-grid-box">
+                    //   <img src={coin3} alt="coin" />
+                    //   {console.log("prize", prize)}
+                    //   <div
+                    //     className="gradient-btn"
+                    //     onClick={() =>
+                    //       convert(prize.priceInBUSD, prize.gcAmount, prize._id)
+                    //     }
+                    //   >
+                    //     <span>
+                    //       {prize.priceInBUSD} BUSD gets you {prize.gcAmount} GOLD
+                    //       COINS
+                    //     </span>
+                    //   </div>
+                    // </div>
+                  ))}
+                </div>
               </div>
             </div>
           ) : (
             <div>
-              <p className='description yellow'>
+              <p className="description yellow">
                 Get started by connecting your wallet.
               </p>
-              <div className='connect-wallet-div'>
+              <div className="connect-wallet-div">
                 <ConnectWallet />
               </div>
             </div>

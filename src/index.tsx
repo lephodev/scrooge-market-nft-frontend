@@ -8,7 +8,6 @@ import ChainContext from "./context/Chain";
 import "./styles/globals.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { DLGate } from "./components/DLGate";
 import Home from "./pages/Home.mjs";
 import NoPage from "./pages/NoPage.mjs";
 import Login from "./pages/Login.mjs";
@@ -24,8 +23,6 @@ import CreatePost from "./pages/CreatePosts.mjs";
 import BlogPosts from "./pages/BlogPosts.mjs";
 // import RedeemNFTs from "./pages/RedeemNFTs.mjs";
 import RedeemPrizes from "./pages/RedeemPrizes.mjs";
-import HolderClaimChips from "./pages/HolderClaimChips.mjs";
-import DLClaimTokens from "./pages/DLClaimTokens.mjs";
 import EarnTokens from "./pages/EarnTokens.mjs";
 import Raffles from "./pages/Raffles.mjs";
 import { useCookies } from "react-cookie";
@@ -37,6 +34,7 @@ import PaymentSuccess from "./pages/PaymentSuccess.mjs";
 import KycForm from "./pages/KycForm.mjs";
 import BuyTokenFromOGJR from "./pages/BuyTokenFromOGJR.mjs";
 import CloudWebsiteError from "./components/cloudWebsiteError.mjs";
+import EarnFreeCoins from "./pages/EarnFreeCoins.mjs";
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
@@ -148,25 +146,12 @@ export default function App() {
                 />
                 <Route
                   path='/claim-free-tokens'
-                  element={<ProtectedRoute component={<HolderClaimChips />} />}
+                  element={<ProtectedRoute component={<EarnFreeCoins />} />}
                 />
                 {/* <Route
                   path='/kyc'
                   element={<ProtectedRoute component={<KycForm />} />}
                 /> */}
-
-                <Route
-                  path='/ducky-lucks-claim-tokens'
-                  element={
-                    <ProtectedRoute
-                      component={
-                        <DLGate>
-                          <DLClaimTokens />
-                        </DLGate>
-                      }
-                    />
-                  }
-                />
                 <Route
                   path='/earn-tokens'
                   element={<ProtectedRoute component={<EarnTokens />} />}
