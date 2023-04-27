@@ -4358,9 +4358,9 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
 
 .purchasemodal-cards img.card-img-top {
   padding-top: 10px;
-  width: 80px;
+  width: 130px;
   margin: 5px auto;
-  transform: rotate3d(8, 8, 5, 14deg);
+  /* transform: rotate3d(8, 8, 5, 14deg); */
 }
 
 .purchasemodal-cards .card-body {
@@ -4384,9 +4384,10 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 4px;
 }
 
 .purchasemodal-cards .card-body p.card-text {
@@ -4448,6 +4449,7 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   color: #000;
   font-weight: 600;
   border-radius: 30px;
+  border: 1px solid #f9ff00;
 }
 
 /********************************************************************************************/
