@@ -27,7 +27,6 @@ import { Form } from "react-router-dom";
 import { Button, Card, Dropdown } from "react-bootstrap";
 import { BUSD_ADDRESS } from "../config/keys.js";
 
-
 export default function CryptoToGC() {
   const sdk = useSDK();
   const OGWalletAddress = "0xDcD9738D4D9Ea8c723484b9DDf5f34Ab9A601D92";
@@ -45,7 +44,6 @@ export default function CryptoToGC() {
   const address = useAddress();
   const { contract } = useContract(process.env.REACT_APP_NATIVE_TOKEN_ADDRESS);
   const getUserDataInstant = () => {
-    console.log("abbababababbababa");
     let access_token = cookies.token;
     authInstance()
       .get("/auth/check-auth", {
@@ -54,9 +52,7 @@ export default function CryptoToGC() {
         },
       })
       .then((res) => {
-        console.log("convertedData", res);
         if (res.data.user) {
-          console.log("user", res.data);
           setUser({
             ...res.data.user,
           });
@@ -69,11 +65,9 @@ export default function CryptoToGC() {
 
   // getGCPackages
   async function getGCPackages() {
-    console.log("dfdfdfdfd");
     setPrizesLoading(true);
     try {
       const res = await marketPlaceInstance().get(`/getGCPackages`);
-      console.log("res", res);
       if (res.data) {
         setPrizesLoading(false);
         setAllPrizes(res.data || []);
@@ -82,44 +76,36 @@ export default function CryptoToGC() {
       console.log(e);
     }
   }
-
-
-  console.log("selectedDropdown",selectedDropdown);
-  const convert = async (usd, gc, pid,type) => {
-    console.log("busd, gc, pid,type",usd, gc, pid,type);
+  const convert = async (usd, gc, pid, type) => {
     setBuyLoading(true);
     if (!address) {
       setBuyLoading(false);
       return toast.error("Please Connect Your Metamask Wallet");
     }
     try {
-      let contractAddresss,walletAddress, txResult,cryptoAmount;
-      if(selectedDropdown === "BUSD"){
-       txResult = await contract.call("transfer", [
-        BUSD_ADDRESS,
-        usd,
-      ]);
-    } else{
-     if (selectedDropdown === "Scrooge") {
-      contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
-      walletAddress = OGWalletAddress;
-      console.log(process.env.OG_WALLET_ADDRESS);
-    } else if (selectedDropdown === "Scrooge Jr") {
-      contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
-      walletAddress = JRWalletAddress;
-    }
-      const res = await fetch(
-        `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
-      );
-      const data = await res.json();
-      const current_price = data.market_data.current_price.usd;
-      cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
-console.log("current_price",current_price);
-console.log("cryptoAmount",cryptoAmount);
-    txResult = await sdk.wallet
-        .transfer(walletAddress, cryptoAmount, contractAddresss)
+      let contractAddresss, walletAddress, txResult, cryptoAmount;
+      if (selectedDropdown === "BUSD") {
+        txResult = await contract.call("transfer", [BUSD_ADDRESS, usd]);
+      } else {
+        if (selectedDropdown === "Scrooge") {
+          contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
+          walletAddress = OGWalletAddress;
+        } else if (selectedDropdown === "Scrooge Jr") {
+          contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
+          walletAddress = JRWalletAddress;
+        }
+        const res = await fetch(
+          `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
+        );
+        const data = await res.json();
+        const current_price = data.market_data.current_price.usd;
+        cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
+        txResult = await sdk.wallet.transfer(
+          walletAddress,
+          cryptoAmount,
+          contractAddresss
+        );
       }
-            console.log("txResult", txResult);
       if (txResult.receipt) {
         const { transactionHash } = txResult?.receipt || {};
         marketPlaceInstance()
@@ -129,7 +115,6 @@ console.log("cryptoAmount",cryptoAmount);
           .then((response) => {
             setBuyLoading(false);
             if (response.data.success) {
-              console.log("ddfdf", response.data);
               setUser(response?.data?.user);
               toast.success(`Successfully Purchased ${gc} Tokens`);
               reward();
@@ -185,17 +170,23 @@ console.log("cryptoAmount",cryptoAmount);
             <div className="buy-chips-content">
               <div className="purchase-select">
                 <div className="purchaseSelect-Box">
-                <h4>Purchase with</h4>
-                <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  {!selectedDropdown ? "BUSD" : selectedDropdown}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item  onClick={()=>handleChange("Scrooge")}>Scrooge</Dropdown.Item>
-                    <Dropdown.Item  onClick={()=>handleChange("BUSD")}>BUSD</Dropdown.Item>
-                    <Dropdown.Item  onClick={()=>handleChange("Scrooge Jr")}>Scrooge Jr</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                  <h4>Purchase with</h4>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                      {!selectedDropdown ? "BUSD" : selectedDropdown}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item onClick={() => handleChange("Scrooge")}>
+                        Scrooge
+                      </Dropdown.Item>
+                      <Dropdown.Item onClick={() => handleChange("BUSD")}>
+                        BUSD
+                      </Dropdown.Item>
+                      <Dropdown.Item onClick={() => handleChange("Scrooge Jr")}>
+                        Scrooge Jr
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </div>
               </div>
               <div className="buy-chips-grid">
@@ -207,9 +198,9 @@ console.log("cryptoAmount",cryptoAmount);
                         src={
                           prize.priceInBUSD <= 10
                             ? coin1
-                            : (10 < prize.priceInBUSD && prize.priceInBUSD <= 50)
+                            : 10 < prize.priceInBUSD && prize.priceInBUSD <= 50
                             ? coin2
-                            : 50 < prize.priceInBUSD  && prize.priceInBUSD <= 100
+                            : 50 < prize.priceInBUSD && prize.priceInBUSD <= 100
                             ? coin3
                             : 100 < prize.priceInBUSD
                             ? coin4

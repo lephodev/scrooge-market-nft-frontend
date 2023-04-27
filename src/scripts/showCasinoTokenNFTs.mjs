@@ -26,7 +26,6 @@ export default function ShowCasinoTokenNFTs() {
   // data is the active listings, isLoading is a loading flag while we load the listings.
   const { data: listings = [], isLoading: loadingListings } =
     useActiveListings(contract);
-  console.log("contract", contract, listings, loadingListings);
 
   // async function handleBuyAsset(_id, _qty) {
   //     setBuyloading(true);

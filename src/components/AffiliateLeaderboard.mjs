@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/authContext.ts";
 import { marketPlaceInstance } from "../config/axios.js";
+import { Button, Collapse } from "react-bootstrap";
 
 export default function AffiliateLeaderboard() {
   const { user } = useContext(AuthContext);
@@ -13,6 +14,12 @@ export default function AffiliateLeaderboard() {
   const [leaderboardMonthlyMovers, setLeaderboardMonthlyMovers] = useState([]);
   const [leaderboardTopSales, setLeaderboardTopSales] = useState([]);
   const [leaderboardTopRegisters, setLeaderboardTopRegisters] = useState([]);
+  const [openSales, setOpenSales] = useState(false);
+  const [openTokens, setOpenTokens] = useState(false);
+  const [openhottest, setOpenhottest] = useState(false);
+  const [openMovers, setOpenMovers] = useState(false);
+  const [openUserReferals, setOpenUserReferals] = useState(false);
+  const [openProductSales, setOpenProductSales] = useState(false);
 
   const getAffLeadersByCount = async (limit = 10, days = 0) => {
     try {
@@ -86,16 +93,14 @@ export default function AffiliateLeaderboard() {
       marketPlaceInstance()
         .get(`/getAffLeadersByType/${type}/${limit}/${days}`)
         .then((data) => {
-          console.log("getAffLeadersByTokens: ", data.data);
-          if (typeof data.data !== "string") setLeaderboardTopSales(data?.data?.data);
+          if (typeof data.data !== "string")
+            setLeaderboardTopSales(data?.data?.data);
           return data.data;
         });
     } catch (err) {
       console.error(err);
     }
   }
-
-
 
   async function getAffLeadersTopRegisters(
     type = "register",
@@ -127,7 +132,7 @@ export default function AffiliateLeaderboard() {
       await getAffLeadersMonthlyMovers();
       await getAffLeadersTopRegisters();
       // getAffLeadersTopSales
-      await  getAffLeadersTopSales();
+      await getAffLeadersTopSales();
     };
     getData();
   }, []);
@@ -136,16 +141,16 @@ export default function AffiliateLeaderboard() {
   return (
     <>
       {showLeaderboards ? (
-        <div className='bordered-section'>
-          <div className='text-animate'>
+        <div className="bordered-section">
+          <div className="text-animate">
             <h1>LEADERBOARDS</h1>
           </div>
-          <div className='flex-row-no-margin'>
+          <div className="flex-row-no-margin">
             {leaderboardByCount !== "Error" ? (
               <>
-                <div className='leaderboard-card-div'>
+                <div className="leaderboard-card-div">
                   <div
-                    className='pageTitless text-animate'
+                    className="pageTitless text-animate"
                     style={{ marginBottom: "20px" }}
                   >
                     <h4>Affiliate Sales Leaders</h4>
@@ -153,20 +158,52 @@ export default function AffiliateLeaderboard() {
                   {leaderboardByCount !== "No Entries Found For User" &&
                   leaderboardByCount !== "Error in Request Process" &&
                   leaderboardByCount.length ? (
-                    leaderboardByCount.map((lead, index) => (
-                      <div className='leaderboard-row' key={lead._id}>
-                        <div className='leaderboard-left'>
-                          <p>{index + 1}.</p>
-                          <p>Affiliate ID: {lead._id}</p>
+                    <>
+                      <div
+                        className="leaderboard-row"
+                        key={leaderboardByCount[0]?._id}
+                      >
+                        <div className="leaderboard-left">
+                          <p>1.</p>
+                          <p>Affiliate ID: {leaderboardByCount[0]?._id}</p>
                         </div>
-                        <div className='leaderboard-right'>
-                          <p># of Sales: {lead.count}</p>
+                        <div className="leaderboard-right">
+                          <p># of Sales: {leaderboardByCount[0]?.count}</p>
                         </div>
                       </div>
-                    ))
+                      <div className="affiliate-dropdown">
+                        <Collapse in={openSales}>
+                          <div id="example-collapse-text">
+                            {leaderboardByCount
+                              ?.slice(1)
+                              ?.map((lead, index) => (
+                                <div className="leaderboard-row" key={lead._id}>
+                                  <div className="leaderboard-left">
+                                    <p>{index + 2}.</p>
+                                    <p>Affiliate ID: {lead._id}</p>
+                                  </div>
+                                  <div className="leaderboard-right">
+                                    <p># of Sales: {lead.count}</p>
+                                  </div>
+                                </div>
+                              ))}
+                          </div>
+                        </Collapse>
+                        <Button
+                          className={`affiliate-dropdownBtn ${
+                            openSales ? "close" : "open"
+                          } `}
+                          onClick={() => setOpenSales(!openSales)}
+                          aria-controls="example-collapse-text"
+                          aria-expanded={openSales}
+                        >
+                          See {openSales ? "Less" : "More"} ...
+                        </Button>
+                      </div>
+                    </>
                   ) : (
                     <div>
-                      <div className='no-data'>No Data Found</div>
+                      <div className="no-data">No Data Found</div>
                     </div>
                   )}
                 </div>
@@ -177,9 +214,9 @@ export default function AffiliateLeaderboard() {
 
             {leaderboardByTokens !== "Error" ? (
               <>
-                <div className='leaderboard-card-div'>
+                <div className="leaderboard-card-div">
                   <div
-                    className='pageTitless text-animate'
+                    className="pageTitless text-animate"
                     style={{ marginBottom: "20px" }}
                   >
                     <h4>Affiliate Tokens Leaders</h4>
@@ -187,22 +224,56 @@ export default function AffiliateLeaderboard() {
                   {leaderboardByTokens !== "No Entries Found For User" &&
                   leaderboardByTokens !== "Error in Request Process" &&
                   leaderboardByTokens.length ? (
-                    leaderboardByTokens.map((lead, index) => (
-                      <div className='leaderboard-row' key={lead._id}>
-                        <div className='leaderboard-left'>
-                          <p>{index + 1}.</p>
-                          <p>Affiliate ID: {lead._id}</p>
+                    <>
+                      <div
+                        className="leaderboard-row"
+                        key={leaderboardByTokens[0]?._id}
+                      >
+                        <div className="leaderboard-left">
+                          <p>1.</p>
+                          <p>Affiliate ID: {leaderboardByTokens[0]?._id}</p>
                         </div>
-
-                        <div>
-                          <p>Earned: {lead.totalCommission} Tokens</p>
+                        <div className="leaderboard-right">
+                          <p>
+                            Earned: {leaderboardByTokens[0]?.totalCommission}{" "}
+                            Tokens
+                          </p>
                         </div>
                       </div>
-                    ))
+                      <div className="affiliate-dropdown">
+                        <Collapse in={openTokens}>
+                          <div id="example-collapse-text">
+                            {leaderboardByTokens
+                              ?.slice(1)
+                              ?.map((lead, index) => (
+                                <div className="leaderboard-row" key={lead._id}>
+                                  <div className="leaderboard-left">
+                                    <p>{index + 2}.</p>
+                                    <p>Affiliate ID: {lead._id}</p>
+                                  </div>
+                                  <div className="leaderboard-right">
+                                    <p>Earned: {lead.totalCommission} Tokens</p>
+                                  </div>
+                                </div>
+                              ))}
+                          </div>
+                        </Collapse>
+                        <Button
+                          className={`affiliate-dropdownBtn ${
+                            openTokens ? "close" : "open"
+                          } `}
+                          onClick={() => setOpenTokens(!openTokens)}
+                          aria-controls="example-collapse-text"
+                          aria-expanded={openTokens}
+                        >
+                          See {openTokens ? "Less" : "More"} ...
+                        </Button>
+                      </div>
+                    </>
                   ) : (
-                    <div className=''>
+                    <div className="">
                       {" "}
-                      <div className='no-data'>No Data Found</div>
+                      <div className="no-data">No Data Found</div>
                     </div>
                   )}
                 </div>
@@ -213,9 +284,9 @@ export default function AffiliateLeaderboard() {
 
             {leaderboardHottestNewcomers !== "Error" ? (
               <>
-                <div className='leaderboard-card-div'>
+                <div className="leaderboard-card-div">
                   <div
-                    className='pageTitlesss text-animate'
+                    className="pageTitlesss text-animate"
                     style={{ marginBottom: "20px" }}
                   >
                     <h4>Hottest Newcomers</h4>
@@ -224,22 +295,61 @@ export default function AffiliateLeaderboard() {
                     "No Entries Found For User" &&
                   leaderboardHottestNewcomers !== "Error in Request Process" &&
                   leaderboardHottestNewcomers.length ? (
-                    leaderboardHottestNewcomers.map((lead, index) => (
-                      <div className='leaderboard-row' key={lead._id}>
-                        <div className='leaderboard-left'>
-                          <p>{index + 1}.</p>
-                          <p>Affiliate ID: {lead._id}</p>
+                    <>
+                      <div
+                        className="leaderboard-row"
+                        key={leaderboardHottestNewcomers[0]?._id}
+                      >
+                        <div className="leaderboard-left">
+                          <p>1.</p>
+                          <p>
+                            Affiliate ID: {leaderboardHottestNewcomers[0]?._id}
+                          </p>
                         </div>
-
-                        <div>
-                          <p>Earned: {lead.totalCommission} Tokens</p>
+                        <div className="leaderboard-right">
+                          <p>
+                            <p>
+                              Earned:{" "}
+                              {leaderboardHottestNewcomers[0]?.totalCommission}{" "}
+                              Tokens
+                            </p>
+                          </p>
                         </div>
                       </div>
-                    ))
+                      <div className="affiliate-dropdown">
+                        <Collapse in={openhottest}>
+                          <div id="example-collapse-text">
+                            {leaderboardHottestNewcomers
+                              ?.slice(1)
+                              ?.map((lead, index) => (
+                                <div className="leaderboard-row" key={lead._id}>
+                                  <div className="leaderboard-left">
+                                    <p>{index + 2}.</p>
+                                    <p>Affiliate ID: {lead._id}</p>
+                                  </div>
+                                  <div className="leaderboard-right">
+                                    <p>Earned: {lead.totalCommission} Tokens</p>
+                                  </div>
+                                </div>
+                              ))}
+                          </div>
+                        </Collapse>
+                        <Button
+                          className={`affiliate-dropdownBtn ${
+                            openhottest ? "close" : "open"
+                          } `}
+                          onClick={() => setOpenhottest(!openhottest)}
+                          aria-controls="example-collapse-text"
+                          aria-expanded={openhottest}
+                        >
+                          See {openhottest ? "Less" : "More"} ...
+                        </Button>
+                      </div>
+                    </>
                   ) : (
-                    <div className=''>
+                    <div className="">
                       {" "}
-                      <div className='no-data'>No Data Found</div>
+                      <div className="no-data">No Data Found</div>
                     </div>
                   )}
                 </div>
@@ -250,9 +360,9 @@ export default function AffiliateLeaderboard() {
 
             {leaderboardMonthlyMovers !== "Error" ? (
               <>
-                <div className='leaderboard-card-div'>
+                <div className="leaderboard-card-div">
                   <div
-                    className='pageTitless text-animate'
+                    className="pageTitless text-animate"
                     style={{ marginBottom: "20px" }}
                   >
                     <h4>Monthly Movers</h4>
@@ -260,21 +370,58 @@ export default function AffiliateLeaderboard() {
                   {leaderboardMonthlyMovers !== "No Entries Found For User" &&
                   leaderboardMonthlyMovers !== "Error in Request Process" &&
                   leaderboardMonthlyMovers.length ? (
-                    leaderboardMonthlyMovers.map((lead, index) => (
-                      <div className='leaderboard-row' key={lead._id}>
-                        <div className='leaderboard-left'>
-                          <p>{index + 1}.</p>
-                          <p>Affiliate ID: {lead._id}</p>
+                    <>
+                      <div
+                        className="leaderboard-row"
+                        key={leaderboardMonthlyMovers[0]?._id}
+                      >
+                        <div className="leaderboard-left">
+                          <p>1.</p>
+                          <p>
+                            Affiliate ID: {leaderboardMonthlyMovers[0]?._id}
+                          </p>
                         </div>
-
-                        <div>
-                          <p>Earned: {lead.totalCommission} Tokens</p>
+                        <div className="leaderboard-right">
+                          <p>
+                            Earned:{" "}
+                            {leaderboardMonthlyMovers[0]?.totalCommission}{" "}
+                            Tokens
+                          </p>
                         </div>
                       </div>
-                    ))
+                      <div className="affiliate-dropdown">
+                        <Collapse in={openMovers}>
+                          <div id="example-collapse-text">
+                            {leaderboardMonthlyMovers
+                              ?.slice(1)
+                              ?.map((lead, index) => (
+                                <div className="leaderboard-row" key={lead._id}>
+                                  <div className="leaderboard-left">
+                                    <p>{index + 2}.</p>
+                                    <p>Affiliate ID: {lead._id}</p>
+                                  </div>
+                                  <div className="leaderboard-right">
+                                    <p>Earned: {lead.totalCommission} Tokens</p>
+                                  </div>
+                                </div>
+                              ))}
+                          </div>
+                        </Collapse>
+                        <Button
+                          className={`affiliate-dropdownBtn ${
+                            openMovers ? "close" : "open"
+                          } `}
+                          onClick={() => setOpenMovers(!openMovers)}
+                          aria-controls="example-collapse-text"
+                          aria-expanded={openMovers}
+                        >
+                          See {openMovers ? "Less" : "More"} ...
+                        </Button>
+                      </div>
+                    </>
                   ) : (
-                    <div className=''>
-                      <div className='no-data'>No Data Found</div>
+                    <div className="">
+                      <div className="no-data">No Data Found</div>
                     </div>
                   )}
                 </div>
@@ -285,9 +432,9 @@ export default function AffiliateLeaderboard() {
 
             {leaderboardTopRegisters !== "Error" ? (
               <>
-                <div className='leaderboard-card-div'>
+                <div className="leaderboard-card-div">
                   <div
-                    className='pageTitless text-animate'
+                    className="pageTitless text-animate"
                     style={{ marginBottom: "20px" }}
                   >
                     <h4>Top User Referrals</h4>
@@ -295,22 +442,56 @@ export default function AffiliateLeaderboard() {
                   {leaderboardTopRegisters !== "No Entries Found For User" &&
                   leaderboardTopRegisters !== "Error in Request Process" &&
                   leaderboardTopRegisters.length ? (
-                    leaderboardTopRegisters.map((lead, index) => (
-                      <div className='leaderboard-row' key={lead._id}>
-                        <div className='leaderboard-left'>
-                          <p>{index + 1}.</p>
-                          <p>Affiliate ID: {lead._id}</p>
+                    <>
+                      <div
+                        className="leaderboard-row"
+                        key={leaderboardTopRegisters[0]?._id}
+                      >
+                        <div className="leaderboard-left">
+                          <p>1.</p>
+                          <p>Affiliate ID: {leaderboardTopRegisters[0]?._id}</p>
                         </div>
-
-                        <div>
-                          <p>Earned: {lead.totalCommission} Tokens</p>
+                        <div className="leaderboard-right">
+                          <p>
+                            Earned:{" "}
+                            {leaderboardTopRegisters[0]?.totalCommission} Tokens
+                          </p>
                         </div>
                       </div>
-                    ))
+                      <div className="affiliate-dropdown">
+                        <Collapse in={openUserReferals}>
+                          <div id="example-collapse-text">
+                            {leaderboardTopRegisters
+                              ?.slice(1)
+                              ?.map((lead, index) => (
+                                <div className="leaderboard-row" key={lead._id}>
+                                  <div className="leaderboard-left">
+                                    <p>{index + 2}.</p>
+                                    <p>Affiliate ID: {lead._id}</p>
+                                  </div>
+                                  <div className="leaderboard-right">
+                                    <p>Earned: {lead.totalCommission} Tokens</p>
+                                  </div>
+                                </div>
+                              ))}
+                          </div>
+                        </Collapse>
+                        <Button
+                          className={`affiliate-dropdownBtn ${
+                            openUserReferals ? "close" : "open"
+                          } `}
+                          onClick={() => setOpenUserReferals(!openUserReferals)}
+                          aria-controls="example-collapse-text"
+                          aria-expanded={openUserReferals}
+                        >
+                          See {openUserReferals ? "Less" : "More"} ...
+                        </Button>
+                      </div>
+                    </>
                   ) : (
-                    <div className=''>
+                    <div className="">
                       {" "}
-                      <div className='no-data'>No Data Found</div>
+                      <div className="no-data">No Data Found</div>
                     </div>
                   )}
                 </div>
@@ -321,9 +502,9 @@ export default function AffiliateLeaderboard() {
 
             {leaderboardTopSales !== "Error" ? (
               <>
-                <div className='leaderboard-card-div'>
+                <div className="leaderboard-card-div">
                   <div
-                    className='pageTitless text-animate'
+                    className="pageTitless text-animate"
                     style={{ marginBottom: "20px" }}
                   >
                     <h4>Top Product Sales</h4>
@@ -331,22 +512,56 @@ export default function AffiliateLeaderboard() {
                   {leaderboardTopSales !== "No Entries Found For User" &&
                   leaderboardTopSales !== "Error in Request Process" &&
                   leaderboardTopSales.length ? (
-                    leaderboardTopSales.map((lead, index) => (
-                      <div className='leaderboard-row' key={lead._id}>
-                        <div className='leaderboard-left'>
-                          <p>{index + 1}.</p>
-                          <p>Affiliate ID: {lead._id}</p>
+                    <>
+                      <div
+                        className="leaderboard-row"
+                        key={leaderboardTopSales[0]?._id}
+                      >
+                        <div className="leaderboard-left">
+                          <p>1.</p>
+                          <p>Affiliate ID: {leaderboardTopSales[0]?._id}</p>
                         </div>
-
-                        <div>
-                          <p>Earned: {lead.totalCommission} Tokens</p>
+                        <div className="leaderboard-right">
+                          <p>
+                            Earned: {leaderboardTopSales[0]?.totalCommission}{" "}
+                            Tokens
+                          </p>
                         </div>
                       </div>
-                    ))
+                      <div className="affiliate-dropdown">
+                        <Collapse in={openProductSales}>
+                          <div id="example-collapse-text">
+                            {leaderboardTopSales
+                              ?.slice(1)
+                              ?.map((lead, index) => (
+                                <div className="leaderboard-row" key={lead._id}>
+                                  <div className="leaderboard-left">
+                                    <p>{index + 2}.</p>
+                                    <p>Affiliate ID: {lead._id}</p>
+                                  </div>
+                                  <div className="leaderboard-right">
+                                    <p>Earned: {lead.totalCommission} Tokens</p>
+                                  </div>
+                                </div>
+                              ))}
+                          </div>
+                        </Collapse>
+                        <Button
+                          className={`affiliate-dropdownBtn ${
+                            openProductSales ? "close" : "open"
+                          } `}
+                          onClick={() => setOpenProductSales(!openProductSales)}
+                          aria-controls="example-collapse-text"
+                          aria-expanded={openProductSales}
+                        >
+                          See {openProductSales ? "Less" : "More"} ...
+                        </Button>
+                      </div>
+                    </>
                   ) : (
-                    <div className=''>
+                    <div className="">
                       {" "}
-                      <div className='no-data'>No Data Found</div>
+                      <div className="no-data">No Data Found</div>
                     </div>
                   )}
                 </div>

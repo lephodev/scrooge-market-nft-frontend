@@ -13,7 +13,6 @@ export default function PaymentSuccess() {
     }
   }, [searchParams]);
 
-  console.log("status", status);
 
   return (
     <Layout>

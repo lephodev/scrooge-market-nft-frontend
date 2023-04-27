@@ -22,19 +22,15 @@ export default function ClaimOGPending() {
   });
   const sdk = useSDK();
   const address = useAddress();
-  console.log("addedee24", address);
   const OGContractAddress = process.env.REACT_APP_OGCONTRACT_ADDRESS;
-  console.log("OGContractAddressOGContractAddress25", OGContractAddress);
   const contractClaim = async () =>
     await sdk
       .getContractFromAbi(OGContractAddress, OG_ABI)
       .then(async (contract) => {
-        console.log("contract29", contract);
         setContractObj(contract);
        await contract
           .call("getAccountDividendsInfo", [address])
           .then((divInfo) => {
-            console.log("divInfo", divInfo);
             setClaimableAmount((parseInt(divInfo[3]) / 10 ** 18).toFixed(4));
             setSecondsUntilClaim(parseInt(divInfo[7]));
             var t = new Date();
@@ -44,7 +40,6 @@ export default function ClaimOGPending() {
             t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
             setClaimableIn(t.toString());
             setClaimableInTime(t.getTime());
-            console.log("divInfo[4]", divInfo[4]);
             setTotalClaimed((parseInt(divInfo[4]) / 10 ** 18).toFixed(4));
           });
       });
@@ -74,7 +69,6 @@ export default function ClaimOGPending() {
   useEffect(() => {
     contractClaim();
   }, [address]);
-  console.log("claimableAmount", claimableAmount, "totalClaimed", totalClaimed);
   return (
     <>
       {!isClaiming ? (

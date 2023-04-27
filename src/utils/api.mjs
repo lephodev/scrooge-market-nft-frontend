@@ -3,7 +3,6 @@ import { kycInstance } from "../config/axios.js";
 export const createKYC = async (requestData) => {
     try {
       const res= await kycInstance().post(`users/createKyc`, requestData);
-      console.log('get KYC data----->', res);
       return res
     } catch (error) {
       console.log('Error in KYC brands api =>', error);

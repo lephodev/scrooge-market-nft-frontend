@@ -36,19 +36,16 @@ export default function ShowAllTokenNFTs() {
     process.env.REACT_APP_MARKETPLACE_ADDRESS,
     "marketplace"
   );
-  console.log("contract", contract);
-  // console.log("contract000",contract);
+
   // data is the active listings, isLoading is a loading flag while we load the listings.
   const { data: listings, isLoading: loadingListings } =
     useActiveListings(contract);
 
-  console.log("listings", listings);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
 
   async function handleBuyAsset(token_id, qty, assetId) {
-    console.log("token_id, qty", token_id, qty, assetId);
     if (!user)
       return toast.error("Please Login first", { containerId: "authenticate" });
     setBuyLoading(true);
@@ -65,7 +62,6 @@ export default function ShowAllTokenNFTs() {
         "affID",
         affID
       );
-      console.log();
       const buyout = await contract.buyoutListing(token_id, qty);
      console.log("buyoutbuyoutbuyout", buyout);
       marketPlaceInstance()
@@ -77,7 +73,6 @@ export default function ShowAllTokenNFTs() {
           affID: affID,
         })
         .then((data) => {
-          console.log("data",data);
           if(data?.data?.success){
           setUser(data?.data?.user)
           toast.success(

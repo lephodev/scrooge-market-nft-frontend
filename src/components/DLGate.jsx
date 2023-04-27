@@ -16,24 +16,20 @@ export const DLGate = ({children}) => {
 
 export async function CheckDLOnPage(address) {
   //check if user has DL (send to backend)
-  console.log("abba")
   let bal = 0
   try {
     await marketPlaceInstance()
       .get(`/getWalletDLBalance/${address}`)
       .then(res => {
-        console.log("resmmmm",res);
         if (res.data >= 0) {
           bal = res.data
         } else {
           bal = 0
         }
       })
-    console.log("hgfg")
   } catch (error) {
     console.log(error)
     bal = 0
   }
-  console.log("aafgafa")
   return bal
 }

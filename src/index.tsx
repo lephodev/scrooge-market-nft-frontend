@@ -51,7 +51,6 @@ export default function App() {
 
   // call this function when you want to authenticate the user
   const login = async () => {
-    console.log("api call");
     setLoading(true);
     let access_token = cookies.token;
     authInstance()
@@ -63,7 +62,6 @@ export default function App() {
       .then((res: any) => {
         // console.log(convertedData)
         if (res.data.user) {
-          console.log("user", res.data);
           setUser({
             ...res.data.user,
           });
