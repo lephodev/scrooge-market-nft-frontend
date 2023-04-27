@@ -30,7 +30,6 @@ export default function BuyTokenFromOGJR() {
   const JRWalletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS
 
   const getUserDataInstant = () => {
-    console.log("abbababababbababa");
     let access_token = cookies.token;
     authInstance()
       .get("/auth/check-auth", {
@@ -39,9 +38,7 @@ export default function BuyTokenFromOGJR() {
         },
       })
       .then((res) => {
-        console.log("convertedData", res);
         if (res.data.user) {
-          console.log("user", res.data);
           setUser({
             ...res.data.user,
           });
@@ -55,7 +52,6 @@ export default function BuyTokenFromOGJR() {
   
 
   const convert = async (type, crypto, tokens) => {
-    console.log("type, crypto, tokens",type, crypto, tokens);
     let contractAddresss, walletAddress, cryptoAmount;
     setBuyLoading(true);
     if (!address) {
@@ -64,7 +60,6 @@ export default function BuyTokenFromOGJR() {
     } else if (type === "OG") {
       contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
       walletAddress = OGWalletAddress;
-      console.log(process.env.OG_WALLET_ADDRESS);
     } else if (type === "JR") {
       contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
       walletAddress = JRWalletAddress;
@@ -80,16 +75,12 @@ export default function BuyTokenFromOGJR() {
       sdk.wallet
         .transfer(walletAddress, cryptoAmount, contractAddresss,)
         .then((txResult) => {
-          console.log("txResult",txResult);
           const {transactionHash}=txResult?.receipt||{}
-          console.log("transactionHash",transactionHash);
           marketPlaceInstance()
             .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}/${transactionHash}`)
             .then((response) => {
-              console.log("responseresponseresponse",response);
               setBuyLoading(false);
               if (response.data.success) {
-                console.log("");
                 setUser(response?.data?.user)
                 toast.success(`Successfully Purchased ${tokens} Tokens`);
                 reward();

@@ -36,7 +36,6 @@ function HolderClaimChips() {
   // const signer = useSigner();
 
   const isMismatched = useNetworkMismatch();
-  console.log("mis", isMismatched, address)
   function notify(message) {
     toast.success("🎩 " + message);
   }
@@ -46,7 +45,6 @@ function HolderClaimChips() {
       marketPlaceInstance()
         .get(`/getNextClaimDate/${address}/holder/${user.id}/0`)
         .then((data) => {
-          console.log("setclam=im---", data);
           if (data.data.success) {
             setNextClaimDate(data.data.data[0].nextClaimDate);
           } else {
@@ -64,7 +62,6 @@ function HolderClaimChips() {
       .then((response) => response.json())
       .then((data) => {
         const current_price = data.market_data.current_price.usd;
-        console.log("coingeckodata", current_price);
         setCurrentPrice(current_price);
         return current_price;
       })
@@ -129,8 +126,6 @@ function HolderClaimChips() {
 
   useEffect(() => {
     getCoinGeckoData();
-    console.log("address", address);
-    console.log("isMismatched", !isMismatched);
     if (address && !isMismatched) {
       sdksdk();
       zzz();

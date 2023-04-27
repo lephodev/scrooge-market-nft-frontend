@@ -130,7 +130,6 @@ const Layout = ({ children }) => {
                   />
                 </Link> */}
               </div>
-              {console.log("currentPriceOG", currentPriceOG)}
               <div className='wallet'>
                 <ConnectWallet />
                 <div className={priceColor}>${currentPriceOG}</div>

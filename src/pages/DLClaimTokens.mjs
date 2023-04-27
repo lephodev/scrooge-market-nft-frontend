@@ -13,16 +13,13 @@ export default function DLClaimTokens() {
   const [loading, setLoading] = useState(true);
 
   async function getWalletDL() {
-    console.log("zzzzz");
     setLoading(true);
     const DLBal = await CheckDLOnPage(address);
-    console.log("DLBal: ", DLBal);
     setHasDL(DLBal);
     setLoading(false);
   }
 
   useEffect(() => {
-    console.log("bghgh", address);
     if (address) {
       getWalletDL(address);
     } else {
@@ -31,7 +28,6 @@ export default function DLClaimTokens() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address]);
 
-  console.log("hasDL", hasDL);
   return (
       <main className='main'>
         <div className='container'>

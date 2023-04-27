@@ -30,16 +30,12 @@ function DailyRewards() {
   }
 
   async function getNextClaimDate() {
-    console.log("user---", user.id);
     try {
       if (user.id) {
-        console.log("---");
-        console.log(address);
         const data = await marketPlaceInstance().get(
           `/getNextClaimDate/${address}/daily/${user.id}/0`
         );
         setLoader(false);
-        console.log("claimdat3e", data.data);
         if (data.data.success) {
           setFullDailyRewards(true);
           setNextClaimDate(data.data.data[0]);
@@ -60,14 +56,11 @@ function DailyRewards() {
   // }
 
   const claimTokens = async () => {
-    console.log("user+++", user.id);
     setBuyLoading(true);
-    console.log("user_id", user.id);
     try {
       const data = await marketPlaceInstance().get(
         `/claimDailyRewards/${user.id}`
       );
-      console.log("datatatta", data);
       const {success,message}=data?.data
       if(success){
         toast.success(message);
@@ -95,7 +88,6 @@ function DailyRewards() {
     window.scrollTo(0, 0);
 
     if (user) {
-      //console.log('UE zzz');
       zzz();
     }
   }, [user, address]);

@@ -938,12 +938,15 @@ span.wallet-user-name {
   margin: 20px 0px;
 }
 
-.tab-btn button, .tab-btn button:hover, .tab-btn button:focus {
+.tab-btn button,
+.tab-btn button:hover,
+.tab-btn button:focus {
   background: transparent;
   border: 1px solid #4d4e4f;
   font-size: 14px;
   padding: 8px 20px;
 }
+
 button.active-btn.btn.btn-primary {
   background: #fbff14;
   color: black;
@@ -4400,9 +4403,11 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
 .card-body button p {
   font-size: 14px;
 }
+
 .card-body button span {
   font-size: 18px;
 }
+
 .purchasemodal-cards .goldPurchase-offers {
   background: #fa0000;
   border-top-left-radius: 10px;
@@ -4452,6 +4457,52 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   border: 1px solid #f9ff00;
 }
 
+button.affiliate-dropdownBtn:hover,
+button.affiliate-dropdownBtn:focus,
+button.affiliate-dropdownBtn:active,
+button.affiliate-dropdownBtn
+ {
+  position: relative;
+  width: 100%;
+  background: transparent !important;
+  border: 1px solid transparent !important; 
+  border-bottom: 1px solid #f9ff00 !important;
+  color: grey;
+  padding: 10px 20px;
+}
+
+button.affiliate-dropdownBtn.open::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  border: 1px solid #f9ff00;
+  position: absolute;
+  rotate: 45deg;
+  transform: translate(-50%, -50%);
+  top: 106%;
+  left: 48%;
+  border-top: 1px solid transparent !important;
+  border-left: 1px solid transparent !important;
+  border-top-left-radius: 100%;
+  background: #000;
+}
+button.affiliate-dropdownBtn.close::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  border: 1px solid #f9ff00;
+  position: absolute;
+  rotate: 45deg;
+  transform: translate(-50%, -50%);
+  top: 110%;
+  left: 47%;
+  border-bottom: 1px solid transparent !important;
+  border-right: 1px solid transparent !important;
+  border-bottom-right-radius: 100%;
+  background: #000;
+}
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
@@ -5330,12 +5381,16 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
 }
 
 @media screen and (max-width: 480px) {
-  .tab-btn button, .tab-btn button:hover, .tab-btn button:focus {
+
+  .tab-btn button,
+  .tab-btn button:hover,
+  .tab-btn button:focus {
     background: transparent;
     border: 1px solid #4d4e4f;
     font-size: 12px;
     padding: 8px 8px;
-}
+  }
+
   .footer-info {
     max-width: 100%;
     padding-top: 0;

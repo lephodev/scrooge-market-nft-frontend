@@ -13,7 +13,7 @@ export default function ClaimJRPending() {
   const [claimableAmount, setClaimableAmount] = useState("");
   const [totalClaimed, setTotalClaimed] = useState("");
   const [secondsUntilClaim, setSecondsUntilClaim] = useState("");
-  const [ setClaimableIn] = useState("");
+  const [setClaimableIn] = useState("");
   const [claimableInTime, setClaimableInTime] = useState();
   const [isClaiming, setIsClaiming] = useState(false);
 
@@ -26,15 +26,12 @@ export default function ClaimJRPending() {
 
   const contractClaim = async () => {
     try {
-      console.log("contractClaimcalled");
       const contract = await sdk.getContractFromAbi(JRContractAddress, JR_ABI);
-      console.log("claimJRPEnding contract", contract);
       setContractObj(contract);
       const accBal = await contract.erc20.balance(address);
       console.log("accBal", accBal);
       const divInfo = await contract.call("getAccountDividendsInfo", [address]);
       // const divInfo = await contract.call("getAccountDividendsInfo", address);
-      console.log("claimjrpending divInfo", divInfo);
       setClaimableAmount((parseInt(divInfo[3]) / 10 ** 18).toFixed(4));
       setSecondsUntilClaim(parseInt(divInfo[7]));
       var t = new Date();
@@ -81,7 +78,7 @@ export default function ClaimJRPending() {
     <>
       {!isClaiming ? (
         <div>
-          <span className='yellow'>
+          <span className="yellow">
             <strong>BUSD REWARDS</strong>
           </span>
           <br></br>
@@ -90,15 +87,16 @@ export default function ClaimJRPending() {
           <br />
           {address &&
           (secondsUntilClaim === 0 || { claimableInTime } >= Date.now()) ? (
-            <div className='new-btn'>
+            <div className="new-btn">
               <button
                 // className='claim-btn'
-                onClick={() => handleClaim()}>
+                onClick={() => handleClaim()}
+              >
                 Claim Pending Rewards
               </button>
             </div>
           ) : (
-            <div className='claim-countdown'>
+            <div className="claim-countdown">
               Next Claim Available:<br></br>
               {claimableInTime ? (
                 getCountdown(claimableInTime)
@@ -108,12 +106,12 @@ export default function ClaimJRPending() {
             </div>
           )}
           <div style={{ width: "100%", textAlign: "center" }}>
-            <div id='rewardId' style={{ margin: "0 auto" }} />
+            <div id="rewardId" style={{ margin: "0 auto" }} />
           </div>
         </div>
       ) : (
         <>
-          <img src={LoadingPoker} alt='game' className='imageAnimation' />
+          <img src={LoadingPoker} alt="game" className="imageAnimation" />
         </>
       )}
     </>

@@ -7,7 +7,7 @@ export function getUserCookie() {
 
 export function getUserCookieProd() {
     let access_token = Cookies.get('token');
-    console.log('access_token', access_token);
+    // console.log('access_token', access_token);
     if (access_token) {
         return access_token;
       } else {

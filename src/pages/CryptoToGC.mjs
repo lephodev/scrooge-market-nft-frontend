@@ -27,7 +27,6 @@ import { Form } from "react-router-dom";
 import { Button, Card, Dropdown } from "react-bootstrap";
 import { BUSD_ADDRESS } from "../config/keys.js";
 
-
 export default function CryptoToGC() {
   const sdk = useSDK();
   const { user, setUser } = useContext(AuthContext);
@@ -87,7 +86,7 @@ export default function CryptoToGC() {
       if(selectedDropdown === "BUSD"){
        txResult = await contract.call("transfer", [
         BUSD_ADDRESS,
-        usd,
+        parseInt(usd),
       ]);
     } else{
      if (selectedDropdown === "Scrooge") {
@@ -171,17 +170,23 @@ export default function CryptoToGC() {
             <div className="buy-chips-content">
               <div className="purchase-select">
                 <div className="purchaseSelect-Box">
-                <h4>Purchase with</h4>
-                <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  {!selectedDropdown ? "BUSD" : selectedDropdown}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item  onClick={()=>handleChange("Scrooge")}>Scrooge</Dropdown.Item>
-                    <Dropdown.Item  onClick={()=>handleChange("BUSD")}>BUSD</Dropdown.Item>
-                    <Dropdown.Item  onClick={()=>handleChange("Scrooge Jr")}>Scrooge Jr</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                  <h4>Purchase with</h4>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                      {!selectedDropdown ? "BUSD" : selectedDropdown}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item onClick={() => handleChange("Scrooge")}>
+                        Scrooge
+                      </Dropdown.Item>
+                      <Dropdown.Item onClick={() => handleChange("BUSD")}>
+                        BUSD
+                      </Dropdown.Item>
+                      <Dropdown.Item onClick={() => handleChange("Scrooge Jr")}>
+                        Scrooge Jr
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </div>
               </div>
               <div className="buy-chips-grid">
@@ -193,9 +198,9 @@ export default function CryptoToGC() {
                         src={
                           prize.priceInBUSD <= 10
                             ? coin1
-                            : (10 < prize.priceInBUSD && prize.priceInBUSD <= 50)
+                            : 10 < prize.priceInBUSD && prize.priceInBUSD <= 50
                             ? coin2
-                            : 50 < prize.priceInBUSD  && prize.priceInBUSD <= 100
+                            : 50 < prize.priceInBUSD && prize.priceInBUSD <= 100
                             ? coin3
                             : 100 < prize.priceInBUSD
                             ? coin4
