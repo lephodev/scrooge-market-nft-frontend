@@ -26,8 +26,8 @@ export default function BuyTokenFromOGJR() {
   const [cookies] = useCookies(["token"]);
   const sdk = useSDK();
   const address = useAddress();
-  const OGWalletAddress = "0xDcD9738D4D9Ea8c723484b9DDf5f34Ab9A601D92";
-  const JRWalletAddress = "0x4E0625BE79Aba0bd7596ad3698C9265D6CbbFAFf";
+  const OGWalletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS
+  const JRWalletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS
 
   const getUserDataInstant = () => {
     console.log("abbababababbababa");
