@@ -171,25 +171,6 @@ export default function BuyTokenFromOGJR() {
           </div>
           <div className='buy-chips-content'>
             <div className='buy-chips-grid'>
-              {/* <div className='buy-chips-grid-box'>
-                <img src={coin4} alt='coin' />
-
-                <div
-                  className='gradient-btn'
-                  onClick={() => convert("OG", 5, 500)}>
-                  <span>5$ WORTH SCROOGE OG gets you 500 Tokens </span>
-                </div>
-              </div>
-              <div className='buy-chips-grid-box'>
-                <img src={coin4} alt='coin' />
-
-                <div
-                  className='gradient-btn'
-                  onClick={() => convert("JR", 5, 500)}>
-                  <span>5$ WORTH SCROOGE JR gets you 500 Tokens </span>
-                </div>
-              </div> */}
-
               <div className='buy-chips-grid-box'>
                 {/* <p>25000 </p> */}
                 <img src={coin3} alt='coin' />
