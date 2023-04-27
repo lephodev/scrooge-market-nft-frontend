@@ -11,7 +11,7 @@ import { useEffect, useState, useContext } from "react";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import ChainContext from "../context/Chain.ts";
-import Token from "../images/token.png";
+import Sweep from "../images/sweep.png";
 import GoldCoin from "../images/goldCoin.png";
 import Ticket from "../images/ticket.png";
 import ScroogeHatLogo from "../images/scroogeHatLogo.png";
@@ -235,7 +235,7 @@ export default function MyWallet() {
                     <div className='token-ticket-row'>
                       <img
                         className='token-small'
-                        src={Token}
+                        src={Sweep}
                         alt='Scrooge Casino balances'
                       />
                       TOKENS: {user?.wallet?.toLocaleString("en-US")}
