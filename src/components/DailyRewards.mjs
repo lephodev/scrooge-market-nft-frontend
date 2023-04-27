@@ -250,7 +250,7 @@ console.log("Affuser",affUser);
                                   alt='daily reward money bag'
                                 />
                               </div>
-                              <div className='green'>60 Tokens</div>
+                              <div className='green'>65 Tokens</div>
                             </>
                           ) : (
                             <>
@@ -261,7 +261,7 @@ console.log("Affuser",affUser);
                                   alt='daily reward money bag'
                                 />
                               </div>
-                              <div className='red'>60 Tokens</div>
+                              <div className='red'>65 Tokens</div>
                             </>
                           )}
                         </div>
