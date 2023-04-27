@@ -34,6 +34,7 @@ export default function CryptoToGC() {
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
   const [selectedDropdown, setSelectedDropdown] = useState("BUSD");
+  const [key, setKey] = useState('cryptoToGc');
   const isMismatched = useNetworkMismatch();
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
@@ -146,7 +147,13 @@ export default function CryptoToGC() {
   return (
     <Layout>
       <main className="main redeem-prizes-page">
-        <div className="container">
+      <div className='tab-btn'>
+            <Button className={`${key === 'cryptoToGc' ? 'active-btn' : ''}`} onClick={ () => setKey("cryptoToGc")}>CryptoToGC</Button>
+            <Button className={`${key === 'ticketToToken' ? 'active-btn' : ''}`} onClick={ () => setKey("ticketToToken")}>TicketToToken</Button>
+        </div>
+        { key ==="cryptoToGc" ? (
+      <div className='tab-claims'>
+            <div className="container">
           {buyLoading ? (
             <div className="pageImgContainer">
               <img src={LoadingPoker} alt="game" className="imageAnimation" />
@@ -244,6 +251,9 @@ export default function CryptoToGC() {
             </div>
           )}
         </div>
+      </div>):""}
+
+     
       </main>
     </Layout>
   );
