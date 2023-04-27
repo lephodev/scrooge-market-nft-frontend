@@ -182,7 +182,7 @@ export default function GetWalletDLNFTs() {
                 a cool motherducker and holding at least one{" "}
                 <a
                   href='https://duckylucks.com'
-                  target='_blank'
+                   
                   rel='noreferrer'
                   alt='claim free tokens for holding ducky lucks NFTs'>
                   Ducky Lucks NFT

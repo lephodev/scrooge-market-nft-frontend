@@ -114,7 +114,7 @@ export default function AffiliateAITools() {
                   At{" "}
                   <a
                     href={scroogeClient}
-                    target='_blank'
+                     
                     rel='noreferrer'
                     alt='Visit Scrooge Casino and play today'
                   >
