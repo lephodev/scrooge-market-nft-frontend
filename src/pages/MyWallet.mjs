@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import GetWalletCasinoNFTs from "../scripts/getWalletCasinoNFTs.mjs";
 import {
   ConnectWallet,
   useNetworkMismatch,
@@ -12,7 +11,8 @@ import { useEffect, useState, useContext } from "react";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import ChainContext from "../context/Chain.ts";
-import Token from "../images/token.png";
+import Sweep from "../images/token.png";
+import GoldCoin from "../images/goldCoin.png";
 import Ticket from "../images/ticket.png";
 import ScroogeHatLogo from "../images/scroogeHatLogo.png";
 import scroogejr from "../images/scroogejr.jpeg";
@@ -39,8 +39,6 @@ export default function MyWallet() {
   const sdk = useSDK();
   const address = useAddress();
   const signer = useSigner();
-  console.log(address);
-  console.log(signer);
 
   async function checkToken() {
     try {
@@ -237,7 +235,7 @@ export default function MyWallet() {
                     <div className='token-ticket-row'>
                       <img
                         className='token-small'
-                        src={Token}
+                        src={Sweep}
                         alt='Scrooge Casino balances'
                       />
                       TOKENS: {user?.wallet?.toLocaleString("en-US")}
@@ -249,6 +247,14 @@ export default function MyWallet() {
                         alt='Scrooge Casino balances'
                       />
                       TICKETS: {user?.ticket?.toLocaleString("en-US")}
+                    </div>
+                    <div className='token-ticket-row'>
+                      <img
+                        className='token-small'
+                        src={GoldCoin}
+                        alt='Scrooge Casino balances'
+                      />
+                      GOLD COIN: {user?.goldCoin?.toLocaleString("en-US")}
                     </div>
                   </div>
                 </div>
@@ -407,7 +413,7 @@ export default function MyWallet() {
             <span></span>
           )}
 
-          {!isMismatched && address && showCasinoNFTs ? (
+          {/* {!isMismatched && address && showCasinoNFTs ? (
             <div className='bottom-margin-100'>
               <div
                 className='close-btn-round-div'
@@ -424,7 +430,7 @@ export default function MyWallet() {
             </div>
           ) : (
             <span></span>
-          )}
+          )} */}
 
           <ShowBottomNavCards />
         </main>

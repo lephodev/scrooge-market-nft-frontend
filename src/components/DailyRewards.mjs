@@ -13,10 +13,10 @@ import { useReward } from "react-rewards";
 import AuthContext from "../context/authContext.ts";
 import { scroogeClient } from "../config/keys.js";
 import { marketPlaceInstance } from "../config/axios.js";
+import getAffiliateUser from "../scripts/getAffilateUser.mjs";
 
 function DailyRewards() {
   const { user } = useContext(AuthContext);
-  console.log("useruser", user);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
@@ -24,29 +24,21 @@ function DailyRewards() {
   const [nextClaimDate, setNextClaimDate] = useState("Loading...");
   const [loader, setLoader] = useState(true);
   const [fullDailyRewards, setFullDailyRewards] = useState(false);
-  /*const [OGBalance, setOGBalance]=useState("Loading...");
-    const [currentPrice, setCurrentPrice]=useState("Loading...");
-    const [email, setEmail]=useState('');
-    const handleChange = event => {
-        setEmail(event.target.value);
-      };*/
+  const [affUser, setAffUser] = useState({});
+
+ 
   const address = useAddress();
-  //const isMismatched = useNetworkMismatch();
   function notify(message) {
     toast.success("🎩 " + message);
   }
 
   async function getNextClaimDate() {
-    console.log("user---", user.id);
     try {
       if (user.id) {
-        console.log("---");
-        console.log(address);
         const data = await marketPlaceInstance().get(
           `/getNextClaimDate/${address}/daily/${user.id}/0`
         );
         setLoader(false);
-        console.log("claimdat3e", data.data);
         if (data.data.success) {
           setFullDailyRewards(true);
           setNextClaimDate(data.data.data[0]);
@@ -67,15 +59,18 @@ function DailyRewards() {
   // }
 
   const claimTokens = async () => {
-    console.log("user+++", user.id);
     setBuyLoading(true);
-    console.log("user_id", user.id);
     try {
       const data = await marketPlaceInstance().get(
         `/claimDailyRewards/${user.id}`
       );
-      console.log("datatatta", data);
-      notify("Tokens Claimed: " + data.data);
+      const {success,message}=data?.data
+      if(success){
+        toast.success(message);
+      }
+      else {
+      toast.error(message);
+      }
       setBuyLoading(false);
       reward();
       zzz();
@@ -96,21 +91,31 @@ function DailyRewards() {
     window.scrollTo(0, 0);
 
     if (user) {
-      //console.log('UE zzz');
       zzz();
     }
   }, [user, address]);
 
+  const refreshAffData = async () => {
+    const getAff = await getAffiliateUser(user?.id);
+    setAffUser(getAff);
+  };
+
+  useEffect(() => {
+  
+    refreshAffData();
+  }, []);
+
+console.log("Affuser",affUser);
   return (
     <>
-      {console.log("fullDR", fullDailyRewards)}
-      {!loader && !fullDailyRewards ? (
+    { affUser?.message?.toString() !== "User not found." ? (
+       !loader && !fullDailyRewards ? (
         <>
           <div className='daily-reward-card-div'>
             {console.log("nextclaimdate", nextClaimDate)}
             <div className='inlineTitle'>DAILY REWARDS</div>
             <div className='rewards'>
-              <span>Last Claim Amount:</span> <p>{nextClaimDate.qty} Tokens</p>
+              <span>Last Claim Amount:</span> <p>{nextClaimDate?.qty} Tokens</p>
             </div>
             <div className='rewards'>
               <span>Consecutive:</span>{" "}
@@ -125,12 +130,6 @@ function DailyRewards() {
             <div className='available-btn'>
               <span>Available:</span>{" "}
               <Countdown date={nextClaimDate.nextClaimDate}>
-                {/* <button
-                          className='button-inline'
-                          style={{ marginLeft: "20px" }}
-                          onClick={() => claimTokens()}>
-                          Claim NOW
-                        </button> */}
                 <div className='new-btn'>
                   <button onClick={() => claimTokens()}>Claim NOW</button>
                 </div>
@@ -251,7 +250,7 @@ function DailyRewards() {
                                   alt='daily reward money bag'
                                 />
                               </div>
-                              <div className='green'>60 Tokens</div>
+                              <div className='green'>65 Tokens</div>
                             </>
                           ) : (
                             <>
@@ -262,7 +261,7 @@ function DailyRewards() {
                                   alt='daily reward money bag'
                                 />
                               </div>
-                              <div className='red'>60 Tokens</div>
+                              <div className='red'>65 Tokens</div>
                             </>
                           )}
                         </div>
@@ -319,7 +318,7 @@ function DailyRewards() {
                     <a
                       href={scroogeClient}
                       alt='Visit Scrooge Casino'
-                      // target='_blank'
+                      //  
                       rel='noreferrer'>
                       Scrooge Casino
                     </a>{" "}
@@ -339,8 +338,13 @@ function DailyRewards() {
             )}
           </div>
         </>
-      )}
-
+      )
+    )
+    :<div className="earn-affiliate-btn">
+    <a href="/earn-tokens">
+    Click to become an affiliate
+</a>
+  </div>}   
       {buyLoading ? (
         <div className='pageImgContainer'>
           <img src={LoadingPoker} alt='game' className='imageAnimation' />

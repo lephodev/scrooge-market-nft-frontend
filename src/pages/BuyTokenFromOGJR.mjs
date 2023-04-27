@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Layout from "./Layout.mjs";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 // import coin1 from "../images/4.png";
@@ -8,6 +8,7 @@ import coin3 from "../images/2.png";
 import coin4 from "../images/1.png";
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
+import { Dropdown} from "react-bootstrap";
 
 import { useAddress,useSDK } from "@thirdweb-dev/react";
 import { marketPlaceInstance, authInstance } from "../config/axios.js";
@@ -16,6 +17,8 @@ import { useReward } from "react-rewards";
 
 export default function BuyTokenFromOGJR() {
   const { user,  setUser } = useContext(AuthContext);
+  const [selectedDropdown, setSelectedDropdown] = useState("");
+
   const [buyLoading, setBuyLoading] = useState(false);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
@@ -23,11 +26,10 @@ export default function BuyTokenFromOGJR() {
   const [cookies] = useCookies(["token"]);
   const sdk = useSDK();
   const address = useAddress();
-  const OGWalletAddress = "0xDcD9738D4D9Ea8c723484b9DDf5f34Ab9A601D92";
-  const JRWalletAddress = "0x4E0625BE79Aba0bd7596ad3698C9265D6CbbFAFf";
+  const OGWalletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS
+  const JRWalletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS
 
   const getUserDataInstant = () => {
-    console.log("abbababababbababa");
     let access_token = cookies.token;
     authInstance()
       .get("/auth/check-auth", {
@@ -36,9 +38,7 @@ export default function BuyTokenFromOGJR() {
         },
       })
       .then((res) => {
-        console.log("convertedData", res);
         if (res.data.user) {
-          console.log("user", res.data);
           setUser({
             ...res.data.user,
           });
@@ -49,6 +49,8 @@ export default function BuyTokenFromOGJR() {
       });
   };
 
+  
+
   const convert = async (type, crypto, tokens) => {
     let contractAddresss, walletAddress, cryptoAmount;
     setBuyLoading(true);
@@ -58,7 +60,6 @@ export default function BuyTokenFromOGJR() {
     } else if (type === "OG") {
       contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
       walletAddress = OGWalletAddress;
-      console.log(process.env.OG_WALLET_ADDRESS);
     } else if (type === "JR") {
       contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
       walletAddress = JRWalletAddress;
@@ -72,21 +73,20 @@ export default function BuyTokenFromOGJR() {
       cryptoAmount = (crypto + crypto * 0.16) / current_price;
 
       sdk.wallet
-        .transfer(walletAddress, cryptoAmount, contractAddresss)
+        .transfer(walletAddress, cryptoAmount, contractAddresss,)
         .then((txResult) => {
-          console.log("txResult",txResult);
+          const {transactionHash}=txResult?.receipt||{}
           marketPlaceInstance()
-            .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}`)
+            .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}/${transactionHash}`)
             .then((response) => {
               setBuyLoading(false);
               if (response.data.success) {
-                console.log("");
                 setUser(response?.data?.user)
                 toast.success(`Successfully Purchased ${tokens} Tokens`);
                 reward();
                 getUserDataInstant();
               } else {
-                toast.error("Failed to buy");
+                toast.error(response?.data?.message);
               }
             })
             .catch((error) => {
@@ -110,6 +110,10 @@ export default function BuyTokenFromOGJR() {
       console.log("errordata", error);
     }
   };
+
+  const handleChange=(value)=>{
+    setSelectedDropdown(value);
+  }
   return (
     <Layout>
       <main className='main redeem-prizes-page'>
@@ -136,6 +140,34 @@ export default function BuyTokenFromOGJR() {
               Disclaimer : +16% will be added to the transaction to cover
               blockchain fees and contract taxes!
             </div>
+           
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic-transition">
+              {!selectedDropdown ? "select" : selectedDropdown}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item
+                  eventKey="busd"
+                  onClick={() => handleChange("BUSD")}
+                >
+                  BUSD
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="og"
+                  onClick={() => handleChange("Scrooge")}
+                >
+                  Scrooge
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="jr"
+                   onClick={() => handleChange("Scrooge JR")}
+                >
+                  Scrooge JR
+                </Dropdown.Item>
+                
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
           <div className='buy-chips-content'>
             <div className='buy-chips-grid'>

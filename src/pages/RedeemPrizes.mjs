@@ -24,12 +24,13 @@ function RedeemPrizes() {
   });
   let prizesReceived = 0;
   const { user, loading, setUser } = useContext(AuthContext);
-  console.log("user", user, loading);
-
+  console.log(loading);
   const [redeemLoading, setRedeemLoading] = useState(false);
   const [redeemSuccess, setRedeemSuccess] = useState(false);
   const [allPrizes, setAllPrizes] = useState([]);
+  const [cryptoTotoken, setCryptoToToken] = useState([]);
   const [prizes, setPrizes] = useState([]);
+  const [ticketPrizes, setTicketPrizes] = useState([]);
   const [disable, setDisable] = useState(false);
   const [prizesLoading, setPrizesLoading] = useState([]);
   const [currentPriceOG, setCurrentPriceOG] = useState("Loading...");
@@ -38,7 +39,7 @@ function RedeemPrizes() {
   const [globalLoader, setglobalLoader] = useState(true);
   const [buyTokenTab, setBuyTokenTab] = useState(false);
   const [show, setShow] = useState(false);
-  const [sliderValue, /* setSliderValue */] = useState(499);
+  // const [sliderValue /* setSliderValue */] = useState(499);
   const [tickets, setTickets] = useState("");
   const [tokens, setTokens] = useState("");
   const [prizeId, setPrizeId] = useState("");
@@ -77,12 +78,29 @@ function RedeemPrizes() {
     handleClose();
   };
 
+  async function getTicketToTokenPrizes() {
+    setPrizesLoading(true);
+    if (prizes.length < 2) {
+      try {
+        const res = await marketPlaceInstance().get(`/getTicketToToken`);
+        if (res.data) {
+          if (prizes.length < 2) {
+            setPrizesLoading(false);
+            setTicketPrizes(res.data || []);
+          }
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
   async function getPrizes() {
     setPrizesLoading(true);
     if (prizes.length < 2) {
       try {
         const res = await marketPlaceInstance().get(`/getPrizes`);
-        console.log("res", res);
+        // console.log("res", res);
         if (res.data) {
           if (prizes.length < 2) {
             setPrizes(res.data || []);
@@ -100,6 +118,7 @@ function RedeemPrizes() {
     getCoinGeckoDataOG();
     getCoinGeckoDataJR();
     if (prizesReceived === 0) {
+      getTicketToTokenPrizes();
       getPrizes();
     }
     prizesReceived = 1;
@@ -201,7 +220,6 @@ function RedeemPrizes() {
   }
 
   const getUserDataInstant = () => {
-    console.log("abbababababbababa");
     let access_token = cookies.token;
     authInstance()
       .get("/auth/check-auth", {
@@ -210,9 +228,7 @@ function RedeemPrizes() {
         },
       })
       .then((res) => {
-        console.log("convertedData", res);
         if (res.data.user) {
-          console.log("user", res.data);
           setUser({
             ...res.data.user,
           });
@@ -223,24 +239,24 @@ function RedeemPrizes() {
       });
   };
   const RedeemPrize = async (prize_id) => {
-    console.log("prize_id", prize_id);
+    // console.log("prize_id", prize_id);
     if (!user)
       return toast.error("Please login first", { containerId: "login" });
     if (!address)
       return toast.error("Please connect wallet first", {
         containerId: "connect-wallet",
       });
-    console.log("user", user, prize_id);
-    console.log("add", address);
-    console.log("user.id", user.id);
-    console.log("prize_id", prize_id);
-    console.log("address", address);
+    // console.log("user", user, prize_id);
+    // console.log("add", address);
+    // console.log("user.id", user.id);
+    // console.log("prize_id", prize_id);
+    // console.log("address", address);
     setRedeemLoading(true);
     marketPlaceInstance()
       .get(`/redeemPrize/${address}/${user.id}/${prize_id}`)
       .then((data) => {
         setPrizeId("");
-        console.log("redeemdata", data);
+        // console.log("redeemdata", data);
         setRedeemLoading(false);
         if (!data.data.success) {
           toast.error("ERROR! - " + data.data.message, {
@@ -262,7 +278,7 @@ function RedeemPrizes() {
   };
 
   const convert = async (ticketPrice, tokenPrice) => {
-    console.log("convertPrice", ticketPrice, tokenPrice);
+    // console.log("convertPrice", ticketPrice, tokenPrice);
     try {
       if (parseInt(ticketPrice) > 0) {
         if (user?.ticket >= parseInt(ticketPrice)) {
@@ -276,6 +292,8 @@ function RedeemPrizes() {
             console.log("datattat", data);
             getUserDataInstant();
             toast.success(message, { id: "A" });
+          } else {
+            toast.error(message, { id: "A" });
           }
         } else {
           toast.error("Not sufficent tokens", { id: "A" });
@@ -310,22 +328,39 @@ function RedeemPrizes() {
     checkKYCStatus();
   }, []);
   // console.log("convertPrice",convertPrice);
+  // getTiketToTokenPackages
+  async function getTicketToTokenPackages() {
+    try {
+      const res = await marketPlaceInstance().get(`/getTicketToTokenPackages`);
+      if (res.data) {
+        // setAllPrizes(res.data || []);
+        setCryptoToToken(res.data || []);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    getTicketToTokenPackages();
+  }, []);
 
   return (
     <Layout>
-      <main className='main redeem-prizes-page'>
-        <div className='container'>
+      <main className="main redeem-prizes-page">
+        <div className="container">
           <Modal show={show} onHide={handleClose} centered animation={false}>
-            <Modal.Body className='popupBody'>
+            <Modal.Body className="popupBody">
               <div>Do You Want To Redeem?</div>
-              <div className='popupBtn'>
-                <button className='greyBtn' onClick={handleClose}>
+              <div className="popupBtn">
+                <button className="greyBtn" onClick={handleClose}>
                   Cancel
                 </button>
                 <button
-                  className='yellowBtn'
+                  className="yellowBtn"
                   disabled={disable}
-                  onClick={confirmBuy}>
+                  onClick={confirmBuy}
+                >
                   Confirm
                 </button>
               </div>
@@ -337,32 +372,33 @@ function RedeemPrizes() {
             </div>
           )} */}
           {globalLoader && (
-            <div className='loading'>
-              <div className='loading-img-div'>
-                <img src={LoadingPoker} alt='game' className='imageAnimation' />
+            <div className="loading">
+              <div className="loading-img-div">
+                <img src={LoadingPoker} alt="game" className="imageAnimation" />
               </div>
             </div>
           )}
-          <div className='bordered-section'>
+          <div className="bordered-section">
             {redeemLoading ? (
-              <div className='pageImgContainer'>
-                <img src={LoadingPoker} alt='game' className='imageAnimation' />
-                <div className='loading-txt pulse'>REDEEMING...</div>
+              <div className="pageImgContainer">
+                <img src={LoadingPoker} alt="game" className="imageAnimation" />
+                <div className="loading-txt pulse">REDEEMING...</div>
               </div>
             ) : (
               <></>
             )}
 
             {redeemSuccess ? (
-              <div className='pageImgContainer'>
-                <div className='loading-txt'>
+              <div className="pageImgContainer">
+                <div className="loading-txt">
                   REDEEMED SUCCESSFULLY<br></br>
                   <button
-                    className='page-nav-header-btn'
+                    className="page-nav-header-btn"
                     onClick={() => {
                       setRedeemSuccess(false);
                       reward();
-                    }}>
+                    }}
+                  >
                     CLOSE
                   </button>
                 </div>
@@ -372,11 +408,11 @@ function RedeemPrizes() {
             )}
             {!globalLoader && (
               <>
-                <div className='scrooge-main-heading'>
-                  <div className='pageTitle'>
-                    <h1 className='title'>Redeem for Prizes</h1>
+                <div className="scrooge-main-heading">
+                  <div className="pageTitle">
+                    <h1 className="title">Redeem for Prizes</h1>
                   </div>
-                  <div className='feature-overview-div'>
+                  <div className="feature-overview-div">
                     Ready to cash in on all of your big wins? Browse through our
                     huge list of amazing prizes and find something you just
                     can't live without. Make sure you have enough available
@@ -385,7 +421,7 @@ function RedeemPrizes() {
                   </div>
                 </div>
 
-                <div className='prizes-chip-count'>
+                <div className="prizes-chip-count">
                   {user ? (
                     <>
                       <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
@@ -394,24 +430,25 @@ function RedeemPrizes() {
                     <>
                       <img
                         src={LoadingPoker}
-                        alt='game'
-                        className='imageAnimation'
+                        alt="game"
+                        className="imageAnimation"
                       />
                     </>
                   )}
                 </div>
-                <div className='page-nav-header-btns-row'>
-                  <div className='new-btn'>
+                <div className="page-nav-header-btns-row">
+                  {/* <div className='new-btn'>
                     <button
                       // className='page-nav-header-btn'
                       onClick={() => filterPrizes("Badges")}>
                       BADGES
                     </button>
-                  </div>
-                  <div className='new-btn'>
+                  </div> */}
+                  <div className="new-btn">
                     <button
                       // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("Crypto")}>
+                      onClick={() => filterPrizes("Crypto")}
+                    >
                       CRYPTO
                     </button>
                   </div>
@@ -422,14 +459,15 @@ function RedeemPrizes() {
                       MERCH
                     </button>
                   </div> */}
-                  <div className='new-btn'>
+                  <div className="new-btn">
                     <button
                       // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("NFTs")}>
+                      onClick={() => filterPrizes("NFTs")}
+                    >
                       NFTS
                     </button>
                   </div>
-                  <div className='new-btn'>
+                  <div className="new-btn">
                     <button onClick={() => filterPrizes("convert")}>
                       Convert ticket to token
                     </button>
@@ -442,60 +480,72 @@ function RedeemPrizes() {
                 </div>
 
                 {buyTokenTab && (
-                  <div className='buyTokenTab'>
+                  <div className="buyTokenTab">
                     <h2>Buy Tokens Here .. </h2>
-                    <Button className='buyTokensBtn'>Buy Tokens</Button>
+                    <Button className="buyTokensBtn">Buy Tokens</Button>
                   </div>
                 )}
 
                 {!showConvert && (
-                  <div className='page-nav-header-btns-subrow'>
+                  <div className="page-nav-header-btns-subrow">
                     <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("priceDescending")}>
+                      className="page-nav-header-subbtn"
+                      onClick={() => sortPrizes("priceDescending")}
+                    >
                       PRICE HIGH TO LOW
                     </button>
                     <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("priceAscending")}>
+                      className="page-nav-header-subbtn"
+                      onClick={() => sortPrizes("priceAscending")}
+                    >
                       PRICE LOW TO HIGH
                     </button>
                     <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("nameDescending")}>
+                      className="page-nav-header-subbtn"
+                      onClick={() => sortPrizes("nameDescending")}
+                    >
                       NAME A-Z
                     </button>
                     <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("nameAscending")}>
+                      className="page-nav-header-subbtn"
+                      onClick={() => sortPrizes("nameAscending")}
+                    >
                       NAME Z-A
                     </button>
                     <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("categoryDescending")}>
+                      className="page-nav-header-subbtn"
+                      onClick={() => sortPrizes("categoryDescending")}
+                    >
                       CATEGORY A-Z
                     </button>
                     <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("categoryAscending")}>
+                      className="page-nav-header-subbtn"
+                      onClick={() => sortPrizes("categoryAscending")}
+                    >
                       CATEGORY Z-A
                     </button>
                   </div>
                 )}
-                <div className='prizes-container'>
+                <div className="prizes-container">
                   {showConvert && (
                     <>
-                      <div className='buy-chips-content'>
-                        <div className='buy-chips-grid'>
-                          <div className='buy-chips-grid-box'>
+                      {console.log("cryptoTotoken512", cryptoTotoken)}{" "}
+                      {/* {cryptoTotoken?.map((el)=>{
+                      return (
+                        <>hhhh</>
+                      )
+                      })} */}
+                      <div className="buy-chips-content">
+                        <div className="buy-chips-grid">
+                          {/* <div className='buy-chips-grid-box'>
                             <img src={coin4} alt='coin' />
 
-                            {/* <InputRange
+                            <InputRange
                               maxValue={499}
                               minValue={10}
                               value={sliderValue}
                               onChange={(value) => setSliderValue(value)}
-                            /> */}
+                            />
                             <div
                               className='gradient-btn'
                               //  onClick={() => convert(500, 510)}
@@ -507,139 +557,74 @@ function RedeemPrizes() {
                                 tokens{" "}
                               </span>
                             </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            <img src={coin4} alt='coin' />
-                            <div className='input-range'></div>
+                          </div> */}
+                          {ticketPrizes.map((prize) => (
                             <div
-                              className='gradient-btn'
-                              //  onClick={() => convert(500, 510)}
-                              onClick={() => handleShow(500, 510, "")}>
-                              <span>500 tickets gets you 510 tokens </span>
+                              key={prize.ticket}
+                              className="buy-chips-grid-box"
+                            >
+                              {(prize.ticket === "500" ||
+                                prize.ticket === "1000") && (
+                                <img src={coin4} alt="coin" />
+                              )}
+                              {(prize.ticket === "25000" ||
+                                prize.ticket === "50000") && (
+                                <img src={coin1} alt="coin" />
+                              )}
+                              {(prize.ticket === "2500" ||
+                                prize.ticket === "5000") && (
+                                <img src={coin3} alt="coin" />
+                              )}
+                              {(prize.ticket === "10000" ||
+                                prize.ticket === "20000") && (
+                                <img src={coin2} alt="coin" />
+                              )}
+                              {/* <div className='input-range'></div> */}
+                              <div
+                                className="gradient-btn"
+                                //  onClick={() => convert(500, 510)}
+                                onClick={() =>
+                                  handleShow(prize.ticket, prize.token, "")
+                                }
+                              >
+                                <span>
+                                  {prize.ticket} tickets gets you {prize.token}{" "}
+                                  tokens{" "}
+                                </span>
+                              </div>
                             </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>25000 </p> */}
-                            <img src={coin3} alt='coin' />
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(1000, 1025)}
-                              onClick={() => handleShow(1000, 1025, "")}>
-                              <span>1000 tickets gets you 1025 tokens </span>
-                            </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>20000 </p> */}
-
-                            <div className='chips-images'>
-                              <img src={coin4} alt='coin' />
-                              <img src={coin3} alt='coin' />
-                            </div>
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(2500, 2600)}
-                              onClick={() => handleShow(2500, 2600, "")}>
-                              <span>2500 tickets gets you 2600 tokens </span>
-                            </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>10000 </p> */}
-                            <img src={coin2} alt='coin' />
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(5000, 5250)}
-                              onClick={() => handleShow(5000, 5250, "")}>
-                              <span>5000 tickets gets you 5250 tokens </span>
-                            </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>5000 </p> */}
-                            <img src={coin1} alt='coin' />
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(10000, 10600)}
-                              onClick={() => handleShow(10000, 10600, "")}>
-                              <span>10000 tickets gets you 10600 tokens </span>
-                            </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>2500 </p> */}
-
-                            <div className='chips-images'>
-                              <img src={coin2} alt='coin' />
-                              <img src={coin3} alt='coin' />
-                            </div>
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(20000, 21400)}
-                              onClick={() => handleShow(20000, 21400, "")}>
-                              <span>20000 tickets gets you 21400 tokens </span>
-                            </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>1000 </p> */}
-                            <div className='chips-images'>
-                              <img src={coin2} alt='coin' />
-                              <img src={coin2} alt='coin' />
-                            </div>
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(25000, 27000)}
-                              onClick={() => handleShow(25000, 27000, "")}>
-                              <span>25000 tickets gets you 27000 tokens </span>
-                            </div>
-                          </div>
-                          <div className='buy-chips-grid-box'>
-                            {/* <p>500 </p> */}
-
-                            <div className='chips-images'>
-                              <img src={coin1} alt='coin' />
-                              <img src={coin1} alt='coin' />
-                            </div>
-                            <div className='input-range'></div>
-                            <div
-                              className='gradient-btn'
-                              // onClick={() => convert(50000, 55000)}
-                              onClick={() => handleShow(50000, 55000, "")}>
-                              <span>50000 tickets gets you 55000 tokens </span>
-                            </div>
-                          </div>
+                          ))}
                         </div>
                       </div>
                     </>
                   )}
 
                   <div style={{ width: "100%", textAlign: "center" }}>
-                    <div id='rewardId' style={{ margin: "0 auto" }} />
+                    <div id="rewardId" style={{ margin: "0 auto" }} />
                   </div>
                   {!prizesLoading ? (
                     <>
-                      <div className='prizes_container'>
+                      <div className="prizes_container">
                         {prizes
                           .filter(
                             (f) =>
                               f.redeem_action !== "burn" &&
                               f.category !== "Merch" &&
+                              f.category !== "Badges" &&
                               f.price !== 500
                           )
                           .map((prize) => (
-                            <div className='prizes-card' key={prize._id}>
-                              {console.log("prize", prize._id)}
+                            <div className="prizes-card" key={prize._id}>
+                              {/* {console.log("prize", prize._id)} */}
                               {!prize.isDynamic ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>{prize.name}</h4>
                                 </div>
                               ) : (
                                 <></>
                               )}
                               {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -660,7 +645,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -681,7 +666,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -701,7 +686,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -722,7 +707,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -742,7 +727,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -763,7 +748,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf761736630ad01d5f52" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -784,7 +769,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedfb61736630ad01d5f55" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -804,7 +789,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf301736630ad01d5f4f" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -825,7 +810,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf651736630ad01d5f51" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -846,7 +831,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -866,7 +851,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedfc51736630ad01d5f56" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -886,7 +871,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "6434f2f5f6bfb431f290a691" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -907,7 +892,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "6434f46cf6bfb431f290a692" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -928,12 +913,12 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               <img
-                                className='card-img pulse'
+                                className="card-img pulse"
                                 src={prize.image_url}
                                 alt={prize.name}
                               />
                               <br></br>
-                              <div className='prize-cost'>
+                              <div className="prize-cost">
                                 <p>Cost: {prize.price} Tickets</p>
                               </div>
                               <br></br>
@@ -948,7 +933,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG1000).toLocaleString("en-US")
@@ -959,7 +944,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR1000).toLocaleString("en-US")
@@ -970,7 +955,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG1000).toLocaleString("en-US")
@@ -981,7 +966,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR1000).toLocaleString("en-US")
@@ -992,7 +977,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG5000).toLocaleString("en-US")
@@ -1003,7 +988,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR5000).toLocaleString("en-US")
@@ -1014,7 +999,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf761736630ad01d5f52" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG5000).toLocaleString("en-US")
@@ -1025,7 +1010,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedfb61736630ad01d5f55" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR5000).toLocaleString("en-US")
@@ -1036,7 +1021,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf301736630ad01d5f4f" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG10000).toLocaleString("en-US")
@@ -1047,7 +1032,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf651736630ad01d5f51" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR10000).toLocaleString("en-US")
@@ -1058,7 +1043,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG10000).toLocaleString("en-US")
@@ -1069,7 +1054,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedfc51736630ad01d5f56" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR10000).toLocaleString("en-US")
@@ -1080,7 +1065,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "6434f2f5f6bfb431f290a691" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG20000).toLocaleString("en-US")
@@ -1091,7 +1076,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "6434f46cf6bfb431f290a692" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR20000).toLocaleString("en-US")
@@ -1102,7 +1087,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize.isDynamic ? (
-                                <div className='asterisk-desc'>
+                                <div className="asterisk-desc">
                                   *Amount received is calculated at time of
                                   redemption and may vary from the amount
                                   displayed.<br></br>
@@ -1113,11 +1098,12 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               <br />
-                              <div className='redeem-btn'>
+                              <div className="redeem-btn">
                                 <button
                                   // className='submit-btn'
-                                  className='gradient-btn'
-                                  onClick={() => handleShow("", "", prize._id)}>
+                                  className="gradient-btn"
+                                  onClick={() => handleShow("", "", prize._id)}
+                                >
                                   REDEEM PRIZE
                                 </button>
                               </div>
@@ -1129,11 +1115,11 @@ function RedeemPrizes() {
                     </>
                   ) : (
                     <>
-                      <div className='loader-img'>
+                      <div className="loader-img">
                         <img
                           src={LoadingPoker}
-                          alt='game'
-                          className='imageAnimation'
+                          alt="game"
+                          className="imageAnimation"
                         />
                       </div>
                     </>

@@ -16,7 +16,7 @@ export default function Contact() {
             <br></br>
             <a
               href='https://t.me/ScroogeJRverify'
-              target='_blank'
+               
               rel='noopener noreferrer'
             >
               Chat with us on Telegram

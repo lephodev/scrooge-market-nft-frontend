@@ -14,9 +14,9 @@ import fetch from "node-fetch";
 import Countdown from "react-countdown";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import { useReward } from "react-rewards";
-import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
+// import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import AuthContext from "../context/authContext.ts";
-import Layout from "./Layout.mjs";
+// import Layout from "./Layout.mjs";
 import { marketPlaceInstance } from "../config/axios.js";
 import { scroogeClient } from "../config/keys.js";
 
@@ -25,7 +25,7 @@ function HolderClaimChips() {
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
-
+  
   const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("Loading...");
   const [OGBalance, setOGBalance] = useState("Loading...");
@@ -45,7 +45,6 @@ function HolderClaimChips() {
       marketPlaceInstance()
         .get(`/getNextClaimDate/${address}/holder/${user.id}/0`)
         .then((data) => {
-          console.log("setclam=im---", data);
           if (data.data.success) {
             setNextClaimDate(data.data.data[0].nextClaimDate);
           } else {
@@ -63,7 +62,6 @@ function HolderClaimChips() {
       .then((response) => response.json())
       .then((data) => {
         const current_price = data.market_data.current_price.usd;
-        console.log("coingeckodata", current_price);
         setCurrentPrice(current_price);
         return current_price;
       })
@@ -128,8 +126,6 @@ function HolderClaimChips() {
 
   useEffect(() => {
     getCoinGeckoData();
-    console.log("address", address);
-    console.log("isMismatched", !isMismatched);
     if (address && !isMismatched) {
       sdksdk();
       zzz();
@@ -137,7 +133,6 @@ function HolderClaimChips() {
   }, [user, address]);
 
   return (
-    <Layout>
       <main className='main claim-free-page'>
         <div className='container'>
           <div className='bordered-section'>
@@ -160,7 +155,7 @@ function HolderClaimChips() {
                   come right to this page and claim your free{" "}
                   <a
                     href={scroogeClient}
-                    // target='_blank'
+                    //  
                     rel='noreferrer'
                     alt='claim free tokens to spend in Scrooge Casino'>
                     Scrooge Casino
@@ -350,7 +345,7 @@ function HolderClaimChips() {
                       <a
                         href={scroogeClient}
                         alt='Visit Scrooge Casino'
-                        // target='_blank'
+                        //  
                         rel='noreferrer'>
                         Scrooge Casino
                       </a>{" "}
@@ -378,12 +373,8 @@ function HolderClaimChips() {
               </div>
             )}
           </div>
-          <div className='flex-row' style={{ margin: "50px auto 0px" }}>
-            <ShowBottomNavCards />
-          </div>
         </div>
       </main>
-    </Layout>
   );
 }
 
