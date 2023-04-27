@@ -191,9 +191,9 @@ export default function SharableData() {
     getSocialShare()
   }, []);
 
-  console.log("affUser", affUser);
+  // console.log("affUser", affUser);
 
-  console.log("user>>>>", user);
+  // console.log("user>>>>", user);
   // const clickevt=(message_id)=>{
   //   console.count("ggg");
   //   try {
@@ -221,9 +221,9 @@ export default function SharableData() {
       
   //   }
   // }
-const CheckIfShow=(e)=>{
-  console.log("after close popup",e);
-}
+// const CheckIfShow=(e)=>{
+//   console.log("after close popup",e);
+// }
 // const handleFacebookShare=(message_id,userid,message)=> {
 //   console.log("user,message",message_id,userid,message);
 //   let url=`${scroogeClient}/?aff_id=${userid}`
@@ -239,9 +239,9 @@ const CheckIfShow=(e)=>{
 //     }
 //   });
 // }
-const handleShareError = () => {
-  console.log('Error sharing content');
-};
+// const handleShareError = () => {
+//   console.log('Error sharing content');
+// };
   return (
     <>
       {creatingAffUser ? (
