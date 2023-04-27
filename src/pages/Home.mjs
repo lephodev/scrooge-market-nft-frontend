@@ -9,12 +9,12 @@ import { useEffect } from "react";
 // import ScroogeCasino from "../images/scroogeCasinoLogo.png";
 import TicketsGIF from "../images/ticketsGif.gif";
 import SlotsGIF from "../images/slotsGif.gif";
-import ShowCasinoTokenNFTs from "../scripts/showCasinoTokenNFTs.mjs";
+// import ShowCasinoTokenNFTs from "../scripts/showCasinoTokenNFTs.mjs";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import { Link } from "react-router-dom";
 import CardsTokens from "../images/cardstokens.gif";
-import CasinoNFT from "../images/absintheGold.png";
+// import CasinoNFT from "../images/absintheGold.png";
 import MoneyBag from "../images/moneybag.gif";
 import "../styles/Home.css";
 import ChainContext from "../context/Chain.ts";
@@ -57,7 +57,7 @@ export default function Home() {
           )}
 
           <div className='grid'>
-            <Link to='/nft-tokens' className='card'>
+            {/* <Link to='/nft-tokens' className='card'>
               <h2>SHOP FOR ALL YOUR CASINO NFTS &rarr;</h2>
               <p>
                 Ready to step up to the table? Get everything you need to be a
@@ -68,7 +68,7 @@ export default function Home() {
                 src={CasinoNFT}
                 alt='buy scrooge casino nft token packages'
               />
-            </Link>
+            </Link> */}
 
             <Link to='/claim-free-tokens' className='card'>
               <h2>CLAIM MONTHLY HOLDER TOKENS &rarr;</h2>
@@ -142,9 +142,9 @@ export default function Home() {
           </div>
 
           <br></br>
-          <div>
+          {/* <div>
             <ShowCasinoTokenNFTs />
-          </div>
+          </div> */}
           <br></br>
           <br></br>
           <ShowBottomNavCards />

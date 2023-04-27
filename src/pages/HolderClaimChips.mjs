@@ -14,9 +14,9 @@ import fetch from "node-fetch";
 import Countdown from "react-countdown";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import { useReward } from "react-rewards";
-import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
+// import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import AuthContext from "../context/authContext.ts";
-import Layout from "./Layout.mjs";
+// import Layout from "./Layout.mjs";
 import { marketPlaceInstance } from "../config/axios.js";
 import { scroogeClient } from "../config/keys.js";
 
@@ -25,7 +25,7 @@ function HolderClaimChips() {
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
-
+  
   const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("Loading...");
   const [OGBalance, setOGBalance] = useState("Loading...");
@@ -36,6 +36,7 @@ function HolderClaimChips() {
   // const signer = useSigner();
 
   const isMismatched = useNetworkMismatch();
+  console.log("mis", isMismatched, address)
   function notify(message) {
     toast.success("🎩 " + message);
   }
@@ -137,7 +138,6 @@ function HolderClaimChips() {
   }, [user, address]);
 
   return (
-    <Layout>
       <main className='main claim-free-page'>
         <div className='container'>
           <div className='bordered-section'>
@@ -378,12 +378,8 @@ function HolderClaimChips() {
               </div>
             )}
           </div>
-          <div className='flex-row' style={{ margin: "50px auto 0px" }}>
-            <ShowBottomNavCards />
-          </div>
         </div>
       </main>
-    </Layout>
   );
 }
 

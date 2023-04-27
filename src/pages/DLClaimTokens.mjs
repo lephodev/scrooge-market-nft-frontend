@@ -1,45 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-//import GetWalletDLNFTs from "../scripts/getWalletDLNFTs.mjs"
+
 import { useEffect, useState } from "react";
-import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import "react-toastify/dist/ReactToastify.css";
 import { useAddress, ConnectWallet } from "@thirdweb-dev/react";
 import { CheckDLOnPage } from "../components/DLGate.jsx";
 import GetWalletDLNFTs from "../scripts/getWalletDLNFTs.mjs";
 import DLLogoMembersOnly from "../images/DLLogoMembersOnly.png";
-import Layout from "./Layout.mjs";
 
 export default function DLClaimTokens() {
   // const [walletDL, setWalletDL]=useState([]);
   const [hasDL, setHasDL] = useState(0);
   const address = useAddress();
   const [loading, setLoading] = useState(true);
-
-  // async function getWalletDLBalance() {
-  //   if(address){
-  //     try {
-  //       console.log("start address: ", address);
-  //       const userRes = await marketPlaceInstance().get(`/getWalletDLBalance/${address}`).then((res) =>{
-  //         console.log('DLgate2: ',res);
-  //         if (typeof res.data.balance != undefined) {
-  //           console.log('Has DL2');
-  //           setHasDL(true);
-  //           return true;
-  //         } else {
-  //           console.log('Does not have DL2');
-  //           setHasDL(false);
-  //           navigate("/", { replace: true });
-  //         }
-  //       });
-  //     } catch (error) {
-  //       setHasDL(false);
-  //       //navigate("/", { replace: true });
-  //     }
-  //   } else {
-  //     return false;
-  //   }
-
-  // }
 
   async function getWalletDL() {
     console.log("zzzzz");
@@ -57,11 +28,11 @@ export default function DLClaimTokens() {
     } else {
       setLoading(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address]);
 
   console.log("hasDL", hasDL);
   return (
-    <Layout>
       <main className='main'>
         <div className='container'>
           {hasDL ? (
@@ -78,7 +49,6 @@ export default function DLClaimTokens() {
                     width='600px'
                     height='600px'
                     style={{ maxWidth: "100%" }}
-                    frameborder='0'
                     title='DLLogo'></iframe>
                 </div>
                 <div className='flex-row'>
@@ -122,12 +92,7 @@ export default function DLClaimTokens() {
           ) : (
             <></>
           )}
-
-          <div style={{ marginTop: "75px" }}>
-            <ShowBottomNavCards />
-          </div>
         </div>
       </main>
-    </Layout>
   );
 }

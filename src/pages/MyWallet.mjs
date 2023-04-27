@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import GetWalletCasinoNFTs from "../scripts/getWalletCasinoNFTs.mjs";
 import {
   ConnectWallet,
   useNetworkMismatch,
@@ -13,6 +12,7 @@ import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import ChainContext from "../context/Chain.ts";
 import Token from "../images/token.png";
+import GoldCoin from "../images/goldCoin.png";
 import Ticket from "../images/ticket.png";
 import ScroogeHatLogo from "../images/scroogeHatLogo.png";
 import scroogejr from "../images/scroogejr.jpeg";
@@ -250,6 +250,14 @@ export default function MyWallet() {
                       />
                       TICKETS: {user?.ticket?.toLocaleString("en-US")}
                     </div>
+                    <div className='token-ticket-row'>
+                      <img
+                        className='token-small'
+                        src={GoldCoin}
+                        alt='Scrooge Casino balances'
+                      />
+                      GOLD COIN: {user?.goldCoin?.toLocaleString("en-US")}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -407,7 +415,7 @@ export default function MyWallet() {
             <span></span>
           )}
 
-          {!isMismatched && address && showCasinoNFTs ? (
+          {/* {!isMismatched && address && showCasinoNFTs ? (
             <div className='bottom-margin-100'>
               <div
                 className='close-btn-round-div'
@@ -424,7 +432,7 @@ export default function MyWallet() {
             </div>
           ) : (
             <span></span>
-          )}
+          )} */}
 
           <ShowBottomNavCards />
         </main>

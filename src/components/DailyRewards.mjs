@@ -16,7 +16,6 @@ import { marketPlaceInstance } from "../config/axios.js";
 
 function DailyRewards() {
   const { user } = useContext(AuthContext);
-  console.log("useruser", user);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
@@ -24,14 +23,8 @@ function DailyRewards() {
   const [nextClaimDate, setNextClaimDate] = useState("Loading...");
   const [loader, setLoader] = useState(true);
   const [fullDailyRewards, setFullDailyRewards] = useState(false);
-  /*const [OGBalance, setOGBalance]=useState("Loading...");
-    const [currentPrice, setCurrentPrice]=useState("Loading...");
-    const [email, setEmail]=useState('');
-    const handleChange = event => {
-        setEmail(event.target.value);
-      };*/
+ 
   const address = useAddress();
-  //const isMismatched = useNetworkMismatch();
   function notify(message) {
     toast.success("🎩 " + message);
   }
@@ -75,7 +68,13 @@ function DailyRewards() {
         `/claimDailyRewards/${user.id}`
       );
       console.log("datatatta", data);
-      notify("Tokens Claimed: " + data.data);
+      const {success,message}=data?.data
+      if(success){
+        toast.success(message);
+      }
+      else {
+      toast.error(message);
+      }
       setBuyLoading(false);
       reward();
       zzz();
@@ -103,10 +102,9 @@ function DailyRewards() {
 
   return (
     <>
-      {console.log("fullDR", fullDailyRewards)}
       {!loader && !fullDailyRewards ? (
         <>
-          <div className='daily-reward-card-div'>
+          {/* <div className='daily-reward-card-div'>
             {console.log("nextclaimdate", nextClaimDate)}
             <div className='inlineTitle'>DAILY REWARDS</div>
             <div className='rewards'>
@@ -125,18 +123,12 @@ function DailyRewards() {
             <div className='available-btn'>
               <span>Available:</span>{" "}
               <Countdown date={nextClaimDate.nextClaimDate}>
-                {/* <button
-                          className='button-inline'
-                          style={{ marginLeft: "20px" }}
-                          onClick={() => claimTokens()}>
-                          Claim NOW
-                        </button> */}
                 <div className='new-btn'>
                   <button onClick={() => claimTokens()}>Claim NOW</button>
                 </div>
               </Countdown>
             </div>
-          </div>
+          </div> */}
         </>
       ) : (
         <>
