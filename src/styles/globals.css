@@ -4347,6 +4347,7 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   padding: 0px;
   padding-top: 6px;
   max-width: 220px;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .purchasemodal-cards {
@@ -4361,16 +4362,18 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
 
 .purchasemodal-cards img.card-img-top {
   padding-top: 10px;
-  width: 130px;
+  max-width: 160px;
+  height: 100px;
   margin: 5px auto;
-  /* transform: rotate3d(8, 8, 5, 14deg); */
+  width: 100%;
+  object-fit: contain;
 }
 
 .purchasemodal-cards .card-body {
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   padding: 5px 10px 10px 10px;
   color: #fff;
@@ -4385,7 +4388,7 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   border-radius: 30px;
   padding: 2px 12px;
   width: 100%;
-  height: 100%;
+  height: 36px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -4400,12 +4403,13 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   font-size: 18px;
 }
 
-.card-body button p {
+.purchasemodal-cards .card-body button p {
   font-size: 14px;
 }
 
-.card-body button span {
+.purchasemodal-cards .card-body button span {
   font-size: 18px;
+  color: #f10000;
 }
 
 .purchasemodal-cards .goldPurchase-offers {
@@ -4419,6 +4423,15 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   font-size: 14px;
   color: #fff;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.purchasemodal-cards .goldPurchase-offers img {
+  width: 20px;
+  margin-left: 4px;
 }
 
 .purchase-select {
@@ -4460,12 +4473,11 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
 button.affiliate-dropdownBtn:hover,
 button.affiliate-dropdownBtn:focus,
 button.affiliate-dropdownBtn:active,
-button.affiliate-dropdownBtn
- {
+button.affiliate-dropdownBtn {
   position: relative;
   width: 100%;
   background: transparent !important;
-  border: 1px solid transparent !important; 
+  border: 1px solid transparent !important;
   border-bottom: 1px solid #f9ff00 !important;
   color: grey;
   padding: 10px 20px;
@@ -4487,6 +4499,7 @@ button.affiliate-dropdownBtn.open::before {
   border-top-left-radius: 100%;
   background: #000;
 }
+
 button.affiliate-dropdownBtn.close::before {
   content: "";
   width: 15px;
@@ -4503,6 +4516,7 @@ button.affiliate-dropdownBtn.close::before {
   border-bottom-right-radius: 100%;
   background: #000;
 }
+
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
