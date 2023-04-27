@@ -7,6 +7,8 @@ import coin3 from "../images/3.png";
 import coin2 from "../images/2.png";
 import coin1 from "../images/1.png";
 import sweep from "../images/token.png";
+import ticket  from "../images/ticket.png";
+import { Button, Modal,Card, Dropdown } from "react-bootstrap";
 // import gold from "../images/gold.png";
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
@@ -24,7 +26,6 @@ import { toast } from "react-toastify";
 import { useReward } from "react-rewards";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import { Form } from "react-router-dom";
-import { Button, Card, Dropdown } from "react-bootstrap";
 import { BUSD_ADDRESS } from "../config/keys.js";
 
 export default function CryptoToGC() {
@@ -34,6 +35,11 @@ export default function CryptoToGC() {
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
   const [selectedDropdown, setSelectedDropdown] = useState("BUSD");
+  const [tickets, setTickets] = useState("");
+  const [show, setShow] = useState(false);
+  const [ticketPrizes, setTicketPrizes] = useState([]);
+  const [disable, setDisable] = useState(false);
+  const [tokens, setTokens] = useState("");
   const [key, setKey] = useState('cryptoToGc');
   const isMismatched = useNetworkMismatch();
   const { reward } = useReward("rewardId", "confetti", {
@@ -61,6 +67,7 @@ export default function CryptoToGC() {
         console.log("error ", err);
       });
   };
+  const handleClose = () => setShow(false);
 
   // getGCPackages
   async function getGCPackages() {
@@ -93,7 +100,6 @@ export default function CryptoToGC() {
      if (selectedDropdown === "Scrooge") {
       contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
       walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
-      console.log("walletAddress",walletAddress);
     } else if (selectedDropdown === "Scrooge Jr") {
       contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
       walletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
@@ -144,12 +150,74 @@ export default function CryptoToGC() {
   const handleChange = (value) => {
     setSelectedDropdown(value);
   };
+
+  const handleShow = (ticket, token, prizeid) => {
+    setTickets(ticket);
+    setTokens(token);
+    setShow(true);
+  };
+
+  async function getTicketToTokenPrizes() {
+    setPrizesLoading(true);
+    
+      try {
+        const res = await marketPlaceInstance().get(`/getTicketToToken`);
+        if (res.data) {
+          console.log("res.data",res.data);
+            setPrizesLoading(false);
+            setTicketPrizes(res.data || []);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    
+  }
+  useEffect(() => {
+    getTicketToTokenPrizes()
+  }, []);
+
+  const confirmBuy = async () => {
+    setDisable(true);
+    try {
+      if (tickets !== "" && tokens !== "") {
+        try {
+          if (parseInt(tickets) > 0) {
+            if (user?.ticket >= parseInt(tickets)) {
+              const res = await marketPlaceInstance().get(
+                `/coverttickettotoken/${tickets}/${tokens}/${user.id}`
+              );
+              const { message, code, data } = res.data;
+              setTickets("");
+              setTokens("");
+              if (code === 200) {
+                console.log("datattat", data);
+                getUserDataInstant();
+                toast.success(message, { id: "A" });
+              } else {
+                toast.error(message, { id: "A" });
+              }
+            } else {
+              toast.error("Not sufficent tokens", { id: "A" });
+            }
+          } else {
+            toast.error("Please enter token", { id: "A" });
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setDisable(false);
+    handleClose();
+  };
   return (
     <Layout>
       <main className="main redeem-prizes-page">
       <div className='tab-btn'>
-            <Button className={`${key === 'cryptoToGc' ? 'active-btn' : ''}`} onClick={ () => setKey("cryptoToGc")}>CryptoToGC</Button>
-            <Button className={`${key === 'ticketToToken' ? 'active-btn' : ''}`} onClick={ () => setKey("ticketToToken")}>TicketToToken</Button>
+            <Button className={`${key === 'cryptoToGc' ? 'active-btn' : ''}`} onClick={ () => setKey("cryptoToGc")}> Convert Crypto to GC</Button>
+            <Button className={`${key === 'ticketToToken' ? 'active-btn' : ''}`} onClick={ () => setKey("ticketToToken")}> Convert ticket to token</Button>
         </div>
         { key ==="cryptoToGc" ? (
       <div className='tab-claims'>
@@ -251,9 +319,73 @@ export default function CryptoToGC() {
             </div>
           )}
         </div>
-      </div>):""}
+      </div>):
+     ( 
+         <div className="buy-chips-content">
+             <div className="prizes-chip-count">
+                  {user ? (
+                    <>
+                      <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
+                    </>
+                  ) : (
+                    <>
+                      <img
+                        src={LoadingPoker}
+                        alt="game"
+                        className="imageAnimation"
+                      />
+                    </>
+                  )}
+                </div>
+                        <div className="buy-chips-grid cryptoTotoken">
+                          <div className="buy-chips-grid">
+                            <div className="purchasemodal-cards">
+                              {ticketPrizes.map((prize) => (
+                                <Card>
+                                  <Card.Img
+                                    variant="top"
+                                    src={sweep}
+                                  />
+                                  <Card.Body>
+                                    <Card.Title>
+                                      Token {prize?.token}
+                                    </Card.Title>
+                                    <Card.Text>Buy Ticket</Card.Text>
+                                    <Button
+                                      variant="primary"
+                                      onClick={() =>
+                                        handleShow(prize.ticket, prize.token, "")
+                                      }
+                                    >
+                                      <img src={ticket} alt="ticket"/>
+                                      <h5>{prize?.ticket}</h5>
+                                    </Button>
+                                  </Card.Body>
+                                </Card>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+   )}
 
-     
+<Modal show={show} onHide={handleClose} centered animation={false}>
+            <Modal.Body className="popupBody">
+              <div>Do You Want To Redeem?</div>
+              <div className="popupBtn">
+                <button className="greyBtn" onClick={handleClose}>
+                  Cancel
+                </button>
+                <button
+                  className="yellowBtn"
+                  disabled={disable}
+                  onClick={confirmBuy}
+                >
+                  Confirm
+                </button>
+              </div>
+            </Modal.Body>
+          </Modal>
       </main>
     </Layout>
   );

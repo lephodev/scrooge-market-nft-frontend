@@ -469,11 +469,11 @@ function RedeemPrizes() {
                       NFTS
                     </button>
                   </div>
-                  <div className="new-btn">
+                  {/* <div className="new-btn">
                     <button onClick={() => filterPrizes("convert")}>
                       Convert ticket to token
                     </button>
-                  </div>
+                  </div> */}
                   {/* <div className='new-btn'>
                     <button onClick={() => filterPrizes("buy_token")}>
                       Buy Tokens
