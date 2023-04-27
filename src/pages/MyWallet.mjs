@@ -39,8 +39,6 @@ export default function MyWallet() {
   const sdk = useSDK();
   const address = useAddress();
   const signer = useSigner();
-  console.log(address);
-  console.log(signer);
 
   async function checkToken() {
     try {
