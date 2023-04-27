@@ -11,7 +11,7 @@ import { useEffect, useState, useContext } from "react";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import ChainContext from "../context/Chain.ts";
-import Sweep from "../images/sweep.png";
+import Sweep from "../images/token.png";
 import GoldCoin from "../images/goldCoin.png";
 import Ticket from "../images/ticket.png";
 import ScroogeHatLogo from "../images/scroogeHatLogo.png";
