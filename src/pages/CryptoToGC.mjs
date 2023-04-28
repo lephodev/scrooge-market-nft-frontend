@@ -184,7 +184,7 @@ export default function CryptoToGC() {
           if (parseInt(tickets) > 0) {
             if (user?.ticket >= parseInt(tickets)) {
               const res = await marketPlaceInstance().get(
-                `/coverttickettotoken/${tickets}/${tokens}/${user.id}`
+                `/coverttickettotoken/${tickets}`
               );
               const { message, code, data } = res.data;
               setTickets("");
