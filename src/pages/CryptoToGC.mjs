@@ -213,9 +213,9 @@ export default function CryptoToGC() {
         }
       } catch (e) {
         console.log(e);
-      
+      }
+    
   }
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     getTicketToTokenPrizes();
   }, []);
@@ -470,5 +470,4 @@ export default function CryptoToGC() {
       </main>
     </Layout>
   );
-                        }
-                      }
+}
