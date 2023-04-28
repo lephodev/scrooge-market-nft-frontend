@@ -5002,7 +5002,7 @@ button.affiliate-dropdownBtn.close::before {
 
   .header .navbar-expand-lg .navbar-nav .nav-link.active {
     border: 1px solid transparent;
-    color: var(--primary-color);
+    color: #f9ff00;
   }
 
   .header button.navbar-toggler {
@@ -5734,6 +5734,7 @@ button.affiliate-dropdownBtn.close::before {
 
   .earn-token .earn-card-box .affiliate-card-row p {
     text-align: center;
+    word-break: break-all;
   }
 
   .earn-token .earn-card-box .affiliate-card-row {
