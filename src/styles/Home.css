@@ -84,11 +84,6 @@
   line-height: 1.5;
 }
 
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
-}
-
 .home-page .grid {
   padding: 20px 0 0;
 }
@@ -119,10 +114,6 @@
 
 .code {
   background: #111;
-}
-
-.logo img {
-  filter: invert(1);
 }
 
 main.main.redeem-prizes-page .loading {
