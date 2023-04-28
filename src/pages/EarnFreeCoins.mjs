@@ -29,6 +29,7 @@ const EarnFreeCoins = () => {
     }
     if (user?.lastSpinTime) handleSpinTimer(user?.lastSpinTime, Date.now());
     else setCanSpin(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleOpenRoulette = () => {

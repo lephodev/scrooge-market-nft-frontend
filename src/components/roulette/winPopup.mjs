@@ -62,13 +62,13 @@ const WinPopup = ({ setWinPopup, winAmount }) => {
             </div>
           </div>
 
-          {/* {coin ? (
+          {coin ? (
             <div className='collect-coin'>
-              <Lottie options={coinanim} height={500} width={500} />
+              {/* <Lottie options={coinanim} height={500} width={500} /> */}
             </div>
           ) : (
             ""
-          )} */}
+          )}
         </div>
         {/* <div className="before"></div>
       <div className="after"></div> */}
