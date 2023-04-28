@@ -25,12 +25,12 @@ export default class Wheel extends React.Component {
     if (this.state.selectedItem === null) {
       try {
         const clientSeed = getClientSeed();
-        console.log({ clientSeed });
+        // console.log({ clientSeed });
         this.setState({ spinButtonDisable: true });
         const response = await marketPlaceInstance().get("/gameResult", {
           params: { clientSeed },
         });
-        console.log("==>>>", response);
+        // console.log("==>>>", response);
         const selectedItem = this.props.items.findIndex(
           (el) => el.token === response?.data?.resultData?.token
         );
@@ -73,7 +73,7 @@ export default class Wheel extends React.Component {
     const { selectedItem } = this.state;
     const { items } = this.props;
 
-    console.log("selectedItem", { selectedItem, items });
+    // console.log("selectedItem", { selectedItem, items });
 
     const wheelVars = {
       "--nb-item": items.length,

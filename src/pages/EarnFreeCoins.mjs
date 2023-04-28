@@ -11,7 +11,7 @@ import NewRoulette from "../components/roulette/roulette.mjs";
 import wheel from "../images/wheel-fortune.jpg";
 
 const EarnFreeCoins = () => {
-  const { user } = useContext(AuthContext);
+  const { user,dateTimeNow } = useContext(AuthContext);
   const [showRoulette, setShowRoulette] = useState(false);
   const [key, setKey] = useState("dailyClaims");
   const [canSpin, setCanSpin] = useState(false);
@@ -27,7 +27,7 @@ const EarnFreeCoins = () => {
       // const ab = localStorage.getItem("class");
       // setActive(ab);
     }
-    if (user?.lastSpinTime) handleSpinTimer(user?.lastSpinTime, Date.now());
+    if (user?.lastSpinTime && dateTimeNow) handleSpinTimer(user?.lastSpinTime, dateTimeNow);
     else setCanSpin(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -35,6 +35,11 @@ const EarnFreeCoins = () => {
   const handleOpenRoulette = () => {
     if (canSpin) setShowRoulette(true);
   };
+
+  const addZero= (val)=>{
+    if(!(val>=10)) val = `0${val}`
+    return val;
+  }
 
   const handleSpinTimer = (nextSpinTIme, datetimeNow) => {
     let date1 = datetimeNow;
@@ -48,7 +53,7 @@ const EarnFreeCoins = () => {
         let h = Math.floor(diffTime / 3600);
         let m = Math.floor((diffTime % 3600) / 60);
         let s = Math.floor((diffTime % 3600) % 60);
-        setSpinTimer(`${h}:${m}: ${s}`);
+        setSpinTimer(`${addZero(h)}:${addZero(m)}:${addZero(s)}`);
         // setSpinTimer("12:00:00")
         // setCanSpin(true);
       }
