@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { ThirdwebNftMedia, useDisconnect } from "@thirdweb-dev/react";
-import { useEffect, useState } from "react";
-import Logo from "../images/scroogeHatLogo.png";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import hatLogo from "../images/scroogeHatLogo.png";
 // import DLBigD from "../images/DLBigD.png";
 // import WalletIcon from "../images/wallet.png";
 // import StoreIconBadge from "../images/store.svg";
@@ -31,6 +32,7 @@ import {
   scroogeClient,
   slotUrl,
 } from "../config/keys.js";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 export const Tooltip = (id, metadata, message) => (
   <Popup
@@ -43,13 +45,25 @@ export const Tooltip = (id, metadata, message) => (
   </Popup>
 );
 
+const useCurrentPath = () => {
+  const location = useLocation();
+  const [currentPath, setCurrentPath] = useState("");
+  useEffect(() => {
+    setCurrentPath(location.pathname);
+  }, [location]);
+  return currentPath;
+};
+
 const Layout = ({ children }) => {
+  const wrapperRef = useRef();
   // const { user } = useContext(AuthContext);
   const [currentPriceOG, setCurrentPriceOG] = useState("");
   const [priceColor, setPriceColor] = useState("");
+  const [navOpen, setNavOpen] = useState(false);
   // const [canSpin, setCanSpin] = useState(false);
   // const [spinTimer, setSpinTimer] = useState("");
-
+  const currentRoute = useCurrentPath();
+  const isActive = (routeName) => (routeName === currentRoute ? "active" : "");
   const disconnect = useDisconnect();
   const OGPrice = async () => {
     await fetch(
@@ -121,102 +135,102 @@ const Layout = ({ children }) => {
   //     date1 += 1000;
   //   }, 1000);
   // };
+
+  const useOutsideAlerter = (ref) => {
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setNavOpen(false);
+        }
+      };
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  };
+  useOutsideAlerter(wrapperRef);
   return (
     <>
       <div className="wrapper">
-        <div className="header">
-          <div className="container">
-            <nav className="header-nav">
-              <div
-                className="header-nav-logo"
-                onClick={() => window.open(scroogeClient, "_self")}
-              >
-                <img src={Logo} alt="logo" className="menu-logo-img" />
-              </div>
+        <div className="header" ref={wrapperRef}>
+          <Navbar
+            collapseOnSelect
+            expand="lg"
+            expanded={navOpen}
+            onToggle={() => {
+              setNavOpen(!navOpen);
+            }}
+          >
+            <Container>
+              <div className="header-Container">
+                <div className="header-content">
+                  <div className="logo">
+                    <Link to="/">
+                      <img src={hatLogo} alt="" />
+                    </Link>
+                  </div>
+                  <div className="main-menu">
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                      <div className="logo-mobile">
+                        <Link to="/">
+                          <img src={hatLogo} alt="" />
+                        </Link>
+                      </div>
 
-              <div className="header-menu">
-                <ul>
-                  {/* <li>
-                  <Link to='/nft-tokens'>Casino NFT Shop</Link>
-                </li> */}
-                  {/* <li>
-                  <Link to='/crypto-to-gc'>Crypto To GC</Link>
-                </li> */}
-                  {/* <li>
-                  <Link to='/claim-free-tokens'>Claim Monthly Tokens</Link>
-                </li> */}
-                  {/* <li>
-                  <Link to='/crypto-to-tokens'>Crypto To Token</Link>
-                </li> */}
-                  {/* <li>
-                  <Link to='/redeem-prizes'>Redeem Prizes</Link>
-                </li> */}
-                  {/* <li>
-                  <Link to='/earn-tokens'>Earn Free coins/Tokens</Link>
-                </li> */}
-                </ul>
-              </div>
-
-              <div className="header-action">
-                <div className="icon-links">
-                  {/* <Link to='/ducky-lucks-claim-tokens'>
-                    <img
-                      src={DLBigD}
-                      alt='Ducky Lucks VIPs'
-                      className='wallet-icon'
-                    />
-                  </Link> */}
-                  {/* <Link to='/my-wallet'>
-                    <img
-                      className='wallet-icon'
-                      src={WalletIcon}
-                      alt='my wallet'
-                    />
-                  </Link> */}
-                </div>
-
-                <div className="header-action">
-                  {/* <div className='icon-links'>
-                      <Link to='/ducky-lucks-claim-tokens'>
-                        <img
-                          src={DLBigD}
-                          alt='Ducky Lucks VIPs'
-                          className='wallet-icon'
-                        />
-                      </Link>
-                      <Link to='/my-wallet'>
-                        <img
-                          className='wallet-icon'
-                          src={WalletIcon}
-                          alt='my wallet'
-                        />
-                      </Link>
-                      <Link to={scroogeClient}>
-                        <HomeSVG />
-                      </Link>
-                    </div> */}
-
+                      <Nav className="mr-auto">
+                        {localStorage.getItem("token") ? (
+                          <>
+                            <Link
+                              to={`/crypto-to-gc`}
+                              className={`nav-link ${isActive(
+                                "/crypto-to-gc"
+                              )}`}
+                            >
+                              Coin Machine
+                            </Link>
+                            <Link
+                              to={`/redeem-prizes`}
+                              className={`nav-link ${isActive(
+                                "/redeem-prizes"
+                              )}`}
+                            >
+                              Redemption Center
+                            </Link>
+                            <Link
+                              to={`/claim-free-tokens`}
+                              className={`nav-link ${isActive("/earn-tokens")}`}
+                            >
+                              Earn Free Coins
+                            </Link>
+                            <Link
+                              to={`/earn-tokens`}
+                              className={`nav-link ${isActive("/Affiliate")}`}
+                            >
+                              Affiliate Program
+                            </Link>
+                            <Link
+                              to={`/my-wallet`}
+                              className={`nav-link ${isActive("/my-wallet")}`}
+                            >
+                              Holder Dividends
+                            </Link>
+                          </>
+                        ) : (
+                          ""
+                        )}
+                      </Nav>
+                    </Navbar.Collapse>
+                  </div>
                   <div className="wallet">
                     <ConnectWallet />
                     <div className={priceColor}>${currentPriceOG}</div>
                   </div>
-                  {/* <div className='spin-button'>
-                      {canSpin ? (
-                        <button onClick={handleOpenRoulette}>
-                          Roulette Spin
-                        </button>
-                      ) : (
-                        <p>{spinTimer}</p>
-                      )}
-                    </div> */}
                 </div>
-                {/* <div className='wallet'>
-                  <ConnectWallet />
-                  <div className={priceColor}>${currentPriceOG}</div>
-                </div> */}
               </div>
-            </nav>
-          </div>
+            </Container>
+          </Navbar>
         </div>
 
         <div className="content">{children}</div>
