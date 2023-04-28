@@ -51,6 +51,12 @@ html {
   /* font-family: "Poppins"; */
 }
 
+.Toastify__toast-container--top-center {
+  top: 1em;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999999 !important;
+}
 .header-nav-container {
   display: flex;
   flex-direction: row;
@@ -929,7 +935,6 @@ span.wallet-user-name {
   line-height: 1.5;
 }
 
-
 .tab-btn {
   justify-content: center;
   gap: 12px;
@@ -946,7 +951,6 @@ span.wallet-user-name {
   font-size: 14px;
   padding: 8px 20px;
 }
-
 button.active-btn.btn.btn-primary {
   background: #fbff14;
   color: black;
@@ -963,15 +967,43 @@ button.active-btn.btn.btn-primary {
   .dlNft-grid .erc721Card-4th-col {
     width: 40%;
   }
+  .spin-popup-content .spin-wheel img {
+    height: 300px;
+  }
+  .spin-win-text {
+    left: 20% !important;
+  }
+  .spin-win-text p {
+    font-size: 30px !important;
+  }
+  .spin-button {
+    left: 25% !important;
+  }
 }
 
 @media screen and (max-width: 767px) {
   .dlNft-grid .erc721Card-4th-col {
     width: 200px;
   }
+  .spin-popup-content .spin-wheel img {
+    height: 300px;
+    max-width: 400px;
+    object-fit: cover;
+    width: 100%;
+  }
+  .spin-win-text {
+    left: 20% !important;
+  }
+  .spin-win-text p {
+    font-size: 30px !important;
+  }
+  .spin-button {
+    left: 25% !important;
+  }
 }
 
-.erc721Card-rarity-subsection {}
+.erc721Card-rarity-subsection {
+}
 
 .rarity-pct-1 {
   color: rgb(245, 168, 168);
@@ -1083,7 +1115,8 @@ button.active-btn.btn.btn-primary {
   cursor: pointer;
 }
 
-.erc1155Card-details {}
+.erc1155Card-details {
+}
 
 .erc1155-price {
   color: #5ee47e;
@@ -1440,7 +1473,8 @@ select {
   gap: 10px;
 }
 
-.raffles-page .leaderboard-card-div {}
+.raffles-page .leaderboard-card-div {
+}
 
 .raffles-page .leaderboard-card-div h1 {
   margin: 30px 0;
@@ -1457,7 +1491,9 @@ select {
   margin: 20px;
   width: 80%;
   padding: 40px;
-  border: 4px solid #fbff12;
+  /* border: 4px solid #fbff12; */
+  border: 4px solid transparent;
+
   border-radius: 5px;
   text-align: center;
   text-transform: uppercase;
@@ -1465,11 +1501,13 @@ select {
   /* font-family: "Poppins"; */
   color: #ffffff;
   font-size: 20px;
-  background-color: #000;
+  /* background-color: #000; */
+  background-color: transparent !important;
 }
 
 .prizes-card:hover {
-  border: 4px solid #fbff12;
+  /* border: 4px solid #fbff12; */
+  border: 4px solid transparent;
 }
 
 .prizes-chip-count {
@@ -1639,7 +1677,7 @@ select {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  border: 4px solid #d2042d;
+  border: 4px solid transparent;
   border-radius: 5px;
   font-size: 20px;
   color: #888888;
@@ -1693,11 +1731,13 @@ select {
 
 .bg-animated {
   background-size: 300% 300%;
-  background-image: linear-gradient(-45deg,
-      rgba(59, 173, 227, 1) 0%,
-      rgba(87, 111, 230, 1) 25%,
-      rgba(152, 68, 183, 1) 51%,
-      rgba(255, 53, 127, 1) 100%);
+  background-image: linear-gradient(
+    -45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
   animation: AnimateBG 5s ease infinite;
 }
 
@@ -1717,21 +1757,25 @@ select {
 
 .bg-animated2 {
   background-size: 300% 300%;
-  background-image: linear-gradient(-45deg,
-      rgb(29, 196, 93) 0%,
-      rgb(40, 168, 14) 25%,
-      rgb(15, 155, 15) 51%,
-      rgb(34, 233, 77) 100%);
+  background-image: linear-gradient(
+    -45deg,
+    rgb(29, 196, 93) 0%,
+    rgb(40, 168, 14) 25%,
+    rgb(15, 155, 15) 51%,
+    rgb(34, 233, 77) 100%
+  );
   animation: AnimateBG 5s ease infinite;
 }
 
 .bg-animated3 {
   background-size: 300% 300%;
-  background-image: linear-gradient(45deg,
-      rgb(211, 69, 13) 0%,
-      rgb(235, 134, 19) 20%,
-      rgb(241, 8, 8) 71%,
-      rgb(248, 232, 12) 100%);
+  background-image: linear-gradient(
+    45deg,
+    rgb(211, 69, 13) 0%,
+    rgb(235, 134, 19) 20%,
+    rgb(241, 8, 8) 71%,
+    rgb(248, 232, 12) 100%
+  );
   animation: AnimateBG 5s ease infinite;
 }
 
@@ -1918,7 +1962,6 @@ select {
 }
 
 @keyframes spinner5 {
-
   from,
   0% {
     -moz-transform: rotateY(0);
@@ -2185,7 +2228,102 @@ li#walletConnect {
   font-family: "Poppins", sans-serif !important;
   font-size: 14px;
 }
+/* ********************** spin button ************************** */
+.spin-button {
+  /* display: flex;
+  place-content: center; */
+  position: absolute;
+  left: 33%;
+  top: 65%;
+}
+.spin-button button {
+  background-color: #fbff14;
+  border-radius: 26px;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  -webkit-animation: glowing 1500ms infinite;
+  -moz-animation: glowing 1500ms infinite;
+  -o-animation: glowing 1500ms infinite;
+  animation: glowing 1500ms infinite;
+}
+@-webkit-keyframes glowing {
+  0% {
+    background-color: #fbff14;
+    -webkit-box-shadow: 0 0 3px #fbff14;
+  }
+  50% {
+    background-color: #fdff8f;
+    -webkit-box-shadow: 0 0 40px #fdff8f;
+  }
+  100% {
+    background-color: #fbff14;
+    -webkit-box-shadow: 0 0 3px #fbff14;
+  }
+}
 
+@keyframes glowing {
+  0% {
+    background-color: #fbff14;
+    -webkit-box-shadow: 0 0 3px #fbff14;
+  }
+  50% {
+    background-color: #fdff8f;
+    -webkit-box-shadow: 0 0 40px #fdff8f;
+  }
+  100% {
+    background-color: #fbff14;
+    -webkit-box-shadow: 0 0 3px #fbff14;
+  }
+}
+.wining-image {
+  position: relative;
+}
+
+.winning-amount-ribbon {
+  position: absolute;
+  top: 63%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.winning-amount-ribbon p {
+  margin: 0;
+  color: #000;
+  font-size: 12px;
+  font-weight: 900;
+  transform-origin: center;
+}
+.spin-popup-content .spin-wheel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.spin-popup-content .spin-wheel img {
+  border-radius: 20px;
+}
+.spin-win-text {
+  position: absolute;
+  left: 30%;
+}
+
+.spin-win-text p {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 700;
+  color: #fbff14;
+  text-transform: uppercase;
+}
+/* **************************************************************** */
 /*********************** Footer *************************/
 
 .footer {
@@ -2837,7 +2975,10 @@ ul.footer-support li img {
   height: 44px !important;
 }
 
-.redeem-prizes-page .prizes-container .redeem-btn input[type="Number"]:focus-visible {
+.redeem-prizes-page
+  .prizes-container
+  .redeem-btn
+  input[type="Number"]:focus-visible {
   outline: none;
 }
 
@@ -3146,12 +3287,18 @@ button.shareBtn-disabled {
   gap: 20px;
 }
 
-.earn-token .earn-free-tokens-desc-div .social-share-card .social-share-message {
+.earn-token
+  .earn-free-tokens-desc-div
+  .social-share-card
+  .social-share-message {
   font-size: 16px;
   text-align: center;
 }
 
-.earn-token .earn-free-tokens-desc-div .social-share-card .social-share-btn-div {
+.earn-token
+  .earn-free-tokens-desc-div
+  .social-share-card
+  .social-share-btn-div {
   max-width: 300px;
   width: 100%;
   text-align: center;
@@ -3273,10 +3420,12 @@ button.shareBtn-disabled {
   width: 100%;
   height: 100%;
   /* background: linear-gradient(#2196f3, #e91e63); */
-  background-image: linear-gradient(45deg,
-      #ff512f 0%,
-      #f09819 51%,
-      #ff512f 100%);
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
   clip-path: circle(15% at 5% 7%);
   transition: all 0.5s;
 }
@@ -3431,10 +3580,12 @@ button.shareBtn-disabled {
   width: 100%;
   height: 100%;
   /* background: linear-gradient(#f00, #f0f); */
-  background-image: linear-gradient(45deg,
-      #ff512f 0%,
-      #f09819 51%,
-      #ff512f 100%);
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
   clip-path: circle(10% at right 100%);
   transition: all 0.5s;
 }
@@ -3699,10 +3850,12 @@ button.shareBtn-disabled {
 }
 
 .gradient-btn {
-  background-image: linear-gradient(45deg,
-      #ff512f 0%,
-      #f09819 51%,
-      #ff512f 100%);
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
 }
 
 .card-btn {
@@ -4232,7 +4385,8 @@ button.greyBtn {
   width: 100%;
 }
 
-span.input-range__label.input-range__label--min {}
+span.input-range__label.input-range__label--min {
+}
 
 span.input-range__label.input-range__label--max {
   right: -5%;
@@ -4283,7 +4437,8 @@ span.input-range__label.input-range__label--value {
   position: relative;
 }
 
-span.input-range__label.input-range__label--value span.input-range__label-container {
+span.input-range__label.input-range__label--value
+  span.input-range__label-container {
   position: absolute;
   top: -26px;
   background: #f9ff00;
@@ -4294,7 +4449,6 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   font-weight: 600;
   z-index: 99;
 }
-
 
 .redeem-prizes-page .scrooge-main-heading {
   padding-bottom: 20px;
@@ -4326,7 +4480,6 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
 .redeem-prizes-page .dropdown-menu.show a {
   color: #fff;
   font-weight: 600;
-
 }
 
 .redeem-prizes-page .dropdown-menu.show a:hover {
@@ -4367,11 +4520,9 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
 
 .purchasemodal-cards img.card-img-top {
   padding-top: 10px;
-  max-width: 160px;
-  height: 100px;
+  width: 80px;
   margin: 5px auto;
-  width: 100%;
-  object-fit: contain;
+  transform: rotate3d(8, 8, 5, 14deg);
 }
 
 .purchasemodal-cards .card-body {
@@ -4398,10 +4549,9 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   width: 100%;
   height: 36px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 4px;
 }
 
 .purchasemodal-cards .card-body button img {
@@ -4423,12 +4573,10 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
 .purchasemodal-cards .card-body button p {
   font-size: 14px;
 }
-
-.purchasemodal-cards .card-body button span {
+.card-body button span {
   font-size: 18px;
   color: #f10000;
 }
-
 .purchasemodal-cards .goldPurchase-offers {
   background: #fa0000;
   border-top-left-radius: 10px;
@@ -4484,7 +4632,6 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   color: #000;
   font-weight: 600;
   border-radius: 30px;
-  border: 1px solid #f9ff00;
 }
 
 button.affiliate-dropdownBtn:hover,
@@ -5382,7 +5529,10 @@ button.affiliate-dropdownBtn.close::before {
     text-align: center;
   }
 
-  .my-wallet-page .wallet-casino-profile-div .crypto-balance-div .claim-pending-div {
+  .my-wallet-page
+    .wallet-casino-profile-div
+    .crypto-balance-div
+    .claim-pending-div {
     margin-top: 10px;
   }
 
@@ -5412,7 +5562,6 @@ button.affiliate-dropdownBtn.close::before {
 }
 
 @media screen and (max-width: 480px) {
-
   .tab-btn button,
   .tab-btn button:hover,
   .tab-btn button:focus {
@@ -5421,7 +5570,6 @@ button.affiliate-dropdownBtn.close::before {
     font-size: 12px;
     padding: 8px 8px;
   }
-
   .footer-info {
     max-width: 100%;
     padding-top: 0;
