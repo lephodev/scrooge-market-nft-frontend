@@ -970,15 +970,15 @@ button.active-btn.btn.btn-primary {
   .spin-popup-content .spin-wheel img {
     height: 300px;
   }
-  .spin-win-text {
+  /* .spin-win-text {
     left: 20% !important;
-  }
+  } */
   .spin-win-text p {
     font-size: 30px !important;
   }
-  .spin-button {
+  /* .spin-button {
     left: 25% !important;
-  }
+  } */
 }
 
 @media screen and (max-width: 767px) {
@@ -986,20 +986,23 @@ button.active-btn.btn.btn-primary {
     width: 200px;
   }
   .spin-popup-content .spin-wheel img {
-    height: 300px;
+    height: 250px;
     max-width: 400px;
     object-fit: cover;
     width: 100%;
   }
-  .spin-win-text {
+  /* .spin-win-text {
     left: 20% !important;
-  }
+  } */
   .spin-win-text p {
-    font-size: 30px !important;
+    font-size: 20px !important;
   }
-  .spin-button {
+  .spin-wheel-img {
+    margin: 0 20px;
+  }
+  /* .spin-button {
     left: 25% !important;
-  }
+  } */
 }
 
 .erc721Card-rarity-subsection {
@@ -2229,13 +2232,7 @@ li#walletConnect {
   font-size: 14px;
 }
 /* ********************** spin button ************************** */
-.spin-button {
-  /* display: flex;
-  place-content: center; */
-  position: absolute;
-  left: 33%;
-  top: 65%;
-}
+
 .spin-button button {
   background-color: #fbff14;
   border-radius: 26px;
@@ -2311,13 +2308,22 @@ li#walletConnect {
 .spin-popup-content .spin-wheel img {
   border-radius: 20px;
 }
-.spin-win-text {
+.spin-wheel-img {
+  position: relative;
+}
+.spin-win-text-content {
+  position: absolute;
+  top: 40%;
+  text-align: center;
+  left: 10%;
+}
+/* .spin-win-text {
   position: absolute;
   left: 30%;
-}
+} */
 
 .spin-win-text p {
-  margin: 0;
+  /* margin: 0; */
   font-size: 40px;
   font-weight: 700;
   color: #fbff14;
