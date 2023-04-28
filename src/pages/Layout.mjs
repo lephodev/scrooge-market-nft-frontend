@@ -21,6 +21,7 @@ import reddit from "../images/footer/reddit.svg";
 
 import { ConnectWallet } from "@thirdweb-dev/react";
 import CookieConsent from "react-cookie-consent";
+import Cookies from 'js-cookie';
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 // import NewRoulette from "../components/roulette/roulette.mjs";
@@ -105,7 +106,7 @@ const Layout = ({ children }) => {
 
   // useEffect(() => {
   //   if (window !== "undefined") {
-  //     // const ab = localStorage.getItem("class");
+  //     // const ab = Cookies.get("class");
   //     // setActive(ab);
   //   }
   //   if (user?.lastSpinTime) handleSpinTimer(user?.lastSpinTime, Date.now());
@@ -180,7 +181,7 @@ const Layout = ({ children }) => {
                       </div>
 
                       <Nav className="mr-auto">
-                        {localStorage.getItem("token") ? (
+                        {Cookies.get("token") ? (
                           <>
                             <Link
                               to={`/crypto-to-gc`}
@@ -265,7 +266,7 @@ const Layout = ({ children }) => {
                   <li>
                     <a
                       href={`${
-                        localStorage.getItem("token")
+                        Cookies.get("token")
                           ? pokerUrl
                           : `${scroogeClient}/login`
                       }`}
@@ -277,7 +278,7 @@ const Layout = ({ children }) => {
                   <li>
                     <a
                       href={`${
-                        localStorage.getItem("token")
+                        Cookies.get("token")
                           ? blackjackUrl
                           : `${scroogeClient}/login`
                       }`}
@@ -289,7 +290,7 @@ const Layout = ({ children }) => {
                   <li>
                     <a
                       href={`${
-                        localStorage.getItem("token")
+                        Cookies.get("token")
                           ? slotUrl
                           : `${scroogeClient}/login`
                       }`}
@@ -301,7 +302,7 @@ const Layout = ({ children }) => {
                   <li>
                     <a
                       href={`${
-                        localStorage.getItem("token")
+                        Cookies.get("token")
                           ? rouletteUrl
                           : `${scroogeClient}/login`
                       }`}
