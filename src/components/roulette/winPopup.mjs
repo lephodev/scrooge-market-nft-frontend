@@ -20,7 +20,7 @@ const WinPopup = ({ setWinPopup, winAmount }) => {
     }
     setTimeout(() => {
       window.location.reload();
-    }, 500);
+    }, 700);
   };
 
   // const coinanim = {
