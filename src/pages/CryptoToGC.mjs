@@ -405,47 +405,33 @@ export default function CryptoToGC() {
                   </>
                 )}
               </div>
-              <div className="buy-chips-grid cryptoToGC">
-                <div className="purchasemodal-cards">
-                  {allPrizes.map((prize) => (
-                    <Card>
-                      <Card.Img
-                        variant="top"
-                        src={
-                          prize.priceInBUSD <= 10
-                            ? coin1
-                            : 10 < prize.priceInBUSD && prize.priceInBUSD <= 50
-                            ? coin2
-                            : 50 < prize.priceInBUSD && prize.priceInBUSD <= 100
-                            ? coin3
-                            : 100 < prize.priceInBUSD
-                            ? coin4
-                            : ""
-                        }
-                      />
-                      <Card.Body>
-                        <Card.Title>GC {prize?.gcAmount}</Card.Title>
-                        {/* <Card.Text>$10</Card.Text> */}
-                        <Button
-                          variant="primary"
-                          onClick={() =>
-                            convert(
-                              prize?.priceInBUSD,
-                              prize?.gcAmount,
-                              prize?._id
-                            )
-                          }
-                        >
-                          <p>Buy </p> <span>${prize?.priceInBUSD}</span>
-                        </Button>
-                      </Card.Body>
-                      <div className="goldPurchase-offers">
-                        Free ST: <img src={sweep} alt="sweep token" /> {prize?.freeTokenAmount}
-                      </div>
-                    </Card>
-                  ))}
-                </div>
-              </div>
+              <div className="buy-chips-grid">
+                            <div className="purchasemodal-cards">
+                              {ticketPrizes.map((prize) => (
+                                <Card>
+                                  <Card.Img
+                                    variant="top"
+                                    src={sweep}
+                                  />
+                                  <Card.Body>
+                                    <Card.Title>
+                                      Token {prize?.token}
+                                    </Card.Title>
+                                    <Card.Text>Buy Ticket</Card.Text>
+                                    <Button
+                                      variant="primary"
+                                      onClick={() =>
+                                        handleShow(prize.ticket, prize.token, "")
+                                      }
+                                    >
+                                      <img src={ticket} alt="ticket"/>
+                                      <h5>{prize?.ticket}</h5>
+                                    </Button>
+                                  </Card.Body>
+                                </Card>
+                              ))}
+                            </div>
+                          </div>
             </div>
           </div>
         )}
