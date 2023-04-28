@@ -14,13 +14,13 @@ const WinPopup = ({ setWinPopup, winAmount }) => {
   const handleCollect = () => {
     setCoin(true);
     let ele = document.getElementById("coin-audio");
-    console.log(ele, "jjjjjjjjjj");
+    // console.log(ele, "jjjjjjjjjj");
     if (ele) {
       ele.play();
     }
     setTimeout(() => {
       window.location.reload();
-    }, 500);
+    }, 700);
   };
 
   // const coinanim = {
