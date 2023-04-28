@@ -352,14 +352,14 @@
 .spin-win-popup::before {
   content: "";
   position: absolute;
-  z-index: 9999;
+  z-index: 9;
   background: #00000094;
   height: 100%;
   width: 100%;
 }
 .spin-popup-content {
   position: relative;
-  z-index: 99999;
+  z-index: 9;
 }
 .winning-popup-content {
   position: absolute;

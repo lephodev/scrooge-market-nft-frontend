@@ -1491,7 +1491,9 @@ select {
   margin: 20px;
   width: 80%;
   padding: 40px;
-  border: 4px solid #fbff12;
+  /* border: 4px solid #fbff12; */
+  border: 4px solid transparent;
+
   border-radius: 5px;
   text-align: center;
   text-transform: uppercase;
@@ -1499,11 +1501,13 @@ select {
   /* font-family: "Poppins"; */
   color: #ffffff;
   font-size: 20px;
-  background-color: #000;
+  /* background-color: #000; */
+  background-color: transparent !important;
 }
 
 .prizes-card:hover {
-  border: 4px solid #fbff12;
+  /* border: 4px solid #fbff12; */
+  border: 4px solid transparent;
 }
 
 .prizes-chip-count {
@@ -1673,7 +1677,7 @@ select {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  border: 4px solid #d2042d;
+  border: 4px solid transparent;
   border-radius: 5px;
   font-size: 20px;
   color: #888888;
@@ -4164,7 +4168,7 @@ button.shareBtn-disabled {
   box-shadow: 0 20px 20px #00000091;
   cursor: pointer;
   transition: all 0.5s;
-  padding: 20px;
+  padding: 14px;
 }
 
 .buy-chips-grid .buy-chips-grid-box:hover {
@@ -4172,6 +4176,7 @@ button.shareBtn-disabled {
 }
 
 .buy-chips-grid .buy-chips-grid-box img {
+  max-width: 200px;
   width: 100%;
 }
 
@@ -4496,6 +4501,11 @@ span.input-range__label.input-range__label--value
   padding: 0px;
   padding-top: 6px;
   max-width: 220px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.buy-chips-grid.cryptoTotoken .purchasemodal-cards .card {
+  border-radius: 10px !important;
 }
 
 .purchasemodal-cards {
@@ -4519,14 +4529,17 @@ span.input-range__label.input-range__label--value
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   padding: 5px 10px 10px 10px;
   color: #fff;
 }
 
-.purchasemodal-cards .card-body button {
-  background-color: #f9ff00;
+.purchasemodal-cards .card-body button,
+.purchasemodal-cards .card-body button:active,
+.purchasemodal-cards .card-body button:focus,
+.purchasemodal-cards .card-body button:hover {
+  background: #f9ff00;
   color: #000;
   font-size: 16px;
   font-weight: 600;
@@ -4534,25 +4547,35 @@ span.input-range__label.input-range__label--value
   border-radius: 30px;
   padding: 2px 12px;
   width: 100%;
-  height: 100%;
+  height: 36px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.purchasemodal-cards .card-body button img {
+  width: 35px;
+}
+
+.purchasemodal-cards .card-body h5 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0px;
+}
+
 .purchasemodal-cards .card-body p.card-text {
   margin-bottom: 5px !important;
   color: #fa0000;
-  text-decoration: line-through;
   font-size: 18px;
 }
 
-.card-body button p {
+.purchasemodal-cards .card-body button p {
   font-size: 14px;
 }
 .card-body button span {
   font-size: 18px;
+  color: #f10000;
 }
 .purchasemodal-cards .goldPurchase-offers {
   background: #fa0000;
@@ -4565,6 +4588,15 @@ span.input-range__label.input-range__label--value
   font-size: 14px;
   color: #fff;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.purchasemodal-cards .goldPurchase-offers img {
+  width: 20px;
+  margin-left: 4px;
 }
 
 .purchase-select {
@@ -4600,6 +4632,53 @@ span.input-range__label.input-range__label--value
   color: #000;
   font-weight: 600;
   border-radius: 30px;
+}
+
+button.affiliate-dropdownBtn:hover,
+button.affiliate-dropdownBtn:focus,
+button.affiliate-dropdownBtn:active,
+button.affiliate-dropdownBtn {
+  position: relative;
+  width: 100%;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-bottom: 1px solid #f9ff00 !important;
+  color: grey;
+  padding: 10px 20px;
+}
+
+button.affiliate-dropdownBtn.open::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  border: 1px solid #f9ff00;
+  position: absolute;
+  rotate: 45deg;
+  transform: translate(-50%, -50%);
+  top: 106%;
+  left: 48%;
+  border-top: 1px solid transparent !important;
+  border-left: 1px solid transparent !important;
+  border-top-left-radius: 100%;
+  background: #000;
+}
+
+button.affiliate-dropdownBtn.close::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  border: 1px solid #f9ff00;
+  position: absolute;
+  rotate: 45deg;
+  transform: translate(-50%, -50%);
+  top: 110%;
+  left: 47%;
+  border-bottom: 1px solid transparent !important;
+  border-right: 1px solid transparent !important;
+  border-bottom-right-radius: 100%;
+  background: #000;
 }
 
 /********************************************************************************************/

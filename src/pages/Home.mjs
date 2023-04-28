@@ -125,7 +125,7 @@ export default function Home() {
             <a
               href={scroogeClient}
               className='card'
-              // target='_blank'
+              //  
               rel='noreferrer'
             >
               <h2>HEAD OVER TO SCROOGE CASINO &rarr;</h2>
