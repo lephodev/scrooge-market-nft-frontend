@@ -8,9 +8,9 @@ import rotatewheel from "../../images/spin/wheel-rotate.wav";
 import coin from "../../images/spin/wheel-win2.wav";
 // import axios from "axios";
 // import { marketPlaceInstance } from "../../config/axios.js";
-import Lottie from "react-lottie";
-import confettiimage1 from "../../images/spin/spin-confetti-1.json";
-import confettiimage2 from "../../images/spin/spin-confetti-2.json";
+// import Lottie from "react-lottie";
+// import confettiimage1 from "../../images/spin/spin-confetti-1.json";
+// import confettiimage2 from "../../images/spin/spin-confetti-2.json";
 
 const NewRoulette = ({ idToken, uid }) => {
   const places = [
@@ -49,14 +49,14 @@ const NewRoulette = ({ idToken, uid }) => {
   //   animationData: confettiimage2,
   // };
 
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: confettiimage1,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
+  // const defaultOptions = {
+  //   loop: true,
+  //   autoplay: true,
+  //   animationData: confettiimage1,
+  //   rendererSettings: {
+  //     preserveAspectRatio: "xMidYMid slice",
+  //   },
+  // };
   // useEffect(() => {
   //   if (window?.innerWidth <= 991) {
   //     setRemoveAnim(true);
