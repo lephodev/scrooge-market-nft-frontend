@@ -167,7 +167,7 @@ const Layout = ({ children }) => {
               <div className="header-Container">
                 <div className="header-content">
                   <div className="logo">
-                    <Link to="/">
+                    <Link to={scroogeClient}>
                       <img src={hatLogo} alt="" />
                     </Link>
                   </div>
@@ -175,7 +175,7 @@ const Layout = ({ children }) => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                       <div className="logo-mobile">
-                        <Link to="/">
+                        <Link to={scroogeClient}>
                           <img src={hatLogo} alt="" />
                         </Link>
                       </div>
