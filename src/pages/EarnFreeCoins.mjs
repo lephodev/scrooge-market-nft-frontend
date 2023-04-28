@@ -84,15 +84,20 @@ const EarnFreeCoins = () => {
         {key === "dailyClaims" ? (
           <div className='spin-popup-content'>
             <div className='spin-wheel'>
-              <div className='spin-win-text'>
-                <p>spin to win</p>
-              </div>
-              <img src={wheel} alt='wheel' />
-              <div className='spin-button'>
-                <button onClick={handleOpenRoulette}>
-                  {" "}
-                  {canSpin ? "Spin Now" : spinTimer}
-                </button>
+              <div className='spin-wheel-img'>
+                <img src={wheel} alt='wheel' />
+                <div className='spin-win-text-content'>
+                  <div className='spin-win-text'>
+                    <p>spin to win</p>
+                  </div>
+
+                  <div className='spin-button'>
+                    <button onClick={handleOpenRoulette}>
+                      {" "}
+                      {canSpin ? "Spin Now" : spinTimer}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
