@@ -29,7 +29,6 @@ export default function GetWalletDLNFTs() {
   }
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   setSelectedChain(ChainId.Mainnet);
-  console.log("ChainId.Mainnet", ChainId.Mainnet);
   // const addresses = {
   //   [String(ChainId.Mainnet)]: process.env.REACT_APP_MAINNET_ADDRESS,
   //   [String(ChainId.BinanceSmartChainMainnet)]: "",
@@ -72,12 +71,9 @@ export default function GetWalletDLNFTs() {
     await marketPlaceInstance()
       .get(`/getNextClaimDate/${address}/dl/${user?.id}/${token_id}`)
       .then(async (data) => {
-        console.log("next claim: ", data.data);
         if (data.data.success) {
           dataArray.push([token_id, data.data.data[0].nextClaimDate]);
-          console.log("foo: ", dataArray);
           setClaimDateArray(dataArray);
-          console.log("setClaimDateArray: ", claimDateArray);
           
           setNextClaimDate(data.data.data[0].nextClaimDate);
         } else {
@@ -92,7 +88,6 @@ export default function GetWalletDLNFTs() {
 
 
   const getUserDataInstant = () => {
-    console.log("abbababababbababa");
     let access_token = cookies.token;
     authInstance()
       .get("/auth/check-auth", {
@@ -101,9 +96,7 @@ export default function GetWalletDLNFTs() {
         },
       })
       .then((res) => {
-        console.log("convertedData", res);
         if (res.data.user) {
-          console.log("user", res.data);
           setUser({
             ...res.data.user,
           });
@@ -189,7 +182,7 @@ export default function GetWalletDLNFTs() {
                 a cool motherducker and holding at least one{" "}
                 <a
                   href='https://duckylucks.com'
-                  target='_blank'
+                   
                   rel='noreferrer'
                   alt='claim free tokens for holding ducky lucks NFTs'>
                   Ducky Lucks NFT

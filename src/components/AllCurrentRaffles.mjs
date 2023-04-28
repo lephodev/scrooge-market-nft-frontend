@@ -110,7 +110,6 @@ export default function AllCurrentRaffles() {
   async function getCurrentRaffles() {
     try {
       const res = await marketPlaceInstance().get(`/getCurrentRaffles/0/0`);
-      console.log("res", res);
       if (res.data) {
         setRaffles(res.data);
         return res.data;
@@ -135,7 +134,6 @@ export default function AllCurrentRaffles() {
   async function getItems() {
     try {
       const res = await marketPlaceInstance().get(`/getItems/entry`);
-      console.log("res", res);
       if (res.data) {
         setItems(res.data);
         return res.data;
@@ -158,12 +156,10 @@ export default function AllCurrentRaffles() {
   //   }
 
   async function enterRaffle(raffle_id) {
-    console.log("user[0]", user[0]);
     try {
       const res = await marketPlaceInstance().get(
         `enterRaffle/${raffle_id}/${user[0]}/${address}`
       );
-      console.log("res", res);
       if (res.data) {
         toast(res?.data);
         return res.data;
@@ -207,7 +203,6 @@ export default function AllCurrentRaffles() {
 
   useEffect(() => {
     if (raffles.length === 0) {
-      console.log("Refledddd");
       getCurrentRaffles();
     }
     if (user.length === 0) {

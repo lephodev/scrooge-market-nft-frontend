@@ -9,7 +9,6 @@ export default function Login() {
   const { user } = useContext(AuthContext);
  const navigate = useNavigate();
  useEffect(() => {
-  console.log("login", user)
   if(user){
     navigate('/')
   }

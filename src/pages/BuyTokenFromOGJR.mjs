@@ -26,11 +26,10 @@ export default function BuyTokenFromOGJR() {
   const [cookies] = useCookies(["token"]);
   const sdk = useSDK();
   const address = useAddress();
-  const OGWalletAddress = "0xDcD9738D4D9Ea8c723484b9DDf5f34Ab9A601D92";
-  const JRWalletAddress = "0x4E0625BE79Aba0bd7596ad3698C9265D6CbbFAFf";
+  const OGWalletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS
+  const JRWalletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS
 
   const getUserDataInstant = () => {
-    console.log("abbababababbababa");
     let access_token = cookies.token;
     authInstance()
       .get("/auth/check-auth", {
@@ -39,9 +38,7 @@ export default function BuyTokenFromOGJR() {
         },
       })
       .then((res) => {
-        console.log("convertedData", res);
         if (res.data.user) {
-          console.log("user", res.data);
           setUser({
             ...res.data.user,
           });
@@ -63,7 +60,6 @@ export default function BuyTokenFromOGJR() {
     } else if (type === "OG") {
       contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
       walletAddress = OGWalletAddress;
-      console.log(process.env.OG_WALLET_ADDRESS);
     } else if (type === "JR") {
       contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
       walletAddress = JRWalletAddress;
@@ -79,16 +75,12 @@ export default function BuyTokenFromOGJR() {
       sdk.wallet
         .transfer(walletAddress, cryptoAmount, contractAddresss,)
         .then((txResult) => {
-          console.log("txResult",txResult);
           const {transactionHash}=txResult?.receipt||{}
-          console.log("transactionHash",transactionHash);
           marketPlaceInstance()
             .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}/${transactionHash}`)
             .then((response) => {
-              console.log("responseresponseresponse",response);
               setBuyLoading(false);
               if (response.data.success) {
-                console.log("");
                 setUser(response?.data?.user)
                 toast.success(`Successfully Purchased ${tokens} Tokens`);
                 reward();
@@ -179,25 +171,6 @@ export default function BuyTokenFromOGJR() {
           </div>
           <div className='buy-chips-content'>
             <div className='buy-chips-grid'>
-              {/* <div className='buy-chips-grid-box'>
-                <img src={coin4} alt='coin' />
-
-                <div
-                  className='gradient-btn'
-                  onClick={() => convert("OG", 5, 500)}>
-                  <span>5$ WORTH SCROOGE OG gets you 500 Tokens </span>
-                </div>
-              </div>
-              <div className='buy-chips-grid-box'>
-                <img src={coin4} alt='coin' />
-
-                <div
-                  className='gradient-btn'
-                  onClick={() => convert("JR", 5, 500)}>
-                  <span>5$ WORTH SCROOGE JR gets you 500 Tokens </span>
-                </div>
-              </div> */}
-
               <div className='buy-chips-grid-box'>
                 {/* <p>25000 </p> */}
                 <img src={coin3} alt='coin' />
