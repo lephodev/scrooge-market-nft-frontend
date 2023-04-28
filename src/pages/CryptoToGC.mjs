@@ -7,8 +7,8 @@ import coin3 from "../images/3.png";
 import coin2 from "../images/2.png";
 import coin1 from "../images/1.png";
 import sweep from "../images/token.png";
-import ticket  from "../images/ticket.png";
-import { Button, Modal,Card, Dropdown } from "react-bootstrap";
+import ticket from "../images/ticket.png";
+import { Button, Modal, Card, Dropdown } from "react-bootstrap";
 // import gold from "../images/gold.png";
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
@@ -40,7 +40,7 @@ export default function CryptoToGC() {
   const [ticketPrizes, setTicketPrizes] = useState([]);
   const [disable, setDisable] = useState(false);
   const [tokens, setTokens] = useState("");
-  const [key, setKey] = useState('cryptoToGc');
+  const [key, setKey] = useState("cryptoToGc");
   const isMismatched = useNetworkMismatch();
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
@@ -83,35 +83,38 @@ export default function CryptoToGC() {
     }
   }
 
-  const convert = async (usd, gc, pid,type) => {
+  const convert = async (usd, gc, pid, type) => {
     setBuyLoading(true);
     if (!address) {
       setBuyLoading(false);
       return toast.error("Please Connect Your Metamask Wallet");
     }
     try {
-      let contractAddresss,walletAddress, txResult,cryptoAmount;
-      if(selectedDropdown === "BUSD"){
-       txResult = await contract.call("transfer", [
-        BUSD_ADDRESS,
-        parseInt(usd),
-      ]);
-    } else{
-     if (selectedDropdown === "Scrooge") {
-      contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
-      walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
-    } else if (selectedDropdown === "Scrooge Jr") {
-      contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
-      walletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
-    }
-      const res = await fetch(
-        `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
-      );
-      const data = await res.json();
-      const current_price = data.market_data.current_price.usd;
-      cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
-    txResult = await sdk.wallet
-        .transfer(walletAddress, cryptoAmount, contractAddresss)
+      let contractAddresss, walletAddress, txResult, cryptoAmount;
+      if (selectedDropdown === "BUSD") {
+        txResult = await contract.call("transfer", [
+          BUSD_ADDRESS,
+          parseInt(usd),
+        ]);
+      } else {
+        if (selectedDropdown === "Scrooge") {
+          contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
+          walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
+        } else if (selectedDropdown === "Scrooge Jr") {
+          contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
+          walletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
+        }
+        const res = await fetch(
+          `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
+        );
+        const data = await res.json();
+        const current_price = data.market_data.current_price.usd;
+        cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
+        txResult = await sdk.wallet.transfer(
+          walletAddress,
+          cryptoAmount,
+          contractAddresss
+        );
       }
       if (txResult.receipt) {
         const { transactionHash } = txResult?.receipt || {};
@@ -159,21 +162,20 @@ export default function CryptoToGC() {
 
   async function getTicketToTokenPrizes() {
     setPrizesLoading(true);
-    
-      try {
-        const res = await marketPlaceInstance().get(`/getTicketToToken`);
-        if (res.data) {
-          console.log("res.data",res.data);
-            setPrizesLoading(false);
-            setTicketPrizes(res.data || []);
-        }
-      } catch (e) {
-        console.log(e);
+
+    try {
+      const res = await marketPlaceInstance().get(`/getTicketToToken`);
+      if (res.data) {
+        console.log("res.data", res.data);
+        setPrizesLoading(false);
+        setTicketPrizes(res.data || []);
       }
-    
+    } catch (e) {
+      console.log(e);
+    }
   }
   useEffect(() => {
-    getTicketToTokenPrizes()
+    getTicketToTokenPrizes();
   }, []);
 
   const confirmBuy = async () => {
@@ -215,177 +217,197 @@ export default function CryptoToGC() {
   return (
     <Layout>
       <main className="main redeem-prizes-page">
-      <div className='tab-btn'>
-            <Button className={`${key === 'cryptoToGc' ? 'active-btn' : ''}`} onClick={ () => setKey("cryptoToGc")}> Convert Crypto to GC</Button>
-            <Button className={`${key === 'ticketToToken' ? 'active-btn' : ''}`} onClick={ () => setKey("ticketToToken")}> Convert ticket to token</Button>
+        <div className="tab-btn">
+          <Button
+            className={`${key === "cryptoToGc" ? "active-btn" : ""}`}
+            onClick={() => setKey("cryptoToGc")}
+          >
+            {" "}
+            Convert Crypto to GC
+          </Button>
+          <Button
+            className={`${key === "ticketToToken" ? "active-btn" : ""}`}
+            onClick={() => setKey("ticketToToken")}
+          >
+            {" "}
+            Convert ticket to token
+          </Button>
         </div>
-        { key ==="cryptoToGc" ? (
-      <div className='tab-claims'>
+        {key === "cryptoToGc" ? (
+          <div className="tab-claims">
             <div className="container">
-          {buyLoading ? (
-            <div className="pageImgContainer">
-              <img src={LoadingPoker} alt="game" className="imageAnimation" />
-              <div className="loading-txt pulse">PURCHASING TOKENS...</div>
-            </div>
-          ) : (
-            <></>
-          )}
-          <div className="scrooge-main-heading">
-            <div className="pageTitle">
-              <h1 className="title">Top up your Gold Coins</h1>
-            </div>
-            {/* <div className="feature-overview-div"></div> */}
-            <div className="asterisk-desc cryptoTotoken">
-              Disclaimer : +16% will be added for Scrooge or JR payment method
-              to cover blockchain fees and contract taxes!
+              {buyLoading ? (
+                <div className="pageImgContainer">
+                  <img
+                    src={LoadingPoker}
+                    alt="game"
+                    className="imageAnimation"
+                  />
+                  <div className="loading-txt pulse">PURCHASING TOKENS...</div>
+                </div>
+              ) : (
+                <></>
+              )}
+              <div className="scrooge-main-heading">
+                <div className="pageTitle">
+                  <h1 className="title">Top up your Gold Coins</h1>
+                </div>
+                {/* <div className="feature-overview-div"></div> */}
+                <div className="asterisk-desc cryptoTotoken">
+                  Disclaimer : +16% will be added for Scrooge or JR payment
+                  method to cover blockchain fees and contract taxes!
+                </div>
+              </div>
+              {isMismatched ? (
+                <SwitchNetworkBSC />
+              ) : address ? (
+                <div className="buy-chips-content">
+                  <div className="purchase-select">
+                    <div className="purchaseSelect-Box">
+                      <h4>Purchase with</h4>
+                      <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                          {!selectedDropdown ? "BUSD" : selectedDropdown}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                          <Dropdown.Item
+                            onClick={() => handleChange("Scrooge")}
+                          >
+                            Scrooge
+                          </Dropdown.Item>
+                          <Dropdown.Item onClick={() => handleChange("BUSD")}>
+                            BUSD
+                          </Dropdown.Item>
+                          <Dropdown.Item
+                            onClick={() => handleChange("Scrooge Jr")}
+                          >
+                            Scrooge Jr
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </div>
+                  </div>
+                  <div className="buy-chips-grid cryptoToGC">
+                    <div className="purchasemodal-cards">
+                      {allPrizes.map((prize) => (
+                        <Card>
+                          {console.log("prize", prize)}
+                          <Card.Img
+                            variant="top"
+                            src={
+                              prize.priceInBUSD <= 10
+                                ? coin1
+                                : 10 < prize.priceInBUSD &&
+                                  prize.priceInBUSD <= 50
+                                ? coin2
+                                : 50 < prize.priceInBUSD &&
+                                  prize.priceInBUSD <= 100
+                                ? coin3
+                                : 100 < prize.priceInBUSD
+                                ? coin4
+                                : ""
+                            }
+                          />
+                          <Card.Body>
+                            <Card.Title>GC {prize?.gcAmount}</Card.Title>
+                            {/* <Card.Text>$10</Card.Text> */}
+                            <Button
+                              variant="primary"
+                              onClick={() =>
+                                convert(
+                                  prize?.priceInBUSD,
+                                  prize?.gcAmount,
+                                  prize?._id
+                                )
+                              }
+                            >
+                              <p>Buy </p> <span>${prize?.priceInBUSD}</span>
+                            </Button>
+                          </Card.Body>
+                          <div className="goldPurchase-offers">
+                            Free ST: <img src={sweep} alt="sweep token" />{" "}
+                            {prize?.freeTokenAmount}
+                          </div>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <p className="description yellow">
+                    Get started by connecting your wallet.
+                  </p>
+                  <div className="connect-wallet-div">
+                    <ConnectWallet />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-          {isMismatched ? (
-            <SwitchNetworkBSC />
-          ) : address ? (
+        ) : (
+          <div className="container">
             <div className="buy-chips-content">
-              <div className="purchase-select">
-                <div className="purchaseSelect-Box">
-                  <h4>Purchase with</h4>
-                  <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                      {!selectedDropdown ? "BUSD" : selectedDropdown}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item onClick={() => handleChange("Scrooge")}>
-                        Scrooge
-                      </Dropdown.Item>
-                      <Dropdown.Item onClick={() => handleChange("BUSD")}>
-                        BUSD
-                      </Dropdown.Item>
-                      <Dropdown.Item onClick={() => handleChange("Scrooge Jr")}>
-                        Scrooge Jr
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </div>
+              <div className="prizes-chip-count">
+                {user ? (
+                  <>
+                    <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
+                  </>
+                ) : (
+                  <>
+                    <img
+                      src={LoadingPoker}
+                      alt="game"
+                      className="imageAnimation"
+                    />
+                  </>
+                )}
               </div>
-              <div className="buy-chips-grid cryptoToGC">
-                <div className="purchasemodal-cards">
-                  {allPrizes.map((prize) => (
-                    <Card>
-                      {console.log("prize", prize)}
-                      <Card.Img
-                        variant="top"
-                        src={
-                          prize.priceInBUSD <= 10
-                            ? coin1
-                            : 10 < prize.priceInBUSD && prize.priceInBUSD <= 50
-                            ? coin2
-                            : 50 < prize.priceInBUSD && prize.priceInBUSD <= 100
-                            ? coin3
-                            : 100 < prize.priceInBUSD
-                            ? coin4
-                            : ""
-                        }
-                      />
-                      <Card.Body>
-                        <Card.Title>GC {prize?.gcAmount}</Card.Title>
-                        {/* <Card.Text>$10</Card.Text> */}
-                        <Button
-                          variant="primary"
-                          onClick={() =>
-                            convert(
-                              prize?.priceInBUSD,
-                              prize?.gcAmount,
-                              prize?._id
-                            )
-                          }
-                        >
-                          <p>Buy </p> <span>${prize?.priceInBUSD}</span>
-                        </Button>
-                      </Card.Body>
-                      <div className="goldPurchase-offers">
-                        Free ST: <img src={sweep} alt="sweep token" /> {prize?.freeTokenAmount}
-                      </div>
-                    </Card>
-                  ))}
+              <div className="buy-chips-grid cryptoTotoken">
+                <div className="buy-chips-grid">
+                  <div className="purchasemodal-cards">
+                    {ticketPrizes.map((prize) => (
+                      <Card>
+                        <Card.Img variant="top" src={sweep} />
+                        <Card.Body>
+                          <Card.Title>Token {prize?.token}</Card.Title>
+                          <Card.Text>Buy Ticket</Card.Text>
+                          <Button
+                            variant="primary"
+                            onClick={() =>
+                              handleShow(prize.ticket, prize.token, "")
+                            }
+                          >
+                            <img src={ticket} alt="ticket" />
+                            <h5>{prize?.ticket}</h5>
+                          </Button>
+                        </Card.Body>
+                      </Card>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          ) : (
-            <div>
-              <p className="description yellow">
-                Get started by connecting your wallet.
-              </p>
-              <div className="connect-wallet-div">
-                <ConnectWallet />
-              </div>
-            </div>
-          )}
-        </div>
-      </div>):
-     ( 
-         <div className="buy-chips-content">
-             <div className="prizes-chip-count">
-                  {user ? (
-                    <>
-                      <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
-                    </>
-                  ) : (
-                    <>
-                      <img
-                        src={LoadingPoker}
-                        alt="game"
-                        className="imageAnimation"
-                      />
-                    </>
-                  )}
-                </div>
-                        <div className="buy-chips-grid cryptoTotoken">
-                          <div className="buy-chips-grid">
-                            <div className="purchasemodal-cards">
-                              {ticketPrizes.map((prize) => (
-                                <Card>
-                                  <Card.Img
-                                    variant="top"
-                                    src={sweep}
-                                  />
-                                  <Card.Body>
-                                    <Card.Title>
-                                      Token {prize?.token}
-                                    </Card.Title>
-                                    <Card.Text>Buy Ticket</Card.Text>
-                                    <Button
-                                      variant="primary"
-                                      onClick={() =>
-                                        handleShow(prize.ticket, prize.token, "")
-                                      }
-                                    >
-                                      <img src={ticket} alt="ticket"/>
-                                      <h5>{prize?.ticket}</h5>
-                                    </Button>
-                                  </Card.Body>
-                                </Card>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-   )}
+          </div>
+        )}
 
-<Modal show={show} onHide={handleClose} centered animation={false}>
-            <Modal.Body className="popupBody">
-              <div>Do You Want To Redeem?</div>
-              <div className="popupBtn">
-                <button className="greyBtn" onClick={handleClose}>
-                  Cancel
-                </button>
-                <button
-                  className="yellowBtn"
-                  disabled={disable}
-                  onClick={confirmBuy}
-                >
-                  Confirm
-                </button>
-              </div>
-            </Modal.Body>
-          </Modal>
+        <Modal show={show} onHide={handleClose} centered animation={false}>
+          <Modal.Body className="popupBody">
+            <div>Do You Want To Redeem?</div>
+            <div className="popupBtn">
+              <button className="greyBtn" onClick={handleClose}>
+                Cancel
+              </button>
+              <button
+                className="yellowBtn"
+                disabled={disable}
+                onClick={confirmBuy}
+              >
+                Confirm
+              </button>
+            </div>
+          </Modal.Body>
+        </Modal>
       </main>
     </Layout>
   );

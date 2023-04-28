@@ -950,9 +950,16 @@ span.wallet-user-name {
 button.active-btn.btn.btn-primary {
   background: #fbff14;
   color: black;
+  border-color: #f9ff00;
   font-weight: 600;
+  box-shadow: 0 0 0 0.25rem #f9ff00, .5;
 }
-
+.btn:first-child:active,
+:not(.btn-check)+.btn:active{
+  background: #fbff14;
+  color: black;
+  border-color: #f9ff00;
+}
 @media screen and (max-width: 1200px) {
   .dlNft-grid .erc721Card-4th-col {
     width: 25%;
