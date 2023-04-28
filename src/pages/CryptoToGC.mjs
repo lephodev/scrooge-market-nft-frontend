@@ -27,6 +27,7 @@ import { useReward } from "react-rewards";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import { Form } from "react-router-dom";
 import { BUSD_ADDRESS } from "../config/keys.js";
+import { ethers } from "ethers";
 
 export default function CryptoToGC() {
   const sdk = useSDK();
@@ -83,41 +84,83 @@ export default function CryptoToGC() {
     }
   }
 
-  const convert = async (usd, gc, pid,type) => {
+  const convert = async (usd, gc, pid) => {
+    console.log("usd, gc, pid",usd, gc, pid,address);
     setBuyLoading(true);
     if (!address) {
       setBuyLoading(false);
       return toast.error("Please Connect Your Metamask Wallet");
     }
+    let tx = {};
     try {
-      let contractAddresss,walletAddress, txResult,cryptoAmount;
+      console.log("called");
+      let contractAddresss,walletAddress,cryptoAmount;
       if(selectedDropdown === "BUSD"){
-       txResult = await contract.call("transfer", [
-        BUSD_ADDRESS,
-        parseInt(usd),
-      ]);
-    } else{
+        console.log("BUSD Block");
+        walletAddress = BUSD_ADDRESS;
+         tx = {
+          from: address,
+          gasPrice: ethers.utils.parseUnits('1', 'gwei'),
+          gasLimit: 1000000,
+          data: ethers.utils.toUtf8Bytes(JSON.stringify({pid: pid, time: new Date() })),
+          value: usd.toString(),
+          to: BUSD_ADDRESS
+        }
+        console.log("BUSD Block End");
+       
+      } else{
      if (selectedDropdown === "Scrooge") {
+      console.log("OG Block");
       contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
       walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
-    } else if (selectedDropdown === "Scrooge Jr") {
+       tx = {
+        from: address,
+        gasPrice: ethers.utils.parseUnits('1', 'gwei'),
+        gasLimit: 1000000,
+        data: ethers.utils.toUtf8Bytes(JSON.stringify({pid: pid, time: new Date() })),
+        value: usd.toString(),
+        to: contractAddresss,
+        chainId: 4
+      }
+    
+  }
+     else if (selectedDropdown === "Scrooge Jr") {
+      console.log("JR Block");
       contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
       walletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
+       tx = {
+        from: address,  
+        gasPrice: ethers.utils.parseUnits('1', 'gwei'),
+        gasLimit: 1000000,
+        data: ethers.utils.toUtf8Bytes(JSON.stringify({pid: pid, time: new Date() })),
+        value: usd.toString(),
+        to: contractAddresss,
+      }
     }
+  console.log("contractAddresss",contractAddresss);
       const res = await fetch(
         `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
       );
       const data = await res.json();
+      console.log("data",data);
       const current_price = data.market_data.current_price.usd;
+      
       cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
-    txResult = await sdk.wallet
-        .transfer(walletAddress, cryptoAmount, contractAddresss)
+      console.log("current_price,cryptoAmount",current_price,cryptoAmount);
+      tx.value = parseInt(cryptoAmount)
+    // txResult = await sdk.wallet
+    //     .transfer(walletAddress, cryptoAmount, contractAddresss)
+    //   }
       }
+      // contract.erc20.transfer()
+      // sdk.wallet.transfer()
+    const txResult = await sdk.wallet.sendRawTransaction(tx)
+    console.log("txResult",txResult);
       if (txResult.receipt) {
         const { transactionHash } = txResult?.receipt || {};
         marketPlaceInstance()
           .get(
-            `convertCryptoToGoldCoin/${user?.id}/${address}/${transactionHash}/${pid}`
+            `convertCryptoToGoldCoin/${address}/${transactionHash}`
           )
           .then((response) => {
             setBuyLoading(false);
@@ -136,7 +179,8 @@ export default function CryptoToGC() {
             toast.error("Token Buy Failed");
             console.log(error);
           });
-      }
+        }
+      
     } catch (error) {
       setBuyLoading(false);
       toast.error("Gold Coin Buy Fail");
@@ -163,7 +207,7 @@ export default function CryptoToGC() {
       try {
         const res = await marketPlaceInstance().get(`/getTicketToToken`);
         if (res.data) {
-          console.log("res.data",res.data);
+          // console.log("res.data",res.data);
             setPrizesLoading(false);
             setTicketPrizes(res.data || []);
         }
@@ -269,7 +313,6 @@ export default function CryptoToGC() {
                 <div className="purchasemodal-cards">
                   {allPrizes.map((prize) => (
                     <Card>
-                      {console.log("prize", prize)}
                       <Card.Img
                         variant="top"
                         src={
