@@ -2574,7 +2574,7 @@ ul.footer-support li img {
 .logo-mobile img {
   max-width: 130px;
   width: 100%;
-  margin: 20px;
+  margin: 10px;
 }
 
 /*********************** Coockie popup *************************/
@@ -4720,6 +4720,10 @@ button.affiliate-dropdownBtn.close::before {
   background: #000;
 }
 
+.mr-auto.navbar-nav button.submit-btn {
+  display: none;
+}
+
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
@@ -5003,6 +5007,11 @@ button.affiliate-dropdownBtn.close::before {
   .header .navbar-expand-lg .navbar-nav .nav-link.active {
     border: 1px solid transparent;
     color: #f9ff00;
+  }
+
+  .mr-auto.navbar-nav button.submit-btn {
+    margin: 40px 10px;
+    display: block;
   }
 
   .header button.navbar-toggler {

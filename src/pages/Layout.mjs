@@ -21,7 +21,7 @@ import reddit from "../images/footer/reddit.svg";
 
 import { ConnectWallet } from "@thirdweb-dev/react";
 import CookieConsent from "react-cookie-consent";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 // import NewRoulette from "../components/roulette/roulette.mjs";
@@ -219,7 +219,15 @@ const Layout = ({ children }) => {
                             </Link>
                           </>
                         ) : (
-                          ""
+                          <a
+                            href={`${scroogeClient}/login`}
+                            /* target="_blank" */ rel="noreferrer"
+                            alt="Login to Scrooge Casino"
+                          >
+                            <button className="submit-btn">
+                              LOGIN TO YOUR SCROOGE CASINO ACCOUNT
+                            </button>
+                          </a>
                         )}
                       </Nav>
                     </Navbar.Collapse>
