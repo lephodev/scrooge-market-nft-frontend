@@ -1,5 +1,5 @@
 import React from "react";
-import Lottie from "react-lottie";
+// import Lottie from "react-lottie";
 // import winimg from "../../assets/images/roulette/win.png";
 // import buttonimg from "../../assets/images/roulette/btn.png";
 import winn from "../../images/ribbon.png";

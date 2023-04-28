@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ThirdwebNftMedia, useDisconnect } from "@thirdweb-dev/react";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../images/scroogeHatLogo.png";
 // import DLBigD from "../images/DLBigD.png";
 // import WalletIcon from "../images/wallet.png";
@@ -22,8 +22,8 @@ import { ConnectWallet } from "@thirdweb-dev/react";
 import CookieConsent from "react-cookie-consent";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import NewRoulette from "../components/roulette/roulette.mjs";
-import AuthContext from "../context/authContext.ts";
+// import NewRoulette from "../components/roulette/roulette.mjs";
+// import AuthContext from "../context/authContext.ts";
 import {
   blackjackUrl,
   pokerUrl,
@@ -44,11 +44,11 @@ export const Tooltip = (id, metadata, message) => (
 );
 
 const Layout = ({ children }) => {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
   const [currentPriceOG, setCurrentPriceOG] = useState("");
   const [priceColor, setPriceColor] = useState("");
-  const [canSpin, setCanSpin] = useState(false);
-  const [spinTimer, setSpinTimer] = useState("");
+  // const [canSpin, setCanSpin] = useState(false);
+  // const [spinTimer, setSpinTimer] = useState("");
 
   const disconnect = useDisconnect();
   const OGPrice = async () => {
@@ -83,44 +83,44 @@ const Layout = ({ children }) => {
   }, [disconnect]);
 
   // const [active, setActive] = useState(null);
-  const [showRoulette, setShowRoulette] = useState(false);
+  // const [showRoulette, setShowRoulette] = useState(false);
   // const handleclick = (value) => {
   //   localStorage.setItem("class", value);
   //   setActive(value);
   // };
 
-  useEffect(() => {
-    if (window !== "undefined") {
-      // const ab = localStorage.getItem("class");
-      // setActive(ab);
-    }
-    if (user?.lastSpinTime) handleSpinTimer(user?.lastSpinTime, Date.now());
-    else setCanSpin(true);
-  }, []);
+  // useEffect(() => {
+  //   if (window !== "undefined") {
+  //     // const ab = localStorage.getItem("class");
+  //     // setActive(ab);
+  //   }
+  //   if (user?.lastSpinTime) handleSpinTimer(user?.lastSpinTime, Date.now());
+  //   else setCanSpin(true);
+  // }, []);
 
-  const handleOpenRoulette = () => {
-    setShowRoulette(true);
-  };
+  // const handleOpenRoulette = () => {
+  //   setShowRoulette(true);
+  // };
 
-  const handleSpinTimer = (nextSpinTIme, datetimeNow) => {
-    let date1 = datetimeNow;
-    let interval = setInterval(() => {
-      const date2 = new Date(nextSpinTIme);
-      const diffTime = (date2 - date1) / 1000;
-      if (diffTime <= 0) {
-        clearInterval(interval);
-        setCanSpin(true);
-      } else {
-        let h = Math.floor(diffTime / 3600);
-        let m = Math.floor((diffTime % 3600) / 60);
-        let s = Math.floor((diffTime % 3600) % 60);
-        setSpinTimer(`${h}:${m}: ${s}`);
-        // setSpinTimer("12:00:00")
-        // setCanSpin(true);
-      }
-      date1 += 1000;
-    }, 1000);
-  };
+  // const handleSpinTimer = (nextSpinTIme, datetimeNow) => {
+  //   let date1 = datetimeNow;
+  //   let interval = setInterval(() => {
+  //     const date2 = new Date(nextSpinTIme);
+  //     const diffTime = (date2 - date1) / 1000;
+  //     if (diffTime <= 0) {
+  //       clearInterval(interval);
+  //       setCanSpin(true);
+  //     } else {
+  //       let h = Math.floor(diffTime / 3600);
+  //       let m = Math.floor((diffTime % 3600) / 60);
+  //       let s = Math.floor((diffTime % 3600) % 60);
+  //       setSpinTimer(`${h}:${m}: ${s}`);
+  //       // setSpinTimer("12:00:00")
+  //       // setCanSpin(true);
+  //     }
+  //     date1 += 1000;
+  //   }, 1000);
+  // };
   return (
     <>
       <div className='wrapper'>
@@ -406,7 +406,7 @@ const Layout = ({ children }) => {
       </div> */}
         </div>
       </div>
-      {showRoulette ? <NewRoulette /> : null}
+      {/* {showRoulette ? <NewRoulette /> : null} */}
     </>
   );
 };
