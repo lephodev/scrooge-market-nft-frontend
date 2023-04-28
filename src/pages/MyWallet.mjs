@@ -12,7 +12,7 @@ import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import ChainContext from "../context/Chain.ts";
 import Sweep from "../images/token.png";
-import GoldCoin from "../images/goldCoin.png";
+import GoldCoin from "../images/token.png";
 import Ticket from "../images/ticket.png";
 import ScroogeHatLogo from "../images/scroogeHatLogo.png";
 import scroogejr from "../images/scroogejr.jpeg";

@@ -14,7 +14,9 @@ a {
   color: #f8d761;
   text-decoration: none;
 }
-
+a:hover {
+  color: #f9ff00;
+}
 * {
   box-sizing: border-box;
 }
@@ -954,9 +956,16 @@ span.wallet-user-name {
 button.active-btn.btn.btn-primary {
   background: #fbff14;
   color: black;
+  border-color: #f9ff00;
   font-weight: 600;
+  box-shadow: 0 0 0 0.25rem #f9ff00, .5;
 }
-
+.btn:first-child:active,
+:not(.btn-check)+.btn:active{
+  background: #fbff14;
+  color: black;
+  border-color: #f9ff00;
+}
 @media screen and (max-width: 1200px) {
   .dlNft-grid .erc721Card-4th-col {
     width: 25%;
@@ -4526,9 +4535,13 @@ span.input-range__label.input-range__label--value
 
 .purchasemodal-cards img.card-img-top {
   padding-top: 10px;
-  width: 80px;
+  width: 130px;
+  max-width: 160px;
+  height: 100px;
   margin: 5px auto;
-  transform: rotate3d(8, 8, 5, 14deg);
+  /* transform: rotate3d(8, 8, 5, 14deg); */
+  width: 100%;
+  object-fit: contain;
 }
 
 .purchasemodal-cards .card-body {
@@ -4555,9 +4568,10 @@ span.input-range__label.input-range__label--value
   width: 100%;
   height: 36px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 4px;
 }
 
 .purchasemodal-cards .card-body button img {
