@@ -375,7 +375,7 @@ export default function CryptoToGC() {
                                     <Card.Title>
                                       Token {prize?.token}
                                     </Card.Title>
-                                    <Card.Text>Buy Ticket</Card.Text>
+                                    <Card.Text>Buy Token</Card.Text>
                                     <Button
                                       variant="primary"
                                       onClick={() =>
