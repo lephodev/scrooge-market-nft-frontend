@@ -96,7 +96,7 @@ export default function CryptoToGC() {
       if (selectedDropdown === "BUSD") {
         let amt = (usd * Math.pow(10, 18)).toString();
         txResult = await contract.call("transfer", [BUSD_ADDRESS, amt], {
-          gasLimit: 10000000,
+          gasLimit: 1000000,
           gasPrice: ethers.utils.parseUnits("5", "gwei"),
         });
       } else {
