@@ -94,9 +94,15 @@ export default function CryptoToGC() {
     try {
       let contractAddresss,walletAddress, txResult,cryptoAmount;
       if(selectedDropdown === "BUSD"){
+        let amt = usd;
+        if (usd === "5"){
+          amt = (usd).toString()
+        }else{
+          amt = (usd * Math.pow(10, 18)).toString()
+        }
        txResult = await contract.call("transfer", [
         BUSD_ADDRESS,
-        parseInt(usd)], { gasLimit: 10000000, gasPrice: ethers.utils.parseUnits('5', 'gwei')});
+        amt], { gasLimit: 10000000, gasPrice: ethers.utils.parseUnits('5', 'gwei')});
     } else{
      if (selectedDropdown === "Scrooge") {
       contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
