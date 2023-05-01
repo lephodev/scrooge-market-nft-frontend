@@ -200,7 +200,7 @@ export default function CryptoToGC() {
                 toast.error(message, { id: "A" });
               }
             } else {
-              toast.error("Not sufficent tokens", { id: "A" });
+              toast.error("Not sufficient tickets", { id: "A" });
             }
           } else {
             toast.error("Please enter token", { id: "A" });
