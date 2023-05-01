@@ -27,6 +27,7 @@ import { useReward } from "react-rewards";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import { Form } from "react-router-dom";
 import { BUSD_ADDRESS } from "../config/keys.js";
+import { ethers } from "ethers";
 
 export default function CryptoToGC() {
   const sdk = useSDK();
@@ -83,44 +84,43 @@ export default function CryptoToGC() {
     }
   }
 
-  const convert = async (usd, gc, pid, type) => {
+  const convert = async (usd, gc, pid) => {
+    console.log("usd, gc, pid",usd, gc, pid,address);
     setBuyLoading(true);
     if (!address) {
       setBuyLoading(false);
       return toast.error("Please Connect Your Metamask Wallet");
     }
     try {
-      let contractAddresss, walletAddress, txResult, cryptoAmount;
-      if (selectedDropdown === "BUSD") {
-        txResult = await contract.call("transfer", [
-          BUSD_ADDRESS,
-          parseInt(usd),
-        ]);
-      } else {
-        if (selectedDropdown === "Scrooge") {
-          contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
-          walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
-        } else if (selectedDropdown === "Scrooge Jr") {
-          contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
-          walletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
-        }
-        const res = await fetch(
-          `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
-        );
-        const data = await res.json();
-        const current_price = data.market_data.current_price.usd;
-        cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
-        txResult = await sdk.wallet.transfer(
-          walletAddress,
-          cryptoAmount,
-          contractAddresss
-        );
+      let contractAddresss,walletAddress, txResult,cryptoAmount;
+      if(selectedDropdown === "BUSD"){
+       txResult = await contract.call("transfer", [
+        BUSD_ADDRESS,
+        parseInt(usd)]);
+    } else{
+     if (selectedDropdown === "Scrooge") {
+      contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
+      walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
+      console.log("walletAddress",walletAddress);
+    } else if (selectedDropdown === "Scrooge Jr") {
+      contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
+      walletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
+    }
+      const res = await fetch(
+        `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
+      );
+      const data = await res.json();
+      const current_price = data.market_data.current_price.usd;
+      cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
+    txResult = await sdk.wallet
+        .transfer(walletAddress, cryptoAmount, contractAddresss)
       }
       if (txResult.receipt) {
+
         const { transactionHash } = txResult?.receipt || {};
         marketPlaceInstance()
           .get(
-            `convertCryptoToGoldCoin/${user?.id}/${address}/${transactionHash}/${pid}`
+            `convertCryptoToGoldCoin/${address}/${transactionHash}`
           )
           .then((response) => {
             setBuyLoading(false);
@@ -162,17 +162,18 @@ export default function CryptoToGC() {
 
   async function getTicketToTokenPrizes() {
     setPrizesLoading(true);
-
-    try {
-      const res = await marketPlaceInstance().get(`/getTicketToToken`);
-      if (res.data) {
-        console.log("res.data", res.data);
-        setPrizesLoading(false);
-        setTicketPrizes(res.data || []);
+    
+      try {
+        const res = await marketPlaceInstance().get(`/getTicketToToken`);
+        if (res.data) {
+          // console.log("res.data",res.data);
+            setPrizesLoading(false);
+            setTicketPrizes(res.data || []);
+        }
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
-    }
+    
   }
   useEffect(() => {
     getTicketToTokenPrizes();
@@ -290,8 +291,7 @@ export default function CryptoToGC() {
                   <div className="buy-chips-grid cryptoToGC">
                     <div className="purchasemodal-cards">
                       {allPrizes.map((prize) => (
-                        <Card>
-                          {console.log("prize", prize)}
+                        <Card key={prize._id}>
                           <Card.Img
                             variant="top"
                             src={
@@ -363,30 +363,33 @@ export default function CryptoToGC() {
                   </>
                 )}
               </div>
-              <div className="buy-chips-grid cryptoTotoken">
-                <div className="buy-chips-grid">
-                  <div className="purchasemodal-cards">
-                    {ticketPrizes.map((prize) => (
-                      <Card>
-                        <Card.Img variant="top" src={sweep} />
-                        <Card.Body>
-                          <Card.Title>Token {prize?.token}</Card.Title>
-                          <Card.Text>Buy Ticket</Card.Text>
-                          <Button
-                            variant="primary"
-                            onClick={() =>
-                              handleShow(prize.ticket, prize.token, "")
-                            }
-                          >
-                            <img src={ticket} alt="ticket" />
-                            <h5>{prize?.ticket}</h5>
-                          </Button>
-                        </Card.Body>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <div className="buy-chips-grid">
+                            <div className="purchasemodal-cards">
+                              {ticketPrizes.map((prize) => (
+                                <Card>
+                                  <Card.Img
+                                    variant="top"
+                                    src={sweep}
+                                  />
+                                  <Card.Body>
+                                    <Card.Title>
+                                      Token {prize?.token}
+                                    </Card.Title>
+                                    <Card.Text>Buy Ticket</Card.Text>
+                                    <Button
+                                      variant="primary"
+                                      onClick={() =>
+                                        handleShow(prize.ticket, prize.token, "")
+                                      }
+                                    >
+                                      <img src={ticket} alt="ticket"/>
+                                      <h5>{prize?.ticket}</h5>
+                                    </Button>
+                                  </Card.Body>
+                                </Card>
+                              ))}
+                            </div>
+                          </div>
             </div>
           </div>
         )}

@@ -43,6 +43,7 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [cookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(true);
+  const [dateTimeNow,setDateTimeNow] = useState('')
 
   useEffect(() => {
     login();
@@ -61,13 +62,16 @@ export default function App() {
       })
       .then((res: any) => {
         // console.log(convertedData)
+        
         if (res.data.user) {
           setUser({
             ...res.data.user,
           });
+          if(res.data.datetimenow) setDateTimeNow(res.data.datetimenow)
           setLoading(false);
         } else {
           setUser(null);
+          setDateTimeNow('')
           setLoading(false);
           return <Navigate to='/login' />;
         }
@@ -94,6 +98,7 @@ export default function App() {
         loading,
         setLoading,
         setUser,
+        dateTimeNow,
       }}>
       {loading ? (
         <div className='loading'>
