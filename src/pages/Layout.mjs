@@ -184,6 +184,20 @@ const Layout = ({ children }) => {
                         {Cookies.get("token") ? (
                           <>
                             <Link
+                              to={scroogeClient}
+                              className={`nav-link ${isActive(scroogeClient)}`}
+                            >
+                              Home
+                            </Link>
+                            <Link
+                              to={`${scroogeClient}/games`}
+                              className={`nav-link ${isActive(
+                                `${scroogeClient}/games`
+                              )}`}
+                            >
+                              Games
+                            </Link>
+                            <Link
                               to={`/crypto-to-gc`}
                               className={`nav-link ${isActive(
                                 "/crypto-to-gc"
