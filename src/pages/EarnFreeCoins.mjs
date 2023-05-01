@@ -16,7 +16,7 @@ const EarnFreeCoins = () => {
   const [key, setKey] = useState("dailyClaims");
   const [canSpin, setCanSpin] = useState(false);
   const [spinTimer, setSpinTimer] = useState("");
-
+  const [show, setShow] = useState(false);
   // const handleclick = (value) => {
   //   localStorage.setItem("class", value);
   //   setActive(value);
@@ -34,6 +34,7 @@ const EarnFreeCoins = () => {
 
   const handleOpenRoulette = () => {
     if (canSpin) setShowRoulette(true);
+    setShow(!show)
   };
 
   const addZero= (val)=>{
@@ -61,6 +62,7 @@ const EarnFreeCoins = () => {
     }, 1000);
   };
 
+
   return (
     <Layout>
       <div className="container">
@@ -84,7 +86,8 @@ const EarnFreeCoins = () => {
             Ducky Luck Claims
           </Button>
         </div>
-        {showRoulette ? <NewRoulette /> : null}
+
+        {showRoulette ? <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} /> : null}
 
         {key === "dailyClaims" ? (
           <div className='spin-popup-content'>
@@ -95,7 +98,6 @@ const EarnFreeCoins = () => {
                   <div className='spin-win-text'>
                     <p>spin to win</p>
                   </div>
-
                   <div className='spin-button'>
                     <button onClick={handleOpenRoulette}>
                       {" "}

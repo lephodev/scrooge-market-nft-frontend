@@ -85,49 +85,45 @@ export default function CryptoToGC() {
   }
 
   const convert = async (usd, gc, pid) => {
-    console.log("usd, gc, pid",usd, gc, pid,address);
+    console.log("usd, gc, pid", usd, gc, pid, address);
     setBuyLoading(true);
     if (!address) {
       setBuyLoading(false);
       return toast.error("Please Connect Your Metamask Wallet");
     }
     try {
-      let contractAddresss,walletAddress, txResult,cryptoAmount;
-      if(selectedDropdown === "BUSD"){
-        let amt = usd;
-        if (usd === "5"){
-          amt = (usd).toString()
-        }else{
-          amt = (usd * Math.pow(10, 18)).toString()
+      let contractAddresss, walletAddress, txResult, cryptoAmount;
+      if (selectedDropdown === "BUSD") {
+        let amt = (usd * Math.pow(10, 18)).toString();
+        txResult = await contract.call("transfer", [BUSD_ADDRESS, amt], {
+          gasLimit: 10000000,
+          gasPrice: ethers.utils.parseUnits("5", "gwei"),
+        });
+      } else {
+        if (selectedDropdown === "Scrooge") {
+          contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
+          walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
+          console.log("walletAddress", walletAddress);
+        } else if (selectedDropdown === "Scrooge Jr") {
+          contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
+          walletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
         }
-       txResult = await contract.call("transfer", [
-        BUSD_ADDRESS,
-        amt], { gasLimit: 10000000, gasPrice: ethers.utils.parseUnits('5', 'gwei')});
-    } else{
-     if (selectedDropdown === "Scrooge") {
-      contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
-      walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
-      console.log("walletAddress",walletAddress);
-    } else if (selectedDropdown === "Scrooge Jr") {
-      contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
-      walletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
-    }
-      const res = await fetch(
-        `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
-      );
-      const data = await res.json();
-      const current_price = data.market_data.current_price.usd;
-      cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
-    txResult = await sdk.wallet
-        .transfer(walletAddress, cryptoAmount, contractAddresss)
+        const res = await fetch(
+          `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
+        );
+        const data = await res.json();
+        const current_price = data.market_data.current_price.usd;
+        cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
+        txResult = await sdk.wallet.transfer(
+          walletAddress,
+          cryptoAmount,
+          contractAddresss
+        );
       }
       if (txResult.receipt) {
-
         const { transactionHash } = txResult?.receipt || {};
         marketPlaceInstance()
-          .get(
-            `convertCryptoToGoldCoin/${address}/${transactionHash}`
-          )
+          .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
           .then((response) => {
             setBuyLoading(false);
             if (response.data.success) {
@@ -168,18 +164,17 @@ export default function CryptoToGC() {
 
   async function getTicketToTokenPrizes() {
     setPrizesLoading(true);
-    
-      try {
-        const res = await marketPlaceInstance().get(`/getTicketToToken`);
-        if (res.data) {
-          // console.log("res.data",res.data);
-            setPrizesLoading(false);
-            setTicketPrizes(res.data || []);
-        }
-      } catch (e) {
-        console.log(e);
+
+    try {
+      const res = await marketPlaceInstance().get(`/getTicketToToken`);
+      if (res.data) {
+        // console.log("res.data",res.data);
+        setPrizesLoading(false);
+        setTicketPrizes(res.data || []);
       }
-    
+    } catch (e) {
+      console.log(e);
+    }
   }
   useEffect(() => {
     getTicketToTokenPrizes();
@@ -224,7 +219,7 @@ export default function CryptoToGC() {
   return (
     <Layout>
       <main className="main redeem-prizes-page">
-        <div className="tab-btn">
+        {/* <div className="tab-btn">
           <Button
             className={`${key === "cryptoToGc" ? "active-btn" : ""}`}
             onClick={() => setKey("cryptoToGc")}
@@ -239,7 +234,7 @@ export default function CryptoToGC() {
             {" "}
             Convert ticket to token
           </Button>
-        </div>
+        </div> */}
         {key === "cryptoToGc" ? (
           <div className="tab-claims">
             <div className="container">
@@ -370,32 +365,27 @@ export default function CryptoToGC() {
                 )}
               </div>
               <div className="buy-chips-grid">
-                            <div className="purchasemodal-cards">
-                              {ticketPrizes.map((prize) => (
-                                <Card>
-                                  <Card.Img
-                                    variant="top"
-                                    src={sweep}
-                                  />
-                                  <Card.Body>
-                                    <Card.Title>
-                                      Token {prize?.token}
-                                    </Card.Title>
-                                    <Card.Text>Buy Token</Card.Text>
-                                    <Button
-                                      variant="primary"
-                                      onClick={() =>
-                                        handleShow(prize.ticket, prize.token, "")
-                                      }
-                                    >
-                                      <img src={ticket} alt="ticket"/>
-                                      <h5>{prize?.ticket}</h5>
-                                    </Button>
-                                  </Card.Body>
-                                </Card>
-                              ))}
-                            </div>
-                          </div>
+                <div className="purchasemodal-cards">
+                  {ticketPrizes.map((prize) => (
+                    <Card>
+                      <Card.Img variant="top" src={sweep} />
+                      <Card.Body>
+                        <Card.Title>Token {prize?.token}</Card.Title>
+                        <Card.Text>Buy Token</Card.Text>
+                        <Button
+                          variant="primary"
+                          onClick={() =>
+                            handleShow(prize.ticket, prize.token, "")
+                          }
+                        >
+                          <img src={ticket} alt="ticket" />
+                          <h5>{prize?.ticket}</h5>
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         )}
