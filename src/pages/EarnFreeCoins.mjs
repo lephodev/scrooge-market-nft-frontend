@@ -8,7 +8,7 @@ import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import DailyRewards from "../components/DailyRewards.mjs";
 import AuthContext from "../context/authContext.ts";
 import NewRoulette from "../components/roulette/roulette.mjs";
-import wheel from "../images/wheel-fortune.jpg";
+import wheel from "../images/wheel-fortune.png";
 
 const EarnFreeCoins = () => {
   const { user,dateTimeNow } = useContext(AuthContext);
@@ -63,7 +63,7 @@ const EarnFreeCoins = () => {
 
   return (
     <Layout>
-      <div>
+      <div className="container">
         <div className='tab-btn'>
           <Button
             className={`${key === "dailyClaims" ? "active-btn" : ""}`}
