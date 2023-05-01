@@ -6,13 +6,14 @@ import bgaudio from "../../images/spin/wheel-win3.wav";
 import winItemaudio from "../../images/spin/wheel-win.wav";
 import rotatewheel from "../../images/spin/wheel-rotate.wav";
 import coin from "../../images/spin/wheel-win2.wav";
+import { Modal } from "react-bootstrap";
 // import axios from "axios";
 // import { marketPlaceInstance } from "../../config/axios.js";
 // import Lottie from "react-lottie";
 // import confettiimage1 from "../../images/spin/spin-confetti-1.json";
 // import confettiimage2 from "../../images/spin/spin-confetti-2.json";
 
-const NewRoulette = ({ idToken, uid }) => {
+const NewRoulette = ({ idToken, uid, handleOpenRoulette, show }) => {
   const places = [
     { token: 5, chances: 70, gc: 5000 },
     { token: 10, chances: 10, gc: 10000 },
@@ -64,7 +65,15 @@ const NewRoulette = ({ idToken, uid }) => {
   // }, []);
 
   return (
-    <div className='roulette-wrapper roulette-wheel-game'>
+    <Modal
+      show={show}
+      onHide={handleOpenRoulette}
+      className="roulette-wrapper roulette-wheel-game"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+      </Modal.Header>
       {/* <>
         <div className='confetti1'>
           <Lottie options={defaultOptions} height={400} width={400} />
@@ -86,33 +95,34 @@ const NewRoulette = ({ idToken, uid }) => {
           <Lottie options={defaultOptions} height={400} width={400} />
         </div>
       </> */}
-
-      <div className='wheel-wrapper'>
-        <Wheel
-          items={places}
-          setWinPopup={setWinPopup}
-          setWinItem={setWinItem}
-          setVolume={setVolume}
-          handleSpin={handleSpin}
-          winItem={winItem}
-        />
-      </div>
-      {winPopup && (
-        <WinPopup setWinPopup={setWinPopup} winAmount={places[winItem]} />
-      )}
-      <audio className='bg-audio' muted={!volume}>
-        <source src={bgaudio}></source>
-      </audio>
-      <audio className='rotate-wheel'>
-        <source src={rotatewheel}></source>
-      </audio>
-      <audio className='winitem-wheel'>
-        <source src={winItemaudio}></source>
-      </audio>
-      <audio id='coin-audio'>
-        <source src={coin}></source>
-      </audio>
-    </div>
+      <Modal.Body>
+        <div className="wheel-wrapper">
+          <Wheel
+            items={places}
+            setWinPopup={setWinPopup}
+            setWinItem={setWinItem}
+            setVolume={setVolume}
+            handleSpin={handleSpin}
+            winItem={winItem}
+          />
+        </div>
+        {winPopup && (
+          <WinPopup setWinPopup={setWinPopup} winAmount={places[winItem]} />
+        )}
+        <audio className="bg-audio" muted={!volume}>
+          <source src={bgaudio}></source>
+        </audio>
+        <audio className="rotate-wheel">
+          <source src={rotatewheel}></source>
+        </audio>
+        <audio className="winitem-wheel">
+          <source src={winItemaudio}></source>
+        </audio>
+        <audio id="coin-audio">
+          <source src={coin}></source>
+        </audio>
+      </Modal.Body>
+    </Modal>
   );
 };
 export default NewRoulette;

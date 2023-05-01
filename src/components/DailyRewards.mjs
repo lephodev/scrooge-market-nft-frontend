@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 // import Axios from "axios";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import { useAddress } from "@thirdweb-dev/react";
-import { ToastContainer, /* toast */ } from "react-toastify";
+import { ToastContainer /* toast */ } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { useReward } from "react-rewards";
 import AuthContext from "../context/authContext.ts";
@@ -21,8 +21,16 @@ function DailyRewards() {
   const [loader, setLoader] = useState(true);
   const [fullDailyRewards, setFullDailyRewards] = useState(false);
   const [affUser, setAffUser] = useState({});
-console.log("nextClaimDate",nextClaimDate,loader,fullDailyRewards,setBuyLoading);
- 
+  console.log(
+    "nextClaimDate",
+    nextClaimDate,
+    loader,
+    fullDailyRewards,
+    setBuyLoading
+  );
+
+  console.log("Affuser", affUser);
+
   const address = useAddress();
   // function notify(message) {
   //   toast.success("🎩 " + message);
@@ -97,14 +105,12 @@ console.log("nextClaimDate",nextClaimDate,loader,fullDailyRewards,setBuyLoading)
   };
 
   useEffect(() => {
-  
     refreshAffData();
   }, []);
 
-console.log("Affuser",affUser);
   return (
     <>
-    {/* { affUser?.message?.toString() !== "User not found." ? (
+      {/* { affUser?.message?.toString() !== "User not found." ? (
        !loader && !fullDailyRewards ? (
         <>
           <div className='daily-reward-card-div'>
@@ -342,16 +348,16 @@ console.log("Affuser",affUser);
 </a>
   </div>}    */}
       {buyLoading ? (
-        <div className='pageImgContainer'>
-          <img src={LoadingPoker} alt='game' className='imageAnimation' />
-          <div className='loading-txt pulse'>CLAIMING TOKENS...</div>
+        <div className="pageImgContainer">
+          <img src={LoadingPoker} alt="game" className="imageAnimation" />
+          <div className="loading-txt pulse">CLAIMING TOKENS...</div>
         </div>
       ) : (
         <></>
       )}
 
       <ToastContainer
-        position='top-center'
+        position="top-center"
         autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -360,7 +366,7 @@ console.log("Affuser",affUser);
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme='light'
+        theme="light"
       />
     </>
   );
