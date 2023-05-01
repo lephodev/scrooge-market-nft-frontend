@@ -15,6 +15,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: #f9ff00;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -51,42 +55,120 @@ html {
   /* font-family: "Poppins"; */
 }
 
-.header-nav-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 20px 20px;
+.Toastify__toast-container--top-center {
+  top: 1em;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999999 !important;
 }
 
-.header-nav-menu {
-  width: 70%;
+.header {
+  position: sticky;
+  top: 0%;
+  z-index: 9999;
+  background: #000;
 }
 
-.header-nav-container ul {
+.header nav {
+  background-color: var(--main-bg);
+  padding: 2px 0;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.navbar-collapse {
+  overflow-y: auto !important;
+}
+
+.header-Container {
   width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  list-style: none;
-  text-transform: uppercase;
-  font-size: 18px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.header-nav-menu a {
-  /* font-family: "Poppins"; */
-  color: #d2042d;
-  border: 2px solid #000;
-  padding: 10px;
-  font-weight: bold;
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.header-nav-menu a:hover {
-  background-color: #fbff12;
+.header .navbar-expand-lg .navbar-nav .nav-link {
+  color: #ddd;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  /* padding: 3px 30px; */
+  padding: 10px 15px;
+  transition: all 0.5s;
+  border-radius: 30px;
+  white-space: nowrap;
+  margin: 2px 5px;
 }
 
-.header-nav-logo-div {
+.header .navbar-expand-lg .navbar-nav .nav-link:hover {
+  color: #f9ff00;
+}
+
+.header .navbar-expand-lg .navbar-nav .nav-link.active {
+  color: #f9ff00;
+}
+
+.header-btn {
+  display: flex;
+  max-width: 250px;
+  /* flex-wrap: wrap; */
+  gap: 10px;
+  width: 100%;
+}
+
+.header-btn .btn {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
   text-align: center;
-  font-family: "Unica One";
+  background: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 30px;
+  color: var(--main-bg);
+  max-width: 120px;
+  width: 100%;
+}
+
+.header-btn .btn:hover,
+.header-btn .btn:focus,
+:not(.btn-check)+.btn:active {
+  background: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  color: var(--main-bg);
+  text-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+}
+
+.header-btn :not(.btn-check)+.btn:active {
+  color: var(--main-bg) !important;
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.header-btn-mobile {
+  display: none;
+}
+
+.logo-mobile {
+  display: none;
+}
+
+.logo {
+  max-width: 120px;
+  width: 100%;
+}
+
+.logo img {
+  max-width: 120px;
+  padding: 8px;
 }
 
 .menu-logo-img {
@@ -929,7 +1011,6 @@ span.wallet-user-name {
   line-height: 1.5;
 }
 
-
 .tab-btn {
   justify-content: center;
   gap: 12px;
@@ -950,26 +1031,18 @@ span.wallet-user-name {
 button.active-btn.btn.btn-primary {
   background: #fbff14;
   color: black;
+  border-color: #f9ff00;
   font-weight: 600;
+  box-shadow: 0 0 0 0.25rem #f9ff00, .5;
 }
 
-@media screen and (max-width: 1200px) {
-  .dlNft-grid .erc721Card-4th-col {
-    width: 25%;
-  }
+.btn:first-child:active,
+:not(.btn-check)+.btn:active {
+  background: #fbff14;
+  color: black;
+  border-color: #f9ff00;
 }
 
-@media screen and (max-width: 991px) {
-  .dlNft-grid .erc721Card-4th-col {
-    width: 40%;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .dlNft-grid .erc721Card-4th-col {
-    width: 200px;
-  }
-}
 
 .erc721Card-rarity-subsection {}
 
@@ -1457,7 +1530,9 @@ select {
   margin: 20px;
   width: 80%;
   padding: 40px;
-  border: 4px solid #fbff12;
+  /* border: 4px solid #fbff12; */
+  border: 4px solid transparent;
+
   border-radius: 5px;
   text-align: center;
   text-transform: uppercase;
@@ -1465,11 +1540,13 @@ select {
   /* font-family: "Poppins"; */
   color: #ffffff;
   font-size: 20px;
-  background-color: #000;
+  /* background-color: #000; */
+  background-color: transparent !important;
 }
 
 .prizes-card:hover {
-  border: 4px solid #fbff12;
+  /* border: 4px solid #fbff12; */
+  border: 4px solid transparent;
 }
 
 .prizes-chip-count {
@@ -1639,7 +1716,7 @@ select {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  border: 4px solid #d2042d;
+  border: 4px solid transparent;
   border-radius: 5px;
   font-size: 20px;
   color: #888888;
@@ -2186,6 +2263,127 @@ li#walletConnect {
   font-size: 14px;
 }
 
+/* ********************** spin button ************************** */
+
+.spin-button button {
+  background-color: #fbff14;
+  border-radius: 26px;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  -webkit-animation: glowing 1500ms infinite;
+  -moz-animation: glowing 1500ms infinite;
+  -o-animation: glowing 1500ms infinite;
+  animation: glowing 1500ms infinite;
+}
+
+@-webkit-keyframes glowing {
+  0% {
+    background-color: #fbff14;
+    -webkit-box-shadow: 0 0 3px #fbff14;
+  }
+
+  50% {
+    background-color: #fdff8f;
+    -webkit-box-shadow: 0 0 40px #fdff8f;
+  }
+
+  100% {
+    background-color: #fbff14;
+    -webkit-box-shadow: 0 0 3px #fbff14;
+  }
+}
+
+@keyframes glowing {
+  0% {
+    background-color: #fbff14;
+    -webkit-box-shadow: 0 0 3px #fbff14;
+  }
+
+  50% {
+    background-color: #fdff8f;
+    -webkit-box-shadow: 0 0 40px #fdff8f;
+  }
+
+  100% {
+    background-color: #fbff14;
+    -webkit-box-shadow: 0 0 3px #fbff14;
+  }
+}
+
+.wining-image {
+  position: relative;
+}
+
+.winning-amount-ribbon {
+  position: absolute;
+  top: 63%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.winning-amount-ribbon p {
+  margin: 0;
+  color: #000;
+  font-size: 12px;
+  font-weight: 900;
+  transform-origin: center;
+}
+
+.spin-popup-content .spin-wheel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 800px;
+  width: 100%;
+  /* border: 1px solid #f9ff00; */
+  margin: 20px auto;
+  background: #232529;
+  border-radius: 10px;
+  padding: 10px 40px 10px 10px;
+}
+
+.spin-popup-content .spin-wheel img {
+  border-radius: 20px;
+}
+
+.spin-wheel-img {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.spin-win-text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* .spin-win-text {
+  position: absolute;
+  left: 30%;
+} */
+
+.spin-win-text p {
+  /* margin: 0; */
+  font-size: 40px;
+  font-weight: 700;
+  color: #fbff14;
+  text-transform: uppercase;
+}
+
+/* **************************************************************** */
 /*********************** Footer *************************/
 
 .footer {
@@ -2385,9 +2583,9 @@ ul.footer-support li img {
 
 .footer-info a img,
 .logo-mobile img {
-  max-width: 270px;
+  max-width: 130px;
   width: 100%;
-  margin-bottom: 20px;
+  margin: 10px;
 }
 
 /*********************** Coockie popup *************************/
@@ -4015,7 +4213,7 @@ button.shareBtn-disabled {
   box-shadow: 0 20px 20px #00000091;
   cursor: pointer;
   transition: all 0.5s;
-  padding: 20px;
+  padding: 14px;
 }
 
 .buy-chips-grid .buy-chips-grid-box:hover {
@@ -4023,6 +4221,7 @@ button.shareBtn-disabled {
 }
 
 .buy-chips-grid .buy-chips-grid-box img {
+  max-width: 200px;
   width: 100%;
 }
 
@@ -4294,7 +4493,6 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   z-index: 99;
 }
 
-
 .redeem-prizes-page .scrooge-main-heading {
   padding-bottom: 20px;
 }
@@ -4325,7 +4523,6 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
 .redeem-prizes-page .dropdown-menu.show a {
   color: #fff;
   font-weight: 600;
-
 }
 
 .redeem-prizes-page .dropdown-menu.show a:hover {
@@ -4350,6 +4547,10 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   border-radius: 10px 10px 0px 0px;
 }
 
+.buy-chips-grid.cryptoTotoken .purchasemodal-cards .card {
+  border-radius: 10px !important;
+}
+
 .purchasemodal-cards {
   display: flex;
   flex-wrap: wrap;
@@ -4362,9 +4563,11 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
 
 .purchasemodal-cards img.card-img-top {
   padding-top: 10px;
+  width: 130px;
   max-width: 160px;
   height: 100px;
   margin: 5px auto;
+  /* transform: rotate3d(8, 8, 5, 14deg); */
   width: 100%;
   object-fit: contain;
 }
@@ -4379,8 +4582,11 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   color: #fff;
 }
 
-.purchasemodal-cards .card-body button {
-  background-color: #f9ff00;
+.purchasemodal-cards .card-body button,
+.purchasemodal-cards .card-body button:active,
+.purchasemodal-cards .card-body button:focus,
+.purchasemodal-cards .card-body button:hover {
+  background: #f9ff00;
   color: #000;
   font-size: 16px;
   font-weight: 600;
@@ -4396,10 +4602,19 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   gap: 4px;
 }
 
+.purchasemodal-cards .card-body button img {
+  width: 35px;
+}
+
+.purchasemodal-cards .card-body h5 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0px;
+}
+
 .purchasemodal-cards .card-body p.card-text {
   margin-bottom: 5px !important;
   color: #fa0000;
-  text-decoration: line-through;
   font-size: 18px;
 }
 
@@ -4407,7 +4622,7 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   font-size: 14px;
 }
 
-.purchasemodal-cards .card-body button span {
+.card-body button span {
   font-size: 18px;
   color: #f10000;
 }
@@ -4467,7 +4682,6 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   color: #000;
   font-weight: 600;
   border-radius: 30px;
-  border: 1px solid #f9ff00;
 }
 
 button.affiliate-dropdownBtn:hover,
@@ -4515,6 +4729,10 @@ button.affiliate-dropdownBtn.close::before {
   border-right: 1px solid transparent !important;
   border-bottom-right-radius: 100%;
   background: #000;
+}
+
+.mr-auto.navbar-nav button.submit-btn {
+  display: none;
 }
 
 /********************************************************************************************/
@@ -4613,7 +4831,32 @@ button.affiliate-dropdownBtn.close::before {
     gap: 30px;
     text-align: center;
   }
+
 }
+
+@media screen and (max-width: 1200px) {
+  .dlNft-grid .erc721Card-4th-col {
+    width: 25%;
+  }
+
+  .logo img {
+    max-width: 90px;
+    padding: 0px;
+  }
+
+  .header .navbar-expand-lg .navbar-nav .nav-link {
+    padding: 5px;
+  }
+
+  .navbar-expand-lg .navbar-nav {
+    gap: 5px;
+  }
+
+  .header .navbar-expand-lg .navbar-nav .nav-link {
+    font-size: 14px;
+  }
+}
+
 
 @media screen and (max-width: 991px) {
   .main {
@@ -4622,6 +4865,27 @@ button.affiliate-dropdownBtn.close::before {
 
   .footer-grid {
     padding: 40px 0px 100px;
+  }
+
+  .wallet {
+    text-align: center;
+    margin-right: 70px;
+    margin-top: 10px;
+  }
+
+  div#responsive-navbar-nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background: #151515;
+    width: 300px;
+    height: auto !important;
+    display: block !important;
+    left: -350px;
+    z-index: 99999999999 !important;
+    transition: all 0.5s;
+    border-right: 1px solid #151515;
+    box-shadow: 5px 5px 30px var(--main-bg) 33;
   }
 
   .footer-menu,
@@ -4697,6 +4961,135 @@ button.affiliate-dropdownBtn.close::before {
     left: 0rem !important;
     bottom: 0rem !important;
   }
+
+  .dlNft-grid .erc721Card-4th-col {
+    width: 40%;
+  }
+
+  .spin-popup-content .spin-wheel img {
+    max-width: 300px;
+    height: 300px;
+  }
+
+  .spin-win-text p {
+    font-size: 30px !important;
+  }
+
+  .logo {
+    position: relative;
+    height: 60px;
+    width: 100%;
+  }
+
+  .logo img {
+    max-width: 76px;
+  }
+
+  .header .collapsed .navbar-toggler-icon {
+    background: url(../images/tab-collaps.svg) !important;
+    width: 24px;
+    height: 19px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    display: block;
+  }
+
+  .header .navbar-toggler-icon {
+    background: url(../images/tab-close.svg) !important;
+    width: 20px;
+    height: 20px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    display: block;
+  }
+
+  div#responsive-navbar-nav.show {
+    left: 0;
+    padding-bottom: 20%;
+    z-index: 99999999999 !important;
+  }
+
+  .header .navbar-expand-lg .navbar-nav .nav-link {
+    font-weight: 600;
+    margin: 0px;
+    padding: 3px 20px;
+    font-size: 18px;
+  }
+
+  .header .navbar-expand-lg .navbar-nav .nav-link.active {
+    border: 1px solid transparent;
+    color: #f9ff00;
+  }
+
+  .mr-auto.navbar-nav button.submit-btn {
+    margin: 40px 10px;
+    display: block;
+  }
+
+  .header button.navbar-toggler {
+    position: absolute;
+    right: 20px;
+    border: none;
+    background: #f9ff00;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-btn {
+    margin-right: 60px;
+  }
+
+  .header .navbar-nav {
+    padding-top: 30px;
+    gap: 20px;
+    padding-bottom: 10px;
+  }
+
+  .header-btn {
+    display: none;
+  }
+
+  .header nav {
+    padding: 5px 0;
+  }
+
+  .header-btn-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .header-btn-mobile .btn {
+    width: 100%;
+    background: var(--primary-color);
+    color: var(--main-bg);
+    border-color: var(--primary-color);
+    height: auto;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--poppins) !important;
+  }
+
+
+  .logo-mobile {
+    display: block;
+  }
+
 
   /* ******************** new responsive ******************** */
 
@@ -4786,6 +5179,37 @@ button.affiliate-dropdownBtn.close::before {
   .nft-page .nft-card-grid p {
     text-align: center;
   }
+}
+
+@media screen and (max-width: 767px) {
+  .dlNft-grid .erc721Card-4th-col {
+    width: 200px;
+  }
+
+  .spin-popup-content .spin-wheel img {
+    height: 250px;
+    max-width: 400px;
+    object-fit: cover;
+    width: 100%;
+  }
+  .spin-popup-content .spin-wheel {
+    padding: 20px 10px;
+  }
+  /* .spin-win-text {
+    left: 20% !important;
+  } */
+  .spin-win-text p {
+    font-size: 20px !important;
+  }
+
+  .spin-wheel-img {
+    margin: 0 20px;
+    flex-direction: column;
+  }
+
+  /* .spin-button {
+    left: 25% !important;
+  } */
 }
 
 @media screen and (max-width: 720px) {
@@ -5334,6 +5758,7 @@ button.affiliate-dropdownBtn.close::before {
 
   .earn-token .earn-card-box .affiliate-card-row p {
     text-align: center;
+    word-break: break-all;
   }
 
   .earn-token .earn-card-box .affiliate-card-row {

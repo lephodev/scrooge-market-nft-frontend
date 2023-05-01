@@ -3,34 +3,30 @@
 import { useState, useEffect, useContext } from "react";
 // import Axios from "axios";
 import LoadingPoker from "../images/scroogeHatLogo.png";
-import MoneyBagGreen from "../images/moneybagGreen.png";
-import MoneyBagGray from "../images/moneybagGray.png";
 import { useAddress } from "@thirdweb-dev/react";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, /* toast */ } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Countdown from "react-countdown";
-import { useReward } from "react-rewards";
+// import { useReward } from "react-rewards";
 import AuthContext from "../context/authContext.ts";
-import { scroogeClient } from "../config/keys.js";
 import { marketPlaceInstance } from "../config/axios.js";
 import getAffiliateUser from "../scripts/getAffilateUser.mjs";
 
 function DailyRewards() {
   const { user } = useContext(AuthContext);
-  const { reward } = useReward("rewardId", "confetti", {
-    colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
-  });
+  // const { reward } = useReward("rewardId", "confetti", {
+  //   colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
+  // });
   const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("Loading...");
   const [loader, setLoader] = useState(true);
   const [fullDailyRewards, setFullDailyRewards] = useState(false);
   const [affUser, setAffUser] = useState({});
-
+console.log("nextClaimDate",nextClaimDate,loader,fullDailyRewards,setBuyLoading);
  
   const address = useAddress();
-  function notify(message) {
-    toast.success("🎩 " + message);
-  }
+  // function notify(message) {
+  //   toast.success("🎩 " + message);
+  // }
 
   async function getNextClaimDate() {
     try {
@@ -58,30 +54,30 @@ function DailyRewards() {
   //   return new Promise((res) => setTimeout(res, delay));
   // }
 
-  const claimTokens = async () => {
-    setBuyLoading(true);
-    try {
-      const data = await marketPlaceInstance().get(
-        `/claimDailyRewards/${user.id}`
-      );
-      const {success,message}=data?.data
-      if(success){
-        toast.success(message);
-      }
-      else {
-      toast.error(message);
-      }
-      setBuyLoading(false);
-      reward();
-      zzz();
-      //await timeout(4200);
-      //window.location.reload();
-    } catch (err) {
-      console.error(err);
-      notify("Error in claiming tokens!");
-      setBuyLoading(false);
-    }
-  };
+  // const claimTokens = async () => {
+  //   setBuyLoading(true);
+  //   try {
+  //     const data = await marketPlaceInstance().get(
+  //       `/claimDailyRewards/${user.id}`
+  //     );
+  //     const {success,message}=data?.data
+  //     if(success){
+  //       toast.success(message);
+  //     }
+  //     else {
+  //     toast.error(message);
+  //     }
+  //     setBuyLoading(false);
+  //     reward();
+  //     zzz();
+  //     //await timeout(4200);
+  //     //window.location.reload();
+  //   } catch (err) {
+  //     console.error(err);
+  //     notify("Error in claiming tokens!");
+  //     setBuyLoading(false);
+  //   }
+  // };
 
   const zzz = async () => {
     await getNextClaimDate();
@@ -108,7 +104,7 @@ function DailyRewards() {
 console.log("Affuser",affUser);
   return (
     <>
-    { affUser?.message?.toString() !== "User not found." ? (
+    {/* { affUser?.message?.toString() !== "User not found." ? (
        !loader && !fullDailyRewards ? (
         <>
           <div className='daily-reward-card-div'>
@@ -344,7 +340,7 @@ console.log("Affuser",affUser);
     <a href="/earn-tokens">
     Click to become an affiliate
 </a>
-  </div>}   
+  </div>}    */}
       {buyLoading ? (
         <div className='pageImgContainer'>
           <img src={LoadingPoker} alt='game' className='imageAnimation' />
