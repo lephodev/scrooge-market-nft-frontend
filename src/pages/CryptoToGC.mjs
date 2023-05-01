@@ -96,7 +96,7 @@ export default function CryptoToGC() {
       if(selectedDropdown === "BUSD"){
        txResult = await contract.call("transfer", [
         BUSD_ADDRESS,
-        parseInt(usd)]);
+        parseInt(usd)], { gasLimit: 10000000, gasPrice: ethers.utils.parseUnits('5', 'gwei')});
     } else{
      if (selectedDropdown === "Scrooge") {
       contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
@@ -142,7 +142,7 @@ export default function CryptoToGC() {
       }
     } catch (error) {
       setBuyLoading(false);
-      toast.error("Gold Coin Buy Fail");
+      toast.error("Gold Coin Buy Fail, try with increasing the gas fee");
       console.log("errordata", error);
     }
   };
