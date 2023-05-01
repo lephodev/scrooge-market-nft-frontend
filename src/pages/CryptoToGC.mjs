@@ -91,72 +91,32 @@ export default function CryptoToGC() {
       setBuyLoading(false);
       return toast.error("Please Connect Your Metamask Wallet");
     }
-    let tx = {};
     try {
-      console.log("called");
-      let contractAddresss,walletAddress,cryptoAmount;
+      let contractAddresss,walletAddress, txResult,cryptoAmount;
       if(selectedDropdown === "BUSD"){
-        console.log("BUSD Block");
-        walletAddress = BUSD_ADDRESS;
-         tx = {
-          from: address,
-          gasPrice: ethers.utils.parseUnits('1', 'gwei'),
-          gasLimit: 1000000,
-          data: ethers.utils.toUtf8Bytes(JSON.stringify({pid: pid, time: new Date() })),
-          value: usd.toString(),
-          to: BUSD_ADDRESS
-        }
-        console.log("BUSD Block End");
-       
-      } else{
+       txResult = await contract.call("transfer", [
+        BUSD_ADDRESS,
+        parseInt(usd)]);
+    } else{
      if (selectedDropdown === "Scrooge") {
-      console.log("OG Block");
       contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
       walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
-       tx = {
-        from: address,
-        gasPrice: ethers.utils.parseUnits('1', 'gwei'),
-        gasLimit: 1000000,
-        data: ethers.utils.toUtf8Bytes(JSON.stringify({pid: pid, time: new Date() })),
-        value: usd.toString(),
-        to: contractAddresss,
-        chainId: 4
-      }
-    
-  }
-     else if (selectedDropdown === "Scrooge Jr") {
-      console.log("JR Block");
+      console.log("walletAddress",walletAddress);
+    } else if (selectedDropdown === "Scrooge Jr") {
       contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
       walletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
-       tx = {
-        from: address,  
-        gasPrice: ethers.utils.parseUnits('1', 'gwei'),
-        gasLimit: 1000000,
-        data: ethers.utils.toUtf8Bytes(JSON.stringify({pid: pid, time: new Date() })),
-        value: usd.toString(),
-        to: contractAddresss,
-      }
     }
-  console.log("contractAddresss",contractAddresss);
       const res = await fetch(
         `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
       );
       const data = await res.json();
-      console.log("data",data);
       const current_price = data.market_data.current_price.usd;
-      
       cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
-      console.log("current_price,cryptoAmount",current_price,cryptoAmount);
-      tx.value = parseInt(cryptoAmount)
-    // txResult = await sdk.wallet
-    //     .transfer(walletAddress, cryptoAmount, contractAddresss)
-    //   }
+    txResult = await sdk.wallet
+        .transfer(walletAddress, cryptoAmount, contractAddresss)
       }
-      // contract.erc20.transfer()
-      // sdk.wallet.transfer()
-    const txResult = await sdk.wallet.sendRawTransaction(tx)
-    console.log("txResult",txResult);
       if (txResult.receipt) {
+
         const { transactionHash } = txResult?.receipt || {};
         marketPlaceInstance()
           .get(
@@ -179,8 +139,7 @@ export default function CryptoToGC() {
             toast.error("Token Buy Failed");
             console.log(error);
           });
-        }
-      
+      }
     } catch (error) {
       setBuyLoading(false);
       toast.error("Gold Coin Buy Fail");
@@ -332,8 +291,7 @@ export default function CryptoToGC() {
                   <div className="buy-chips-grid cryptoToGC">
                     <div className="purchasemodal-cards">
                       {allPrizes.map((prize) => (
-                        <Card>
-                          {console.log("prize", prize)}
+                        <Card key={prize._id}>
                           <Card.Img
                             variant="top"
                             src={
