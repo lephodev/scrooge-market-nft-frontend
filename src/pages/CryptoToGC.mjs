@@ -95,10 +95,37 @@ export default function CryptoToGC() {
       let contractAddresss, walletAddress, txResult, cryptoAmount;
       if (selectedDropdown === "BUSD") {
         let amt = (usd * Math.pow(10, 18)).toString();
+        contract.events.addEventListener("Transfer",(event) => {
+          if(event.data.from.toLowerCase() === address.toLowerCase() && event.data.to.toLowerCase() === BUSD_ADDRESS){
+            if (event.transaction.transactionHash) {
+              const { transactionHash } = event.transaction || {};
+              marketPlaceInstance()
+                .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
+                .then((response) => {
+                  setBuyLoading(false);
+                  if (response.data.success) {
+                    setUser(response?.data?.user);
+                    toast.success(`Successfully Purchased ${gc} Tokens`);
+                    reward();
+                    getUserDataInstant();
+                  } else {
+                    setBuyLoading(false);
+                    toast.error("Failed to buy");
+                  }
+                })
+                .catch((error) => {
+                  setBuyLoading(false);
+                  toast.error("Token Buy Failed");
+                  console.log(error);
+                });
+            }
+          }
+        })
         txResult = await contract.call("transfer", [BUSD_ADDRESS, amt], {
           gasLimit: 1000000,
           gasPrice: ethers.utils.parseUnits("5", "gwei"),
         });
+        return;
       } else {
         if (selectedDropdown === "Scrooge") {
           contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
