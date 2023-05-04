@@ -96,7 +96,9 @@ export default function CryptoToGC() {
       if (selectedDropdown === "BUSD") {
         let amt = (usd * Math.pow(10, 18)).toString();
         contract.events.addEventListener("Transfer",(event) => {
-          if(event.data.from.toLowerCase() === address.toLowerCase() && event.data.to.toLowerCase() === BUSD_ADDRESS){
+          //  console.log("event trigger", event.data.from === address, event.data.to === BUSD_ADDRESS);
+          if(event.data.from.toLowerCase() === address.toLowerCase() && event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase()){
+            console.log("transaction",event.transaction)
             if (event.transaction.transactionHash) {
               const { transactionHash } = event.transaction || {};
               marketPlaceInstance()
@@ -121,10 +123,13 @@ export default function CryptoToGC() {
             }
           }
         })
-        txResult = await contract.call("transfer", [BUSD_ADDRESS, amt], {
-          gasLimit: 1000000,
-          gasPrice: ethers.utils.parseUnits("5", "gwei"),
-        });
+        setTimeout(async() => {
+          txResult = await contract.call("transfer", [BUSD_ADDRESS, amt], {
+            gasLimit: 1000000,
+            gasPrice: ethers.utils.parseUnits("5", "gwei"),
+          });
+        },3000)
+        
         return;
       } else {
         if (selectedDropdown === "Scrooge") {
