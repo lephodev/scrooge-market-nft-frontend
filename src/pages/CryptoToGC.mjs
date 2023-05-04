@@ -95,10 +95,42 @@ export default function CryptoToGC() {
       let contractAddresss, walletAddress, txResult, cryptoAmount;
       if (selectedDropdown === "BUSD") {
         let amt = (usd * Math.pow(10, 18)).toString();
-        txResult = await contract.call("transfer", [BUSD_ADDRESS, amt], {
-          gasLimit: 1000000,
-          gasPrice: ethers.utils.parseUnits("5", "gwei"),
-        });
+        contract.events.addEventListener("Transfer",(event) => {
+          //  console.log("event trigger", event.data.from === address, event.data.to === BUSD_ADDRESS);
+          if(event.data.from.toLowerCase() === address.toLowerCase() && event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase()){
+            console.log("transaction",event.transaction)
+            if (event.transaction.transactionHash) {
+              const { transactionHash } = event.transaction || {};
+              marketPlaceInstance()
+                .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
+                .then((response) => {
+                  setBuyLoading(false);
+                  if (response.data.success) {
+                    setUser(response?.data?.user);
+                    toast.success(`Successfully Purchased ${gc} Tokens`);
+                    reward();
+                    getUserDataInstant();
+                  } else {
+                    setBuyLoading(false);
+                    toast.error("Failed to buy");
+                  }
+                })
+                .catch((error) => {
+                  setBuyLoading(false);
+                  toast.error("Token Buy Failed");
+                  console.log(error);
+                });
+            }
+          }
+        })
+        setTimeout(async() => {
+          txResult = await contract.call("transfer", [BUSD_ADDRESS, amt], {
+            gasLimit: 1000000,
+            gasPrice: ethers.utils.parseUnits("5", "gwei"),
+          });
+        },3000)
+        
+        return;
       } else {
         if (selectedDropdown === "Scrooge") {
           contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;

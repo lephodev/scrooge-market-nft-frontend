@@ -215,13 +215,15 @@ const Layout = ({ children }) => {
                             </Link>
                             <Link
                               to={`/claim-free-tokens`}
-                              className={`nav-link ${isActive("/earn-tokens")}`}
+                              className={`nav-link ${isActive(
+                                "/claim-free-tokens"
+                              )}`}
                             >
                               Earn Free Coins
                             </Link>
                             <Link
                               to={`/earn-tokens`}
-                              className={`nav-link ${isActive("/Affiliate")}`}
+                              className={`nav-link ${isActive("/earn-tokens")}`}
                             >
                               Affiliate Program
                             </Link>
@@ -229,7 +231,7 @@ const Layout = ({ children }) => {
                               to={`/my-wallet`}
                               className={`nav-link ${isActive("/my-wallet")}`}
                             >
-                              Holder Dividends
+                              Holder Claim Center
                             </Link>
                           </>
                         ) : (
