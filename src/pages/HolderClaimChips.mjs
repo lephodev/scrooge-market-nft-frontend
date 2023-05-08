@@ -84,7 +84,7 @@ function HolderClaimChips() {
     try {
       marketPlaceInstance()
         .get(
-          `/claimHolderTokens/${address}/${OGBalance}/${currentPrice}/${user.id}`
+          `/claimHolderTokens/${address}`
         )
         .then(async (data) => {
           if (data?.data?.code === 200) {
