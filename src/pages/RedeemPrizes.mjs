@@ -89,7 +89,7 @@ function RedeemPrizes() {
       containerId: "connect-wallet",
     });
     marketPlaceInstance()
-      .get(`/redeemPrizeData/${address}/${prize_id}`)
+      .get(`/WithdrawRequest/${address}/${prize_id}`)
       .then((data) => {
         console.log("redeemdata", data);
         if (!data.data.success) {
