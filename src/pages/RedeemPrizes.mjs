@@ -27,7 +27,6 @@ function RedeemPrizes() {
   let prizesReceived = 0;
   const { user, loading, setUser } = useContext(AuthContext);
   console.log(loading);
-  const [redeemLoading, /* setRedeemLoading */] = useState(false);
   const [redeemSuccess, setRedeemSuccess] = useState(false);
   const [allPrizes, setAllPrizes] = useState([]);
   const [cryptoTotoken, setCryptoToToken] = useState([]);
@@ -90,7 +89,7 @@ function RedeemPrizes() {
       containerId: "connect-wallet",
     });
     marketPlaceInstance()
-      .get(`/redeemPrizeData/${address}/${user.id}/${prize_id}`)
+      .get(`/redeemPrizeData/${address}/${prize_id}`)
       .then((data) => {
         console.log("redeemdata", data);
         if (!data.data.success) {
@@ -98,7 +97,7 @@ function RedeemPrizes() {
             containerId: "error",
           });
         } else {
-          toast.success("redeemed successfully!");
+          toast.success(data?.data?.message);
           getUserDataInstant();
         }
       })
@@ -408,15 +407,6 @@ function RedeemPrizes() {
             </div>
           )}
           <div className="bordered-section">
-            {redeemLoading ? (
-              <div className="pageImgContainer">
-                <img src={LoadingPoker} alt="game" className="imageAnimation" />
-                <div className="loading-txt pulse">REDEEMING...</div>
-              </div>
-            ) : (
-              <></>
-            )}
-
             {redeemSuccess ? (
               <div className="pageImgContainer">
                 <div className="loading-txt">
