@@ -88,7 +88,8 @@ function RedeemPrizes() {
     return toast.error("Please connect wallet first", {
       containerId: "connect-wallet",
     });
-    marketPlaceInstance()
+    setglobalLoader(true)
+        marketPlaceInstance()
       .get(`/WithdrawRequest/${address}/${prize_id}`)
       .then((data) => {
         console.log("redeemdata", data);
@@ -96,8 +97,10 @@ function RedeemPrizes() {
           toast.error("ERROR! - " + data.data.message, {
             containerId: "error",
           });
+          setglobalLoader(false)
         } else {
           toast.success(data?.data?.message);
+          setglobalLoader(false)
           getUserDataInstant();
         }
       })
