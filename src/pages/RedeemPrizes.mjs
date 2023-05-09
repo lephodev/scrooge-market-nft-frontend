@@ -27,7 +27,6 @@ function RedeemPrizes() {
   let prizesReceived = 0;
   const { user, loading, setUser } = useContext(AuthContext);
   console.log(loading);
-  const [redeemLoading, setRedeemLoading] = useState(false);
   const [redeemSuccess, setRedeemSuccess] = useState(false);
   const [allPrizes, setAllPrizes] = useState([]);
   const [cryptoTotoken, setCryptoToToken] = useState([]);
@@ -71,7 +70,7 @@ function RedeemPrizes() {
         await convert(tickets, tokens);
       }
       if (prizeId !== "") {
-        await RedeemPrize(prizeId);
+        await confirmRedeem(prizeId);
       }
     } catch (error) {
       console.log(error);
@@ -79,6 +78,33 @@ function RedeemPrizes() {
     setDisable(false);
     handleClose();
   };
+
+
+  const confirmRedeem=(prize_id)=>{
+    try {
+    if (!user)
+    return toast.error("Please login first", { containerId: "login" });
+  if (!address)
+    return toast.error("Please connect wallet first", {
+      containerId: "connect-wallet",
+    });
+    marketPlaceInstance()
+      .get(`/WithdrawRequest/${address}/${prize_id}`)
+      .then((data) => {
+        console.log("redeemdata", data);
+        if (!data.data.success) {
+          toast.error("ERROR! - " + data.data.message, {
+            containerId: "error",
+          });
+        } else {
+          toast.success(data?.data?.message);
+          getUserDataInstant();
+        }
+      })
+  } catch (error) {
+      console.log("errrr",error);
+  }
+  }
 
   async function getTicketToTokenPrizes() {
     setPrizesLoading(true);
@@ -240,44 +266,44 @@ function RedeemPrizes() {
         console.log("error ", err);
       });
   };
-  const RedeemPrize = async (prize_id) => {
-    // console.log("prize_id", prize_id);
-    if (!user)
-      return toast.error("Please login first", { containerId: "login" });
-    if (!address)
-      return toast.error("Please connect wallet first", {
-        containerId: "connect-wallet",
-      });
-    // console.log("user", user, prize_id);
-    // console.log("add", address);
-    // console.log("user.id", user.id);
-    // console.log("prize_id", prize_id);
-    // console.log("address", address);
-    setRedeemLoading(true);
-    marketPlaceInstance()
-      .get(`/redeemPrize/${address}/${user.id}/${prize_id}`)
-      .then((data) => {
-        setPrizeId("");
-        // console.log("redeemdata", data);
-        setRedeemLoading(false);
-        if (!data.data.success) {
-          toast.error("ERROR! - " + data.data.message, {
-            containerId: "error",
-          });
-        } else {
-          setRedeemSuccess(false);
-          toast.success(data.data.message + " redeemed successfully!");
-          getUserDataInstant();
-        }
-      })
-      .catch((err) => {
-        if (err.response.data.message) {
-          toast.error(err.response.data.message, {
-            containerId: "error-redeen",
-          });
-        }
-      });
-  };
+  // const RedeemPrize = async (prize_id) => {
+  //   // console.log("prize_id", prize_id);
+  //   if (!user)
+  //     return toast.error("Please login first", { containerId: "login" });
+  //   if (!address)
+  //     return toast.error("Please connect wallet first", {
+  //       containerId: "connect-wallet",
+  //     });
+  //   // console.log("user", user, prize_id);
+  //   // console.log("add", address);
+  //   // console.log("user.id", user.id);
+  //   // console.log("prize_id", prize_id);
+  //   // console.log("address", address);
+  //   setRedeemLoading(true);
+  //   marketPlaceInstance()
+  //     .get(`/redeemPrize/${address}/${user.id}/${prize_id}`)
+  //     .then((data) => {
+  //       setPrizeId("");
+  //       // console.log("redeemdata", data);
+  //       setRedeemLoading(false);
+  //       if (!data.data.success) {
+  //         toast.error("ERROR! - " + data.data.message, {
+  //           containerId: "error",
+  //         });
+  //       } else {
+  //         setRedeemSuccess(false);
+  //         toast.success(data.data.message + " redeemed successfully!");
+  //         getUserDataInstant();
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       if (err.response.data.message) {
+  //         toast.error(err.response.data.message, {
+  //           containerId: "error-redeen",
+  //         });
+  //       }
+  //     });
+  // };
 
   const convert = async (ticketPrice, tokenPrice) => {
     // console.log("convertPrice", ticketPrice, tokenPrice);
@@ -381,15 +407,6 @@ function RedeemPrizes() {
             </div>
           )}
           <div className="bordered-section">
-            {redeemLoading ? (
-              <div className="pageImgContainer">
-                <img src={LoadingPoker} alt="game" className="imageAnimation" />
-                <div className="loading-txt pulse">REDEEMING...</div>
-              </div>
-            ) : (
-              <></>
-            )}
-
             {redeemSuccess ? (
               <div className="pageImgContainer">
                 <div className="loading-txt">
