@@ -13,7 +13,7 @@ export default function ClaimJRPending() {
   const [claimableAmount, setClaimableAmount] = useState("");
   const [totalClaimed, setTotalClaimed] = useState("");
   const [secondsUntilClaim, setSecondsUntilClaim] = useState("");
-  const [setClaimableIn] = useState("");
+  const [/* claimableIn */,setClaimableIn] = useState("");
   const [claimableInTime, setClaimableInTime] = useState();
   const [isClaiming, setIsClaiming] = useState(false);
 
@@ -22,18 +22,17 @@ export default function ClaimJRPending() {
   });
   const sdk = useSDK();
   const address = useAddress();
-  const JRContractAddress = "0x2e9F79aF51dD1bb56Bbb1627FBe4Cc90aa8985Dd";
+  const JRContractAddress = process.env.REACT_APP_JRCONTRACT_ADDRESS;
 
   const contractClaim = async () => {
     try {
       const contract = await sdk.getContractFromAbi(JRContractAddress, JR_ABI);
       setContractObj(contract);
-      const accBal = await contract.erc20.balance(address);
-      console.log("accBal", accBal);
       const divInfo = await contract.call("getAccountDividendsInfo", [address]);
       // const divInfo = await contract.call("getAccountDividendsInfo", address);
       setClaimableAmount((parseInt(divInfo[3]) / 10 ** 18).toFixed(4));
       setSecondsUntilClaim(parseInt(divInfo[7]));
+      console.log("parseInt(divInfo[7]",parseInt(divInfo[7]));
       var t = new Date();
       /*if(parseInt(divInfo[7]) > 0){
               t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
@@ -87,23 +86,21 @@ export default function ClaimJRPending() {
           <br />
           {address &&
           (secondsUntilClaim === 0 || { claimableInTime } >= Date.now()) ? (
-            <div className="new-btn">
+            <div className='new-btn'>
               <button
                 // className='claim-btn'
-                onClick={() => handleClaim()}
-              >
+                onClick={() => handleClaim()}>
                 Claim Pending Rewards
               </button>
             </div>
           ) : (
-            <div className="claim-countdown">
+            <div className='claim-countdown'>
               Next Claim Available:<br></br>
               {claimableInTime ? (
                 getCountdown(claimableInTime)
               ) : (
                 <>Unavailable</>
-              )}
-            </div>
+              )}</div>
           )}
           <div style={{ width: "100%", textAlign: "center" }}>
             <div id="rewardId" style={{ margin: "0 auto" }} />
