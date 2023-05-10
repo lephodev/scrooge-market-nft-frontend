@@ -13,7 +13,6 @@ export default function ClaimJRPending() {
   const [claimableAmount, setClaimableAmount] = useState("");
   const [totalClaimed, setTotalClaimed] = useState("");
   const [secondsUntilClaim, setSecondsUntilClaim] = useState("");
-  const [setClaimableIn] = useState("");
   const [claimableInTime, setClaimableInTime] = useState();
   const [isClaiming, setIsClaiming] = useState(false);
 
@@ -32,14 +31,14 @@ export default function ClaimJRPending() {
       console.log("accBal", accBal);
       const divInfo = await contract.call("getAccountDividendsInfo", [address]);
       // const divInfo = await contract.call("getAccountDividendsInfo", address);
-      setClaimableAmount((parseInt(divInfo[3]) / 10 ** 18).toFixed(4));
+      setClaimableAmount((parseInt(divInfo[3]) / 10 * 18).toFixed(4));
       setSecondsUntilClaim(parseInt(divInfo[7]));
       var t = new Date();
       /*if(parseInt(divInfo[7]) > 0){
               t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
           }*/
       t.setSeconds(t.getSeconds() + parseInt(divInfo[7]));
-      setClaimableIn(t.toString());
+      // setClaimableIn(t.toString());
       setClaimableInTime(t.getTime());
       setTotalClaimed((parseInt(divInfo[4]) / 10 ** 18).toFixed(4));
     } catch (error) {
@@ -74,6 +73,7 @@ export default function ClaimJRPending() {
     contractClaim();
   }, [address]);
 
+  console.log("JR claimableAmount",claimableAmount);
   return (
     <>
       {!isClaiming ? (
