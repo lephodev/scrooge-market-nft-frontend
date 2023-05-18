@@ -191,7 +191,7 @@ export default function CryptoToGC() {
             setBuyLoading(false);
             if (response.data.success) {
               setUser(response?.data?.user);
-              toast.success(`Successfully Purchased ${gc} Tokens`);
+              toast.success(`Successfully Purchased ${gc} goldCoin`);
               reward();
               getUserDataInstant();
             } else {
