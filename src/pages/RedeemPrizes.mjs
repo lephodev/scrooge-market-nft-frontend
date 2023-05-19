@@ -619,13 +619,24 @@ function RedeemPrizes() {
                   {!prizesLoading ? (
                     <>
                       <div className="prizes_container">
+                      <div className="prizes-card">
+                  <div className="prize-name bold text-animate">
+                                  <h4>Under token migeration</h4>
+                                </div>
+                               <img className="card-img pulse" src={"https://casino-nft-marketplace.s3.amazonaws.com/scroogeJRAvatar.png"} alt="JR" />
+                               <img className="card-img pulse" src="https://casino-nft-marketplace.s3.amazonaws.com/scroogeHatPrize.png" alt="OG" />
+                                <div>
+                                  <p> We are migrating OG and JR and one token, Crypto redeem will be back soon</p>
+                                  <p>We are sorry for inconvenience</p>
+                                </div>
+                  </div>
                         {prizes
                           .filter(
                             (f) =>
                               f.redeem_action !== "burn" &&
                               f.category !== "Merch" &&
                               f.category !== "Badges" &&
-                              f.price !== 500
+                              f.price !== 500 && f.contract_name !== "OG" && f.contract_name !== "JR"
                           )
                           .map((prize) => (
                             <div className="prizes-card" key={prize._id}>
