@@ -626,7 +626,7 @@ function RedeemPrizes() {
                                <img className="card-img pulse" src={"https://casino-nft-marketplace.s3.amazonaws.com/scroogeJRAvatar.png"} alt="JR" />
                                <img className="card-img pulse" src="https://casino-nft-marketplace.s3.amazonaws.com/scroogeHatPrize.png" alt="OG" />
                                 <div>
-                                  <p> We are migrating OG and JR and one token, Crypto redeem will be back soon</p>
+                                  <p> We are migrating OG and JR into one token, Crypto redeem will be back soon</p>
                                   <p>We are sorry for inconvenience</p>
                                 </div>
                   </div>
