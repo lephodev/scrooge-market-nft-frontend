@@ -222,8 +222,8 @@ const Layout = ({ children }) => {
                               Earn Free Coins
                             </Link>
                             <Link
-                              to={`/earn-tokens`}
-                              className={`nav-link ${isActive("/earn-tokens")}`}
+                              to={`${scroogeClient}/affiliate`}
+                              className={`nav-link ${isActive("/affiliate")}`}
                             >
                               Affiliate Program
                             </Link>
