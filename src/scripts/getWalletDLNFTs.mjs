@@ -390,12 +390,17 @@ export default function GetWalletDLNFTs() {
                   <span></span>
                 )}
               </div>
+              
               <div className='erc721Card-4th-col'>
+            
                 {claimDateArray.length === ownedNFTs.length ? (
                   <>
+                  
                     {claimDateArray
                       .find((element) => element[0] === nft.metadata.id)[1]
-                      .toString() === "No Entries Found" ? (
+                      .toString() === "No Entries Found" || 
+                      new Date() >=new Date(claimDateArray
+                      .find((element) => element[0] === nft.metadata.id)[1]) ? (
                       <>
                         <button
                           className='subheader-btn'
