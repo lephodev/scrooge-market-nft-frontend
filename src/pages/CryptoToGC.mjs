@@ -92,7 +92,7 @@ export default function CryptoToGC() {
       return toast.error("Please Connect Your Metamask Wallet");
     }
     try {
-      let contractAddresss, walletAddress, txResult, cryptoAmount;
+      let contractAddresss, walletAddress, txResult, cryptoAmount, current_price;
       if (selectedDropdown === "BUSD") {
         let amt = (usd * Math.pow(10, 18)).toString();
         contract.events.addEventListener("Transfer",(event) => {
@@ -107,7 +107,7 @@ export default function CryptoToGC() {
                   setBuyLoading(false);
                   if (response.data.success) {
                     setUser(response?.data?.user);
-                    toast.success(`Successfully Purchased ${gc} Tokens`);
+                    toast.success(`Successfully Purchased ${gc} goldCoin`);
                     reward();
                     getUserDataInstant();
                   } else {
@@ -135,22 +135,53 @@ export default function CryptoToGC() {
         if (selectedDropdown === "Scrooge") {
           contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
           walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
-          console.log("walletAddress", walletAddress);
+          
         } else if (selectedDropdown === "Scrooge Jr") {
           contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
           walletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
+         
+        }else if(selectedDropdown === "BNB"){
+          contractAddresss = process.env.REACT_APP_BNBCONTRACT_ADDRESS;
+          walletAddress = BUSD_ADDRESS;
+         
+        }else if(selectedDropdown === "USDC"){
+          contractAddresss = process.env.REACT_APP_USDCCONTRACT_ADDRESS;
+          walletAddress = BUSD_ADDRESS;
+          
+        }
+        else if(selectedDropdown === "USDT"){
+          contractAddresss = process.env.REACT_APP_USDTCONTRACT_ADDRESS;
+          walletAddress = BUSD_ADDRESS;
+         
         }
         const res = await fetch(
           `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
         );
         const data = await res.json();
-        const current_price = data.market_data.current_price.usd;
-        cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
+         current_price = data.market_data.current_price.usd;
+         if(["USDC", "USDT", "BNB"].includes(selectedDropdown)){
+          if(["USDC", "USDT"].includes(selectedDropdown)){
+            cryptoAmount = parseInt(usd);
+          }else{
+            cryptoAmount = parseInt(usd)/current_price
+          }
+          
+         }else{
+          cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
+         }
+        console.log(selectedDropdown, cryptoAmount)
+        if(selectedDropdown === "BNB"){
+          txResult = await sdk.wallet.transfer(
+            walletAddress,
+            cryptoAmount
+          );
+        }else{
         txResult = await sdk.wallet.transfer(
           walletAddress,
           cryptoAmount,
           contractAddresss
         );
+        }
       }
       if (txResult.receipt) {
         const { transactionHash } = txResult?.receipt || {};
@@ -160,7 +191,7 @@ export default function CryptoToGC() {
             setBuyLoading(false);
             if (response.data.success) {
               setUser(response?.data?.user);
-              toast.success(`Successfully Purchased ${gc} Tokens`);
+              toast.success(`Successfully Purchased ${gc} goldCoin`);
               reward();
               getUserDataInstant();
             } else {
@@ -304,19 +335,25 @@ export default function CryptoToGC() {
                           {!selectedDropdown ? "BUSD" : selectedDropdown}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                          {/* <Dropdown.Item
-                            onClick={() => handleChange("Scrooge")}
-                          >
-                            Scrooge
-                          </Dropdown.Item> */}
+                          
                           <Dropdown.Item onClick={() => handleChange("BUSD")}>
                             BUSD
                           </Dropdown.Item>
-                          {/* <Dropdown.Item
-                            onClick={() => handleChange("Scrooge Jr")}
+                          <Dropdown.Item
+                            onClick={() => handleChange("BNB")}
                           >
-                            Scrooge Jr
-                          </Dropdown.Item> */}
+                            BNB
+                          </Dropdown.Item>
+                          <Dropdown.Item
+                            onClick={() => handleChange("USDC")}
+                          >
+                            USDC
+                          </Dropdown.Item>
+                          <Dropdown.Item
+                            onClick={() => handleChange("USDT")}
+                          >
+                            USDT
+                          </Dropdown.Item>
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
