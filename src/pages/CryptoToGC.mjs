@@ -76,8 +76,10 @@ export default function CryptoToGC() {
     try {
       const res = await marketPlaceInstance().get(`/getGCPackages`);
       if (res.data) {
+        const sortedAsc = res.data.sort((a, b) => parseInt(a.priceInBUSD) - parseInt(b.priceInBUSD));
+
         setPrizesLoading(false);
-        setAllPrizes(res.data || []);
+        setAllPrizes(sortedAsc || []);
       }
     } catch (e) {
       console.log(e);
@@ -335,10 +337,19 @@ export default function CryptoToGC() {
                           {!selectedDropdown ? "BUSD" : selectedDropdown}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                          
+                          {/* <Dropdown.Item
+                            onClick={() => handleChange("Scrooge")}
+                          >
+                            Scrooge
+                          </Dropdown.Item> */}
                           <Dropdown.Item onClick={() => handleChange("BUSD")}>
                             BUSD
                           </Dropdown.Item>
+                          {/* <Dropdown.Item
+                            onClick={() => handleChange("Scrooge Jr")}
+                          >
+                            Scrooge Jr
+                          </Dropdown.Item> */}
                           <Dropdown.Item
                             onClick={() => handleChange("BNB")}
                           >
