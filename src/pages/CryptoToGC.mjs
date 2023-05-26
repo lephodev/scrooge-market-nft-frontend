@@ -357,17 +357,19 @@ export default function CryptoToGC() {
                           {!selectedDropdown ? "BUSD" : selectedDropdown}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                          <Dropdown.Item
-                            onClick={() => handleChange("Scrooge")}>
+                          {/* <Dropdown.Item
+                            onClick={() => handleChange("Scrooge")}
+                          >
                             Scrooge
-                          </Dropdown.Item>
+                          </Dropdown.Item> */}
                           <Dropdown.Item onClick={() => handleChange("BUSD")}>
                             BUSD
                           </Dropdown.Item>
-                          <Dropdown.Item
-                            onClick={() => handleChange("Scrooge Jr")}>
+                          {/* <Dropdown.Item
+                            onClick={() => handleChange("Scrooge Jr")}
+                          >
                             Scrooge Jr
-                          </Dropdown.Item>
+                          </Dropdown.Item> */}
                           <Dropdown.Item onClick={() => handleChange("BNB")}>
                             BNB
                           </Dropdown.Item>
