@@ -41,6 +41,7 @@ export default function App() {
     ChainId.BinanceSmartChainMainnet
   );
   const [user, setUser] = useState(null);
+  const [spendedAmount, setSpendedAmount] = useState(null);
   const [cookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(true);
   const [dateTimeNow,setDateTimeNow] = useState('')
@@ -68,6 +69,7 @@ export default function App() {
             ...res.data.user,
           });
           if(res.data.datetimenow) setDateTimeNow(res.data.datetimenow)
+          setSpendedAmount(res.data.spended);
           setLoading(false);
         } else {
           setUser(null);
@@ -92,6 +94,8 @@ export default function App() {
   return (
     <AuthContext.Provider
       value={{
+        spendedAmount,
+        setSpendedAmount,
         user,
         logout,
         login,
