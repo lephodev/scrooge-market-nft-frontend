@@ -31,7 +31,8 @@ import { ethers } from "ethers";
 
 export default function CryptoToGC() {
   const sdk = useSDK();
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, setSpendedAmount, spendedAmount } =
+    useContext(AuthContext);
   const [prizesLoading, setPrizesLoading] = useState([]);
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
@@ -62,6 +63,7 @@ export default function CryptoToGC() {
           setUser({
             ...res.data.user,
           });
+          setSpendedAmount(res.data.spended);
         }
       })
       .catch((err) => {
@@ -76,7 +78,9 @@ export default function CryptoToGC() {
     try {
       const res = await marketPlaceInstance().get(`/getGCPackages`);
       if (res.data) {
-        const sortedAsc = res.data.sort((a, b) => parseInt(a.priceInBUSD) - parseInt(b.priceInBUSD));
+        const sortedAsc = res.data.sort(
+          (a, b) => parseInt(a.priceInBUSD) - parseInt(b.priceInBUSD)
+        );
 
         setPrizesLoading(false);
         setAllPrizes(sortedAsc || []);
@@ -88,19 +92,45 @@ export default function CryptoToGC() {
 
   const convert = async (usd, gc, pid) => {
     console.log("usd, gc, pid", usd, gc, pid, address);
+
+    if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
+      return toast.error("Your daily limit is exceeding");
+    }
+
+    if (
+      spendedAmount.spened_this_week + usd >
+      user.weeklyGoldCoinSpendingLimit
+    ) {
+      return toast.error("Your weekly limit is exceeding");
+    }
+
+    if (
+      spendedAmount.spneded_this_month + usd >
+      user.monthlyGoldCoinSpendingLimit
+    ) {
+      return toast.error("Your monthly limit is exceeding");
+    }
     setBuyLoading(true);
+
     if (!address) {
       setBuyLoading(false);
       return toast.error("Please Connect Your Metamask Wallet");
     }
     try {
-      let contractAddresss, walletAddress, txResult, cryptoAmount, current_price;
+      let contractAddresss,
+        walletAddress,
+        txResult,
+        cryptoAmount,
+        current_price;
       if (selectedDropdown === "BUSD") {
         let amt = (usd * Math.pow(10, 18)).toString();
-        contract.events.addEventListener("Transfer",(event) => {
+        contract.events.addEventListener("Transfer", (event) => {
           //  console.log("event trigger", event.data.from === address, event.data.to === BUSD_ADDRESS);
-          if(event.data.from.toLowerCase() === address.toLowerCase() && event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase()){
-            console.log("transaction",event.transaction)
+          if (
+            event.data.from.toLowerCase() === address.toLowerCase() &&
+            event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase()
+          ) {
+            console.log("transaction", event.transaction);
             if (event.transaction.transactionHash) {
               const { transactionHash } = event.transaction || {};
               marketPlaceInstance()
@@ -124,65 +154,55 @@ export default function CryptoToGC() {
                 });
             }
           }
-        })
-        setTimeout(async() => {
+        });
+        setTimeout(async () => {
           txResult = await contract.call("transfer", [BUSD_ADDRESS, amt], {
             gasLimit: 1000000,
             gasPrice: ethers.utils.parseUnits("5", "gwei"),
           });
-        },3000)
-        
+        }, 3000);
+
         return;
       } else {
         if (selectedDropdown === "Scrooge") {
           contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
           walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
-          
         } else if (selectedDropdown === "Scrooge Jr") {
           contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
           walletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
-         
-        }else if(selectedDropdown === "BNB"){
+        } else if (selectedDropdown === "BNB") {
           contractAddresss = process.env.REACT_APP_BNBCONTRACT_ADDRESS;
           walletAddress = BUSD_ADDRESS;
-         
-        }else if(selectedDropdown === "USDC"){
+        } else if (selectedDropdown === "USDC") {
           contractAddresss = process.env.REACT_APP_USDCCONTRACT_ADDRESS;
           walletAddress = BUSD_ADDRESS;
-          
-        }
-        else if(selectedDropdown === "USDT"){
+        } else if (selectedDropdown === "USDT") {
           contractAddresss = process.env.REACT_APP_USDTCONTRACT_ADDRESS;
           walletAddress = BUSD_ADDRESS;
-         
         }
         const res = await fetch(
           `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
         );
         const data = await res.json();
-         current_price = data.market_data.current_price.usd;
-         if(["USDC", "USDT", "BNB"].includes(selectedDropdown)){
-          if(["USDC", "USDT"].includes(selectedDropdown)){
+        current_price = data.market_data.current_price.usd;
+        if (["USDC", "USDT", "BNB"].includes(selectedDropdown)) {
+          if (["USDC", "USDT"].includes(selectedDropdown)) {
             cryptoAmount = parseInt(usd);
-          }else{
-            cryptoAmount = parseInt(usd)/current_price
+          } else {
+            cryptoAmount = parseInt(usd) / current_price;
           }
-          
-         }else{
+        } else {
           cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
-         }
-        console.log(selectedDropdown, cryptoAmount)
-        if(selectedDropdown === "BNB"){
+        }
+        console.log(selectedDropdown, cryptoAmount);
+        if (selectedDropdown === "BNB") {
+          txResult = await sdk.wallet.transfer(walletAddress, cryptoAmount);
+        } else {
           txResult = await sdk.wallet.transfer(
             walletAddress,
-            cryptoAmount
+            cryptoAmount,
+            contractAddresss
           );
-        }else{
-        txResult = await sdk.wallet.transfer(
-          walletAddress,
-          cryptoAmount,
-          contractAddresss
-        );
         }
       }
       if (txResult.receipt) {
@@ -283,7 +303,7 @@ export default function CryptoToGC() {
   };
   return (
     <Layout>
-      <main className="main redeem-prizes-page">
+      <main className='main redeem-prizes-page'>
         {/* <div className="tab-btn">
           <Button
             className={`${key === "cryptoToGc" ? "active-btn" : ""}`}
@@ -301,26 +321,26 @@ export default function CryptoToGC() {
           </Button>
         </div> */}
         {key === "cryptoToGc" ? (
-          <div className="tab-claims">
-            <div className="container">
+          <div className='tab-claims'>
+            <div className='container'>
               {buyLoading ? (
-                <div className="pageImgContainer">
+                <div className='pageImgContainer'>
                   <img
                     src={LoadingPoker}
-                    alt="game"
-                    className="imageAnimation"
+                    alt='game'
+                    className='imageAnimation'
                   />
-                  <div className="loading-txt pulse">PURCHASING TOKENS...</div>
+                  <div className='loading-txt pulse'>PURCHASING TOKENS...</div>
                 </div>
               ) : (
                 <></>
               )}
-              <div className="scrooge-main-heading">
-                <div className="pageTitle">
-                  <h1 className="title">Top up your Gold Coins</h1>
+              <div className='scrooge-main-heading'>
+                <div className='pageTitle'>
+                  <h1 className='title'>Top up your Gold Coins</h1>
                 </div>
                 {/* <div className="feature-overview-div"></div> */}
-                <div className="asterisk-desc cryptoTotoken">
+                <div className='asterisk-desc cryptoTotoken'>
                   Disclaimer : +16% will be added for Scrooge or JR payment
                   method to cover blockchain fees and contract taxes!
                 </div>
@@ -328,53 +348,45 @@ export default function CryptoToGC() {
               {isMismatched ? (
                 <SwitchNetworkBSC />
               ) : address ? (
-                <div className="buy-chips-content">
-                  <div className="purchase-select">
-                    <div className="purchaseSelect-Box">
+                <div className='buy-chips-content'>
+                  <div className='purchase-select'>
+                    <div className='purchaseSelect-Box'>
                       <h4>Purchase with</h4>
                       <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        <Dropdown.Toggle variant='success' id='dropdown-basic'>
                           {!selectedDropdown ? "BUSD" : selectedDropdown}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                           <Dropdown.Item
-                            onClick={() => handleChange("Scrooge")}
-                          >
+                            onClick={() => handleChange("Scrooge")}>
                             Scrooge
                           </Dropdown.Item>
                           <Dropdown.Item onClick={() => handleChange("BUSD")}>
                             BUSD
                           </Dropdown.Item>
                           <Dropdown.Item
-                            onClick={() => handleChange("Scrooge Jr")}
-                          >
+                            onClick={() => handleChange("Scrooge Jr")}>
                             Scrooge Jr
                           </Dropdown.Item>
-                          <Dropdown.Item
-                            onClick={() => handleChange("BNB")}
-                          >
+                          <Dropdown.Item onClick={() => handleChange("BNB")}>
                             BNB
                           </Dropdown.Item>
-                          <Dropdown.Item
-                            onClick={() => handleChange("USDC")}
-                          >
+                          <Dropdown.Item onClick={() => handleChange("USDC")}>
                             USDC
                           </Dropdown.Item>
-                          <Dropdown.Item
-                            onClick={() => handleChange("USDT")}
-                          >
+                          <Dropdown.Item onClick={() => handleChange("USDT")}>
                             USDT
                           </Dropdown.Item>
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
                   </div>
-                  <div className="buy-chips-grid cryptoToGC">
-                    <div className="purchasemodal-cards">
+                  <div className='buy-chips-grid cryptoToGC'>
+                    <div className='purchasemodal-cards'>
                       {allPrizes.map((prize) => (
                         <Card key={prize._id}>
                           <Card.Img
-                            variant="top"
+                            variant='top'
                             src={
                               prize.priceInBUSD <= 10
                                 ? coin1
@@ -393,20 +405,19 @@ export default function CryptoToGC() {
                             <Card.Title>GC {prize?.gcAmount}</Card.Title>
                             {/* <Card.Text>$10</Card.Text> */}
                             <Button
-                              variant="primary"
+                              variant='primary'
                               onClick={() =>
                                 convert(
                                   prize?.priceInBUSD,
                                   prize?.gcAmount,
                                   prize?._id
                                 )
-                              }
-                            >
+                              }>
                               <p>Buy </p> <span>${prize?.priceInBUSD}</span>
                             </Button>
                           </Card.Body>
-                          <div className="goldPurchase-offers">
-                            Free ST: <img src={sweep} alt="sweep token" />{" "}
+                          <div className='goldPurchase-offers'>
+                            Free ST: <img src={sweep} alt='sweep token' />{" "}
                             {prize?.freeTokenAmount}
                           </div>
                         </Card>
@@ -416,10 +427,10 @@ export default function CryptoToGC() {
                 </div>
               ) : (
                 <div>
-                  <p className="description yellow">
+                  <p className='description yellow'>
                     Get started by connecting your wallet.
                   </p>
-                  <div className="connect-wallet-div">
+                  <div className='connect-wallet-div'>
                     <ConnectWallet />
                   </div>
                 </div>
@@ -427,9 +438,9 @@ export default function CryptoToGC() {
             </div>
           </div>
         ) : (
-          <div className="container">
-            <div className="buy-chips-content">
-              <div className="prizes-chip-count">
+          <div className='container'>
+            <div className='buy-chips-content'>
+              <div className='prizes-chip-count'>
                 {user ? (
                   <>
                     <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
@@ -438,27 +449,26 @@ export default function CryptoToGC() {
                   <>
                     <img
                       src={LoadingPoker}
-                      alt="game"
-                      className="imageAnimation"
+                      alt='game'
+                      className='imageAnimation'
                     />
                   </>
                 )}
               </div>
-              <div className="buy-chips-grid">
-                <div className="purchasemodal-cards">
+              <div className='buy-chips-grid'>
+                <div className='purchasemodal-cards'>
                   {ticketPrizes.map((prize) => (
                     <Card>
-                      <Card.Img variant="top" src={sweep} />
+                      <Card.Img variant='top' src={sweep} />
                       <Card.Body>
                         <Card.Title>Token {prize?.token}</Card.Title>
                         <Card.Text>Buy Token</Card.Text>
                         <Button
-                          variant="primary"
+                          variant='primary'
                           onClick={() =>
                             handleShow(prize.ticket, prize.token, "")
-                          }
-                        >
-                          <img src={ticket} alt="ticket" />
+                          }>
+                          <img src={ticket} alt='ticket' />
                           <h5>{prize?.ticket}</h5>
                         </Button>
                       </Card.Body>
@@ -471,17 +481,16 @@ export default function CryptoToGC() {
         )}
 
         <Modal show={show} onHide={handleClose} centered animation={false}>
-          <Modal.Body className="popupBody">
+          <Modal.Body className='popupBody'>
             <div>Do You Want To Redeem?</div>
-            <div className="popupBtn">
-              <button className="greyBtn" onClick={handleClose}>
+            <div className='popupBtn'>
+              <button className='greyBtn' onClick={handleClose}>
                 Cancel
               </button>
               <button
-                className="yellowBtn"
+                className='yellowBtn'
                 disabled={disable}
-                onClick={confirmBuy}
-              >
+                onClick={confirmBuy}>
                 Confirm
               </button>
             </div>
