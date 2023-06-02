@@ -4739,6 +4739,21 @@ button.affiliate-dropdownBtn.close::before {
 /************* Media Query ******************/
 /********************************************************************************************/
 
+@media screen and (max-width: 1500px) {
+.header .navbar-expand-lg .navbar-nav .nav-link{
+  font-size: 13px;
+  padding: 10px 10px;
+}
+
+}
+
+@media screen and (max-width: 1366px) {
+  .logo img {
+    max-width: 80px;
+    padding: 8px;
+  }
+}
+
 @media screen and (max-width: 1240px) and (min-width: 720px) {
   .header-nav-container {
     display: flex;
@@ -4858,20 +4873,17 @@ button.affiliate-dropdownBtn.close::before {
 }
 
 
-@media screen and (max-width: 991px) {
-  .main {
-    padding: 50px 0px !important;
-  }
 
-  .footer-grid {
-    padding: 40px 0px 100px;
-  }
-
+@media screen and (max-width: 1224px) {
   .wallet {
     text-align: center;
     margin-right: 70px;
     margin-top: 10px;
   }
+
+  .navbar-expand-lg .navbar-nav {
+    flex-direction: column;
+}
 
   div#responsive-navbar-nav {
     position: fixed;
@@ -4902,6 +4914,10 @@ button.affiliate-dropdownBtn.close::before {
     width: 75px;
   }
 
+.logo-mobile img {
+    max-width: 80px;
+}
+
   .wallet .green {
     font-size: 14px;
     padding-top: 5px;
@@ -4921,58 +4937,6 @@ button.affiliate-dropdownBtn.close::before {
     box-sizing: border-box;
     border: 1px solid #292d30;
     z-index: 9;
-  }
-
-  .login-page-body {
-    padding: 30px 20px;
-  }
-
-  .grid .card {
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .grid .card .card-img {
-    margin: 20px auto 0px;
-    display: block;
-  }
-
-  .nft-home-sell-title h1 {
-    font-size: 25px;
-  }
-
-  .nft-page h2 {
-    font-size: 30px;
-  }
-
-  .main .title {
-    font-size: 30px;
-  }
-
-  .connect-wallet-div {
-    margin-bottom: 30px;
-  }
-
-  .nft-home-sell-title {
-    margin-bottom: 30px;
-  }
-
-  .CookieConsent {
-    left: 0rem !important;
-    bottom: 0rem !important;
-  }
-
-  .dlNft-grid .erc721Card-4th-col {
-    width: 40%;
-  }
-
-  .spin-popup-content .spin-wheel img {
-    max-width: 300px;
-    height: 300px;
-  }
-
-  .spin-win-text p {
-    font-size: 30px !important;
   }
 
   .logo {
@@ -5089,6 +5053,242 @@ button.affiliate-dropdownBtn.close::before {
   .logo-mobile {
     display: block;
   }
+
+}
+
+@media screen and (max-width: 991px) {
+  .main {
+    padding: 50px 0px !important;
+  }
+
+  .footer-grid {
+    padding: 40px 0px 100px;
+  }
+
+  .wallet {
+    text-align: center;
+    margin-right: 70px;
+    margin-top: 10px;
+  }
+
+  div#responsive-navbar-nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background: #151515;
+    width: 300px;
+    height: auto !important;
+    display: block !important;
+    left: -350px;
+    z-index: 99999999999 !important;
+    transition: all 0.5s;
+    border-right: 1px solid #151515;
+    box-shadow: 5px 5px 30px var(--main-bg) 33;
+  }
+
+  .footer-menu,
+  .footer-contact {
+    padding-top: 30px;
+    padding-bottom: 15px;
+  }
+
+  .header-menu {
+    display: none;
+  }
+
+  .menu-logo-img {
+    width: 75px;
+  }
+
+  .wallet .green {
+    font-size: 14px;
+    padding-top: 5px;
+  }
+
+  .icon-links {
+    left: 80px;
+  }
+
+  .mobile-menu {
+    display: block;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background: #000000;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #292d30;
+    z-index: 9;
+  }
+
+  .logo {
+    position: relative;
+    height: 60px;
+    width: 100%;
+  }
+
+  .logo img {
+    max-width: 76px;
+  }
+
+  .header .collapsed .navbar-toggler-icon {
+    background: url(../images/tab-collaps.svg) !important;
+    width: 24px;
+    height: 19px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    display: block;
+  }
+
+  .header .navbar-toggler-icon {
+    background: url(../images/tab-close.svg) !important;
+    width: 20px;
+    height: 20px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    display: block;
+  }
+
+  div#responsive-navbar-nav.show {
+    left: 0;
+    padding-bottom: 20%;
+    z-index: 99999999999 !important;
+  }
+
+  .header .navbar-expand-lg .navbar-nav .nav-link {
+    font-weight: 600;
+    margin: 0px;
+    padding: 3px 20px;
+    font-size: 18px;
+  }
+
+  .header .navbar-expand-lg .navbar-nav .nav-link.active {
+    border: 1px solid transparent;
+    color: #f9ff00;
+  }
+
+  .mr-auto.navbar-nav button.submit-btn {
+    margin: 40px 10px;
+    display: block;
+  }
+
+  .header button.navbar-toggler {
+    position: absolute;
+    right: 20px;
+    border: none;
+    background: #f9ff00;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-btn {
+    margin-right: 60px;
+  }
+
+  .header .navbar-nav {
+    padding-top: 30px;
+    gap: 20px;
+    padding-bottom: 10px;
+  }
+
+  .header-btn {
+    display: none;
+  }
+
+  .header nav {
+    padding: 5px 0;
+  }
+
+  .header-btn-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .header-btn-mobile .btn {
+    width: 100%;
+    background: var(--primary-color);
+    color: var(--main-bg);
+    border-color: var(--primary-color);
+    height: auto;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--poppins) !important;
+  }
+
+
+  .logo-mobile {
+    display: block;
+  }
+
+
+  .login-page-body {
+    padding: 30px 20px;
+  }
+
+  .grid .card {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .grid .card .card-img {
+    margin: 20px auto 0px;
+    display: block;
+  }
+
+  .nft-home-sell-title h1 {
+    font-size: 25px;
+  }
+
+  .nft-page h2 {
+    font-size: 30px;
+  }
+
+  .main .title {
+    font-size: 30px;
+  }
+
+  .connect-wallet-div {
+    margin-bottom: 30px;
+  }
+
+  .nft-home-sell-title {
+    margin-bottom: 30px;
+  }
+
+  .CookieConsent {
+    left: 0rem !important;
+    bottom: 0rem !important;
+  }
+
+  .dlNft-grid .erc721Card-4th-col {
+    width: 40%;
+  }
+
+  .spin-popup-content .spin-wheel img {
+    max-width: 300px;
+    height: 300px;
+  }
+
+  .spin-win-text p {
+    font-size: 30px !important;
+  }
+
 
 
   /* ******************** new responsive ******************** */
