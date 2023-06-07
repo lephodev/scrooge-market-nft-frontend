@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "prod" ]
     
 jobs:
   build:
@@ -18,8 +18,8 @@ jobs:
     - name: Use Node.js 16
       uses: actions/setup-node@v3
 
-    - run: npm install
-    - run: CI= npm run build
+    - run: npm install --force
+    - run: CI= npm run build:prod
     - name: Deploy to ec2
       uses: easingthemes/ssh-deploy@main
       env:

@@ -78,9 +78,7 @@ export default function CryptoToGC() {
     try {
       const res = await marketPlaceInstance().get(`/getGCPackages`);
       if (res.data) {
-        const sortedAsc = res.data.sort(
-          (a, b) => parseInt(a.priceInBUSD) - parseInt(b.priceInBUSD)
-        );
+        const sortedAsc = res.data.sort((a, b) => parseInt(a.priceInBUSD) - parseInt(b.priceInBUSD));
 
         setPrizesLoading(false);
         setAllPrizes(sortedAsc || []);
@@ -357,20 +355,13 @@ export default function CryptoToGC() {
                           {!selectedDropdown ? "BUSD" : selectedDropdown}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                          {/* <Dropdown.Item
-                            onClick={() => handleChange("Scrooge")}
-                          >
-                            Scrooge
-                          </Dropdown.Item> */}
+                          
                           <Dropdown.Item onClick={() => handleChange("BUSD")}>
                             BUSD
                           </Dropdown.Item>
-                          {/* <Dropdown.Item
-                            onClick={() => handleChange("Scrooge Jr")}
+                          <Dropdown.Item
+                            onClick={() => handleChange("BNB")}
                           >
-                            Scrooge Jr
-                          </Dropdown.Item> */}
-                          <Dropdown.Item onClick={() => handleChange("BNB")}>
                             BNB
                           </Dropdown.Item>
                           <Dropdown.Item onClick={() => handleChange("USDC")}>
@@ -387,6 +378,7 @@ export default function CryptoToGC() {
                     <div className='purchasemodal-cards'>
                       {allPrizes.map((prize) => (
                         <Card key={prize._id}>
+                          {console.log("prize",prize)}
                           <Card.Img
                             variant='top'
                             src={

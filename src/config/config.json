@@ -36,8 +36,8 @@
     "stripeKey": "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT"
   },
   "production": {
-    "client": "https://market.scrooge.casino/",
-    "server": "https://api-market.scrooge.casino",
+    "client": "https://market.scrooge.casino",
+    "server": "https://market-api.scrooge.casino",
     "scroogeServer": "https://api.scrooge.casino",
     "scroogeClient": "https://scrooge.casino",
     "pokerUrl": "https://poker.scrooge.casino",
