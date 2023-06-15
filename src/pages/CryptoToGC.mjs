@@ -56,6 +56,8 @@ export default function CryptoToGC() {
       .get("/auth/check-auth", {
         headers: {
           Authorization: `Bearer ${access_token}`,
+          "Permissions-Policy": "geolocation=*",
+
         },
       })
       .then((res) => {
