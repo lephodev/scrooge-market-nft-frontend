@@ -56,6 +56,8 @@ export default function CryptoToGC() {
       .get("/auth/check-auth", {
         headers: {
           Authorization: `Bearer ${access_token}`,
+          "Permissions-Policy": "geolocation=*",
+
         },
       })
       .then((res) => {
@@ -78,9 +80,7 @@ export default function CryptoToGC() {
     try {
       const res = await marketPlaceInstance().get(`/getGCPackages`);
       if (res.data) {
-        const sortedAsc = res.data.sort(
-          (a, b) => parseInt(a.priceInBUSD) - parseInt(b.priceInBUSD)
-        );
+        const sortedAsc = res.data.sort((a, b) => parseInt(a.priceInBUSD) - parseInt(b.priceInBUSD));
 
         setPrizesLoading(false);
         setAllPrizes(sortedAsc || []);
@@ -387,6 +387,7 @@ export default function CryptoToGC() {
                     <div className='purchasemodal-cards'>
                       {allPrizes.map((prize) => (
                         <Card key={prize._id}>
+                          {console.log("prize",prize)}
                           <Card.Img
                             variant='top'
                             src={
