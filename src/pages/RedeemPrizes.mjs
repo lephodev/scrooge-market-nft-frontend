@@ -30,7 +30,6 @@ function RedeemPrizes() {
   console.log(loading);
   const [redeemSuccess, setRedeemSuccess] = useState(false);
   const [allPrizes, setAllPrizes] = useState([]);
-  const [cryptoTotoken, setCryptoToToken] = useState([]);
   const [prizes, setPrizes] = useState([]);
   const [ticketPrizes, setTicketPrizes] = useState([]);
   const [disable, setDisable] = useState(false);
@@ -210,7 +209,7 @@ function RedeemPrizes() {
   };
   async function getCoinGeckoDataOG() {
     await axios.post('https://api.coinbrain.com/public/coin-info', {
-        "56":["0x9DfeE72aEa65dc7e375d50Ea2Bd90384313A165A"]
+        "56":[process.env.REACT_APP_OGCONTRACT_ADDRESS]
     })
     .then((response) => {
       console.log("abc",response);
@@ -382,21 +381,21 @@ function RedeemPrizes() {
   }, []);
   // console.log("convertPrice",convertPrice);
   // getTiketToTokenPackages
-  async function getTicketToTokenPackages() {
-    try {
-      const res = await marketPlaceInstance().get(`/getTicketToTokenPackages`);
-      if (res.data) {
-        // setAllPrizes(res.data || []);
-        setCryptoToToken(res.data || []);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
+  // async function getTicketToTokenPackages() {
+  //   try {
+  //     const res = await marketPlaceInstance().get(`/getTicketToTokenPackages`);
+  //     if (res.data) {
+  //       // setAllPrizes(res.data || []);
+  //       setCryptoToToken(res.data || []);
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
 
-  useEffect(() => {
-    getTicketToTokenPackages();
-  }, []);
+  // useEffect(() => {
+  //   getTicketToTokenPackages();
+  // }, []);
 
   return (
     <Layout>
@@ -573,12 +572,7 @@ function RedeemPrizes() {
                 <div className="prizes-container">
                   {showConvert && (
                     <>
-                      {console.log("cryptoTotoken512", cryptoTotoken)}{" "}
-                      {/* {cryptoTotoken?.map((el)=>{
-                      return (
-                        <>hhhh</>
-                      )
-                      })} */}
+                      
                       <div className="buy-chips-content">
                         <div className="buy-chips-grid cryptoTotoken">
                           {/* <div className='buy-chips-grid-box'>
