@@ -109,7 +109,7 @@ export default function MyWallet() {
 
   const getOG = async () => {
     const rawBal = await sdk.wallet.balance(
-      "0xfA1BA18067aC6884fB26e329e60273488a247FC3"
+      "0x9DfeE72aEa65dc7e375d50Ea2Bd90384313A165A"
     );
     setOGBalance(parseInt(rawBal.value / 10 ** 18));
     getCoinGeckoDataOG(parseInt(rawBal.value / 10 ** 18));
