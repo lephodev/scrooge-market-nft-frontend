@@ -155,6 +155,7 @@ export default function CryptoToGC() {
             }
           }
         });
+        console.log("BUSDamt",amt);
         setTimeout(async () => {
           txResult = await contract.call("transfer", [BUSD_ADDRESS, amt], {
             gasLimit: 1000000,
@@ -173,6 +174,7 @@ export default function CryptoToGC() {
         } else if (selectedDropdown === "BNB") {
           contractAddresss = process.env.REACT_APP_BNBCONTRACT_ADDRESS;
           walletAddress = BUSD_ADDRESS;
+          
         } else if (selectedDropdown === "USDC") {
           contractAddresss = process.env.REACT_APP_USDCCONTRACT_ADDRESS;
           walletAddress = BUSD_ADDRESS;
@@ -180,11 +182,29 @@ export default function CryptoToGC() {
           contractAddresss = process.env.REACT_APP_USDTCONTRACT_ADDRESS;
           walletAddress = BUSD_ADDRESS;
         }
+        if(selectedDropdown==="Scrooge"){
+          await fetch(
+            `https://api.coinbrain.com/public/coin-info`,{
+              method: "post",
+            body:JSON.stringify({
+              "56":[process.env.REACT_APP_OGCONTRACT_ADDRESS]
+            })})
+            .then((response) => response.json())
+            .then((data) => {
+              current_price = data[0].priceUsd;
+            })
+            .catch((e) => {
+              console.log(e);
+              return false;
+            });
+        }
+        else {
         const res = await fetch(
           `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
         );
         const data = await res.json();
         current_price = data.market_data.current_price.usd;
+        }
         if (["USDC", "USDT", "BNB"].includes(selectedDropdown)) {
           if (["USDC", "USDT"].includes(selectedDropdown)) {
             cryptoAmount = parseInt(usd);
@@ -192,9 +212,11 @@ export default function CryptoToGC() {
             cryptoAmount = parseInt(usd) / current_price;
           }
         } else {
-          cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
+          console.log("(parseInt(usd) + parseInt(usd) * 0.16) ",(current_price));
+          cryptoAmount = (parseInt(usd) + (parseInt(usd) * 0.16)) / parseFloat(current_price);
+          console.log("cryptoAmountcryptoAmount",cryptoAmount);
         }
-        console.log(selectedDropdown, cryptoAmount);
+        console.log(selectedDropdown, cryptoAmount,usd);
         if (selectedDropdown === "BNB") {
           txResult = await sdk.wallet.transfer(walletAddress, cryptoAmount);
         } else {
@@ -387,7 +409,6 @@ export default function CryptoToGC() {
                     <div className='purchasemodal-cards'>
                       {allPrizes.map((prize) => (
                         <Card key={prize._id}>
-                          {console.log("prize",prize)}
                           <Card.Img
                             variant='top'
                             src={

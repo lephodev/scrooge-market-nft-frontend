@@ -15,9 +15,9 @@ import Sweep from "../images/token.png";
 import GoldCoin from "../images/gold.png";
 import Ticket from "../images/ticket.png";
 import ScroogeHatLogo from "../images/scroogeHatLogo.png";
-import scroogejr from "../images/scroogejr.jpeg";
+// import scroogejr from "../images/scroogejr.jpeg";
 import ClaimOGPending from "../components/claimOGPending.mjs";
-import ClaimJRPending from "../components/claimJRPending.mjs";
+// import ClaimJRPending from "../components/claimJRPending.mjs";
 import "react-toastify/dist/ReactToastify.css";
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
@@ -26,8 +26,8 @@ import profile from "../images/profile.png";
 // import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses.js";
 export default function MyWallet() {
   const [OGBalance, setOGBalance] = useState("Loading...");
-  const [JRBalance, setJRBalance] = useState("Loading...");
-  const [JRValue, setJRValue] = useState("Loading...");
+  const [ setJRBalance] = useState("Loading...");
+  const [ setJRValue] = useState("Loading...");
   const [OGValue, setOGValue] = useState("Loading...");
   const [/* currentPriceOG */, setCurrentPriceOG] = useState("Loading...");
   const [/* currentPriceJR */, setCurrentPriceJR] = useState("Loading...");
@@ -287,7 +287,7 @@ export default function MyWallet() {
                         </div>
                       </div>
                     </div>
-                    <div className='crypto-balance-div'>
+                    {/* <div className='crypto-balance-div'>
                       <div className='width-100'>
                         <div className='crypto-balance-header'>JR BALANCE</div>
 
@@ -308,7 +308,7 @@ export default function MyWallet() {
                           <ClaimJRPending />
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </>
               ) : (
