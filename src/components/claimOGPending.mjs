@@ -77,8 +77,8 @@ export default function ClaimOGPending() {
             <strong>BUSD REWARDS</strong>
           </span>
           <br></br>
-          Claimable Amount: {claimableAmount} BUSD<br></br>
-          Total Rewards Claimed: {totalClaimed} BUSD<br></br>
+          Claimable Amount: {claimableAmount} USDT<br></br>
+          Total Rewards Claimed: {totalClaimed} USDT<br></br>
           <br />
           {address &&
           (secondsUntilClaim === 0 || { claimableInTime } >= Date.now()) ? (
