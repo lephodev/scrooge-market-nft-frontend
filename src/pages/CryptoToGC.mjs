@@ -363,8 +363,7 @@ export default function CryptoToGC() {
                 </div>
                 {/* <div className="feature-overview-div"></div> */}
                 <div className='asterisk-desc cryptoTotoken'>
-                  Disclaimer : +16% will be added for Scrooge or JR payment
-                  method to cover blockchain fees and contract taxes!
+                  Disclaimer : +16% Will be added to Scrooge payment method to cover blockchain fees and contract taxes!
                 </div>
               </div>
               {isMismatched ? (
