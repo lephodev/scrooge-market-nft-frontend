@@ -227,25 +227,6 @@ function RedeemPrizes() {
     }, (error) => {
       console.log(error);
     });
-
-    // await fetch(
-    //   `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${process.env.REACT_APP_OGCONTRACT_ADDRESS}`
-    // )
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     const current_price = data.market_data.current_price.usd;
-    //     setCurrentPriceOG(current_price);
-    //     setOG1000((10 / current_price / 2).toFixed(0));
-    //     setOG5000((40 / current_price / 2).toFixed(0));
-    //     setOG10000((100 / current_price / 2).toFixed(0));
-    //     setOG20000((200 / current_price / 2).toFixed(0));
-    //     //console.log(OG1000, OG5000, OG10000);
-    //     return current_price;
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //     return false;
-    //   });
   }
 
   async function getCoinGeckoDataJR() {
