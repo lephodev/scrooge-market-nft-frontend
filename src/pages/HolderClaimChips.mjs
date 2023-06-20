@@ -59,7 +59,7 @@ function HolderClaimChips() {
       `https://api.coinbrain.com/public/coin-info`,{
         method: "post",
       body:JSON.stringify({
-        "56":["0x9DfeE72aEa65dc7e375d50Ea2Bd90384313A165A"]
+        "56":[process.env.REACT_APP_OGCONTRACT_ADDRESS]
       })})
       .then((response) => response.json())
       .then((data) => {
@@ -127,7 +127,7 @@ function HolderClaimChips() {
 
   const sdksdk = async () => {
     const rawBal = await sdk.wallet.balance(
-      "0x9DfeE72aEa65dc7e375d50Ea2Bd90384313A165A"
+      process.env.REACT_APP_OGCONTRACT_ADDRESS
     );
     // setOGBalance(0);
     setOGBalance(parseInt(rawBal.value / 10 ** 18));
