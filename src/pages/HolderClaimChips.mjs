@@ -54,22 +54,41 @@ function HolderClaimChips() {
         });
     }
   }
-
-  async function getCoinGeckoData() {
+  async function getCoinGeckoData(){
     await fetch(
-      `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${process.env.REACT_APP_OGCONTRACT_ADDRESS}`
-    )
+      `https://api.coinbrain.com/public/coin-info`,{
+        method: "post",
+      body:JSON.stringify({
+        "56":["0x9DfeE72aEa65dc7e375d50Ea2Bd90384313A165A"]
+      })})
       .then((response) => response.json())
       .then((data) => {
-        const current_price = data.market_data.current_price.usd;
-        setCurrentPrice(current_price);
-        return current_price;
+        console.log('gecko data: ', data);
+        const current_price = data[0].priceUsd;
+              setCurrentPrice(current_price);
+              return current_price;
       })
       .catch((e) => {
         console.log(e);
         return false;
       });
   }
+
+  // async function getCoinGeckoData() {
+  //   await fetch(
+  //     `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${process.env.REACT_APP_OGCONTRACT_ADDRESS}`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       const current_price = data.market_data.current_price.usd;
+  //       setCurrentPrice(current_price);
+  //       return current_price;
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //       return false;
+  //     });
+  // }
 
   // function timeout(delay) {
   //   return new Promise((res) => setTimeout(res, delay));
