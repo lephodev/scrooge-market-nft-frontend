@@ -74,7 +74,7 @@ export default function ClaimOGPending() {
       {!isClaiming ? (
         <div>
           <span className='yellow'>
-            <strong>BUSD REWARDS</strong>
+            <strong>USDT REWARDS</strong>
           </span>
           <br></br>
           Claimable Amount: {claimableAmount} USDT<br></br>
