@@ -68,18 +68,21 @@ const Layout = ({ children }) => {
   const disconnect = useDisconnect();
   const OGPrice = async () => {
     await fetch(
-      `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${process.env.REACT_APP_OGCONTRACT_ADDRESS}`
-    )
+      `https://api.coinbrain.com/public/coin-info`,{
+        method: "post",
+      body:JSON.stringify({
+        "56":[process.env.REACT_APP_OGCONTRACT_ADDRESS]
+      })})
       .then((response) => response.json())
       .then((data) => {
-        //console.log('gecko data: ', data.market_data.price_change_percentage_24h);
-        const change_pct = data.market_data.price_change_percentage_24h;
+        console.log('gecko data: ', data);
+        const change_pct = data[0].priceUsd24hAgo;
         if (change_pct > 0) {
           setPriceColor("green");
         } else if (change_pct < 0) {
           setPriceColor("red");
         }
-        const current_price = data.market_data.current_price.usd;
+        const current_price = data[0].priceUsd;
         setCurrentPriceOG(current_price.toFixed(10));
         return current_price;
       })

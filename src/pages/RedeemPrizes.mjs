@@ -19,6 +19,7 @@ import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
 import { authInstance, marketPlaceInstance } from "../config/axios.js";
 import { Button, Card, Modal } from "react-bootstrap";
+import axios from "axios";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -29,7 +30,6 @@ function RedeemPrizes() {
   console.log(loading);
   const [redeemSuccess, setRedeemSuccess] = useState(false);
   const [allPrizes, setAllPrizes] = useState([]);
-  const [cryptoTotoken, setCryptoToToken] = useState([]);
   const [prizes, setPrizes] = useState([]);
   const [ticketPrizes, setTicketPrizes] = useState([]);
   const [disable, setDisable] = useState(false);
@@ -131,7 +131,7 @@ function RedeemPrizes() {
     if (prizes.length < 2) {
       try {
         const res = await marketPlaceInstance().get(`/getPrizes`);
-        // console.log("res", res);
+        console.log("res", res);
         if (res.data) {
           if (prizes.length < 2) {
             setPrizes(res.data || []);
@@ -207,26 +207,26 @@ function RedeemPrizes() {
       }
     }
   };
-
   async function getCoinGeckoDataOG() {
-    await fetch(
-      `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${process.env.REACT_APP_OGCONTRACT_ADDRESS}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const current_price = data.market_data.current_price.usd;
-        setCurrentPriceOG(current_price);
-        setOG1000((10 / current_price / 2).toFixed(0));
-        setOG5000((40 / current_price / 2).toFixed(0));
-        setOG10000((100 / current_price / 2).toFixed(0));
-        setOG20000((200 / current_price / 2).toFixed(0));
-        //console.log(OG1000, OG5000, OG10000);
-        return current_price;
-      })
-      .catch((e) => {
-        console.log(e);
-        return false;
-      });
+    await axios.post('https://api.coinbrain.com/public/coin-info', {
+        "56":[process.env.REACT_APP_OGCONTRACT_ADDRESS]
+    })
+    .then((response) => {
+      console.log("abc",response);
+
+      const current_price = response.data[0].priceUsd;
+      console.log("current_price",current_price);
+      console.log("(10 / current_price / 2).toFixed(0)",(10 / current_price / 2).toFixed(0));
+      setCurrentPriceOG(current_price);
+      setOG1000((10 / current_price / 2).toFixed(0));
+      setOG5000((40 / current_price / 2).toFixed(0));
+      setOG10000((100 / current_price / 2).toFixed(0));
+      setOG20000((200 / current_price / 2).toFixed(0));
+      //console.log(OG1000, OG5000, OG10000);
+      return current_price;
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   async function getCoinGeckoDataJR() {
@@ -245,7 +245,7 @@ function RedeemPrizes() {
         return current_price;
       })
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
         return false;
       });
   }
@@ -256,6 +256,8 @@ function RedeemPrizes() {
       .get("/auth/check-auth", {
         headers: {
           Authorization: `Bearer ${access_token}`,
+          "Permissions-Policy": "geolocation=*",
+
         },
       })
       .then((res) => {
@@ -360,21 +362,21 @@ function RedeemPrizes() {
   }, []);
   // console.log("convertPrice",convertPrice);
   // getTiketToTokenPackages
-  async function getTicketToTokenPackages() {
-    try {
-      const res = await marketPlaceInstance().get(`/getTicketToTokenPackages`);
-      if (res.data) {
-        // setAllPrizes(res.data || []);
-        setCryptoToToken(res.data || []);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
+  // async function getTicketToTokenPackages() {
+  //   try {
+  //     const res = await marketPlaceInstance().get(`/getTicketToTokenPackages`);
+  //     if (res.data) {
+  //       // setAllPrizes(res.data || []);
+  //       setCryptoToToken(res.data || []);
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
 
-  useEffect(() => {
-    getTicketToTokenPackages();
-  }, []);
+  // useEffect(() => {
+  //   getTicketToTokenPackages();
+  // }, []);
 
   return (
     <Layout>
@@ -551,12 +553,7 @@ function RedeemPrizes() {
                 <div className="prizes-container">
                   {showConvert && (
                     <>
-                      {console.log("cryptoTotoken512", cryptoTotoken)}{" "}
-                      {/* {cryptoTotoken?.map((el)=>{
-                      return (
-                        <>hhhh</>
-                      )
-                      })} */}
+                      
                       <div className="buy-chips-content">
                         <div className="buy-chips-grid cryptoTotoken">
                           {/* <div className='buy-chips-grid-box'>
@@ -619,24 +616,24 @@ function RedeemPrizes() {
                   {!prizesLoading ? (
                     <>
                       <div className="prizes_container">
-                      <div className="prizes-card">
+                      {/* <div className="prizes-card">
                   <div className="prize-name bold text-animate">
                                   <h4>Under token migeration</h4>
                                 </div>
                                <img className="card-img pulse" src={"https://casino-nft-marketplace.s3.amazonaws.com/scroogeJRAvatar.png"} alt="JR" />
                                <img className="card-img pulse" src="https://casino-nft-marketplace.s3.amazonaws.com/scroogeHatPrize.png" alt="OG" />
                                 <div>
-                                  <p> We are migrating OG and JR into one token, Crypto redeem will be back soon</p>
+                                  <p>We are migrating OG and JR into one token, Crypto redeem will be back soon</p>
                                   <p>We are sorry for inconvenience</p>
                                 </div>
-                  </div>
+                  </div> */}
                         {prizes
                           .filter(
                             (f) =>
                               f.redeem_action !== "burn" &&
                               f.category !== "Merch" &&
                               f.category !== "Badges" &&
-                              f.price !== 500 && f.contract_name !== "OG" && f.contract_name !== "JR"
+                              f.price !== 500 && f.contract_name !== "JR"
                           )
                           .map((prize) => (
                             <div className="prizes-card" key={prize._id}>
@@ -652,6 +649,7 @@ function RedeemPrizes() {
                                 <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
+                                    
                                     {prize.name.replace(
                                       "xxxValue",
                                       parseInt(OG1000).toLocaleString("en-US")
