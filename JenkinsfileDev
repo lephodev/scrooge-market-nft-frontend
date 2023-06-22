@@ -9,7 +9,7 @@ pwd
 rm -rf build/
 rm -rf devbuild.tar.gz
 npm install --force
-CI= npm run build:dev
+npm run build:dev
 tar cvf devbuild.tar.gz build
 ls'''
       }
