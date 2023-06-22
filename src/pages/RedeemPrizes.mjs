@@ -147,7 +147,7 @@ function RedeemPrizes() {
 
   async function startFetching() {
     getCoinGeckoDataOG();
-    getCoinGeckoDataJR();
+    // getCoinGeckoDataJR();
     if (prizesReceived === 0) {
       getTicketToTokenPrizes();
       getPrizes();
