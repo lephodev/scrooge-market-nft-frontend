@@ -80,7 +80,9 @@ export default function ClaimOGPending() {
           Claimable Amount: {claimableAmount} USDT<br></br>
           Total Rewards Claimed: {totalClaimed} USDT<br></br>
           <br />
-          {address &&
+          {claimableAmount>0&& 
+         <>          
+         {address && 
           (secondsUntilClaim === 0 || { claimableInTime } >= Date.now()) ? (
             <div className='new-btn'>
               <button
@@ -102,7 +104,11 @@ export default function ClaimOGPending() {
           <div style={{ width: "100%", textAlign: "center" }}>
             <div id='rewardId' style={{ margin: "0 auto" }} />
           </div>
+          </>
+}
         </div>
+      
+
       ) : (
         <>
           <img src={LoadingPoker} alt='game' className='imageAnimation' />

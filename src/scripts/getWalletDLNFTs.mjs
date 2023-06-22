@@ -21,6 +21,13 @@ import { toast } from "react-toastify";
 
 export default function GetWalletDLNFTs() {
   const { user, setUser } = useContext(AuthContext);
+  const address = useAddress();
+  const { contract } = useContract(
+    "0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768"
+  );
+  const { data: ownedNFTs, isLoading } = useOwnedNFTs(contract, address);
+console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
+
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
@@ -29,24 +36,23 @@ export default function GetWalletDLNFTs() {
   }
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   setSelectedChain(ChainId.Mainnet);
+  
+
   // const addresses = {
   //   [String(ChainId.Mainnet)]: process.env.REACT_APP_MAINNET_ADDRESS,
   //   [String(ChainId.BinanceSmartChainMainnet)]: "",
   // };
   const [cookies] = useCookies(["token"]);
 
-  const address = useAddress();
   const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("");
  
   const [claimDateArray, setClaimDateArray] = useState([]);
 
-  const { contract } = useContract(
-    "0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768"
-  );
 
-  const { data: ownedNFTs, isLoading } = useOwnedNFTs(contract, address);
-
+  
+    
+  
 
   const claimTokens = (token_id) => {
     setBuyLoading(true);
