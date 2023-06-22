@@ -6,6 +6,8 @@ import {
   useNetworkMismatch,
   useAddress,
   useSDK,
+  ChainId,
+  useMetamask
 } from "@thirdweb-dev/react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,6 +27,8 @@ function HolderClaimChips() {
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
+  const connectWithMetamask = useMetamask();
+  
   
   const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("Loading...");
@@ -33,8 +37,10 @@ function HolderClaimChips() {
   const [disable, setDisable] = useState(false);
   const sdk = useSDK();
   const address = useAddress();
+  // sdk.wallet.connect(ChainId.BinanceSmartChainMainnet);
   // const signer = useSigner();
-
+  console.log("ChainId42",ChainId);
+  // setSelectedChain(ChainId.BinanceSmartChainMainnet)
   const isMismatched = useNetworkMismatch();
   function notify(message) {
     toast.success("🎩 " + message);
@@ -66,6 +72,7 @@ function HolderClaimChips() {
         console.log('gecko data: ', data);
         const current_price = data[0].priceUsd;
               setCurrentPrice(current_price);
+              console.log("current_pricecurrent_price",current_price);
               return current_price;
       })
       .catch((e) => {
@@ -74,25 +81,6 @@ function HolderClaimChips() {
       });
   }
 
-  // async function getCoinGeckoData() {
-  //   await fetch(
-  //     `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${process.env.REACT_APP_OGCONTRACT_ADDRESS}`
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       const current_price = data.market_data.current_price.usd;
-  //       setCurrentPrice(current_price);
-  //       return current_price;
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //       return false;
-  //     });
-  // }
-
-  // function timeout(delay) {
-  //   return new Promise((res) => setTimeout(res, delay));
-  // }
 
   const claimTokens = () => {
     setDisable(true);
@@ -113,7 +101,6 @@ function HolderClaimChips() {
             toast.error("Tokens Claimed: " + data.data.msg);
           }
           setBuyLoading(false);
-
           zzz();
           //await timeout(4200);
           //window.location.reload();
@@ -126,12 +113,23 @@ function HolderClaimChips() {
   };
 
   const sdksdk = async () => {
-    const rawBal = await sdk.wallet.balance(
-      process.env.REACT_APP_OGCONTRACT_ADDRESS
-    );
-    // setOGBalance(0);
-    setOGBalance(parseInt(rawBal.value / 10 ** 18));
+    try{
+      await connectWithMetamask({chainId: ChainId.BinanceSmartChainMainnet});
+      console.log("sdk  wallleet ==>",sdk);
+      const rawBal = await sdk.wallet.balance(
+        process.env.REACT_APP_OGCONTRACT_ADDRESS
+      );
+      console.log("rawBal.value",rawBal.value);
+      // setOGBalance(0);
+      setOGBalance(parseInt(rawBal.value / 10 ** 18));
+      console.log("yyy",parseInt(rawBal.value));
+    }catch(err){
+      console.log("errorr sdk sdk",err)
+    }
+    
   };
+
+  console.log({OGBalance});
 
   const zzz = async () => {
     if (address && !isMismatched) {
@@ -144,12 +142,18 @@ function HolderClaimChips() {
   };
 
   useEffect(() => {
-    getCoinGeckoData();
-    if (address && !isMismatched) {
-      sdksdk();
-      zzz();
-    }
-  }, [user, address]);
+    //  setSelectedChain("56")
+    (async ()=>{
+      console.log("addressaddress130",address);
+      getCoinGeckoData();
+      if (address) {
+        console.log("addressaddressaddress",address);
+        await sdksdk();
+        zzz();
+      }
+    })()
+    
+  }, [user, address,OGBalance,sdk]);
 
   return (
       <main className='main claim-free-page'>

@@ -249,6 +249,7 @@ function RedeemPrizes() {
         return false;
       });
   }
+  console.log(getCoinGeckoDataJR());
 
   const getUserDataInstant = () => {
     let access_token = cookies.token;
