@@ -18,7 +18,7 @@ pwd
 rm -rf build/
 rm -rf betabuild.tar.gz
 npm install --force
-CI= npm run build:staging
+npm run build:staging
 tar cvf betabuild.tar.gz build
 ls'''
       }
