@@ -122,6 +122,7 @@ const EarnFreeCoins = () => {
             </div>
           ) : key === "duckyLuckClaims" ? (
             <div>
+              {/* "gghh" */}
               <DLGate>
                 <DLClaimTokens />
               </DLGate>
