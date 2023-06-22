@@ -114,7 +114,7 @@ function HolderClaimChips() {
 
   const sdksdk = async () => {
     try{
-      await connectWithMetamask({chainId: ChainId.BinanceSmartChainMainnet});
+      // await connectWithMetamask({chainId: ChainId.BinanceSmartChainMainnet});
       console.log("sdk  wallleet ==>",sdk);
       const rawBal = await sdk.wallet.balance(
         process.env.REACT_APP_OGCONTRACT_ADDRESS
@@ -129,7 +129,6 @@ function HolderClaimChips() {
     
   };
 
-  console.log({OGBalance});
 
   const zzz = async () => {
     if (address && !isMismatched) {
@@ -143,17 +142,19 @@ function HolderClaimChips() {
 
   useEffect(() => {
     //  setSelectedChain("56")
-    (async ()=>{
-      console.log("addressaddress130",address);
-      getCoinGeckoData();
-      if (address) {
-        console.log("addressaddressaddress",address);
+      (async()=>{
+        // console.log("addressaddress130",address);
+        getCoinGeckoData();
+        if (address && OGBalance === "Loading...") {
+          
+        await connectWithMetamask({chainId: ChainId.BinanceSmartChainMainnet});
+        // console.log("addressaddressaddress",address);
         await sdksdk();
         zzz();
-      }
-    })()
-    
-  }, [user, address,OGBalance,sdk]);
+        }
+      })();
+  
+  }, [user, address,sdk]);
 
   return (
       <main className='main claim-free-page'>
