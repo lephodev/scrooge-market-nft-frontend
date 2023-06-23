@@ -481,6 +481,7 @@ const provider = sdk.getProvider()
       usdcContract.events.removeEventListener("Transfer")
       contract.events.removeEventListener("Transfer")
       scroogeContract.events.removeEventListener("Transfer")
+      provider.off("block")
     }
   };
 
