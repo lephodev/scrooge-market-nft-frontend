@@ -372,7 +372,7 @@ const provider = sdk.getProvider()
           });
         } catch (error) {
           setBuyLoading(false);
-          if(error.toString().includes("transfer amount exceeds balance" || error.data.message.includes("insufficient funds"))){
+          if(error.toString().includes("transfer amount exceeds balance" || error?.data?.message?.includes("insufficient funds"))){
             toast.error("Transfer amount exceeds balance");
           }else if(error.toString().includes("user rejected transaction")){
           toast.error("You rejected the transaction request.");
@@ -468,7 +468,7 @@ const provider = sdk.getProvider()
       // }
     } catch (error) {
       setBuyLoading(false);
-      if(error.toString().includes("transfer amount exceeds balance") || error.data.message.includes("insufficient funds")){
+      if(error.toString().includes("transfer amount exceeds balance") || error?.data?.message.includes("insufficient funds")){
         toast.error("Transfer amount exceeds balance");
       }else if(error.toString().includes("user rejected transaction")){
       toast.error("You rejected the transaction request.");
