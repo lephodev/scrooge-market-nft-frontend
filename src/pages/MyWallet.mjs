@@ -124,7 +124,7 @@ export default function MyWallet() {
       "0x2e9F79aF51dD1bb56Bbb1627FBe4Cc90aa8985Dd"
     );
     setJRBalance(parseInt(rawBal.value / 10 ** 18));
-    // getCoinGeckoDataJR(parseInt(rawBal.value / 10 ** 18));
+     getCoinGeckoDataJR(parseInt(rawBal.value / 10 ** 18));
   };
 
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
