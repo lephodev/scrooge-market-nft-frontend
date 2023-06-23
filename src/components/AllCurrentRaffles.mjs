@@ -211,9 +211,9 @@ export default function AllCurrentRaffles() {
     if (items.length === 0) {
       getItems();
     }
-    if (!currentPriceOG) {
-      getCoinGeckoDataOG();
-    }
+    // if (!currentPriceOG) {
+    //   getCoinGeckoDataOG();
+    // }
   }, []);
 
   return (
