@@ -147,7 +147,7 @@ function RedeemPrizes() {
 
   async function startFetching() {
     getCoinGeckoDataOG();
-    // getCoinGeckoDataJR();
+     getCoinGeckoDataJR();
     if (prizesReceived === 0) {
       getTicketToTokenPrizes();
       getPrizes();
@@ -249,7 +249,6 @@ function RedeemPrizes() {
         return false;
       });
   }
-  console.log(getCoinGeckoDataJR());
 
   const getUserDataInstant = () => {
     let access_token = cookies.token;
