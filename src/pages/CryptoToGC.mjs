@@ -391,9 +391,9 @@ export default function CryptoToGC() {
                           >
                             Scrooge Jr
                           </Dropdown.Item> */}
-                          <Dropdown.Item onClick={() => handleChange("BNB")}>
+                          {/* <Dropdown.Item onClick={() => handleChange("BNB")}>
                             BNB
-                          </Dropdown.Item>
+                          </Dropdown.Item> */}
                           <Dropdown.Item onClick={() => handleChange("USDC")}>
                             USDC
                           </Dropdown.Item>
