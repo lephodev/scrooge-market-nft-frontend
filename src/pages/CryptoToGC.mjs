@@ -80,6 +80,17 @@ export default function CryptoToGC() {
 // Create a new WebSocket provider connected to BSC mainnet
 const provider = sdk.getProvider()
 
+useEffect(() => {
+  const getBalance = async () => {
+    console.log("adre", address);
+    const bal = await sdk.wallet.balance();
+    console.log("bl",bal )
+  }
+  if(address){
+   getBalance()
+  }
+},[address, sdk])
+
 
   // getGCPackages
   async function getGCPackages() {
