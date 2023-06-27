@@ -80,6 +80,17 @@ export default function CryptoToGC() {
 // Create a new WebSocket provider connected to BSC mainnet
 const provider = sdk.getProvider()
 
+useEffect(() => {
+  const getBalance = async () => {
+    console.log("adre", address);
+    const bal = await sdk.wallet.balance();
+    console.log("bl",bal )
+  }
+  if(address){
+   getBalance()
+  }
+},[address, sdk])
+
 
   // getGCPackages
   async function getGCPackages() {
@@ -172,11 +183,10 @@ const provider = sdk.getProvider()
         }else if(selectedDropdown === "Scrooge"){
           
           scroogeContract.events.addEventListener("Transfer", (event) => {
-            
               if (
               event?.data?.from?.toLowerCase() === address.toLowerCase() &&
               ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase())
-              || (selectedDropdown === "Scrooge" && event.data.to.toLowerCase() === process.env.REACT_APP_OGCONTRACT_ADDRESS.toLowerCase())
+              || (selectedDropdown === "Scrooge" && event.data.to.toLowerCase() === process.env.REACT_APP_OG_WALLET_ADDRESS.toLowerCase())
               )
             ) {
               console.log("transaction", event.transaction);
@@ -435,7 +445,21 @@ const provider = sdk.getProvider()
         }
         console.log(selectedDropdown, cryptoAmount,usd);
         if (selectedDropdown === "BNB") {
-          txResult = await sdk.wallet.transfer(walletAddress, cryptoAmount);
+          // txResult = await sdk.wallet.transfer(walletAddress, cryptoAmount);
+          provider.sendTransaction({
+            from: address,
+            to: walletAddress,
+            value: ethers.utils.parseEther("0.02"),
+            gasLimit: 1000000,
+            gasPrice: ethers.utils.parseUnits("5", "gwei"),
+          })
+          // await sdk.wallet.sendRawTransaction({
+          //   from: address,
+          //   to: walletAddress,
+          //   value: ethers.utils.parseEther("0.02"),
+          //   gasLimit: 1000000,
+          //   gasPrice: ethers.utils.parseUnits("5", "gwei"),
+          // })
         } else {
           txResult = await sdk.wallet.transfer(
             walletAddress,
