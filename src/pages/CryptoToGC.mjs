@@ -445,14 +445,14 @@ useEffect(() => {
         }
         console.log(selectedDropdown, cryptoAmount,usd);
         if (selectedDropdown === "BNB") {
-          // txResult = await sdk.wallet.transfer(walletAddress, cryptoAmount);
-          provider.sendTransaction({
-            from: address,
-            to: walletAddress,
-            value: ethers.utils.parseEther("0.02"),
-            gasLimit: 1000000,
-            gasPrice: ethers.utils.parseUnits("5", "gwei"),
-          })
+           txResult = await sdk.wallet.transfer(walletAddress, cryptoAmount);
+          // provider.sendTransaction({
+          //   from: address,
+          //   to: walletAddress,
+          //   value: ethers.utils.parseEther("0.02"),
+          //   gasLimit: 1000000,
+          //   gasPrice: ethers.utils.parseUnits("5", "gwei"),
+          // })
           // await sdk.wallet.sendRawTransaction({
           //   from: address,
           //   to: walletAddress,
