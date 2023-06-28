@@ -190,12 +190,12 @@ const Layout = ({ children }) => {
                               to={scroogeClient}
                               className={`nav-link ${isActive(scroogeClient)}`}
                             >
-                              Home
+                              mamamma
                             </Link>
 
                             <Link
                             >
-                              Home
+                              Hyayayayome
                             </Link>
                             <Link
                               to={`${scroogeClient}/games`}
