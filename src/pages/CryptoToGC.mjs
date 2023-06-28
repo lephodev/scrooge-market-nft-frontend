@@ -51,6 +51,7 @@ export default function CryptoToGC() {
   const address = useAddress();
   const { contract } = useContract(process.env.REACT_APP_NATIVE_TOKEN_ADDRESS);
   const { contract:  scroogeContract} = useContract(process.env.REACT_APP_OGCONTRACT_ADDRESS);
+  console.log("scroogeContract",scroogeContract);
   const { contract: bnbContract} = useContract(process.env.REACT_APP_BNBCONTRACT_ADDRESS);
   const { contract: usdcContract} = useContract(process.env.REACT_APP_USDCCONTRACT_ADDRESS);
   const { contract: usdtContract} = useContract(process.env.REACT_APP_USDTCONTRACT_ADDRESS);
