@@ -20,6 +20,7 @@ const KYCForm = () => {
   const [frontIdImage, setfrontIdImage] = useState([]);
   const [backIdImage, setbackIdImage] = useState([]);
   const [statusKyc, setstatusKyc] = useState(null);
+  const [rejectionMessage,setRejectionMessage]=useState('')
   const [loading, setLoading] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
   // const [successMsg, setSuccessMsg] = useState("");
@@ -125,8 +126,10 @@ const KYCForm = () => {
 
   const getKYCStatus = async () => {
     const response = await userKycDetails();
+    console.log("response",response);
     if (response?.code === 200) {
       setstatusKyc(response.message);
+      setRejectionMessage(response?.description)
       setValue('firstName', response?.userDetails?.firstName);
       setValue('lastName', response?.userDetails?.lastName);
       setglobalLoader(false);
@@ -434,7 +437,7 @@ const KYCForm = () => {
                 <SubmitKYC handleLogOut={handleLogOut} />
               )}
               {statusKyc === "reject" && (
-                <FailedKYC handleLogOut={handleLogOut} reapply={reapply}/>
+                <FailedKYC handleLogOut={handleLogOut} reapply={reapply} rejectionMessage={rejectionMessage}/>
               )}
               {statusKyc === "accept" && (
                 <SuccessKYC handleLogOut={handleLogOut} />
@@ -461,7 +464,7 @@ const SubmitKYC = ({ handleLogOut }) => {
   );
 };
 
-const FailedKYC = ({ handleLogOut, reapply}) => {
+const FailedKYC = ({ handleLogOut, reapply,rejectionMessage}) => {
   return (
     <div className='kyc-msg-grid failedErrorBox'>
       <div className='kyc-form-msg'>
@@ -471,6 +474,7 @@ const FailedKYC = ({ handleLogOut, reapply}) => {
           You already have an account with us, please contact support to get
           more information.
         </p>
+        <p className="reject-reason"><span>Reasion </span> : {rejectionMessage}</p>
         <button onClick={reapply}>Re-Apply</button>
         {/* <Link to="/">Contact Support</Link>
         <span onClick={handleLogOut}>Logout</span> */}

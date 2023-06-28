@@ -71,7 +71,7 @@ function HolderClaimChips() {
       .then((data) => {
         console.log('gecko data: ', data);
         const current_price = data[0].priceUsd;
-              setCurrentPrice(current_price);
+              setCurrentPrice(current_price.toFixed(9));
               console.log("current_pricecurrent_price",current_price);
               return current_price;
       })
@@ -320,8 +320,10 @@ function HolderClaimChips() {
                           </div>
                         ) : (
                           <>
+                          {console.log("OGBalance323",OGBalance)}
+                          {console.log("currentPriceOG",currentPrice)}
                             <div className='prize-name text-animate'>
-                              {nextClaimDate !== "Loading..." &&
+                              {
                               (OGBalance * currentPrice).toFixed(0) >= 50 ? (
                                 <>
                                   <h1>Next Claim Available:</h1>
