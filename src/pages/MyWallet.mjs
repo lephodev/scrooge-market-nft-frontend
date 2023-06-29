@@ -15,9 +15,9 @@ import Sweep from "../images/token.png";
 import GoldCoin from "../images/gold.png";
 import Ticket from "../images/ticket.png";
 import ScroogeHatLogo from "../images/scroogeHatLogo.png";
-import scroogejr from "../images/scroogejr.jpeg";
+// import scroogejr from "../images/scroogejr.jpeg";
 import ClaimOGPending from "../components/claimOGPending.mjs";
-import ClaimJRPending from "../components/claimJRPending.mjs";
+// import ClaimJRPending from "../components/claimJRPending.mjs";
 import "react-toastify/dist/ReactToastify.css";
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
@@ -26,8 +26,8 @@ import profile from "../images/profile.png";
 // import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses.js";
 export default function MyWallet() {
   const [OGBalance, setOGBalance] = useState("Loading...");
-  const [JRBalance, setJRBalance] = useState("Loading...");
-  const [JRValue, setJRValue] = useState("Loading...");
+  const [ setJRBalance] = useState("Loading...");
+  const [ setJRValue] = useState("Loading...");
   const [OGValue, setOGValue] = useState("Loading...");
   const [/* currentPriceOG */, setCurrentPriceOG] = useState("Loading...");
   const [/* currentPriceJR */, setCurrentPriceJR] = useState("Loading...");
@@ -55,11 +55,14 @@ export default function MyWallet() {
 
   async function getCoinGeckoDataOG(bal) {
     await fetch(
-      `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${process.env.REACT_APP_OGCONTRACT_ADDRESS}`
-    )
+      `https://api.coinbrain.com/public/coin-info`,{
+        method: "post",
+      body:JSON.stringify({
+        "56":[process.env.REACT_APP_OGCONTRACT_ADDRESS]
+      })})
       .then((response) => response.json())
       .then((data) => {
-        const current_price = data.market_data.current_price.usd;
+        const current_price = data[0].priceUsd;
         setCurrentPriceOG(current_price);
         setOGValue((bal * current_price).toFixed(2));
         return current_price;
@@ -68,6 +71,7 @@ export default function MyWallet() {
         console.log(e);
         return false;
       });
+
   }
 
   async function getCoinGeckoDataJR(bal) {
@@ -109,7 +113,7 @@ export default function MyWallet() {
 
   const getOG = async () => {
     const rawBal = await sdk.wallet.balance(
-      "0xfA1BA18067aC6884fB26e329e60273488a247FC3"
+      process.env.REACT_APP_OGCONTRACT_ADDRESS
     );
     setOGBalance(parseInt(rawBal.value / 10 ** 18));
     getCoinGeckoDataOG(parseInt(rawBal.value / 10 ** 18));
@@ -120,7 +124,7 @@ export default function MyWallet() {
       "0x2e9F79aF51dD1bb56Bbb1627FBe4Cc90aa8985Dd"
     );
     setJRBalance(parseInt(rawBal.value / 10 ** 18));
-    getCoinGeckoDataJR(parseInt(rawBal.value / 10 ** 18));
+     getCoinGeckoDataJR(parseInt(rawBal.value / 10 ** 18));
   };
 
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
@@ -287,7 +291,7 @@ export default function MyWallet() {
                         </div>
                       </div>
                     </div>
-                    <div className='crypto-balance-div'>
+                    {/* <div className='crypto-balance-div'>
                       <div className='width-100'>
                         <div className='crypto-balance-header'>JR BALANCE</div>
 
@@ -308,7 +312,7 @@ export default function MyWallet() {
                           <ClaimJRPending />
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </>
               ) : (

@@ -50,12 +50,19 @@ export default function CryptoToGC() {
   const [cookies] = useCookies(["token"]);
   const address = useAddress();
   const { contract } = useContract(process.env.REACT_APP_NATIVE_TOKEN_ADDRESS);
+  const { contract:  scroogeContract} = useContract(process.env.REACT_APP_OGCONTRACT_ADDRESS);
+  console.log("scroogeContract",scroogeContract);
+  const { contract: bnbContract} = useContract(process.env.REACT_APP_BNBCONTRACT_ADDRESS);
+  const { contract: usdcContract} = useContract(process.env.REACT_APP_USDCCONTRACT_ADDRESS);
+  const { contract: usdtContract} = useContract(process.env.REACT_APP_USDTCONTRACT_ADDRESS);
   const getUserDataInstant = () => {
     let access_token = cookies.token;
     authInstance()
       .get("/auth/check-auth", {
         headers: {
           Authorization: `Bearer ${access_token}`,
+          "Permissions-Policy": "geolocation=*",
+
         },
       })
       .then((res) => {
@@ -71,6 +78,20 @@ export default function CryptoToGC() {
       });
   };
   const handleClose = () => setShow(false);
+// Create a new WebSocket provider connected to BSC mainnet
+const provider = sdk.getProvider()
+
+useEffect(() => {
+  const getBalance = async () => {
+    console.log("adre", address);
+    const bal = await sdk.wallet.balance();
+    console.log("bl",bal )
+  }
+  if(address){
+   getBalance()
+  }
+},[address, sdk])
+
 
   // getGCPackages
   async function getGCPackages() {
@@ -78,9 +99,7 @@ export default function CryptoToGC() {
     try {
       const res = await marketPlaceInstance().get(`/getGCPackages`);
       if (res.data) {
-        const sortedAsc = res.data.sort(
-          (a, b) => parseInt(a.priceInBUSD) - parseInt(b.priceInBUSD)
-        );
+        const sortedAsc = res.data.sort((a, b) => parseInt(a.priceInBUSD) - parseInt(b.priceInBUSD));
 
         setPrizesLoading(false);
         setAllPrizes(sortedAsc || []);
@@ -116,50 +135,263 @@ export default function CryptoToGC() {
       setBuyLoading(false);
       return toast.error("Please Connect Your Metamask Wallet");
     }
+
     try {
       let contractAddresss,
         walletAddress,
         txResult,
         cryptoAmount,
         current_price;
+        let contactSDk;
+
+        if(selectedDropdown === "BUSD"){
+          contract.events.addEventListener("Transfer", (event) => {
+            console.log("event busd", event.data.from, event.data.to);
+              if (
+              event?.data?.from?.toLowerCase() === address.toLowerCase() &&
+              ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase())
+              || (selectedDropdown === "Scrooge" && event.data.to.toLowerCase() === process.env.REACT_APP_OGCONTRACT_ADDRESS.toLowerCase())
+              )
+            ) {
+              console.log("transaction", event.transaction);
+              if (event.transaction.transactionHash) {
+                const { transactionHash } = event.transaction || {};
+                marketPlaceInstance()
+                  .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
+                  .then((response) => {
+                    setBuyLoading(false);
+                    if (response.data.success) {
+                      setUser(response?.data?.user);
+                      toast.success(`Successfully Purchased ${gc} goldCoin`);
+                      reward();
+                      getUserDataInstant();
+                    } else {
+                      setBuyLoading(false);
+                      toast.error("Failed to buy");
+                    }
+                    contract.events.removeEventListener("Transfer")
+                  })
+                  .catch((error) => {
+                    setBuyLoading(false);
+                    toast.error("Token Buy Failed");
+                    console.log(error);
+                    contract.events.removeEventListener("Transfer")
+                  });
+              }
+            }
+          });
+          contactSDk = contract;
+        }else if(selectedDropdown === "Scrooge"){
+          
+          scroogeContract.events.addEventListener("Transfer", (event) => {
+              if (
+              event?.data?.from?.toLowerCase() === address.toLowerCase() &&
+              ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase())
+              || (selectedDropdown === "Scrooge" && event.data.to.toLowerCase() === process.env.REACT_APP_OG_WALLET_ADDRESS.toLowerCase())
+              )
+            ) {
+              console.log("transaction", event.transaction);
+              if (event.transaction.transactionHash) {
+                const { transactionHash } = event.transaction || {};
+                marketPlaceInstance()
+                  .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
+                  .then((response) => {
+                    setBuyLoading(false);
+                    if (response.data.success) {
+                      setUser(response?.data?.user);
+                      toast.success(`Successfully Purchased ${gc} goldCoin`);
+                      reward();
+                      getUserDataInstant();
+                    } else {
+                      setBuyLoading(false);
+                      toast.error("Failed to buy");
+                    }
+                    scroogeContract.events.removeAllListeners();
+                  })
+                  .catch((error) => {
+                    setBuyLoading(false);
+                    toast.error("Token Buy Failed");
+                    console.log(error);
+                    scroogeContract.events.removeAllListeners()
+                  });
+              }
+            }
+          });
+        }else if(selectedDropdown === "BNB"){
+          provider.on("block", async(blockNumber) => {
+            // Emitted on every block change
+            const block = await provider.getBlockWithTransactions(blockNumber)
+            for await(const transaction of block.transactions){
+               
+                   
+                        if (
+                        transaction?.from?.toLowerCase() === address.toLowerCase() &&
+                        ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && transaction?.to?.toLowerCase() === BUSD_ADDRESS.toLowerCase()))
+                      ) {
+                        console.log("transaction", transaction);
+                        if (transaction.hash) {
+                          try{
+                            const res = await marketPlaceInstance()
+                            .get(`convertCryptoToGoldCoin/${address}/${transaction.hash}`)
+                           
+                              if (res.data.success) {
+                                setUser(res?.data?.user);
+                                toast.success(`Successfully Purchased ${gc} goldCoin`);
+                                reward();
+                                getUserDataInstant();
+                              } else {
+                                setBuyLoading(false);
+                                toast.error("Failed to buy");
+                              }
+                              provider.off("block")
+                            return;
+                          }catch(err){
+                            setBuyLoading(false);
+                            toast.error("Token Buy Failed");
+                            console.log(err);
+                            bnbContract.events.removeAllListeners()
+                            provider.off("block")
+                            return;
+                          }  
+                  
+                        }
+                      }
+                    
+            }
+            console.log("block", block)
+           
+          })
+          // bnbContract.events.addEventListener("Transfer", (event) => {
+          // console.log("eventbnb -", event, event.data,event.transaction.transactionHash)
+          //     if (
+          //     event?.data?.src?.toLowerCase() === address.toLowerCase() &&
+          //     ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && event.data.dst.toLowerCase() === BUSD_ADDRESS.toLowerCase())
+          //     || (selectedDropdown === "Scrooge" && event.data.dst.toLowerCase() === process.env.REACT_APP_OGCONTRACT_ADDRESS.toLowerCase())
+          //     )
+          //   ) {
+          //     console.log("transaction", event.transaction);
+          //     if (event.transaction.transactionHash) {
+          //       const { transactionHash } = event.transaction || {};
+          //       marketPlaceInstance()
+          //         .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
+          //         .then((response) => {
+          //           setBuyLoading(false);
+          //           if (response.data.success) {
+          //             setUser(response?.data?.user);
+          //             toast.success(`Successfully Purchased ${gc} goldCoin`);
+          //             reward();
+          //             getUserDataInstant();
+          //           } else {
+          //             setBuyLoading(false);
+          //             toast.error("Failed to buy");
+          //           }
+          //           bnbContract.events.removeAllListeners()
+          //         })
+          //         .catch((error) => {
+          //           setBuyLoading(false);
+          //           toast.error("Token Buy Failed");
+          //           console.log(error);
+          //           bnbContract.events.removeAllListeners()
+          //         });
+          //     }
+          //   }
+          // });
+        }else if(selectedDropdown === "USDT"){
+          
+          usdtContract.events.addEventListener("Transfer", (event) => {
+           console.log("eventusdt-", event.data.from, event.data.to);
+              if (
+              event?.data?.from?.toLowerCase() === address.toLowerCase() &&
+              ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase())
+              || (selectedDropdown === "Scrooge" && event.data.to.toLowerCase() === process.env.REACT_APP_OGCONTRACT_ADDRESS.toLowerCase())
+              )
+            ) {
+              console.log("transaction", event.transaction);
+              if (event.transaction.transactionHash) {
+                const { transactionHash } = event.transaction || {};
+                marketPlaceInstance()
+                  .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
+                  .then((response) => {
+                    setBuyLoading(false);
+                    if (response.data.success) {
+                      setUser(response?.data?.user);
+                      toast.success(`Successfully Purchased ${gc} goldCoin`);
+                      reward();
+                      getUserDataInstant();
+                    } else {
+                      setBuyLoading(false);
+                      toast.error("Failed to buy");
+                    }
+                    usdtContract.events.removeAllListeners()
+                  })
+                  .catch((error) => {
+                    setBuyLoading(false);
+                    toast.error("Token Buy Failed");
+                    console.log(error);
+                    usdtContract.events.removeAllListeners()
+                  });
+              }
+            }
+          });
+        }else if(selectedDropdown === "USDC"){
+          
+          usdcContract.events.addEventListener("Transfer", (event) => {
+            console.log("eventusdc-", event.data.from, event.data.to);
+              if (
+              event?.data?.from?.toLowerCase() === address.toLowerCase() &&
+              ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase())
+              || (selectedDropdown === "Scrooge" && event.data.to.toLowerCase() === process.env.REACT_APP_OGCONTRACT_ADDRESS.toLowerCase())
+              )
+            ) {
+              console.log("transaction", event.transaction);
+              if (event.transaction.transactionHash) {
+                const { transactionHash } = event.transaction || {};
+                marketPlaceInstance()
+                  .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
+                  .then((response) => {
+                    setBuyLoading(false);
+                    if (response.data.success) {
+                      setUser(response?.data?.user);
+                      toast.success(`Successfully Purchased ${gc} goldCoin`);
+                      reward();
+                      getUserDataInstant();
+                    } else {
+                      setBuyLoading(false);
+                      toast.error("Failed to buy");
+                    }
+                    usdcContract.events.removeAllListeners()
+                  })
+                  .catch((error) => {
+                    setBuyLoading(false);
+                    toast.error("Token Buy Failed");
+                    console.log(error);
+                    usdcContract.events.removeAllListeners()
+                  });
+              }
+            }
+          });
+        }
+        
       if (selectedDropdown === "BUSD") {
         let amt = (usd * Math.pow(10, 18)).toString();
-        contract.events.addEventListener("Transfer", (event) => {
-          //  console.log("event trigger", event.data.from === address, event.data.to === BUSD_ADDRESS);
-          if (
-            event.data.from.toLowerCase() === address.toLowerCase() &&
-            event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase()
-          ) {
-            console.log("transaction", event.transaction);
-            if (event.transaction.transactionHash) {
-              const { transactionHash } = event.transaction || {};
-              marketPlaceInstance()
-                .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
-                .then((response) => {
-                  setBuyLoading(false);
-                  if (response.data.success) {
-                    setUser(response?.data?.user);
-                    toast.success(`Successfully Purchased ${gc} goldCoin`);
-                    reward();
-                    getUserDataInstant();
-                  } else {
-                    setBuyLoading(false);
-                    toast.error("Failed to buy");
-                  }
-                })
-                .catch((error) => {
-                  setBuyLoading(false);
-                  toast.error("Token Buy Failed");
-                  console.log(error);
-                });
-            }
-          }
-        });
+        console.log("BUSDamt",amt);
         setTimeout(async () => {
+          try {
           txResult = await contract.call("transfer", [BUSD_ADDRESS, amt], {
             gasLimit: 1000000,
             gasPrice: ethers.utils.parseUnits("5", "gwei"),
           });
+        } catch (error) {
+          setBuyLoading(false);
+          if(error.toString().includes("transfer amount exceeds balance" || error?.data?.message?.includes("insufficient funds"))){
+            toast.error("Transfer amount exceeds balance");
+          }else if(error.toString().includes("user rejected transaction")){
+          toast.error("You rejected the transaction request.");
+          }
+          else
+          toast.error("Gold Coin Buy Fail, try with increasing the gas fee");
+          contract.events.removeEventListener("Transfer")
+        }
         }, 3000);
 
         return;
@@ -167,12 +399,10 @@ export default function CryptoToGC() {
         if (selectedDropdown === "Scrooge") {
           contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
           walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
-        } else if (selectedDropdown === "Scrooge Jr") {
-          contractAddresss = process.env.REACT_APP_JRCONTRACT_ADDRESS;
-          walletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
-        } else if (selectedDropdown === "BNB") {
+        }  else if (selectedDropdown === "BNB") {
           contractAddresss = process.env.REACT_APP_BNBCONTRACT_ADDRESS;
           walletAddress = BUSD_ADDRESS;
+          
         } else if (selectedDropdown === "USDC") {
           contractAddresss = process.env.REACT_APP_USDCCONTRACT_ADDRESS;
           walletAddress = BUSD_ADDRESS;
@@ -180,11 +410,29 @@ export default function CryptoToGC() {
           contractAddresss = process.env.REACT_APP_USDTCONTRACT_ADDRESS;
           walletAddress = BUSD_ADDRESS;
         }
+        if(selectedDropdown==="Scrooge"){
+          await fetch(
+            `https://api.coinbrain.com/public/coin-info`,{
+              method: "post",
+            body:JSON.stringify({
+              "56":[process.env.REACT_APP_OGCONTRACT_ADDRESS]
+            })})
+            .then((response) => response.json())
+            .then((data) => {
+              current_price = data[0].priceUsd;
+            })
+            .catch((e) => {
+              console.log(e);
+              return false;
+            });
+        }
+        else {
         const res = await fetch(
           `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/${contractAddresss}`
         );
         const data = await res.json();
         current_price = data.market_data.current_price.usd;
+        }
         if (["USDC", "USDT", "BNB"].includes(selectedDropdown)) {
           if (["USDC", "USDT"].includes(selectedDropdown)) {
             cryptoAmount = parseInt(usd);
@@ -192,11 +440,27 @@ export default function CryptoToGC() {
             cryptoAmount = parseInt(usd) / current_price;
           }
         } else {
-          cryptoAmount = (parseInt(usd) + parseInt(usd) * 0.16) / current_price;
+          console.log("(parseInt(usd) + parseInt(usd) * 0.16) ",(current_price));
+          cryptoAmount = (parseInt(usd) + (parseInt(usd) * 0.16)) / parseFloat(current_price);
+          console.log("cryptoAmountcryptoAmount",cryptoAmount);
         }
-        console.log(selectedDropdown, cryptoAmount);
+        console.log(selectedDropdown, cryptoAmount,usd);
         if (selectedDropdown === "BNB") {
-          txResult = await sdk.wallet.transfer(walletAddress, cryptoAmount);
+           txResult = await sdk.wallet.transfer(walletAddress, cryptoAmount);
+          // provider.sendTransaction({
+          //   from: address,
+          //   to: walletAddress,
+          //   value: ethers.utils.parseEther("0.02"),
+          //   gasLimit: 1000000,
+          //   gasPrice: ethers.utils.parseUnits("5", "gwei"),
+          // })
+          // await sdk.wallet.sendRawTransaction({
+          //   from: address,
+          //   to: walletAddress,
+          //   value: ethers.utils.parseEther("0.02"),
+          //   gasLimit: 1000000,
+          //   gasPrice: ethers.utils.parseUnits("5", "gwei"),
+          // })
         } else {
           txResult = await sdk.wallet.transfer(
             walletAddress,
@@ -205,32 +469,44 @@ export default function CryptoToGC() {
           );
         }
       }
-      if (txResult.receipt) {
-        const { transactionHash } = txResult?.receipt || {};
-        marketPlaceInstance()
-          .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
-          .then((response) => {
-            setBuyLoading(false);
-            if (response.data.success) {
-              setUser(response?.data?.user);
-              toast.success(`Successfully Purchased ${gc} goldCoin`);
-              reward();
-              getUserDataInstant();
-            } else {
-              setBuyLoading(false);
-              toast.error("Failed to buy");
-            }
-          })
-          .catch((error) => {
-            setBuyLoading(false);
-            toast.error("Token Buy Failed");
-            console.log(error);
-          });
-      }
+      // if (txResult.receipt) {
+      //   const { transactionHash } = txResult?.receipt || {};
+      //   marketPlaceInstance()
+      //     .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
+      //     .then((response) => {
+      //       setBuyLoading(false);
+      //       if (response.data.success) {
+      //         setUser(response?.data?.user);
+      //         toast.success(`Successfully Purchased ${gc} goldCoin`);
+      //         reward();
+      //         getUserDataInstant();
+      //       } else {
+      //         setBuyLoading(false);
+      //         toast.error("Failed to buy");
+      //       }
+      //     })
+      //     .catch((error) => {
+      //       setBuyLoading(false);
+      //       toast.error("Token Buy Failed");
+      //       console.log(error);
+      //     });
+      // }
     } catch (error) {
       setBuyLoading(false);
+      if(error.toString().includes("transfer amount exceeds balance") || error?.data?.message.includes("insufficient funds")){
+        toast.error("Transfer amount exceeds balance");
+      }else if(error.toString().includes("user rejected transaction")){
+      toast.error("You rejected the transaction request.");
+    }
+      else
       toast.error("Gold Coin Buy Fail, try with increasing the gas fee");
       console.log("errordata", error);
+      bnbContract.events.removeEventListener("Transfer")
+      usdtContract.events.removeEventListener("Transfer")
+      usdcContract.events.removeEventListener("Transfer")
+      contract.events.removeEventListener("Transfer")
+      scroogeContract.events.removeEventListener("Transfer")
+      provider.off("block")
     }
   };
 
@@ -341,8 +617,7 @@ export default function CryptoToGC() {
                 </div>
                 {/* <div className="feature-overview-div"></div> */}
                 <div className='asterisk-desc cryptoTotoken'>
-                  Disclaimer : +16% will be added for Scrooge or JR payment
-                  method to cover blockchain fees and contract taxes!
+                  Disclaimer : +16% Will be added to Scrooge payment method to cover blockchain fees and contract taxes!
                 </div>
               </div>
               {isMismatched ? (
@@ -357,11 +632,11 @@ export default function CryptoToGC() {
                           {!selectedDropdown ? "BUSD" : selectedDropdown}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                          {/* <Dropdown.Item
+                          <Dropdown.Item
                             onClick={() => handleChange("Scrooge")}
                           >
                             Scrooge
-                          </Dropdown.Item> */}
+                          </Dropdown.Item>
                           <Dropdown.Item onClick={() => handleChange("BUSD")}>
                             BUSD
                           </Dropdown.Item>

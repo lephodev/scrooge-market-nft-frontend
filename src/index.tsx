@@ -59,6 +59,7 @@ export default function App() {
       .get("/auth/check-auth", {
         headers: {
           Authorization: `Bearer ${access_token}`,
+          "Permissions-Policy": "geolocation=*",
         },
       })
       .then((res: any) => {

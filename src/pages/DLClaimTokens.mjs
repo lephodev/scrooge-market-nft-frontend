@@ -48,6 +48,7 @@ export default function DLClaimTokens() {
                     title='DLLogo'></iframe>
                 </div>
                 <div className='flex-row'>
+                {/* kivan */}
                   <GetWalletDLNFTs />
                 </div>
               </div>

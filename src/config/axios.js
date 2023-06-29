@@ -13,17 +13,30 @@ export const getAuthorizationHeader = () => `Bearer ${getToken()}`;
 export const marketPlaceInstance = () =>
   axios.create({
     baseURL: `${server}/api`,
-    headers: { Authorization: getAuthorizationHeader() },
+    headers: {
+       Authorization: getAuthorizationHeader(),
+       "Permissions-Policy": "geolocation=*",
+      },
   });
 
 export const kycInstance = () =>
   axios.create({
     baseURL: `${scroogeServer}/v1`,
-    headers: { Authorization: getAuthorizationHeader() },
+    headers: { 
+      Authorization: getAuthorizationHeader(),
+      "Permissions-Policy": "geolocation=*",
+    },
+    withCredentials: true, 
+    credentials: "include"
   });
 
 export const authInstance = () =>
   axios.create({
     baseURL: `${scroogeServer}/v1`,
-    headers: { Authorization: getAuthorizationHeader() },
+    headers: {
+       Authorization: getAuthorizationHeader(),
+       "Permissions-Policy": "geolocation=*",
+      },
+      withCredentials: true, 
+      credentials: "include"
   });
