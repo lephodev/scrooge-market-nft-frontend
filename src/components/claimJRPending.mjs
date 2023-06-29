@@ -52,7 +52,7 @@ export default function ClaimJRPending() {
       await contractObj.call("claim");
       setIsClaiming(false);
       //console.log('claimed');
-      notify("Your pending BUSD rewards have been successfully claimed!");
+      notify("Your pending USDT rewards have been successfully claimed!");
       reward();
       contractClaim();
     } catch (error) {
@@ -78,11 +78,11 @@ export default function ClaimJRPending() {
       {!isClaiming ? (
         <div>
           <span className="yellow">
-            <strong>BUSD REWARDS</strong>
+            <strong>USDT REWARDS</strong>
           </span>
           <br></br>
-          Claimable Amount: {claimableAmount} BUSD<br></br>
-          Total Rewards Claimed: {totalClaimed} BUSD<br></br>
+          Claimable Amount: {claimableAmount} USDT<br></br>
+          Total Rewards Claimed: {totalClaimed} USDT<br></br>
           <br />
           {address &&
           (secondsUntilClaim === 0 || { claimableInTime } >= Date.now()) ? (
