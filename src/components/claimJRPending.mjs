@@ -52,7 +52,7 @@ export default function ClaimJRPending() {
       await contractObj.call("claim");
       setIsClaiming(false);
       //console.log('claimed');
-      notify("Your pending BUSD rewards have been successfully claimed!");
+      notify("Your pending USDT rewards have been successfully claimed!");
       reward();
       contractClaim();
     } catch (error) {
