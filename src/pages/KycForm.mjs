@@ -474,7 +474,7 @@ const FailedKYC = ({ handleLogOut, reapply,rejectionMessage}) => {
           You already have an account with us, please contact support to get
           more information.
         </p>
-        <p className="reject-reason"><span>Reasion </span> : {rejectionMessage}</p>
+        <p className="reject-reason"><span>Reason </span> : {rejectionMessage}</p>
         <button onClick={reapply}>Re-Apply</button>
         {/* <Link to="/">Contact Support</Link>
         <span onClick={handleLogOut}>Logout</span> */}
