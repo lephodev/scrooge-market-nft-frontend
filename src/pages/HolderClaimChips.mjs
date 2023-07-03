@@ -7,7 +7,8 @@ import {
   useAddress,
   useSDK,
   ChainId,
-  // useMetamask,
+  useMetamask,
+  useSafe
 } from "@thirdweb-dev/react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,9 +28,8 @@ function HolderClaimChips() {
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
-  // const connectWithMetamask = useMetamask();
-  
-  
+  const connectWithMetamask = useMetamask();
+  const connectSafepal=useSafe()
   const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("Loading...");
   const [OGBalance, setOGBalance] = useState("Loading...");
@@ -71,7 +71,7 @@ function HolderClaimChips() {
       .then((data) => {
         console.log('gecko data: ', data);
         const current_price = data[0].priceUsd;
-              setCurrentPrice(current_price.toFixed(9));
+              setCurrentPrice(current_price);
               console.log("current_pricecurrent_price",current_price);
               return current_price;
       })
@@ -145,13 +145,14 @@ function HolderClaimChips() {
       (async()=>{
         // console.log("addressaddress130",address);
         getCoinGeckoData();
-        
+        if (address && OGBalance === "Loading...") {
           
-        // await connectWithMetamask({chainId: ChainId.BinanceSmartChainMainnet});
+        await connectWithMetamask({chainId: ChainId.BinanceSmartChainMainnet});
         // console.log("addressaddressaddress",address);
+        await connectSafepal({chainId: ChainId.BinanceSmartChainMainnet})
         await sdksdk();
         zzz();
-        
+        }
       })();
   
   }, [user, address,sdk]);
@@ -320,10 +321,8 @@ function HolderClaimChips() {
                           </div>
                         ) : (
                           <>
-                          {console.log("OGBalance323",OGBalance)}
-                          {console.log("currentPriceOG",currentPrice)}
                             <div className='prize-name text-animate'>
-                              {
+                              {nextClaimDate !== "Loading..." &&
                               (OGBalance * currentPrice).toFixed(0) >= 50 ? (
                                 <>
                                   <h1>Next Claim Available:</h1>
