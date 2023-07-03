@@ -145,13 +145,13 @@ function HolderClaimChips() {
       (async()=>{
         // console.log("addressaddress130",address);
         getCoinGeckoData();
-        if (address && OGBalance === "Loading...") {
+        
           
         await connectWithMetamask({chainId: ChainId.BinanceSmartChainMainnet});
         // console.log("addressaddressaddress",address);
         await sdksdk();
         zzz();
-        }
+        
       })();
   
   }, [user, address,sdk]);
