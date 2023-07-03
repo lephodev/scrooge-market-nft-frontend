@@ -3,6 +3,8 @@ import { ThirdwebNftMedia, useDisconnect } from "@thirdweb-dev/react";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import hatLogo from "../images/scroogeHatLogo.png";
+import { useContext } from "react";
+
 // import DLBigD from "../images/DLBigD.png";
 // import WalletIcon from "../images/wallet.png";
 // import StoreIconBadge from "../images/store.svg";
@@ -34,6 +36,7 @@ import {
   slotUrl,
 } from "../config/keys.js";
 import { Container, Nav, Navbar } from "react-bootstrap";
+import AuthContext from "../context/authContext.ts";
 
 export const Tooltip = (id, metadata, message) => (
   <Popup
@@ -56,6 +59,7 @@ const useCurrentPath = () => {
 };
 
 const Layout = ({ children }) => {
+  const { user } = useContext(AuthContext);
   const wrapperRef = useRef();
   // const { user } = useContext(AuthContext);
   const [currentPriceOG, setCurrentPriceOG] = useState("");
@@ -184,7 +188,7 @@ const Layout = ({ children }) => {
                       </div>
 
                       <Nav className="mr-auto">
-                        {Cookies.get("token") ? (
+                        {user ? (
                           <>
                             <Link
                               to={scroogeClient}

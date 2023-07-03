@@ -130,7 +130,7 @@ export default function App() {
 
                 <Route
                   path='/'
-                  element={<ProtectedRoute component={<Home />} />}
+                  element={<ProtectedRoute  component={<Home   />} />}
                 />
                 <Route
                   path='/my-wallet'
