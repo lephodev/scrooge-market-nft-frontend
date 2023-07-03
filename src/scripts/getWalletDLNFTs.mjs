@@ -35,7 +35,7 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
     toast.success("🎩 " + message);
   }
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
-  setSelectedChain(ChainId.Mainnet);
+  // setSelectedChain(ChainId.Mainnet);
   
 
   // const addresses = {
@@ -52,6 +52,7 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
 
   
     
+  
   
 
   const claimTokens = (token_id) => {
@@ -116,7 +117,7 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
 
   useEffect(() => {
     return () => setSelectedChain(ChainId.BinanceSmartChainMainnet);
-  }, []);
+  }, [address]);
 
   let dataArray = [];
   useEffect(() => {
