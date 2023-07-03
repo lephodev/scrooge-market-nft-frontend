@@ -7,7 +7,7 @@ import {
   useAddress,
   useSDK,
   ChainId,
-  useMetamask
+  // useMetamask
 } from "@thirdweb-dev/react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,7 +27,7 @@ function HolderClaimChips() {
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
-  const connectWithMetamask = useMetamask();
+  // const connectWithMetamask = useMetamask();
   
   
   const [buyLoading, setBuyLoading] = useState(false);
@@ -145,13 +145,13 @@ function HolderClaimChips() {
       (async()=>{
         // console.log("addressaddress130",address);
         getCoinGeckoData();
-        if (address && OGBalance === "Loading...") {
+        // if (address && OGBalance === "Loading...") {
           
-        await connectWithMetamask({chainId: ChainId.BinanceSmartChainMainnet});
-        // console.log("addressaddressaddress",address);
+        // await connectWithMetamask({chainId: ChainId.BinanceSmartChainMainnet});
+        // // console.log("addressaddressaddress",address);
         await sdksdk();
         zzz();
-        }
+        // }
       })();
   
   }, [user, address,sdk]);
