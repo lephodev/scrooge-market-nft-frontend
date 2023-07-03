@@ -7,8 +7,8 @@ import {
   useAddress,
   useSDK,
   ChainId,
-  useMetamask,
-  useSafe
+  // useMetamask,
+  // useSafe
 } from "@thirdweb-dev/react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,21 +22,24 @@ import AuthContext from "../context/authContext.ts";
 // import Layout from "./Layout.mjs";
 import { marketPlaceInstance } from "../config/axios.js";
 import { scroogeClient } from "../config/keys.js";
+import ChainContext from "../context/Chain.ts";
 
 function HolderClaimChips() {
   const { user } = useContext(AuthContext);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
-  const connectWithMetamask = useMetamask();
-  const connectSafepal=useSafe()
+  // const connectWithMetamask = useMetamask();
+  // const connectSafepal=useSafe()
   const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("Loading...");
   const [OGBalance, setOGBalance] = useState("Loading...");
   const [currentPrice, setCurrentPrice] = useState("Loading...");
   const [disable, setDisable] = useState(false);
+
   const sdk = useSDK();
   const address = useAddress();
+  const { selectedChain, setSelectedChain } = useContext(ChainContext);
   // sdk.wallet.connect(ChainId.BinanceSmartChainMainnet);
   // const signer = useSigner();
   console.log("ChainId42",ChainId);
@@ -45,6 +48,7 @@ function HolderClaimChips() {
   function notify(message) {
     toast.success("🎩 " + message);
   }
+ 
 
   async function getNextClaimDate() {
     if (user) {
@@ -125,6 +129,7 @@ function HolderClaimChips() {
       console.log("yyy",parseInt(rawBal.value));
     }catch(err){
       console.log("errorr sdk sdk",err)
+
     }
     
   };
@@ -139,17 +144,20 @@ function HolderClaimChips() {
       return false;
     }
   };
-
+console.log("selec144",selectedChain,ChainId.BinanceSmartChainMainnet);
   useEffect(() => {
+    // handleClick()
     //  setSelectedChain("56")
       (async()=>{
         // console.log("addressaddress130",address);
         getCoinGeckoData();
         if (address && OGBalance === "Loading...") {
           
-        await connectWithMetamask({chainId: ChainId.BinanceSmartChainMainnet});
+        // await connectWithMetamask({chainId: ChainId.BinanceSmartChainMainnet});
         // console.log("addressaddressaddress",address);
-        await connectSafepal({chainId: ChainId.BinanceSmartChainMainnet})
+        // setSelectedChain(ChainId.BinanceSmartChainMainnet);
+
+        // await connectSafepal({chainId: ChainId.BinanceSmartChainMainnet})
         await sdksdk();
         zzz();
         }
@@ -157,8 +165,15 @@ function HolderClaimChips() {
   
   }, [user, address,sdk]);
 
+  useEffect(() => {
+    return () => setSelectedChain(ChainId.BinanceSmartChainMainnet);
+  }, []);
+
+  
+
   return (
       <main className='main claim-free-page'>
+
         <div className='container'>
           <div className='bordered-section'>
             {buyLoading ? (
