@@ -180,6 +180,10 @@
   color: #3661eb;
   cursor: pointer;
 }
+.kyc-form-msg p.reject-reason span {
+  display: inline;
+  color: #ff512f;
+}
 
 .kyc-form-msg a {
   padding: 9px 40px;

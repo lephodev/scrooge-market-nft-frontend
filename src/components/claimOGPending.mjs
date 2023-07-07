@@ -49,7 +49,7 @@ export default function ClaimOGPending() {
     try {
       await contractObj.call("claim");
       setIsClaiming(false);
-      notify("Your pending BUSD rewards have been successfully claimed!");
+      notify("Your pending USDT rewards have been successfully claimed!");
       reward();
       contractClaim();
     } catch (error) {

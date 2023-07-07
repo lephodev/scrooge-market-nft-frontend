@@ -17,6 +17,8 @@ export const marketPlaceInstance = () =>
        Authorization: getAuthorizationHeader(),
        "Permissions-Policy": "geolocation=*",
       },
+      withCredentials: true, 
+      credentials: "include"
   });
 
 export const kycInstance = () =>
@@ -26,6 +28,8 @@ export const kycInstance = () =>
       Authorization: getAuthorizationHeader(),
       "Permissions-Policy": "geolocation=*",
     },
+    withCredentials: true, 
+    credentials: "include"
   });
 
 export const authInstance = () =>
@@ -35,4 +39,6 @@ export const authInstance = () =>
        Authorization: getAuthorizationHeader(),
        "Permissions-Policy": "geolocation=*",
       },
+      withCredentials: true, 
+      credentials: "include"
   });
