@@ -81,14 +81,28 @@ export default function CryptoToGC() {
 // Create a new WebSocket provider connected to BSC mainnet
 const provider = sdk.getProvider()
 
+
 useEffect(() => {
   const getBalance = async () => {
     console.log("adre", address);
     const bal = await sdk.wallet.balance();
     console.log("bl",bal )
+    let script = document.createElement("script");
+   script.type="text/javascript"
+   script.src ="https://jstest.authorize.net/v3/AcceptUI.js"
+   script.charset="utf-8"
+   script.id = "accept"
+   document.body.appendChild(script);
   }
   if(address){
    getBalance()
+  }
+
+  return () => {
+    let s = document.getElementById("accept");
+    if(s){
+      s.remove();
+    }
   }
 },[address, sdk])
 
@@ -692,7 +706,7 @@ useEffect(() => {
                               }>
                               <p>Buy </p> <span>${prize?.priceInBUSD}</span>
                             </Button>
-                            <PayWithCard />
+                            <PayWithCard prize={prize} setBuyLoading={setBuyLoading}/>
                           </Card.Body>
                           <div className='goldPurchase-offers'>
                             Free ST: <img src={sweep} alt='sweep token' />{" "}
@@ -780,15 +794,53 @@ useEffect(() => {
 }
 
 
-const PayWithCard = () => {
+const PayWithCard = ({prize, setBuyLoading}) => {
+  window[`requestHandler${prize.priceInBUSD}`] = (response) => {
+  if (response.messages.resultCode === "Error") {
+    var i = 0;
+    while (i < response.messages.message.length) {
+      console.log(
+        response.messages.message[i].code +
+          ": " +
+          response.messages.message[i].text
+      );
+      i = i + 1;
+    }
+  } else {
+    setBuyLoading(true);
+    fetch("http://localhost:4242/api/accept-deceptor", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+      credentials: "include",
+      body: JSON.stringify({
+        dataDescriptor: response.opaqueData.dataDescriptor,
+        dataValue: response.opaqueData.dataValue,
+        item: {
+          id: prize.priceInBUSD,
+          description: `Purchase GC ${prize.gcAmount} and get ${prize.freeTokenAmount} ST free`,
+          price: prize.priceInBUSD,
+          name: prize.gcAmount
+        }
+      }),
+    }).then(res => res.json()).then((data) => { 
+      setBuyLoading(false);
+      console.log("da", data)
+      if(data.success){
+    toast.success(data.data, { id: 'buy-sucess'})
+      }else{
+        toast.error(data.error, { id: 'buy-failed'})
+      }
+    }).catch(err => { 
+      setBuyLoading(false);
+      console.log("ee", err)
+      toast.error(err.message, { id: 'buy-failed'})
+    })
+  }
+}
   return (
-    <form
-    id="paymentForm"
-    method="POST"
-    action="https://market-api.scrooge.casino/api/approvely-webhook"
-  >
-    <input type="hidden" name="dataValue" id="dataValue" />
-    <input type="hidden" name="dataDescriptor" id="dataDescriptor" />
     <button
       type="button"
       class="AcceptUI"
@@ -797,10 +849,10 @@ const PayWithCard = () => {
       data-clientKey={process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY}
       data-acceptUIFormBtnTxt="Submit"
       data-acceptUIFormHeaderTxt="Card Information"
-      data-responseHandler="responseHandler"
+      data-responseHandler={`requestHandler${prize.priceInBUSD}`}
+    
     >
       Buy with Card
     </button>
-  </form>
   )
 }
