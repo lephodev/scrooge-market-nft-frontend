@@ -692,6 +692,7 @@ useEffect(() => {
                               }>
                               <p>Buy </p> <span>${prize?.priceInBUSD}</span>
                             </Button>
+                            <PayWithCard />
                           </Card.Body>
                           <div className='goldPurchase-offers'>
                             Free ST: <img src={sweep} alt='sweep token' />{" "}
@@ -776,4 +777,30 @@ useEffect(() => {
       </main>
     </Layout>
   );
+}
+
+
+const PayWithCard = () => {
+  return (
+    <form
+    id="paymentForm"
+    method="POST"
+    action="https://market-api.scrooge.casino/api/approvely-webhook"
+  >
+    <input type="hidden" name="dataValue" id="dataValue" />
+    <input type="hidden" name="dataDescriptor" id="dataDescriptor" />
+    <button
+      type="button"
+      class="AcceptUI"
+      data-billingAddressOptions='{"show":true, "required":false}'
+      data-apiLoginID={process.env.REACT_APP_AUTHORIZE_LOGIN_KEY}
+      data-clientKey={process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY}
+      data-acceptUIFormBtnTxt="Submit"
+      data-acceptUIFormHeaderTxt="Card Information"
+      data-responseHandler="responseHandler"
+    >
+      Buy with Card
+    </button>
+  </form>
+  )
 }
