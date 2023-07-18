@@ -846,7 +846,7 @@ catch(err){
       class="AcceptUI"
       data-billingAddressOptions='{"show":true, "required":false}'
       data-apiLoginID={process.env.REACT_APP_AUTHORIZE_LOGIN_KEY}
-      data-clientKey={process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY}
+      data-clientKey={process.env.REACT_APP_SANDBOX_AUTHORIZE_PUBLIC_KEY}
       data-acceptUIFormBtnTxt="Submit"
       data-acceptUIFormHeaderTxt="Card Information"
       data-responseHandler={`requestHandler${prize.priceInBUSD}`}
