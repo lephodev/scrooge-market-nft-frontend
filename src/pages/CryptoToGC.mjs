@@ -795,7 +795,7 @@ useEffect(() => {
 
 
 const PayWithCard = ({prize, setBuyLoading}) => {
-  window[`requestHandler${prize.priceInBUSD}`] = (response) => {
+  window[`requestHandler${prize.priceInBUSD}`] = async(response) => {
   if (response.messages.resultCode === "Error") {
     var i = 0;
     while (i < response.messages.message.length) {
@@ -808,15 +808,9 @@ const PayWithCard = ({prize, setBuyLoading}) => {
     }
   } else {
     setBuyLoading(true);
-    fetch("http://localhost:4242/api/accept-deceptor", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-      credentials: "include",
-      body: JSON.stringify({
-        dataDescriptor: response.opaqueData.dataDescriptor,
+    try{
+    const res = await marketPlaceInstance().post(`/accept-deceptor`, {
+      dataDescriptor: response.opaqueData.dataDescriptor,
         dataValue: response.opaqueData.dataValue,
         item: {
           id: prize.priceInBUSD,
@@ -824,20 +818,26 @@ const PayWithCard = ({prize, setBuyLoading}) => {
           price: prize.priceInBUSD,
           name: prize.gcAmount
         }
-      }),
-    }).then(res => res.json()).then((data) => { 
+    }, { headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+    credentials: "include",
+  });
+   
       setBuyLoading(false);
-      console.log("da", data)
-      if(data.success){
-    toast.success(data.data, { id: 'buy-sucess'})
+      if(res.data.success){
+    toast.success(res.data.data, { id: 'buy-sucess'})
       }else{
-        toast.error(data.error, { id: 'buy-failed'})
+        toast.error(res.data.error, { id: 'buy-failed'})
       }
-    }).catch(err => { 
-      setBuyLoading(false);
-      console.log("ee", err)
-      toast.error(err.message, { id: 'buy-failed'})
-    })
+    
+  }
+catch(err){
+  setBuyLoading(false);
+  console.log("ee", err)
+  toast.error(err.response.data.message, { id: 'buy-failed'})
+}
   }
 }
   return (
