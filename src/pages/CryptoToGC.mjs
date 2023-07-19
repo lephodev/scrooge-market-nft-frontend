@@ -37,6 +37,8 @@ export default function CryptoToGC() {
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
   const [selectedDropdown, setSelectedDropdown] = useState("BUSD");
+  const [selectedTypeDropdown, setSelectedTypeDropdown] = useState("Credit Card");
+
   const [tickets, setTickets] = useState("");
   const [show, setShow] = useState(false);
   const [ticketPrizes, setTicketPrizes] = useState([]);
@@ -82,15 +84,92 @@ export default function CryptoToGC() {
 const provider = sdk.getProvider()
 
 useEffect(() => {
+  window.requestHandler = async(response) => {
+    if (response.messages.resultCode === "Error") {
+      var i = 0;
+      while (i < response.messages.message.length) {
+        console.log(
+          response.messages.message[i].code +
+            ": " +
+            response.messages.message[i].text
+        );
+        i = i + 1;
+      }
+    } else {
+      setBuyLoading(true);
+      try{
+      const res = await marketPlaceInstance().post(`/accept-deceptor`, {
+        dataDescriptor: response.opaqueData.dataDescriptor,
+          dataValue: response.opaqueData.dataValue,
+          item: {
+            id: window.prize.priceInBUSD,
+            description: `Purchase GC ${window.prize.gcAmount} and get ${window.prize.freeTokenAmount} ST free`,
+            price: window.prize.priceInBUSD,
+            name: window.prize.gcAmount
+          }
+      }, { headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+      credentials: "include",
+    });
+     
+        setBuyLoading(false);
+        if(res.data.success){
+      toast.success(res.data.data, { id: 'buy-sucess'})
+        }else{
+          toast.error(res.data.error, { id: 'buy-failed'})
+        }
+      
+    }
+  catch(err){
+    setBuyLoading(false);
+    console.log("ee", err)
+    toast.error(err.response.data.message, { id: 'buy-failed'})
+  }
+    }
+  }
+},[])
+
+
+useEffect(() => {
   const getBalance = async () => {
     console.log("adre", address);
     const bal = await sdk.wallet.balance();
     console.log("bl",bal )
+   
   }
   if(address){
    getBalance()
   }
+
+  
 },[address, sdk])
+
+useEffect(()=>{
+  console.log("hello");
+  if(selectedTypeDropdown==="Credit Card" && allPrizes.length){
+  let script = document.createElement("script");
+  script.type="text/javascript"
+  script.src ="https://js.authorize.net/v3/AcceptUI.js"
+  script.charset="utf-8"
+  script.id = "accept"
+  document.body.appendChild(script);
+  }
+  else {
+    let s = document.getElementById("accept");
+    if(s){
+      s.remove();
+    }
+  }
+
+  return () => {
+    let s = document.getElementById("accept");
+    if(s){
+      s.remove();
+    }
+  }
+},[selectedTypeDropdown, allPrizes])
 
 
   // getGCPackages
@@ -516,6 +595,9 @@ useEffect(() => {
   const handleChange = (value) => {
     setSelectedDropdown(value);
   };
+  const handlePaymentTypeChange = (value) => {
+    setSelectedTypeDropdown(value);
+  };
 
   const handleShow = (ticket, token, prizeid) => {
     setTickets(ticket);
@@ -620,11 +702,35 @@ useEffect(() => {
                   Disclaimer : +16% Will be added to Scrooge payment method to cover blockchain fees and contract taxes!
                 </div>
               </div>
-              {isMismatched ? (
+              <div className='purchase-select'>
+              <div className='purchaseSelect-Box'>
+                      <h4>Purchase with</h4>
+                      <Dropdown>
+                        <Dropdown.Toggle variant='success' id='dropdown-basic'>
+                          {!selectedTypeDropdown ? "Credit Card" : selectedTypeDropdown}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                          <Dropdown.Item
+                            onClick={() => handlePaymentTypeChange("Credit Card")}
+                          >
+                            Credit Card
+                          </Dropdown.Item>
+                          <Dropdown.Item onClick={() => handlePaymentTypeChange("Cashapp")}>
+                          Cashapp
+                          </Dropdown.Item>
+                          <Dropdown.Item onClick={() => handlePaymentTypeChange("Crypto")}>
+                          Crypto
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </div>
+                    </div>
+              {/* {isMismatched ? (
                 <SwitchNetworkBSC />
-              ) : address ? (
+              ) : address ? ( */}
                 <div className='buy-chips-content'>
                   <div className='purchase-select'>
+                    {selectedTypeDropdown ==="Crypto" && 
                     <div className='purchaseSelect-Box'>
                       <h4>Purchase with</h4>
                       <Dropdown>
@@ -657,10 +763,11 @@ useEffect(() => {
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
+}
                   </div>
                   <div className='buy-chips-grid cryptoToGC'>
                     <div className='purchasemodal-cards'>
-                      {allPrizes.map((prize) => (
+                      {allPrizes.map((prize, i) => (
                         <Card key={prize._id}>
                           <Card.Img
                             variant='top'
@@ -681,6 +788,7 @@ useEffect(() => {
                           <Card.Body>
                             <Card.Title>GC {prize?.gcAmount}</Card.Title>
                             {/* <Card.Text>$10</Card.Text> */}
+                            {selectedTypeDropdown==="Crypto" ?
                             <Button
                               variant='primary'
                               onClick={() =>
@@ -692,6 +800,15 @@ useEffect(() => {
                               }>
                               <p>Buy </p> <span>${prize?.priceInBUSD}</span>
                             </Button>
+                           :selectedTypeDropdown==="Credit Card"?
+                            <PayWithCard prize={prize} index={i} setBuyLoading={setBuyLoading} selectedTypeDropdown={selectedTypeDropdown}/>
+                            :<> <Button
+                            variant='primary'
+                            >
+                            <p>Buy with Cash App </p> <span>${prize?.priceInBUSD}</span>
+                            </Button>
+                            </>
+                          }
                           </Card.Body>
                           <div className='goldPurchase-offers'>
                             Free ST: <img src={sweep} alt='sweep token' />{" "}
@@ -702,7 +819,7 @@ useEffect(() => {
                     </div>
                   </div>
                 </div>
-              ) : (
+              {/* ) : (
                 <div>
                   <p className='description yellow'>
                     Get started by connecting your wallet.
@@ -711,7 +828,7 @@ useEffect(() => {
                     <ConnectWallet />
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         ) : (
@@ -757,6 +874,9 @@ useEffect(() => {
           </div>
         )}
 
+{console.log("process.env.REACT_APP_AUTHORIZE_LOGIN_KEY",process.env.REACT_APP_AUTHORIZE_LOGIN_KEY)}
+{console.log("process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY",process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY)}
+
         <Modal show={show} onHide={handleClose} centered animation={false}>
           <Modal.Body className='popupBody'>
             <div>Do You Want To Redeem?</div>
@@ -773,7 +893,33 @@ useEffect(() => {
             </div>
           </Modal.Body>
         </Modal>
+        <button
+        style={{ visibility:"hidden"}}
+      type="button"
+      id="paycard"
+      class="AcceptUI"
+      data-billingAddressOptions='{"show":true, "required":false}'
+      data-apiLoginID={process.env.REACT_APP_AUTHORIZE_LOGIN_KEY}
+      data-clientKey={process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY}
+      data-acceptUIFormBtnTxt="Submit"
+      data-acceptUIFormHeaderTxt="Card Information"
+      data-responseHandler={`requestHandler`}
+    
+    >
+      pay
+    </button>
       </main>
     </Layout>
   );
+}
+
+
+const PayWithCard = ({prize, setBuyLoading}) => {
+const handleCLick = () => {
+  window.prize = prize;
+  document.getElementById("paycard").click();
+}
+  return (
+   <button onClick={handleCLick}>  Buy With Card ${prize?.priceInBUSD}</button>
+  )
 }
