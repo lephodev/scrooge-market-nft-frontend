@@ -571,6 +571,18 @@ span.wallet-user-name {
   text-align: center;
   font-weight: 600;
 }
+.asterisk-desc.cryptoTotoken ul {
+  max-width: 65%;
+  margin: 0px auto;
+  width: 100%;
+  padding: 0;
+  font-size: 20px;
+}
+.asterisk-desc.cryptoTotoken ul li {
+  width: fit-content;
+  text-align: left;
+  font-size: 18px;
+}
 
 .bordered-section {
   margin: 0px auto;
@@ -5410,6 +5422,15 @@ button.affiliate-dropdownBtn.close::before {
   /* .spin-button {
     left: 25% !important;
   } */
+  .asterisk-desc.cryptoTotoken ul {
+    max-width: 85%;
+  }
+  .asterisk-desc.cryptoTotoken ul li {
+    width: 100%;
+    font-size: 20px;
+    font-size: 14px;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 720px) {
