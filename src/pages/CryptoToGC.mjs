@@ -190,7 +190,7 @@ useEffect(()=>{
     }
   }
 
-  const convert = async (usd, gc, pid) => {
+  const convert = async (usd, gc, pid,previousAmount) => {
     console.log("usd, gc, pid", usd, gc, pid, address);
 
     if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
@@ -239,7 +239,7 @@ useEffect(()=>{
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
                   .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`,{
-                    params: {promocode},
+                    params: {promocode,previousAmount},
                   })
                   .then((response) => {
                     setBuyLoading(false);
@@ -278,7 +278,7 @@ useEffect(()=>{
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
                   .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`,{
-                    params: {promocode},
+                    params: {promocode,previousAmount},
                   })
                   .then((response) => {
                     setBuyLoading(false);
@@ -318,7 +318,7 @@ useEffect(()=>{
                           try{
                             const res = await marketPlaceInstance()
                             .get(`convertCryptoToGoldCoin/${address}/${transaction.hash}`,{
-                              params: {promocode},
+                              params: {promocode,previousAmount},
                             })
                            
                               if (res.data.success) {
@@ -398,7 +398,7 @@ useEffect(()=>{
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
                   .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`,{
-                    params: {promocode},
+                    params: {promocode,previousAmount},
                   })
                   .then((response) => {
                     setBuyLoading(false);
@@ -437,7 +437,7 @@ useEffect(()=>{
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
                   .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`,{
-                    params: {promocode},
+                    params: {promocode,previousAmount},
                   })
                   .then((response) => {
                     setBuyLoading(false);
@@ -898,7 +898,8 @@ useEffect(()=>{
                                 convert(
                                   getExactPrice(prize?.priceInBUSD,promoDetails ),
                                   prize?.gcAmount,
-                                  prize?._id
+                                  prize?._id,
+                                  prize?.priceInBUSD
                                 )
                               }>
                               <p>Buy </p> <span>${getExactPrice(prize?.priceInBUSD,promoDetails )}</span>
