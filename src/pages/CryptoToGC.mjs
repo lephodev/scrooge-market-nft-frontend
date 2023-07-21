@@ -897,7 +897,6 @@ useEffect(()=>{
                               onClick={() =>
                                 convert(
                                   getExactPrice(prize?.priceInBUSD,promoDetails ),
-                                  prize?.priceInBUSD,
                                   prize?.gcAmount,
                                   prize?._id
                                 )
