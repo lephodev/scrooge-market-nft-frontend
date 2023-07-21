@@ -34,7 +34,7 @@ export default function CryptoToGC() {
   const sdk = useSDK();
   const { user, setUser, setSpendedAmount, spendedAmount } =
     useContext(AuthContext);
-  const [prizesLoading, setPrizesLoading] = useState([]);
+  const [prizesLoading, setPrizesLoading] = useState(true);
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
   const [selectedDropdown, setSelectedDropdown] = useState("BUSD");
@@ -127,7 +127,7 @@ useEffect(() => {
   catch(err){
     setBuyLoading(false);
     console.log("ee", err)
-    toast.error(err.response.data.message, { id: 'buy-failed'})
+    toast.error(err.response.data.error, { id: 'buy-failed'})
   }
     }
   }
@@ -726,7 +726,13 @@ useEffect(()=>{
 
 
   return (
-    <Layout>
+    <>
+      {prizesLoading ? <div className="loading">
+          <div className="loading-img-div">
+            <img src={LoadingPoker} alt="game" className="imageAnimation" />
+          </div>
+        </div> : 
+         <Layout>
       <main className='main redeem-prizes-page'>
         {/* <div className="tab-btn">
           <Button
@@ -765,7 +771,11 @@ useEffect(()=>{
                 </div>
                 {/* <div className="feature-overview-div"></div> */}
                 <div className='asterisk-desc cryptoTotoken'>
-                  Disclaimer : +16% Will be added to Scrooge payment method to cover blockchain fees and contract taxes!
+                  <ul>
+                  Disclaimer :
+                    <li>+16% Will be added to Scrooge payment method to cover blockchain fees and contract taxes!</li>
+                    <li>All sales are final. SCROOGE LLC has a zero refund policy.</li>
+                  </ul>
                 </div>
               </div>
               <div className='purchase-select'>
@@ -1004,7 +1014,8 @@ useEffect(()=>{
       pay
     </button>
       </main>
-    </Layout>
+      </Layout>}
+    </>
   );
 }
 
