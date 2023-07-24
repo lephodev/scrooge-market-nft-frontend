@@ -526,10 +526,10 @@ useEffect(()=>{
           if(error.toString().includes("transfer amount exceeds balance" || error?.data?.message?.includes("insufficient funds"))){
             toast.error("Transfer amount exceeds balance");
           }else if(error.toString().includes("user rejected transaction")){
-          toast.error("You rejected the transaction request.");
+          toast.error("You rejected the transaction request.",{toastId:"D"});
           }
           else
-          toast.error("Gold Coin Buy Fail, try with increasing the gas fee");
+          toast.error("Gold Coin Buy Fail, try with increasing the gas fee",{toastId:"D"});
           contract.events.removeEventListener("Transfer")
         }
         }, 3000);
@@ -636,12 +636,12 @@ useEffect(()=>{
       console.log("error",error);
       setBuyLoading(false);
       if(error.toString().includes("transfer amount exceeds balance") || error?.data?.message.includes("insufficient funds")){
-        toast.error("Transfer amount exceeds balance");
+        toast.error("Transfer amount exceeds balance",{toastId:"D"});
       }else if(error.toString().includes("user rejected transaction")){
-      toast.error("You rejected the transaction request.");
+      toast.error("You rejected the transaction request.",{toastId:"D"});
     }
       else
-      toast.error("Gold Coin Buy Fail, try with increasing the gas fee");
+      toast.error("Gold Coin Buy Fail, try with increasing the gas fee",{toastId:"D"});
       console.log("errordata", error);
       bnbContract.events.removeEventListener("Transfer")
       usdtContract.events.removeEventListener("Transfer")
