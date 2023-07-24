@@ -8,8 +8,9 @@ import coin2 from "../images/2.png";
 import coin1 from "../images/1.png";
 import sweep from "../images/token.png";
 import ticket from "../images/ticket.png";
-import { Button, Modal, Card, Dropdown } from "react-bootstrap";
+import { Button, Modal,Form, Card, Dropdown } from "react-bootstrap";
 // import gold from "../images/gold.png";
+
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
 
@@ -25,9 +26,9 @@ import { marketPlaceInstance, authInstance } from "../config/axios.js";
 import { toast } from "react-toastify";
 import { useReward } from "react-rewards";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
-import { Form } from "react-router-dom";
 import { BUSD_ADDRESS } from "../config/keys.js";
 import { ethers } from "ethers";
+import axios from "axios";
 
 export default function CryptoToGC() {
   const sdk = useSDK();
@@ -38,7 +39,8 @@ export default function CryptoToGC() {
   const [buyLoading, setBuyLoading] = useState(false);
   const [selectedDropdown, setSelectedDropdown] = useState("BUSD");
   const [selectedTypeDropdown, setSelectedTypeDropdown] = useState("Credit Card");
-
+  const [promocode,setPromoCode]=useState("")
+  const [promoDetails,setPromoDetails]=useState({})
   const [tickets, setTickets] = useState("");
   const [show, setShow] = useState(false);
   const [ticketPrizes, setTicketPrizes] = useState([]);
@@ -53,7 +55,7 @@ export default function CryptoToGC() {
   const address = useAddress();
   const { contract } = useContract(process.env.REACT_APP_NATIVE_TOKEN_ADDRESS);
   const { contract:  scroogeContract} = useContract(process.env.REACT_APP_OGCONTRACT_ADDRESS);
-  console.log("scroogeContract",scroogeContract);
+  // console.log("scroogeContract",scroogeContract);
   const { contract: bnbContract} = useContract(process.env.REACT_APP_BNBCONTRACT_ADDRESS);
   const { contract: usdcContract} = useContract(process.env.REACT_APP_USDCCONTRACT_ADDRESS);
   const { contract: usdtContract} = useContract(process.env.REACT_APP_USDTCONTRACT_ADDRESS);
@@ -147,7 +149,7 @@ useEffect(() => {
 },[address, sdk])
 
 useEffect(()=>{
-  console.log("hello");
+  // console.log("hello");
   if(selectedTypeDropdown==="Credit Card" && allPrizes.length){
   let script = document.createElement("script");
   script.type="text/javascript"
@@ -188,7 +190,7 @@ useEffect(()=>{
     }
   }
 
-  const convert = async (usd, gc, pid) => {
+  const convert = async (usd, gc, pid,previousAmount) => {
     console.log("usd, gc, pid", usd, gc, pid, address);
 
     if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
@@ -236,7 +238,9 @@ useEffect(()=>{
               if (event.transaction.transactionHash) {
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
-                  .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
+                  .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`,{
+                    params: {promocode,previousAmount},
+                  })
                   .then((response) => {
                     setBuyLoading(false);
                     if (response.data.success) {
@@ -273,7 +277,9 @@ useEffect(()=>{
               if (event.transaction.transactionHash) {
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
-                  .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
+                  .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`,{
+                    params: {promocode,previousAmount},
+                  })
                   .then((response) => {
                     setBuyLoading(false);
                     if (response.data.success) {
@@ -311,7 +317,9 @@ useEffect(()=>{
                         if (transaction.hash) {
                           try{
                             const res = await marketPlaceInstance()
-                            .get(`convertCryptoToGoldCoin/${address}/${transaction.hash}`)
+                            .get(`convertCryptoToGoldCoin/${address}/${transaction.hash}`,{
+                              params: {promocode,previousAmount},
+                            })
                            
                               if (res.data.success) {
                                 setUser(res?.data?.user);
@@ -389,7 +397,9 @@ useEffect(()=>{
               if (event.transaction.transactionHash) {
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
-                  .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
+                  .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`,{
+                    params: {promocode,previousAmount},
+                  })
                   .then((response) => {
                     setBuyLoading(false);
                     if (response.data.success) {
@@ -426,7 +436,9 @@ useEffect(()=>{
               if (event.transaction.transactionHash) {
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
-                  .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
+                  .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`,{
+                    params: {promocode,previousAmount},
+                  })
                   .then((response) => {
                     setBuyLoading(false);
                     if (response.data.success) {
@@ -659,6 +671,60 @@ useEffect(()=>{
     setDisable(false);
     handleClose();
   };
+
+  const handleChangePromo=(e)=>{
+    const { value, name } = e.target;
+    setPromoCode(value)
+  }
+
+  const handlePromoApply=async()=>{
+    console.log("Promo Apply",promocode);
+    try {
+      if (promocode === "") {
+        return
+      }
+      const payload={
+        promocode
+      }
+      const res = await marketPlaceInstance().post('/applyPromoCode',payload);
+       const {code,message,getPromo}=res.data
+       setPromoDetails(getPromo)
+       console.log("getPromo===>>>",getPromo);
+       if(code===200){
+        toast.success(message, { id: "A" })
+       }
+       else if(code===404){
+        toast.error(message, { id: "A" })
+       }
+      
+    } catch (error) {
+      if (axios.isAxiosError(error) && error?.response) {
+        if (error?.response?.status !== 200) {
+          toast.error(error?.response?.data?.message, { toastId: "login" });
+        }
+      } 
+      
+    }
+  }
+
+  const handlePromoReject=()=>{
+    setPromoDetails({})
+    setPromoCode("")
+  }
+
+  const getExactPrice = (price,promo)=>{
+    console.log("promo",promo);
+    const {coupanType,discountInPercent, discountInAmount}=promo
+    let discount=0;
+    if(coupanType==="Percent"){
+      discount=price*discountInPercent/100;
+    }else if(coupanType==="Amount"){
+      discount = discountInAmount
+    }
+    return (price - discount)
+}
+
+
   return (
     <>
       {prizesLoading ? <div className="loading">
@@ -733,7 +799,33 @@ useEffect(()=>{
                           </Dropdown.Item>
                         </Dropdown.Menu>
                       </Dropdown>
-                    </div>
+              </div>
+                    <Form.Group className='form-group'>
+                        {/* <Form.Label>Promo code</Form.Label> */}
+                        <Form.Control
+                          type='text'
+                          name='Promocode'
+                        value={promocode}
+                          placeholder="Enter promo code"
+                           onChange={(e) => handleChangePromo(e)}
+                        />
+                      </Form.Group>
+                      {Object.keys(promoDetails).length ?
+                      <Button
+                          type='button'
+                          className='send-btn'
+                          onClick={handlePromoReject}
+                          >
+                          Reject
+                        </Button>
+                        :<Button
+                        type='button'
+                        className='send-btn'
+                        onClick={handlePromoApply}
+                        >
+                        Apply
+                      </Button>
+}
                     </div>
               {/* {isMismatched ? (
                 <SwitchNetworkBSC />
@@ -799,23 +891,26 @@ useEffect(()=>{
                             <Card.Title>GC {prize?.gcAmount}</Card.Title>
                             {/* <Card.Text>$10</Card.Text> */}
                             {selectedTypeDropdown==="Crypto" ?
+                            getExactPrice(prize?.priceInBUSD,promoDetails )>0&&
                             <Button
                               variant='primary'
                               onClick={() =>
                                 convert(
-                                  prize?.priceInBUSD,
+                                  getExactPrice(prize?.priceInBUSD,promoDetails ),
                                   prize?.gcAmount,
-                                  prize?._id
+                                  prize?._id,
+                                  prize?.priceInBUSD
                                 )
                               }>
-                              <p>Buy </p> <span>${prize?.priceInBUSD}</span>
+                              <p>Buy </p> <span>${getExactPrice(prize?.priceInBUSD,promoDetails )}</span>
                             </Button>
                            :selectedTypeDropdown==="Credit Card"?
-                            <PayWithCard prize={prize} index={i} setBuyLoading={setBuyLoading} selectedTypeDropdown={selectedTypeDropdown}/>
+                           getExactPrice(prize?.priceInBUSD,promoDetails )>0&&
+                            <PayWithCard prize={prize} getExactPrice={getExactPrice} promoDetails={promoDetails} index={i} setBuyLoading={setBuyLoading} selectedTypeDropdown={selectedTypeDropdown}/>
                             :<> <Button
                             variant='primary'
                             >
-                            <p>Buy with Cash App </p> <span>${prize?.priceInBUSD}</span>
+                            <p>Buy with Cash App </p> <span>${ getExactPrice(prize?.priceInBUSD,promoDetails )}</span>
                             </Button>
                             </>
                           }
@@ -884,8 +979,8 @@ useEffect(()=>{
           </div>
         )}
 
-{console.log("process.env.REACT_APP_AUTHORIZE_LOGIN_KEY",process.env.REACT_APP_AUTHORIZE_LOGIN_KEY)}
-{console.log("process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY",process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY)}
+{/* {console.log("process.env.REACT_APP_AUTHORIZE_LOGIN_KEY",process.env.REACT_APP_AUTHORIZE_LOGIN_KEY)}
+{console.log("process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY",process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY)} */}
 
         <Modal show={show} onHide={handleClose} centered animation={false}>
           <Modal.Body className='popupBody'>
@@ -925,12 +1020,12 @@ useEffect(()=>{
 }
 
 
-const PayWithCard = ({prize, setBuyLoading}) => {
+const PayWithCard = ({prize,getExactPrice,promoDetails}) => {
 const handleCLick = () => {
   window.prize = prize;
   document.getElementById("paycard").click();
 }
   return (
-   <button onClick={handleCLick}>  Buy With Card ${prize?.priceInBUSD}</button>
+   <button onClick={handleCLick}>  Buy With Card ${getExactPrice(prize?.priceInBUSD,promoDetails)}</button>
   )
 }
