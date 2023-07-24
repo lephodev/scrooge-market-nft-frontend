@@ -723,9 +723,13 @@ useEffect(()=>{
     handleClose();
   };
 
+  const [errors,setErrors]=useState("")
   const handleChangePromo=(e)=>{
     const { value, name } = e.target;
-    setPromoCode(value)
+    setPromoCode(value.trim())
+    if(value.trim().length){
+    setErrors("")
+  }
     promoCode=value
   }
 
@@ -733,6 +737,7 @@ useEffect(()=>{
     console.log("Promo Apply",promocode);
     try {
       if (promocode === "") {
+        setErrors("Please enter promo code.")
         return
       }
       const payload={
@@ -778,12 +783,10 @@ useEffect(()=>{
 const getExactGC=(Gc,promo)=>{
   const {coupanType,discountInPercent,discountInAmount}=promo
   let discount=0;
-  // if(coupanType==="Percent"){
-  //       discount=Gc*discountInPercent/100;
-  //     }else if(coupanType==="Amount"){
-  //       discount = discountInAmount
-  //     }
-      if(coupanType) {
+  if(coupanType==="Percent"){
+        discount=Gc*discountInPercent/100;
+      }
+      else if(coupanType==="2X") {
         discount=parseInt(Gc)
       }
   return (parseInt(Gc) + discount)
@@ -792,12 +795,12 @@ const getExactGC=(Gc,promo)=>{
 const getExactToken=(Token,promo)=>{
   const {coupanType,discountInPercent,discountInAmount}=promo
   let discount=0;
-  // if(coupanType==="Percent"){
-  //       discount=Token*discountInPercent/100;
-  //     }else if(coupanType==="Amount"){
-  //       discount = discountInAmount
-  //     }
-      if(coupanType) {
+  if(coupanType==="Percent"){
+        discount=Token*discountInPercent/100;
+      // }else if(coupanType==="Amount"){
+      //   discount = discountInAmount
+      }
+      if(coupanType==="2X") {
         discount=parseInt(Token)
       }
   return (parseInt(Token) + discount)
@@ -878,6 +881,7 @@ const getExactToken=(Token,promo)=>{
                         </Dropdown.Menu>
                       </Dropdown>
               </div>
+              <div className="enter-promo">
                     <Form.Group className='form-group'>
                         {/* <Form.Label>Promo code</Form.Label> */}
                         <Form.Control
@@ -887,23 +891,29 @@ const getExactToken=(Token,promo)=>{
                           placeholder="Enter promo code"
                            onChange={(e) => handleChangePromo(e)}
                         />
+                        
+                          {errors ? <p className='error-text'>
+                           {errors}
+                          </p>: null}
+                        
                       </Form.Group>
                       {Object.keys(promoDetails).length ?
                       <Button
                           type='button'
-                          className='send-btn'
+                          className='reject-btn'
                           onClick={handlePromoReject}
                           >
                           Reject
                         </Button>
                         :<Button
                         type='button'
-                        className='send-btn'
+                        className='apply-btn'
                         onClick={handlePromoApply}
+                        disabled={!promocode}
                         >
                         Apply
                       </Button>
-}
+                }</div>
                     </div>
               {/* {isMismatched ? (
                 <SwitchNetworkBSC />
