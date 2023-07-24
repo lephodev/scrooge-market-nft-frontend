@@ -741,12 +741,11 @@ useEffect(()=>{
       const res = await marketPlaceInstance().post('/applyPromoCode',payload);
        const {code,message,getPromo}=res.data
        setPromoDetails(getPromo)
-       console.log("getPromo===>>>",getPromo);
        if(code===200){
-        toast.success(message, { id: "A" })
+        toast.success(message, { toastId: "A" })
        }
        else if(code===404){
-        toast.error(message, { id: "A" })
+        toast.error(message, { toastId: "B" })
        }
       
     } catch (error) {
@@ -765,24 +764,43 @@ useEffect(()=>{
     // console.log("promo",promo);    
     return (price)
 }
-
+// const getExactPrice = (price,promo)=>{
+//   console.log("promo",promo);
+//   const {coupanType,discountInPercent, discountInAmount}=promo
+//   let discount=0;
+//   if(coupanType==="Percent"){
+//     discount=price*discountInPercent/100;
+//   }else if(coupanType==="Amount"){
+//     discount = discountInAmount
+//   }
+//   return (price - discount)
+// }
 const getExactGC=(Gc,promo)=>{
-  const {couponCode}=promo
+  const {coupanType,discountInPercent,discountInAmount}=promo
   let discount=0;
-  if(couponCode){
-    discount=parseInt(Gc);
-  }
-  let amount=parseInt(Gc)+discount
-  return amount
+  // if(coupanType==="Percent"){
+  //       discount=Gc*discountInPercent/100;
+  //     }else if(coupanType==="Amount"){
+  //       discount = discountInAmount
+  //     }
+      if(coupanType) {
+        discount=parseInt(Gc)
+      }
+  return (parseInt(Gc) + discount)
 }
 
 const getExactToken=(Token,promo)=>{
-  const {couponCode}=promo
+  const {coupanType,discountInPercent,discountInAmount}=promo
   let discount=0;
-  if(couponCode){
-    discount=parseInt(Token);
-  }
-  return parseInt(Token)+discount
+  // if(coupanType==="Percent"){
+  //       discount=Token*discountInPercent/100;
+  //     }else if(coupanType==="Amount"){
+  //       discount = discountInAmount
+  //     }
+      if(coupanType) {
+        discount=parseInt(Token)
+      }
+  return (parseInt(Token) + discount)
 }
 
   return (
