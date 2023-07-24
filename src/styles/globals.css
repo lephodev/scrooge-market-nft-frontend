@@ -4666,7 +4666,8 @@ span.input-range__label.input-range__label--value span.input-range__label-contai
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
@@ -4745,6 +4746,45 @@ button.affiliate-dropdownBtn.close::before {
 
 .mr-auto.navbar-nav button.submit-btn {
   display: none;
+}
+.enter-promo {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.enter-promo p {
+  color: red;
+  font-size: 12px;
+  margin: 0;
+}
+.enter-promo .apply-btn {
+  background: #f9ff00;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid #f9ff00;
+  border-radius: 30px;
+  padding: 2px 15px;
+  height: 36px;
+}
+.enter-promo .reject-btn {
+  background: #fa0000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid #fa0000;
+  border-radius: 30px;
+  padding: 2px 15px;
+  height: 36px;
+}
+.enter-promo .form-control {
+  border-radius: 30px;
+  border-color: #f9ff00;
+  background: transparent;
+  color: #fff;
+}
+.enter-promo .form-control::placeholder {
+  color: #fff;
 }
 
 /********************************************************************************************/

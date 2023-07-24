@@ -29,8 +29,11 @@ import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import { BUSD_ADDRESS } from "../config/keys.js";
 import { ethers } from "ethers";
 import axios from "axios";
+let promoCode;
+let goldcoinAmount;
 
 export default function CryptoToGC() {
+  
   const sdk = useSDK();
   const { user, setUser, setSpendedAmount, spendedAmount } =
     useContext(AuthContext);
@@ -86,6 +89,7 @@ export default function CryptoToGC() {
 const provider = sdk.getProvider()
 
 useEffect(() => {
+  // console.log("window",window.prize)
   window.requestHandler = async(response) => {
     if (response.messages.resultCode === "Error") {
       var i = 0;
@@ -100,14 +104,18 @@ useEffect(() => {
     } else {
       setBuyLoading(true);
       try{
+        console.log("window prize",window.prize)
       const res = await marketPlaceInstance().post(`/accept-deceptor`, {
+      
         dataDescriptor: response.opaqueData.dataDescriptor,
           dataValue: response.opaqueData.dataValue,
           item: {
             id: window.prize.priceInBUSD,
             description: `Purchase GC ${window.prize.gcAmount} and get ${window.prize.freeTokenAmount} ST free`,
             price: window.prize.priceInBUSD,
-            name: window.prize.gcAmount
+            name: window.prize.gcAmount,
+            actualAmount:window.prize.actualAmount,
+            promoCode:window.prize.promoCode
           }
       }, { headers: {
         "Content-Type": "application/json",
@@ -126,11 +134,14 @@ useEffect(() => {
     }
   catch(err){
     setBuyLoading(false);
-    console.log("ee", err)
+    console.log("ee55", err)
     toast.error(err.response.data.error, { id: 'buy-failed'})
   }
     }
   }
+
+  console.log("window", window.prize)
+
 },[])
 
 
@@ -190,9 +201,15 @@ useEffect(()=>{
     }
   }
 
-  const convert = async (usd, gc, pid,previousAmount) => {
-    console.log("usd, gc, pid", usd, gc, pid, address);
+  const handlePromoReject=()=>{
+    setPromoDetails({})
+    setPromoCode("")
+    promoCode=""
+    goldcoinAmount=""
+  }
 
+  const convert = async (usd, gc, pid) => {
+    goldcoinAmount=gc
     if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
       return toast.error("Your daily limit is exceeding");
     }
@@ -227,7 +244,7 @@ useEffect(()=>{
 
         if(selectedDropdown === "BUSD"){
           contract.events.addEventListener("Transfer", (event) => {
-            console.log("event busd", event.data.from, event.data.to);
+            // console.log("event busd", event.data.from, event.data.to);
               if (
               event?.data?.from?.toLowerCase() === address.toLowerCase() &&
               ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase())
@@ -239,24 +256,33 @@ useEffect(()=>{
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
                   .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`,{
-                    params: {promocode,previousAmount},
+                    params: {promocode},
                   })
                   .then((response) => {
+                    console.log("gcgcgc251",goldcoinAmount);
                     setBuyLoading(false);
                     if (response.data.success) {
                       setUser(response?.data?.user);
-                      toast.success(`Successfully Purchased ${gc} goldCoin`);
+                      toast.success(`Successfully Purchased ${goldcoinAmount} goldCoin`,{ toastId: "A" });
+                      handlePromoReject()
                       reward();
                       getUserDataInstant();
                     } else {
                       setBuyLoading(false);
-                      toast.error("Failed to buy");
+                      toast.error("Failed to buy",{ toastId: "B" });
+                     setPromoCode("")
+                      setPromoDetails({})
                     }
                     contract.events.removeEventListener("Transfer")
                   })
                   .catch((error) => {
                     setBuyLoading(false);
-                    toast.error("Token Buy Failed");
+                    toast.error("Token Buy Failed",{ toastId: "C" });
+                    promoCode=""
+                    goldcoinAmount=""
+                    setPromoCode("")
+                    setPromoDetails({})
+
                     console.log(error);
                     contract.events.removeEventListener("Transfer")
                   });
@@ -266,36 +292,45 @@ useEffect(()=>{
           contactSDk = contract;
         }else if(selectedDropdown === "Scrooge"){
           
-          scroogeContract.events.addEventListener("Transfer", (event) => {
+           scroogeContract.events.addEventListener("Transfer", async(event) => {
+            console.log("eventeventeventevent",event);
               if (
               event?.data?.from?.toLowerCase() === address.toLowerCase() &&
               ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase())
               || (selectedDropdown === "Scrooge" && event.data.to.toLowerCase() === process.env.REACT_APP_OG_WALLET_ADDRESS.toLowerCase())
               )
             ) {
+              console.log("selectedDropdown",selectedDropdown);
               console.log("transaction", event.transaction);
               if (event.transaction.transactionHash) {
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
                   .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`,{
-                    params: {promocode,previousAmount},
+                    params: {promoCode},
                   })
                   .then((response) => {
+                    console.log("gcgcgc294",gc,"promocode",promoCode);
+                    
                     setBuyLoading(false);
                     if (response.data.success) {
                       setUser(response?.data?.user);
-                      toast.success(`Successfully Purchased ${gc} goldCoin`);
+                      toast.success(`Successfully Purchased ${goldcoinAmount} goldCoin`,{ toastId: "A" });
+                     setPromoCode("")
+                     handlePromoReject()
                       reward();
                       getUserDataInstant();
                     } else {
                       setBuyLoading(false);
-                      toast.error("Failed to buy");
+                      toast.error("Failed to buy",{ toastId: "B" });
+                      handlePromoReject()
                     }
                     scroogeContract.events.removeAllListeners();
                   })
                   .catch((error) => {
                     setBuyLoading(false);
-                    toast.error("Token Buy Failed");
+                    toast.error("Token Buy Failed",{ toastId: "C" });
+                    handlePromoReject()
+
                     console.log(error);
                     scroogeContract.events.removeAllListeners()
                   });
@@ -318,23 +353,27 @@ useEffect(()=>{
                           try{
                             const res = await marketPlaceInstance()
                             .get(`convertCryptoToGoldCoin/${address}/${transaction.hash}`,{
-                              params: {promocode,previousAmount},
+                              params: {promoCode},
                             })
                            
                               if (res.data.success) {
                                 setUser(res?.data?.user);
-                                toast.success(`Successfully Purchased ${gc} goldCoin`);
+                                toast.success(`Successfully Purchased ${goldcoinAmount} goldCoin`,{ toastId: "A" });
+                                handlePromoReject()
                                 reward();
                                 getUserDataInstant();
                               } else {
                                 setBuyLoading(false);
-                                toast.error("Failed to buy");
+                                toast.error("Failed to buy",{ toastId: "B" });
+                                handlePromoReject()
+
                               }
                               provider.off("block")
                             return;
                           }catch(err){
                             setBuyLoading(false);
-                            toast.error("Token Buy Failed");
+                            toast.error("Token Buy Failed",{ toastId: "B" });
+                            handlePromoReject()
                             console.log(err);
                             bnbContract.events.removeAllListeners()
                             provider.off("block")
@@ -398,24 +437,29 @@ useEffect(()=>{
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
                   .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`,{
-                    params: {promocode,previousAmount},
+                    params: {promoCode},
                   })
                   .then((response) => {
                     setBuyLoading(false);
                     if (response.data.success) {
                       setUser(response?.data?.user);
-                      toast.success(`Successfully Purchased ${gc} goldCoin`);
+                      toast.success(`Successfully Purchased ${goldcoinAmount} goldCoin`,{ toastId: "A" });
+                      handlePromoReject()
+
                       reward();
                       getUserDataInstant();
                     } else {
                       setBuyLoading(false);
-                      toast.error("Failed to buy");
+                      toast.error("Failed to buy",{ toastId: "B" });
+                      handlePromoReject()
+
                     }
                     usdtContract.events.removeAllListeners()
                   })
                   .catch((error) => {
                     setBuyLoading(false);
-                    toast.error("Token Buy Failed");
+                    toast.error("Token Buy Failed",{ toastId: "C" });
+                    handlePromoReject()
                     console.log(error);
                     usdtContract.events.removeAllListeners()
                   });
@@ -437,24 +481,29 @@ useEffect(()=>{
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
                   .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`,{
-                    params: {promocode,previousAmount},
+                    params: {promoCode},
                   })
                   .then((response) => {
                     setBuyLoading(false);
                     if (response.data.success) {
                       setUser(response?.data?.user);
-                      toast.success(`Successfully Purchased ${gc} goldCoin`);
+                      toast.success(`Successfully Purchased ${goldcoinAmount} goldCoin`,{ toastId: "A" });
+                      handlePromoReject()
+
                       reward();
                       getUserDataInstant();
                     } else {
                       setBuyLoading(false);
-                      toast.error("Failed to buy");
+                      toast.error("Failed to buy",{ toastId: "B" });
+                      setPromoCode("")
+                      setPromoDetails({})
                     }
                     usdcContract.events.removeAllListeners()
                   })
                   .catch((error) => {
                     setBuyLoading(false);
-                    toast.error("Token Buy Failed");
+                    toast.error("Token Buy Failed",{ toastId: "C" });
+                    handlePromoReject()
                     console.log(error);
                     usdcContract.events.removeAllListeners()
                   });
@@ -477,16 +526,17 @@ useEffect(()=>{
           if(error.toString().includes("transfer amount exceeds balance" || error?.data?.message?.includes("insufficient funds"))){
             toast.error("Transfer amount exceeds balance");
           }else if(error.toString().includes("user rejected transaction")){
-          toast.error("You rejected the transaction request.");
+          toast.error("You rejected the transaction request.",{toastId:"D"});
           }
           else
-          toast.error("Gold Coin Buy Fail, try with increasing the gas fee");
+          toast.error("Gold Coin Buy Fail, try with increasing the gas fee",{toastId:"D"});
           contract.events.removeEventListener("Transfer")
         }
         }, 3000);
 
         return;
       } else {
+        console.log("heloo run");
         if (selectedDropdown === "Scrooge") {
           contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
           walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
@@ -583,14 +633,15 @@ useEffect(()=>{
       //     });
       // }
     } catch (error) {
+      console.log("error",error);
       setBuyLoading(false);
       if(error.toString().includes("transfer amount exceeds balance") || error?.data?.message.includes("insufficient funds")){
-        toast.error("Transfer amount exceeds balance");
+        toast.error("Transfer amount exceeds balance",{toastId:"D"});
       }else if(error.toString().includes("user rejected transaction")){
-      toast.error("You rejected the transaction request.");
+      toast.error("You rejected the transaction request.",{toastId:"D"});
     }
       else
-      toast.error("Gold Coin Buy Fail, try with increasing the gas fee");
+      toast.error("Gold Coin Buy Fail, try with increasing the gas fee",{toastId:"D"});
       console.log("errordata", error);
       bnbContract.events.removeEventListener("Transfer")
       usdtContract.events.removeEventListener("Transfer")
@@ -672,15 +723,21 @@ useEffect(()=>{
     handleClose();
   };
 
+  const [errors,setErrors]=useState("")
   const handleChangePromo=(e)=>{
     const { value, name } = e.target;
-    setPromoCode(value)
+    setPromoCode(value.trim())
+    if(value.trim().length){
+    setErrors("")
+  }
+    promoCode=value
   }
 
   const handlePromoApply=async()=>{
     console.log("Promo Apply",promocode);
     try {
       if (promocode === "") {
+        setErrors("Please enter promo code.")
         return
       }
       const payload={
@@ -689,12 +746,11 @@ useEffect(()=>{
       const res = await marketPlaceInstance().post('/applyPromoCode',payload);
        const {code,message,getPromo}=res.data
        setPromoDetails(getPromo)
-       console.log("getPromo===>>>",getPromo);
        if(code===200){
-        toast.success(message, { id: "A" })
+        toast.success(message, { toastId: "A" })
        }
        else if(code===404){
-        toast.error(message, { id: "A" })
+        toast.error(message, { toastId: "B" })
        }
       
     } catch (error) {
@@ -707,23 +763,48 @@ useEffect(()=>{
     }
   }
 
-  const handlePromoReject=()=>{
-    setPromoDetails({})
-    setPromoCode("")
-  }
+  
 
-  const getExactPrice = (price,promo)=>{
-    console.log("promo",promo);
-    const {coupanType,discountInPercent, discountInAmount}=promo
-    let discount=0;
-    if(coupanType==="Percent"){
-      discount=price*discountInPercent/100;
-    }else if(coupanType==="Amount"){
-      discount = discountInAmount
-    }
-    return (price - discount)
+  const getExactPrice = (price)=>{
+    // console.log("promo",promo);    
+    return (price)
+}
+// const getExactPrice = (price,promo)=>{
+//   console.log("promo",promo);
+//   const {coupanType,discountInPercent, discountInAmount}=promo
+//   let discount=0;
+//   if(coupanType==="Percent"){
+//     discount=price*discountInPercent/100;
+//   }else if(coupanType==="Amount"){
+//     discount = discountInAmount
+//   }
+//   return (price - discount)
+// }
+const getExactGC=(Gc,promo)=>{
+  const {coupanType,discountInPercent,discountInAmount}=promo
+  let discount=0;
+  if(coupanType==="Percent"){
+        discount=Gc*discountInPercent/100;
+      }
+      else if(coupanType==="2X") {
+        discount=parseInt(Gc)
+      }
+  return (parseInt(Gc) + discount)
 }
 
+const getExactToken=(Token,promo)=>{
+  const {coupanType,discountInPercent,discountInAmount}=promo
+  let discount=0;
+  if(coupanType==="Percent"){
+        discount=Token*discountInPercent/100;
+      // }else if(coupanType==="Amount"){
+      //   discount = discountInAmount
+      }
+      if(coupanType==="2X") {
+        discount=parseInt(Token)
+      }
+  return (parseInt(Token) + discount)
+}
 
   return (
     <>
@@ -800,6 +881,7 @@ useEffect(()=>{
                         </Dropdown.Menu>
                       </Dropdown>
               </div>
+              <div className="enter-promo">
                     <Form.Group className='form-group'>
                         {/* <Form.Label>Promo code</Form.Label> */}
                         <Form.Control
@@ -809,23 +891,29 @@ useEffect(()=>{
                           placeholder="Enter promo code"
                            onChange={(e) => handleChangePromo(e)}
                         />
+                        
+                          {errors ? <p className='error-text'>
+                           {errors}
+                          </p>: null}
+                        
                       </Form.Group>
                       {Object.keys(promoDetails).length ?
                       <Button
                           type='button'
-                          className='send-btn'
+                          className='reject-btn'
                           onClick={handlePromoReject}
                           >
                           Reject
                         </Button>
                         :<Button
                         type='button'
-                        className='send-btn'
+                        className='apply-btn'
                         onClick={handlePromoApply}
+                        disabled={!promocode}
                         >
                         Apply
                       </Button>
-}
+                }</div>
                     </div>
               {/* {isMismatched ? (
                 <SwitchNetworkBSC />
@@ -888,7 +976,7 @@ useEffect(()=>{
                             }
                           />
                           <Card.Body>
-                            <Card.Title>GC {prize?.gcAmount}</Card.Title>
+                            <Card.Title>GC {getExactGC(prize?.gcAmount,promoDetails)}</Card.Title>
                             {/* <Card.Text>$10</Card.Text> */}
                             {selectedTypeDropdown==="Crypto" ?
                             getExactPrice(prize?.priceInBUSD,promoDetails )>0&&
@@ -896,8 +984,8 @@ useEffect(()=>{
                               variant='primary'
                               onClick={() =>
                                 convert(
-                                  getExactPrice(prize?.priceInBUSD,promoDetails ),
-                                  prize?.gcAmount,
+                                  getExactPrice(prize?.priceInBUSD,promoDetails),
+                                  getExactGC(prize?.gcAmount,promoDetails),
                                   prize?._id,
                                   prize?.priceInBUSD
                                 )
@@ -906,7 +994,7 @@ useEffect(()=>{
                             </Button>
                            :selectedTypeDropdown==="Credit Card"?
                            getExactPrice(prize?.priceInBUSD,promoDetails )>0&&
-                            <PayWithCard prize={prize} getExactPrice={getExactPrice} promoDetails={promoDetails} index={i} setBuyLoading={setBuyLoading} selectedTypeDropdown={selectedTypeDropdown}/>
+                            <PayWithCard prize={prize} getExactPrice={getExactPrice} getExactGC={getExactGC} getExactToken={getExactToken} promoDetails={promoDetails} index={i} setBuyLoading={setBuyLoading} selectedTypeDropdown={selectedTypeDropdown}/>
                             :<> <Button
                             variant='primary'
                             >
@@ -917,7 +1005,7 @@ useEffect(()=>{
                           </Card.Body>
                           <div className='goldPurchase-offers'>
                             Free ST: <img src={sweep} alt='sweep token' />{" "}
-                            {prize?.freeTokenAmount}
+                            {getExactToken(prize?.freeTokenAmount,promoDetails)}
                           </div>
                         </Card>
                       ))}
@@ -1020,9 +1108,18 @@ useEffect(()=>{
 }
 
 
-const PayWithCard = ({prize,getExactPrice,promoDetails}) => {
+const PayWithCard = ({prize,getExactPrice,promoDetails,getExactToken,getExactGC}) => {
+  console.log("promobbbb",promoCode);
 const handleCLick = () => {
-  window.prize = prize;
+  let payload={
+    freeTokenAmount: getExactToken(prize.freeTokenAmount,promoDetails),
+    gcAmount: getExactGC(prize.gcAmount,promoDetails),
+    priceInBUSD: getExactPrice(prize?.priceInBUSD,promoDetails).toString(),
+   _id:prize._id,
+    actualAmount:prize?.priceInBUSD,
+    promoCode:promoCode
+  }
+  window.prize = payload;
   document.getElementById("paycard").click();
 }
   return (
