@@ -95,17 +95,17 @@ useEffect(() => {
     if (response.messages.resultCode === "Error") {
       var i = 0;
       while (i < response.messages.message.length) {
-        console.log(
-          response.messages.message[i].code +
-            ": " +
-            response.messages.message[i].text
-        );
+        // console.log(
+        //   response.messages.message[i].code +
+        //     ": " +
+        //     response.messages.message[i].text
+        // );
         i = i + 1;
       }
     } else {
       setBuyLoading(true);
       try{
-        console.log("window prize",window.prize)
+        // console.log("window prize",window.prize)
         if(user?.isBlockWallet){
           setBuyLoading(false);
           return toast.error(`Your wallet blocked by admin`,{ toastId: "A" });
@@ -145,17 +145,13 @@ useEffect(() => {
     }
   }
 
-  console.log("window", window.prize)
 
 },[])
 
 
 useEffect(() => {
   const getBalance = async () => {
-    console.log("adre", address);
-    const bal = await sdk.wallet.balance();
-    console.log("bl",bal )
-   
+    const bal = await sdk.wallet.balance();   
   }
   if(address){
    getBalance()
@@ -259,7 +255,7 @@ useEffect(()=>{
               || (selectedDropdown === "Scrooge" && event.data.to.toLowerCase() === process.env.REACT_APP_OGCONTRACT_ADDRESS.toLowerCase())
               )
             ) {
-              console.log("transaction", event.transaction);
+              // console.log("transaction", event.transaction);
               if (event.transaction.transactionHash) {
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
@@ -267,7 +263,6 @@ useEffect(()=>{
                     params: {promocode},
                   })
                   .then((response) => {
-                    console.log("gcgcgc251",goldcoinAmount);
                     setBuyLoading(false);
                     if (response.data.success) {
                       setUser(response?.data?.user);
@@ -301,24 +296,19 @@ useEffect(()=>{
         }else if(selectedDropdown === "Scrooge"){
           
            scroogeContract.events.addEventListener("Transfer", async(event) => {
-            console.log("eventeventeventevent",event);
               if (
               event?.data?.from?.toLowerCase() === address.toLowerCase() &&
               ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase())
               || (selectedDropdown === "Scrooge" && event.data.to.toLowerCase() === process.env.REACT_APP_OG_WALLET_ADDRESS.toLowerCase())
               )
             ) {
-              console.log("selectedDropdown",selectedDropdown);
-              console.log("transaction", event.transaction);
               if (event.transaction.transactionHash) {
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
                   .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`,{
                     params: {promoCode},
                   })
-                  .then((response) => {
-                    console.log("gcgcgc294",gc,"promocode",promoCode);
-                    
+                  .then((response) => {                    
                     setBuyLoading(false);
                     if (response.data.success) {
                       setUser(response?.data?.user);
@@ -356,7 +346,6 @@ useEffect(()=>{
                         transaction?.from?.toLowerCase() === address.toLowerCase() &&
                         ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && transaction?.to?.toLowerCase() === BUSD_ADDRESS.toLowerCase()))
                       ) {
-                        console.log("transaction", transaction);
                         if (transaction.hash) {
                           try{
                             const res = await marketPlaceInstance()
@@ -391,9 +380,7 @@ useEffect(()=>{
                         }
                       }
                     
-            }
-            console.log("block", block)
-           
+            }           
           })
           // bnbContract.events.addEventListener("Transfer", (event) => {
           // console.log("eventbnb -", event, event.data,event.transaction.transactionHash)
@@ -433,14 +420,13 @@ useEffect(()=>{
         }else if(selectedDropdown === "USDT"){
           
           usdtContract.events.addEventListener("Transfer", (event) => {
-           console.log("eventusdt-", event.data.from, event.data.to);
+          //  console.log("eventusdt-", event.data.from, event.data.to);
               if (
               event?.data?.from?.toLowerCase() === address.toLowerCase() &&
               ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase())
               || (selectedDropdown === "Scrooge" && event.data.to.toLowerCase() === process.env.REACT_APP_OGCONTRACT_ADDRESS.toLowerCase())
               )
             ) {
-              console.log("transaction", event.transaction);
               if (event.transaction.transactionHash) {
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
@@ -477,14 +463,13 @@ useEffect(()=>{
         }else if(selectedDropdown === "USDC"){
           
           usdcContract.events.addEventListener("Transfer", (event) => {
-            console.log("eventusdc-", event.data.from, event.data.to);
+            // console.log("eventusdc-", event.data.from, event.data.to);
               if (
               event?.data?.from?.toLowerCase() === address.toLowerCase() &&
               ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && event.data.to.toLowerCase() === BUSD_ADDRESS.toLowerCase())
               || (selectedDropdown === "Scrooge" && event.data.to.toLowerCase() === process.env.REACT_APP_OGCONTRACT_ADDRESS.toLowerCase())
               )
             ) {
-              console.log("transaction", event.transaction);
               if (event.transaction.transactionHash) {
                 const { transactionHash } = event.transaction || {};
                 marketPlaceInstance()
@@ -522,7 +507,7 @@ useEffect(()=>{
         
       if (selectedDropdown === "BUSD") {
         let amt = (usd * Math.pow(10, 18)).toString();
-        console.log("BUSDamt",amt);
+        // console.log("BUSDamt",amt);
         setTimeout(async () => {
           try {
           txResult = await contract.call("transfer", [BUSD_ADDRESS, amt], {
@@ -544,7 +529,6 @@ useEffect(()=>{
 
         return;
       } else {
-        console.log("heloo run");
         if (selectedDropdown === "Scrooge") {
           contractAddresss = process.env.REACT_APP_OGCONTRACT_ADDRESS;
           walletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
@@ -589,11 +573,8 @@ useEffect(()=>{
             cryptoAmount = parseInt(usd) / current_price;
           }
         } else {
-          console.log("(parseInt(usd) + parseInt(usd) * 0.16) ",(current_price));
           cryptoAmount = (parseInt(usd) + (parseInt(usd) * 0.16)) / parseFloat(current_price);
-          console.log("cryptoAmountcryptoAmount",cryptoAmount);
         }
-        console.log(selectedDropdown, cryptoAmount,usd);
         if (selectedDropdown === "BNB") {
            txResult = await sdk.wallet.transfer(walletAddress, cryptoAmount);
           // provider.sendTransaction({
@@ -708,7 +689,6 @@ useEffect(()=>{
               setTickets("");
               setTokens("");
               if (code === 200) {
-                console.log("datattat", data);
                 getUserDataInstant();
                 toast.success(message, { id: "A" });
               } else {
@@ -742,7 +722,6 @@ useEffect(()=>{
   }
 
   const handlePromoApply=async()=>{
-    console.log("Promo Apply",promocode);
     try {
       if (promocode === "") {
         setErrors("Please enter promo code.")
@@ -774,20 +753,9 @@ useEffect(()=>{
   
 
   const getExactPrice = (price)=>{
-    // console.log("promo",promo);    
     return (price)
 }
-// const getExactPrice = (price,promo)=>{
-//   console.log("promo",promo);
-//   const {coupanType,discountInPercent, discountInAmount}=promo
-//   let discount=0;
-//   if(coupanType==="Percent"){
-//     discount=price*discountInPercent/100;
-//   }else if(coupanType==="Amount"){
-//     discount = discountInAmount
-//   }
-//   return (price - discount)
-// }
+
 const getExactGC=(Gc,promo)=>{
   const {coupanType,discountInPercent,discountInAmount}=promo
   let discount=0;
@@ -1074,10 +1042,6 @@ const getExactToken=(Token,promo)=>{
             </div>
           </div>
         )}
-
-{/* {console.log("process.env.REACT_APP_AUTHORIZE_LOGIN_KEY",process.env.REACT_APP_AUTHORIZE_LOGIN_KEY)}
-{console.log("process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY",process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY)} */}
-
         <Modal show={show} onHide={handleClose} centered animation={false}>
           <Modal.Body className='popupBody'>
             <div>Do You Want To Redeem?</div>
@@ -1117,7 +1081,6 @@ const getExactToken=(Token,promo)=>{
 
 
 const PayWithCard = ({prize,getExactPrice,promoDetails,getExactToken,getExactGC}) => {
-  console.log("promobbbb",promoCode);
 const handleCLick = () => {
   let payload={
     freeTokenAmount: getExactToken(prize.freeTokenAmount,promoDetails),
