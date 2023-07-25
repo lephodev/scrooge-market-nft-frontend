@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useState, useContext, useEffect } from "react";
 import Layout from "./Layout.mjs";
@@ -105,6 +106,10 @@ useEffect(() => {
       setBuyLoading(true);
       try{
         console.log("window prize",window.prize)
+        if(user?.isBlockWallet){
+          setBuyLoading(false);
+          return toast.error(`Your wallet blocked by admin`,{ toastId: "A" });
+        }
       const res = await marketPlaceInstance().post(`/accept-deceptor`, {
       
         dataDescriptor: response.opaqueData.dataDescriptor,
@@ -209,6 +214,9 @@ useEffect(()=>{
   }
 
   const convert = async (usd, gc, pid) => {
+    if(user?.isBlockWallet){
+      return toast.error(`Your wallet blocked by admin`,{ toastId: "A" });
+    }
     goldcoinAmount=gc
     if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
       return toast.error("Your daily limit is exceeding");

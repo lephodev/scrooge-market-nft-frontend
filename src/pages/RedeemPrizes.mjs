@@ -84,6 +84,9 @@ function RedeemPrizes() {
     try {
     if (!user)
     return toast.error("Please login first", { containerId: "login" });
+    if(user?.isBlockWallet){
+      return toast.error(`Your wallet blocked by admin`,{ toastId: "A" });
+    }
   if (!address)
     return toast.error("Please connect wallet first", {
       containerId: "connect-wallet",
