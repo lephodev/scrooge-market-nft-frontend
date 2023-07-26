@@ -87,6 +87,9 @@ function HolderClaimChips() {
 
 
   const claimTokens = () => {
+    if(user?.isBlockWallet){
+      return toast.error(`Your wallet blocked by admin`,{ toastId: "A" });
+    }
     setDisable(true);
     setTimeout(() => {
       setDisable(false);
