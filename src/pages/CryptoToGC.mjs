@@ -41,6 +41,7 @@ export default function CryptoToGC() {
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
   const [selectedDropdown, setSelectedDropdown] = useState("BUSD");
+  const [handler, setHndler] = useState(true);
   const [selectedTypeDropdown, setSelectedTypeDropdown] =
     useState("Credit Card");
   const [promocode, setPromoCode] = useState("");
@@ -96,65 +97,77 @@ export default function CryptoToGC() {
   // Create a new WebSocket provider connected to BSC mainnet
   const provider = sdk.getProvider();
 
+  let handler2 = true;
+
   useEffect(() => {
     // console.log("window",window.prize)
-    window.requestHandler = async (response) => {
-      if (response.messages.resultCode === "Error") {
-        var i = 0;
-        while (i < response.messages.message.length) {
-          // console.log(
-          //   response.messages.message[i].code +
-          //     ": " +
-          //     response.messages.message[i].text
-          // );
-          i = i + 1;
-        }
-      } else {
-        setBuyLoading(true);
-        try {
-          // console.log("window prize",window.prize)
-          if (user?.isBlockWallet) {
-            setBuyLoading(false);
-            return toast.error(`Your wallet blocked by admin`, {
-              toastId: "A",
-            });
+    if (handler2) {
+      window.requestHandler = async (response) => {
+        if (response.messages.resultCode === "Error") {
+          var i = 0;
+          while (i < response.messages.message.length) {
+            // console.log(
+            //   response.messages.message[i].code +
+            //     ": " +
+            //     response.messages.message[i].text
+            // );
+            i = i + 1;
           }
-          const res = await marketPlaceInstance().post(
-            `/accept-deceptor`,
-            {
-              dataDescriptor: response.opaqueData.dataDescriptor,
-              dataValue: response.opaqueData.dataValue,
-              item: {
-                id: window.prize.priceInBUSD,
-                description: `Purchase GC ${window.prize.gcAmount} and get ${window.prize.freeTokenAmount} ST free`,
-                price: window.prize.priceInBUSD,
-                name: window.prize.gcAmount,
-                actualAmount: window.prize.actualAmount,
-                promoCode: window.prize.promoCode,
-              },
-            },
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-              withCredentials: true,
-              credentials: "include",
+        } else {
+          setBuyLoading(true);
+          try {
+            // console.log("window prize",window.prize)
+            if (user?.isBlockWallet) {
+              setBuyLoading(false);
+              return toast.error(`Your wallet blocked by admin`, {
+                toastId: "A",
+              });
             }
-          );
+            const res = await marketPlaceInstance().post(
+              `/accept-deceptor`,
+              {
+                dataDescriptor: response.opaqueData.dataDescriptor,
+                dataValue: response.opaqueData.dataValue,
+                item: {
+                  id: window.prize.priceInBUSD,
+                  description: `Purchase GC ${window.prize.gcAmount} and get ${window.prize.freeTokenAmount} ST free`,
+                  price: window.prize.priceInBUSD,
+                  name: window.prize.gcAmount,
+                  actualAmount: window.prize.actualAmount,
+                  promoCode: window.prize.promoCode,
+                },
+              },
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                withCredentials: true,
+                credentials: "include",
+              }
+            );
 
-          setBuyLoading(false);
-          if (res.data.success) {
-            toast.success(res.data.data, { id: "buy-sucess" });
-          } else {
-            toast.error(res.data.error, { id: "buy-failed" });
+            setBuyLoading(false);
+            if (res.data.success) {
+              toast.success(res.data.data, { id: "buy-sucess" });
+            } else {
+              toast.error(res.data.error, { id: "buy-failed" });
+            }
+          } catch (e) {
+            setBuyLoading(false);
+            console.log("ee55", e.response);
+            // console.log("ee55", JSON.parse(e));
+            if (axios.isAxiosError(e) && e?.response) {
+              if (e?.response?.status !== 200) {
+                toast.error(e?.response?.data?.message, { toastId: "login" });
+              }
+            }
           }
-        } catch (err) {
-          setBuyLoading(false);
-          console.log("ee55", err);
-          toast.error(err.response.data.error, { id: "buy-failed" });
         }
-      }
-    };
+      };
+      handler2 = false;
+    } else {
+      handler2 = true;
+    }
   }, []);
 
   useEffect(() => {
