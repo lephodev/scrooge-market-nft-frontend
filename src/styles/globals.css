@@ -140,14 +140,14 @@ html {
 
 .header-btn .btn:hover,
 .header-btn .btn:focus,
-:not(.btn-check)+.btn:active {
+:not(.btn-check) + .btn:active {
   background: var(--primary-color);
   border: 2px solid var(--primary-color);
   color: var(--main-bg);
   text-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 }
 
-.header-btn :not(.btn-check)+.btn:active {
+.header-btn :not(.btn-check) + .btn:active {
   color: var(--main-bg) !important;
   background-color: var(--primary-color) !important;
   border-color: var(--primary-color) !important;
@@ -1045,18 +1045,18 @@ button.active-btn.btn.btn-primary {
   color: black;
   border-color: #f9ff00;
   font-weight: 600;
-  box-shadow: 0 0 0 0.25rem #f9ff00, .5;
+  box-shadow: 0 0 0 0.25rem #f9ff00, 0.5;
 }
 
 .btn:first-child:active,
-:not(.btn-check)+.btn:active {
+:not(.btn-check) + .btn:active {
   background: #fbff14;
   color: black;
   border-color: #f9ff00;
 }
 
-
-.erc721Card-rarity-subsection {}
+.erc721Card-rarity-subsection {
+}
 
 .rarity-pct-1 {
   color: rgb(245, 168, 168);
@@ -1168,7 +1168,8 @@ button.active-btn.btn.btn-primary {
   cursor: pointer;
 }
 
-.erc1155Card-details {}
+.erc1155Card-details {
+}
 
 .erc1155-price {
   color: #5ee47e;
@@ -1525,7 +1526,8 @@ select {
   gap: 10px;
 }
 
-.raffles-page .leaderboard-card-div {}
+.raffles-page .leaderboard-card-div {
+}
 
 .raffles-page .leaderboard-card-div h1 {
   margin: 30px 0;
@@ -1782,11 +1784,13 @@ select {
 
 .bg-animated {
   background-size: 300% 300%;
-  background-image: linear-gradient(-45deg,
-      rgba(59, 173, 227, 1) 0%,
-      rgba(87, 111, 230, 1) 25%,
-      rgba(152, 68, 183, 1) 51%,
-      rgba(255, 53, 127, 1) 100%);
+  background-image: linear-gradient(
+    -45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
   animation: AnimateBG 5s ease infinite;
 }
 
@@ -1806,21 +1810,25 @@ select {
 
 .bg-animated2 {
   background-size: 300% 300%;
-  background-image: linear-gradient(-45deg,
-      rgb(29, 196, 93) 0%,
-      rgb(40, 168, 14) 25%,
-      rgb(15, 155, 15) 51%,
-      rgb(34, 233, 77) 100%);
+  background-image: linear-gradient(
+    -45deg,
+    rgb(29, 196, 93) 0%,
+    rgb(40, 168, 14) 25%,
+    rgb(15, 155, 15) 51%,
+    rgb(34, 233, 77) 100%
+  );
   animation: AnimateBG 5s ease infinite;
 }
 
 .bg-animated3 {
   background-size: 300% 300%;
-  background-image: linear-gradient(45deg,
-      rgb(211, 69, 13) 0%,
-      rgb(235, 134, 19) 20%,
-      rgb(241, 8, 8) 71%,
-      rgb(248, 232, 12) 100%);
+  background-image: linear-gradient(
+    45deg,
+    rgb(211, 69, 13) 0%,
+    rgb(235, 134, 19) 20%,
+    rgb(241, 8, 8) 71%,
+    rgb(248, 232, 12) 100%
+  );
   animation: AnimateBG 5s ease infinite;
 }
 
@@ -2007,7 +2015,6 @@ select {
 }
 
 @keyframes spinner5 {
-
   from,
   0% {
     -moz-transform: rotateY(0);
@@ -3047,7 +3054,10 @@ ul.footer-support li img {
   height: 44px !important;
 }
 
-.redeem-prizes-page .prizes-container .redeem-btn input[type="Number"]:focus-visible {
+.redeem-prizes-page
+  .prizes-container
+  .redeem-btn
+  input[type="Number"]:focus-visible {
   outline: none;
 }
 
@@ -3356,12 +3366,18 @@ button.shareBtn-disabled {
   gap: 20px;
 }
 
-.earn-token .earn-free-tokens-desc-div .social-share-card .social-share-message {
+.earn-token
+  .earn-free-tokens-desc-div
+  .social-share-card
+  .social-share-message {
   font-size: 16px;
   text-align: center;
 }
 
-.earn-token .earn-free-tokens-desc-div .social-share-card .social-share-btn-div {
+.earn-token
+  .earn-free-tokens-desc-div
+  .social-share-card
+  .social-share-btn-div {
   max-width: 300px;
   width: 100%;
   text-align: center;
@@ -3483,10 +3499,12 @@ button.shareBtn-disabled {
   width: 100%;
   height: 100%;
   /* background: linear-gradient(#2196f3, #e91e63); */
-  background-image: linear-gradient(45deg,
-      #ff512f 0%,
-      #f09819 51%,
-      #ff512f 100%);
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
   clip-path: circle(15% at 5% 7%);
   transition: all 0.5s;
 }
@@ -3641,10 +3659,12 @@ button.shareBtn-disabled {
   width: 100%;
   height: 100%;
   /* background: linear-gradient(#f00, #f0f); */
-  background-image: linear-gradient(45deg,
-      #ff512f 0%,
-      #f09819 51%,
-      #ff512f 100%);
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
   clip-path: circle(10% at right 100%);
   transition: all 0.5s;
 }
@@ -3909,10 +3929,12 @@ button.shareBtn-disabled {
 }
 
 .gradient-btn {
-  background-image: linear-gradient(45deg,
-      #ff512f 0%,
-      #f09819 51%,
-      #ff512f 100%);
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
 }
 
 .card-btn {
@@ -4442,7 +4464,8 @@ button.greyBtn {
   width: 100%;
 }
 
-span.input-range__label.input-range__label--min {}
+span.input-range__label.input-range__label--min {
+}
 
 span.input-range__label.input-range__label--max {
   right: -5%;
@@ -4493,7 +4516,8 @@ span.input-range__label.input-range__label--value {
   position: relative;
 }
 
-span.input-range__label.input-range__label--value span.input-range__label-container {
+span.input-range__label.input-range__label--value
+  span.input-range__label-container {
   position: absolute;
   top: -26px;
   background: #f9ff00;
@@ -4786,17 +4810,21 @@ button.affiliate-dropdownBtn.close::before {
 .enter-promo .form-control::placeholder {
   color: #fff;
 }
+.cross-text {
+  text-decoration: line-through;
+  text-decoration-color: red;
+  text-decoration-thickness: 2px;
+}
 
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
 
 @media screen and (max-width: 1500px) {
-.header .navbar-expand-lg .navbar-nav .nav-link{
-  font-size: 13px;
-  padding: 10px 10px;
-}
-
+  .header .navbar-expand-lg .navbar-nav .nav-link {
+    font-size: 13px;
+    padding: 10px 10px;
+  }
 }
 
 @media screen and (max-width: 1366px) {
@@ -4898,7 +4926,6 @@ button.affiliate-dropdownBtn.close::before {
     gap: 30px;
     text-align: center;
   }
-
 }
 
 @media screen and (max-width: 1200px) {
@@ -4924,8 +4951,6 @@ button.affiliate-dropdownBtn.close::before {
   }
 }
 
-
-
 @media screen and (max-width: 1224px) {
   .wallet {
     text-align: center;
@@ -4935,7 +4960,7 @@ button.affiliate-dropdownBtn.close::before {
 
   .navbar-expand-lg .navbar-nav {
     flex-direction: column;
-}
+  }
 
   div#responsive-navbar-nav {
     position: fixed;
@@ -4966,9 +4991,9 @@ button.affiliate-dropdownBtn.close::before {
     width: 75px;
   }
 
-.logo-mobile img {
+  .logo-mobile img {
     max-width: 80px;
-}
+  }
 
   .wallet .green {
     font-size: 14px;
@@ -5101,11 +5126,9 @@ button.affiliate-dropdownBtn.close::before {
     font-family: var(--poppins) !important;
   }
 
-
   .logo-mobile {
     display: block;
   }
-
 }
 
 @media screen and (max-width: 991px) {
@@ -5283,11 +5306,9 @@ button.affiliate-dropdownBtn.close::before {
     font-family: var(--poppins) !important;
   }
 
-
   .logo-mobile {
     display: block;
   }
-
 
   .login-page-body {
     padding: 30px 20px;
@@ -5340,8 +5361,6 @@ button.affiliate-dropdownBtn.close::before {
   .spin-win-text p {
     font-size: 30px !important;
   }
-
-
 
   /* ******************** new responsive ******************** */
 
@@ -6051,7 +6070,10 @@ button.affiliate-dropdownBtn.close::before {
     text-align: center;
   }
 
-  .my-wallet-page .wallet-casino-profile-div .crypto-balance-div .claim-pending-div {
+  .my-wallet-page
+    .wallet-casino-profile-div
+    .crypto-balance-div
+    .claim-pending-div {
     margin-top: 10px;
   }
 
@@ -6081,7 +6103,6 @@ button.affiliate-dropdownBtn.close::before {
 }
 
 @media screen and (max-width: 480px) {
-
   .tab-btn button,
   .tab-btn button:hover,
   .tab-btn button:focus {
