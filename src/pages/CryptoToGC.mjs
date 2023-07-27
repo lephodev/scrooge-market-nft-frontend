@@ -281,7 +281,7 @@ export default function CryptoToGC() {
               const { transactionHash } = event.transaction || {};
               marketPlaceInstance()
                 .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`, {
-                  params: { promocode },
+                  params: { promoCode },
                 })
                 .then((response) => {
                   setBuyLoading(false);
