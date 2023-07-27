@@ -158,7 +158,12 @@ export default function CryptoToGC() {
             // console.log("ee55", JSON.parse(e));
             if (axios.isAxiosError(e) && e?.response) {
               if (e?.response?.status !== 200) {
-                toast.error(e?.response?.data?.message, { toastId: "login" });
+                toast.error(
+                  e?.response?.data?.error || e?.response?.data?.message,
+                  {
+                    toastId: "login",
+                  }
+                );
               }
             }
           }
