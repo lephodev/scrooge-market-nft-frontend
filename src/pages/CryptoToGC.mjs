@@ -95,7 +95,9 @@ export default function CryptoToGC() {
         console.log("error ", err);
       });
   };
+
   const handleClose = () => setShow(false);
+
   const handlePromoReject = () => {
     setPromoDetails({});
     setPromoCode("");
@@ -703,6 +705,7 @@ export default function CryptoToGC() {
   useEffect(() => {
     getGCPackages();
   }, []);
+
   const handleChange = (value) => {
     setSelectedDropdown(value);
   };
@@ -840,14 +843,14 @@ export default function CryptoToGC() {
   return (
     <>
       {prizesLoading ? (
-        <div className="loading">
-          <div className="loading-img-div">
-            <img src={LoadingPoker} alt="game" className="imageAnimation" />
+        <div className='loading'>
+          <div className='loading-img-div'>
+            <img src={LoadingPoker} alt='game' className='imageAnimation' />
           </div>
         </div>
       ) : (
         <Layout>
-          <main className="main redeem-prizes-page">
+          <main className='main redeem-prizes-page'>
             {/* <div className="tab-btn">
           <Button
             className={`${key === "cryptoToGc" ? "active-btn" : ""}`}
@@ -865,28 +868,28 @@ export default function CryptoToGC() {
           </Button>
         </div> */}
             {key === "cryptoToGc" ? (
-              <div className="tab-claims">
-                <div className="container">
+              <div className='tab-claims'>
+                <div className='container'>
                   {buyLoading ? (
-                    <div className="pageImgContainer">
+                    <div className='pageImgContainer'>
                       <img
                         src={LoadingPoker}
-                        alt="game"
-                        className="imageAnimation"
+                        alt='game'
+                        className='imageAnimation'
                       />
-                      <div className="loading-txt pulse">
+                      <div className='loading-txt pulse'>
                         PURCHASING TOKENS...
                       </div>
                     </div>
                   ) : (
                     <></>
                   )}
-                  <div className="scrooge-main-heading">
-                    <div className="pageTitle">
-                      <h1 className="title">Top up your Gold Coins</h1>
+                  <div className='scrooge-main-heading'>
+                    <div className='pageTitle'>
+                      <h1 className='title'>Top up your Gold Coins</h1>
                     </div>
                     {/* <div className="feature-overview-div"></div> */}
-                    <div className="asterisk-desc cryptoTotoken">
+                    <div className='asterisk-desc cryptoTotoken'>
                       <ul>
                         Disclaimer :
                         <li>
@@ -900,11 +903,11 @@ export default function CryptoToGC() {
                       </ul>
                     </div>
                   </div>
-                  <div className="purchase-select">
-                    <div className="purchaseSelect-Box">
+                  <div className='purchase-select'>
+                    <div className='purchaseSelect-Box'>
                       <h4>Purchase with</h4>
                       <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        <Dropdown.Toggle variant='success' id='dropdown-basic'>
                           {!selectedTypeDropdown
                             ? "Credit Card"
                             : selectedTypeDropdown}
@@ -913,53 +916,48 @@ export default function CryptoToGC() {
                           <Dropdown.Item
                             onClick={() =>
                               handlePaymentTypeChange("Credit Card")
-                            }
-                          >
+                            }>
                             Credit Card
                           </Dropdown.Item>
                           <Dropdown.Item
-                            onClick={() => handlePaymentTypeChange("Cashapp")}
-                          >
+                            onClick={() => handlePaymentTypeChange("Cashapp")}>
                             Cashapp
                           </Dropdown.Item>
                           <Dropdown.Item
-                            onClick={() => handlePaymentTypeChange("Crypto")}
-                          >
+                            onClick={() => handlePaymentTypeChange("Crypto")}>
                             Crypto
                           </Dropdown.Item>
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
-                    <div className="enter-promo">
-                      <Form.Group className="form-group">
+                    <div className='enter-promo'>
+                      <Form.Group className='form-group'>
                         {/* <Form.Label>Promo code</Form.Label> */}
                         <Form.Control
-                          type="text"
-                          name="Promocode"
+                          type='text'
+                          name='Promocode'
                           value={promocode}
-                          placeholder="Enter promo code"
+                          placeholder='Enter promo code'
                           onChange={(e) => handleChangePromo(e)}
                         />
 
-                        {errors ? <p className="error-text">{errors}</p> : null}
+                        {errors ? <p className='error-text'>{errors}</p> : null}
                       </Form.Group>
                       {Object.keys(promoDetails).length ? (
                         <Button
-                          type="button"
-                          className="reject-btn"
-                          onClick={handlePromoReject}
-                        >
+                          type='button'
+                          className='reject-btn'
+                          onClick={handlePromoReject}>
                           Reject
                         </Button>
                       ) : (
                         <Button
-                          type="button"
-                          className="apply-btn"
+                          type='button'
+                          className='apply-btn'
                           onClick={handlePromoApply}
-                          disabled={!promocode || promoLoader}
-                        >
+                          disabled={!promocode || promoLoader}>
                           {promoLoader ? (
-                            <Spinner animation="border" />
+                            <Spinner animation='border' />
                           ) : (
                             "Apply"
                           )}
@@ -970,27 +968,24 @@ export default function CryptoToGC() {
                   {/* {isMismatched ? (
                 <SwitchNetworkBSC />
               ) : address ? ( */}
-                  <div className="buy-chips-content">
-                    <div className="purchase-select">
+                  <div className='buy-chips-content'>
+                    <div className='purchase-select'>
                       {selectedTypeDropdown === "Crypto" && (
-                        <div className="purchaseSelect-Box">
+                        <div className='purchaseSelect-Box'>
                           <h4>Purchase with</h4>
                           <Dropdown>
                             <Dropdown.Toggle
-                              variant="success"
-                              id="dropdown-basic"
-                            >
+                              variant='success'
+                              id='dropdown-basic'>
                               {!selectedDropdown ? "BUSD" : selectedDropdown}
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                               <Dropdown.Item
-                                onClick={() => handleChange("Scrooge")}
-                              >
+                                onClick={() => handleChange("Scrooge")}>
                                 Scrooge
                               </Dropdown.Item>
                               <Dropdown.Item
-                                onClick={() => handleChange("BUSD")}
-                              >
+                                onClick={() => handleChange("BUSD")}>
                                 BUSD
                               </Dropdown.Item>
                               {/* <Dropdown.Item
@@ -999,18 +994,15 @@ export default function CryptoToGC() {
                             Scrooge Jr
                           </Dropdown.Item> */}
                               <Dropdown.Item
-                                onClick={() => handleChange("BNB")}
-                              >
+                                onClick={() => handleChange("BNB")}>
                                 BNB
                               </Dropdown.Item>
                               <Dropdown.Item
-                                onClick={() => handleChange("USDC")}
-                              >
+                                onClick={() => handleChange("USDC")}>
                                 USDC
                               </Dropdown.Item>
                               <Dropdown.Item
-                                onClick={() => handleChange("USDT")}
-                              >
+                                onClick={() => handleChange("USDT")}>
                                 USDT
                               </Dropdown.Item>
                             </Dropdown.Menu>
@@ -1018,12 +1010,12 @@ export default function CryptoToGC() {
                         </div>
                       )}
                     </div>
-                    <div className="buy-chips-grid cryptoToGC">
-                      <div className="purchasemodal-cards">
+                    <div className='buy-chips-grid cryptoToGC'>
+                      <div className='purchasemodal-cards'>
                         {allPrizes.map((prize, i) => (
                           <Card key={prize._id}>
                             <Card.Img
-                              variant="top"
+                              variant='top'
                               src={
                                 prize.priceInBUSD <= 10
                                   ? coin1
@@ -1043,7 +1035,7 @@ export default function CryptoToGC() {
                                 GC {getExactGC(prize?.gcAmount, promoDetails)}
                               </Card.Title>
                               {promoDetails?.couponCode && (
-                                <Card.Title className="cross-text">
+                                <Card.Title className='cross-text'>
                                   GC {getExactGC(prize?.gcAmount, {})}
                                 </Card.Title>
                               )}
@@ -1054,7 +1046,7 @@ export default function CryptoToGC() {
                                   promoDetails
                                 ) > 0 && (
                                   <Button
-                                    variant="primary"
+                                    variant='primary'
                                     onClick={() =>
                                       convert(
                                         getExactPrice(
@@ -1068,8 +1060,7 @@ export default function CryptoToGC() {
                                         prize?._id,
                                         prize?.priceInBUSD
                                       )
-                                    }
-                                  >
+                                    }>
                                     <p>Buy </p>{" "}
                                     <span>
                                       $
@@ -1099,7 +1090,7 @@ export default function CryptoToGC() {
                               ) : (
                                 <>
                                   {" "}
-                                  <Button variant="primary">
+                                  <Button variant='primary'>
                                     <p>Buy with Cash App </p>{" "}
                                     <span>
                                       $
@@ -1112,10 +1103,10 @@ export default function CryptoToGC() {
                                 </>
                               )}
                             </Card.Body>
-                            <div className="goldPurchase-offers">
-                              Free ST: <img src={sweep} alt="sweep token" />{" "}
+                            <div className='goldPurchase-offers'>
+                              Free ST: <img src={sweep} alt='sweep token' />{" "}
                               {promoDetails?.couponCode && (
-                                <span className="cross-text">
+                                <span className='cross-text'>
                                   {getExactToken(prize?.freeTokenAmount, {})}
                                 </span>
                               )}{" "}
@@ -1148,9 +1139,9 @@ export default function CryptoToGC() {
                 </div>
               </div>
             ) : (
-              <div className="container">
-                <div className="buy-chips-content">
-                  <div className="prizes-chip-count">
+              <div className='container'>
+                <div className='buy-chips-content'>
+                  <div className='prizes-chip-count'>
                     {user ? (
                       <>
                         <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
@@ -1159,27 +1150,26 @@ export default function CryptoToGC() {
                       <>
                         <img
                           src={LoadingPoker}
-                          alt="game"
-                          className="imageAnimation"
+                          alt='game'
+                          className='imageAnimation'
                         />
                       </>
                     )}
                   </div>
-                  <div className="buy-chips-grid">
-                    <div className="purchasemodal-cards">
+                  <div className='buy-chips-grid'>
+                    <div className='purchasemodal-cards'>
                       {ticketPrizes.map((prize) => (
                         <Card>
-                          <Card.Img variant="top" src={sweep} />
+                          <Card.Img variant='top' src={sweep} />
                           <Card.Body>
                             <Card.Title>Token {prize?.token}</Card.Title>
                             <Card.Text>Buy Token</Card.Text>
                             <Button
-                              variant="primary"
+                              variant='primary'
                               onClick={() =>
                                 handleShow(prize.ticket, prize.token, "")
-                              }
-                            >
-                              <img src={ticket} alt="ticket" />
+                              }>
+                              <img src={ticket} alt='ticket' />
                               <h5>{prize?.ticket}</h5>
                             </Button>
                           </Card.Body>
@@ -1191,17 +1181,16 @@ export default function CryptoToGC() {
               </div>
             )}
             <Modal show={show} onHide={handleClose} centered animation={false}>
-              <Modal.Body className="popupBody">
+              <Modal.Body className='popupBody'>
                 <div>Do You Want To Redeem?</div>
-                <div className="popupBtn">
-                  <button className="greyBtn" onClick={handleClose}>
+                <div className='popupBtn'>
+                  <button className='greyBtn' onClick={handleClose}>
                     Cancel
                   </button>
                   <button
-                    className="yellowBtn"
+                    className='yellowBtn'
                     disabled={disable}
-                    onClick={confirmBuy}
-                  >
+                    onClick={confirmBuy}>
                     Confirm
                   </button>
                 </div>
@@ -1209,16 +1198,15 @@ export default function CryptoToGC() {
             </Modal>
             <button
               style={{ visibility: "hidden" }}
-              type="button"
-              id="paycard"
-              class="AcceptUI"
+              type='button'
+              id='paycard'
+              class='AcceptUI'
               data-billingAddressOptions='{"show":true, "required":false}'
               data-apiLoginID={process.env.REACT_APP_AUTHORIZE_LOGIN_KEY}
               data-clientKey={process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY}
-              data-acceptUIFormBtnTxt="Submit"
-              data-acceptUIFormHeaderTxt="Card Information"
-              data-responseHandler={`requestHandler`}
-            >
+              data-acceptUIFormBtnTxt='Submit'
+              data-acceptUIFormHeaderTxt='Card Information'
+              data-responseHandler={`requestHandler`}>
               pay
             </button>
           </main>
