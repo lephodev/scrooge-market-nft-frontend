@@ -53,6 +53,8 @@ export default function CryptoToGC() {
   const [tokens, setTokens] = useState("");
   const [key, setKey] = useState("cryptoToGc");
   const isMismatched = useNetworkMismatch();
+  const [errors, setErrors] = useState("");
+
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
@@ -94,6 +96,12 @@ export default function CryptoToGC() {
       });
   };
   const handleClose = () => setShow(false);
+  const handlePromoReject = () => {
+    setPromoDetails({});
+    setPromoCode("");
+    promoCode = "";
+    goldcoinAmount = "";
+  };
   // Create a new WebSocket provider connected to BSC mainnet
   const provider = sdk.getProvider();
 
@@ -149,11 +157,14 @@ export default function CryptoToGC() {
             setBuyLoading(false);
             if (res.data.success) {
               toast.success(res.data.data, { id: "buy-sucess" });
+              handlePromoReject();
             } else {
               toast.error(res.data.error, { id: "buy-failed" });
+              handlePromoReject();
             }
           } catch (e) {
             setBuyLoading(false);
+            handlePromoReject();
             console.log("ee55", e.response);
             // console.log("ee55", JSON.parse(e));
             if (axios.isAxiosError(e) && e?.response) {
@@ -225,13 +236,6 @@ export default function CryptoToGC() {
       console.log(e);
     }
   }
-
-  const handlePromoReject = () => {
-    setPromoDetails({});
-    setPromoCode("");
-    promoCode = "";
-    goldcoinAmount = "";
-  };
 
   const convert = async (usd, gc, pid) => {
     if (user?.isBlockWallet) {
@@ -766,7 +770,6 @@ export default function CryptoToGC() {
     handleClose();
   };
 
-  const [errors, setErrors] = useState("");
   const handleChangePromo = (e) => {
     const { value, name } = e.target;
     setPromoCode(value.trim());
