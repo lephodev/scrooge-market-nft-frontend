@@ -4573,7 +4573,6 @@ span.input-range__label.input-range__label--value
 
 .purchasemodal-cards .card {
   background: #151515;
-  max-width: 180px;
   width: 100%;
   height: 250px;
   border: 1px solid #33363adb;
@@ -4581,6 +4580,10 @@ span.input-range__label.input-range__label--value
   padding-top: 6px;
   max-width: 220px;
   border-radius: 10px 10px 0px 0px;
+}
+.buy-chips-grid.cryptoToGC .purchasemodal-cards .card {
+  max-width: 240px;
+  margin: 10px;
 }
 
 .buy-chips-grid.cryptoTotoken .purchasemodal-cards .card {
@@ -4775,6 +4778,7 @@ button.affiliate-dropdownBtn.close::before {
   display: flex;
   gap: 10px;
   align-items: flex-start;
+  position: relative;
 }
 .enter-promo p {
   color: red;
@@ -4806,14 +4810,24 @@ button.affiliate-dropdownBtn.close::before {
   border-color: #f9ff00;
   background: transparent;
   color: #fff;
+  position: relative;
+  height: 44px;
+  padding: 2px 15px;
+  padding-right: 90px;
 }
 .enter-promo .form-control::placeholder {
   color: #fff;
+}
+.enter-promo button {
+  position: absolute;
+  right: 4px;
+  top: 4px;
 }
 .cross-text {
   text-decoration: line-through;
   text-decoration-color: red;
   text-decoration-thickness: 2px;
+  font-size: 14px;
 }
 
 /********************************************************************************************/
