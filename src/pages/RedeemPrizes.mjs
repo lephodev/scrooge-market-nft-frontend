@@ -12,7 +12,7 @@ import { useCookies } from "react-cookie";
 // import coin3 from "../images/2.png";
 // import coin4 from "../images/1.png";
 import sweep from "../images/token.png";
-import ticket  from "../images/ticket.png";
+import ticket from "../images/ticket.png";
 // import InputRange from "react-input-range";
 import { userKycDetails } from "../utils/api.mjs";
 import AuthContext from "../context/authContext.ts";
@@ -48,6 +48,7 @@ function RedeemPrizes() {
   const [OG5000, setOG5000] = useState();
   const [OG10000, setOG10000] = useState();
   const [OG20000, setOG20000] = useState();
+  const [OG500000, setOG500000] = useState();
   const [JR1000, setJR1000] = useState();
   const [JR5000, setJR5000] = useState();
   const [JR10000, setJR10000] = useState();
@@ -79,38 +80,37 @@ function RedeemPrizes() {
     handleClose();
   };
 
-
-  const confirmRedeem=(prize_id)=>{
+  const confirmRedeem = (prize_id) => {
     try {
-    if (!user)
-    return toast.error("Please login first", { containerId: "login" });
-    if(user?.isBlockWallet){
-      return toast.error(`Your wallet blocked by admin`,{ toastId: "A" });
+      if (!user)
+        return toast.error("Please login first", { containerId: "login" });
+      if (user?.isBlockWallet) {
+        return toast.error(`Your wallet blocked by admin`, { toastId: "A" });
+      }
+      if (!address)
+        return toast.error("Please connect wallet first", {
+          containerId: "connect-wallet",
+        });
+      setglobalLoader(true);
+      marketPlaceInstance()
+        .get(`/WithdrawRequest/${address}/${prize_id}`)
+        .then((data) => {
+          console.log("redeemdata", data);
+          if (!data.data.success) {
+            toast.error("ERROR! - " + data.data.message, {
+              containerId: "error",
+            });
+            setglobalLoader(false);
+          } else {
+            toast.success(data?.data?.message);
+            setglobalLoader(false);
+            getUserDataInstant();
+          }
+        });
+    } catch (error) {
+      console.log("errrr", error);
     }
-  if (!address)
-    return toast.error("Please connect wallet first", {
-      containerId: "connect-wallet",
-    });
-    setglobalLoader(true)
-        marketPlaceInstance()
-      .get(`/WithdrawRequest/${address}/${prize_id}`)
-      .then((data) => {
-        console.log("redeemdata", data);
-        if (!data.data.success) {
-          toast.error("ERROR! - " + data.data.message, {
-            containerId: "error",
-          });
-          setglobalLoader(false)
-        } else {
-          toast.success(data?.data?.message);
-          setglobalLoader(false)
-          getUserDataInstant();
-        }
-      })
-  } catch (error) {
-      console.log("errrr",error);
-  }
-  }
+  };
 
   async function getTicketToTokenPrizes() {
     setPrizesLoading(true);
@@ -150,7 +150,7 @@ function RedeemPrizes() {
 
   async function startFetching() {
     getCoinGeckoDataOG();
-     getCoinGeckoDataJR();
+    getCoinGeckoDataJR();
     if (prizesReceived === 0) {
       getTicketToTokenPrizes();
       getPrizes();
@@ -211,25 +211,34 @@ function RedeemPrizes() {
     }
   };
   async function getCoinGeckoDataOG() {
-    await axios.post('https://api.coinbrain.com/public/coin-info', {
-        "56":[process.env.REACT_APP_OGCONTRACT_ADDRESS]
-    })
-    .then((response) => {
-      console.log("abc",response);
+    await axios
+      .post("https://api.coinbrain.com/public/coin-info", {
+        56: [process.env.REACT_APP_OGCONTRACT_ADDRESS],
+      })
+      .then(
+        (response) => {
+          console.log("abc", response);
 
-      const current_price = response.data[0].priceUsd;
-      console.log("current_price",current_price);
-      console.log("(10 / current_price / 2).toFixed(0)",(10 / current_price / 2).toFixed(0));
-      setCurrentPriceOG(current_price);
-      setOG1000((10 / current_price / 2).toFixed(0));
-      setOG5000((40 / current_price / 2).toFixed(0));
-      setOG10000((100 / current_price / 2).toFixed(0));
-      setOG20000((200 / current_price / 2).toFixed(0));
-      //console.log(OG1000, OG5000, OG10000);
-      return current_price;
-    }, (error) => {
-      console.log(error);
-    });
+          const current_price = response.data[0].priceUsd;
+          console.log("current_price", current_price);
+          console.log(
+            "(10 / current_price / 2).toFixed(0)",
+            (10 / current_price / 2).toFixed(0)
+          );
+          setCurrentPriceOG(current_price);
+          setOG1000((10 / current_price / 2).toFixed(0));
+          setOG5000((40 / current_price / 2).toFixed(0));
+          setOG10000((100 / current_price / 2).toFixed(0));
+          setOG20000((200 / current_price / 2).toFixed(0));
+          setOG500000((1000 / current_price / 2).toFixed(0));
+
+          console.log("OG1000, OG5000, OG10000", OG1000, OG5000, OG10000);
+          return current_price;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   async function getCoinGeckoDataJR() {
@@ -260,7 +269,6 @@ function RedeemPrizes() {
         headers: {
           Authorization: `Bearer ${access_token}`,
           "Permissions-Policy": "geolocation=*",
-
         },
       })
       .then((res) => {
@@ -383,20 +391,19 @@ function RedeemPrizes() {
 
   return (
     <Layout>
-      <main className="main redeem-prizes-page">
-        <div className="container">
+      <main className='main redeem-prizes-page'>
+        <div className='container'>
           <Modal show={show} onHide={handleClose} centered animation={false}>
-            <Modal.Body className="popupBody">
+            <Modal.Body className='popupBody'>
               <div>Do You Want To Redeem?</div>
-              <div className="popupBtn">
-                <button className="greyBtn" onClick={handleClose}>
+              <div className='popupBtn'>
+                <button className='greyBtn' onClick={handleClose}>
                   Cancel
                 </button>
                 <button
-                  className="yellowBtn"
+                  className='yellowBtn'
                   disabled={disable}
-                  onClick={confirmBuy}
-                >
+                  onClick={confirmBuy}>
                   Confirm
                 </button>
               </div>
@@ -408,24 +415,23 @@ function RedeemPrizes() {
             </div>
           )} */}
           {globalLoader && (
-            <div className="loading">
-              <div className="loading-img-div">
-                <img src={LoadingPoker} alt="game" className="imageAnimation" />
+            <div className='loading'>
+              <div className='loading-img-div'>
+                <img src={LoadingPoker} alt='game' className='imageAnimation' />
               </div>
             </div>
           )}
-          <div className="bordered-section">
+          <div className='bordered-section'>
             {redeemSuccess ? (
-              <div className="pageImgContainer">
-                <div className="loading-txt">
+              <div className='pageImgContainer'>
+                <div className='loading-txt'>
                   REDEEMED SUCCESSFULLY<br></br>
                   <button
-                    className="page-nav-header-btn"
+                    className='page-nav-header-btn'
                     onClick={() => {
                       setRedeemSuccess(false);
                       reward();
-                    }}
-                  >
+                    }}>
                     CLOSE
                   </button>
                 </div>
@@ -435,11 +441,11 @@ function RedeemPrizes() {
             )}
             {!globalLoader && (
               <>
-                <div className="scrooge-main-heading">
-                  <div className="pageTitle">
-                    <h1 className="title">Redeem for Prizes</h1>
+                <div className='scrooge-main-heading'>
+                  <div className='pageTitle'>
+                    <h1 className='title'>Redeem for Prizes</h1>
                   </div>
-                  <div className="feature-overview-div">
+                  <div className='feature-overview-div'>
                     Ready to cash in on all of your big wins? Browse through our
                     huge list of amazing prizes and find something you just
                     can't live without. Make sure you have enough available
@@ -448,7 +454,7 @@ function RedeemPrizes() {
                   </div>
                 </div>
 
-                <div className="prizes-chip-count">
+                <div className='prizes-chip-count'>
                   {user ? (
                     <>
                       <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
@@ -457,13 +463,13 @@ function RedeemPrizes() {
                     <>
                       <img
                         src={LoadingPoker}
-                        alt="game"
-                        className="imageAnimation"
+                        alt='game'
+                        className='imageAnimation'
                       />
                     </>
                   )}
                 </div>
-                <div className="page-nav-header-btns-row">
+                <div className='page-nav-header-btns-row'>
                   {/* <div className='new-btn'>
                     <button
                       // className='page-nav-header-btn'
@@ -471,11 +477,10 @@ function RedeemPrizes() {
                       BADGES
                     </button>
                   </div> */}
-                  <div className="new-btn">
+                  <div className='new-btn'>
                     <button
                       // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("Crypto")}
-                    >
+                      onClick={() => filterPrizes("Crypto")}>
                       CRYPTO
                     </button>
                   </div>
@@ -486,11 +491,10 @@ function RedeemPrizes() {
                       MERCH
                     </button>
                   </div> */}
-                  <div className="new-btn">
+                  <div className='new-btn'>
                     <button
                       // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("NFTs")}
-                    >
+                      onClick={() => filterPrizes("NFTs")}>
                       NFTS
                     </button>
                   </div>
@@ -507,58 +511,51 @@ function RedeemPrizes() {
                 </div>
 
                 {buyTokenTab && (
-                  <div className="buyTokenTab">
+                  <div className='buyTokenTab'>
                     <h2>Buy Tokens Here .. </h2>
-                    <Button className="buyTokensBtn">Buy Tokens</Button>
+                    <Button className='buyTokensBtn'>Buy Tokens</Button>
                   </div>
                 )}
 
                 {!showConvert && (
-                  <div className="page-nav-header-btns-subrow">
+                  <div className='page-nav-header-btns-subrow'>
                     <button
-                      className="page-nav-header-subbtn"
-                      onClick={() => sortPrizes("priceDescending")}
-                    >
+                      className='page-nav-header-subbtn'
+                      onClick={() => sortPrizes("priceDescending")}>
                       PRICE HIGH TO LOW
                     </button>
                     <button
-                      className="page-nav-header-subbtn"
-                      onClick={() => sortPrizes("priceAscending")}
-                    >
+                      className='page-nav-header-subbtn'
+                      onClick={() => sortPrizes("priceAscending")}>
                       PRICE LOW TO HIGH
                     </button>
                     <button
-                      className="page-nav-header-subbtn"
-                      onClick={() => sortPrizes("nameDescending")}
-                    >
+                      className='page-nav-header-subbtn'
+                      onClick={() => sortPrizes("nameDescending")}>
                       NAME A-Z
                     </button>
                     <button
-                      className="page-nav-header-subbtn"
-                      onClick={() => sortPrizes("nameAscending")}
-                    >
+                      className='page-nav-header-subbtn'
+                      onClick={() => sortPrizes("nameAscending")}>
                       NAME Z-A
                     </button>
                     <button
-                      className="page-nav-header-subbtn"
-                      onClick={() => sortPrizes("categoryDescending")}
-                    >
+                      className='page-nav-header-subbtn'
+                      onClick={() => sortPrizes("categoryDescending")}>
                       CATEGORY A-Z
                     </button>
                     <button
-                      className="page-nav-header-subbtn"
-                      onClick={() => sortPrizes("categoryAscending")}
-                    >
+                      className='page-nav-header-subbtn'
+                      onClick={() => sortPrizes("categoryAscending")}>
                       CATEGORY Z-A
                     </button>
                   </div>
                 )}
-                <div className="prizes-container">
+                <div className='prizes-container'>
                   {showConvert && (
                     <>
-                      
-                      <div className="buy-chips-content">
-                        <div className="buy-chips-grid cryptoTotoken">
+                      <div className='buy-chips-content'>
+                        <div className='buy-chips-grid cryptoTotoken'>
                           {/* <div className='buy-chips-grid-box'>
                             <img src={coin4} alt='coin' />
 
@@ -581,26 +578,26 @@ function RedeemPrizes() {
                             </div>
                           </div> */}
 
-                          <div className="buy-chips-grid">
-                            <div className="purchasemodal-cards">
+                          <div className='buy-chips-grid'>
+                            <div className='purchasemodal-cards'>
                               {ticketPrizes.map((prize) => (
                                 <Card>
-                                  <Card.Img
-                                    variant="top"
-                                    src={sweep}
-                                  />
+                                  <Card.Img variant='top' src={sweep} />
                                   <Card.Body>
                                     <Card.Title>
                                       Token {prize?.token}
                                     </Card.Title>
                                     <Card.Text>Buy Ticket</Card.Text>
                                     <Button
-                                      variant="primary"
+                                      variant='primary'
                                       onClick={() =>
-                                        handleShow(prize.ticket, prize.token, "")
-                                      }
-                                    >
-                                      <img src={ticket} alt="ticket"/>
+                                        handleShow(
+                                          prize.ticket,
+                                          prize.token,
+                                          ""
+                                        )
+                                      }>
+                                      <img src={ticket} alt='ticket' />
                                       <h5>{prize?.ticket}</h5>
                                     </Button>
                                   </Card.Body>
@@ -614,12 +611,12 @@ function RedeemPrizes() {
                   )}
 
                   <div style={{ width: "100%", textAlign: "center" }}>
-                    <div id="rewardId" style={{ margin: "0 auto" }} />
+                    <div id='rewardId' style={{ margin: "0 auto" }} />
                   </div>
                   {!prizesLoading ? (
                     <>
-                      <div className="prizes_container">
-                      {/* <div className="prizes-card">
+                      <div className='prizes_container'>
+                        {/* <div className="prizes-card">
                   <div className="prize-name bold text-animate">
                                   <h4>Under token migeration</h4>
                                 </div>
@@ -636,23 +633,23 @@ function RedeemPrizes() {
                               f.redeem_action !== "burn" &&
                               f.category !== "Merch" &&
                               f.category !== "Badges" &&
-                              f.price !== 500 && f.contract_name !== "JR"
+                              f.price !== 500 &&
+                              f.contract_name !== "JR"
                           )
                           .map((prize) => (
-                            <div className="prizes-card" key={prize._id}>
+                            <div className='prizes-card' key={prize._id}>
                               {/* {console.log("prize", prize._id)} */}
                               {!prize.isDynamic ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>{prize.name}</h4>
                                 </div>
                               ) : (
                                 <></>
                               )}
                               {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
-                                    
                                     {prize.name.replace(
                                       "xxxValue",
                                       parseInt(OG1000).toLocaleString("en-US")
@@ -671,7 +668,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -692,7 +689,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -712,7 +709,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -733,7 +730,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -753,7 +750,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -774,7 +771,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf761736630ad01d5f52" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -795,7 +792,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedfb61736630ad01d5f55" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -815,7 +812,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf301736630ad01d5f4f" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -836,7 +833,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf651736630ad01d5f51" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -857,7 +854,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -877,7 +874,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedfc51736630ad01d5f56" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -897,7 +894,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "6434f2f5f6bfb431f290a691" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -918,7 +915,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "6434f46cf6bfb431f290a692" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -938,13 +935,35 @@ function RedeemPrizes() {
                               ) : (
                                 <></>
                               )}
+
+                              {prize._id === "64e2f7cf9a8e251156cfe8f5" ? (
+                                <div className='prize-name bold text-animate'>
+                                  <h4>
+                                    {" "}
+                                    {prize.name.replace(
+                                      "xxxValue",
+                                      parseInt(OG500000).toLocaleString("en-US")
+                                    )}
+                                  </h4>
+                                  *
+                                  <h4>
+                                    {(
+                                      parseInt(OG500000) * currentPriceOG
+                                    ).toLocaleString("en-US")}
+                                    $ In Value
+                                  </h4>{" "}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
                               <img
-                                className="card-img pulse"
+                                className='card-img pulse'
                                 src={prize.image_url}
                                 alt={prize.name}
                               />
                               <br></br>
-                              <div className="prize-cost">
+                              <div className='prize-cost'>
                                 <p>Cost: {prize.price} Tickets</p>
                               </div>
                               <br></br>
@@ -959,7 +978,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG1000).toLocaleString("en-US")
@@ -970,7 +989,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR1000).toLocaleString("en-US")
@@ -981,7 +1000,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG1000).toLocaleString("en-US")
@@ -992,7 +1011,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR1000).toLocaleString("en-US")
@@ -1003,7 +1022,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG5000).toLocaleString("en-US")
@@ -1014,7 +1033,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR5000).toLocaleString("en-US")
@@ -1025,7 +1044,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf761736630ad01d5f52" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG5000).toLocaleString("en-US")
@@ -1036,7 +1055,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedfb61736630ad01d5f55" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR5000).toLocaleString("en-US")
@@ -1047,7 +1066,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf301736630ad01d5f4f" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG10000).toLocaleString("en-US")
@@ -1058,7 +1077,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf651736630ad01d5f51" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR10000).toLocaleString("en-US")
@@ -1069,7 +1088,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG10000).toLocaleString("en-US")
@@ -1080,7 +1099,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedfc51736630ad01d5f56" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR10000).toLocaleString("en-US")
@@ -1091,7 +1110,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "6434f2f5f6bfb431f290a691" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG20000).toLocaleString("en-US")
@@ -1102,7 +1121,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "6434f46cf6bfb431f290a692" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR20000).toLocaleString("en-US")
@@ -1112,8 +1131,19 @@ function RedeemPrizes() {
                               ) : (
                                 <></>
                               )}
+                              {prize._id === "64e2f7cf9a8e251156cfe8f5" ? (
+                                <div className=''>
+                                  {prize.description.replace(
+                                    "xxxValue",
+                                    parseInt(OG500000).toLocaleString("en-US")
+                                  )}
+                                  *
+                                </div>
+                              ) : (
+                                <></>
+                              )}
                               {prize.isDynamic ? (
-                                <div className="asterisk-desc">
+                                <div className='asterisk-desc'>
                                   *Amount received is calculated at time of
                                   redemption and may vary from the amount
                                   displayed.<br></br>
@@ -1124,12 +1154,11 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               <br />
-                              <div className="redeem-btn">
+                              <div className='redeem-btn'>
                                 <button
                                   // className='submit-btn'
-                                  className="gradient-btn"
-                                  onClick={() => handleShow("", "", prize._id)}
-                                >
+                                  className='gradient-btn'
+                                  onClick={() => handleShow("", "", prize._id)}>
                                   REDEEM PRIZE
                                 </button>
                               </div>
@@ -1141,11 +1170,11 @@ function RedeemPrizes() {
                     </>
                   ) : (
                     <>
-                      <div className="loader-img">
+                      <div className='loader-img'>
                         <img
                           src={LoadingPoker}
-                          alt="game"
-                          className="imageAnimation"
+                          alt='game'
+                          className='imageAnimation'
                         />
                       </div>
                     </>
