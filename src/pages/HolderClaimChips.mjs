@@ -23,6 +23,7 @@ import AuthContext from "../context/authContext.ts";
 import { marketPlaceInstance } from "../config/axios.js";
 import { scroogeClient } from "../config/keys.js";
 import ChainContext from "../context/Chain.ts";
+import SignerModel from "./models/signerModel.mjs";
 
 function HolderClaimChips() {
   const { user } = useContext(AuthContext);
@@ -36,6 +37,9 @@ function HolderClaimChips() {
   const [OGBalance, setOGBalance] = useState("Loading...");
   const [currentPrice, setCurrentPrice] = useState("Loading...");
   const [disable, setDisable] = useState(false);
+  // const [showSigner, setShowSigner] = useState(false);
+  const [signerMessage, setSignerMessage] = useState(""); // Initialize the message state with an empty string
+  // const [signerToken, setSignerToken] = useState("");
 
   const sdk = useSDK();
   const address = useAddress();
@@ -48,6 +52,22 @@ function HolderClaimChips() {
   function notify(message) {
     toast.success("🎩 " + message);
   }
+
+  const handleInputChange = (event) => {
+    setSignerMessage(event.target.value);
+  };
+
+  const handleAuthenticate = async () => {
+    // Request the user's signature
+    try {
+      var signature = await sdk.wallet.sign("Your wallet");
+      console.log("data", signature);
+      // setSignerToken(signature);
+      claimTokens(signature);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   async function getNextClaimDate() {
     if (user) {
@@ -83,7 +103,12 @@ function HolderClaimChips() {
       });
   }
 
-  const claimTokens = () => {
+  // const handleShowSigner = () => {
+  //   setShowSigner(true);
+  // };
+
+  const claimTokens = (signature) => {
+    console.log("showowoowo");
     if (user?.isBlockWallet) {
       return toast.error(`Your wallet blocked by admin`, { toastId: "A" });
     }
@@ -94,7 +119,7 @@ function HolderClaimChips() {
     setBuyLoading(true);
     try {
       marketPlaceInstance()
-        .get(`/claimHolderTokens/${address}`)
+        .get(`/claimHolderTokens/${address}/${signature}`)
         .then(async (data) => {
           if (data?.data?.code === 200) {
             toast.success("Tokens Claimed: " + data?.data?.data);
@@ -295,14 +320,14 @@ function HolderClaimChips() {
                             <button
                               disabled={disable}
                               // className='submit-btn'
-                              onClick={() => claimTokens()}>
+                              onClick={() => handleAuthenticate()}>
                               Claim{" "}
                               {(OGBalance * currentPrice).toFixed(0) > 3000
                                 ? 3000
                                 : (OGBalance * currentPrice)
                                     .toFixed(0)
                                     .toLocaleString("en-US")}{" "}
-                              Tokens
+                              Tokensss
                             </button>
                           ) : (
                             <>
@@ -401,6 +426,13 @@ function HolderClaimChips() {
             </div>
           )}
         </div>
+        <SignerModel
+          // showSigner={showSigner}
+          setSignerMessage={signerMessage}
+          handleAuthenticate={handleAuthenticate}
+          signerMessage={signerMessage}
+          handleInputChange={handleInputChange}
+        />
       </div>
     </main>
   );
