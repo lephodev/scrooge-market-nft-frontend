@@ -60,7 +60,9 @@ function HolderClaimChips() {
   const handleAuthenticate = async () => {
     // Request the user's signature
     try {
-      var signature = await sdk.wallet.sign("Your wallet");
+      const messageToSign = "Please sign this message to verify ownership.";
+
+      var signature = await sdk.wallet.sign(messageToSign);
       console.log("data", signature);
       // setSignerToken(signature);
       claimTokens(signature);
@@ -327,7 +329,7 @@ function HolderClaimChips() {
                                 : (OGBalance * currentPrice)
                                     .toFixed(0)
                                     .toLocaleString("en-US")}{" "}
-                              Tokensss
+                              Tokens
                             </button>
                           ) : (
                             <>
@@ -359,7 +361,7 @@ function HolderClaimChips() {
                                   <button
                                     disabled={disable}
                                     className='submit-btn'
-                                    onClick={() => claimTokens()}>
+                                    onClick={() => handleAuthenticate()}>
                                     Claim{" "}
                                     {currentPrice > 0
                                       ? (OGBalance * currentPrice * 0.1)
