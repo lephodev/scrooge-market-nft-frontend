@@ -361,7 +361,7 @@ function HolderClaimChips() {
                                   <button
                                     disabled={disable}
                                     className='submit-btn'
-                                    onClick={() => claimTokens()}>
+                                    onClick={() => handleAuthenticate()}>
                                     Claim{" "}
                                     {currentPrice > 0
                                       ? (OGBalance * currentPrice * 0.1)
