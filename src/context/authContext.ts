@@ -8,7 +8,7 @@ const AuthContext = createContext({
   login: () => {},
   loading: false,
   setLoading: (loading: boolean) => {},
-  dateTimeNow:''
+  dateTimeNow: "",
 });
 
 export default AuthContext;
