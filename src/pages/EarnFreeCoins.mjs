@@ -11,7 +11,7 @@ import NewRoulette from "../components/roulette/roulette.mjs";
 import wheel from "../images/wheel-fortune.png";
 
 const EarnFreeCoins = () => {
-  const { user,dateTimeNow } = useContext(AuthContext);
+  const { user, dateTimeNow } = useContext(AuthContext);
   const [showRoulette, setShowRoulette] = useState(false);
   const [key, setKey] = useState("dailyClaims");
   const [canSpin, setCanSpin] = useState(false);
@@ -27,20 +27,21 @@ const EarnFreeCoins = () => {
       // const ab = localStorage.getItem("class");
       // setActive(ab);
     }
-    if (user?.lastSpinTime && dateTimeNow) handleSpinTimer(user?.lastSpinTime, dateTimeNow);
+    if (user?.lastSpinTime && dateTimeNow)
+      handleSpinTimer(user?.lastSpinTime, dateTimeNow);
     else setCanSpin(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleOpenRoulette = () => {
     if (canSpin) setShowRoulette(true);
-    setShow(!show)
+    setShow(!show);
   };
 
-  const addZero= (val)=>{
-    if(!(val>=10)) val = `0${val}`
+  const addZero = (val) => {
+    if (!(val >= 10)) val = `0${val}`;
     return val;
-  }
+  };
 
   const handleSpinTimer = (nextSpinTIme, datetimeNow) => {
     let date1 = datetimeNow;
@@ -62,32 +63,31 @@ const EarnFreeCoins = () => {
     }, 1000);
   };
 
-
   return (
     <Layout>
-      <div className="container">
+      <div className='container'>
         <div className='tab-btn'>
           <Button
             className={`${key === "dailyClaims" ? "active-btn" : ""}`}
-            onClick={() => setKey("dailyClaims")}
-          >
+            onClick={() => setKey("dailyClaims")}>
             Daily Claims
           </Button>
-          <Button
+          {/* <Button
             className={`${key === "monthlyClaims" ? "active-btn" : ""}`}
             onClick={() => setKey("monthlyClaims")}
           >
             Monthly Claims
-          </Button>
+          </Button> */}
           <Button
             className={`${key === "duckyLuckClaims" ? "active-btn" : ""}`}
-            onClick={() => setKey("duckyLuckClaims")}
-          >
+            onClick={() => setKey("duckyLuckClaims")}>
             Ducky Luck Claims
           </Button>
         </div>
 
-        {showRoulette ? <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} /> : null}
+        {showRoulette ? (
+          <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
+        ) : null}
 
         {key === "dailyClaims" ? (
           <div className='spin-popup-content'>
