@@ -449,7 +449,7 @@ function RedeemPrizes() {
                     Ready to cash in on all of your big wins? Browse through our
                     huge list of amazing prizes and find something you just
                     can't live without. Make sure you have enough available
-                    tickets for the prize you want, then click the REDEEM PRIZE
+                    tokens for the prize you want, then click the REDEEM PRIZE
                     button!
                   </div>
                 </div>
