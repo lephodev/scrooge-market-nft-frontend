@@ -58,7 +58,7 @@ function RedeemPrizes() {
 
   const handleClose = () => setShow(false);
   const handleShow = (ticket, token, prizeid) => {
-    setTickets(ticket);
+    // setTickets(ticket);
     setTokens(token);
     setPrizeId(prizeid);
     setShow(true);
@@ -457,7 +457,7 @@ function RedeemPrizes() {
                 <div className='prizes-chip-count'>
                   {user ? (
                     <>
-                      <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
+                      <h3>Your Token Balance: {user?.wallet.toFixed(2)}</h3>
                     </>
                   ) : (
                     <>
@@ -964,7 +964,7 @@ function RedeemPrizes() {
                               />
                               <br></br>
                               <div className='prize-cost'>
-                                <p>Cost: {prize.price} Tickets</p>
+                                <p>Cost: {prize.price} tokens</p>
                               </div>
                               <br></br>
                               <p>Category: {prize.category}</p>
