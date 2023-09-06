@@ -137,7 +137,8 @@ function RedeemPrizes() {
         console.log("res", res);
         if (res.data) {
           if (prizes.length < 2) {
-            setPrizes(res.data || []);
+            // setPrizes(res.data || []);
+            setPrizes(res.data.filter((prize) => prize.category === "Crypto"));
             setPrizesLoading(false);
             setAllPrizes(res.data || []);
           }
@@ -634,7 +635,8 @@ function RedeemPrizes() {
                               f.category !== "Merch" &&
                               f.category !== "Badges" &&
                               f.price !== 500 &&
-                              f.contract_name !== "JR"
+                              f.contract_name !== "JR" &&
+                              f._id !== "63cedf0d1736630ad01d5f4e"
                           )
                           .map((prize) => (
                             <div className='prizes-card' key={prize._id}>
