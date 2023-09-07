@@ -58,7 +58,7 @@ function RedeemPrizes() {
 
   const handleClose = () => setShow(false);
   const handleShow = (ticket, token, prizeid) => {
-    setTickets(ticket);
+    // setTickets(ticket);
     setTokens(token);
     setPrizeId(prizeid);
     setShow(true);
@@ -137,7 +137,8 @@ function RedeemPrizes() {
         console.log("res", res);
         if (res.data) {
           if (prizes.length < 2) {
-            setPrizes(res.data || []);
+            // setPrizes(res.data || []);
+            setPrizes(res.data.filter((prize) => prize.category === "Crypto"));
             setPrizesLoading(false);
             setAllPrizes(res.data || []);
           }
@@ -449,7 +450,7 @@ function RedeemPrizes() {
                     Ready to cash in on all of your big wins? Browse through our
                     huge list of amazing prizes and find something you just
                     can't live without. Make sure you have enough available
-                    tickets for the prize you want, then click the REDEEM PRIZE
+                    tokens for the prize you want, then click the REDEEM PRIZE
                     button!
                   </div>
                 </div>
@@ -457,7 +458,7 @@ function RedeemPrizes() {
                 <div className='prizes-chip-count'>
                   {user ? (
                     <>
-                      <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
+                      <h3>Your Token Balance: {user?.wallet.toFixed(2)}</h3>
                     </>
                   ) : (
                     <>
@@ -634,7 +635,8 @@ function RedeemPrizes() {
                               f.category !== "Merch" &&
                               f.category !== "Badges" &&
                               f.price !== 500 &&
-                              f.contract_name !== "JR"
+                              f.contract_name !== "JR" &&
+                              f._id !== "63cedf0d1736630ad01d5f4e"
                           )
                           .map((prize) => (
                             <div className='prizes-card' key={prize._id}>
@@ -964,7 +966,7 @@ function RedeemPrizes() {
                               />
                               <br></br>
                               <div className='prize-cost'>
-                                <p>Cost: {prize.price} Tickets</p>
+                                <p>Cost: {prize.price} tokens</p>
                               </div>
                               <br></br>
                               <p>Category: {prize.category}</p>

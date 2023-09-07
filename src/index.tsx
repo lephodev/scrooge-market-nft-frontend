@@ -44,7 +44,7 @@ export default function App() {
   const [spendedAmount, setSpendedAmount] = useState(null);
   const [cookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(true);
-  const [dateTimeNow,setDateTimeNow] = useState('')
+  const [dateTimeNow, setDateTimeNow] = useState("");
 
   useEffect(() => {
     login();
@@ -64,17 +64,17 @@ export default function App() {
       })
       .then((res: any) => {
         // console.log(convertedData)
-        
+
         if (res.data.user) {
           setUser({
             ...res.data.user,
           });
-          if(res.data.datetimenow) setDateTimeNow(res.data.datetimenow)
+          if (res.data.datetimenow) setDateTimeNow(res.data.datetimenow);
           setSpendedAmount(res.data.spended);
           setLoading(false);
         } else {
           setUser(null);
-          setDateTimeNow('')
+          setDateTimeNow("");
           setLoading(false);
           return <Navigate to='/login' />;
         }
@@ -130,7 +130,7 @@ export default function App() {
 
                 <Route
                   path='/'
-                  element={<ProtectedRoute  component={<Home   />} />}
+                  element={<ProtectedRoute component={<Home />} />}
                 />
                 <Route
                   path='/my-wallet'
