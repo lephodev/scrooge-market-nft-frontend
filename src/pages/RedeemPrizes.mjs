@@ -19,6 +19,7 @@ import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
 import { authInstance, marketPlaceInstance } from "../config/axios.js";
 import { Button, Card, Modal } from "react-bootstrap";
+import scroogelogo from "../images/scroogeCasinoLogo.png";
 import axios from "axios";
 function RedeemPrizes() {
   const navigate = useNavigate();
@@ -56,9 +57,11 @@ function RedeemPrizes() {
   const [cookies] = useCookies(["token"]);
   const address = useAddress();
 
+  const redemptionUnderMaintainance = true;
+
   const handleClose = () => setShow(false);
   const handleShow = (ticket, token, prizeid) => {
-    setTickets(ticket);
+    // setTickets(ticket);
     setTokens(token);
     setPrizeId(prizeid);
     setShow(true);
@@ -137,7 +140,8 @@ function RedeemPrizes() {
         console.log("res", res);
         if (res.data) {
           if (prizes.length < 2) {
-            setPrizes(res.data || []);
+            // setPrizes(res.data || []);
+            setPrizes(res.data.filter((prize) => prize.category === "Crypto"));
             setPrizesLoading(false);
             setAllPrizes(res.data || []);
           }
@@ -389,6 +393,10 @@ function RedeemPrizes() {
   //   getTicketToTokenPackages();
   // }, []);
 
+  if (redemptionUnderMaintainance) {
+    return <UnderMaintenanceContent />;
+  }
+
   return (
     <Layout>
       <main className='main redeem-prizes-page'>
@@ -449,7 +457,7 @@ function RedeemPrizes() {
                     Ready to cash in on all of your big wins? Browse through our
                     huge list of amazing prizes and find something you just
                     can't live without. Make sure you have enough available
-                    tickets for the prize you want, then click the REDEEM PRIZE
+                    tokens for the prize you want, then click the REDEEM PRIZE
                     button!
                   </div>
                 </div>
@@ -457,7 +465,7 @@ function RedeemPrizes() {
                 <div className='prizes-chip-count'>
                   {user ? (
                     <>
-                      <h3>Your Ticket Balance: {user?.ticket.toFixed(2)}</h3>
+                      <h3>Your Token Balance: {user?.wallet.toFixed(2)}</h3>
                     </>
                   ) : (
                     <>
@@ -965,7 +973,7 @@ function RedeemPrizes() {
                               />
                               <br></br>
                               <div className='prize-cost'>
-                                <p>Cost: {prize.price} Tickets</p>
+                                <p>Cost: {prize.price} tokens</p>
                               </div>
                               <br></br>
                               <p>Category: {prize.category}</p>
@@ -1189,5 +1197,14 @@ function RedeemPrizes() {
     </Layout>
   );
 }
+
+const UnderMaintenanceContent = () => {
+  return (
+    <div className='scrooge-under-content'>
+      <img src={scroogelogo} alt='scrooge' />
+      <h4>Under Maintainance</h4>
+    </div>
+  );
+};
 
 export default RedeemPrizes;

@@ -35,6 +35,7 @@ import KycForm from "./pages/KycForm.mjs";
 import BuyTokenFromOGJR from "./pages/BuyTokenFromOGJR.mjs";
 import CloudWebsiteError from "./components/cloudWebsiteError.mjs";
 import EarnFreeCoins from "./pages/EarnFreeCoins.mjs";
+import scroogelogo from "./images/scroogeCasinoLogo.png";
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
@@ -44,7 +45,9 @@ export default function App() {
   const [spendedAmount, setSpendedAmount] = useState(null);
   const [cookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(true);
-  const [dateTimeNow,setDateTimeNow] = useState('')
+  const [dateTimeNow, setDateTimeNow] = useState("");
+
+  const underMaintainance = false;
 
   useEffect(() => {
     login();
@@ -64,17 +67,17 @@ export default function App() {
       })
       .then((res: any) => {
         // console.log(convertedData)
-        
+
         if (res.data.user) {
           setUser({
             ...res.data.user,
           });
-          if(res.data.datetimenow) setDateTimeNow(res.data.datetimenow)
+          if (res.data.datetimenow) setDateTimeNow(res.data.datetimenow);
           setSpendedAmount(res.data.spended);
           setLoading(false);
         } else {
           setUser(null);
-          setDateTimeNow('')
+          setDateTimeNow("");
           setLoading(false);
           return <Navigate to='/login' />;
         }
@@ -91,6 +94,10 @@ export default function App() {
     setUser(null);
     return <Navigate to='/login' />;
   };
+
+  if (underMaintainance) {
+    return <UnderMaintenanceContent />;
+  }
 
   return (
     <AuthContext.Provider
@@ -130,16 +137,16 @@ export default function App() {
 
                 <Route
                   path='/'
-                  element={<ProtectedRoute  component={<Home   />} />}
+                  element={<ProtectedRoute component={<Home />} />}
                 />
                 <Route
                   path='/my-wallet'
                   element={<ProtectedRoute component={<MyWallet />} />}
                 />
                 {/* <Route
-                  path='/redeem-nfts'
-                  element={<ProtectedRoute component={<RedeemNFTs />} />}
-                /> */}
+                    path='/redeem-nfts'
+                    element={<ProtectedRoute component={<RedeemNFTs />} />}
+                  /> */}
                 <Route
                   path='/crypto-to-gc'
                   element={<ProtectedRoute component={<CryptoToGC />} />}
@@ -157,9 +164,9 @@ export default function App() {
                   element={<ProtectedRoute component={<EarnFreeCoins />} />}
                 />
                 {/* <Route
-                  path='/kyc'
-                  element={<ProtectedRoute component={<KycForm />} />}
-                /> */}
+                    path='/kyc'
+                    element={<ProtectedRoute component={<KycForm />} />}
+                  /> */}
                 <Route
                   path='/earn-tokens'
                   element={<ProtectedRoute component={<EarnTokens />} />}
@@ -205,6 +212,15 @@ export default function App() {
     </AuthContext.Provider>
   );
 }
+
+const UnderMaintenanceContent = () => {
+  return (
+    <div className='scrooge-under-content'>
+      <img src={scroogelogo} alt='scrooge' />
+      <h4>Under Maintainance</h4>
+    </div>
+  );
+};
 
 const container = document.getElementById("root");
 const root = createRoot(container!);

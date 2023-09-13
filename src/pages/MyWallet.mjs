@@ -13,7 +13,7 @@ import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import ChainContext from "../context/Chain.ts";
 import Sweep from "../images/token.png";
 import GoldCoin from "../images/gold.png";
-import Ticket from "../images/ticket.png";
+// import Ticket from "../images/ticket.png";
 import ScroogeHatLogo from "../images/scroogeHatLogo.png";
 // import scroogejr from "../images/scroogejr.jpeg";
 import ClaimOGPending from "../components/claimOGPending.mjs";
@@ -26,11 +26,11 @@ import profile from "../images/profile.png";
 // import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses.js";
 export default function MyWallet() {
   const [OGBalance, setOGBalance] = useState("Loading...");
-  const [ setJRBalance] = useState("Loading...");
-  const [ setJRValue] = useState("Loading...");
+  const [setJRBalance] = useState("Loading...");
+  const [setJRValue] = useState("Loading...");
   const [OGValue, setOGValue] = useState("Loading...");
-  const [/* currentPriceOG */, setCurrentPriceOG] = useState("Loading...");
-  const [/* currentPriceJR */, setCurrentPriceJR] = useState("Loading...");
+  const [, /* currentPriceOG */ setCurrentPriceOG] = useState("Loading...");
+  const [, /* currentPriceJR */ setCurrentPriceJR] = useState("Loading...");
   const { user } = useContext(AuthContext);
   const [userRedeemed, setUserRedeemed] = useState([]);
   const [showMerchRedeemed, setShowMerchRedeemed] = useState(false);
@@ -54,12 +54,12 @@ export default function MyWallet() {
   }
 
   async function getCoinGeckoDataOG(bal) {
-    await fetch(
-      `https://api.coinbrain.com/public/coin-info`,{
-        method: "post",
-      body:JSON.stringify({
-        "56":[process.env.REACT_APP_OGCONTRACT_ADDRESS]
-      })})
+    await fetch(`https://api.coinbrain.com/public/coin-info`, {
+      method: "post",
+      body: JSON.stringify({
+        56: [process.env.REACT_APP_OGCONTRACT_ADDRESS],
+      }),
+    })
       .then((response) => response.json())
       .then((data) => {
         const current_price = data[0].priceUsd;
@@ -71,7 +71,6 @@ export default function MyWallet() {
         console.log(e);
         return false;
       });
-
   }
 
   async function getCoinGeckoDataJR(bal) {
@@ -124,7 +123,7 @@ export default function MyWallet() {
       "0x2e9F79aF51dD1bb56Bbb1627FBe4Cc90aa8985Dd"
     );
     setJRBalance(parseInt(rawBal.value / 10 ** 18));
-     getCoinGeckoDataJR(parseInt(rawBal.value / 10 ** 18));
+    getCoinGeckoDataJR(parseInt(rawBal.value / 10 ** 18));
   };
 
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
@@ -179,8 +178,7 @@ export default function MyWallet() {
                         // className='min-menu-btn'
                         onClick={() => {
                           setShowCasinoNFTs(true);
-                        }}
-                      >
+                        }}>
                         CASINO NFTS
                       </button>
                     </div>
@@ -195,8 +193,7 @@ export default function MyWallet() {
                         // className='min-menu-btn'
                         onClick={() => {
                           setShowCrypto(true);
-                        }}
-                      >
+                        }}>
                         CRYPTO
                       </button>
                     </div>
@@ -244,14 +241,14 @@ export default function MyWallet() {
                       />
                       TOKENS: {user?.wallet?.toLocaleString("en-US")}
                     </div>
-                    <div className='token-ticket-row'>
+                    {/* <div className='token-ticket-row'>
                       <img
                         className='ticket-small'
                         src={Ticket}
                         alt='Scrooge Casino balances'
                       />
                       TICKETS: {user?.ticket?.toLocaleString("en-US")}
-                    </div>
+                    </div> */}
                     <div className='token-ticket-row'>
                       <img
                         className='token-small'
@@ -330,8 +327,7 @@ export default function MyWallet() {
               <div className='close-btn-round-div wallet-close'>
                 <div
                   className='close-btn-round'
-                  onClick={() => setShowMerchRedeemed(false)}
-                >
+                  onClick={() => setShowMerchRedeemed(false)}>
                   X
                 </div>
               </div>
@@ -351,8 +347,7 @@ export default function MyWallet() {
                                 ? "disabled transaction-card"
                                 : "transaction-card"
                             }
-                            key={red._id}
-                          >
+                            key={red._id}>
                             <div key={deet._id}>
                               {deet.name}
                               <br></br>
@@ -374,8 +369,7 @@ export default function MyWallet() {
                                 <div className='new-btn'>
                                   <button
                                     // className='claim-btn'
-                                    onClick={() => handleMarkRedeemed(red._id)}
-                                  >
+                                    onClick={() => handleMarkRedeemed(red._id)}>
                                     Mark as Redeemed
                                   </button>
                                 </div>
