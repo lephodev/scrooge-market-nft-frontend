@@ -47,7 +47,6 @@ export default function App() {
   const [dateTimeNow, setDateTimeNow] = useState("");
 
   const underMaintainance = true;
-  
 
   useEffect(() => {
     login();
@@ -95,120 +94,122 @@ export default function App() {
     return <Navigate to='/login' />;
   };
 
-  return { underMaintainance ? (
-    "Under Maintainance" : (
-      <AuthContext.Provider
-        value={{
-          spendedAmount,
-          setSpendedAmount,
-          user,
-          logout,
-          login,
-          loading,
-          setLoading,
-          setUser,
-          dateTimeNow,
-        }}>
-        {loading ? (
-          <div className='loading'>
-            <div className='loading-img-div'>
-              <img src={LoadingPoker} alt='game' className='imageAnimation' />
-            </div>
+  if (underMaintainance) {
+    return <>Under Maintainance</>;
+  }
+
+  return (
+    <AuthContext.Provider
+      value={{
+        spendedAmount,
+        setSpendedAmount,
+        user,
+        logout,
+        login,
+        loading,
+        setLoading,
+        setUser,
+        dateTimeNow,
+      }}>
+      {loading ? (
+        <div className='loading'>
+          <div className='loading-img-div'>
+            <img src={LoadingPoker} alt='game' className='imageAnimation' />
           </div>
-        ) : (
-          <ChainContext.Provider value={{ selectedChain, setSelectedChain }}>
-            <ThirdwebProvider
-              activeChain={selectedChain}
-              dAppMeta={{
-                name: "Scrooge Casino NFT Marketplace",
-                description:
-                  "Everything you need to be a high roller in the Scrooge Casino.",
-                isDarkMode: true,
-                logoUrl:
-                  "https://casino-nft-marketplace.s3.amazonaws.com/highRollerBasic.png",
-                url: "https://market.scrooge.casino",
-              }}>
-              <BrowserRouter>
-                <Routes>
-                  {/* Protectde Route */}
-  
-                  <Route
-                    path='/'
-                    element={<ProtectedRoute component={<Home />} />}
-                  />
-                  <Route
-                    path='/my-wallet'
-                    element={<ProtectedRoute component={<MyWallet />} />}
-                  />
-                  {/* <Route
+        </div>
+      ) : (
+        <ChainContext.Provider value={{ selectedChain, setSelectedChain }}>
+          <ThirdwebProvider
+            activeChain={selectedChain}
+            dAppMeta={{
+              name: "Scrooge Casino NFT Marketplace",
+              description:
+                "Everything you need to be a high roller in the Scrooge Casino.",
+              isDarkMode: true,
+              logoUrl:
+                "https://casino-nft-marketplace.s3.amazonaws.com/highRollerBasic.png",
+              url: "https://market.scrooge.casino",
+            }}>
+            <BrowserRouter>
+              <Routes>
+                {/* Protectde Route */}
+
+                <Route
+                  path='/'
+                  element={<ProtectedRoute component={<Home />} />}
+                />
+                <Route
+                  path='/my-wallet'
+                  element={<ProtectedRoute component={<MyWallet />} />}
+                />
+                {/* <Route
                     path='/redeem-nfts'
                     element={<ProtectedRoute component={<RedeemNFTs />} />}
                   /> */}
-                  <Route
-                    path='/crypto-to-gc'
-                    element={<ProtectedRoute component={<CryptoToGC />} />}
-                  />
-                  <Route
-                    path='/redeem-prizes'
-                    element={<ProtectedRoute component={<RedeemPrizes />} />}
-                  />
-                  <Route
-                    path='/crypto-to-tokens'
-                    element={<ProtectedRoute component={<BuyTokenFromOGJR />} />}
-                  />
-                  <Route
-                    path='/claim-free-tokens'
-                    element={<ProtectedRoute component={<EarnFreeCoins />} />}
-                  />
-                  {/* <Route
+                <Route
+                  path='/crypto-to-gc'
+                  element={<ProtectedRoute component={<CryptoToGC />} />}
+                />
+                <Route
+                  path='/redeem-prizes'
+                  element={<ProtectedRoute component={<RedeemPrizes />} />}
+                />
+                <Route
+                  path='/crypto-to-tokens'
+                  element={<ProtectedRoute component={<BuyTokenFromOGJR />} />}
+                />
+                <Route
+                  path='/claim-free-tokens'
+                  element={<ProtectedRoute component={<EarnFreeCoins />} />}
+                />
+                {/* <Route
                     path='/kyc'
                     element={<ProtectedRoute component={<KycForm />} />}
                   /> */}
-                  <Route
-                    path='/earn-tokens'
-                    element={<ProtectedRoute component={<EarnTokens />} />}
-                  />
-                  <Route
-                    path='/raffles'
-                    element={<ProtectedRoute component={<Raffles />} />}
-                  />
-  
-                  {/* Public Routes */}
-  
-                  <Route path='/login' element={<Login />} />
-                  <Route path='/kyc' element={<KycForm />} />
-                  <Route path='/explore' element={<Explore />} />
-                  <Route path='/contact' element={<Contact />} />
-                  <Route path='/privacy' element={<Privacy />} />
-                  <Route path='/terms' element={<Terms />} />
-                  <Route path='/create-listing' element={<CreateListing />} />
-                  <Route path='/blog-posts' element={<BlogPosts />} />
-                  <Route path='/create-posts' element={<CreatePost />} />
-                  {/* <Route path='/nft-tokens' element={<NFTTokens />} /> */}
-                  <Route path='/payment' element={<PaymentSuccess />} />
-                  <Route path='/vip' element={<NoPage />} />
-                  <Route path='/*' element={<NoPage />} />
-                  <Route path='/cloudError' element={<CloudWebsiteError />} />
-                </Routes>
-              </BrowserRouter>
-            </ThirdwebProvider>
-            <ToastContainer
-              position='top-center'
-              autoClose={4000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme='light'
-            />
-          </ChainContext.Provider>
-        )}
-      </AuthContext.Provider>
-    )
-  )} ;
+                <Route
+                  path='/earn-tokens'
+                  element={<ProtectedRoute component={<EarnTokens />} />}
+                />
+                <Route
+                  path='/raffles'
+                  element={<ProtectedRoute component={<Raffles />} />}
+                />
+
+                {/* Public Routes */}
+
+                <Route path='/login' element={<Login />} />
+                <Route path='/kyc' element={<KycForm />} />
+                <Route path='/explore' element={<Explore />} />
+                <Route path='/contact' element={<Contact />} />
+                <Route path='/privacy' element={<Privacy />} />
+                <Route path='/terms' element={<Terms />} />
+                <Route path='/create-listing' element={<CreateListing />} />
+                <Route path='/blog-posts' element={<BlogPosts />} />
+                <Route path='/create-posts' element={<CreatePost />} />
+                {/* <Route path='/nft-tokens' element={<NFTTokens />} /> */}
+                <Route path='/payment' element={<PaymentSuccess />} />
+                <Route path='/vip' element={<NoPage />} />
+                <Route path='/*' element={<NoPage />} />
+                <Route path='/cloudError' element={<CloudWebsiteError />} />
+              </Routes>
+            </BrowserRouter>
+          </ThirdwebProvider>
+          <ToastContainer
+            position='top-center'
+            autoClose={4000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme='light'
+          />
+        </ChainContext.Provider>
+      )}
+    </AuthContext.Provider>
+  );
 }
 
 const container = document.getElementById("root");
