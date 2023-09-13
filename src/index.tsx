@@ -47,7 +47,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [dateTimeNow, setDateTimeNow] = useState("");
 
-  const underMaintainance = true;
+  const underMaintainance = false;
 
   useEffect(() => {
     login();
