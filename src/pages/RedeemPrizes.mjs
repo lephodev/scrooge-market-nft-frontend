@@ -19,6 +19,7 @@ import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
 import { authInstance, marketPlaceInstance } from "../config/axios.js";
 import { Button, Card, Modal } from "react-bootstrap";
+import scroogelogo from "../images/scroogeCasinoLogo.png";
 import axios from "axios";
 function RedeemPrizes() {
   const navigate = useNavigate();
@@ -55,6 +56,8 @@ function RedeemPrizes() {
   const [JR20000, setJR20000] = useState();
   const [cookies] = useCookies(["token"]);
   const address = useAddress();
+
+  const redemptionUnderMaintainance = true;
 
   const handleClose = () => setShow(false);
   const handleShow = (ticket, token, prizeid) => {
@@ -389,6 +392,10 @@ function RedeemPrizes() {
   // useEffect(() => {
   //   getTicketToTokenPackages();
   // }, []);
+
+  if (redemptionUnderMaintainance) {
+    return <UnderMaintenanceContent />;
+  }
 
   return (
     <Layout>
@@ -1190,5 +1197,14 @@ function RedeemPrizes() {
     </Layout>
   );
 }
+
+const UnderMaintenanceContent = () => {
+  return (
+    <div className='scrooge-under-content'>
+      <img src={scroogelogo} alt='scrooge' />
+      <h4>Under Maintainance</h4>
+    </div>
+  );
+};
 
 export default RedeemPrizes;
