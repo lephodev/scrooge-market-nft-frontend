@@ -46,6 +46,8 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [dateTimeNow, setDateTimeNow] = useState("");
 
+  const underMaintainance = true;
+
   useEffect(() => {
     login();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -92,6 +94,10 @@ export default function App() {
     return <Navigate to='/login' />;
   };
 
+  if (underMaintainance) {
+    return <>Under Maintainance</>;
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -137,9 +143,9 @@ export default function App() {
                   element={<ProtectedRoute component={<MyWallet />} />}
                 />
                 {/* <Route
-                  path='/redeem-nfts'
-                  element={<ProtectedRoute component={<RedeemNFTs />} />}
-                /> */}
+                    path='/redeem-nfts'
+                    element={<ProtectedRoute component={<RedeemNFTs />} />}
+                  /> */}
                 <Route
                   path='/crypto-to-gc'
                   element={<ProtectedRoute component={<CryptoToGC />} />}
@@ -157,9 +163,9 @@ export default function App() {
                   element={<ProtectedRoute component={<EarnFreeCoins />} />}
                 />
                 {/* <Route
-                  path='/kyc'
-                  element={<ProtectedRoute component={<KycForm />} />}
-                /> */}
+                    path='/kyc'
+                    element={<ProtectedRoute component={<KycForm />} />}
+                  /> */}
                 <Route
                   path='/earn-tokens'
                   element={<ProtectedRoute component={<EarnTokens />} />}
