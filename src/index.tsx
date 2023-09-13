@@ -35,6 +35,7 @@ import KycForm from "./pages/KycForm.mjs";
 import BuyTokenFromOGJR from "./pages/BuyTokenFromOGJR.mjs";
 import CloudWebsiteError from "./components/cloudWebsiteError.mjs";
 import EarnFreeCoins from "./pages/EarnFreeCoins.mjs";
+import scroogelogo from "./images/scroogeCasinoLogo.png";
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
@@ -95,7 +96,7 @@ export default function App() {
   };
 
   if (underMaintainance) {
-    return <>Under Maintainance</>;
+    return <UnderMaintenanceContent />;
   }
 
   return (
@@ -211,6 +212,15 @@ export default function App() {
     </AuthContext.Provider>
   );
 }
+
+const UnderMaintenanceContent = () => {
+  return (
+    <div className='scrooge-under-content'>
+      <img src={scroogelogo} alt='scrooge' />
+      <h4>Under Maintainance</h4>
+    </div>
+  );
+};
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
