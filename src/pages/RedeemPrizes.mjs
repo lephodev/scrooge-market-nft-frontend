@@ -57,7 +57,7 @@ function RedeemPrizes() {
   const [cookies] = useCookies(["token"]);
   const address = useAddress();
 
-  const redemptionUnderMaintainance = true;
+  const redemptionUnderMaintainance = false;
 
   const handleClose = () => setShow(false);
   const handleShow = (ticket, token, prizeid) => {
