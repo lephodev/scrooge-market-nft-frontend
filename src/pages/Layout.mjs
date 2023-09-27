@@ -204,7 +204,7 @@ const Layout = ({ children }) => {
                               className={`nav-link ${isActive(
                                 "/crypto-to-gc"
                               )}`}>
-                              Coin Machine
+                              Purchase Center{" "}
                             </Link>
                             <Link
                               to={`/redeem-prizes`}
