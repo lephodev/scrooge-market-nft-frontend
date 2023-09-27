@@ -4860,7 +4860,7 @@ button.affiliate-dropdownBtn.close::before {
   color: #f9ff00;
 }
 h3.mega-text {
-  /* background: #fa0000; */
+  background: #fa0000;
   border: 1px solid #f9ff00;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
@@ -4874,15 +4874,15 @@ h3.mega-text {
   margin-top: -6px;
   font-weight: 600;
 }
-.pulse {
+.pulses {
   display: block;
   cursor: pointer;
   box-shadow: 0 0 0 #f9ff00;
-  animation: pulse 2s infinite;
+  animation: pulses 2s infinite;
 }
 
 
-@-webkit-keyframes pulse {
+@-webkit-keyframes pulses {
   0% {
     -webkit-box-shadow: 0 0 0 0 #f9ff00;
     opacity: 1;
@@ -4896,7 +4896,7 @@ h3.mega-text {
       opacity: 1;
   }
 }
-@keyframes pulse {
+@keyframes pulses {
   0% {
     -moz-box-shadow: 0 0 0 0 #f9ff00;
     box-shadow: 0 0 0 0 #f9ff00;

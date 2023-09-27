@@ -1047,7 +1047,7 @@ export default function CryptoToGC() {
                               <>
                                 {purcahseBonus.length === 0 ? (
                                   <Card key={prize._id}>
-                                    <h3 className="mega-text pulse">
+                                    <h3 className="mega-text pulses">
                                       Mega Offer
                                     </h3>
                                     <Card.Img variant="top" src={coin3} />
