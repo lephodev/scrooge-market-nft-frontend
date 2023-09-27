@@ -4859,6 +4859,60 @@ button.affiliate-dropdownBtn.close::before {
   margin-top: 20px;
   color: #f9ff00;
 }
+h3.mega-text {
+  /* background: #fa0000; */
+  border: 1px solid #f9ff00;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  padding: 4px 14px;
+  text-align: center;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  color: white;
+  font-size: 14px;
+  margin: 0;
+  margin-top: -6px;
+  font-weight: 600;
+}
+.pulse {
+  display: block;
+  cursor: pointer;
+  box-shadow: 0 0 0 #f9ff00;
+  animation: pulse 2s infinite;
+}
+
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 #f9ff00;
+    opacity: 1;
+  }
+  70% {
+      -webkit-box-shadow: 0 0 0 4px rgb(249 255 0 / 50%);
+      opacity: .5;
+  }
+  100% {
+      -webkit-box-shadow: 0 0 0 0 #f9ff00;
+      opacity: 1;
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 #f9ff00;
+    box-shadow: 0 0 0 0 #f9ff00;
+    opacity: 1;
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 5px rgb(249 255 0 / 50%);
+      box-shadow: 0 0 0 4px rgb(249 255 0 / 50%);
+      opacity: .5;
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 #f9ff00;
+      box-shadow: 0 0 0 0 #f9ff00;
+      opacity: 1;
+  }
+}
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
