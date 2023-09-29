@@ -437,6 +437,7 @@ export default function CryptoToGC() {
                       `Successfully Purchased ${goldcoinAmount} goldCoin`,
                       { toastId: "A" }
                     );
+                    setBuyLoading(false);
                     getGCPackages();
                     getCryptoToGCPurcahse();
                     handlePromoReject();
