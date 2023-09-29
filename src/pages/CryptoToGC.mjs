@@ -869,7 +869,7 @@ export default function CryptoToGC() {
   };
 
   const getExactGC = (Gc, promo) => {
-    const { coupanType, discountInPercent, discountInAmount } = promo;
+    const { coupanType, discountInPercent, discountInAmount } = promo || {};
     let discount = 0;
     if (coupanType === "Percent") {
       discount = (Gc * discountInPercent) / 100;
@@ -880,7 +880,7 @@ export default function CryptoToGC() {
   };
 
   const getExactToken = (Token, promo) => {
-    const { coupanType, discountInPercent, discountInAmount } = promo;
+    const { coupanType, discountInPercent, discountInAmount } = promo || {};
     let discount = 0;
     if (coupanType === "Percent") {
       discount = (Token * discountInPercent) / 100;
