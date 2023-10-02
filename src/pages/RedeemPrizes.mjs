@@ -655,7 +655,7 @@ function RedeemPrizes() {
                               ) : (
                                 <></>
                               )}
-                              {prize._id === "63b74c51dd789f0383a51d3b" ? (
+                              {/* {prize._id === "63b74c51dd789f0383a51d3b" ? (
                                 <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
@@ -675,7 +675,7 @@ function RedeemPrizes() {
                                 </div>
                               ) : (
                                 <></>
-                              )}
+                              )} */}
                               {prize._id === "63b74ce7dd789f0383a51d3c" ? (
                                 <div className='prize-name bold text-animate'>
                                   <h4>
@@ -986,7 +986,7 @@ function RedeemPrizes() {
                               ) : (
                                 <></>
                               )}
-                              {prize._id === "63b74c51dd789f0383a51d3b" ? (
+                              {/* {prize._id === "63b74c51dd789f0383a51d3b" ? (
                                 <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
@@ -996,7 +996,7 @@ function RedeemPrizes() {
                                 </div>
                               ) : (
                                 <></>
-                              )}
+                              )} */}
                               {prize._id === "63b74ce7dd789f0383a51d3c" ? (
                                 <div className=''>
                                   {prize.description.replace(
