@@ -643,7 +643,8 @@ function RedeemPrizes() {
                               f.category !== "Badges" &&
                               // f.price === 500 &&
                               f.contract_name !== "JR" &&
-                              f._id !== "63cedf0d1736630ad01d5f4e"
+                              f._id !== "63cedf0d1736630ad01d5f4e" &&
+                              f._id !== "63b74c51dd789f0383a51d3b"
                           )
                           .map((prize) => (
                             <div className='prizes-card' key={prize._id}>
