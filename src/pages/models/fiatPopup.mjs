@@ -3,7 +3,6 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext, useState } from "react";
-import LoadingPoker from "../../images/scroogeHatLogo.png";
 
 import {
   purchaseWithCashApp,
@@ -113,12 +112,14 @@ const FiatPopup = ({ show, handleCloseFiat, getUserDataInstant }) => {
   const { user } = useContext(AuthContext);
 
   const [paymentType, setPaymentType] = useState();
-  const [globalLoader, setglobalLoader] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const {
     handleSubmit,
     formState: { errors },
     register,
+    setError,
+    reset,
     setValue,
   } = useForm({
     mode: "onBlur",
@@ -135,7 +136,13 @@ const FiatPopup = ({ show, handleCloseFiat, getUserDataInstant }) => {
       if (user?.isBlockWallet) {
         return toast.error(`Your wallet blocked by admin`, { toastId: "A" });
       }
-      setglobalLoader(true);
+      if (!values.redeemPrize) {
+        setError("amount", {
+          message: "Please Select amount",
+        });
+        return;
+      }
+      setLoading(true);
       marketPlaceInstance()
         .post(`/WithdrawRequestWithFiat`, values)
         .then((data) => {
@@ -144,10 +151,14 @@ const FiatPopup = ({ show, handleCloseFiat, getUserDataInstant }) => {
             toast.error("ERROR! - " + data.data.message, {
               containerId: "error",
             });
-            setglobalLoader(false);
+            setLoading(false);
+
+            handleCloseFiat();
           } else {
             toast.success(data?.data?.message);
-            setglobalLoader(false);
+            setLoading(false);
+            handleCloseFiat();
+            reset();
             getUserDataInstant();
           }
         });
@@ -168,17 +179,10 @@ const FiatPopup = ({ show, handleCloseFiat, getUserDataInstant }) => {
     setValue("redeemPrize", selectedOptions?.value);
   };
 
-  console.log("errors", errors);
+  console.log("errors", errors, loading);
 
   return (
     <>
-      {globalLoader && (
-        <div className="loading">
-          <div className="loading-img-div">
-            <img src={LoadingPoker} alt="game" className="imageAnimation" />
-          </div>
-        </div>
-      )}
       <Modal
         show={show}
         onHide={handleCloseFiat}
