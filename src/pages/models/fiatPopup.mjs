@@ -244,6 +244,7 @@ const FiatPopup = ({ show, handleCloseFiat, getUserDataInstant }) => {
                   </Form.Group>
                 )}
               </div>
+              10% amount will deduct from your redeemption amount
             </div>
             <div className='popupBtn'>
               <button className='greyBtn' onClick={handleCloseFiat}>
