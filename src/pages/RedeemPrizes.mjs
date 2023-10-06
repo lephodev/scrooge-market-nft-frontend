@@ -41,6 +41,7 @@ function RedeemPrizes() {
   const [showConvert, setShowConvert] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
   const [buyTokenTab, setBuyTokenTab] = useState(false);
+  const [buyWithFiat, setBuyWithFiat] = useState(false);
   const [show, setShow] = useState(false);
   const [showFiat, setShowFiat] = useState(false);
   // const [sliderValue /* setSliderValue */] = useState(499);
@@ -193,6 +194,8 @@ function RedeemPrizes() {
           [...allPrizes].filter((prize) => prize.category === "Crypto")
         );
         setShowConvert(false);
+        setBuyWithFiat(false);
+
         //console.log('crypto: ',prizes);
       } else if (filterOn === "Merch") {
         setPrizes([...allPrizes].filter((prize) => prize.category === "Merch"));
@@ -201,6 +204,7 @@ function RedeemPrizes() {
         setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
         setShowConvert(false);
+        setBuyWithFiat(false);
       } else if (filterOn === "convert") {
         setShowConvert(true);
         setBuyTokenTab(false);
@@ -210,6 +214,12 @@ function RedeemPrizes() {
       } else if (filterOn === "buy_token") {
         setBuyTokenTab(true);
         setShowConvert(false);
+        setPrizes([]);
+        // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
+        //console.log('nfts: ',prizes);
+      } else if (filterOn === "Fiat") {
+        console.log("gggg");
+        setBuyWithFiat(true);
         setPrizes([]);
         // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
@@ -399,11 +409,6 @@ function RedeemPrizes() {
     return <UnderMaintenanceContent />;
   }
 
-  const handleFiat = () => {
-    console.log("Fiat");
-    setShowFiat(true);
-  };
-
   const handleCloseFiat = () => {
     setShowFiat(false);
   };
@@ -517,9 +522,14 @@ function RedeemPrizes() {
                     </button>
                   </div>
                   <div className='new-btn'>
-                    <button
+                    {/* <button
                       // className='page-nav-header-btn'
                       onClick={() => handleFiat()}>
+                      Fiat
+                    </button> */}
+                    <button
+                      // className='page-nav-header-btn'
+                      onClick={() => filterPrizes("Fiat")}>
                       Fiat
                     </button>
                   </div>
@@ -542,7 +552,15 @@ function RedeemPrizes() {
                   </div>
                 )}
 
-                {!showConvert && (
+                {buyWithFiat && (
+                  <FiatPopup
+                    show={showFiat}
+                    handleCloseFiat={handleCloseFiat}
+                    getUserDataInstant={getUserDataInstant}
+                  />
+                )}
+
+                {!buyWithFiat && (
                   <div className='page-nav-header-btns-subrow'>
                     <button
                       className='page-nav-header-subbtn'
@@ -1209,11 +1227,6 @@ function RedeemPrizes() {
               </>
             )}
           </div>
-          <FiatPopup
-            show={showFiat}
-            handleCloseFiat={handleCloseFiat}
-            getUserDataInstant={getUserDataInstant}
-          />
         </div>
       </main>
     </Layout>
