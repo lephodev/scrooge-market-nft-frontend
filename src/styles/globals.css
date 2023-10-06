@@ -4954,11 +4954,19 @@ h3.mega-text {
   padding: 8px 20px;
   font-size: 16px;
   height: 48px;
+  font-weight: 400 !important;
 }
-.fiat-group .form-control:focus {
+.fiat-group input {
+  font-weight: 400 !important;
+  font-size: 14px !important;
+}
+.fiat-group input::placeholder {
+  font-weight: 400 !important;
+}
+.fiat-group .form-control:focus,  .fiat-group input:focus {
   box-shadow: none;
 }
-.fiat-group .form-control::placeholder {
+.fiat-group .form-control::placeholder, .fiat-group input::placeholder {
   color: #858585c7;
   font-size: 14px;
 }
@@ -4977,6 +4985,12 @@ h3.mega-text {
   column-gap: 20px;
   row-gap: 10px;
   padding-top: 30px;
+}
+.fiat-select__menu {
+  padding: 5px;
+}
+.fiat-select__option {
+  font-size: 14px;
 }
 
 /********************************************************************************************/
