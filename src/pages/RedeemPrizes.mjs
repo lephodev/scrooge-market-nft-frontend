@@ -21,6 +21,7 @@ import { authInstance, marketPlaceInstance } from "../config/axios.js";
 import { Button, Card, Modal } from "react-bootstrap";
 import scroogelogo from "../images/scroogeCasinoLogo.png";
 import axios from "axios";
+import FiatPopup from "./models/fiatPopup.mjs";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -41,6 +42,7 @@ function RedeemPrizes() {
   const [globalLoader, setglobalLoader] = useState(true);
   const [buyTokenTab, setBuyTokenTab] = useState(false);
   const [show, setShow] = useState(false);
+  const [showFiat, setShowFiat] = useState(false);
   // const [sliderValue /* setSliderValue */] = useState(499);
   const [tickets, setTickets] = useState("");
   const [tokens, setTokens] = useState("");
@@ -397,6 +399,14 @@ function RedeemPrizes() {
     return <UnderMaintenanceContent />;
   }
 
+  const handleFiat = () => {
+    console.log("Fiat");
+    setShowFiat(true);
+  };
+
+  const handleCloseFiat = () => {
+    setShowFiat(false);
+  };
   return (
     <Layout>
       <main className='main redeem-prizes-page'>
@@ -504,6 +514,13 @@ function RedeemPrizes() {
                       // className='page-nav-header-btn'
                       onClick={() => filterPrizes("NFTs")}>
                       NFTS
+                    </button>
+                  </div>
+                  <div className='new-btn'>
+                    <button
+                      // className='page-nav-header-btn'
+                      onClick={() => handleFiat()}>
+                      Fiat
                     </button>
                   </div>
                   {/* <div className="new-btn">
@@ -1192,6 +1209,11 @@ function RedeemPrizes() {
               </>
             )}
           </div>
+          <FiatPopup
+            show={showFiat}
+            handleCloseFiat={handleCloseFiat}
+            getUserDataInstant={getUserDataInstant}
+          />
         </div>
       </main>
     </Layout>
