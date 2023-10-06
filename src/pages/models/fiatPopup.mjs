@@ -1,4 +1,4 @@
-import { Form, Modal, Spinner } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,6 +11,7 @@ import {
 import AuthContext from "../../context/authContext.ts";
 import { toast } from "react-toastify";
 import { marketPlaceInstance } from "../../config/axios.js";
+import "../../styles/globals.css";
 
 const customStyles = {
   container: (provided) => ({
@@ -178,91 +179,84 @@ const FiatPopup = ({ show, handleCloseFiat, getUserDataInstant }) => {
     setValue("redeemPrize", selectedOptions?.value);
   };
 
-  console.log("errors", errors);
+  console.log("errors", errors, loading);
 
   return (
     <>
-      <Modal show={show} onHide={handleCloseFiat} centered animation={false}>
-        <Form onSubmit={handleSubmit(WithdrawRequest)}>
-          <Modal.Header closeButton></Modal.Header>
-          <Modal.Body className='popupBody'>
-            <div className='opentable-userBy'>
-              <div className='opentable-userByinput'>
-                <Form.Group className='userBuy' controlId='formBasicEmail'>
-                  <Form.Label>Payout</Form.Label>
+      <Modal
+        show={show}
+        onHide={handleCloseFiat}
+        centered
+        animation={false}
+        className="fiat-modal"
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body className="popupBody">
+          <Form onSubmit={handleSubmit(WithdrawRequest)}>
+            <div className="fiat-content">
+              <Form.Group className="fiat-group">
+                <Form.Label>Withdraw to</Form.Label>
+                <Select
+                  options={options}
+                  onChange={handleChnagePayout}
+                  styles={customStyles}
+                />
+              </Form.Group>
+              {console.log("paymentType", paymentType)}
+              {paymentType && paymentType.value === "Paypal" ? (
+                <Form.Group className="fiat-group">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    placeholder="Enter email"
+                    {...register("email")}
+                  />
+                  {errors?.email && (
+                    <p className="error-msg">{errors?.email?.message}</p>
+                  )}
+                </Form.Group>
+              ) : paymentType && paymentType.value === "Cashapp" ? (
+                <Form.Group className="fiat-group">
+                  <Form.Label>CashAppId </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="cashAppid"
+                    //   defaultValue={singleTournament?.name}
+                    placeholder="Enter Cashapp Id"
+                    {...register("cashAppid")}
+                  />
+                  {errors?.cashAppid && (
+                    <p className="error-msg">{errors?.cashAppid?.message}</p>
+                  )}
+                </Form.Group>
+              ) : (
+                ""
+              )}
+              {paymentType && paymentType.value && (
+                <Form.Group className="fiat-group">
+                  <Form.Label>Redeem Amount</Form.Label>
                   <Select
-                    options={options}
-                    onChange={handleChnagePayout}
+                    options={paymentoptions}
+                    onChange={handleChnagePrice}
                     styles={customStyles}
                   />
                 </Form.Group>
-                {console.log("paymentType", paymentType)}
-                {paymentType && paymentType.value === "Paypal" ? (
-                  <div className='opentable-userBy'>
-                    <div className='opentable-userByinput'>
-                      <Form.Group className='userBuy'>
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                          type='email'
-                          name='email'
-                          placeholder='Enter email'
-                          {...register("email")}
-                        />
-                        {errors?.email && (
-                          <p className='error-msg'>{errors?.email?.message}</p>
-                        )}
-                      </Form.Group>
-                    </div>
-                  </div>
-                ) : paymentType && paymentType.value === "Cashapp" ? (
-                  <div className='opentable-userBy'>
-                    <div className='opentable-userByinput'>
-                      <Form.Group className='userBuy'>
-                        <Form.Label>CashAppId </Form.Label>
-                        <Form.Control
-                          type='text'
-                          name='cashAppid'
-                          //   defaultValue={singleTournament?.name}
-                          placeholder='Enter Cashapp Id'
-                          {...register("cashAppid")}
-                        />
-                        {errors?.cashAppid && (
-                          <p className='error-msg'>
-                            {errors?.cashAppid?.message}
-                          </p>
-                        )}
-                      </Form.Group>
-                    </div>
-                  </div>
-                ) : (
-                  ""
-                )}
-                {paymentType && paymentType.value && (
-                  <Form.Group className='userBuy' controlId='formBasicEmail'>
-                    <Form.Label>Redeem Amount</Form.Label>
-                    <Select
-                      options={paymentoptions}
-                      onChange={handleChnagePrice}
-                      styles={customStyles}
-                    />
-                  </Form.Group>
-                )}
-                {errors?.amount && (
-                  <p className='error-msg'>{errors?.amount?.message}</p>
-                )}
-              </div>
-              10% amount will deduct from your redeemption amount
+              )}
+              <h6 className="deducted-heading">
+                10% of the amount will be deducted from your redemption amount
+              </h6>
             </div>
-            <div className='popupBtn'>
-              <button className='greyBtn' onClick={handleCloseFiat}>
+            <div className="popupBtn">
+              <button className="greyBtn" onClick={handleCloseFiat}>
                 Cancel
               </button>
-              <button className='yellowBtn' variant='primary' type='submit'>
-                {!loading ? "Confirm" : <Spinner animation='border' />}
+              <button className="yellowBtn" variant="primary" type="submit">
+                Confirm
               </button>
             </div>
-          </Modal.Body>
-        </Form>
+          </Form>
+        </Modal.Body>
       </Modal>
     </>
   );

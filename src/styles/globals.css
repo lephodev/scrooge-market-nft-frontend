@@ -4913,6 +4913,64 @@ h3.mega-text {
       opacity: 1;
   }
 }
+.fiat-modal .modal-content {
+  background: #141414;
+  border-color: #141414;
+  box-shadow: 0 2px 10px #141414;
+}
+.fiat-modal.modal .modal-header {
+  margin: 0;
+  background: transparent;
+  border: none;
+}
+.fiat-modal .modal-header button.btn-close {
+  background: url("../images/close-icon.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.fiat-modal .popupBody {
+  padding-top: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.fiat-group {
+  padding-bottom: 20px;
+}
+.fiat-content .form-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #ddd !important;
+}
+.fiat-group .form-control {
+  background: #000;
+  border: 2px solid #000;
+  color: #ddd;
+  border-radius: 30px;
+  padding: 8px 20px;
+  font-size: 16px;
+}
+.fiat-group .form-control::placeholder {
+  color: #858585c7;
+  font-size: 14px;
+}
+.fiat-content p.error-msg {
+  font-size: 14px;
+  color: #fa0000;
+  margin: 0;
+  padding-top: 5px;
+}
+.fiat-content h6.deducted-heading {
+  font-size: 16px;
+  margin: 0;
+}
+.fiat-modal .popupBtn {
+  justify-content: center;
+  column-gap: 20px;
+  row-gap: 10px;
+  padding-top: 30px;
+}
+
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
