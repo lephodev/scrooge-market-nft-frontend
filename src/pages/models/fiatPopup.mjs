@@ -142,6 +142,13 @@ const FiatPopup = ({ show, handleCloseFiat, getUserDataInstant }) => {
         });
         return;
       }
+
+      if (!values.paymentType) {
+        setError("paymentType", {
+          message: "Please Select paymentType",
+        });
+        return;
+      }
       setLoading(true);
       marketPlaceInstance()
         .post(`/WithdrawRequestWithFiat`, values)
@@ -192,6 +199,9 @@ const FiatPopup = ({ show, handleCloseFiat, getUserDataInstant }) => {
               onChange={handleChnagePayout}
               styles={customStyles}
             />
+            {errors?.paymentType && (
+              <p className='error-msg'>{errors?.paymentType?.message}</p>
+            )}
           </Form.Group>
           {console.log("paymentType", paymentType)}
           {paymentType && paymentType.value === "Paypal" ? (
