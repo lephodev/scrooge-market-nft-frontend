@@ -4927,7 +4927,11 @@ h3.mega-text {
   background: url("../images/close-icon.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  width: 30px;
+  height: 30px;
+}
+.fiat-modal .modal-header button.btn-close:focus {
+  box-shadow: none;
 }
 .fiat-modal .popupBody {
   padding-top: 0;
@@ -4949,6 +4953,10 @@ h3.mega-text {
   border-radius: 30px;
   padding: 8px 20px;
   font-size: 16px;
+  height: 48px;
+}
+.fiat-group .form-control:focus {
+  box-shadow: none;
 }
 .fiat-group .form-control::placeholder {
   color: #858585c7;
@@ -5644,6 +5652,23 @@ h3.mega-text {
     font-size: 20px;
     font-size: 14px;
     text-align: center;
+  }
+  .fiat-modal.modal .modal-header {
+    padding-bottom: 0;
+  }
+  .fiat-modal .popupBody {
+    padding: 30px 15px;
+    padding-top: 0px;
+  }
+  .fiat-group {
+    padding-bottom: 12px;
+  }
+  .fiat-content h6.deducted-heading {
+    font-size: 14px;
+  }
+  .fiat-modal .popupBtn {
+    column-gap: 15px;
+    padding-top: 20px;
   }
 }
 
