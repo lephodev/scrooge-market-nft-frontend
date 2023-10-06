@@ -409,11 +409,6 @@ function RedeemPrizes() {
     return <UnderMaintenanceContent />;
   }
 
-  const handleFiat = () => {
-    console.log("Fiat");
-    setShowFiat(true);
-  };
-
   const handleCloseFiat = () => {
     setShowFiat(false);
   };

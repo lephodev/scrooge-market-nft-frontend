@@ -1,4 +1,4 @@
-import { Form, Modal, Spinner } from "react-bootstrap";
+import { Form, Spinner } from "react-bootstrap";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -24,7 +24,7 @@ const customStyles = {
     color: "#ddd",
     fontWeight: "400",
     fontSize: "16px",
-    padding: "10px 20px",
+    padding: "5px 10px",
     lineHeight: "16px",
     cursor: "pointer",
     borderRadius: "4px",
@@ -43,17 +43,17 @@ const customStyles = {
   }),
   control: () => ({
     background: "#000",
-    border: "2px solid #000",
+    border: "1px solid #141414",
     borderRadius: "30px",
     color: "#fff",
     display: "flex",
     alignItem: "center",
     height: "41",
     margin: "2px 0",
-    boxShadow: " 0 2px 10px #000000a5",
+    boxShadow: "0px 20px 20px #00000091",
     cursor: "pointer",
     ":hover": {
-      background: "#000",
+      background: "#141414",
       // border: "2px solid #306CFE",
     },
   }),
