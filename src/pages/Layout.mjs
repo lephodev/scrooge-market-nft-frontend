@@ -358,7 +358,7 @@ const Layout = ({ children }) => {
                   </li>
                   <li>
                     <a
-                      href='https://twitter.com/scrooge_coin'
+                      href='https://twitter.com/Scrooge_Casino'
                       rel='noopener noreferrer'>
                       <img src={twitter} alt='' />
                     </a>
