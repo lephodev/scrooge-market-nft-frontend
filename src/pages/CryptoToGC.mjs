@@ -973,10 +973,10 @@ export default function CryptoToGC() {
                             }>
                             Credit Card
                           </Dropdown.Item>
-                          <Dropdown.Item
+                          {/* <Dropdown.Item
                             onClick={() => handlePaymentTypeChange("Cashapp")}>
                             Cashapp
-                          </Dropdown.Item>
+                          </Dropdown.Item> */}
                           <Dropdown.Item
                             onClick={() => handlePaymentTypeChange("Crypto")}>
                             Crypto
