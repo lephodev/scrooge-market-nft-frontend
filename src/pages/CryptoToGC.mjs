@@ -682,15 +682,16 @@ export default function CryptoToGC() {
         }
         if (["USDC", "USDT", "BNB"].includes(selectedDropdown)) {
           if (["USDC", "USDT"].includes(selectedDropdown)) {
-            cryptoAmount = parseInt(usd);
+            cryptoAmount = parseFloat(usd);
           } else {
-            cryptoAmount = parseInt(usd) / current_price;
+            cryptoAmount = parseFloat(usd) / current_price;
           }
         } else {
           cryptoAmount =
-            (parseInt(usd) + parseInt(usd) * 0.16) / parseFloat(current_price);
+            (parseFloat(usd) + parseFloat(usd) * 0.16) / parseFloat(current_price);
         }
         if (selectedDropdown === "BNB") {
+          console.log("cryptoAmount",cryptoAmount);
           txResult = await sdk.wallet.transfer(walletAddress, cryptoAmount);
           // provider.sendTransaction({
           //   from: address,
