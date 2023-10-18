@@ -6373,3 +6373,9 @@ h3.mega-text {
     font-size: 20px;
   }
 }
+
+body > a {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
