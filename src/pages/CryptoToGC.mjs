@@ -688,10 +688,11 @@ export default function CryptoToGC() {
           }
         } else {
           cryptoAmount =
-            (parseFloat(usd) + parseFloat(usd) * 0.16) / parseFloat(current_price);
+            (parseFloat(usd) + parseFloat(usd) * 0.16) /
+            parseFloat(current_price);
         }
         if (selectedDropdown === "BNB") {
-          console.log("cryptoAmount",cryptoAmount);
+          console.log("cryptoAmount", cryptoAmount);
           txResult = await sdk.wallet.transfer(walletAddress, cryptoAmount);
           // provider.sendTransaction({
           //   from: address,
@@ -1067,6 +1068,19 @@ export default function CryptoToGC() {
                     </div>
                     {console.log("purcahseBonus", purcahseBonus.length)}
                     <div className='buy-chips-grid cryptoToGC'>
+                      {selectedTypeDropdown === "Credit Card" ? (
+                        <div className='asterisk-desc cryptoTotoken abc'>
+                          <ul>
+                            <span style={{ color: "red" }}>Please note: </span>
+                            <span style={{ fontSize: "16px" }}>
+                              Credit card transactions are limited to four
+                              purchases per day.
+                            </span>{" "}
+                          </ul>
+                        </div>
+                      ) : (
+                        ""
+                      )}
                       <div className='purchasemodal-cards'>
                         {allPrizes.map((prize, i) => (
                           <>

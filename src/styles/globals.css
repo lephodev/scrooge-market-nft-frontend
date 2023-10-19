@@ -584,6 +584,20 @@ span.wallet-user-name {
   font-size: 18px;
 }
 
+.asterisk-desc.cryptoTotoken.abc {
+  margin-top: -22px;
+  font-size: 11px !important;
+  color: #c6bfbf;
+  text-align: center;
+  font-weight: 600;
+}
+
+.asterisk-desc.cryptoTotoken.abc ul li {
+  width: fit-content;
+  text-align: left;
+  font-size: 18px;
+}
+
 .bordered-section {
   margin: 0px auto;
   width: 100%;
