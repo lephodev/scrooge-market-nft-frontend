@@ -52,7 +52,6 @@ export default function CryptoToGC() {
   const [disable, setDisable] = useState(false);
   const [tokens, setTokens] = useState("");
   const [key, setKey] = useState("cryptoToGc");
-  const [purcahseBonus, setPurcahseBonus] = useState([]);
   const isMismatched = useNetworkMismatch();
   const [errors, setErrors] = useState("");
 
@@ -110,21 +109,6 @@ export default function CryptoToGC() {
 
   let handler2 = true;
 
-  async function getCryptoToGCPurcahse() {
-    try {
-      const res = await marketPlaceInstance().get(`/getCryptoToGCPurcahse`);
-      if (res.data) {
-        console.log("res.data", res);
-        setPurcahseBonus(res.data);
-        console.log();
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  useEffect(() => {
-    getCryptoToGCPurcahse();
-  }, []);
   // getGCPackages
   async function getGCPackages() {
     setPrizesLoading(true);
@@ -197,18 +181,15 @@ export default function CryptoToGC() {
             setBuyLoading(false);
             if (res.data.success) {
               toast.success(res.data.data, { id: "buy-sucess" });
-              getCryptoToGCPurcahse();
               getGCPackages();
               handlePromoReject();
             } else {
-              getCryptoToGCPurcahse();
               getGCPackages();
               toast.error(res.data.error, { id: "buy-failed" });
               handlePromoReject();
             }
           } catch (e) {
             setBuyLoading(false);
-            getCryptoToGCPurcahse();
             getGCPackages();
             handlePromoReject();
             console.log("ee55", e.response);
@@ -328,14 +309,13 @@ export default function CryptoToGC() {
                       `Successfully Purchased ${goldcoinAmount} goldCoin`,
                       { toastId: "A" }
                     );
-                    getCryptoToGCPurcahse();
+
                     getGCPackages();
                     handlePromoReject();
                     reward();
                     getUserDataInstant();
                   } else {
                     getGCPackages();
-                    getCryptoToGCPurcahse();
                     setBuyLoading(false);
                     toast.error("Failed to buy", { toastId: "B" });
                     setPromoCode("");
@@ -345,7 +325,6 @@ export default function CryptoToGC() {
                 })
                 .catch((error) => {
                   getGCPackages();
-                  getCryptoToGCPurcahse();
                   setBuyLoading(false);
                   toast.error("Token Buy Failed", { toastId: "C" });
                   promoCode = "";
@@ -385,14 +364,12 @@ export default function CryptoToGC() {
                       { toastId: "A" }
                     );
                     getGCPackages();
-                    getCryptoToGCPurcahse();
                     setPromoCode("");
                     handlePromoReject();
                     reward();
                     getUserDataInstant();
                   } else {
                     getGCPackages();
-                    getCryptoToGCPurcahse();
                     setBuyLoading(false);
                     toast.error("Failed to buy", { toastId: "B" });
                     handlePromoReject();
@@ -401,7 +378,6 @@ export default function CryptoToGC() {
                 })
                 .catch((error) => {
                   getGCPackages();
-                  getCryptoToGCPurcahse();
                   setBuyLoading(false);
                   toast.error("Token Buy Failed", { toastId: "C" });
                   handlePromoReject();
@@ -439,13 +415,11 @@ export default function CryptoToGC() {
                     );
                     setBuyLoading(false);
                     getGCPackages();
-                    getCryptoToGCPurcahse();
                     handlePromoReject();
                     reward();
                     getUserDataInstant();
                   } else {
                     getGCPackages();
-                    getCryptoToGCPurcahse();
                     setBuyLoading(false);
                     toast.error("Failed to buy", { toastId: "B" });
                     handlePromoReject();
@@ -454,7 +428,6 @@ export default function CryptoToGC() {
                   return;
                 } catch (err) {
                   getGCPackages();
-                  getCryptoToGCPurcahse();
                   setBuyLoading(false);
                   toast.error("Token Buy Failed", { toastId: "B" });
                   handlePromoReject();
@@ -527,14 +500,12 @@ export default function CryptoToGC() {
                       `Successfully Purchased ${goldcoinAmount} goldCoin`,
                       { toastId: "A" }
                     );
-                    getCryptoToGCPurcahse();
                     getGCPackages();
                     handlePromoReject();
 
                     reward();
                     getUserDataInstant();
                   } else {
-                    getCryptoToGCPurcahse();
                     getGCPackages();
 
                     setBuyLoading(false);
@@ -544,7 +515,6 @@ export default function CryptoToGC() {
                   usdtContract.events.removeAllListeners();
                 })
                 .catch((error) => {
-                  getCryptoToGCPurcahse();
                   getGCPackages();
                   setBuyLoading(false);
                   toast.error("Token Buy Failed", { toastId: "C" });
@@ -580,14 +550,12 @@ export default function CryptoToGC() {
                       `Successfully Purchased ${goldcoinAmount} goldCoin`,
                       { toastId: "A" }
                     );
-                    getCryptoToGCPurcahse();
                     getGCPackages();
                     handlePromoReject();
 
                     reward();
                     getUserDataInstant();
                   } else {
-                    getCryptoToGCPurcahse();
                     setBuyLoading(false);
                     toast.error("Failed to buy", { toastId: "B" });
                     setPromoCode("");
@@ -597,7 +565,6 @@ export default function CryptoToGC() {
                   usdcContract.events.removeAllListeners();
                 })
                 .catch((error) => {
-                  getCryptoToGCPurcahse();
                   setBuyLoading(false);
                   toast.error("Token Buy Failed", { toastId: "C" });
                   handlePromoReject();
@@ -1066,7 +1033,6 @@ export default function CryptoToGC() {
                         </div>
                       )}
                     </div>
-                    {console.log("purcahseBonus", purcahseBonus.length)}
                     <div className='buy-chips-grid cryptoToGC'>
                       {selectedTypeDropdown === "Credit Card" ? (
                         <div className='asterisk-desc cryptoTotoken abc'>
@@ -1081,12 +1047,13 @@ export default function CryptoToGC() {
                       ) : (
                         ""
                       )}
+                      {console.log("isGCPurchase", user)}
                       <div className='purchasemodal-cards'>
                         {allPrizes.map((prize, i) => (
                           <>
                             {prize.priceInBUSD === "9.99" ? (
                               <>
-                                {purcahseBonus.length === 0 ? (
+                                {!user.isGCPurchase ? (
                                   <Card key={prize._id}>
                                     <h3 className='mega-text pulses'>
                                       Mega Offer
