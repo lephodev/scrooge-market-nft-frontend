@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Form, Spinner } from "react-bootstrap";
+import { /* Button */ Form /* Spinner */ } from "react-bootstrap";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import cross from "../images/close-icon.svg";
 import { createKYC, userKycDetails, reApply } from "../utils/api.mjs";
@@ -21,7 +21,7 @@ const KYCForm = () => {
   const [backIdImage, setbackIdImage] = useState([]);
   const [statusKyc, setstatusKyc] = useState(null);
   const [rejectionMessage, setRejectionMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [/* loading */ setLoading] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
   // const [successMsg, setSuccessMsg] = useState("");
   const [activeRatioType, setActiveRatioType] = useState("Male");
@@ -429,9 +429,9 @@ const KYCForm = () => {
                         </Form.Group>
 
                         <div className='login-button full-w'>
-                          <Button type='submit' className='l-btn'>
+                          {/* <Button type='submit' className='l-btn'>
                             {!loading ? "Save" : <Spinner animation='border' />}
-                          </Button>
+                          </Button> */}
                         </div>
                       </Form>
                     </div>
