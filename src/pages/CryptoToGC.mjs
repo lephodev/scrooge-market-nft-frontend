@@ -181,19 +181,25 @@ export default function CryptoToGC() {
             setIsExicute(false);
 
             setBuyLoading(false);
+            getUserDataInstant();
+
             if (res.data.success) {
               toast.success(res.data.data, { id: "buy-sucess" });
               getGCPackages();
               handlePromoReject();
+              getUserDataInstant();
             } else {
               getGCPackages();
               toast.error(res.data.error, { id: "buy-failed" });
               handlePromoReject();
+              getUserDataInstant();
             }
           } catch (e) {
             setBuyLoading(false);
             getGCPackages();
             handlePromoReject();
+            getUserDataInstant();
+
             console.log("ee55", e.response);
             // console.log("ee55", JSON.parse(e));
             if (axios.isAxiosError(e) && e?.response) {
