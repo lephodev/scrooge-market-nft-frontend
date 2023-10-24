@@ -54,6 +54,7 @@ export default function CryptoToGC() {
   const [key, setKey] = useState("cryptoToGc");
   const isMismatched = useNetworkMismatch();
   const [errors, setErrors] = useState("");
+  const [isExicute, setIsExicute] = useState(true);
 
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
@@ -145,8 +146,7 @@ export default function CryptoToGC() {
             // );
             i = i + 1;
           }
-        } else {
-          setBuyLoading(true);
+        } else if (isExicute) {
           try {
             // console.log("window prize",window.prize)
             if (user?.isBlockWallet) {
@@ -177,21 +177,29 @@ export default function CryptoToGC() {
                 credentials: "include",
               }
             );
+            console.log("callliiiii");
+            setIsExicute(false);
 
             setBuyLoading(false);
+            getUserDataInstant();
+
             if (res.data.success) {
               toast.success(res.data.data, { id: "buy-sucess" });
               getGCPackages();
               handlePromoReject();
+              getUserDataInstant();
             } else {
               getGCPackages();
               toast.error(res.data.error, { id: "buy-failed" });
               handlePromoReject();
+              getUserDataInstant();
             }
           } catch (e) {
             setBuyLoading(false);
             getGCPackages();
             handlePromoReject();
+            getUserDataInstant();
+
             console.log("ee55", e.response);
             // console.log("ee55", JSON.parse(e));
             if (axios.isAxiosError(e) && e?.response) {
@@ -1361,6 +1369,7 @@ const PayWithCard = ({
   getExactGC,
 }) => {
   const handleCLick = () => {
+    console.log("handleCLickhandleCLickhandleCLick");
     let payload = {
       freeTokenAmount: getExactToken(prize.freeTokenAmount, promoDetails),
       gcAmount: getExactGC(prize.gcAmount, promoDetails),
