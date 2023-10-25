@@ -37,13 +37,59 @@ const KYCForm = () => {
 
   const handleImageChange = (e) => {
     const { name } = e.target;
+    const acceptedImageTypes = ["image/jpeg", "image/png"]; // Add more types if needed
+
     if (name === "IDimageFront") {
-      setfrontIdImage([...e.target.files]);
-      clearErrors("IDimageFront");
+      const files = e.target.files;
+
+      // Check if any files are selected
+      if (files.length === 0) {
+        clearErrors("IDimageFront");
+        return;
+      }
+
+      // Check if all selected files are image files
+      const allAreImages = Array.from(files).every((file) =>
+        acceptedImageTypes.includes(file.type)
+      );
+
+      if (allAreImages) {
+        setfrontIdImage([...files]);
+        clearErrors("IDimageFront");
+      } else {
+        setError("IDimageFront", {
+          message:
+            "Unsupported File Format. Please upload images in JPEG or PNG format",
+        }); // Handle the case where one or more selected files are not images
+        // You can display an error message or perform other actions here
+      }
     }
+
     if (name === "IDimageBack") {
-      setbackIdImage([...e.target.files]);
-      clearErrors("IDimageBack");
+      const files = e.target.files;
+
+      // Check if any files are selected
+      if (files.length === 0) {
+        clearErrors("IDimageBack");
+        return;
+      }
+
+      // Check if all selected files are image files
+      const allAreImages = Array.from(files).every((file) =>
+        acceptedImageTypes.includes(file.type)
+      );
+      console.log("allAreImages", allAreImages);
+      if (allAreImages) {
+        setbackIdImage([...files]);
+        clearErrors("IDimageBack");
+      } else {
+        setError("IDimageBack", {
+          message:
+            "Unsupported File Format. Please upload images in JPEG or PNG format",
+        });
+        // Handle the case where one or more selected files are not images
+        // You can display an error message or perform other actions here
+      }
     }
   };
 
