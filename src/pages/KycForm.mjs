@@ -37,7 +37,7 @@ const KYCForm = () => {
 
   const handleImageChange = (e) => {
     const { name } = e.target;
-    const acceptedImageTypes = ["image/jpeg", "image/png", "image/svg+xml"]; // Add more types if needed
+    const acceptedImageTypes = ["image/jpeg", "image/png"]; // Add more types if needed
 
     if (name === "IDimageFront") {
       const files = e.target.files;
@@ -58,7 +58,8 @@ const KYCForm = () => {
         clearErrors("IDimageFront");
       } else {
         setError("IDimageFront", {
-          message: "Please upload only image",
+          message:
+            "Unsupported File Format. Please upload images in JPEG or PNG format",
         }); // Handle the case where one or more selected files are not images
         // You can display an error message or perform other actions here
       }
@@ -83,7 +84,8 @@ const KYCForm = () => {
         clearErrors("IDimageBack");
       } else {
         setError("IDimageBack", {
-          message: "Please upload only image",
+          message:
+            "Unsupported File Format. Please upload images in JPEG or PNG format",
         });
         // Handle the case where one or more selected files are not images
         // You can display an error message or perform other actions here
