@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { /* Button */ Form /* Spinner */ } from "react-bootstrap";
+import { Button, Form, Spinner } from "react-bootstrap";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import cross from "../images/close-icon.svg";
 import { createKYC, userKycDetails, reApply } from "../utils/api.mjs";
@@ -21,7 +21,7 @@ const KYCForm = () => {
   const [backIdImage, setbackIdImage] = useState([]);
   const [statusKyc, setstatusKyc] = useState(null);
   const [rejectionMessage, setRejectionMessage] = useState("");
-  const [/* loading */ setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
   // const [successMsg, setSuccessMsg] = useState("");
   const [activeRatioType, setActiveRatioType] = useState("Male");
@@ -37,13 +37,57 @@ const KYCForm = () => {
 
   const handleImageChange = (e) => {
     const { name } = e.target;
+    const acceptedImageTypes = ["image/jpeg", "image/png", "image/svg+xml"]; // Add more types if needed
+
     if (name === "IDimageFront") {
-      setfrontIdImage([...e.target.files]);
-      clearErrors("IDimageFront");
+      const files = e.target.files;
+
+      // Check if any files are selected
+      if (files.length === 0) {
+        clearErrors("IDimageFront");
+        return;
+      }
+
+      // Check if all selected files are image files
+      const allAreImages = Array.from(files).every((file) =>
+        acceptedImageTypes.includes(file.type)
+      );
+
+      if (allAreImages) {
+        setfrontIdImage([...files]);
+        clearErrors("IDimageFront");
+      } else {
+        setError("IDimageFront", {
+          message: "Please upload only image",
+        }); // Handle the case where one or more selected files are not images
+        // You can display an error message or perform other actions here
+      }
     }
+
     if (name === "IDimageBack") {
-      setbackIdImage([...e.target.files]);
-      clearErrors("IDimageBack");
+      const files = e.target.files;
+
+      // Check if any files are selected
+      if (files.length === 0) {
+        clearErrors("IDimageBack");
+        return;
+      }
+
+      // Check if all selected files are image files
+      const allAreImages = Array.from(files).every((file) =>
+        acceptedImageTypes.includes(file.type)
+      );
+      console.log("allAreImages", allAreImages);
+      if (allAreImages) {
+        setbackIdImage([...files]);
+        clearErrors("IDimageBack");
+      } else {
+        setError("IDimageBack", {
+          message: "Please upload only image",
+        });
+        // Handle the case where one or more selected files are not images
+        // You can display an error message or perform other actions here
+      }
     }
   };
 
@@ -429,9 +473,9 @@ const KYCForm = () => {
                         </Form.Group>
 
                         <div className='login-button full-w'>
-                          {/* <Button type='submit' className='l-btn'>
+                          <Button type='submit' className='l-btn'>
                             {!loading ? "Save" : <Spinner animation='border' />}
-                          </Button> */}
+                          </Button>
                         </div>
                       </Form>
                     </div>
