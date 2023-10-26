@@ -1037,12 +1037,12 @@ body.modal-open {
   }
 
   .roulette-wheel-game .wheel-container {
-    --wheel-size: 340px;
+    --wheel-size: 430px;
   }
 
   .roulette-wheel-game .roulette-spinner::before {
-    height: 375px;
-    width: 375px;
+    height: 465px;
+    width: 465px;
   }
 
   .roulette-wheel-game .wheel-container {
