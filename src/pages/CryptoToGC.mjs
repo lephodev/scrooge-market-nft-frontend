@@ -136,6 +136,10 @@ export default function CryptoToGC() {
     // console.log("window",window.prize)
     if (handler2) {
       window.requestHandler = async (response) => {
+        const {
+          encryptedCardData: { bin },
+        } = response;
+        console.log("binnnn", bin);
         if (response.messages.resultCode === "Error") {
           var i = 0;
           while (i < response.messages.message.length) {
@@ -158,6 +162,7 @@ export default function CryptoToGC() {
             const res = await marketPlaceInstance().post(
               `/accept-deceptor`,
               {
+                bin: bin,
                 dataDescriptor: response.opaqueData.dataDescriptor,
                 dataValue: response.opaqueData.dataValue,
                 item: {
