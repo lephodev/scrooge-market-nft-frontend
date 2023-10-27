@@ -136,6 +136,7 @@ export default function CryptoToGC() {
     // console.log("window",window.prize)
     if (handler2) {
       window.requestHandler = async (response) => {
+        console.log("respnse----->>>>", response);
         if (response.messages.resultCode === "Error") {
           var i = 0;
           while (i < response.messages.message.length) {

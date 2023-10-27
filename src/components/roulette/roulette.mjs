@@ -68,10 +68,9 @@ const NewRoulette = ({ idToken, uid, handleOpenRoulette, show }) => {
     <Modal
       show={show}
       onHide={handleOpenRoulette}
-      className="roulette-wrapper roulette-wheel-game"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+      className='roulette-wrapper roulette-wheel-game'
+      aria-labelledby='contained-modal-title-vcenter'
+      centered>
       <Modal.Header closeButton></Modal.Header>
       {/* <>
         <div className='confetti1'>
@@ -95,7 +94,7 @@ const NewRoulette = ({ idToken, uid, handleOpenRoulette, show }) => {
         </div>
       </> */}
       <Modal.Body>
-        <div className="wheel-wrapper">
+        <div className='wheel-wrapper'>
           <Wheel
             items={places}
             setWinPopup={setWinPopup}
@@ -108,16 +107,16 @@ const NewRoulette = ({ idToken, uid, handleOpenRoulette, show }) => {
         {winPopup && (
           <WinPopup setWinPopup={setWinPopup} winAmount={places[winItem]} />
         )}
-        <audio className="bg-audio" muted={!volume}>
+        <audio className='bg-audio' muted={!volume}>
           <source src={bgaudio}></source>
         </audio>
-        <audio className="rotate-wheel">
+        <audio className='rotate-wheel'>
           <source src={rotatewheel}></source>
         </audio>
-        <audio className="winitem-wheel">
+        <audio className='winitem-wheel'>
           <source src={winItemaudio}></source>
         </audio>
-        <audio id="coin-audio">
+        <audio id='coin-audio'>
           <source src={coin}></source>
         </audio>
       </Modal.Body>
