@@ -78,7 +78,7 @@ export default function CryptoToGC() {
   const getUserDataInstant = () => {
     let access_token = cookies.token;
     authInstance()
-      .get("/auth/check-auth", {
+      .get("/auth", {
         headers: {
           Authorization: `Bearer ${access_token}`,
           "Permissions-Policy": "geolocation=*",
@@ -132,8 +132,9 @@ export default function CryptoToGC() {
     getGCPackages();
   }, []);
 
+  let preventMultilecalls = true;
+
   useEffect(() => {
-    // console.log("window",window.prize)
     if (handler2) {
       window.requestHandler = async (response) => {
         const {
@@ -150,9 +151,11 @@ export default function CryptoToGC() {
             // );
             i = i + 1;
           }
-        } else if (isExicute) {
+        } else if (preventMultilecalls) {
           try {
             // console.log("window prize",window.prize)
+            preventMultilecalls = false;
+            
             if (user?.isBlockWallet) {
               setBuyLoading(false);
               return toast.error(`Your wallet blocked by admin`, {
@@ -182,8 +185,6 @@ export default function CryptoToGC() {
                 credentials: "include",
               }
             );
-            console.log("callliiiii");
-            setIsExicute(false);
 
             setBuyLoading(false);
             getUserDataInstant();
@@ -199,11 +200,13 @@ export default function CryptoToGC() {
               handlePromoReject();
               getUserDataInstant();
             }
+            preventMultilecalls = true;
           } catch (e) {
             setBuyLoading(false);
             getGCPackages();
             handlePromoReject();
             getUserDataInstant();
+            preventMultilecalls = true;
 
             console.log("ee55", e.response);
             // console.log("ee55", JSON.parse(e));
