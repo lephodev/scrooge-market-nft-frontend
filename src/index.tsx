@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
+import { ChainId, ThirdwebProvider /* coinbaseWallet */, metamaskWallet, walletConnect } from "@thirdweb-dev/react";
 import ChainContext from "./context/Chain";
 import "./styles/globals.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -46,14 +46,23 @@ export default function App() {
   const [cookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(true);
   const [dateTimeNow, setDateTimeNow] = useState("");
-
+  const [supportedWalletForMob,setSupportedWalletForMob]=useState(false)
   const underMaintainance = false;
 
   useEffect(() => {
     login();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  useEffect(()=>{
+   if(window.innerWidth <=991 &&window.innerWidth >=768){
+    setSupportedWalletForMob(true)
+   }else if(window.innerWidth <=768){
+    setSupportedWalletForMob(true)
+   }else{
+    setSupportedWalletForMob(false)
+   }
+  },[])
+  console.log("inner width-->",window.innerWidth)
   // call this function when you want to authenticate the user
   const login = async () => {
     setLoading(true);
@@ -94,7 +103,6 @@ export default function App() {
     setUser(null);
     return <Navigate to='/login' />;
   };
-
   if (underMaintainance) {
     return <UnderMaintenanceContent />;
   }
@@ -122,6 +130,7 @@ export default function App() {
         <ChainContext.Provider value={{ selectedChain, setSelectedChain }}>
           <ThirdwebProvider
             activeChain={selectedChain}
+            supportedWallets={supportedWalletForMob ?[walletConnect()]:[metamaskWallet(), walletConnect()/* ,coinbaseWallet() */]}
             dAppMeta={{
               name: "Scrooge Casino NFT Marketplace",
               description:
