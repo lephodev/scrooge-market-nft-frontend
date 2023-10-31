@@ -137,8 +137,12 @@ const KYCForm = () => {
     formData.append("IDimageBack", backIdImage[0]);
     formData.append("formValues", JSON.stringify(payload));
     setLoading(true);
-    const res = await createKYC(formData);
-    setLoading(false);
+    setTimeout(()=>{
+      setLoading(false);
+      toast.error("We are urgently working to fix the KYC submissions, Please Try Again Later", {toast_id: "kyc"});
+    }, 2000);
+    const res = {status: 400}; //await createKYC(formData);
+    
     if (res.status === 201) {
       getKYCStatus();
     } else {
