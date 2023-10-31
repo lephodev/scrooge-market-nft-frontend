@@ -50,6 +50,34 @@ html {
 .yellow {
   color: #fbff12;
 }
+@font-face {
+  font-family: "DejaVu Sans";
+  src: url(../fonts/DejaVuSans.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "DejaVu Sans";
+  src: url(../fonts/DejaVuSans.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "DejaVu Sans";
+  src: url(../fonts/DejaVuSans.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "DejaVu Sans";
+  src: url(../fonts/DejaVuSans-Bold.ttf);
+  font-weight: bold;
+}
+@font-face {
+  font-family: "DejaVu Sans";
+  src: url(../fonts/DejaVuSans-Bold.ttf);
+  font-weight: bolder;
+}
 
 .font-martian {
   /* font-family: "Poppins"; */
