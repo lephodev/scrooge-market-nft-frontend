@@ -99,54 +99,54 @@ const KYCForm = () => {
   };
 
   const saveData = async (value) => {
-    const formData = new FormData();
-    let payload = { ...value };
+    try {
+      const formData = new FormData();
+      let payload = { ...value };
 
-    if (frontIdImage.length !== 1) {
-      setError("IDimageFront", {
-        message: "Please uplaod front image of ID",
-      });
-      return;
-    }
+      if (frontIdImage.length !== 1) {
+        setError("IDimageFront", {
+          message: "Please uplaod front image of ID",
+        });
+        return;
+      }
 
-    if (backIdImage.length !== 1) {
-      setError("IDimageBack", {
-        message: "Please upload your selfie with your Id",
-      });
-      return;
-    }
-    let mbLimit = 10 * 1024 * 1024;
+      if (backIdImage.length !== 1) {
+        setError("IDimageBack", {
+          message: "Please upload your selfie with your Id",
+        });
+        return;
+      }
+      let mbLimit = 10 * 1024 * 1024;
 
-    if (frontIdImage[0]?.size > mbLimit) {
-      setError("IDimageFront", {
-        message: "Front image of ID size should not be greater than 10 MB.",
-      });
-      return;
-    }
+      if (frontIdImage[0]?.size > mbLimit) {
+        setError("IDimageFront", {
+          message: "Front image of ID size should not be greater than 10 MB.",
+        });
+        return;
+      }
 
-    if (backIdImage[0]?.size > mbLimit) {
-      setError("IDimageBack", {
-        message:
-          "Selfie with your Id image size should not be greater than 10 MB.",
-      });
-      return;
-    }
+      if (backIdImage[0]?.size > mbLimit) {
+        setError("IDimageBack", {
+          message:
+            "Selfie with your Id image size should not be greater than 10 MB.",
+        });
+        return;
+      }
 
-    payload.gender = activeRatioType;
-    formData.append("IDimageFront", frontIdImage[0]);
-    formData.append("IDimageBack", backIdImage[0]);
-    formData.append("formValues", JSON.stringify(payload));
-    setLoading(true);
-    setTimeout(()=>{
+      payload.gender = activeRatioType;
+      formData.append("IDimageFront", frontIdImage[0]);
+      formData.append("IDimageBack", backIdImage[0]);
+      formData.append("formValues", JSON.stringify(payload));
+      setLoading(true);
+      const res = await createKYC(formData);
       setLoading(false);
-      toast.error("We are urgently working to fix the KYC submissions, Please Try Again Later", {toast_id: "kyc"});
-    }, 2000);
-    const res = {status: 400}; //await createKYC(formData);
-    
-    if (res.status === 201) {
-      getKYCStatus();
-    } else {
-      toast.error("Unable to Upload the Kyc");
+      if (res.status === 201) {
+        getKYCStatus();
+      } else {
+        toast.error("Unable to Upload the Kyc");
+      }
+    } catch (error) {
+      console.log("errr", error);
     }
   };
 
