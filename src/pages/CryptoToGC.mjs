@@ -155,7 +155,7 @@ export default function CryptoToGC() {
           try {
             // console.log("window prize",window.prize)
             preventMultilecalls = false;
-            
+
             if (user?.isBlockWallet) {
               setBuyLoading(false);
               return toast.error(`Your wallet blocked by admin`, {
@@ -190,6 +190,9 @@ export default function CryptoToGC() {
             getUserDataInstant();
 
             if (res.data.success) {
+              setUser({
+                ...res.data.user,
+              });
               toast.success(res.data.data, { id: "buy-sucess" });
               getGCPackages();
               handlePromoReject();
@@ -201,6 +204,9 @@ export default function CryptoToGC() {
               getUserDataInstant();
             }
             preventMultilecalls = true;
+            console.log("user======>>>>>>", user);
+            getGCPackages();
+            getUserDataInstant();
           } catch (e) {
             setBuyLoading(false);
             getGCPackages();
