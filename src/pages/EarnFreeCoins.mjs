@@ -74,11 +74,12 @@ const EarnFreeCoins = () => {
           </Button>
           {/* <Button
             className={`${key === "monthlyClaims" ? "active-btn" : ""}`}
-            onClick={() => setKey("monthlyClaims")}
-          >
+            onClick={() => setKey("monthlyClaims")}>
             Monthly Claims
-          </Button> */}
+          </Button>  */}
           {/* <Button
+          </Button>
+          <Button
             className={`${key === "duckyLuckClaims" ? "active-btn" : ""}`}
             onClick={() => setKey("duckyLuckClaims")}>
             Ducky Luck Claims

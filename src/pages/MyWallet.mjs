@@ -219,7 +219,19 @@ export default function MyWallet() {
           ) : (
             <></>
           )}
+{!address ? (
+            <div>
+              <p className="description yellow">
+                Get started by connecting your wallet.
+              </p>
 
+              <div className="connect-wallet-div">
+                <ConnectWallet />
+              </div>
+            </div>
+          ) : (
+            <span></span>
+          )}
           {user ? (
             <div className="wallet-casino-profile-div">
               <div className="wallet-casino-top">
@@ -272,9 +284,11 @@ export default function MyWallet() {
                     </div> */}
                     <div>
               {/* "gghh" */}
+              <h6 className="title">Ducky Luck Claims</h6>
               <DLGate>
                 <DLClaimTokens />
               </DLGate>
+              <h6 className="title">Monthly Claims</h6>
               <div className='tab-claims'>
               <HolderClaimChips />
                 </div>
@@ -424,19 +438,7 @@ export default function MyWallet() {
             <span></span>
           )}
 
-          {!address ? (
-            <div>
-              <p className="description yellow">
-                Get started by connecting your wallet.
-              </p>
-
-              <div className="connect-wallet-div">
-                <ConnectWallet />
-              </div>
-            </div>
-          ) : (
-            <span></span>
-          )}
+          
 
           {/* {!isMismatched && address && showCasinoNFTs ? (
             <div className='bottom-margin-100'>
