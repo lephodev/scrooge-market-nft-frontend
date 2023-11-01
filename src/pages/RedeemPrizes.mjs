@@ -476,7 +476,10 @@ function RedeemPrizes() {
                 <div className="prizes-chip-count">
                   {user ? (
                     <>
-                      <h3>Your Token Balance: {user?.wallet.toFixed(2)}</h3>
+                      <h3>
+                        Your Token Balance:{" "}
+                        {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
+                      </h3>
                     </>
                   ) : (
                     <>
