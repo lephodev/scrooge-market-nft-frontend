@@ -2,7 +2,7 @@
 import { useState, useEffect, useContext } from "react";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import {
-  ConnectWallet,
+  //ConnectWallet,
   useNetworkMismatch,
   useAddress,
   useSDK,
@@ -419,12 +419,12 @@ function HolderClaimChips() {
             </div>
           ) : (
             <div>
-              <p className='description yellow'>
+              {/* <p className='description yellow'>
                 Get started by connecting your wallet.
               </p>
               <div className='connect-wallet-div'>
                 <ConnectWallet />
-              </div>
+              </div> */}
             </div>
           )}
         </div>
