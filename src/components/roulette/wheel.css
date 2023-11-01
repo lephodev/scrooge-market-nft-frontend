@@ -1062,18 +1062,10 @@ body.modal-open {
   }
 
   .wheel-wrapper {
-    transform: scale(0.9);
+    transform: scale(0.6);
   }
+
 }
-
-@media screen and (max-width: 375px) {
-  .wheel-wrapper {
-    transform: scale(0.7);
-  }
-}
-
-
-
 
 /**** Winner Animation *******/
 
