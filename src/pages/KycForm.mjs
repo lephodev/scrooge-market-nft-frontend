@@ -22,7 +22,9 @@ const KYCForm = () => {
   const [statusKyc, setstatusKyc] = useState(null);
   const [rejectionMessage, setRejectionMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSaveLoader, setIsSaveLoader] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
+  const [unSupportedImg, setUnsupportedImg] = useState(true);
   // const [successMsg, setSuccessMsg] = useState("");
   const [activeRatioType, setActiveRatioType] = useState("Male");
 
@@ -41,7 +43,7 @@ const KYCForm = () => {
 
     if (name === "IDimageFront") {
       const files = e.target.files;
-
+      setUnsupportedImg(true);
       // Check if any files are selected
       if (files.length === 0) {
         clearErrors("IDimageFront");
@@ -52,11 +54,14 @@ const KYCForm = () => {
       const allAreImages = Array.from(files).every((file) =>
         acceptedImageTypes.includes(file.type)
       );
+      console.log("allAreImages", files);
 
       if (allAreImages) {
+        setUnsupportedImg(true);
         setfrontIdImage([...files]);
         clearErrors("IDimageFront");
       } else {
+        setUnsupportedImg(false);
         setError("IDimageFront", {
           message:
             "Unsupported File Format. Please upload images in JPEG or PNG format",
@@ -66,6 +71,8 @@ const KYCForm = () => {
     }
 
     if (name === "IDimageBack") {
+      setUnsupportedImg(true);
+
       const files = e.target.files;
 
       // Check if any files are selected
@@ -78,6 +85,8 @@ const KYCForm = () => {
       const allAreImages = Array.from(files).every((file) =>
         acceptedImageTypes.includes(file.type)
       );
+      setUnsupportedImg(true);
+
       console.log("allAreImages", allAreImages);
       if (allAreImages) {
         setbackIdImage([...files]);
@@ -99,54 +108,51 @@ const KYCForm = () => {
   };
 
   const saveData = async (value) => {
-    try {
-      const formData = new FormData();
-      let payload = { ...value };
+    setIsSaveLoader(true);
+    const formData = new FormData();
+    let payload = { ...value };
 
-      if (frontIdImage.length !== 1) {
-        setError("IDimageFront", {
-          message: "Please uplaod front image of ID",
-        });
-        return;
-      }
+    if (frontIdImage.length !== 1) {
+      setError("IDimageFront", {
+        message: "Please uplaod front image of ID",
+      });
+      return;
+    }
 
-      if (backIdImage.length !== 1) {
-        setError("IDimageBack", {
-          message: "Please upload your selfie with your Id",
-        });
-        return;
-      }
-      let mbLimit = 10 * 1024 * 1024;
+    if (backIdImage.length !== 1) {
+      setError("IDimageBack", {
+        message: "Please upload your selfie with your Id",
+      });
+      return;
+    }
+    let mbLimit = 10 * 1024 * 1024;
 
-      if (frontIdImage[0]?.size > mbLimit) {
-        setError("IDimageFront", {
-          message: "Front image of ID size should not be greater than 10 MB.",
-        });
-        return;
-      }
+    if (frontIdImage[0]?.size > mbLimit) {
+      setError("IDimageFront", {
+        message: "Front image of ID size should not be greater than 10 MB.",
+      });
+      return;
+    }
 
-      if (backIdImage[0]?.size > mbLimit) {
-        setError("IDimageBack", {
-          message:
-            "Selfie with your Id image size should not be greater than 10 MB.",
-        });
-        return;
-      }
+    if (backIdImage[0]?.size > mbLimit) {
+      setError("IDimageBack", {
+        message:
+          "Selfie with your Id image size should not be greater than 10 MB.",
+      });
+      return;
+    }
 
-      payload.gender = activeRatioType;
-      formData.append("IDimageFront", frontIdImage[0]);
-      formData.append("IDimageBack", backIdImage[0]);
-      formData.append("formValues", JSON.stringify(payload));
-      setLoading(true);
-      const res = await createKYC(formData);
-      setLoading(false);
-      if (res.status === 201) {
-        getKYCStatus();
-      } else {
-        toast.error("Unable to Upload the Kyc");
-      }
-    } catch (error) {
-      console.log("errr", error);
+    payload.gender = activeRatioType;
+    formData.append("IDimageFront", frontIdImage[0]);
+    formData.append("IDimageBack", backIdImage[0]);
+    formData.append("formValues", JSON.stringify(payload));
+    setLoading(true);
+    const res = await createKYC(formData);
+    setLoading(false);
+    if (res.status === 201) {
+      getKYCStatus();
+    } else {
+      toast.error("Unable to Upload the Kyc");
     }
   };
 
@@ -400,12 +406,14 @@ const KYCForm = () => {
                                             handleRemoveImage(0, false, false)
                                           }
                                         />
-                                        <img
-                                          src={window.URL.createObjectURL(
-                                            frontIdImage[0]
-                                          )}
-                                          alt='logo-img'
-                                        />
+                                        {unSupportedImg && (
+                                          <img
+                                            src={window.URL.createObjectURL(
+                                              frontIdImage[0]
+                                            )}
+                                            alt='logo-img'
+                                          />
+                                        )}
                                       </div>
                                     )}
                                     <div></div>
@@ -479,7 +487,10 @@ const KYCForm = () => {
                         </Form.Group>
 
                         <div className='login-button full-w'>
-                          <Button type='submit' className='l-btn'>
+                          <Button
+                            type='submit'
+                            className='l-btn '
+                            disabled={isSaveLoader}>
                             {!loading ? "Save" : <Spinner animation='border' />}
                           </Button>
                         </div>

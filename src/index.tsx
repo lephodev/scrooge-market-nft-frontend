@@ -62,7 +62,6 @@ export default function App() {
     setSupportedWalletForMob(false)
    }
   },[])
-  console.log("inner width-->",window.innerWidth)
   // call this function when you want to authenticate the user
   const login = async () => {
     setLoading(true);

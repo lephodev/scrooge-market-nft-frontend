@@ -53,9 +53,7 @@ body.modal-open {
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
-  height: 100%;
   background-repeat: no-repeat;
-  width: 100%;
   background-size: 100%;
   z-index: -1;
   background-position: center;
@@ -66,21 +64,19 @@ body.modal-open {
 }
 
 .wheel .wheel-item:nth-child(odd)::before {
-  /* border-right-color: #ca965c !important; */
-  border-right-color: #000 !important;
+  border-right-color: #f8e17e !important;
 }
 
 .wheel .wheel-item:nth-child(even)::before {
-  /* border-right-color: #f4dfba !important; */
-  border-right-color: #d2042d !important;
+  border-right-color: #262727 !important;
 }
 
 .wheel .wheel-item:nth-child(odd) {
-  color: white !important;
+  color: #111213 !important;
 }
 
 .wheel .wheel-item:nth-child(even) {
-  color: black !important;
+  color: #ffffff !important;
 }
 
 /*.wheel .wheel-item0::before {
@@ -196,13 +192,13 @@ body.modal-open {
 }
 
 .roulette-wheel-game .wheel-container {
-  --wheel-font: "Lato", "Quicksand", sans-serif;
-  --wheel-size: 385px;
+  --wheel-font: "DejaVu Sans", sans-serif !important;
+  --wheel-size: 440px;
   --wheel-slice-spacing: 50px;
   --wheel-border-size: 5px;
   --wheel-color: transparent;
-  --neutral-color: white;
-  --PI: 4.6;
+  --neutral-color: #262727 !important;
+  --PI: 3.5;
   --nb-item: 0;
   --item-nb: 0;
   --selected-item: 0;
@@ -219,7 +215,6 @@ body.modal-open {
   background-color: var(--neutral-color);
   border-radius: 50%;
   user-select: none;
-  margin-top: 0px;
   z-index: 999999;
 }
 
@@ -233,8 +228,6 @@ body.modal-open {
   overflow: hidden;
   border-radius: 50%;
   border: solid var(--wheel-color) var(--wheel-border-size);
-  /* background-color: #f4dfba; */
-  background-color: #d2042d;
   transition: transform var(--reset-duration);
   transform: rotate(-90deg);
   cursor: pointer;
@@ -260,30 +253,25 @@ body.modal-open {
 }
 
 .wheel-container:after {
-  background-color: #1a1d29;
-  /*background: url("../../assets/images/roulette/2.png") no-repeat 50%;*/
-  /* background: #876445; */
-  background: #fbff12;
+  background: url("../../images/spin/spin-arrow.png") no-repeat 50%;
   content: "";
-  height: 55px;
+  height: 70px;
   left: 50%;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 55px;
+  width: 70px;
   z-index: 999999;
   background-size: 75%;
   background-position: center;
-  border-radius: 50%;
 }
 
-.wheel-container:before {
+/* .wheel-container:before {
   content: "";
   width: 0px;
   height: 0px;
   border-style: solid;
   border-width: 60px 20px 0px 20px;
-  /* border-color: #876445 transparent transparent transparent; */
   border-color: #fbff12 transparent transparent transparent;
   display: inline-block;
   vertical-align: middle;
@@ -294,22 +282,9 @@ body.modal-open {
   transform: translate(-50%, -50%) rotate(180deg);
   z-index: 999999999999;
   margin-top: -39px;
-}
+} */
 
-.wheel-bg:before {
-  content: "";
-  position: absolute;
-  height: 45px;
-  width: 45px;
-  /* background: #f4dfba; */
-  background: #d2042d;
-  z-index: 9999999999;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  /* border: 4px solid black; */
-}
+
 
 .roulette-wheel-game .wheel-item {
   display: block;
@@ -322,14 +297,10 @@ body.modal-open {
   transform: translateY(-50%) rotate(calc(var(--item-nb) * (360deg / var(--nb-item, 1))));
   color: var(--neutral-color);
   text-align: right;
-  padding: 0 20px 0 24px;
-  font-family: var(--wheel-font);
-  font-size: 12px;
-  font-weight: 600;
-  font-family: "Courgette", cursive !important;
-  font-family: "Exo 2", sans-serif !important;
-  font-family: "Lobster", cursive !important;
-  font-family: "Pacifico", cursive !important;
+  padding: 0 10px 0 10px;
+  font-size: 14px;
+  font-weight: bolder;
+  font-family: "DejaVu Sans" !important;
 }
 
 .roulette-wheel-game .wheel-item:before {
@@ -353,21 +324,13 @@ body.modal-open {
 
 .roulette-wheel-game .roulette-spinner::before {
   content: "";
-  /*background: url(../../assets/images/roulette/1.png);*/
-  /* background: radial-gradient(circle, #876445 0%, #876445 100%); */
-  /* background: rgb(246, 4, 3);
-  background: radial-gradient(
-    circle,
-    rgba(246, 4, 3, 1) 0%,
-    rgba(251, 255, 18, 1) 100%
-  ); */
-  background-color: #fbff12;
-
+  /* background-color: #fbff12; */
+  background: url("../../images/spin/spin-border.png") ;
   position: absolute;
   z-index: 99999;
   background-size: 100%;
-  height: 450px;
-  width: 440px;
+  height: 480px;
+  width: 480px;
   background-repeat: no-repeat;
   transform: translate(-50%, -50%);
   left: 50%;
@@ -1035,19 +998,6 @@ body.modal-open {
     height: 22px;
     font-size: 11px;
   }
-
-  .roulette-wheel-game .wheel-container {
-    --wheel-size: 430px;
-  }
-
-  .roulette-wheel-game .roulette-spinner::before {
-    height: 465px;
-    width: 465px;
-  }
-
-  .roulette-wheel-game .wheel-container {
-    margin-top: 0px;
-  }
 }
 
 @media screen and (max-width: 991px) {
@@ -1112,18 +1062,10 @@ body.modal-open {
   }
 
   .wheel-wrapper {
-    transform: scale(0.9);
+    transform: scale(0.6);
   }
+
 }
-
-@media screen and (max-width: 375px) {
-  .wheel-wrapper {
-    transform: scale(0.7);
-  }
-}
-
-
-
 
 /**** Winner Animation *******/
 
