@@ -39,6 +39,7 @@ const KYCForm = () => {
 
   const handleImageChange = (e) => {
     const { name } = e.target;
+    console.log("e", e.target);
     const acceptedImageTypes = ["image/jpeg", "image/png"]; // Add more types if needed
 
     if (name === "IDimageFront") {

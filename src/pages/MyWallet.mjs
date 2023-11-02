@@ -6,42 +6,42 @@ import {
   ChainId,
   useSigner,
   useSDK,
-} from '@thirdweb-dev/react'
-import { useEffect, useState, useContext } from 'react'
-import ShowBottomNavCards from '../scripts/showBottomNavCards.mjs'
-import SwitchNetworkBSC from '../scripts/switchNetworkBSC.mjs'
-import ChainContext from '../context/Chain.ts'
+} from "@thirdweb-dev/react";
+import { useEffect, useState, useContext } from "react";
+import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
+import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
+import ChainContext from "../context/Chain.ts";
 // import Sweep from '../images/token.png'
 // import GoldCoin from '../images/gold.png'
 // import Ticket from "../images/ticket.png";
-import ScroogeHatLogo from '../images/scroogeHatLogo.png'
+import ScroogeHatLogo from "../images/scroogeHatLogo.png";
 // import scroogejr from "../images/scroogejr.jpeg";
-import ClaimOGPending from '../components/claimOGPending.mjs'
+import ClaimOGPending from "../components/claimOGPending.mjs";
 // import ClaimJRPending from "../components/claimJRPending.mjs";
-import 'react-toastify/dist/ReactToastify.css'
-import AuthContext from '../context/authContext.ts'
-import Layout from './Layout.mjs'
-import { marketPlaceInstance } from '../config/axios.js'
+import "react-toastify/dist/ReactToastify.css";
+import AuthContext from "../context/authContext.ts";
+import Layout from "./Layout.mjs";
+import { marketPlaceInstance } from "../config/axios.js";
 //import profile from '../images/profile.png'
-import { DLGate } from '../components/DLGate.jsx'
-import DLClaimTokens from './DLClaimTokens.mjs'
-import HolderClaimChips from './HolderClaimChips.mjs'
+import { DLGate } from "../components/DLGate.jsx";
+import DLClaimTokens from "./DLClaimTokens.mjs";
+// import HolderClaimChips from "./HolderClaimChips.mjs";
 // import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses.js";
 export default function MyWallet() {
-  const [OGBalance, setOGBalance] = useState('Loading...')
-  const [setJRBalance] = useState('Loading...')
-  const [setJRValue] = useState('Loading...')
-  const [OGValue, setOGValue] = useState('Loading...')
-  const [, /* currentPriceOG */ setCurrentPriceOG] = useState('Loading...')
-  const [, /* currentPriceJR */ setCurrentPriceJR] = useState('Loading...')
-  const { user } = useContext(AuthContext)
-  const [userRedeemed, setUserRedeemed] = useState([])
-  const [showMerchRedeemed, setShowMerchRedeemed] = useState(false)
-  const [showCasinoNFTs, setShowCasinoNFTs] = useState(true)
-  const [showCrypto, setShowCrypto] = useState(true)
-  const sdk = useSDK()
-  const address = useAddress()
-  const signer = useSigner()
+  const [OGBalance, setOGBalance] = useState("Loading...");
+  const [setJRBalance] = useState("Loading...");
+  const [setJRValue] = useState("Loading...");
+  const [OGValue, setOGValue] = useState("Loading...");
+  const [, /* currentPriceOG */ setCurrentPriceOG] = useState("Loading...");
+  const [, /* currentPriceJR */ setCurrentPriceJR] = useState("Loading...");
+  const { user } = useContext(AuthContext);
+  const [userRedeemed, setUserRedeemed] = useState([]);
+  const [showMerchRedeemed, setShowMerchRedeemed] = useState(false);
+  const [showCasinoNFTs, setShowCasinoNFTs] = useState(true);
+  const [showCrypto, setShowCrypto] = useState(true);
+  const sdk = useSDK();
+  const address = useAddress();
+  const signer = useSigner();
 
   async function checkToken() {
     try {
@@ -49,48 +49,48 @@ export default function MyWallet() {
         .get(`/getUserRedeemed/${user.id}`)
         .then((data) => {
           //console.log('data: ', data);
-          setUserRedeemed(data.data)
-        })
+          setUserRedeemed(data.data);
+        });
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   }
 
   async function getCoinGeckoDataOG(bal) {
     await fetch(`https://api.coinbrain.com/public/coin-info`, {
-      method: 'post',
+      method: "post",
       body: JSON.stringify({
         56: [process.env.REACT_APP_OGCONTRACT_ADDRESS],
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        const current_price = data[0].priceUsd
-        setCurrentPriceOG(current_price)
-        setOGValue((bal * current_price).toFixed(2))
-        return current_price
+        const current_price = data[0].priceUsd;
+        setCurrentPriceOG(current_price);
+        setOGValue((bal * current_price).toFixed(2));
+        return current_price;
       })
       .catch((e) => {
-        console.log(e)
-        return false
-      })
+        console.log(e);
+        return false;
+      });
   }
 
   async function getCoinGeckoDataJR(bal) {
     await fetch(
-      `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/0x2e9F79aF51dD1bb56Bbb1627FBe4Cc90aa8985Dd`,
+      `https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/0x2e9F79aF51dD1bb56Bbb1627FBe4Cc90aa8985Dd`
     )
       .then((response) => response.json())
       .then((data) => {
-        const current_price = data.market_data.current_price.usd
-        setCurrentPriceJR(current_price)
-        setJRValue((bal * current_price).toFixed(2))
-        return current_price
+        const current_price = data.market_data.current_price.usd;
+        setCurrentPriceJR(current_price);
+        setJRValue((bal * current_price).toFixed(2));
+        return current_price;
       })
       .catch((e) => {
-        console.log(e)
-        return false
-      })
+        console.log(e);
+        return false;
+      });
   }
 
   const handleMarkRedeemed = (trans_id) => {
@@ -98,9 +98,9 @@ export default function MyWallet() {
       .get(`/markMerchCouponRedeemed/${trans_id}/${user.id}`)
       .then((res) => {
         //console.log('handle: ', res);
-        getUserRedeemed()
-      })
-  }
+        getUserRedeemed();
+      });
+  };
 
   const getUserRedeemed = () => {
     //console.log('user: ', user[0]);
@@ -108,54 +108,54 @@ export default function MyWallet() {
       .get(`/getUserRedeemed/${user.id}`)
       .then((data) => {
         //console.log('post get data: ', data);
-        setUserRedeemed(data.data)
+        setUserRedeemed(data.data);
         //console.log('useRed: ',userRedeemed);
-      })
-  }
+      });
+  };
 
   const getOG = async () => {
     const rawBal = await sdk.wallet.balance(
-      process.env.REACT_APP_OGCONTRACT_ADDRESS,
-    )
-    setOGBalance(parseInt(rawBal.value / 10 ** 18))
-    getCoinGeckoDataOG(parseInt(rawBal.value / 10 ** 18))
-  }
+      process.env.REACT_APP_OGCONTRACT_ADDRESS
+    );
+    setOGBalance(parseInt(rawBal.value / 10 ** 18));
+    getCoinGeckoDataOG(parseInt(rawBal.value / 10 ** 18));
+  };
 
   const getJR = async () => {
     const rawBal = await sdk.wallet.balance(
-      '0x2e9F79aF51dD1bb56Bbb1627FBe4Cc90aa8985Dd',
-    )
-    setJRBalance(parseInt(rawBal.value / 10 ** 18))
-    getCoinGeckoDataJR(parseInt(rawBal.value / 10 ** 18))
-  }
+      "0x2e9F79aF51dD1bb56Bbb1627FBe4Cc90aa8985Dd"
+    );
+    setJRBalance(parseInt(rawBal.value / 10 ** 18));
+    getCoinGeckoDataJR(parseInt(rawBal.value / 10 ** 18));
+  };
 
-  const { selectedChain, setSelectedChain } = useContext(ChainContext)
-  const isMismatched = useNetworkMismatch()
+  const { selectedChain, setSelectedChain } = useContext(ChainContext);
+  const isMismatched = useNetworkMismatch();
 
   useEffect(() => {
     if (selectedChain === ChainId.Mainnet) {
-      setSelectedChain(ChainId.BinanceSmartChainMainnet)
+      setSelectedChain(ChainId.BinanceSmartChainMainnet);
     }
     if (user) {
-      checkToken()
+      checkToken();
     }
     if (
       address &&
       !isMismatched &&
       selectedChain === ChainId.BinanceSmartChainMainnet
     ) {
-      getOG()
-      getJR()
+      getOG();
+      getJR();
     }
-  }, [user, isMismatched, address, signer])
+  }, [user, isMismatched, address, signer]);
 
   return (
     <Layout>
-      <div className="container">
-        <main className="main my-wallet-page">
+      <div className='container'>
+        <main className='main my-wallet-page'>
           {/* <h1 className='title'>{user?.username}'s SCROOGE CASINO WALLET</h1> */}
-          <h1 className="title">Scrooge Crypto holder rewards</h1>
-          <div className="feature-overview-div">
+          <h1 className='title'>Scrooge Crypto holder rewards</h1>
+          <div className='feature-overview-div'>
             Here is where the magic happens, by holding our Cryptocurrency,
             Scrooge, you are rewarded with free monthly Sweep Tokens based upon
             your value of Scrooge holdings. That’s not all, you can also claim
@@ -165,7 +165,7 @@ export default function MyWallet() {
           </div>
           {!showMerchRedeemed || !showCasinoNFTs || !showCrypto ? (
             <>
-              <div className="min-menu-div">
+              <div className='min-menu-div'>
                 {!showMerchRedeemed ? (
                   <>
                     {/* <div className='new-btn'>
@@ -184,13 +184,12 @@ export default function MyWallet() {
                 )}
                 {!showCasinoNFTs ? (
                   <>
-                    <div className="new-btn">
+                    <div className='new-btn'>
                       <button
                         // className='min-menu-btn'
                         onClick={() => {
-                          setShowCasinoNFTs(true)
-                        }}
-                      >
+                          setShowCasinoNFTs(true);
+                        }}>
                         CASINO NFTS
                       </button>
                     </div>
@@ -200,13 +199,12 @@ export default function MyWallet() {
                 )}
                 {!showCrypto ? (
                   <>
-                    <div className="new-btn">
+                    <div className='new-btn'>
                       <button
                         // className='min-menu-btn'
                         onClick={() => {
-                          setShowCrypto(true)
-                        }}
-                      >
+                          setShowCrypto(true);
+                        }}>
                         CRYPTO
                       </button>
                     </div>
@@ -219,13 +217,13 @@ export default function MyWallet() {
           ) : (
             <></>
           )}
-{!address ? (
+          {!address ? (
             <div>
-              <p className="description yellow">
+              <p className='description yellow'>
                 Get started by connecting your wallet.
               </p>
 
-              <div className="connect-wallet-div">
+              <div className='connect-wallet-div'>
                 <ConnectWallet />
               </div>
             </div>
@@ -233,8 +231,8 @@ export default function MyWallet() {
             <span></span>
           )}
           {user ? (
-            <div className="wallet-casino-profile-div">
-              <div className="wallet-casino-top">
+            <div className='wallet-casino-profile-div'>
+              <div className='wallet-casino-top'>
                 {/* <div className="wallet-casino-profile-img-div">
                   <img
                     className="wallet-casino-profile-img"
@@ -246,7 +244,7 @@ export default function MyWallet() {
                     alt="Scrooge Casino profile"
                   />
                 </div> */}
-                <div className="wallet-casino-profile-details">
+                <div className='wallet-casino-profile-details'>
                   {/* <div className="">
                     <span className="wallet-casino-profile-username">
                       {user?.username}
@@ -257,7 +255,7 @@ export default function MyWallet() {
                     </span>
                     <br></br>
                   </div> */}
-                  <div className="balance-column">
+                  <div className='balance-column'>
                     {/* <div className="token-ticket-row">
                       <img
                         className="token-small"
@@ -283,43 +281,42 @@ export default function MyWallet() {
                       GOLD COIN: {user?.goldCoin?.toLocaleString('en-US')}
                     </div> */}
                     <div>
-              {/* "gghh" */}
-              <h6 className="title">Ducky Luck Claims</h6>
-              <DLGate>
-                <DLClaimTokens />
-              </DLGate>
-              <h6 className="title">Monthly Claims</h6>
+                      <h6 className='title'>Ducky Luck Claims</h6>
+                      <DLGate>
+                        <DLClaimTokens />
+                      </DLGate>
+                      {/* <h6 className="title">Monthly Claims</h6>
               <div className='tab-claims'>
               <HolderClaimChips />
-                </div>
-            </div>
+                </div> */}
+                    </div>
                   </div>
                 </div>
               </div>
 
               {address ? (
                 <>
-                  <div className="crypto-card-grid">
-                    <div className="crypto-balance-div">
-                      <div className="width-100">
-                        <div className="crypto-balance-header">
+                  <div className='crypto-card-grid'>
+                    <div className='crypto-balance-div'>
+                      <div className='width-100'>
+                        <div className='crypto-balance-header'>
                           CRYPTO BALANCE
                         </div>
-                        <div className="crypto-balance-row-new">
-                          <div className="crypto-balance-row-img">
+                        <div className='crypto-balance-row-new'>
+                          <div className='crypto-balance-row-img'>
                             <img
-                              className="token-logo"
+                              className='token-logo'
                               src={ScroogeHatLogo}
-                              alt="Scrooge Casino balances"
+                              alt='Scrooge Casino balances'
                             />
                           </div>
 
-                          <div className="crypto-balance-row-text">
+                          <div className='crypto-balance-row-text'>
                             <p>SCROOGE COIN: {OGBalance}</p>
-                            <p> VALUE: ${OGValue.toLocaleString('en-US')}</p>
+                            <p> VALUE: ${OGValue.toLocaleString("en-US")}</p>
                           </div>
                         </div>
-                        <div className="claim-pending-div">
+                        <div className='claim-pending-div'>
                           <ClaimOGPending />
                         </div>
                       </div>
@@ -350,7 +347,7 @@ export default function MyWallet() {
                 </>
               ) : (
                 <>
-                {/* // <div className="connect-wallet-div">
+                  {/* // <div className="connect-wallet-div">
                 //   <ConnectWallet />
                 // </div> */}
                 </>
@@ -361,56 +358,53 @@ export default function MyWallet() {
           )}
 
           {userRedeemed.length > 0 && showMerchRedeemed ? (
-            <div className="transaction-div">
-              <div className="close-btn-round-div wallet-close">
+            <div className='transaction-div'>
+              <div className='close-btn-round-div wallet-close'>
                 <div
-                  className="close-btn-round"
-                  onClick={() => setShowMerchRedeemed(false)}
-                >
+                  className='close-btn-round'
+                  onClick={() => setShowMerchRedeemed(false)}>
                   X
                 </div>
               </div>
-              <div className="transaction-div-title text-animate">
+              <div className='transaction-div-title text-animate'>
                 <h1> Your Merch Coupon Codes</h1>
               </div>
 
-              <div className="transaction-card-grid">
+              <div className='transaction-card-grid'>
                 {userRedeemed.map((red) => (
                   <>
                     {red.prize_details.map((deet) => (
                       <>
-                        {deet.category === 'Merch' ? (
+                        {deet.category === "Merch" ? (
                           <div
                             className={
                               red.markRedeemed
-                                ? 'disabled transaction-card'
-                                : 'transaction-card'
+                                ? "disabled transaction-card"
+                                : "transaction-card"
                             }
-                            key={red._id}
-                          >
+                            key={red._id}>
                             <div key={deet._id}>
                               {deet.name}
                               <br></br>
                               <p>COUPON CODE:</p>
-                              <div className="transaction-card-coupon-code">
+                              <div className='transaction-card-coupon-code'>
                                 {red.coupon_code}
                               </div>
                               <br></br>
-                              Received Date:{' '}
+                              Received Date:{" "}
                               {red.timestamp.substring(
                                 0,
-                                red.timestamp.indexOf('T'),
+                                red.timestamp.indexOf("T")
                               )}
                               <br></br>
                               <br />
                               {red.markRedeemed ? (
-                                <div className="green bold">Redeemed</div>
+                                <div className='green bold'>Redeemed</div>
                               ) : (
-                                <div className="new-btn">
+                                <div className='new-btn'>
                                   <button
                                     // className='claim-btn'
-                                    onClick={() => handleMarkRedeemed(red._id)}
-                                  >
+                                    onClick={() => handleMarkRedeemed(red._id)}>
                                     Mark as Redeemed
                                   </button>
                                 </div>
@@ -438,8 +432,6 @@ export default function MyWallet() {
             <span></span>
           )}
 
-          
-
           {/* {!isMismatched && address && showCasinoNFTs ? (
             <div className='bottom-margin-100'>
               <div
@@ -463,5 +455,5 @@ export default function MyWallet() {
         </main>
       </div>
     </Layout>
-  )
+  );
 }
