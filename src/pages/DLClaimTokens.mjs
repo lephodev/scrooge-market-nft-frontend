@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { useAddress, ConnectWallet } from "@thirdweb-dev/react";
+import { useAddress, /* ConnectWallet */ } from "@thirdweb-dev/react";
 import { CheckDLOnPage } from "../components/DLGate.jsx";
 import GetWalletDLNFTs from "../scripts/getWalletDLNFTs.mjs";
 import DLLogoMembersOnly from "../images/DLLogoMembersOnly.png";
@@ -81,14 +81,13 @@ export default function DLClaimTokens() {
               <h1>No DL Tokens</h1>
             </div>
           )}
-          {!address ? (
-            // <div className="connect-wallet">Please connect your wallet.</div>
+          {/* {!address ? (
             <div className='connect-wallet-div'>
               <ConnectWallet />
             </div>
           ) : (
             <></>
-          )}
+          )} */}
         </div>
       </main>
   );

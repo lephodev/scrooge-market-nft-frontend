@@ -469,18 +469,19 @@ function RedeemPrizes() {
                     <h1 className='title'>Redeem for Prizes</h1>
                   </div>
                   <div className='feature-overview-div'>
-                    Ready to cash in on all of your big wins? Browse through our
-                    huge list of amazing prizes and find something you just
-                    can't live without. Make sure you have enough available
-                    tokens for the prize you want, then click the REDEEM PRIZE
-                    button!
+                    Ready to cash in on your big wins? Take a look through our
+                    selection of prize options and pick what suits you best!
+                    Sweep Tokens are redeemed at a 100:1 USD ratio!
                   </div>
                 </div>
 
                 <div className='prizes-chip-count'>
                   {user ? (
                     <>
-                      <h3>Your Token Balance: {user?.wallet.toFixed(2)}</h3>
+                      <h3>
+                        Your Token Balance:{" "}
+                        {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
+                      </h3>
                     </>
                   ) : (
                     <>
@@ -676,7 +677,7 @@ function RedeemPrizes() {
                               f.redeem_action !== "burn" &&
                               f.category !== "Merch" &&
                               f.category !== "Badges" &&
-                              // f.price === 500 &&
+                              f.price !== 500 &&
                               f.contract_name !== "JR" &&
                               f._id !== "63cedf0d1736630ad01d5f4e"
                           )
@@ -699,12 +700,20 @@ function RedeemPrizes() {
                                       parseInt(OG1000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(OG1000) * currentPriceOG
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -720,12 +729,20 @@ function RedeemPrizes() {
                                       parseInt(JR1000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(JR1000) * currentPriceJR
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -740,12 +757,20 @@ function RedeemPrizes() {
                                       parseInt(OG1000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(OG1000) * currentPriceOG
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -761,12 +786,20 @@ function RedeemPrizes() {
                                       parseInt(JR1000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(JR1000) * currentPriceJR
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -781,12 +814,20 @@ function RedeemPrizes() {
                                       parseInt(OG5000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(OG5000) * currentPriceOG
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -802,12 +843,20 @@ function RedeemPrizes() {
                                       parseInt(JR5000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(JR5000) * currentPriceJR
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -823,12 +872,20 @@ function RedeemPrizes() {
                                       parseInt(OG5000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(OG5000) * currentPriceOG
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -843,12 +900,20 @@ function RedeemPrizes() {
                                       parseInt(JR5000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(JR5000) * currentPriceJR
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -864,12 +929,20 @@ function RedeemPrizes() {
                                       parseInt(OG10000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(OG10000) * currentPriceOG
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -885,12 +958,20 @@ function RedeemPrizes() {
                                       parseInt(JR10000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(JR10000) * currentPriceJR
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -905,12 +986,20 @@ function RedeemPrizes() {
                                       parseInt(OG10000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(OG10000) * currentPriceOG
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -925,12 +1014,20 @@ function RedeemPrizes() {
                                       parseInt(JR10000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(JR10000) * currentPriceJR
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -946,12 +1043,20 @@ function RedeemPrizes() {
                                       parseInt(OG20000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(OG20000) * currentPriceOG
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -967,12 +1072,20 @@ function RedeemPrizes() {
                                       parseInt(JR20000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(JR20000) * currentPriceJR
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -989,12 +1102,20 @@ function RedeemPrizes() {
                                       parseInt(OG500000).toLocaleString("en-US")
                                     )}
                                   </h4>
+                                  <div>
+                                    <p>
+                                      Scrooge Contract to view tokens in wallet
+                                    </p>
+                                    <p>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    </p>
+                                  </div>
                                   *
                                   <h4>
                                     {(
                                       parseInt(OG500000) * currentPriceOG
                                     ).toLocaleString("en-US")}
-                                    $ In Value
+                                    &nbsp;USD In Value
                                   </h4>{" "}
                                   *
                                 </div>
@@ -1011,7 +1132,7 @@ function RedeemPrizes() {
                                 <p>Cost: {prize.price} tokens</p>
                               </div>
                               <br></br>
-                              <p>Category: {prize.category}</p>
+                              <p>Category : {prize.category}</p>
                               <br></br>
 
                               {!prize.isDynamic ? (

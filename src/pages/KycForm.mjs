@@ -22,7 +22,9 @@ const KYCForm = () => {
   const [statusKyc, setstatusKyc] = useState(null);
   const [rejectionMessage, setRejectionMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSaveLoader, setIsSaveLoader] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
+  const [unSupportedImg, setUnsupportedImg] = useState(true);
   // const [successMsg, setSuccessMsg] = useState("");
   const [activeRatioType, setActiveRatioType] = useState("Male");
 
@@ -41,7 +43,7 @@ const KYCForm = () => {
 
     if (name === "IDimageFront") {
       const files = e.target.files;
-
+      setUnsupportedImg(true);
       // Check if any files are selected
       if (files.length === 0) {
         clearErrors("IDimageFront");
@@ -52,11 +54,14 @@ const KYCForm = () => {
       const allAreImages = Array.from(files).every((file) =>
         acceptedImageTypes.includes(file.type)
       );
+      console.log("allAreImages", files);
 
       if (allAreImages) {
+        setUnsupportedImg(true);
         setfrontIdImage([...files]);
         clearErrors("IDimageFront");
       } else {
+        setUnsupportedImg(false);
         setError("IDimageFront", {
           message:
             "Unsupported File Format. Please upload images in JPEG or PNG format",
@@ -66,6 +71,8 @@ const KYCForm = () => {
     }
 
     if (name === "IDimageBack") {
+      setUnsupportedImg(true);
+
       const files = e.target.files;
 
       // Check if any files are selected
@@ -78,6 +85,8 @@ const KYCForm = () => {
       const allAreImages = Array.from(files).every((file) =>
         acceptedImageTypes.includes(file.type)
       );
+      setUnsupportedImg(true);
+
       console.log("allAreImages", allAreImages);
       if (allAreImages) {
         setbackIdImage([...files]);
@@ -99,6 +108,7 @@ const KYCForm = () => {
   };
 
   const saveData = async (value) => {
+    setIsSaveLoader(true);
     const formData = new FormData();
     let payload = { ...value };
 
@@ -396,12 +406,14 @@ const KYCForm = () => {
                                             handleRemoveImage(0, false, false)
                                           }
                                         />
-                                        <img
-                                          src={window.URL.createObjectURL(
-                                            frontIdImage[0]
-                                          )}
-                                          alt='logo-img'
-                                        />
+                                        {unSupportedImg && (
+                                          <img
+                                            src={window.URL.createObjectURL(
+                                              frontIdImage[0]
+                                            )}
+                                            alt='logo-img'
+                                          />
+                                        )}
                                       </div>
                                     )}
                                     <div></div>
@@ -475,7 +487,10 @@ const KYCForm = () => {
                         </Form.Group>
 
                         <div className='login-button full-w'>
-                          <Button type='submit' className='l-btn'>
+                          <Button
+                            type='submit'
+                            className='l-btn '
+                            disabled={isSaveLoader}>
                             {!loading ? "Save" : <Spinner animation='border' />}
                           </Button>
                         </div>

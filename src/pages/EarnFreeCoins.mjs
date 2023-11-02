@@ -77,11 +77,13 @@ const EarnFreeCoins = () => {
             onClick={() => setKey("monthlyClaims")}>
             Monthly Claims
           </Button>
+          {/* <Button
+          </Button>
           <Button
             className={`${key === "duckyLuckClaims" ? "active-btn" : ""}`}
             onClick={() => setKey("duckyLuckClaims")}>
             Ducky Luck Claims
-          </Button>
+          </Button> */}
         </div>
 
         {showRoulette ? (
