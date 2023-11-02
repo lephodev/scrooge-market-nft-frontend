@@ -475,7 +475,10 @@ const KYCForm = () => {
                         </Form.Group>
 
                         <div className='login-button full-w'>
-                          <Button type='submit' className='l-btn'>
+                          <Button
+                            type='submit'
+                            className='l-btn '
+                            disabled={loading}>
                             {!loading ? "Save" : <Spinner animation='border' />}
                           </Button>
                         </div>
