@@ -22,6 +22,7 @@ const KYCForm = () => {
   const [statusKyc, setstatusKyc] = useState(null);
   const [rejectionMessage, setRejectionMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSaveLoader, setIsSaveLoader] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
   // const [successMsg, setSuccessMsg] = useState("");
   const [activeRatioType, setActiveRatioType] = useState("Male");
@@ -99,6 +100,7 @@ const KYCForm = () => {
   };
 
   const saveData = async (value) => {
+    setIsSaveLoader(true);
     const formData = new FormData();
     let payload = { ...value };
 
@@ -478,7 +480,7 @@ const KYCForm = () => {
                           <Button
                             type='submit'
                             className='l-btn '
-                            disabled={loading}>
+                            disabled={isSaveLoader}>
                             {!loading ? "Save" : <Spinner animation='border' />}
                           </Button>
                         </div>
