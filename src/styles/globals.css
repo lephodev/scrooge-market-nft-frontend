@@ -3486,6 +3486,20 @@ button.shareBtn-disabled {
   margin: 0;
   font-size: 18px;
 }
+.redeem-prizes-page .prizes-card h5 {
+  margin: 0;
+  font-size: 18px;
+  word-break: break-all;
+  color: #eee;
+}
+
+.redeem-prizes-page .prizes-card h5 img {
+  filter: brightness(0) invert(1);
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
 
 .earn-token .earn-free-tokens-desc-div-full {
   border: none;
@@ -6346,6 +6360,13 @@ h3.mega-text {
 
   .wallet-casino-top {
     flex-wrap: wrap;
+  }
+  .redeem-prizes-page .prizes-card h4 {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .redeem-prizes-page .prizes-card p, .redeem-prizes-page .prizes-card h5 {
+    font-size: 14px;
   }
 }
 

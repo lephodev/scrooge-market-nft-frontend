@@ -9,12 +9,12 @@ export default function PrivacyPolicy() {
   }, []);
   return (
     <Layout>
-      <div className='container'>
-        <main className='main privacy-page'>
-          <h1 className='title'>PRIVACY POLICY</h1>
+      <div className="container">
+        <main className="main privacy-page">
+          <h1 className="title">PRIVACY POLICY</h1>
 
-          <div className='contact-div'>
-            <div className='text-animate'>
+          <div className="contact-div">
+            <div className="text-animate">
               <h4>Who we are</h4>
             </div>
             <br></br>
@@ -23,7 +23,7 @@ export default function PrivacyPolicy() {
             holders in the form of BUSD.
             <br></br>
             <br></br>
-            <div className='text-animate'>
+            <div className="text-animate">
               <h4>Comments</h4>
             </div>
             <br></br>
@@ -40,7 +40,7 @@ export default function PrivacyPolicy() {
             comment.
             <br></br>
             <br></br>
-            <div className='text-animate'>
+            <div className="text-animate">
               <h4>Media</h4>
             </div>
             <br></br>
@@ -50,7 +50,7 @@ export default function PrivacyPolicy() {
             on the website.
             <br></br>
             <br></br>
-            <div className='text-animate'>
+            <div className="text-animate">
               <h4>Cookies</h4>
             </div>
             <br></br>
@@ -79,7 +79,7 @@ export default function PrivacyPolicy() {
             expires after 1 day.
             <br></br>
             <br></br>
-            <div className='text-animate'>
+            <div className="text-animate">
               <h4>Embedded content from other websites</h4>
             </div>
             <br></br>
@@ -96,7 +96,7 @@ export default function PrivacyPolicy() {
             website.
             <br></br>
             <br></br>
-            <div className='text-animate'>
+            <div className="text-animate">
               <h4>Who we share your data with</h4>
             </div>
             <br></br>
@@ -104,7 +104,7 @@ export default function PrivacyPolicy() {
             the reset email for your own security purposes.
             <br></br>
             <br></br>
-            <div className='text-animate'>
+            <div className="text-animate">
               <h4>How long we retain your data</h4>
             </div>
             <br></br>
@@ -121,7 +121,7 @@ export default function PrivacyPolicy() {
             can also see and edit that information.
             <br></br>
             <br></br>
-            <div className='text-animate'>
+            <div className="text-animate">
               <h4>What rights you have over your data</h4>
             </div>
             <br></br>
@@ -133,7 +133,7 @@ export default function PrivacyPolicy() {
             legal, or security purposes.
             <br></br>
             <br></br>
-            <div className='text-animate'>
+            <div className="text-animate">
               <h4>Where we send your data</h4>
             </div>
             <br></br>
@@ -142,9 +142,8 @@ export default function PrivacyPolicy() {
             outside parties.
             <br></br>
             <br></br>
-            If you have any questions, please contact us at
-            utilities@scroogegold.com 
-                      </div>
+            If you have any questions, please contact us at info@scrooge.casino
+          </div>
 
           <br></br>
           <br></br>
