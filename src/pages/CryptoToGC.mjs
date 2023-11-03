@@ -884,6 +884,31 @@ export default function CryptoToGC() {
     }
     return parseInt(Token) + discount;
   };
+  const [currentState, setCurrentState] = useState("");
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get("https://geolocation-db.com/json/");
+        const CurrentIp = res?.data?.IPv4;
+
+        // eslint-disable-next-line no-console
+        // console.log("CurrentIpAddress", CurrentIp);
+
+        const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/city`);
+        // eslint-disable-next-line no-console
+        // console.log("city", res1?.data);
+        const CurrentCity = res1?.data;
+        console.log("CurrentCity", CurrentCity);
+        setCurrentState(CurrentCity);
+        // eslint-disable-next-line no-constant-condition
+
+        // navigates("/CountryBlockblock");
+      } catch (error) {
+        console.log("errr", error);
+      }
+    })();
+  }, []);
+  console.log("currentState---->>>", currentState);
 
   return (
     <>
@@ -892,6 +917,17 @@ export default function CryptoToGC() {
           <div className='loading-img-div'>
             <img src={LoadingPoker} alt='game' className='imageAnimation' />
           </div>
+        </div>
+      ) : currentState === "Lucknow" ? (
+        <div
+          style={{
+            marginTop: "100px",
+            textAlign: "center",
+            color: "white",
+            backgroundColor: "red",
+          }}>
+          Due to state legislations, our application is no longer available in
+          your current location
         </div>
       ) : (
         <Layout>
