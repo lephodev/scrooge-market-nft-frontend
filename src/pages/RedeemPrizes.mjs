@@ -22,6 +22,7 @@ import { Button, Card, Modal } from "react-bootstrap";
 import scroogelogo from "../images/scroogeCasinoLogo.png";
 import axios from "axios";
 import FiatPopup from "./models/fiatPopup.mjs";
+import copyIcon from "../images/copied-icon.svg";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -412,21 +413,26 @@ function RedeemPrizes() {
   const handleCloseFiat = () => {
     setShowFiat(false);
   };
+  function handleCopyURL(value) {
+    navigator.clipboard.writeText(value);
+    toast.success("Copied");
+  }
   return (
     <Layout>
-      <main className='main redeem-prizes-page'>
-        <div className='container'>
+      <main className="main redeem-prizes-page">
+        <div className="container">
           <Modal show={show} onHide={handleClose} centered animation={false}>
-            <Modal.Body className='popupBody'>
+            <Modal.Body className="popupBody">
               <div>Do You Want To Redeem?</div>
-              <div className='popupBtn'>
-                <button className='greyBtn' onClick={handleClose}>
+              <div className="popupBtn">
+                <button className="greyBtn" onClick={handleClose}>
                   Cancel
                 </button>
                 <button
-                  className='yellowBtn'
+                  className="yellowBtn"
                   disabled={disable}
-                  onClick={confirmBuy}>
+                  onClick={confirmBuy}
+                >
                   Confirm
                 </button>
               </div>
@@ -438,23 +444,24 @@ function RedeemPrizes() {
             </div>
           )} */}
           {globalLoader && (
-            <div className='loading'>
-              <div className='loading-img-div'>
-                <img src={LoadingPoker} alt='game' className='imageAnimation' />
+            <div className="loading">
+              <div className="loading-img-div">
+                <img src={LoadingPoker} alt="game" className="imageAnimation" />
               </div>
             </div>
           )}
-          <div className='bordered-section'>
+          <div className="bordered-section">
             {redeemSuccess ? (
-              <div className='pageImgContainer'>
-                <div className='loading-txt'>
+              <div className="pageImgContainer">
+                <div className="loading-txt">
                   REDEEMED SUCCESSFULLY<br></br>
                   <button
-                    className='page-nav-header-btn'
+                    className="page-nav-header-btn"
                     onClick={() => {
                       setRedeemSuccess(false);
                       reward();
-                    }}>
+                    }}
+                  >
                     CLOSE
                   </button>
                 </div>
@@ -464,18 +471,18 @@ function RedeemPrizes() {
             )}
             {!globalLoader && (
               <>
-                <div className='scrooge-main-heading'>
-                  <div className='pageTitle'>
-                    <h1 className='title'>Redeem for Prizes</h1>
+                <div className="scrooge-main-heading">
+                  <div className="pageTitle">
+                    <h1 className="title">Redeem for Prizes</h1>
                   </div>
-                  <div className='feature-overview-div'>
+                  <div className="feature-overview-div">
                     Ready to cash in on your big wins? Take a look through our
                     selection of prize options and pick what suits you best!
                     Sweep Tokens are redeemed at a 100:1 USD ratio!
                   </div>
                 </div>
 
-                <div className='prizes-chip-count'>
+                <div className="prizes-chip-count">
                   {user ? (
                     <>
                       <h3>
@@ -487,13 +494,13 @@ function RedeemPrizes() {
                     <>
                       <img
                         src={LoadingPoker}
-                        alt='game'
-                        className='imageAnimation'
+                        alt="game"
+                        className="imageAnimation"
                       />
                     </>
                   )}
                 </div>
-                <div className='page-nav-header-btns-row'>
+                <div className="page-nav-header-btns-row">
                   {/* <div className='new-btn'>
                     <button
                       // className='page-nav-header-btn'
@@ -501,10 +508,11 @@ function RedeemPrizes() {
                       BADGES
                     </button>
                   </div> */}
-                  <div className='new-btn'>
+                  <div className="new-btn">
                     <button
                       // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("Crypto")}>
+                      onClick={() => filterPrizes("Crypto")}
+                    >
                       CRYPTO
                     </button>
                   </div>
@@ -515,14 +523,15 @@ function RedeemPrizes() {
                       MERCH
                     </button>
                   </div> */}
-                  <div className='new-btn'>
+                  <div className="new-btn">
                     <button
                       // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("NFTs")}>
+                      onClick={() => filterPrizes("NFTs")}
+                    >
                       NFTS
                     </button>
                   </div>
-                  <div className='new-btn'>
+                  <div className="new-btn">
                     {/* <button
                       // className='page-nav-header-btn'
                       onClick={() => handleFiat()}>
@@ -530,7 +539,8 @@ function RedeemPrizes() {
                     </button> */}
                     <button
                       // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("Fiat")}>
+                      onClick={() => filterPrizes("Fiat")}
+                    >
                       Fiat
                     </button>
                   </div>
@@ -547,9 +557,9 @@ function RedeemPrizes() {
                 </div>
 
                 {buyTokenTab && (
-                  <div className='buyTokenTab'>
+                  <div className="buyTokenTab">
                     <h2>Buy Tokens Here .. </h2>
-                    <Button className='buyTokensBtn'>Buy Tokens</Button>
+                    <Button className="buyTokensBtn">Buy Tokens</Button>
                   </div>
                 )}
 
@@ -562,44 +572,50 @@ function RedeemPrizes() {
                 )}
 
                 {!buyWithFiat && (
-                  <div className='page-nav-header-btns-subrow'>
+                  <div className="page-nav-header-btns-subrow">
                     <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("priceDescending")}>
+                      className="page-nav-header-subbtn"
+                      onClick={() => sortPrizes("priceDescending")}
+                    >
                       PRICE HIGH TO LOW
                     </button>
                     <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("priceAscending")}>
+                      className="page-nav-header-subbtn"
+                      onClick={() => sortPrizes("priceAscending")}
+                    >
                       PRICE LOW TO HIGH
                     </button>
                     <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("nameDescending")}>
+                      className="page-nav-header-subbtn"
+                      onClick={() => sortPrizes("nameDescending")}
+                    >
                       NAME A-Z
                     </button>
                     <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("nameAscending")}>
+                      className="page-nav-header-subbtn"
+                      onClick={() => sortPrizes("nameAscending")}
+                    >
                       NAME Z-A
                     </button>
                     <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("categoryDescending")}>
+                      className="page-nav-header-subbtn"
+                      onClick={() => sortPrizes("categoryDescending")}
+                    >
                       CATEGORY A-Z
                     </button>
                     <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("categoryAscending")}>
+                      className="page-nav-header-subbtn"
+                      onClick={() => sortPrizes("categoryAscending")}
+                    >
                       CATEGORY Z-A
                     </button>
                   </div>
                 )}
-                <div className='prizes-container'>
+                <div className="prizes-container">
                   {showConvert && (
                     <>
-                      <div className='buy-chips-content'>
-                        <div className='buy-chips-grid cryptoTotoken'>
+                      <div className="buy-chips-content">
+                        <div className="buy-chips-grid cryptoTotoken">
                           {/* <div className='buy-chips-grid-box'>
                             <img src={coin4} alt='coin' />
 
@@ -622,26 +638,27 @@ function RedeemPrizes() {
                             </div>
                           </div> */}
 
-                          <div className='buy-chips-grid'>
-                            <div className='purchasemodal-cards'>
+                          <div className="buy-chips-grid">
+                            <div className="purchasemodal-cards">
                               {ticketPrizes.map((prize) => (
                                 <Card>
-                                  <Card.Img variant='top' src={sweep} />
+                                  <Card.Img variant="top" src={sweep} />
                                   <Card.Body>
                                     <Card.Title>
                                       Token {prize?.token}
                                     </Card.Title>
                                     <Card.Text>Buy Ticket</Card.Text>
                                     <Button
-                                      variant='primary'
+                                      variant="primary"
                                       onClick={() =>
                                         handleShow(
                                           prize.ticket,
                                           prize.token,
                                           ""
                                         )
-                                      }>
-                                      <img src={ticket} alt='ticket' />
+                                      }
+                                    >
+                                      <img src={ticket} alt="ticket" />
                                       <h5>{prize?.ticket}</h5>
                                     </Button>
                                   </Card.Body>
@@ -655,11 +672,11 @@ function RedeemPrizes() {
                   )}
 
                   <div style={{ width: "100%", textAlign: "center" }}>
-                    <div id='rewardId' style={{ margin: "0 auto" }} />
+                    <div id="rewardId" style={{ margin: "0 auto" }} />
                   </div>
                   {!prizesLoading ? (
                     <>
-                      <div className='prizes_container'>
+                      <div className="prizes_container">
                         {/* <div className="prizes-card">
                   <div className="prize-name bold text-animate">
                                   <h4>Under token migeration</h4>
@@ -682,17 +699,17 @@ function RedeemPrizes() {
                               f._id !== "63cedf0d1736630ad01d5f4e"
                           )
                           .map((prize) => (
-                            <div className='prizes-card' key={prize._id}>
+                            <div className="prizes-card" key={prize._id}>
                               {/* {console.log("prize", prize._id)} */}
                               {!prize.isDynamic ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>{prize.name}</h4>
                                 </div>
                               ) : (
                                 <></>
                               )}
                               {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -704,8 +721,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />{" "}
                                     </p>
                                   </div>
                                   *
@@ -721,7 +745,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -733,8 +757,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -750,7 +781,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -761,8 +792,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -778,7 +816,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -790,8 +828,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -807,7 +852,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -818,8 +863,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -835,7 +887,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -847,8 +899,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -864,7 +923,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf761736630ad01d5f52" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -876,8 +935,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -893,7 +959,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedfb61736630ad01d5f55" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -904,8 +970,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -921,7 +994,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf301736630ad01d5f4f" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -933,8 +1006,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -950,7 +1030,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf651736630ad01d5f51" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -962,8 +1042,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -979,7 +1066,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -990,8 +1077,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -1007,7 +1101,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedfc51736630ad01d5f56" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -1018,8 +1112,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -1035,7 +1136,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "6434f2f5f6bfb431f290a691" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -1047,8 +1148,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -1064,7 +1172,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "6434f46cf6bfb431f290a692" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -1076,8 +1184,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -1094,7 +1209,7 @@ function RedeemPrizes() {
                               )}
 
                               {prize._id === "64e2f7cf9a8e251156cfe8f5" ? (
-                                <div className='prize-name bold text-animate'>
+                                <div className="prize-name bold text-animate">
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -1106,8 +1221,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}
+                                    >
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt="icon" />
                                     </p>
                                   </div>
                                   *
@@ -1123,12 +1245,12 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               <img
-                                className='card-img pulse'
+                                className="card-img pulse"
                                 src={prize.image_url}
                                 alt={prize.name}
                               />
                               <br></br>
-                              <div className='prize-cost'>
+                              <div className="prize-cost">
                                 <p>Cost: {prize.price} tokens</p>
                               </div>
                               <br></br>
@@ -1143,7 +1265,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG1000).toLocaleString("en-US")
@@ -1154,7 +1276,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR1000).toLocaleString("en-US")
@@ -1165,7 +1287,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG1000).toLocaleString("en-US")
@@ -1176,7 +1298,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR1000).toLocaleString("en-US")
@@ -1187,7 +1309,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG5000).toLocaleString("en-US")
@@ -1198,7 +1320,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR5000).toLocaleString("en-US")
@@ -1209,7 +1331,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf761736630ad01d5f52" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG5000).toLocaleString("en-US")
@@ -1220,7 +1342,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedfb61736630ad01d5f55" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR5000).toLocaleString("en-US")
@@ -1231,7 +1353,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf301736630ad01d5f4f" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG10000).toLocaleString("en-US")
@@ -1242,7 +1364,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf651736630ad01d5f51" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR10000).toLocaleString("en-US")
@@ -1253,7 +1375,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG10000).toLocaleString("en-US")
@@ -1264,7 +1386,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "63cedfc51736630ad01d5f56" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR10000).toLocaleString("en-US")
@@ -1275,7 +1397,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "6434f2f5f6bfb431f290a691" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG20000).toLocaleString("en-US")
@@ -1286,7 +1408,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "6434f46cf6bfb431f290a692" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR20000).toLocaleString("en-US")
@@ -1297,7 +1419,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize._id === "64e2f7cf9a8e251156cfe8f5" ? (
-                                <div className=''>
+                                <div className="">
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG500000).toLocaleString("en-US")
@@ -1308,7 +1430,7 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               {prize.isDynamic ? (
-                                <div className='asterisk-desc'>
+                                <div className="asterisk-desc">
                                   *Amount of crypto coins received is calculated
                                   in real time on redemption and may vary from
                                   displayed total to equal proper USD value.
@@ -1320,11 +1442,12 @@ function RedeemPrizes() {
                                 <></>
                               )}
                               <br />
-                              <div className='redeem-btn'>
+                              <div className="redeem-btn">
                                 <button
                                   // className='submit-btn'
-                                  className='gradient-btn'
-                                  onClick={() => handleShow("", "", prize._id)}>
+                                  className="gradient-btn"
+                                  onClick={() => handleShow("", "", prize._id)}
+                                >
                                   REDEEM PRIZE
                                 </button>
                               </div>
@@ -1336,11 +1459,11 @@ function RedeemPrizes() {
                     </>
                   ) : (
                     <>
-                      <div className='loader-img'>
+                      <div className="loader-img">
                         <img
                           src={LoadingPoker}
-                          alt='game'
-                          className='imageAnimation'
+                          alt="game"
+                          className="imageAnimation"
                         />
                       </div>
                     </>
@@ -1357,8 +1480,8 @@ function RedeemPrizes() {
 
 const UnderMaintenanceContent = () => {
   return (
-    <div className='scrooge-under-content'>
-      <img src={scroogelogo} alt='scrooge' />
+    <div className="scrooge-under-content">
+      <img src={scroogelogo} alt="scrooge" />
       <h4>Under Maintainance</h4>
     </div>
   );

@@ -3485,7 +3485,15 @@ button.shareBtn-disabled {
 .redeem-prizes-page .prizes-card p {
   margin: 0;
   font-size: 18px;
+  word-break: break-all;
 }
+.redeem-prizes-page .prizes-card p img {
+  filter: brightness(0) invert(1);
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
 
 .earn-token .earn-free-tokens-desc-div-full {
   border: none;
@@ -6346,6 +6354,13 @@ h3.mega-text {
 
   .wallet-casino-top {
     flex-wrap: wrap;
+  }
+  .redeem-prizes-page .prizes-card h4 {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .redeem-prizes-page .prizes-card p {
+    font-size: 14px;
   }
 }
 
