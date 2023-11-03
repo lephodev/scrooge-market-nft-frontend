@@ -3485,9 +3485,15 @@ button.shareBtn-disabled {
 .redeem-prizes-page .prizes-card p {
   margin: 0;
   font-size: 18px;
-  word-break: break-all;
 }
-.redeem-prizes-page .prizes-card p img {
+.redeem-prizes-page .prizes-card h5 {
+  margin: 0;
+  font-size: 18px;
+  word-break: break-all;
+  color: #eee;
+}
+
+.redeem-prizes-page .prizes-card h5 img {
   filter: brightness(0) invert(1);
   width: 20px;
   height: 20px;
@@ -6359,7 +6365,7 @@ h3.mega-text {
     font-size: 14px;
     line-height: 24px;
   }
-  .redeem-prizes-page .prizes-card p {
+  .redeem-prizes-page .prizes-card p, .redeem-prizes-page .prizes-card h5 {
     font-size: 14px;
   }
 }
