@@ -918,7 +918,7 @@ export default function CryptoToGC() {
             <img src={LoadingPoker} alt='game' className='imageAnimation' />
           </div>
         </div>
-      ) : currentState === "Lucknow" ? (
+      ) : currentState === "Michigan" ? (
         <div
           style={{
             marginTop: "100px",
