@@ -3491,6 +3491,7 @@ button.shareBtn-disabled {
   font-size: 18px;
   word-break: break-all;
   color: #eee;
+  text-transform: none;
 }
 
 .redeem-prizes-page .prizes-card h5 img {
