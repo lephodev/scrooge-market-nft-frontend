@@ -22,6 +22,7 @@ import { Button, Card, Modal } from "react-bootstrap";
 import scroogelogo from "../images/scroogeCasinoLogo.png";
 import axios from "axios";
 import FiatPopup from "./models/fiatPopup.mjs";
+import copyIcon from "../images/copied-icon.svg";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -412,6 +413,10 @@ function RedeemPrizes() {
   const handleCloseFiat = () => {
     setShowFiat(false);
   };
+  function handleCopyURL(value) {
+    navigator.clipboard.writeText(value);
+    toast.success("Copied");
+  }
   return (
     <Layout>
       <main className='main redeem-prizes-page'>
@@ -704,8 +709,14 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
+                                    <p
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />{" "}
                                     </p>
                                   </div>
                                   *
@@ -733,9 +744,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -761,9 +778,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -790,9 +813,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -818,9 +847,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -847,9 +882,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -876,9 +917,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -904,9 +951,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -933,9 +986,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -962,9 +1021,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -990,9 +1055,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -1018,9 +1089,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -1047,9 +1124,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -1076,9 +1159,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -1106,9 +1195,15 @@ function RedeemPrizes() {
                                     <p>
                                       Scrooge Contract to view tokens in wallet
                                     </p>
-                                    <p>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a
-                                    </p>
+                                    <h5
+                                      onClick={() => {
+                                        handleCopyURL(
+                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
+                                        );
+                                      }}>
+                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+                                      <img src={copyIcon} alt='icon' />
+                                    </h5>
                                   </div>
                                   *
                                   <h4>
@@ -1309,9 +1404,10 @@ function RedeemPrizes() {
                               )}
                               {prize.isDynamic ? (
                                 <div className='asterisk-desc'>
-                                  *Amount received is calculated at time of
-                                  redemption and may vary from the amount
-                                  displayed.<br></br>
+                                  *Amount of crypto coins received is calculated
+                                  in real time on redemption and may vary from
+                                  displayed total to equal proper USD value.
+                                  <br></br>
                                   *Value received on each item will be 1% less
                                   to cover Blockchain Fees.
                                 </div>
