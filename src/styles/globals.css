@@ -3501,7 +3501,6 @@ button.shareBtn-disabled {
   margin-left: 10px;
 }
 
-
 .earn-token .earn-free-tokens-desc-div-full {
   border: none;
   background: transparent;
@@ -5060,6 +5059,7 @@ h3.mega-text {
 .success-modal .modal-content {
   padding: 0;
   background: transparent;
+  border: none;
 }
 .success-modal .modal-body {
   padding: 0;
@@ -6371,7 +6371,8 @@ h3.mega-text {
     font-size: 14px;
     line-height: 24px;
   }
-  .redeem-prizes-page .prizes-card p, .redeem-prizes-page .prizes-card h5 {
+  .redeem-prizes-page .prizes-card p,
+  .redeem-prizes-page .prizes-card h5 {
     font-size: 14px;
   }
 }
