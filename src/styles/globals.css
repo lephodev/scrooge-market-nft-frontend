@@ -4521,9 +4521,6 @@ button.greyBtn {
   width: 100%;
 }
 
-span.input-range__label.input-range__label--min {
-}
-
 span.input-range__label.input-range__label--max {
   right: -5%;
   position: absolute;
@@ -5059,6 +5056,14 @@ h3.mega-text {
 }
 .fiat-select__option {
   font-size: 14px;
+}
+.success-modal .modal-content {
+  padding: 0;
+  background: transparent;
+}
+.success-modal .modal-body {
+  padding: 0;
+  background: transparent;
 }
 
 /********************************************************************************************/
