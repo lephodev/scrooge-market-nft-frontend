@@ -23,6 +23,7 @@ import scroogelogo from "../images/scroogeCasinoLogo.png";
 import axios from "axios";
 import FiatPopup from "./models/fiatPopup.mjs";
 import copyIcon from "../images/copied-icon.svg";
+import SuccessModal from "./models/SuccessModal.mjs";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -60,6 +61,7 @@ function RedeemPrizes() {
   const [JR20000, setJR20000] = useState();
   const [cookies] = useCookies(["token"]);
   const address = useAddress();
+  const [successShow, setSuccessShow] = useState(false);
 
   const redemptionUnderMaintainance = false;
 
@@ -388,6 +390,15 @@ function RedeemPrizes() {
     }
     checkKYCStatus();
   }, []);
+
+  const handleSuccessModal = () => {
+    // setSuccessShow(!successShow);
+    setSuccessShow(false);
+  };
+
+  useEffect(() => {
+    handleSuccessModal();
+  }, []);
   // console.log("convertPrice",convertPrice);
   // getTiketToTokenPackages
   // async function getTicketToTokenPackages() {
@@ -419,6 +430,11 @@ function RedeemPrizes() {
   }
   return (
     <Layout>
+      <SuccessModal
+        setSuccessShow={setSuccessShow}
+        successShow={successShow}
+        handleSuccessModal={handleSuccessModal}
+      />
       <main className="main redeem-prizes-page">
         <div className="container">
           <Modal show={show} onHide={handleClose} centered animation={false}>
