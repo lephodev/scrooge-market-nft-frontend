@@ -523,7 +523,7 @@ function RedeemPrizes() {
                   {user ? (
                     <>
                       <h3>
-                        Your Token Balance:{" "}
+                        Redeemable Balance:{" "}
                         {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
                       </h3>
                     </>
