@@ -1405,7 +1405,7 @@ export default function CryptoToGC() {
                   <div className='prizes-chip-count'>
                     {user ? (
                       <>
-                        <h3>Your Token Balance: {user?.wallet.toFixed(2)}</h3>
+                        <h3>Redeemable Balance: {user?.wallet.toFixed(2)}</h3>
                       </>
                     ) : (
                       <>
