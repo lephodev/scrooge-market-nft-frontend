@@ -3501,7 +3501,6 @@ button.shareBtn-disabled {
   margin-left: 10px;
 }
 
-
 .earn-token .earn-free-tokens-desc-div-full {
   border: none;
   background: transparent;
@@ -4521,9 +4520,6 @@ button.greyBtn {
   width: 100%;
 }
 
-span.input-range__label.input-range__label--min {
-}
-
 span.input-range__label.input-range__label--max {
   right: -5%;
   position: absolute;
@@ -5059,6 +5055,15 @@ h3.mega-text {
 }
 .fiat-select__option {
   font-size: 14px;
+}
+.success-modal .modal-content {
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+.success-modal .modal-body {
+  padding: 0;
+  background: transparent;
 }
 
 /********************************************************************************************/
@@ -6366,7 +6371,8 @@ h3.mega-text {
     font-size: 14px;
     line-height: 24px;
   }
-  .redeem-prizes-page .prizes-card p, .redeem-prizes-page .prizes-card h5 {
+  .redeem-prizes-page .prizes-card p,
+  .redeem-prizes-page .prizes-card h5 {
     font-size: 14px;
   }
 }
@@ -6442,4 +6448,23 @@ body > a {
   position: fixed;
   bottom: 10px;
   right: 10px;
+}
+
+.ip-block-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  padding: 10px 20px;
+  gap: 20px;
+}
+p.ip-block {
+  text-align: center;
+  font-size: 26px;
+  color: red;
+  font-weight: 500;
+  max-width: 700px;
+  width: 100%;
+  margin: 0px auto;
 }
