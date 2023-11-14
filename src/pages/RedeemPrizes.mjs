@@ -23,6 +23,7 @@ import scroogelogo from "../images/scroogeCasinoLogo.png";
 import axios from "axios";
 import FiatPopup from "./models/fiatPopup.mjs";
 import copyIcon from "../images/copied-icon.svg";
+import SuccessModal from "./models/SuccessModal.mjs";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -60,6 +61,9 @@ function RedeemPrizes() {
   const [JR20000, setJR20000] = useState();
   const [cookies] = useCookies(["token"]);
   const address = useAddress();
+  const [success50Show, setSuccess50Show] = useState(false);
+  const [success100Show, setSuccess100Show] = useState(false);
+  const [success500Show, setSuccess500Show] = useState(false);
 
   const redemptionUnderMaintainance = false;
 
@@ -103,13 +107,24 @@ function RedeemPrizes() {
         .get(`/WithdrawRequest/${address}/${prize_id}`)
         .then((data) => {
           console.log("redeemdata", data);
+          const prize = data?.data?.prize?.price;
+          console.log("prize", prize);
           if (!data.data.success) {
             toast.error("ERROR! - " + data.data.message, {
               containerId: "error",
             });
             setglobalLoader(false);
           } else {
-            toast.success(data?.data?.message);
+            if (prize === 5000) {
+              setSuccess50Show(true);
+            }
+            if (prize === "10000") {
+              setSuccess100Show(true);
+            }
+            if (prize === "50000") {
+              setSuccess500Show(true);
+            }
+            // toast.success(data?.data?.message);
             setglobalLoader(false);
             getUserDataInstant();
           }
@@ -388,6 +403,22 @@ function RedeemPrizes() {
     }
     checkKYCStatus();
   }, []);
+
+  const handleSuccess50Modal = () => {
+    setSuccess50Show(!success50Show);
+  };
+
+  const handleSuccess100Modal = () => {
+    setSuccess100Show(!success100Show);
+  };
+
+  const handleSuccess500Modal = () => {
+    setSuccess500Show(!success500Show);
+  };
+
+  // useEffect(() => {
+  //   handleSuccessModal();
+  // }, []);
   // console.log("convertPrice",convertPrice);
   // getTiketToTokenPackages
   // async function getTicketToTokenPackages() {
@@ -419,6 +450,14 @@ function RedeemPrizes() {
   }
   return (
     <Layout>
+      <SuccessModal
+        success50Show={success50Show}
+        success100Show={success100Show}
+        success500Show={success500Show}
+        handleSuccess50Modal={handleSuccess50Modal}
+        handleSuccess100Modal={handleSuccess100Modal}
+        handleSuccess500Modal={handleSuccess500Modal}
+      />
       <main className='main redeem-prizes-page'>
         <div className='container'>
           <Modal show={show} onHide={handleClose} centered animation={false}>
@@ -484,7 +523,7 @@ function RedeemPrizes() {
                   {user ? (
                     <>
                       <h3>
-                        Your Token Balance:{" "}
+                        Redeemable Balance:{" "}
                         {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
                       </h3>
                     </>

@@ -3,7 +3,12 @@ import { createRoot } from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ChainId, ThirdwebProvider /* coinbaseWallet */, metamaskWallet, walletConnect } from "@thirdweb-dev/react";
+import {
+  ChainId,
+  ThirdwebProvider /* coinbaseWallet */,
+  metamaskWallet,
+  walletConnect,
+} from "@thirdweb-dev/react";
 import ChainContext from "./context/Chain";
 import "./styles/globals.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -36,6 +41,9 @@ import BuyTokenFromOGJR from "./pages/BuyTokenFromOGJR.mjs";
 import CloudWebsiteError from "./components/cloudWebsiteError.mjs";
 import EarnFreeCoins from "./pages/EarnFreeCoins.mjs";
 import scroogelogo from "./images/scroogeCasinoLogo.png";
+import scroogeHat from "./images/Loader.webp";
+
+import axios from "axios";
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
@@ -46,22 +54,25 @@ export default function App() {
   const [cookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(true);
   const [dateTimeNow, setDateTimeNow] = useState("");
-  const [supportedWalletForMob,setSupportedWalletForMob]=useState(false)
+  const [supportedWalletForMob, setSupportedWalletForMob] = useState(false);
+  const [isVPNEnable, setIsVPNEnable] = useState(false);
+  const [stateBlock, setStateBlock] = useState(false);
+
   const underMaintainance = false;
 
   useEffect(() => {
     login();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(()=>{
-   if(window.innerWidth <=991 &&window.innerWidth >=768){
-    setSupportedWalletForMob(true)
-   }else if(window.innerWidth <=768){
-    setSupportedWalletForMob(true)
-   }else{
-    setSupportedWalletForMob(false)
-   }
-  },[])
+  useEffect(() => {
+    if (window.innerWidth <= 991 && window.innerWidth >= 768) {
+      setSupportedWalletForMob(true);
+    } else if (window.innerWidth <= 768) {
+      setSupportedWalletForMob(true);
+    } else {
+      setSupportedWalletForMob(false);
+    }
+  }, []);
   // call this function when you want to authenticate the user
   const login = async () => {
     setLoading(true);
@@ -97,6 +108,48 @@ export default function App() {
       });
   };
 
+  const checkVPN = async () => {
+    try {
+      const res = await fetch("https://geolocation-db.com/json/").then(
+        (response) => response.json()
+      );
+      const CurrentIp = res?.IPv4;
+      // const apiUrl = `http://api.vpnblocker.net/v2/json/${CurrentIp}`;
+      const serverUrl = `/auth/validate_VPN?ip=${CurrentIp}&timezone=${null}`;
+      const checkVPNRes = await authInstance().get(serverUrl);
+      setIsVPNEnable(checkVPNRes?.data?.vpnStatus);
+
+      console.log("checkVPNRes", checkVPNRes);
+    } catch (error) {
+      console.log("err", error);
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      const res = await axios.get("https://geolocation-db.com/json/");
+      const CurrentIp = res?.data?.IPv4;
+      // eslint-disable-next-line no-console
+      // console.log("CurrentIpAddress", CurrentIp);
+
+      const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/city`);
+      // eslint-disable-next-line no-console
+      // console.log("city", res1?.data);
+      const CurrentCity = res1?.data;
+      // eslint-disable-next-line no-constant-condition
+      if (
+        CurrentCity.toString() === "Washington" ||
+        CurrentCity.toString() === "Quebec" ||
+        CurrentCity.toString() === "Mumbai" ||
+        CurrentCity.toString() === "Idaho"
+      ) {
+        setStateBlock(true);
+        // navigates("/CountryBlockblock");
+      }
+      await checkVPN();
+    })();
+  }, []);
+
   // call this function to sign out logged in user
   const logout = () => {
     setUser(null);
@@ -107,117 +160,149 @@ export default function App() {
   }
 
   return (
-    <AuthContext.Provider
-      value={{
-        spendedAmount,
-        setSpendedAmount,
-        user,
-        logout,
-        login,
-        loading,
-        setLoading,
-        setUser,
-        dateTimeNow,
-      }}>
-      {loading ? (
-        <div className='loading'>
-          <div className='loading-img-div'>
-            <img src={LoadingPoker} alt='game' className='imageAnimation' />
+    <>
+      {stateBlock || isVPNEnable ? (
+        <div className='ip-block-content'>
+          <div className='container'>
+            <div className='ip-block-grid'>
+              <img
+                src={scroogeHat}
+                alt='Scrooge Hat'
+                width={96}
+                height={96}
+                loading='lazy'
+              />
+              <p className='ip-block'>
+                {isVPNEnable
+                  ? "VPN detected please turn off the VPN and access again, Thank you!."
+                  : "We are sorry to inform you, but this application is restricted from access in your location"}
+              </p>
+            </div>
           </div>
         </div>
       ) : (
-        <ChainContext.Provider value={{ selectedChain, setSelectedChain }}>
-          <ThirdwebProvider
-            activeChain={selectedChain}
-            supportedWallets={supportedWalletForMob ?[walletConnect()]:[metamaskWallet(), walletConnect()/* ,coinbaseWallet() */]}
-            dAppMeta={{
-              name: "Scrooge Casino NFT Marketplace",
-              description:
-                "Everything you need to be a high roller in the Scrooge Casino.",
-              isDarkMode: true,
-              logoUrl:
-                "https://casino-nft-marketplace.s3.amazonaws.com/highRollerBasic.png",
-              url: "https://market.scrooge.casino",
-            }}>
-            <BrowserRouter>
-              <Routes>
-                {/* Protectde Route */}
+        <AuthContext.Provider
+          value={{
+            spendedAmount,
+            setSpendedAmount,
+            user,
+            logout,
+            login,
+            loading,
+            setLoading,
+            setUser,
+            dateTimeNow,
+          }}>
+          {loading ? (
+            <div className='loading'>
+              <div className='loading-img-div'>
+                <img src={LoadingPoker} alt='game' className='imageAnimation' />
+              </div>
+            </div>
+          ) : (
+            <ChainContext.Provider value={{ selectedChain, setSelectedChain }}>
+              <ThirdwebProvider
+                activeChain={selectedChain}
+                supportedWallets={
+                  supportedWalletForMob
+                    ? [walletConnect()]
+                    : [
+                        metamaskWallet(),
+                        walletConnect() /* ,coinbaseWallet() */,
+                      ]
+                }
+                dAppMeta={{
+                  name: "Scrooge Casino NFT Marketplace",
+                  description:
+                    "Everything you need to be a high roller in the Scrooge Casino.",
+                  isDarkMode: true,
+                  logoUrl:
+                    "https://casino-nft-marketplace.s3.amazonaws.com/highRollerBasic.png",
+                  url: "https://market.scrooge.casino",
+                }}>
+                <BrowserRouter>
+                  <Routes>
+                    {/* Protectde Route */}
 
-                <Route
-                  path='/'
-                  element={<ProtectedRoute component={<Home />} />}
-                />
-                <Route
-                  path='/my-wallet'
-                  element={<ProtectedRoute component={<MyWallet />} />}
-                />
-                {/* <Route
+                    <Route
+                      path='/'
+                      element={<ProtectedRoute component={<Home />} />}
+                    />
+                    <Route
+                      path='/my-wallet'
+                      element={<ProtectedRoute component={<MyWallet />} />}
+                    />
+                    {/* <Route
                     path='/redeem-nfts'
                     element={<ProtectedRoute component={<RedeemNFTs />} />}
                   /> */}
-                <Route
-                  path='/crypto-to-gc'
-                  element={<ProtectedRoute component={<CryptoToGC />} />}
-                />
-                <Route
-                  path='/redeem-prizes'
-                  element={<ProtectedRoute component={<RedeemPrizes />} />}
-                />
-                <Route
-                  path='/crypto-to-tokens'
-                  element={<ProtectedRoute component={<BuyTokenFromOGJR />} />}
-                />
-                <Route
-                  path='/claim-free-tokens'
-                  element={<ProtectedRoute component={<EarnFreeCoins />} />}
-                />
-                {/* <Route
+                    <Route
+                      path='/crypto-to-gc'
+                      element={<ProtectedRoute component={<CryptoToGC />} />}
+                    />
+                    <Route
+                      path='/redeem-prizes'
+                      element={<ProtectedRoute component={<RedeemPrizes />} />}
+                    />
+                    <Route
+                      path='/crypto-to-tokens'
+                      element={
+                        <ProtectedRoute component={<BuyTokenFromOGJR />} />
+                      }
+                    />
+                    <Route
+                      path='/claim-free-tokens'
+                      element={<ProtectedRoute component={<EarnFreeCoins />} />}
+                    />
+                    {/* <Route
                     path='/kyc'
                     element={<ProtectedRoute component={<KycForm />} />}
                   /> */}
-                <Route
-                  path='/earn-tokens'
-                  element={<ProtectedRoute component={<EarnTokens />} />}
-                />
-                <Route
-                  path='/raffles'
-                  element={<ProtectedRoute component={<Raffles />} />}
-                />
+                    <Route
+                      path='/earn-tokens'
+                      element={<ProtectedRoute component={<EarnTokens />} />}
+                    />
+                    <Route
+                      path='/raffles'
+                      element={<ProtectedRoute component={<Raffles />} />}
+                    />
 
-                {/* Public Routes */}
+                    {/* Public Routes */}
 
-                <Route path='/login' element={<Login />} />
-                <Route path='/kyc' element={<KycForm />} />
-                <Route path='/explore' element={<Explore />} />
-                <Route path='/contact' element={<Contact />} />
-                <Route path='/privacy' element={<Privacy />} />
-                <Route path='/terms' element={<Terms />} />
-                <Route path='/create-listing' element={<CreateListing />} />
-                <Route path='/blog-posts' element={<BlogPosts />} />
-                <Route path='/create-posts' element={<CreatePost />} />
-                {/* <Route path='/nft-tokens' element={<NFTTokens />} /> */}
-                <Route path='/payment' element={<PaymentSuccess />} />
-                <Route path='/vip' element={<NoPage />} />
-                <Route path='/*' element={<NoPage />} />
-                <Route path='/cloudError' element={<CloudWebsiteError />} />
-              </Routes>
-            </BrowserRouter>
-          </ThirdwebProvider>
-          <ToastContainer
-            position='top-center'
-            autoClose={4000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme='light'
-          />
-        </ChainContext.Provider>
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/kyc' element={<KycForm />} />
+                    <Route path='/explore' element={<Explore />} />
+                    <Route path='/contact' element={<Contact />} />
+                    <Route path='/privacy' element={<Privacy />} />
+                    <Route path='/terms' element={<Terms />} />
+                    <Route path='/create-listing' element={<CreateListing />} />
+                    <Route path='/blog-posts' element={<BlogPosts />} />
+                    <Route path='/create-posts' element={<CreatePost />} />
+                    {/* <Route path='/nft-tokens' element={<NFTTokens />} /> */}
+                    <Route path='/payment' element={<PaymentSuccess />} />
+                    <Route path='/vip' element={<NoPage />} />
+                    <Route path='/*' element={<NoPage />} />
+                    <Route path='/cloudError' element={<CloudWebsiteError />} />
+                  </Routes>
+                </BrowserRouter>
+              </ThirdwebProvider>
+              <ToastContainer
+                position='top-center'
+                autoClose={4000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme='light'
+              />
+            </ChainContext.Provider>
+          )}
+        </AuthContext.Provider>
       )}
-    </AuthContext.Provider>
+    </>
   );
 }
 
