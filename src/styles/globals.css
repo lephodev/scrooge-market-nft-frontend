@@ -1613,6 +1613,11 @@ select {
   font-size: 26px;
   text-transform: uppercase;
 }
+.prizes-chip-count .pdf-down {
+  font-size: 16px;
+  text-decoration: underline;
+  text-transform: capitalize;
+}
 
 .prize-name {
   font-size: 30px;
@@ -6373,6 +6378,9 @@ h3.mega-text {
   }
   .redeem-prizes-page .prizes-card p,
   .redeem-prizes-page .prizes-card h5 {
+    font-size: 14px;
+  }
+  .prizes-chip-count .pdf-down {
     font-size: 14px;
   }
 }
