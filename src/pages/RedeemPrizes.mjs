@@ -24,6 +24,7 @@ import axios from "axios";
 import FiatPopup from "./models/fiatPopup.mjs";
 import copyIcon from "../images/copied-icon.svg";
 import SuccessModal from "./models/SuccessModal.mjs";
+import Pdf from "../images/SCROOGE Redemption Manual.pdf";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -458,7 +459,7 @@ function RedeemPrizes() {
         handleSuccess100Modal={handleSuccess100Modal}
         handleSuccess500Modal={handleSuccess500Modal}
       />
-      <main className='main redeem-prizes-page'>
+      <main className='main redeem-prizes-page redeem-page'>
         <div className='container'>
           <Modal show={show} onHide={handleClose} centered animation={false}>
             <Modal.Body className='popupBody'>
@@ -526,6 +527,10 @@ function RedeemPrizes() {
                         Redeemable Balance:{" "}
                         {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
                       </h3>
+                      <a href={Pdf} target='blank' className='pdf-down'>
+                        {" "}
+                        How it works! Click here to download pdf.
+                      </a>
                     </>
                   ) : (
                     <>
@@ -533,6 +538,8 @@ function RedeemPrizes() {
                         src={LoadingPoker}
                         alt='game'
                         className='imageAnimation'
+                        width={100}
+                        height={100}
                       />
                     </>
                   )}
@@ -574,7 +581,8 @@ function RedeemPrizes() {
                     </button> */}
                     {/* <button
                       // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("Fiat")}>
+                      onClick={() => filterPrizes("Fiat")}
+                    >
                       Fiat
                     </button> */}
                   </div>
@@ -754,9 +762,10 @@ function RedeemPrizes() {
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}>
+                                      }}
+                                    >
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />{" "}
+                                      <img src={copyIcon} alt="icon" />{" "}
                                     </p>
                                   </div>
                                   *
