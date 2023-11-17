@@ -29,6 +29,7 @@ import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import { BUSD_ADDRESS } from "../config/keys.js";
 import { ethers } from "ethers";
 import axios from "axios";
+import SuccessPurchaseModel from "./models/SuccessPurchaseModel.mjs";
 let promoCode;
 let goldcoinAmount;
 
@@ -54,6 +55,13 @@ export default function CryptoToGC() {
   const [key, setKey] = useState("cryptoToGc");
   const isMismatched = useNetworkMismatch();
   const [errors, setErrors] = useState("");
+  const [ST500, setST500] = useState(false);
+  const [ST1000, setST1000] = useState(false);
+  const [ST2500, setST2500] = useState(false);
+  const [ST5000, setST5000] = useState(false);
+  const [ST10000, setST10000] = useState(false);
+  const [ST25000, setST25000] = useState(false);
+
   const [isExicute, setIsExicute] = useState(true);
 
   const { reward } = useReward("rewardId", "confetti", {
@@ -193,7 +201,27 @@ export default function CryptoToGC() {
               setUser({
                 ...res.data.user,
               });
-              toast.success(res.data.data, { id: "buy-sucess" });
+              const prizeBusd = res?.data?.purchaseDetails?.priceInBUSD;
+              if (prizeBusd === "5") {
+                setST500(true);
+              }
+              if (prizeBusd === "10") {
+                setST1000(true);
+              }
+              if (prizeBusd === "25") {
+                setST2500(true);
+              }
+              if (prizeBusd === "50") {
+                setST5000(true);
+              }
+
+              if (prizeBusd === "100") {
+                setST10000(true);
+              }
+              if (prizeBusd === "250") {
+                setST25000(true);
+              }
+              // toast.success(res.data.data, { id: "buy-sucess" });
               getGCPackages();
               handlePromoReject();
               getUserDataInstant();
@@ -884,14 +912,88 @@ export default function CryptoToGC() {
     }
     return parseInt(Token) + discount;
   };
+  const [currentState, setCurrentState] = useState("");
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get("https://geolocation-db.com/json/");
+        const CurrentIp = res?.data?.IPv4;
+
+        // eslint-disable-next-line no-console
+        // console.log("CurrentIpAddress", CurrentIp);
+
+        const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/city`);
+        // eslint-disable-next-line no-console
+        // console.log("city", res1?.data);
+        const CurrentCity = res1?.data;
+        console.log("CurrentCity", CurrentCity);
+        setCurrentState(CurrentCity);
+        // eslint-disable-next-line no-constant-condition
+
+        // navigates("/CountryBlockblock");
+      } catch (error) {
+        console.log("errr", error);
+      }
+    })();
+  }, []);
+  console.log("currentState---->>>", currentState);
+
+  const handleSuccess500Modal = () => {
+    setST500(!ST500);
+  };
+
+  const handleSuccess1000Modal = () => {
+    setST1000(!ST1000);
+  };
+
+  const handleSuccess2500Modal = () => {
+    setST1000(!ST2500);
+  };
+
+  const handleSuccess5000Modal = () => {
+    setST5000(!ST5000);
+  };
+
+  const handleSuccess10000Modal = () => {
+    setST10000(!ST10000);
+  };
+
+  const handleSuccess25000Modal = () => {
+    setST25000(!ST25000);
+  };
 
   return (
     <>
+      <SuccessPurchaseModel
+        ST500={ST500}
+        ST1000={ST1000}
+        ST2500={ST2500}
+        ST5000={ST5000}
+        ST10000={ST10000}
+        ST25000={ST25000}
+        handleSuccess500Modal={handleSuccess500Modal}
+        handleSuccess1000Modal={handleSuccess1000Modal}
+        handleSuccess2500Modal={handleSuccess2500Modal}
+        handleSuccess5000Modal={handleSuccess5000Modal}
+        handleSuccess10000Modal={handleSuccess10000Modal}
+        handleSuccess25000Modal={handleSuccess25000Modal}
+      />
       {prizesLoading ? (
         <div className='loading'>
           <div className='loading-img-div'>
             <img src={LoadingPoker} alt='game' className='imageAnimation' />
           </div>
+        </div>
+      ) : currentState === "Michigan" ? (
+        <div
+          style={{
+            marginTop: "100px",
+            textAlign: "center",
+            color: "white",
+            backgroundColor: "red",
+          }}>
+          Due to state legislations, our application is no longer available in
+          your current location
         </div>
       ) : (
         <Layout>
@@ -1303,7 +1405,7 @@ export default function CryptoToGC() {
                   <div className='prizes-chip-count'>
                     {user ? (
                       <>
-                        <h3>Your Token Balance: {user?.wallet.toFixed(2)}</h3>
+                        <h3>Redeemable Balance: {user?.wallet.toFixed(2)}</h3>
                       </>
                     ) : (
                       <>

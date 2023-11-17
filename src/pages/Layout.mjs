@@ -16,10 +16,10 @@ import { useContext } from "react";
 import logo from "../images/footer/logo.png";
 import envelope from "../images/footer/envelope.svg";
 import twitter from "../images/footer/twitter.svg";
-import discord from "../images/footer/discord.svg";
+// import discord from "../images/footer/discord.svg";
 import telegram from "../images/footer/telegram.svg";
 import facebook from "../images/footer/facebook.svg";
-import reddit from "../images/footer/reddit.svg";
+// import reddit from "../images/footer/reddit.svg";
 
 import { ConnectWallet } from "@thirdweb-dev/react";
 import CookieConsent from "react-cookie-consent";
@@ -370,29 +370,31 @@ const Layout = ({ children }) => {
                       <img src={telegram} alt='' />
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a
-                      href='https://discord.gg/scroogecoin'
-                      rel='noopener noreferrer'>
-                      <img src={discord} alt='' />
+                      href="https://discord.gg/scroogecoin"
+                      rel="noopener noreferrer"
+                    >
+                      <img src={discord} alt="" />
                     </a>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <a
-                      href='https://www.reddit.com/r/scroogecoin/'
-                      rel='noopener noreferrer'>
-                      <img src={reddit} alt='' />
+                      href="https://www.reddit.com/r/scroogecoin/"
+                      rel="noopener noreferrer"
+                    >
+                      <img src={reddit} alt="" />
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
                 <h3>Contact Us</h3>
                 <ul className='footer-support'>
                   <li>
                     <a
-                      href='mailto:utilities@scroogegold.com'
+                      href='mailto:info@scrooge.casino'
                       rel='noopener noreferrer'>
                       <img src={envelope} alt='' />
-                      utilities@scroogegold.com {/* support@scroogegold.com */}
+                      info@scrooge.casino {/* support@scroogegold.com */}
                     </a>
                   </li>
                 </ul>

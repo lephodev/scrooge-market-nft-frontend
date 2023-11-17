@@ -1613,6 +1613,11 @@ select {
   font-size: 26px;
   text-transform: uppercase;
 }
+.prizes-chip-count .pdf-down {
+  font-size: 16px;
+  text-decoration: underline;
+  text-transform: capitalize;
+}
 
 .prize-name {
   font-size: 30px;
@@ -3486,6 +3491,20 @@ button.shareBtn-disabled {
   margin: 0;
   font-size: 18px;
 }
+.redeem-prizes-page .prizes-card h5 {
+  margin: 0;
+  font-size: 18px;
+  word-break: break-all;
+  color: #eee;
+  text-transform: none;
+}
+
+.redeem-prizes-page .prizes-card h5 img {
+  filter: brightness(0) invert(1);
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
 
 .earn-token .earn-free-tokens-desc-div-full {
   border: none;
@@ -4506,9 +4525,6 @@ button.greyBtn {
   width: 100%;
 }
 
-span.input-range__label.input-range__label--min {
-}
-
 span.input-range__label.input-range__label--max {
   right: -5%;
   position: absolute;
@@ -5044,6 +5060,15 @@ h3.mega-text {
 }
 .fiat-select__option {
   font-size: 14px;
+}
+.success-modal .modal-content {
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+.success-modal .modal-body {
+  padding: 0;
+  background: transparent;
 }
 
 /********************************************************************************************/
@@ -6347,6 +6372,17 @@ h3.mega-text {
   .wallet-casino-top {
     flex-wrap: wrap;
   }
+  .redeem-prizes-page .prizes-card h4 {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .redeem-prizes-page .prizes-card p,
+  .redeem-prizes-page .prizes-card h5 {
+    font-size: 14px;
+  }
+  .prizes-chip-count .pdf-down {
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -6420,4 +6456,23 @@ body > a {
   position: fixed;
   bottom: 10px;
   right: 10px;
+}
+
+.ip-block-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  padding: 10px 20px;
+  gap: 20px;
+}
+p.ip-block {
+  text-align: center;
+  font-size: 26px;
+  color: red;
+  font-weight: 500;
+  max-width: 700px;
+  width: 100%;
+  margin: 0px auto;
 }
