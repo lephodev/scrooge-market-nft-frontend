@@ -188,6 +188,12 @@ const KYCForm = () => {
       setRejectionMessage(response?.description);
       setValue("firstName", response?.userDetails?.firstName);
       setValue("lastName", response?.userDetails?.lastName);
+      setValue("birthDate", response?.userDetails?.birthDate);
+      setValue("city", response?.userDetails?.city);
+      setValue("state", response?.userDetails?.state);
+      setValue("country", response?.userDetails?.country);
+      setValue("address", response?.userDetails?.address);
+      setValue("zipCode", response?.userDetails?.zipCode);
       setglobalLoader(false);
     } else {
       setglobalLoader(false);
@@ -365,7 +371,7 @@ const KYCForm = () => {
                             ""
                           )}
                         </Form.Group>
-                        <Form.Group className="form-group full-w">
+                        <Form.Group className='form-group'>
                           <Form.Label>Country</Form.Label>
                           <Form.Control
                             type="text"
@@ -383,7 +389,43 @@ const KYCForm = () => {
                             ""
                           )}
                         </Form.Group>
-                        <Form.Group className="form-group ">
+                        <Form.Group className='form-group'>
+                          <Form.Label>Postal / Zip code</Form.Label>
+                          <Form.Control
+                            type='number'
+                            name='zipCode'
+                            placeholder='Enter your postal / zip code'
+                            autoComplete='off'
+                            className={errors.zipCode ? "error-field" : ""}
+                            {...register("zipCode")}
+                          />
+                          {errors?.zipCode ? (
+                            <p className='error-text'>
+                              {errors?.zipCode?.message}
+                            </p>
+                          ) : (
+                            ""
+                          )}
+                        </Form.Group>
+                        <Form.Group className='form-group full-w'>
+                          <Form.Label>Full Address</Form.Label>
+                          <Form.Control
+                            type='text'
+                            name='address'
+                            placeholder='Enter your full address'
+                            autoComplete='off'
+                            className={errors.address ? "error-field" : ""}
+                            {...register("address")}
+                          />
+                          {errors?.address ? (
+                            <p className='error-text'>
+                              {errors?.address?.message}
+                            </p>
+                          ) : (
+                            ""
+                          )}
+                        </Form.Group>
+                        <Form.Group className='form-group '>
                           <Form.Label>Upload Front Id</Form.Label>
                           <div className="upload-game-thumnail">
                             <Form.Control
