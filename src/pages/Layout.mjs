@@ -17,7 +17,7 @@ import logo from "../images/footer/logo.png";
 import envelope from "../images/footer/envelope.svg";
 import twitter from "../images/footer/twitter.svg";
 // import discord from "../images/footer/discord.svg";
-import telegram from "../images/footer/telegram.svg";
+// import telegram from "../images/footer/telegram.svg";
 import facebook from "../images/footer/facebook.svg";
 // import reddit from "../images/footer/reddit.svg";
 
@@ -363,13 +363,13 @@ const Layout = ({ children }) => {
                       <img src={twitter} alt='' />
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a
                       href='http://t.me/scroogecoingold'
                       rel='noopener noreferrer'>
                       <img src={telegram} alt='' />
                     </a>
-                  </li>
+                  </li> */}
                   {/* <li>
                     <a
                       href="https://discord.gg/scroogecoin"
