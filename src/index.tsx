@@ -41,7 +41,8 @@ import BuyTokenFromOGJR from "./pages/BuyTokenFromOGJR.mjs";
 import CloudWebsiteError from "./components/cloudWebsiteError.mjs";
 import EarnFreeCoins from "./pages/EarnFreeCoins.mjs";
 import scroogelogo from "./images/scroogeCasinoLogo.png";
-import scroogeHat from "./images/Loader.webp";
+import vpnbanner from "./images/vpn-banner.webp"
+import notaccess from "./images/not-access.webp"
 
 import axios from "axios";
 
@@ -165,18 +166,20 @@ export default function App() {
         <div className='ip-block-content'>
           <div className='container'>
             <div className='ip-block-grid'>
-              <img
-                src={scroogeHat}
-                alt='Scrooge Hat'
-                width={96}
-                height={96}
-                loading='lazy'
-              />
-              <p className='ip-block'>
                 {isVPNEnable
-                  ? "VPN detected please turn off the VPN and access again, Thank you!."
-                  : "We are sorry to inform you, but this application is restricted from access in your location"}
-              </p>
+                  ? <img
+                  src={vpnbanner}
+                  alt='Scrooge VPN'
+                  loading='lazy'
+                  className="img-fluid maintance-img"
+                />
+                  :
+                  <img
+                  src={notaccess}
+                  alt='Scrooge Access'
+                  loading='lazy'
+                  className="img-fluid maintance-img"
+                />}
             </div>
           </div>
         </div>
