@@ -23,7 +23,7 @@ const KYCForm = () => {
   const [statusKyc, setstatusKyc] = useState(null);
   const [rejectionMessage, setRejectionMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isSaveLoader, setIsSaveLoader] = useState(false);
+  const [isSaveLoader /* setIsSaveLoader */] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
   const [unSupportedImg, setUnsupportedImg] = useState(true);
   // const [successMsg, setSuccessMsg] = useState("");
@@ -141,7 +141,7 @@ const KYCForm = () => {
   };
 
   const saveData = async (value) => {
-    setIsSaveLoader(true);
+    // setIsSaveLoader(true);
     const formData = new FormData();
     let payload = { ...value };
 
