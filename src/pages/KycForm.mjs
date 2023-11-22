@@ -279,6 +279,13 @@ const KYCForm = () => {
                 {statusKyc === "NotApplied" && (
                   <div className='login-form'>
                     <h1>Know Your Customer</h1>
+
+                    <p>
+                      <span style={{ color: "red" }}>Note: </span> Please fill
+                      in your details for verification If your address on ID
+                      doesn’t match profile, please submit a utility, mobile or
+                      other document verifying address on profile
+                    </p>
                     <p className='auth-para'>
                       Please fill your details to verify KYC
                     </p>
@@ -439,7 +446,7 @@ const KYCForm = () => {
                         <Form.Group className='form-group'>
                           <Form.Label>Postal / Zip code</Form.Label>
                           <Form.Control
-                            type='number'
+                            type='text'
                             name='zipCode'
                             placeholder='Enter your postal / zip code'
                             autoComplete='off'
