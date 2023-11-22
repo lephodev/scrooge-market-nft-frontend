@@ -23,7 +23,6 @@ import facebook from "../images/footer/facebook.svg";
 
 import { ConnectWallet } from "@thirdweb-dev/react";
 import CookieConsent from "react-cookie-consent";
-import Cookies from "js-cookie";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 // import NewRoulette from "../components/roulette/roulette.mjs";
@@ -285,44 +284,28 @@ const Layout = ({ children }) => {
                   </li>
                   <li>
                     <a
-                      href={`${
-                        Cookies.get("token")
-                          ? pokerUrl
-                          : `${scroogeClient}/login`
-                      }`}
+                      href={`${user ? pokerUrl : `${scroogeClient}/login`}`}
                       rel='noreferrer'>
                       Poker
                     </a>
                   </li>
                   <li>
                     <a
-                      href={`${
-                        Cookies.get("token")
-                          ? blackjackUrl
-                          : `${scroogeClient}/login`
-                      }`}
+                      href={`${user ? blackjackUrl : `${scroogeClient}/login`}`}
                       rel='noreferrer'>
                       Blackjack
                     </a>
                   </li>
                   <li>
                     <a
-                      href={`${
-                        Cookies.get("token")
-                          ? slotUrl
-                          : `${scroogeClient}/login`
-                      }`}
+                      href={`${user ? slotUrl : `${scroogeClient}/login`}`}
                       rel='noreferrer'>
                       Slot
                     </a>
                   </li>
                   <li>
                     <a
-                      href={`${
-                        Cookies.get("token")
-                          ? rouletteUrl
-                          : `${scroogeClient}/login`
-                      }`}
+                      href={`${user ? rouletteUrl : `${scroogeClient}/login`}`}
                       rel='noreferrer'>
                       Roulette
                     </a>
