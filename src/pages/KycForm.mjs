@@ -34,6 +34,7 @@ const KYCForm = () => {
     register,
     setError,
     setValue,
+    getValues,
     formState: { errors },
     clearErrors,
   } = useForm({ resolver: yupResolver(createKYCSchema) });
@@ -290,6 +291,7 @@ const KYCForm = () => {
                             name='firstName'
                             placeholder='Enter your first name'
                             autoComplete='off'
+                            readOnly={getValues("firstName") ? true : false}
                             className={errors.firstName ? "error-field" : ""}
                             {...register("firstName")}
                           />
@@ -308,6 +310,7 @@ const KYCForm = () => {
                             name='lastName'
                             placeholder='Enter your last name'
                             autoComplete='off'
+                            readOnly={getValues("lastName") ? true : false}
                             className={errors.lastName ? "error-field" : ""}
                             {...register("lastName")}
                           />
@@ -362,6 +365,7 @@ const KYCForm = () => {
                           <Form.Label>Date of Birth</Form.Label>
                           <input
                             type='date'
+                            readOnly={getValues("birthDate") ? true : false}
                             className='form-control'
                             {...register("birthDate")}
                           />
@@ -383,6 +387,7 @@ const KYCForm = () => {
                             placeholder='Enter your city'
                             autoComplete='off'
                             className={errors.city ? "error-field" : ""}
+                            readOnly={getValues("city") ? true : false}
                             {...register("city")}
                           />
                           {errors?.city ? (
@@ -401,6 +406,7 @@ const KYCForm = () => {
                             placeholder='Enter your state'
                             autoComplete='off'
                             className={errors.state ? "error-field" : ""}
+                            readOnly={getValues("state") ? true : false}
                             {...register("state")}
                           />
                           {errors?.state ? (
@@ -420,6 +426,7 @@ const KYCForm = () => {
                             autoComplete='off'
                             className={errors.country ? "error-field" : ""}
                             {...register("country")}
+                            readOnly={getValues("country") ? true : false}
                           />
                           {errors?.country ? (
                             <p className='error-text'>
@@ -437,6 +444,7 @@ const KYCForm = () => {
                             placeholder='Enter your postal / zip code'
                             autoComplete='off'
                             className={errors.zipCode ? "error-field" : ""}
+                            readOnly={getValues("zipCode") ? true : false}
                             {...register("zipCode")}
                           />
                           {errors?.zipCode ? (
@@ -455,6 +463,7 @@ const KYCForm = () => {
                             placeholder='Enter your full address'
                             autoComplete='off'
                             className={errors.address ? "error-field" : ""}
+                            readOnly={getValues("address") ? true : false}
                             {...register("address")}
                           />
                           {errors?.address ? (
