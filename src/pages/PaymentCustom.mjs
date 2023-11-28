@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { AcceptHosted } from "react-acceptjs";
 
 const PaymentForm = () => {
-  const iframeRef = useRef(null);
-  const [formToken, setFormToken] = useState(null);
+  const [liveFormToken, setFormToken] = useState(null);
 
   useEffect(() => {
     const fetchFormToken = async () => {
@@ -18,8 +18,7 @@ const PaymentForm = () => {
         });
 
         const responseData = await response.json();
-        console.log("responseData", responseData.response.token);
-        setFormToken(responseData.response.token);
+        setFormToken(responseData?.response?.token);
       } catch (error) {
         console.error("Error fetching form token:", error);
       }
@@ -45,19 +44,21 @@ const PaymentForm = () => {
       window.removeEventListener("message", handleMessage);
     };
   }, []);
-  console.log("formToken", formToken);
+  console.log(
+    "formToken",
+    `https://authorize.net/payment/payment?token=${liveFormToken}`
+  );
   return (
     <div>
       <h1>Payment Form</h1>
-      {formToken && (
-        <iframe
-          title='Authorize.Net Hosted Payment Page'
-          width='600'
-          height='400'
-          frameBorder='0'
-          ref={iframeRef}
-          src={`https://test.authorize.net/payment/payment?token=${formToken}`}
-        />
+      {liveFormToken && (
+        <AcceptHosted
+          formToken={liveFormToken}
+          integration='redirect'
+          apiEndpoint='https://api.authorize.net/xml/v1/request.api'
+          redirectUrl='https://accept.authorize.net/payment/payment'>
+          Continue to Redirect
+        </AcceptHosted>
       )}
     </div>
   );
