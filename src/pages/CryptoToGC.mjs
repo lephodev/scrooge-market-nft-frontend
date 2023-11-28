@@ -1458,13 +1458,13 @@ export default function CryptoToGC() {
               </Modal.Body>
             </Modal>
             <button
-              style={{ visibility: "hidden" }}
               type='button'
               id='paycard'
               class='AcceptUI'
               data-billingAddressOptions='{"show":true, "required":false}'
               data-apiLoginID={process.env.REACT_APP_AUTHORIZE_LOGIN_KEY}
               data-clientKey={process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY}
+              data-hostedPaymentShippingAddressOptions='{"show": true, "required": false	}'
               data-acceptUIFormBtnTxt='Submit'
               data-acceptUIFormHeaderTxt='Card Information'
               data-responseHandler={`requestHandler`}>
