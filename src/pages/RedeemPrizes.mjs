@@ -25,6 +25,7 @@ import FiatPopup from "./models/fiatPopup.mjs";
 import copyIcon from "../images/copied-icon.svg";
 import SuccessModal from "./models/SuccessModal.mjs";
 import Pdf from "../images/SCROOGE Redemption Manual.pdf";
+import FastWithdrawPopup from "./models/fastWithdrawPopup.mjs";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -197,16 +198,18 @@ function RedeemPrizes() {
       setPrizes([...prizes].sort((a, b) => (a.category > b.category ? -1 : 1)));
     }
   };
-
+const [showFastWithdraw,setShowFastWithdraw]=useState(false)
   const filterPrizes = (filterOn) => {
     if (allPrizes.length > 2) {
       if (filterOn === "Badges") {
+        setShowFastWithdraw(false);
         setPrizes(
           [...allPrizes].filter((prize) => prize.category === "Badges")
         );
         setShowConvert(false);
         //console.log('badges: ',prizes);
       } else if (filterOn === "Crypto") {
+        setShowFastWithdraw(false);
         setPrizes(
           [...allPrizes].filter((prize) => prize.category === "Crypto")
         );
@@ -215,6 +218,7 @@ function RedeemPrizes() {
 
         //console.log('crypto: ',prizes);
       } else if (filterOn === "Merch") {
+        setShowFastWithdraw(false);
         setPrizes([...allPrizes].filter((prize) => prize.category === "Merch"));
         //console.log('merch: ',prizes);
       } else if (filterOn === "NFTs") {
@@ -222,21 +226,34 @@ function RedeemPrizes() {
         //console.log('nfts: ',prizes);
         setShowConvert(false);
         setBuyWithFiat(false);
+        setShowFastWithdraw(false);
       } else if (filterOn === "convert") {
         setShowConvert(true);
         setBuyTokenTab(false);
+        setShowFastWithdraw(false);
         setPrizes([]);
         // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
       } else if (filterOn === "buy_token") {
         setBuyTokenTab(true);
         setShowConvert(false);
+        setShowFastWithdraw(false);
         setPrizes([]);
         // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
       } else if (filterOn === "Fiat") {
         console.log("gggg");
         setBuyWithFiat(true);
+        setShowFastWithdraw(false);
+        setPrizes([]);
+        // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
+        //console.log('nfts: ',prizes);
+      }
+      else if (filterOn === "fast_withdraw") {
+        console.log("gggg");
+        setShowFastWithdraw(true);
+        setBuyWithFiat(false);
+        setShowConvert(false);
         setPrizes([]);
         // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
@@ -590,6 +607,19 @@ function RedeemPrizes() {
                       Fiat
                     </button>
                   </div>
+                  <div className="new-btn">
+                    {/* <button
+                      // className='page-nav-header-btn'
+                      onClick={() => handleFiat()}>
+                      Fiat
+                    </button> */}
+                    <button
+                      // className='page-nav-header-btn'
+                      onClick={() => filterPrizes("fast_withdraw")}
+                    >
+                      Fast Withdraw
+                    </button>
+                  </div>
                   {/* <div className="new-btn">
                     <button onClick={() => filterPrizes("convert")}>
                       Convert ticket to token
@@ -612,6 +642,15 @@ function RedeemPrizes() {
                 {buyWithFiat && (
                   <FiatPopup
                     show={showFiat}
+                    handleCloseFiat={handleCloseFiat}
+                    getUserDataInstant={getUserDataInstant}
+                  />
+                )}
+                {console.log("Show withdraw-->",showFastWithdraw)}
+                {showFastWithdraw && (
+                  <FastWithdrawPopup
+                    show={showFastWithdraw}
+                    setShow={setShowFastWithdraw}
                     handleCloseFiat={handleCloseFiat}
                     getUserDataInstant={getUserDataInstant}
                   />
