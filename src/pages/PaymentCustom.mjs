@@ -28,6 +28,10 @@ const PaymentForm = () => {
     fetchFormToken();
   }, []);
 
+  useEffect(() => {
+    console.log("response--------------", window);
+  }, []);
+
   const handleMessage = (event) => {
     // Handle the success message from the iframe
     if (event.data === "paymentSuccess") {
