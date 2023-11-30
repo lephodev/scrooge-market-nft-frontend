@@ -1496,62 +1496,6 @@ export default function CryptoToGC() {
               pay
             </button>
           </main>
-
-          <Modal show={true} onHide={handleClose} centered animation={false}>
-            <Modal.Body className='popupBody'>
-              <div className='popupBtn'>
-                <form onSubmit={handleSubmit} environment='PRODUCTION'>
-                  <input
-                    type='number'
-                    name='cardNumber'
-                    value={cardData.cardNumber}
-                    onChange={(event) =>
-                      setCardData({
-                        ...cardData,
-                        cardNumber: event.target.value,
-                      })
-                    }
-                  />
-                  <input
-                    type='text'
-                    name='month'
-                    value={cardData.month}
-                    onChange={(event) =>
-                      setCardData({ ...cardData, month: event.target.value })
-                    }
-                  />
-                  <input
-                    type='text'
-                    name='year'
-                    value={cardData.year}
-                    onChange={(event) =>
-                      setCardData({ ...cardData, year: event.target.value })
-                    }
-                  />
-                  <input
-                    type='text'
-                    name='cardCode'
-                    value={cardData.cardCode}
-                    onChange={(event) =>
-                      setCardData({ ...cardData, cardCode: event.target.value })
-                    }
-                  />
-                  <button type='submit' disabled={loading || error}>
-                    Pay
-                  </button>
-                </form>
-                {/* <button className='greyBtn' onClick={handleClose}>
-                  Cancel
-                </button>
-                <button
-                  className='yellowBtn'
-                  disabled={disable}
-                  onClick={confirmBuy}>
-                  Confirm
-                </button> */}
-              </div>
-            </Modal.Body>
-          </Modal>
         </Layout>
       )}
     </>
