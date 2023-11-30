@@ -1,27 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { AcceptHosted } from "react-acceptjs";
+import { marketPlaceInstance } from "../config/axios.js";
 
 const PaymentForm = () => {
   const [liveFormToken, setFormToken] = useState(null);
   const [response, setResponse] = useState(null);
 
+  // useEffect(() => {
+  //   const fetchFormToken = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:4242/api/getFormToken", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         withCredentials: true,
+  //         credentials: "include",
+  //         body: JSON.stringify({
+  //           // Add any additional parameters needed for obtaining the form token
+  //         }),
+  //       });
+
+  //       const responseData = await response.json();
+  //       setFormToken(responseData?.response?.token);
+  //     } catch (error) {
+  //       console.error("Error fetching form token:", error);
+  //     }
+  //   };
+
+  //   fetchFormToken();
+  // }, []);
+
   useEffect(() => {
     const fetchFormToken = async () => {
       try {
-        const response = await fetch("http://localhost:4242/api/getFormToken", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-          credentials: "include",
-          body: JSON.stringify({
-            // Add any additional parameters needed for obtaining the form token
-          }),
-        });
+        const res = await marketPlaceInstance().post(
+          `/getFormToken`,
 
-        const responseData = await response.json();
-        setFormToken(responseData?.response?.token);
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+            credentials: "include",
+          }
+        );
+        console.log("res", res);
+
+        const responseData = res?.data?.response;
+        console.log("responseData", responseData);
+        setFormToken(responseData?.token);
       } catch (error) {
         console.error("Error fetching form token:", error);
       }
