@@ -45,9 +45,11 @@ const PaymentForm = () => {
             credentials: "include",
           }
         );
+        console.log("res", res);
 
-        const responseData = await res.json();
-        setFormToken(responseData?.res?.token);
+        const responseData = res?.data?.response;
+        console.log("responseData", responseData);
+        setFormToken(responseData?.token);
       } catch (error) {
         console.error("Error fetching form token:", error);
       }
