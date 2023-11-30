@@ -13,6 +13,8 @@ const PaymentForm = () => {
           headers: {
             "Content-Type": "application/json",
           },
+          withCredentials: true,
+          credentials: "include",
           body: JSON.stringify({
             // Add any additional parameters needed for obtaining the form token
           }),
@@ -26,10 +28,6 @@ const PaymentForm = () => {
     };
 
     fetchFormToken();
-  }, []);
-
-  useEffect(() => {
-    console.log("response--------------", window);
   }, []);
 
   const handleMessage = (event) => {
