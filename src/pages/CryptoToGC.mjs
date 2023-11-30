@@ -1500,9 +1500,9 @@ export default function CryptoToGC() {
           <Modal show={true} onHide={handleClose} centered animation={false}>
             <Modal.Body className='popupBody'>
               <div className='popupBtn'>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} environment='PRODUCTION'>
                   <input
-                    type='text'
+                    type='number'
                     name='cardNumber'
                     value={cardData.cardNumber}
                     onChange={(event) =>
