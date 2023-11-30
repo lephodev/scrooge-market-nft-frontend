@@ -1462,7 +1462,7 @@ export default function CryptoToGC() {
               type='button'
               id='paycard'
               class='AcceptUI'
-              data-billingAddressOptions='{"show":true, "required":false}'
+              data-billingAddressOptions='{"show":true, "required":true}'
               data-apiLoginID={process.env.REACT_APP_AUTHORIZE_LOGIN_KEY}
               data-clientKey={process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY}
               data-acceptUIFormBtnTxt='Submit'
