@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useState, useContext, useEffect } from "react";
+import { useAcceptJs } from "react-acceptjs";
+
 import { Button, Modal, Form, Card, Dropdown, Spinner } from "react-bootstrap";
 import Layout from "./Layout.mjs";
 import LoadingPoker from "../images/scroogeHatLogo.png";
@@ -32,6 +34,10 @@ import axios from "axios";
 import SuccessPurchaseModel from "./models/SuccessPurchaseModel.mjs";
 let promoCode;
 let goldcoinAmount;
+const authData = {
+  apiLoginID: "92WEDagC2em3",
+  clientKey: "6YnDJ6QV2u4Mw4NjRtzZ8P5vx8Ewuj7ZeQ85C2cfPj5x8FY75ZY45bgYqWhgz6rT",
+};
 
 export default function CryptoToGC() {
   const sdk = useSDK();
@@ -61,6 +67,13 @@ export default function CryptoToGC() {
   const [ST5000, setST5000] = useState(false);
   const [ST10000, setST10000] = useState(false);
   const [ST25000, setST25000] = useState(false);
+  const { dispatchData, loading, error } = useAcceptJs({ authData });
+  const [cardData, setCardData] = useState({
+    cardNumber: "",
+    month: "",
+    year: "",
+    cardCode: "",
+  });
 
   const [isExicute, setIsExicute] = useState(true);
 
@@ -962,6 +975,18 @@ export default function CryptoToGC() {
     setST25000(!ST25000);
   };
 
+  const handleSubmit = async (event) => {
+    try {
+      console.log("hsfgfdgsfdgsfddgfs");
+      event.preventDefault();
+      // Dispatch CC data to Authorize.net and receive payment nonce for use on your server
+      const response = await dispatchData({ cardData });
+      console.log("Received response:", response);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <>
       <SuccessPurchaseModel
@@ -1471,6 +1496,62 @@ export default function CryptoToGC() {
               pay
             </button>
           </main>
+
+          <Modal show={true} onHide={handleClose} centered animation={false}>
+            <Modal.Body className='popupBody'>
+              <div className='popupBtn'>
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type='text'
+                    name='cardNumber'
+                    value={cardData.cardNumber}
+                    onChange={(event) =>
+                      setCardData({
+                        ...cardData,
+                        cardNumber: event.target.value,
+                      })
+                    }
+                  />
+                  <input
+                    type='text'
+                    name='month'
+                    value={cardData.month}
+                    onChange={(event) =>
+                      setCardData({ ...cardData, month: event.target.value })
+                    }
+                  />
+                  <input
+                    type='text'
+                    name='year'
+                    value={cardData.year}
+                    onChange={(event) =>
+                      setCardData({ ...cardData, year: event.target.value })
+                    }
+                  />
+                  <input
+                    type='text'
+                    name='cardCode'
+                    value={cardData.cardCode}
+                    onChange={(event) =>
+                      setCardData({ ...cardData, cardCode: event.target.value })
+                    }
+                  />
+                  <button type='submit' disabled={loading || error}>
+                    Pay
+                  </button>
+                </form>
+                {/* <button className='greyBtn' onClick={handleClose}>
+                  Cancel
+                </button>
+                <button
+                  className='yellowBtn'
+                  disabled={disable}
+                  onClick={confirmBuy}>
+                  Confirm
+                </button> */}
+              </div>
+            </Modal.Body>
+          </Modal>
         </Layout>
       )}
     </>
