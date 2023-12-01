@@ -1596,7 +1596,7 @@ const PayWithCard = ({
           formToken={liveFormToken}
           environment='PRODUCTION'
           integration='redirect'>
-          Continue to Redirect
+          Pay Now {getExactPrice(prize?.priceInBUSD, promoDetails)}
         </AcceptHosted>
       )}
       {/* {!loading ? "Save" : <Spinner animation='border' />} */}
