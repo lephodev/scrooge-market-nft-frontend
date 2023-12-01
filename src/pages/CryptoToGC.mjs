@@ -1484,7 +1484,7 @@ export default function CryptoToGC() {
                 </div>
               </Modal.Body>
             </Modal>
-            <button
+            {/* <button
               type='button'
               id='paycard'
               class='AcceptUI'
@@ -1496,7 +1496,7 @@ export default function CryptoToGC() {
               data-acceptUIFormHeaderTxt='Card Information'
               data-responseHandler={`requestHandler`}>
               pay
-            </button>
+            </button> */}
           </main>
         </Layout>
       )}
