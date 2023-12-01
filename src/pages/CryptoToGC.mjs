@@ -1484,7 +1484,7 @@ export default function CryptoToGC() {
                 </div>
               </Modal.Body>
             </Modal>
-            {/* <button
+            <button
               type='button'
               id='paycard'
               class='AcceptUI'
@@ -1496,7 +1496,7 @@ export default function CryptoToGC() {
               data-acceptUIFormHeaderTxt='Card Information'
               data-responseHandler={`requestHandler`}>
               pay
-            </button> */}
+            </button>
           </main>
         </Layout>
       )}
@@ -1541,9 +1541,11 @@ const PayWithCard = ({
   const [liveFormToken, setFormToken] = useState(null);
   const [response, setResponse] = useState(null);
   const acceptHostedButtonRef = useRef(null);
+  const [loader, setLoading] = useState(false);
 
   const handleCLick = async () => {
     try {
+      setLoading(true);
       const res = await marketPlaceInstance().post(
         `/getFormToken`,
         {
@@ -1562,7 +1564,10 @@ const PayWithCard = ({
       const responseData = res?.data?.response;
       console.log("responseData", responseData);
       setFormToken(responseData?.token);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
+
       console.error("Error fetching form token:", error);
     }
   };
@@ -1608,9 +1613,16 @@ const PayWithCard = ({
           </AcceptHosted.IFrameContainer>
         </AcceptHosted>
       )}
-      {!liveFormToken
-        ? `Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}`
-        : ""}
+      {/* {!loading ? "Save" : <Spinner animation='border' />} */}
+      {!liveFormToken ? (
+        !loader ? (
+          `Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}`
+        ) : (
+          <Spinner animation='border' />
+        )
+      ) : (
+        ""
+      )}
     </button>
   );
 };
