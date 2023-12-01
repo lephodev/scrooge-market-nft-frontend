@@ -1564,9 +1564,9 @@ const PayWithCard = ({
       const responseData = res?.data?.response;
       console.log("responseData", responseData);
       setFormToken(responseData?.token);
-      setLoading(false);
+      // setLoading(false);
     } catch (error) {
-      setLoading(false);
+      // setLoading(false);
 
       console.error("Error fetching form token:", error);
     }
@@ -1588,27 +1588,40 @@ const PayWithCard = ({
   //   acceptHostedButtonRef.current.click();
   // }, []); // Empty dependency array ensures that this effect runs only once after the initial render
 
+  useEffect(() => {
+    if (liveFormToken) {
+      setTimeout(() => {
+        document.getElementsByTagName("form")[0][1].click();
+      }, 1000);
+    }
+  }, [liveFormToken]);
+
   return (
-    <button onClick={handleCLick}>
-      {" "}
-      {liveFormToken && (
-        <AcceptHosted
-          formToken={liveFormToken}
-          environment='PRODUCTION'
-          integration='redirect'>
-          Pay Now {getExactPrice(prize?.priceInBUSD, promoDetails)}
-        </AcceptHosted>
-      )}
-      {/* {!loading ? "Save" : <Spinner animation='border' />} */}
-      {!liveFormToken ? (
-        !loader ? (
-          `Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}`
-        ) : (
-          <Spinner animation='border' />
-        )
+    <>
+      {liveFormToken ? (
+        <button id='payRedirection'>
+          <AcceptHosted
+            formToken={liveFormToken}
+            environment='PRODUCTION'
+            integration='redirect'>
+            <Spinner animation='border' />
+          </AcceptHosted>
+        </button>
       ) : (
-        ""
+        <button onClick={handleCLick}>
+          {" "}
+          {/* {!loading ? "Save" : <Spinner animation='border' />} */}
+          {!liveFormToken ? (
+            !loader ? (
+              `Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}`
+            ) : (
+              <Spinner animation='border' />
+            )
+          ) : (
+            ""
+          )}
+        </button>
       )}
-    </button>
+    </>
   );
 };
