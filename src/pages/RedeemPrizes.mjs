@@ -198,7 +198,7 @@ function RedeemPrizes() {
       setPrizes([...prizes].sort((a, b) => (a.category > b.category ? -1 : 1)));
     }
   };
-const [showFastWithdraw,setShowFastWithdraw]=useState(false)
+  const [showFastWithdraw, setShowFastWithdraw] = useState(false);
   const filterPrizes = (filterOn) => {
     if (allPrizes.length > 2) {
       if (filterOn === "Badges") {
@@ -248,8 +248,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
         setPrizes([]);
         // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
-      }
-      else if (filterOn === "fast_withdraw") {
+      } else if (filterOn === "fast_withdraw") {
         console.log("gggg");
         setShowFastWithdraw(true);
         setBuyWithFiat(false);
@@ -646,7 +645,6 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                     getUserDataInstant={getUserDataInstant}
                   />
                 )}
-                {console.log("Show withdraw-->",showFastWithdraw)}
                 {showFastWithdraw && (
                   <FastWithdrawPopup
                     show={showFastWithdraw}
@@ -656,7 +654,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                   />
                 )}
 
-                {!buyWithFiat && (
+                {!(buyWithFiat || showFastWithdraw) && (
                   <div className="page-nav-header-btns-subrow">
                     <button
                       className="page-nav-header-subbtn"
