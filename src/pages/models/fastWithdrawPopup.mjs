@@ -4,9 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext, useState } from "react";
 
-import {
-  fastWithdraw,
-} from "../../utils/validationSchema.mjs";
+import { fastWithdraw } from "../../utils/validationSchema.mjs";
 import AuthContext from "../../context/authContext.ts";
 import { toast } from "react-toastify";
 import { marketPlaceInstance } from "../../config/axios.js";
@@ -108,7 +106,12 @@ import { useAddress } from "@thirdweb-dev/react";
 //   { value: 500, label: "$500" },
 // ];
 
-const FastWithdrawPopup = ({ show,setShow, handleCloseFiat, getUserDataInstant }) => {
+const FastWithdrawPopup = ({
+  show,
+  setShow,
+  handleCloseFiat,
+  getUserDataInstant,
+}) => {
   const { user } = useContext(AuthContext);
   const address = useAddress();
   // const [paymentType, setPaymentType] = useState();
@@ -121,9 +124,7 @@ const FastWithdrawPopup = ({ show,setShow, handleCloseFiat, getUserDataInstant }
     reset,
   } = useForm({
     mode: "onBlur",
-    resolver: yupResolver(
-      fastWithdraw
-    ),
+    resolver: yupResolver(fastWithdraw),
   });
 
   // const WithdrawRequest = async (values) => {
@@ -173,7 +174,7 @@ const FastWithdrawPopup = ({ show,setShow, handleCloseFiat, getUserDataInstant }
   // };
   const WithdrawRequest = (values) => {
     try {
-      console.log("values--->",values)
+      console.log("values--->", values);
       if (!user)
         return toast.error("Please login first", { containerId: "login" });
       if (user?.isBlockWallet) {
@@ -183,7 +184,7 @@ const FastWithdrawPopup = ({ show,setShow, handleCloseFiat, getUserDataInstant }
         return toast.error("Please connect wallet first", {
           containerId: "connect-wallet",
         });
-        setLoading(true);
+      setLoading(true);
       marketPlaceInstance()
         .get(`/FastWithdrawRequest/${address}/${values?.amount}`)
         .then((data) => {
@@ -220,38 +221,35 @@ const FastWithdrawPopup = ({ show,setShow, handleCloseFiat, getUserDataInstant }
   console.log("errors", errors);
 
   return (
-    <div className='fiat-modal'>
+    <div className="fiat-modal">
       <Form onSubmit={handleSubmit(WithdrawRequest)}>
-        <div className='fiat-content'>
-
-            <Form.Group className='fiat-group'>
-              <Form.Label>Withdraw Amount</Form.Label>
-              <Form.Control
-                type='number'
-                name='amount'
-                placeholder='Enter Amount'
-                {...register("amount")}
-              />
-              {errors?.amount && (
-                <p className='error-msg'>{errors?.amount?.message}</p>
-              )}
-            </Form.Group>
-
+        <div className="fiat-content">
+          <Form.Group className="fiat-group">
+            <Form.Label>Withdraw Amount</Form.Label>
+            <Form.Control
+              type="number"
+              name="amount"
+              placeholder="Enter Amount"
+              {...register("amount")}
+            />
+            {errors?.amount && (
+              <p className="error-msg">{errors?.amount?.message}</p>
+            )}
+          </Form.Group>
+          {/* 
           <h6 className='deducted-heading'>
             10% of the amount will be deducted from your redemption amount
-          </h6>
+          </h6> */}
         </div>
-        <div className='popupBtn'>
-        <button className='greyBtn' onClick={()=>setShow(false)}>
+        <div className="popupBtn">
+          <button className="greyBtn" onClick={() => setShow(false)}>
             Cancel
           </button>
-          <button className='yellowBtn' variant='primary' type='submit'>
-            {!loading ? "Confirm" : <Spinner animation='border' />}{" "}
+          <button className="yellowBtn" variant="primary" type="submit">
+            {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
           </button>
-          
         </div>
       </Form>
-      
     </div>
   );
 };
