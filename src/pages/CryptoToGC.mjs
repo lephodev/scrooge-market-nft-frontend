@@ -1594,23 +1594,9 @@ const PayWithCard = ({
       {liveFormToken && (
         <AcceptHosted
           formToken={liveFormToken}
-          integration='iframe'
           environment='PRODUCTION'
-          onTransactionResponse={(response) => {
-            console.log("Transaction Response:", response);
-            // Handle the response here, e.g., update UI, show confirmation, etc.
-            // setResponse(JSON.stringify(response, null, 2) + "\n");
-          }}>
-          <AcceptHosted.Button
-            className='btn btn-primary'
-            id='paynow'
-            ref={acceptHostedButtonRef}>
-            Pay Now ${getExactPrice(prize?.priceInBUSD, promoDetails)}
-          </AcceptHosted.Button>
-          <AcceptHosted.IFrameBackdrop />
-          <AcceptHosted.IFrameContainer>
-            <AcceptHosted.IFrame />
-          </AcceptHosted.IFrameContainer>
+          integration='redirect'>
+          Continue to Redirect
         </AcceptHosted>
       )}
       {/* {!loading ? "Save" : <Spinner animation='border' />} */}
