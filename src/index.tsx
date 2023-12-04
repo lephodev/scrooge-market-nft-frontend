@@ -41,8 +41,8 @@ import BuyTokenFromOGJR from "./pages/BuyTokenFromOGJR.mjs";
 import CloudWebsiteError from "./components/cloudWebsiteError.mjs";
 import EarnFreeCoins from "./pages/EarnFreeCoins.mjs";
 import scroogelogo from "./images/scroogeCasinoLogo.png";
-import vpnbanner from "./images/vpn-banner.webp"
-import notaccess from "./images/not-access.webp"
+import vpnbanner from "./images/vpn-banner.webp";
+import notaccess from "./images/not-access.webp";
 
 import axios from "axios";
 
@@ -51,6 +51,8 @@ export default function App() {
     ChainId.BinanceSmartChainMainnet
   );
   const [user, setUser] = useState(null);
+
+  const [region, setRegion] = useState("");
   const [spendedAmount, setSpendedAmount] = useState(null);
   const [cookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(true);
@@ -119,6 +121,11 @@ export default function App() {
       const serverUrl = `/auth/validate_VPN?ip=${CurrentIp}&timezone=${null}`;
       const checkVPNRes = await authInstance().get(serverUrl);
       setIsVPNEnable(checkVPNRes?.data?.vpnStatus);
+      const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
+      const CurrentCity = res1?.data;
+      console.log("CurrentCity-------------------", CurrentCity);
+
+      setRegion(CurrentCity);
 
       console.log("checkVPNRes", checkVPNRes);
     } catch (error) {
@@ -141,7 +148,6 @@ export default function App() {
       if (
         CurrentCity.toString() === "Washington" ||
         CurrentCity.toString() === "Quebec" ||
-        CurrentCity.toString() === "Mumbai" ||
         CurrentCity.toString() === "Idaho"
       ) {
         setStateBlock(true);
@@ -166,20 +172,21 @@ export default function App() {
         <div className='ip-block-content'>
           <div className='container'>
             <div className='ip-block-grid'>
-                {isVPNEnable
-                  ? <img
+              {isVPNEnable ? (
+                <img
                   src={vpnbanner}
                   alt='Scrooge VPN'
                   loading='lazy'
-                  className="img-fluid maintance-img"
+                  className='img-fluid maintance-img'
                 />
-                  :
-                  <img
+              ) : (
+                <img
                   src={notaccess}
                   alt='Scrooge Access'
                   loading='lazy'
-                  className="img-fluid maintance-img"
-                />}
+                  className='img-fluid maintance-img'
+                />
+              )}
             </div>
           </div>
         </div>
@@ -195,6 +202,7 @@ export default function App() {
             setLoading,
             setUser,
             dateTimeNow,
+            region,
           }}>
           {loading ? (
             <div className='loading'>
@@ -235,6 +243,7 @@ export default function App() {
                       path='/my-wallet'
                       element={<ProtectedRoute component={<MyWallet />} />}
                     />
+
                     {/* <Route
                     path='/redeem-nfts'
                     element={<ProtectedRoute component={<RedeemNFTs />} />}
