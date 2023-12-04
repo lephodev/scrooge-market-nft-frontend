@@ -183,22 +183,22 @@ function RedeemPrizes() {
     prizesReceived = 1;
   }
 
-  const sortPrizes = (sortOn) => {
-    if (sortOn === "priceAscending") {
-      setPrizes([...prizes].sort((a, b) => a.price - b.price));
-    } else if (sortOn === "priceDescending") {
-      setPrizes([...prizes].sort((a, b) => b.price - a.price));
-    } else if (sortOn === "nameDescending") {
-      setPrizes([...prizes].sort((a, b) => (a.name > b.name ? 1 : -1)));
-    } else if (sortOn === "nameAscending") {
-      setPrizes([...prizes].sort((a, b) => (a.name > b.name ? -1 : 1)));
-    } else if (sortOn === "categoryDescending") {
-      setPrizes([...prizes].sort((a, b) => (a.category > b.category ? 1 : -1)));
-    } else if (sortOn === "categoryAscending") {
-      setPrizes([...prizes].sort((a, b) => (a.category > b.category ? -1 : 1)));
-    }
-  };
-  const [showFastWithdraw, setShowFastWithdraw] = useState(false);
+  // const sortPrizes = (sortOn) => {
+  //   if (sortOn === "priceAscending") {
+  //     setPrizes([...prizes].sort((a, b) => a.price - b.price));
+  //   } else if (sortOn === "priceDescending") {
+  //     setPrizes([...prizes].sort((a, b) => b.price - a.price));
+  //   } else if (sortOn === "nameDescending") {
+  //     setPrizes([...prizes].sort((a, b) => (a.name > b.name ? 1 : -1)));
+  //   } else if (sortOn === "nameAscending") {
+  //     setPrizes([...prizes].sort((a, b) => (a.name > b.name ? -1 : 1)));
+  //   } else if (sortOn === "categoryDescending") {
+  //     setPrizes([...prizes].sort((a, b) => (a.category > b.category ? 1 : -1)));
+  //   } else if (sortOn === "categoryAscending") {
+  //     setPrizes([...prizes].sort((a, b) => (a.category > b.category ? -1 : 1)));
+  //   }
+  // };
+const [showFastWithdraw,setShowFastWithdraw]=useState(false)
   const filterPrizes = (filterOn) => {
     if (allPrizes.length > 2) {
       if (filterOn === "Badges") {
@@ -248,7 +248,8 @@ function RedeemPrizes() {
         setPrizes([]);
         // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
-      } else if (filterOn === "fast_withdraw") {
+      }
+      else if (filterOn === "fast_withdraw") {
         console.log("gggg");
         setShowFastWithdraw(true);
         setBuyWithFiat(false);
@@ -654,7 +655,7 @@ function RedeemPrizes() {
                   />
                 )}
 
-                {!(buyWithFiat || showFastWithdraw) && (
+                {/* {!buyWithFiat && (
                   <div className="page-nav-header-btns-subrow">
                     <button
                       className="page-nav-header-subbtn"
@@ -693,33 +694,13 @@ function RedeemPrizes() {
                       CATEGORY Z-A
                     </button>
                   </div>
-                )}
+                )} */}
                 <div className="prizes-container">
                   {showConvert && (
                     <>
                       <div className="buy-chips-content">
                         <div className="buy-chips-grid cryptoTotoken">
-                          {/* <div className='buy-chips-grid-box'>
-                            <img src={coin4} alt='coin' />
-
-                            <InputRange
-                              maxValue={499}
-                              minValue={10}
-                              value={sliderValue}
-                              onChange={(value) => setSliderValue(value)}
-                            />
-                            <div
-                              className='gradient-btn'
-                              //  onClick={() => convert(500, 510)}
-                              onClick={() =>
-                                handleShow(sliderValue, sliderValue, "")
-                              }>
-                              <span>
-                                {sliderValue} tickets gets you {sliderValue}{" "}
-                                tokens{" "}
-                              </span>
-                            </div>
-                          </div> */}
+                          
 
                           <div className="buy-chips-grid">
                             <div className="purchasemodal-cards">
@@ -1542,13 +1523,13 @@ function RedeemPrizes() {
                     </>
                   ) : (
                     <>
-                      <div className="loader-img">
+                       <div className="loader-img">
                         <img
                           src={LoadingPoker}
                           alt="game"
                           className="imageAnimation"
                         />
-                      </div>
+                      </div> 
                     </>
                   )}
                 </div>

@@ -188,9 +188,6 @@ const FastWithdrawPopup = ({
       marketPlaceInstance()
         .get(`/FastWithdrawRequest/${address}/${values?.amount}`)
         .then((data) => {
-          console.log("redeemdata", data);
-          const prize = data?.data?.prize?.price;
-          console.log("prize", prize);
           if (!data.data.success) {
             toast.error("ERROR! - " + data.data.message, {
               containerId: "error",
@@ -198,11 +195,13 @@ const FastWithdrawPopup = ({
             setLoading(true);
           } else {
             reset();
+            setLoading(false);
             toast.success(data?.data?.message);
             getUserDataInstant();
           }
         });
     } catch (error) {
+      setLoading(false);
       console.log("errrr", error);
     }
   };
