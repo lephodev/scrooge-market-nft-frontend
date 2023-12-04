@@ -937,7 +937,7 @@ export default function CryptoToGC() {
         // eslint-disable-next-line no-console
         // console.log("CurrentIpAddress", CurrentIp);
 
-        const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/city`);
+        const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
         // eslint-disable-next-line no-console
         // console.log("city", res1?.data);
         const CurrentCity = res1?.data;
