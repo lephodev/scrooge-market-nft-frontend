@@ -11,7 +11,7 @@ import NewRoulette from "../components/roulette/roulette.mjs";
 import wheel from "../images/wheel-fortune.png";
 
 const EarnFreeCoins = () => {
-  const { user, dateTimeNow } = useContext(AuthContext);
+  const { user, dateTimeNow, region } = useContext(AuthContext);
   const [showRoulette, setShowRoulette] = useState(false);
   const [key, setKey] = useState("dailyClaims");
   const [canSpin, setCanSpin] = useState(false);
@@ -65,75 +65,88 @@ const EarnFreeCoins = () => {
 
   return (
     <Layout>
-      <div className='container'>
-        <div className='tab-btn'>
-          <Button
-            className={`${key === "dailyClaims" ? "active-btn" : ""}`}
-            onClick={() => setKey("dailyClaims")}>
-            Daily Claims
-          </Button>
-          {/* <Button
+      {region === "Michigan" ? (
+        <div
+          style={{
+            marginTop: "100px",
+            textAlign: "center",
+            color: "white",
+            backgroundColor: "red",
+          }}>
+          Due to state legislations, our application is no longer available in
+          your current location
+        </div>
+      ) : (
+        <div className='container'>
+          <div className='tab-btn'>
+            <Button
+              className={`${key === "dailyClaims" ? "active-btn" : ""}`}
+              onClick={() => setKey("dailyClaims")}>
+              Daily Claims
+            </Button>
+            {/* <Button
             className={`${key === "monthlyClaims" ? "active-btn" : ""}`}
             onClick={() => setKey("monthlyClaims")}>
             Monthly Claims
           </Button> */}
-          {/* <Button
+            {/* <Button
             className={`${key === "duckyLuckClaims" ? "active-btn" : ""}`}
             onClick={() => setKey("duckyLuckClaims")}>
             Ducky Luck Claims
           </Button> */}
-        </div>
+          </div>
 
-        {showRoulette ? (
-          <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
-        ) : null}
+          {showRoulette ? (
+            <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
+          ) : null}
 
-        {key === "dailyClaims" ? (
-          <div className='spin-popup-content'>
-            <div className='spin-wheel'>
-              <div className='spin-wheel-img'>
-                <img src={wheel} alt='wheel' />
-                <div className='spin-win-text-content'>
-                  <div className='spin-win-text'>
-                    <p>spin to win</p>
-                  </div>
-                  <div className='spin-button'>
-                    <button onClick={handleOpenRoulette}>
-                      {" "}
-                      {canSpin ? "Spin Now" : spinTimer}
-                    </button>
+          {key === "dailyClaims" ? (
+            <div className='spin-popup-content'>
+              <div className='spin-wheel'>
+                <div className='spin-wheel-img'>
+                  <img src={wheel} alt='wheel' />
+                  <div className='spin-win-text-content'>
+                    <div className='spin-win-text'>
+                      <p>spin to win</p>
+                    </div>
+                    <div className='spin-button'>
+                      <button onClick={handleOpenRoulette}>
+                        {" "}
+                        {canSpin ? "Spin Now" : spinTimer}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ) : (
-          ""
-        )}
-        <div className='tabs-claim'>
-          {key === "dailyClaims" ? (
-            <div className='tab-claims'>
-              <DailyRewards />
-            </div>
-          ) : key === "monthlyClaims" ? (
-            <div className='tab-claims'>
-              <HolderClaimChips />
-            </div>
-          ) : key === "duckyLuckClaims" ? (
-            <div>
-              {/* "gghh" */}
-              <DLGate>
-                <DLClaimTokens />
-              </DLGate>
-            </div>
           ) : (
             ""
           )}
+          <div className='tabs-claim'>
+            {key === "dailyClaims" ? (
+              <div className='tab-claims'>
+                <DailyRewards />
+              </div>
+            ) : key === "monthlyClaims" ? (
+              <div className='tab-claims'>
+                <HolderClaimChips />
+              </div>
+            ) : key === "duckyLuckClaims" ? (
+              <div>
+                {/* "gghh" */}
+                <DLGate>
+                  <DLClaimTokens />
+                </DLGate>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className='flex-row' style={{ margin: "50px auto 0px" }}>
+            <ShowBottomNavCards />
+          </div>
         </div>
-        <div className='flex-row' style={{ margin: "50px auto 0px" }}>
-          <ShowBottomNavCards />
-        </div>
-      </div>
+      )}
     </Layout>
   );
 };
