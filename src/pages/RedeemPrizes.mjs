@@ -615,11 +615,11 @@ function RedeemPrizes() {
                       onClick={() => handleFiat()}>
                       Fiat
                     </button> */}
-                    <button
+                    {/* <button
                       // className='page-nav-header-btn'
                       onClick={() => filterPrizes("fast_withdraw")}>
                       Fast Withdraw
-                    </button>
+                    </button> */}
                   </div>
                   {/* <div className="new-btn">
                     <button onClick={() => filterPrizes("convert")}>
