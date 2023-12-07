@@ -74,6 +74,8 @@
 
 .kyc-page .login-box {
   max-width: 620px;
+  margin: 0px auto;
+  width: 100%
 }
 
 .upload-game-thumnail label.form-label {
@@ -293,6 +295,7 @@
 
 .marketPlace_kycForm input.form-control::placeholder {
   font-size: 12px;
+  color: #ddd;
 }
 
 .marketPlace_kycForm input.form-control:focus-visible,

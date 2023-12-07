@@ -41,10 +41,11 @@ import BuyTokenFromOGJR from "./pages/BuyTokenFromOGJR.mjs";
 import CloudWebsiteError from "./components/cloudWebsiteError.mjs";
 import EarnFreeCoins from "./pages/EarnFreeCoins.mjs";
 import scroogelogo from "./images/scroogeCasinoLogo.png";
-import vpnbanner from "./images/vpn-banner.webp"
-import notaccess from "./images/not-access.webp"
+import vpnbanner from "./images/vpn-banner.webp";
+import notaccess from "./images/not-access.webp";
 
 import axios from "axios";
+import PaymentCustom from "./pages/PaymentCustom.mjs";
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
@@ -166,20 +167,21 @@ export default function App() {
         <div className='ip-block-content'>
           <div className='container'>
             <div className='ip-block-grid'>
-                {isVPNEnable
-                  ? <img
+              {isVPNEnable ? (
+                <img
                   src={vpnbanner}
                   alt='Scrooge VPN'
                   loading='lazy'
-                  className="img-fluid maintance-img"
+                  className='img-fluid maintance-img'
                 />
-                  :
-                  <img
+              ) : (
+                <img
                   src={notaccess}
                   alt='Scrooge Access'
                   loading='lazy'
-                  className="img-fluid maintance-img"
-                />}
+                  className='img-fluid maintance-img'
+                />
+              )}
             </div>
           </div>
         </div>
@@ -234,6 +236,10 @@ export default function App() {
                     <Route
                       path='/my-wallet'
                       element={<ProtectedRoute component={<MyWallet />} />}
+                    />
+                    <Route
+                      path='/pay'
+                      element={<ProtectedRoute component={<PaymentCustom />} />}
                     />
                     {/* <Route
                     path='/redeem-nfts'

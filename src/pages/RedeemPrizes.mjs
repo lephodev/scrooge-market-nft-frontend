@@ -25,6 +25,7 @@ import FiatPopup from "./models/fiatPopup.mjs";
 import copyIcon from "../images/copied-icon.svg";
 import SuccessModal from "./models/SuccessModal.mjs";
 import Pdf from "../images/SCROOGE Redemption Manual.pdf";
+import FastWithdrawPopup from "./models/fastWithdrawPopup.mjs";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -182,31 +183,33 @@ function RedeemPrizes() {
     prizesReceived = 1;
   }
 
-  const sortPrizes = (sortOn) => {
-    if (sortOn === "priceAscending") {
-      setPrizes([...prizes].sort((a, b) => a.price - b.price));
-    } else if (sortOn === "priceDescending") {
-      setPrizes([...prizes].sort((a, b) => b.price - a.price));
-    } else if (sortOn === "nameDescending") {
-      setPrizes([...prizes].sort((a, b) => (a.name > b.name ? 1 : -1)));
-    } else if (sortOn === "nameAscending") {
-      setPrizes([...prizes].sort((a, b) => (a.name > b.name ? -1 : 1)));
-    } else if (sortOn === "categoryDescending") {
-      setPrizes([...prizes].sort((a, b) => (a.category > b.category ? 1 : -1)));
-    } else if (sortOn === "categoryAscending") {
-      setPrizes([...prizes].sort((a, b) => (a.category > b.category ? -1 : 1)));
-    }
-  };
-
+  // const sortPrizes = (sortOn) => {
+  //   if (sortOn === "priceAscending") {
+  //     setPrizes([...prizes].sort((a, b) => a.price - b.price));
+  //   } else if (sortOn === "priceDescending") {
+  //     setPrizes([...prizes].sort((a, b) => b.price - a.price));
+  //   } else if (sortOn === "nameDescending") {
+  //     setPrizes([...prizes].sort((a, b) => (a.name > b.name ? 1 : -1)));
+  //   } else if (sortOn === "nameAscending") {
+  //     setPrizes([...prizes].sort((a, b) => (a.name > b.name ? -1 : 1)));
+  //   } else if (sortOn === "categoryDescending") {
+  //     setPrizes([...prizes].sort((a, b) => (a.category > b.category ? 1 : -1)));
+  //   } else if (sortOn === "categoryAscending") {
+  //     setPrizes([...prizes].sort((a, b) => (a.category > b.category ? -1 : 1)));
+  //   }
+  // };
+const [showFastWithdraw,setShowFastWithdraw]=useState(false)
   const filterPrizes = (filterOn) => {
     if (allPrizes.length > 2) {
       if (filterOn === "Badges") {
+        setShowFastWithdraw(false);
         setPrizes(
           [...allPrizes].filter((prize) => prize.category === "Badges")
         );
         setShowConvert(false);
         //console.log('badges: ',prizes);
       } else if (filterOn === "Crypto") {
+        setShowFastWithdraw(false);
         setPrizes(
           [...allPrizes].filter((prize) => prize.category === "Crypto")
         );
@@ -215,6 +218,7 @@ function RedeemPrizes() {
 
         //console.log('crypto: ',prizes);
       } else if (filterOn === "Merch") {
+        setShowFastWithdraw(false);
         setPrizes([...allPrizes].filter((prize) => prize.category === "Merch"));
         //console.log('merch: ',prizes);
       } else if (filterOn === "NFTs") {
@@ -222,21 +226,34 @@ function RedeemPrizes() {
         //console.log('nfts: ',prizes);
         setShowConvert(false);
         setBuyWithFiat(false);
+        setShowFastWithdraw(false);
       } else if (filterOn === "convert") {
         setShowConvert(true);
         setBuyTokenTab(false);
+        setShowFastWithdraw(false);
         setPrizes([]);
         // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
       } else if (filterOn === "buy_token") {
         setBuyTokenTab(true);
         setShowConvert(false);
+        setShowFastWithdraw(false);
         setPrizes([]);
         // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
       } else if (filterOn === "Fiat") {
         console.log("gggg");
         setBuyWithFiat(true);
+        setShowFastWithdraw(false);
+        setPrizes([]);
+        // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
+        //console.log('nfts: ',prizes);
+      }
+      else if (filterOn === "fast_withdraw") {
+        console.log("gggg");
+        setShowFastWithdraw(true);
+        setBuyWithFiat(false);
+        setShowConvert(false);
         setPrizes([]);
         // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
@@ -590,6 +607,19 @@ function RedeemPrizes() {
                       Fiat
                     </button>
                   </div>
+                  <div className="new-btn">
+                    {/* <button
+                      // className='page-nav-header-btn'
+                      onClick={() => handleFiat()}>
+                      Fiat
+                    </button> */}
+                    <button
+                      // className='page-nav-header-btn'
+                      onClick={() => filterPrizes("fast_withdraw")}
+                    >
+                      Fast Withdraw
+                    </button>
+                  </div>
                   {/* <div className="new-btn">
                     <button onClick={() => filterPrizes("convert")}>
                       Convert ticket to token
@@ -616,8 +646,16 @@ function RedeemPrizes() {
                     getUserDataInstant={getUserDataInstant}
                   />
                 )}
+                {showFastWithdraw && (
+                  <FastWithdrawPopup
+                    show={showFastWithdraw}
+                    setShow={setShowFastWithdraw}
+                    handleCloseFiat={handleCloseFiat}
+                    getUserDataInstant={getUserDataInstant}
+                  />
+                )}
 
-                {!buyWithFiat && (
+                {/* {!buyWithFiat && (
                   <div className="page-nav-header-btns-subrow">
                     <button
                       className="page-nav-header-subbtn"
@@ -656,33 +694,13 @@ function RedeemPrizes() {
                       CATEGORY Z-A
                     </button>
                   </div>
-                )}
+                )} */}
                 <div className="prizes-container">
                   {showConvert && (
                     <>
                       <div className="buy-chips-content">
                         <div className="buy-chips-grid cryptoTotoken">
-                          {/* <div className='buy-chips-grid-box'>
-                            <img src={coin4} alt='coin' />
-
-                            <InputRange
-                              maxValue={499}
-                              minValue={10}
-                              value={sliderValue}
-                              onChange={(value) => setSliderValue(value)}
-                            />
-                            <div
-                              className='gradient-btn'
-                              //  onClick={() => convert(500, 510)}
-                              onClick={() =>
-                                handleShow(sliderValue, sliderValue, "")
-                              }>
-                              <span>
-                                {sliderValue} tickets gets you {sliderValue}{" "}
-                                tokens{" "}
-                              </span>
-                            </div>
-                          </div> */}
+                          
 
                           <div className="buy-chips-grid">
                             <div className="purchasemodal-cards">
@@ -1505,13 +1523,13 @@ function RedeemPrizes() {
                     </>
                   ) : (
                     <>
-                      <div className="loader-img">
+                       <div className="loader-img">
                         <img
                           src={LoadingPoker}
                           alt="game"
                           className="imageAnimation"
                         />
-                      </div>
+                      </div> 
                     </>
                   )}
                 </div>
