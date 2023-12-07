@@ -45,6 +45,7 @@ import vpnbanner from "./images/vpn-banner.webp";
 import notaccess from "./images/not-access.webp";
 
 import axios from "axios";
+import PaymentCustom from "./pages/PaymentCustom.mjs";
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
@@ -243,7 +244,10 @@ export default function App() {
                       path='/my-wallet'
                       element={<ProtectedRoute component={<MyWallet />} />}
                     />
-
+                    <Route
+                      path='/pay'
+                      element={<ProtectedRoute component={<PaymentCustom />} />}
+                    />
                     {/* <Route
                     path='/redeem-nfts'
                     element={<ProtectedRoute component={<RedeemNFTs />} />}
