@@ -1484,7 +1484,7 @@ export default function CryptoToGC() {
                 </div>
               </Modal.Body>
             </Modal>
-            <button
+            {/* <button
               type='button'
               id='paycard'
               class='AcceptUI'
@@ -1496,7 +1496,7 @@ export default function CryptoToGC() {
               data-acceptUIFormHeaderTxt='Card Information'
               data-responseHandler={`requestHandler`}>
               pay
-            </button>
+            </button> */}
           </main>
         </Layout>
       )}
@@ -1531,101 +1531,6 @@ export default function CryptoToGC() {
 //     </button>
 //   );
 // };
-// const PayWithCard = ({
-//   prize,
-//   getExactPrice,
-//   promoDetails,
-//   getExactToken,
-//   getExactGC,
-// }) => {
-//   const [liveFormToken, setFormToken] = useState(null);
-//   const [response, setResponse] = useState(null);
-//   const acceptHostedButtonRef = useRef(null);
-//   const [loader, setLoading] = useState(false);
-
-//   const handleCLick = async () => {
-//     try {
-//       setLoading(true);
-//       const res = await marketPlaceInstance().post(
-//         `/getFormToken`,
-//         {
-//           amount: prize?.priceInBUSD,
-//         },
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           withCredentials: true,
-//           credentials: "include",
-//         }
-//       );
-//       console.log("res", res);
-
-//       const responseData = res?.data?.response;
-//       console.log("responseData", responseData);
-//       setFormToken(responseData?.token);
-//       // setLoading(false);
-//     } catch (error) {
-//       // setLoading(false);
-
-//       console.error("Error fetching form token:", error);
-//     }
-//   };
-
-//   // useEffect(() => {
-//   //   setTimeout(() => {
-
-//   //   }, 4000);
-//   // }, []);
-//   // const a = () => {
-//   //   if (liveFormToken && acceptHostedButtonRef.current) {
-//   //     console.log("acceptHostedButtonRef");
-//   //     acceptHostedButtonRef.current.click();
-//   //   }
-//   // };
-//   // useEffect(() => {
-//   //   // Trigger the click event after the component has mounted
-//   //   acceptHostedButtonRef.current.click();
-//   // }, []); // Empty dependency array ensures that this effect runs only once after the initial render
-
-//   useEffect(() => {
-//     if (liveFormToken) {
-//       setTimeout(() => {
-//         document.getElementsByTagName("form")[0][1].click();
-//       }, 1000);
-//     }
-//   }, [liveFormToken]);
-
-//   return (
-//     <>
-//       {liveFormToken ? (
-//         <button id='payRedirection'>
-//           <AcceptHosted
-//             formToken={liveFormToken}
-//             environment='PRODUCTION'
-//             integration='redirect'>
-//             <Spinner animation='border' />
-//           </AcceptHosted>
-//         </button>
-//       ) : (
-//         <button onClick={handleCLick}>
-//           {" "}
-//           {/* {!loading ? "Save" : <Spinner animation='border' />} */}
-//           {!liveFormToken ? (
-//             !loader ? (
-//               `Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}`
-//             ) : (
-//               <Spinner animation='border' />
-//             )
-//           ) : (
-//             ""
-//           )}
-//         </button>
-//       )}
-//     </>
-//   );
-// };
-
 const PayWithCard = ({
   prize,
   getExactPrice,
@@ -1633,23 +1538,90 @@ const PayWithCard = ({
   getExactToken,
   getExactGC,
 }) => {
-  const handleCLick = () => {
-    console.log("handleCLickhandleCLickhandleCLick");
-    let payload = {
-      freeTokenAmount: getExactToken(prize.freeTokenAmount, promoDetails),
-      gcAmount: getExactGC(prize.gcAmount, promoDetails),
-      priceInBUSD: getExactPrice(prize?.priceInBUSD, promoDetails).toString(),
-      _id: prize._id,
-      actualAmount: prize?.priceInBUSD,
-      promoCode: promoCode,
-    };
-    window.prize = payload;
-    document.getElementById("paycard").click();
+  const [liveFormToken, setFormToken] = useState(null);
+  const [response, setResponse] = useState(null);
+  const acceptHostedButtonRef = useRef(null);
+  const [loader, setLoading] = useState(false);
+
+  const handleCLick = async () => {
+    try {
+      setLoading(true);
+      const res = await marketPlaceInstance().post(
+        `/getFormToken`,
+        {
+          amount: prize?.priceInBUSD,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+          credentials: "include",
+        }
+      );
+      console.log("res", res);
+
+      const responseData = res?.data?.response;
+      console.log("responseData", responseData);
+      setFormToken(responseData?.token);
+      // setLoading(false);
+    } catch (error) {
+      // setLoading(false);
+
+      console.error("Error fetching form token:", error);
+    }
   };
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+
+  //   }, 4000);
+  // }, []);
+  // const a = () => {
+  //   if (liveFormToken && acceptHostedButtonRef.current) {
+  //     console.log("acceptHostedButtonRef");
+  //     acceptHostedButtonRef.current.click();
+  //   }
+  // };
+  // useEffect(() => {
+  //   // Trigger the click event after the component has mounted
+  //   acceptHostedButtonRef.current.click();
+  // }, []); // Empty dependency array ensures that this effect runs only once after the initial render
+
+  useEffect(() => {
+    if (liveFormToken) {
+      setTimeout(() => {
+        document.getElementsByTagName("form")[0][1].click();
+      }, 1000);
+    }
+  }, [liveFormToken]);
+
   return (
-    <button onClick={handleCLick}>
-      {" "}
-      Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}
-    </button>
+    <>
+      {liveFormToken ? (
+        <button id='payRedirection'>
+          <AcceptHosted
+            formToken={liveFormToken}
+            environment='PRODUCTION'
+            integration='redirect'>
+            <Spinner animation='border' />
+          </AcceptHosted>
+        </button>
+      ) : (
+        <button onClick={handleCLick}>
+          {" "}
+          {/* {!loading ? "Save" : <Spinner animation='border' />} */}
+          {!liveFormToken ? (
+            !loader ? (
+              `Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}`
+            ) : (
+              <Spinner animation='border' />
+            )
+          ) : (
+            ""
+          )}
+        </button>
+      )}
+    </>
   );
 };
