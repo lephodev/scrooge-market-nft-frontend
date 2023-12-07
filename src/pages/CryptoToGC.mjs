@@ -1495,7 +1495,7 @@ export default function CryptoToGC() {
               data-acceptUIFormBtnTxt='Submit'
               data-acceptUIFormHeaderTxt='Card Information'
               data-responseHandler={`requestHandler`}>
-              pay
+              {/* pay */}
             </button>
           </main>
         </Layout>
