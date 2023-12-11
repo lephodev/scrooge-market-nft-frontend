@@ -245,7 +245,7 @@ export default function App() {
                       element={<ProtectedRoute component={<MyWallet />} />}
                     />
                     <Route
-                      path='/pay'
+                      path='/pay-cctoGC'
                       element={<ProtectedRoute component={<PaymentCustom />} />}
                     />
                     {/* <Route
