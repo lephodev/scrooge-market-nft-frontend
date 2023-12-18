@@ -30,7 +30,6 @@ import BlogPosts from "./pages/BlogPosts.mjs";
 import RedeemPrizes from "./pages/RedeemPrizes.mjs";
 import EarnTokens from "./pages/EarnTokens.mjs";
 import Raffles from "./pages/Raffles.mjs";
-import { useCookies } from "react-cookie";
 import AuthContext from "./context/authContext";
 import { ToastContainer } from "react-toastify";
 import { authInstance } from "./config/axios";
@@ -56,7 +55,6 @@ export default function App() {
 
   const [region, setRegion] = useState("");
   const [spendedAmount, setSpendedAmount] = useState(null);
-  const [cookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(true);
   const [dateTimeNow, setDateTimeNow] = useState("");
   const [supportedWalletForMob, setSupportedWalletForMob] = useState(false);
@@ -81,12 +79,13 @@ export default function App() {
   // call this function when you want to authenticate the user
   const login = async () => {
     setLoading(true);
-    let access_token = cookies.token;
+    const basicAuthToken = validateToken();
+
+    // let access_token = cookies.token;
     authInstance()
       .get("/auth/check-auth", {
         headers: {
-          Authorization: `Bearer ${access_token}`,
-          "Permissions-Policy": "geolocation=*",
+          Authorization: basicAuthToken,
         },
       })
       .then((res: any) => {

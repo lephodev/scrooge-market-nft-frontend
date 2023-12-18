@@ -6,7 +6,6 @@ import {
   ThirdwebNftMedia,
   ChainId,
 } from "@thirdweb-dev/react";
-import { useCookies } from "react-cookie";
 
 import { useState, useEffect, useContext } from "react";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,6 +17,7 @@ import AuthContext from "../context/authContext.ts";
 import { scroogeClient } from "../config/keys.js";
 import { authInstance, marketPlaceInstance } from "../config/axios.js";
 import { toast } from "react-toastify";
+import { validateToken } from "../utils/dateUtils.mjs";
 
 export default function GetWalletDLNFTs() {
   const { user, setUser } = useContext(AuthContext);
@@ -26,7 +26,7 @@ export default function GetWalletDLNFTs() {
     "0xEe7c31b42e8bC3F2e04B5e1bfde84462fe1aA768"
   );
   const { data: ownedNFTs, isLoading } = useOwnedNFTs(contract, address);
-console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
+  console.log("ownedNFTs", ownedNFTs, isLoading, ChainId);
 
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
@@ -36,24 +36,16 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
   }
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   // setSelectedChain(ChainId.Mainnet);
-  
 
   // const addresses = {
   //   [String(ChainId.Mainnet)]: process.env.REACT_APP_MAINNET_ADDRESS,
   //   [String(ChainId.BinanceSmartChainMainnet)]: "",
   // };
-  const [cookies] = useCookies(["token"]);
 
   const [buyLoading, setBuyLoading] = useState(false);
   const [nextClaimDate, setNextClaimDate] = useState("");
- 
+
   const [claimDateArray, setClaimDateArray] = useState([]);
-
-
-  
-    
-  
-  
 
   const claimTokens = (token_id) => {
     setBuyLoading(true);
@@ -81,26 +73,25 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
         if (data.data.success) {
           dataArray.push([token_id, data.data.data[0].nextClaimDate]);
           setClaimDateArray(dataArray);
-          
+
           setNextClaimDate(data.data.data[0].nextClaimDate);
         } else {
           dataArray.push([token_id, data.data.message]);
           setClaimDateArray(dataArray);
-          
+
           setNextClaimDate(data.data.message);
         }
       });
     return nextClaimDate;
   }
 
-
   const getUserDataInstant = () => {
-    let access_token = cookies.token;
+    const basicAuthToken = validateToken();
+
     authInstance()
       .get("/auth/check-auth", {
         headers: {
-          Authorization: `Bearer ${access_token}`,
-          "Permissions-Policy": "geolocation=*",
+          Authorization: basicAuthToken,
         },
       })
       .then((res) => {
@@ -190,7 +181,6 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
                 a cool motherducker and holding at least one{" "}
                 <a
                   href='https://duckylucks.com'
-                   
                   rel='noreferrer'
                   alt='claim free tokens for holding ducky lucks NFTs'>
                   Ducky Lucks NFT
@@ -216,9 +206,13 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
           <div style={{ width: "100%", textAlign: "center" }}>
             <div id='rewardId' style={{ margin: "0 auto" }} />
           </div>
-          {ownedNFTs?.length ?  <div className='pageTitle'>
+          {ownedNFTs?.length ? (
+            <div className='pageTitle'>
               <h1>My Ducky Lucks</h1>
-            </div> : ""}
+            </div>
+          ) : (
+            ""
+          )}
           {ownedNFTs?.map((nft) => (
             <div className='erc721Card dlNft-grid' key={nft.metadata.id}>
               <div className='erc721Card-name'>
@@ -276,9 +270,7 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
                     <strong>
                       Monthly Claimable Amount:{" "}
                       <span>
-                        {(
-                          500-nft.metadata.attributes[11].value
-                        ).toFixed(0)}{" "}
+                        {(500 - nft.metadata.attributes[11].value).toFixed(0)}{" "}
                         Tokens
                       </span>
                     </strong>
@@ -299,9 +291,7 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
                     <strong>
                       Monthly Claimable Amount:{" "}
                       <span>
-                        {(
-                          500 -nft.metadata.attributes[11].value
-                        ).toFixed(0)}{" "}
+                        {(500 - nft.metadata.attributes[11].value).toFixed(0)}{" "}
                         Tokens
                       </span>
                     </strong>
@@ -321,9 +311,7 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
                     <strong>
                       Monthly Claimable Amount:{" "}
                       <span>
-                        {(
-                          500 -nft.metadata.attributes[11].value
-                        ).toFixed(0)}{" "}
+                        {(500 - nft.metadata.attributes[11].value).toFixed(0)}{" "}
                         Tokens
                       </span>
                     </strong>
@@ -343,9 +331,7 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
                     <strong>
                       Monthly Claimable Amount:{" "}
                       <span>
-                        {(
-                          500 -nft.metadata.attributes[11].value 
-                        ).toFixed(0)}{" "}
+                        {(500 - nft.metadata.attributes[11].value).toFixed(0)}{" "}
                         Tokens
                       </span>
                     </strong>
@@ -365,9 +351,7 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
                     <strong>
                       Monthly Claimable Amount:{" "}
                       <span>
-                        {(
-                          500-nft.metadata.attributes[11].value
-                        ).toFixed(0)}{" "}
+                        {(500 - nft.metadata.attributes[11].value).toFixed(0)}{" "}
                         Tokens
                       </span>
                     </strong>
@@ -387,9 +371,7 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
                     <strong>
                       Monthly Claimable Amount:{" "}
                       <span>
-                        {(
-                          500 -nft.metadata.attributes[11].value
-                        ).toFixed(0)}{" "}
+                        {(500 - nft.metadata.attributes[11].value).toFixed(0)}{" "}
                         Tokens
                       </span>
                     </strong>
@@ -398,17 +380,19 @@ console.log("ownedNFTs",ownedNFTs,isLoading, ChainId);
                   <span></span>
                 )}
               </div>
-              
+
               <div className='erc721Card-4th-col'>
-            
                 {claimDateArray.length === ownedNFTs.length ? (
                   <>
-                  
                     {claimDateArray
                       .find((element) => element[0] === nft.metadata.id)[1]
-                      .toString() === "No Entries Found" || 
-                      new Date() >=new Date(claimDateArray
-                      .find((element) => element[0] === nft.metadata.id)[1]) ? (
+                      .toString() === "No Entries Found" ||
+                    new Date() >=
+                      new Date(
+                        claimDateArray.find(
+                          (element) => element[0] === nft.metadata.id
+                        )[1]
+                      ) ? (
                       <>
                         <button
                           className='subheader-btn'

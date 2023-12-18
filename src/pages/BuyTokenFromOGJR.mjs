@@ -8,15 +8,16 @@ import coin3 from "../images/2.png";
 import coin4 from "../images/1.png";
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
-import { Dropdown} from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 
-import { useAddress,useSDK } from "@thirdweb-dev/react";
+import { useAddress, useSDK } from "@thirdweb-dev/react";
 import { marketPlaceInstance, authInstance } from "../config/axios.js";
 import { toast } from "react-toastify";
 import { useReward } from "react-rewards";
+import { validateToken } from "../utils/dateUtils.mjs";
 
 export default function BuyTokenFromOGJR() {
-  const { user,  setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const [selectedDropdown, setSelectedDropdown] = useState("");
 
   const [buyLoading, setBuyLoading] = useState(false);
@@ -26,17 +27,17 @@ export default function BuyTokenFromOGJR() {
   const [cookies] = useCookies(["token"]);
   const sdk = useSDK();
   const address = useAddress();
-  const OGWalletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS
-  const JRWalletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS
+  const OGWalletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
+  const JRWalletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
 
   const getUserDataInstant = () => {
-    let access_token = cookies.token;
+    // let access_token = cookies.token;
+    const basicAuthToken = validateToken();
+
     authInstance()
       .get("/auth/check-auth", {
         headers: {
-          Authorization: `Bearer ${access_token}`,
-          "Permissions-Policy": "geolocation=*",
-
+          Authorization: basicAuthToken,
         },
       })
       .then((res) => {
@@ -50,8 +51,6 @@ export default function BuyTokenFromOGJR() {
         console.log("error ", err);
       });
   };
-
-  
 
   const convert = async (type, crypto, tokens) => {
     let contractAddresss, walletAddress, cryptoAmount;
@@ -75,15 +74,17 @@ export default function BuyTokenFromOGJR() {
       cryptoAmount = (crypto + crypto * 0.16) / current_price;
 
       sdk.wallet
-        .transfer(walletAddress, cryptoAmount, contractAddresss,)
+        .transfer(walletAddress, cryptoAmount, contractAddresss)
         .then((txResult) => {
-          const {transactionHash}=txResult?.receipt||{}
+          const { transactionHash } = txResult?.receipt || {};
           marketPlaceInstance()
-            .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}/${transactionHash}`)
+            .get(
+              `convertCryptoToToken/${user?.id}/${address}/${tokens}/${transactionHash}`
+            )
             .then((response) => {
               setBuyLoading(false);
               if (response.data.success) {
-                setUser(response?.data?.user)
+                setUser(response?.data?.user);
                 toast.success(`Successfully Purchased ${tokens} Tokens`);
                 reward();
                 getUserDataInstant();
@@ -107,15 +108,15 @@ export default function BuyTokenFromOGJR() {
           }
         });
     } catch (error) {
-      setBuyLoading(false)
+      setBuyLoading(false);
       toast.error("Token Buy Fail");
       console.log("errordata", error);
     }
   };
 
-  const handleChange=(value)=>{
+  const handleChange = (value) => {
     setSelectedDropdown(value);
-  }
+  };
   return (
     <Layout>
       <main className='main redeem-prizes-page'>
@@ -142,32 +143,28 @@ export default function BuyTokenFromOGJR() {
               Disclaimer : +16% will be added to the transaction to cover
               blockchain fees and contract taxes!
             </div>
-           
+
             <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic-transition">
-              {!selectedDropdown ? "select" : selectedDropdown}
+              <Dropdown.Toggle variant='success' id='dropdown-basic-transition'>
+                {!selectedDropdown ? "select" : selectedDropdown}
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
                 <Dropdown.Item
-                  eventKey="busd"
-                  onClick={() => handleChange("BUSD")}
-                >
+                  eventKey='busd'
+                  onClick={() => handleChange("BUSD")}>
                   BUSD
                 </Dropdown.Item>
                 <Dropdown.Item
-                  eventKey="og"
-                  onClick={() => handleChange("Scrooge")}
-                >
+                  eventKey='og'
+                  onClick={() => handleChange("Scrooge")}>
                   Scrooge
                 </Dropdown.Item>
                 <Dropdown.Item
-                  eventKey="jr"
-                   onClick={() => handleChange("Scrooge JR")}
-                >
+                  eventKey='jr'
+                  onClick={() => handleChange("Scrooge JR")}>
                   Scrooge JR
                 </Dropdown.Item>
-                
               </Dropdown.Menu>
             </Dropdown>
           </div>

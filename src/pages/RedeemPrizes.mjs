@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useReward } from "react-rewards";
-import { useCookies } from "react-cookie";
 // import coin1 from "../images/4.png";
 // import coin2 from "../images/3.png";
 // import coin3 from "../images/2.png";
@@ -26,6 +25,7 @@ import copyIcon from "../images/copied-icon.svg";
 import SuccessModal from "./models/SuccessModal.mjs";
 import Pdf from "../images/SCROOGE Redemption Manual.pdf";
 import FastWithdrawPopup from "./models/fastWithdrawPopup.mjs";
+import { validateToken } from "../utils/dateUtils.mjs";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -61,7 +61,6 @@ function RedeemPrizes() {
   const [JR5000, setJR5000] = useState();
   const [JR10000, setJR10000] = useState();
   const [JR20000, setJR20000] = useState();
-  const [cookies] = useCookies(["token"]);
   const address = useAddress();
   const [success50Show, setSuccess50Show] = useState(false);
   const [success100Show, setSuccess100Show] = useState(false);
@@ -312,12 +311,12 @@ function RedeemPrizes() {
   }
 
   const getUserDataInstant = () => {
-    let access_token = cookies.token;
+    const basicAuthToken = validateToken();
+
     authInstance()
       .get("/auth/check-auth", {
         headers: {
-          Authorization: `Bearer ${access_token}`,
-          "Permissions-Policy": "geolocation=*",
+          Authorization: basicAuthToken,
         },
       })
       .then((res) => {
