@@ -46,6 +46,7 @@ import notaccess from "./images/not-access.webp";
 
 import axios from "axios";
 import PaymentCustom from "./pages/PaymentCustom.mjs";
+import { validateToken } from "./utils/dateUtils.mjs";
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
@@ -118,9 +119,15 @@ export default function App() {
         (response) => response.json()
       );
       const CurrentIp = res?.IPv4;
+      const basicAuthToken = validateToken();
+
       // const apiUrl = `http://api.vpnblocker.net/v2/json/${CurrentIp}`;
       const serverUrl = `/auth/validate_VPN?ip=${CurrentIp}&timezone=${null}`;
-      const checkVPNRes = await authInstance().get(serverUrl);
+      const checkVPNRes = await authInstance().get(serverUrl, {
+        headers: {
+          Authorization: basicAuthToken,
+        },
+      });
       setIsVPNEnable(checkVPNRes?.data?.vpnStatus);
       const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
       const CurrentCity = res1?.data;
