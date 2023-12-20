@@ -19,7 +19,7 @@ export default function Home() {
         </p>
 
         <div className='connect-wallet-div'>
-          <ConnectWallet />
+          <ConnectWallet modalTitle='Wallet supports only MetaMask, Trust Wallet, and SafePal.' />
         </div>
         <div>
           <GetWalletERC1155NFTs />
