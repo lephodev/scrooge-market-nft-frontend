@@ -6482,5 +6482,10 @@ p.ip-block {
 }
 
 h2#radix-\:r4\: {
-  color: red;
+  color: red !important;
+}
+
+.css-ytz34g:hover {
+  background: hsl(243, 4.9%, 18.8%);
+  display: none;
 }
