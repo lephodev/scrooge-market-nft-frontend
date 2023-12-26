@@ -14,9 +14,9 @@ import ChainContext from "../context/Chain.ts";
 // import Sweep from '../images/token.png'
 // import GoldCoin from '../images/gold.png'
 // import Ticket from "../images/ticket.png";
-import ScroogeHatLogo from "../images/scroogeHatLogo.png";
+// import ScroogeHatLogo from "../images/scroogeHatLogo.png";
 // import scroogejr from "../images/scroogejr.jpeg";
-import ClaimOGPending from "../components/claimOGPending.mjs";
+// import ClaimOGPending from "../components/claimOGPending.mjs";
 // import ClaimJRPending from "../components/claimJRPending.mjs";
 import "react-toastify/dist/ReactToastify.css";
 import AuthContext from "../context/authContext.ts";
@@ -25,13 +25,13 @@ import { marketPlaceInstance } from "../config/axios.js";
 //import profile from '../images/profile.png'
 import { DLGate } from "../components/DLGate.jsx";
 import DLClaimTokens from "./DLClaimTokens.mjs";
-import HolderClaimChips from "./HolderClaimChips.mjs";
+// import HolderClaimChips from "./HolderClaimChips.mjs";
 // import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses.js";
 export default function MyWallet() {
-  const [OGBalance, setOGBalance] = useState("Loading...");
+  const [, /* OGBalance */ setOGBalance] = useState("Loading...");
   const [setJRBalance] = useState("Loading...");
   const [setJRValue] = useState("Loading...");
-  const [OGValue, setOGValue] = useState("Loading...");
+  const [, /* OGValue */ setOGValue] = useState("Loading...");
   const [, /* currentPriceOG */ setCurrentPriceOG] = useState("Loading...");
   const [, /* currentPriceJR */ setCurrentPriceJR] = useState("Loading...");
   const { user } = useContext(AuthContext);
@@ -286,10 +286,10 @@ export default function MyWallet() {
                       <DLGate>
                         <DLClaimTokens />
                       </DLGate>
-                      <h6 className='title'>Monthly Claims</h6>
+                      {/* <h6 className='title'>Monthly Claims</h6>
                       <div className='tab-claims'>
                         <HolderClaimChips />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -298,7 +298,7 @@ export default function MyWallet() {
               {address ? (
                 <>
                   <div className='crypto-card-grid'>
-                    <div className='crypto-balance-div'>
+                    {/* <div className='crypto-balance-div'>
                       <div className='width-100'>
                         <div className='crypto-balance-header'>
                           CRYPTO BALANCE
@@ -321,7 +321,7 @@ export default function MyWallet() {
                           <ClaimOGPending />
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     {/* <div className='crypto-balance-div'>
                       <div className='width-100'>
                         <div className='crypto-balance-header'>JR BALANCE</div>
