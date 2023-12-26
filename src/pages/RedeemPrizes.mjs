@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useReward } from "react-rewards";
-import { useCookies } from "react-cookie";
 // import coin1 from "../images/4.png";
 // import coin2 from "../images/3.png";
 // import coin3 from "../images/2.png";
@@ -26,6 +25,7 @@ import copyIcon from "../images/copied-icon.svg";
 import SuccessModal from "./models/SuccessModal.mjs";
 import Pdf from "../images/SCROOGE Redemption Manual.pdf";
 import FastWithdrawPopup from "./models/fastWithdrawPopup.mjs";
+import { validateToken } from "../utils/dateUtils.mjs";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -61,7 +61,6 @@ function RedeemPrizes() {
   const [JR5000, setJR5000] = useState();
   const [JR10000, setJR10000] = useState();
   const [JR20000, setJR20000] = useState();
-  const [cookies] = useCookies(["token"]);
   const address = useAddress();
   const [success50Show, setSuccess50Show] = useState(false);
   const [success100Show, setSuccess100Show] = useState(false);
@@ -198,7 +197,7 @@ function RedeemPrizes() {
   //     setPrizes([...prizes].sort((a, b) => (a.category > b.category ? -1 : 1)));
   //   }
   // };
-const [showFastWithdraw,setShowFastWithdraw]=useState(false)
+  const [showFastWithdraw, setShowFastWithdraw] = useState(false);
   const filterPrizes = (filterOn) => {
     if (allPrizes.length > 2) {
       if (filterOn === "Badges") {
@@ -248,8 +247,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
         setPrizes([]);
         // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
         //console.log('nfts: ',prizes);
-      }
-      else if (filterOn === "fast_withdraw") {
+      } else if (filterOn === "fast_withdraw") {
         console.log("gggg");
         setShowFastWithdraw(true);
         setBuyWithFiat(false);
@@ -313,12 +311,11 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
   }
 
   const getUserDataInstant = () => {
-    let access_token = cookies.token;
+    const basicAuthToken = validateToken();
     authInstance()
       .get("/auth/check-auth", {
         headers: {
-          Authorization: `Bearer ${access_token}`,
-          "Permissions-Policy": "geolocation=*",
+          Authorization: basicAuthToken,
         },
       })
       .then((res) => {
@@ -476,20 +473,19 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
         handleSuccess100Modal={handleSuccess100Modal}
         handleSuccess500Modal={handleSuccess500Modal}
       />
-      <main className="main redeem-prizes-page redeem-page">
-        <div className="container">
+      <main className='main redeem-prizes-page redeem-page'>
+        <div className='container'>
           <Modal show={show} onHide={handleClose} centered animation={false}>
-            <Modal.Body className="popupBody">
+            <Modal.Body className='popupBody'>
               <div>Do You Want To Redeem?</div>
-              <div className="popupBtn">
-                <button className="greyBtn" onClick={handleClose}>
+              <div className='popupBtn'>
+                <button className='greyBtn' onClick={handleClose}>
                   Cancel
                 </button>
                 <button
-                  className="yellowBtn"
+                  className='yellowBtn'
                   disabled={disable}
-                  onClick={confirmBuy}
-                >
+                  onClick={confirmBuy}>
                   Confirm
                 </button>
               </div>
@@ -501,24 +497,23 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
             </div>
           )} */}
           {globalLoader && (
-            <div className="loading">
-              <div className="loading-img-div">
-                <img src={LoadingPoker} alt="game" className="imageAnimation" />
+            <div className='loading'>
+              <div className='loading-img-div'>
+                <img src={LoadingPoker} alt='game' className='imageAnimation' />
               </div>
             </div>
           )}
-          <div className="bordered-section">
+          <div className='bordered-section'>
             {redeemSuccess ? (
-              <div className="pageImgContainer">
-                <div className="loading-txt">
+              <div className='pageImgContainer'>
+                <div className='loading-txt'>
                   REDEEMED SUCCESSFULLY<br></br>
                   <button
-                    className="page-nav-header-btn"
+                    className='page-nav-header-btn'
                     onClick={() => {
                       setRedeemSuccess(false);
                       reward();
-                    }}
-                  >
+                    }}>
                     CLOSE
                   </button>
                 </div>
@@ -528,25 +523,25 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
             )}
             {!globalLoader && (
               <>
-                <div className="scrooge-main-heading">
-                  <div className="pageTitle">
-                    <h1 className="title">Redeem for Prizes</h1>
+                <div className='scrooge-main-heading'>
+                  <div className='pageTitle'>
+                    <h1 className='title'>Redeem for Prizes</h1>
                   </div>
-                  <div className="feature-overview-div">
+                  <div className='feature-overview-div'>
                     Ready to cash in on your big wins? Take a look through our
                     selection of prize options and pick what suits you best!
                     Sweep Tokens are redeemed at a 100:1 USD ratio!
                   </div>
                 </div>
 
-                <div className="prizes-chip-count">
+                <div className='prizes-chip-count'>
                   {user ? (
                     <>
                       <h3>
                         Redeemable Balance:{" "}
                         {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
                       </h3>
-                      <a href={Pdf} target="blank" className="pdf-down">
+                      <a href={Pdf} target='blank' className='pdf-down'>
                         {" "}
                         How it works! Click here to download pdf.
                       </a>
@@ -555,15 +550,15 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                     <>
                       <img
                         src={LoadingPoker}
-                        alt="game"
-                        className="imageAnimation"
+                        alt='game'
+                        className='imageAnimation'
                         width={100}
                         height={100}
                       />
                     </>
                   )}
                 </div>
-                <div className="page-nav-header-btns-row">
+                <div className='page-nav-header-btns-row'>
                   {/* <div className='new-btn'>
                     <button
                       // className='page-nav-header-btn'
@@ -571,11 +566,10 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                       BADGES
                     </button>
                   </div> */}
-                  <div className="new-btn">
+                  <div className='new-btn'>
                     <button
                       // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("Crypto")}
-                    >
+                      onClick={() => filterPrizes("Crypto")}>
                       CRYPTO
                     </button>
                   </div>
@@ -586,15 +580,14 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                       MERCH
                     </button>
                   </div> */}
-                  <div className="new-btn">
+                  <div className='new-btn'>
                     <button
                       // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("NFTs")}
-                    >
+                      onClick={() => filterPrizes("NFTs")}>
                       NFTS
                     </button>
                   </div>
-                  <div className="new-btn">
+                  <div className='new-btn'>
                     {/* <button
                       // className='page-nav-header-btn'
                       onClick={() => handleFiat()}>
@@ -602,12 +595,11 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                     </button> */}
                     <button
                       // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("Fiat")}
-                    >
+                      onClick={() => filterPrizes("Fiat")}>
                       Fiat
                     </button>
                   </div>
-                  <div className="new-btn">
+                  <div className='new-btn'>
                     {/* <button
                       // className='page-nav-header-btn'
                       onClick={() => handleFiat()}>
@@ -615,8 +607,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                     </button> */}
                     <button
                       // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("fast_withdraw")}
-                    >
+                      onClick={() => filterPrizes("fast_withdraw")}>
                       Fast Withdraw
                     </button>
                   </div>
@@ -633,9 +624,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                 </div>
 
                 {buyTokenTab && (
-                  <div className="buyTokenTab">
+                  <div className='buyTokenTab'>
                     <h2>Buy Tokens Here .. </h2>
-                    <Button className="buyTokensBtn">Buy Tokens</Button>
+                    <Button className='buyTokensBtn'>Buy Tokens</Button>
                   </div>
                 )}
 
@@ -695,34 +686,31 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                     </button>
                   </div>
                 )} */}
-                <div className="prizes-container">
+                <div className='prizes-container'>
                   {showConvert && (
                     <>
-                      <div className="buy-chips-content">
-                        <div className="buy-chips-grid cryptoTotoken">
-                          
-
-                          <div className="buy-chips-grid">
-                            <div className="purchasemodal-cards">
+                      <div className='buy-chips-content'>
+                        <div className='buy-chips-grid cryptoTotoken'>
+                          <div className='buy-chips-grid'>
+                            <div className='purchasemodal-cards'>
                               {ticketPrizes.map((prize) => (
                                 <Card>
-                                  <Card.Img variant="top" src={sweep} />
+                                  <Card.Img variant='top' src={sweep} />
                                   <Card.Body>
                                     <Card.Title>
                                       Token {prize?.token}
                                     </Card.Title>
                                     <Card.Text>Buy Ticket</Card.Text>
                                     <Button
-                                      variant="primary"
+                                      variant='primary'
                                       onClick={() =>
                                         handleShow(
                                           prize.ticket,
                                           prize.token,
                                           ""
                                         )
-                                      }
-                                    >
-                                      <img src={ticket} alt="ticket" />
+                                      }>
+                                      <img src={ticket} alt='ticket' />
                                       <h5>{prize?.ticket}</h5>
                                     </Button>
                                   </Card.Body>
@@ -736,11 +724,11 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                   )}
 
                   <div style={{ width: "100%", textAlign: "center" }}>
-                    <div id="rewardId" style={{ margin: "0 auto" }} />
+                    <div id='rewardId' style={{ margin: "0 auto" }} />
                   </div>
                   {!prizesLoading ? (
                     <>
-                      <div className="prizes_container">
+                      <div className='prizes_container'>
                         {/* <div className="prizes-card">
                   <div className="prize-name bold text-animate">
                                   <h4>Under token migeration</h4>
@@ -763,17 +751,17 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                               f._id !== "63cedf0d1736630ad01d5f4e"
                           )
                           .map((prize) => (
-                            <div className="prizes-card" key={prize._id}>
+                            <div className='prizes-card' key={prize._id}>
                               {/* {console.log("prize", prize._id)} */}
                               {!prize.isDynamic ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>{prize.name}</h4>
                                 </div>
                               ) : (
                                 <></>
                               )}
                               {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -790,10 +778,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />{" "}
+                                      <img src={copyIcon} alt='icon' />{" "}
                                     </p>
                                   </div>
                                   *
@@ -809,7 +796,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -826,10 +813,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -845,7 +831,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -861,10 +847,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -880,7 +865,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -897,10 +882,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -916,7 +900,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -932,10 +916,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -951,7 +934,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -968,10 +951,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -987,7 +969,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedf761736630ad01d5f52" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -1004,10 +986,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -1023,7 +1004,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedfb61736630ad01d5f55" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -1039,10 +1020,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -1058,7 +1038,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedf301736630ad01d5f4f" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -1075,10 +1055,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -1094,7 +1073,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedf651736630ad01d5f51" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -1111,10 +1090,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -1130,7 +1108,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -1146,10 +1124,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -1165,7 +1142,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedfc51736630ad01d5f56" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {prize.name.replace(
                                       "xxxValue",
@@ -1181,10 +1158,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -1200,7 +1176,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "6434f2f5f6bfb431f290a691" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -1217,10 +1193,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -1236,7 +1211,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "6434f46cf6bfb431f290a692" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -1253,10 +1228,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -1273,7 +1247,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                               )}
 
                               {prize._id === "64e2f7cf9a8e251156cfe8f5" ? (
-                                <div className="prize-name bold text-animate">
+                                <div className='prize-name bold text-animate'>
                                   <h4>
                                     {" "}
                                     {prize.name.replace(
@@ -1290,10 +1264,9 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />
+                                      <img src={copyIcon} alt='icon' />
                                     </h5>
                                   </div>
                                   *
@@ -1309,12 +1282,12 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               <img
-                                className="card-img pulse"
+                                className='card-img pulse'
                                 src={prize.image_url}
                                 alt={prize.name}
                               />
                               <br></br>
-                              <div className="prize-cost">
+                              <div className='prize-cost'>
                                 <p>Cost: {prize.price} tokens</p>
                               </div>
                               <br></br>
@@ -1329,7 +1302,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG1000).toLocaleString("en-US")
@@ -1340,7 +1313,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR1000).toLocaleString("en-US")
@@ -1351,7 +1324,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG1000).toLocaleString("en-US")
@@ -1362,7 +1335,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR1000).toLocaleString("en-US")
@@ -1373,7 +1346,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG5000).toLocaleString("en-US")
@@ -1384,7 +1357,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR5000).toLocaleString("en-US")
@@ -1395,7 +1368,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedf761736630ad01d5f52" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG5000).toLocaleString("en-US")
@@ -1406,7 +1379,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedfb61736630ad01d5f55" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR5000).toLocaleString("en-US")
@@ -1417,7 +1390,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedf301736630ad01d5f4f" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG10000).toLocaleString("en-US")
@@ -1428,7 +1401,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedf651736630ad01d5f51" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR10000).toLocaleString("en-US")
@@ -1439,7 +1412,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG10000).toLocaleString("en-US")
@@ -1450,7 +1423,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "63cedfc51736630ad01d5f56" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR10000).toLocaleString("en-US")
@@ -1461,7 +1434,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "6434f2f5f6bfb431f290a691" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG20000).toLocaleString("en-US")
@@ -1472,7 +1445,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "6434f46cf6bfb431f290a692" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(JR20000).toLocaleString("en-US")
@@ -1483,7 +1456,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize._id === "64e2f7cf9a8e251156cfe8f5" ? (
-                                <div className="">
+                                <div className=''>
                                   {prize.description.replace(
                                     "xxxValue",
                                     parseInt(OG500000).toLocaleString("en-US")
@@ -1494,7 +1467,7 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               {prize.isDynamic ? (
-                                <div className="asterisk-desc">
+                                <div className='asterisk-desc'>
                                   *Amount of crypto coins received is calculated
                                   in real time on redemption and may vary from
                                   displayed total to equal proper USD value.
@@ -1506,12 +1479,11 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                                 <></>
                               )}
                               <br />
-                              <div className="redeem-btn">
+                              <div className='redeem-btn'>
                                 <button
                                   // className='submit-btn'
-                                  className="gradient-btn"
-                                  onClick={() => handleShow("", "", prize._id)}
-                                >
+                                  className='gradient-btn'
+                                  onClick={() => handleShow("", "", prize._id)}>
                                   REDEEM PRIZE
                                 </button>
                               </div>
@@ -1523,13 +1495,13 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
                     </>
                   ) : (
                     <>
-                       <div className="loader-img">
+                      <div className='loader-img'>
                         <img
                           src={LoadingPoker}
-                          alt="game"
-                          className="imageAnimation"
+                          alt='game'
+                          className='imageAnimation'
                         />
-                      </div> 
+                      </div>
                     </>
                   )}
                 </div>
@@ -1544,8 +1516,8 @@ const [showFastWithdraw,setShowFastWithdraw]=useState(false)
 
 const UnderMaintenanceContent = () => {
   return (
-    <div className="scrooge-under-content">
-      <img src={scroogelogo} alt="scrooge" />
+    <div className='scrooge-under-content'>
+      <img src={scroogelogo} alt='scrooge' />
       <h4>Under Maintainance</h4>
     </div>
   );

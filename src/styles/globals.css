@@ -6480,3 +6480,12 @@ p.ip-block {
   height: 90vh;
   object-fit: contain;
 }
+
+h2#radix-\:r4\: {
+  color: red !important;
+}
+
+
+h2#radix-\:r1\: {
+  color: red !important;
+}

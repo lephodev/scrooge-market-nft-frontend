@@ -192,7 +192,7 @@ const FastWithdrawPopup = ({
             toast.error("ERROR! - " + data.data.message, {
               containerId: "error",
             });
-            setLoading(true);
+            setLoading(false);
           } else {
             reset();
             setLoading(false);
@@ -220,19 +220,19 @@ const FastWithdrawPopup = ({
   console.log("errors", errors);
 
   return (
-    <div className="fiat-modal">
+    <div className='fiat-modal'>
       <Form onSubmit={handleSubmit(WithdrawRequest)}>
-        <div className="fiat-content">
-          <Form.Group className="fiat-group">
+        <div className='fiat-content'>
+          <Form.Group className='fiat-group'>
             <Form.Label>Withdraw Amount</Form.Label>
             <Form.Control
-              type="number"
-              name="amount"
-              placeholder="Enter Amount"
+              type='number'
+              name='amount'
+              placeholder='Enter Amount'
               {...register("amount")}
             />
             {errors?.amount && (
-              <p className="error-msg">{errors?.amount?.message}</p>
+              <p className='error-msg'>{errors?.amount?.message}</p>
             )}
           </Form.Group>
           {/* 
@@ -240,12 +240,13 @@ const FastWithdrawPopup = ({
             10% of the amount will be deducted from your redemption amount
           </h6> */}
         </div>
-        <div className="popupBtn">
-          <button className="greyBtn" onClick={() => setShow(false)}>
+        <div className='popupBtn'>
+          {/* <button className='greyBtn' onClick={() => setShow(false)}>
             Cancel
           </button>
-          <button className="yellowBtn" variant="primary" type="submit">
-            {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
+        */}
+          <button className='yellowBtn' variant='primary' type='submit'>
+            {!loading ? "Confirm" : <Spinner animation='border' />}{" "}
           </button>
         </div>
       </Form>

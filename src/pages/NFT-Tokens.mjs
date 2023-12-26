@@ -31,7 +31,7 @@ export default function NFTTokens() {
             <div className='wallet-connect'>
               <p>Get started by connecting your wallet.</p>
               <div className='connect-wallet-div'>
-                <ConnectWallet />
+                <ConnectWallet modalTitle='Wallet supports only MetaMask, Trust Wallet, and SafePal.' />
               </div>
             </div>
           ) : (
