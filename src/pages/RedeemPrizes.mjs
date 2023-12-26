@@ -312,7 +312,6 @@ function RedeemPrizes() {
 
   const getUserDataInstant = () => {
     const basicAuthToken = validateToken();
-
     authInstance()
       .get("/auth/check-auth", {
         headers: {
@@ -596,8 +595,7 @@ function RedeemPrizes() {
                     </button> */}
                     {/* <button
                       // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("Fiat")}
-                    >
+                      onClick={() => filterPrizes("Fiat")}>
                       Fiat
                     </button> */}
                   </div>
@@ -775,10 +773,9 @@ function RedeemPrizes() {
                                         handleCopyURL(
                                           "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
                                         );
-                                      }}
-                                    >
+                                      }}>
                                       0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt="icon" />{" "}
+                                      <img src={copyIcon} alt='icon' />{" "}
                                     </p>
                                   </div>
                                   *

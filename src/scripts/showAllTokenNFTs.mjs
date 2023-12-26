@@ -16,7 +16,7 @@ import { useReward } from "react-rewards";
 import AuthContext from "../context/authContext.ts";
 import { toast } from "react-toastify";
 // import { loadStripe } from "@stripe/stripe-js";
-import { scroogeClient, /* stripeKey */ } from "../config/keys.js";
+import { scroogeClient /* stripeKey */ } from "../config/keys.js";
 import { marketPlaceInstance } from "../config/axios.js";
 
 // const stripePromise = loadStripe(stripeKey);
@@ -27,7 +27,7 @@ import { marketPlaceInstance } from "../config/axios.js";
 export default function ShowAllTokenNFTs() {
   const [buyLoading, setBuyLoading] = useState(false);
   const [buySuccess, setBuySuccess] = useState(false);
-  const { user,setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const address = useAddress();
   const [searchParams] = useSearchParams();
   const [affID, setAffID] = useState("");
@@ -63,7 +63,7 @@ export default function ShowAllTokenNFTs() {
         affID
       );
       const buyout = await contract.buyoutListing(token_id, qty);
-     console.log("buyoutbuyoutbuyout", buyout);
+      console.log("buyoutbuyoutbuyout", buyout);
       marketPlaceInstance()
         .post(`/getFreeTokens`, {
           address: address,
@@ -73,22 +73,20 @@ export default function ShowAllTokenNFTs() {
           affID: affID,
         })
         .then((data) => {
-          if(data?.data?.success){
-          setUser(data?.data?.user)
-          toast.success(
-            "You have successfully purchased your NFT and " +
-              data?.data?.data +
-              " chips have been added to your casino account!",
-            { containerId: "purchased" }
-          );
-          setBuyLoading(false);
-          setBuySuccess(true);
-          }
-          else {
+          if (data?.data?.success) {
+            setUser(data?.data?.user);
+            toast.success(
+              "You have successfully purchased your NFT and " +
+                data?.data?.data +
+                " chips have been added to your casino account!",
+              { containerId: "purchased" }
+            );
+            setBuyLoading(false);
+            setBuySuccess(true);
+          } else {
             setBuyLoading(false);
             toast.error(data?.data?.message);
           }
-          
         });
     } catch (err) {
       console.log("err", err);
@@ -159,7 +157,7 @@ export default function ShowAllTokenNFTs() {
       if (q) {
         setAffID(q);
         const aff_id = Cookies.set("aff_id", q);
-         console.log("cookie: ", aff_id);
+        console.log("cookie: ", aff_id);
       } else {
         const aff_id = Cookies.get("aff_id", { domain: scroogeClient }); //change before going live
         // console.log("cookie=====>>>>>: ", aff_id);
@@ -192,8 +190,7 @@ export default function ShowAllTokenNFTs() {
               onClick={() => {
                 setBuySuccess(false);
                 reward();
-              }}
-            >
+              }}>
               CLOSE
             </button>
           </div>
@@ -213,8 +210,7 @@ export default function ShowAllTokenNFTs() {
             <a
               href={scroogeClient}
               rel='noreferrer'
-              alt='buy your Scrooge Casino NFTs today'
-            >
+              alt='buy your Scrooge Casino NFTs today'>
               Scrooge Casino
             </a>
             . Simply choose the badge that is perfect for you from the list
@@ -274,7 +270,7 @@ export default function ShowAllTokenNFTs() {
                         <br></br>
                         {!address ? (
                           <div className='connect-wallet-inline'>
-                            <ConnectWallet />
+                            <ConnectWallet modalTitle='Wallet supports only MetaMask, Trust Wallet, and SafePal.' />
                           </div>
                         ) : (
                           <button
@@ -282,8 +278,7 @@ export default function ShowAllTokenNFTs() {
                             onClick={() =>
                               handleBuyAsset(el?.id, 1, el?.asset?.id)
                             }
-                            id={el?.asset?.name.toString()}
-                          >
+                            id={el?.asset?.name.toString()}>
                             BUY NFT!
                           </button>
                         )}

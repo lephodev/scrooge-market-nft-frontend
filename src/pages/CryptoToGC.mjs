@@ -69,6 +69,7 @@ export default function CryptoToGC() {
   const [ST5000, setST5000] = useState(false);
   const [ST10000, setST10000] = useState(false);
   const [ST25000, setST25000] = useState(false);
+  const [dailyGCPurchaseLimit, setDailyGCPurchaseLimit] = useState(0);
   const { dispatchData, loading, error } = useAcceptJs({ authData });
   const [cardData, setCardData] = useState({
     cardNumber: "",
@@ -151,8 +152,22 @@ export default function CryptoToGC() {
     }
   }
 
+  async function getGCPurcahseLimitPerDay() {
+    try {
+      const res = await marketPlaceInstance().get(`/getGCPurcahseLimitPerDay`);
+      console.log("res", res);
+      const { findTransactionIfExist } = res?.data;
+      console.log("res", res);
+      console.log("findTransactionIfExist====>>>>", findTransactionIfExist);
+      setDailyGCPurchaseLimit(findTransactionIfExist);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
     getGCPackages();
+    getGCPurcahseLimitPerDay();
   }, []);
 
   let preventMultilecalls = true;
@@ -1259,6 +1274,9 @@ export default function CryptoToGC() {
                                             selectedTypeDropdown={
                                               selectedTypeDropdown
                                             }
+                                            dailyGCPurchaseLimit={
+                                              dailyGCPurchaseLimit
+                                            }
                                           />
                                         )
                                       ) : (
@@ -1367,6 +1385,9 @@ export default function CryptoToGC() {
                                         setBuyLoading={setBuyLoading}
                                         selectedTypeDropdown={
                                           selectedTypeDropdown
+                                        }
+                                        dailyGCPurchaseLimit={
+                                          dailyGCPurchaseLimit
                                         }
                                       />
                                     )
@@ -1524,6 +1545,7 @@ const PayWithCard = ({
   promoDetails,
   getExactToken,
   getExactGC,
+  dailyGCPurchaseLimit,
 }) => {
   const [liveFormToken, setFormToken] = useState(null);
   const [response, setResponse] = useState(null);
@@ -1532,6 +1554,10 @@ const PayWithCard = ({
 
   const handleCLick = async () => {
     try {
+      console.log("dailyGCPurchaseLimit", dailyGCPurchaseLimit);
+      if (dailyGCPurchaseLimit >= 4) {
+        return toast.error("Credit card daily purchase limit are reached");
+      }
       setLoading(true);
       const res = await marketPlaceInstance().post(
         `/getFormToken`,

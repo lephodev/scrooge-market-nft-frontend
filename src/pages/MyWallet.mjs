@@ -25,7 +25,7 @@ import { marketPlaceInstance } from "../config/axios.js";
 //import profile from '../images/profile.png'
 import { DLGate } from "../components/DLGate.jsx";
 import DLClaimTokens from "./DLClaimTokens.mjs";
-// import HolderClaimChips from "./HolderClaimChips.mjs";
+import HolderClaimChips from "./HolderClaimChips.mjs";
 // import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses.js";
 export default function MyWallet() {
   const [OGBalance, setOGBalance] = useState("Loading...");
@@ -224,7 +224,7 @@ export default function MyWallet() {
               </p>
 
               <div className='connect-wallet-div'>
-                <ConnectWallet />
+                <ConnectWallet modalTitle='Wallet supports only MetaMask, Trust Wallet, and SafePal.' />
               </div>
             </div>
           ) : (
@@ -281,14 +281,15 @@ export default function MyWallet() {
                       GOLD COIN: {user?.goldCoin?.toLocaleString('en-US')}
                     </div> */}
                     <div>
+                      {/* "gghh" */}
                       <h6 className='title'>Ducky Luck Claims</h6>
                       <DLGate>
                         <DLClaimTokens />
                       </DLGate>
-                      {/* <h6 className="title">Monthly Claims</h6>
-              <div className='tab-claims'>
-              <HolderClaimChips />
-                </div> */}
+                      <h6 className='title'>Monthly Claims</h6>
+                      <div className='tab-claims'>
+                        <HolderClaimChips />
+                      </div>
                     </div>
                   </div>
                 </div>

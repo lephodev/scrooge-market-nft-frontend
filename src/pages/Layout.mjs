@@ -260,7 +260,7 @@ const Layout = ({ children }) => {
                     </Navbar.Collapse>
                   </div>
                   <div className='wallet'>
-                    <ConnectWallet />
+                    <ConnectWallet modalTitle='Wallet supports only MetaMask, Trust Wallet, and SafePal.' />
                     <div className={priceColor}>${currentPriceOG}</div>
                   </div>
                 </div>

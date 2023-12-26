@@ -49,7 +49,7 @@ export default function Home() {
               </p>
 
               <div className='connect-wallet-div'>
-                <ConnectWallet />
+                <ConnectWallet modalTitle='Wallet supports only MetaMask, Trust Wallet, and SafePal.' />
               </div>
             </div>
           ) : (
@@ -125,9 +125,8 @@ export default function Home() {
             <a
               href={scroogeClient}
               className='card'
-              //  
-              rel='noreferrer'
-            >
+              //
+              rel='noreferrer'>
               <h2>HEAD OVER TO SCROOGE CASINO &rarr;</h2>
               <p>
                 Time to cash in your winnings? Browse our huge selection of

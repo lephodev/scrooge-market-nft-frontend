@@ -87,7 +87,6 @@ export default function GetWalletDLNFTs() {
 
   const getUserDataInstant = () => {
     const basicAuthToken = validateToken();
-
     authInstance()
       .get("/auth/check-auth", {
         headers: {

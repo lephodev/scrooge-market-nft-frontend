@@ -32,7 +32,7 @@ export const createKYCSchema = yup.object().shape({
       }
       return false;
     }),
-    zipCode: yup.string().required("Postal / Zip Code is required"),
+  zipCode: yup.string().required("Postal / Zip Code is required"),
   address: yup.string().required("Full address is required"),
   // gender: yup.string().required('Gender is required')
 });
@@ -46,10 +46,10 @@ export const purchaseWithPaypal = yup.object().shape({
     .required("Email is required"),
 });
 export const fastWithdraw = yup.object().shape({
-  amount: yup.number()
-    .typeError('Must be a number') // Displayed if the value is not a number
-    .min(5000, 'Must be greater than or equal to 5000') // Set your minimum value and a corresponding error message
-    .max(50000, 'Must be less than or equal to 50000'),
+  amount: yup
+    .number()
+    .typeError("Must be a number") // Displayed if the value is not a number
+    .min(5000, "Must be greater than or equal to 5000"), // Set your minimum value and a corresponding error messag
 });
 
 export const purchaseWithCashApp = yup.object().shape({

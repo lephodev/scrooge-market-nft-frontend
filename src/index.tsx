@@ -80,8 +80,6 @@ export default function App() {
   const login = async () => {
     setLoading(true);
     const basicAuthToken = validateToken();
-
-    // let access_token = cookies.token;
     authInstance()
       .get("/auth/check-auth", {
         headers: {
@@ -223,7 +221,7 @@ export default function App() {
                 activeChain={selectedChain}
                 supportedWallets={
                   supportedWalletForMob
-                    ? [walletConnect()]
+                    ? [walletConnect(), metamaskWallet()]
                     : [
                         metamaskWallet(),
                         walletConnect() /* ,coinbaseWallet() */,
