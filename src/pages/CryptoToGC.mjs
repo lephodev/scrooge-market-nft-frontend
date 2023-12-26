@@ -151,8 +151,18 @@ export default function CryptoToGC() {
     }
   }
 
+  async function getGCPurcahseLimitPerDay() {
+    try {
+      const res = await marketPlaceInstance().get(`/getGCPurcahseLimitPerDay`);
+      console.log("res", res);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
     getGCPackages();
+    getGCPurcahseLimitPerDay();
   }, []);
 
   let preventMultilecalls = true;
@@ -1484,19 +1494,6 @@ export default function CryptoToGC() {
                 </div>
               </Modal.Body>
             </Modal>
-            {/* <button
-              type='button'
-              id='paycard'
-              class='AcceptUI'
-              data-billingAddressOptions='{"show":true, "required":false}'
-              data-apiLoginID={process.env.REACT_APP_AUTHORIZE_LOGIN_KEY}
-              data-clientKey={process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY}
-              data-hostedPaymentShippingAddressOptions='{"show": true, "required": false	}'
-              data-acceptUIFormBtnTxt='Submit'
-              data-acceptUIFormHeaderTxt='Card Information'
-              data-responseHandler={`requestHandler`}>
-              pay
-            </button> */}
           </main>
         </Layout>
       )}
