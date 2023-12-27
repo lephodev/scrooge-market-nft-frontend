@@ -155,10 +155,8 @@ export default function CryptoToGC() {
   async function getGCPurcahseLimitPerDay() {
     try {
       const res = await marketPlaceInstance().get(`/getGCPurcahseLimitPerDay`);
-      console.log("res", res);
       const { findTransactionIfExist } = res?.data;
-      console.log("res", res);
-      console.log("findTransactionIfExist====>>>>", findTransactionIfExist);
+
       setDailyGCPurchaseLimit(findTransactionIfExist);
     } catch (e) {
       console.log(e);
@@ -966,7 +964,6 @@ export default function CryptoToGC() {
       }
     })();
   }, []);
-  console.log("currentState---->>>", currentState);
 
   const handleSuccess500Modal = () => {
     setST500(!ST500);
@@ -1213,7 +1210,6 @@ export default function CryptoToGC() {
                       ) : (
                         ""
                       )}
-                      {console.log("isGCPurchase", user)}
                       <div className='purchasemodal-cards'>
                         {allPrizes.map((prize, i) => (
                           <>
@@ -1563,6 +1559,7 @@ const PayWithCard = ({
         `/getFormToken`,
         {
           amount: prize?.priceInBUSD,
+          promoCode: promoCode,
         },
         {
           headers: {
