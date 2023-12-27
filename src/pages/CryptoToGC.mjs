@@ -1550,7 +1550,7 @@ const PayWithCard = ({
 
   const handleCLick = async () => {
     try {
-      console.log("dailyGCPurchaseLimit", dailyGCPurchaseLimit);
+      console.log("dailyGCPurchaseLimit");
       if (dailyGCPurchaseLimit >= 4) {
         return toast.error("Credit card daily purchase limit are reached");
       }
@@ -1559,7 +1559,7 @@ const PayWithCard = ({
         `/getFormToken`,
         {
           amount: prize?.priceInBUSD,
-          promoCode: promoCode,
+          promoCode: promoCode ? promoCode : "",
         },
         {
           headers: {
