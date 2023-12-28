@@ -44,8 +44,8 @@ const AuthorizeSucessModel = ({ show, status, handleOk }) => {
                     <>
                       <h1>Success</h1>
                       <p>
-                        We received your purchase request;
-                        <br /> we'll be in touch shortly!
+                        Your purchase request has been received!
+                        <br /> Thank you!
                       </p>
                       <Button onClick={() => handleOk()}>OK</Button>
                     </>
