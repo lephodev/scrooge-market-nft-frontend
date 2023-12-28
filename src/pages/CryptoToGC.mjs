@@ -13,6 +13,7 @@ import coin2 from "../images/2.png";
 import coin1 from "../images/1.png";
 import sweep from "../images/token.png";
 import ticket from "../images/ticket.png";
+import { useSearchParams } from "react-router-dom";
 
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
@@ -34,6 +35,7 @@ import { ethers } from "ethers";
 import axios from "axios";
 import SuccessPurchaseModel from "./models/SuccessPurchaseModel.mjs";
 import { async } from "q";
+import AuthorizeSucessModel from "./models/authrizeSucessModel.mjs";
 let promoCode;
 let goldcoinAmount;
 const authData = {
@@ -70,15 +72,6 @@ export default function CryptoToGC() {
   const [ST10000, setST10000] = useState(false);
   const [ST25000, setST25000] = useState(false);
   const [dailyGCPurchaseLimit, setDailyGCPurchaseLimit] = useState(0);
-  const { dispatchData, loading, error } = useAcceptJs({ authData });
-  const [cardData, setCardData] = useState({
-    cardNumber: "",
-    month: "",
-    year: "",
-    cardCode: "",
-  });
-
-  const [isExicute, setIsExicute] = useState(true);
 
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
@@ -99,6 +92,23 @@ export default function CryptoToGC() {
   const { contract: usdtContract } = useContract(
     process.env.REACT_APP_USDTCONTRACT_ADDRESS
   );
+
+  const [searchParams] = useSearchParams();
+  const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    const params = searchParams.get("status");
+    if (params) {
+      if (params === "success") {
+        setStatus("inprogress");
+      }
+
+      setTimeout(() => {
+        setStatus(params);
+      }, 20000);
+    }
+  }, [searchParams]);
+  console.log("status", status);
   const getUserDataInstant = () => {
     let access_token = cookies.token;
     authInstance()
@@ -989,20 +999,23 @@ export default function CryptoToGC() {
     setST25000(!ST25000);
   };
 
-  const handleSubmit = async (event) => {
+  const handleOk = async (event) => {
     try {
-      console.log("hsfgfdgsfdgsfddgfs");
-      event.preventDefault();
-      // Dispatch CC data to Authorize.net and receive payment nonce for use on your server
-      const response = await dispatchData({ cardData });
-      console.log("Received response:", response);
+      console.log("handleOk");
+      getGCPurcahseLimitPerDay();
+      setStatus("");
     } catch (error) {
       console.log("error", error);
     }
   };
 
+  console.log("dailyGCPurchaseLimit", dailyGCPurchaseLimit);
+
   return (
     <>
+      {(status === "success" || status === "inprogress") && (
+        <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
+      )}
       <SuccessPurchaseModel
         ST500={ST500}
         ST1000={ST1000}
