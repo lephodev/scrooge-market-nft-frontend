@@ -275,7 +275,6 @@ const KYCForm = () => {
       }
     })();
   }, []);
-  console.log("currentState---->>>", currentState);
 
   return (
     <Layout>

@@ -4215,6 +4215,55 @@ button.shareBtn-disabled {
   animation: animateShadow 0.75s ease-out forwards 0.75s;
 }
 
+.loader {
+  width: 65px;
+  height: 65px;
+  border: 8px solid #ee9b00a6;
+  border-radius: 50px;
+  position: relative;
+}
+
+.loader span {
+  display: block;
+  background: #ee9b00;
+}
+
+.loader .hour,
+.loader .min {
+  width: 6px;
+  height: 22px;
+  border-radius: 50px;
+  position: absolute;
+  top: 24.5px;
+  left: 21px;
+  animation: load9243 2s linear infinite;
+  transform-origin: top center;
+}
+
+.loader .min {
+  height: 17px;
+  animation: load9243 4s linear infinite;
+}
+
+.loader .circel {
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  position: absolute;
+  top: 19px;
+  left: 19px;
+}
+
+@keyframes load9243 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes animateContainer {
   0% {
     opacity: 0;
@@ -6452,6 +6501,17 @@ h3.mega-text {
   }
 }
 
+.payment-success .card-check {
+  border-radius: 200px;
+  height: 150px;
+  width: 150px;
+  margin: 0 auto;
+  /* background-color: #9abc663d; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 body > a {
   position: fixed;
   bottom: 10px;
@@ -6484,7 +6544,6 @@ p.ip-block {
 h2#radix-\:r4\: {
   color: red !important;
 }
-
 
 h2#radix-\:r1\: {
   color: red !important;
