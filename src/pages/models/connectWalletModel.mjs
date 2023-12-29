@@ -21,18 +21,46 @@ const ConnectWalletModel = ({ show, handleConnectWallet }) => {
             <span
               style={{
                 color: "red",
-                alignItems: "center",
+                display: "flex",
                 justifyContent: "center",
               }}>
               NOTE:
             </span>
 
-            <p>
-              Preferred contract address: Binance Smart Chain. Supported apps:
+            <p style={{ fontSize: "16px" }}>
+              Preferred contract address:{" "}
+              <span style={{ color: "white" }}>Binance Smart Chain.</span>{" "}
+              <span style={{ display: "flex", justifyContent: "center" }}>
+                Supported apps:
+              </span>
             </p>
-            <p>1.Trust Wallet</p>
-            <p>2.MetaMask</p>
-            <p>3.SafePal</p>
+            <p
+              style={{
+                color: "white",
+                fontSize: "16px",
+                display: "flex",
+                justifyContent: "center",
+              }}>
+              1.Trust Wallet
+            </p>
+            <p
+              style={{
+                color: "white",
+                fontSize: "16px",
+                display: "flex",
+                justifyContent: "center",
+              }}>
+              2.MetaMask
+            </p>
+            <p
+              style={{
+                color: "white",
+                fontSize: "16px",
+                display: "flex",
+                justifyContent: "center",
+              }}>
+              3.SafePal
+            </p>
             {/* <ListGroup as='ol' numbered>
               <ListGroup.Item as='li'> Trust Wallet</ListGroup.Item>
               <ListGroup.Item as='li'>MetaMask</ListGroup.Item>
