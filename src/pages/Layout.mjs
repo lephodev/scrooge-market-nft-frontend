@@ -34,8 +34,9 @@ import {
   scroogeClient,
   slotUrl,
 } from "../config/keys.js";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import AuthContext from "../context/authContext.ts";
+import ConnectWalletModel from "./models/connectWalletModel.mjs";
 
 export const Tooltip = (id, metadata, message) => (
   <Popup
@@ -63,6 +64,7 @@ const Layout = ({ children }) => {
   const [currentPriceOG, setCurrentPriceOG] = useState("");
   const [priceColor, setPriceColor] = useState("");
   const [navOpen, setNavOpen] = useState(false);
+  const [showConnect, setShowConnect] = useState(false);
   // const [canSpin, setCanSpin] = useState(false);
   // const [spinTimer, setSpinTimer] = useState("");
   const currentRoute = useCurrentPath();
@@ -155,8 +157,16 @@ const Layout = ({ children }) => {
     }, [ref]);
   };
   useOutsideAlerter(wrapperRef);
+
+  const handleConnectWallet = () => {
+    setShowConnect(!showConnect);
+  };
   return (
     <>
+      <ConnectWalletModel
+        show={showConnect}
+        handleConnectWallet={handleConnectWallet}
+      />
       <div className='wrapper'>
         <div className='header' ref={wrapperRef}>
           <Navbar
@@ -244,7 +254,9 @@ const Layout = ({ children }) => {
                     </Navbar.Collapse>
                   </div>
                   <div className='wallet'>
-                    <ConnectWallet modalTitle='Wallet supports only MetaMask, Trust Wallet, and SafePal.' />
+                    <Button onClick={() => handleConnectWallet()}>
+                      Connect Wallet
+                    </Button>
                     <div className={priceColor}>${currentPriceOG}</div>
                   </div>
                 </div>
