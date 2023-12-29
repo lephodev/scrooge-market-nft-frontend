@@ -6557,7 +6557,16 @@ h2#radix-\:r1\: {
 .support-chain p {
   margin: 0;
   padding-bottom: 10px;
+  max-width: 200px;
+  width: 100%;
+  text-align: left;
 }
 .support-chain span {
   padding-bottom: 5px;
 }
+.support-chain ol {
+  max-width: 200px;
+}
+/* .support-chain ol li {
+  text-align: left;
+} */
