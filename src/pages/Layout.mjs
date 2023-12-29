@@ -39,7 +39,7 @@ import {
   scroogeClient,
   slotUrl,
 } from "../config/keys.js";
-import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import { Button, Container, Nav, Navbar, Spinner } from "react-bootstrap";
 import AuthContext from "../context/authContext.ts";
 import ConnectWalletModel from "./models/connectWalletModel.mjs";
 
@@ -56,6 +56,7 @@ export const Tooltip = (id, metadata, message) => (
 const useCurrentPath = () => {
   const location = useLocation();
   const [currentPath, setCurrentPath] = useState("");
+
   useEffect(() => {
     setCurrentPath(location.pathname);
   }, [location]);
@@ -72,6 +73,7 @@ const Layout = ({ children }) => {
   const [priceColor, setPriceColor] = useState("");
   const [navOpen, setNavOpen] = useState(false);
   const [showConnect, setShowConnect] = useState(false);
+  const [loaderaddress, setLoaderAddress] = useState(false);
   // const [canSpin, setCanSpin] = useState(false);
   // const [spinTimer, setSpinTimer] = useState("");
   const currentRoute = useCurrentPath();
@@ -168,11 +170,24 @@ const Layout = ({ children }) => {
   const handleConnectWallet = () => {
     setShowConnect(!showConnect);
   };
+
+  const handleConnect = () => {
+    setLoaderAddress(true);
+
+    setShowConnect(!showConnect);
+  };
+
+  useEffect(() => {
+    if (address) {
+      setLoaderAddress(false);
+    }
+  }, [address]);
   return (
     <>
       <ConnectWalletModel
         show={showConnect}
         handleConnectWallet={handleConnectWallet}
+        handleConnect={handleConnect}
       />
       <div className='wrapper'>
         <div className='header' ref={wrapperRef}>
@@ -265,7 +280,11 @@ const Layout = ({ children }) => {
                       <ConnectWallet />
                     ) : (
                       <Button onClick={() => handleConnectWallet()}>
-                        Connect Wallet
+                        {!loaderaddress ? (
+                          "Connect Wallet"
+                        ) : (
+                          <Spinner animation='border' />
+                        )}
                       </Button>
                     )}
 

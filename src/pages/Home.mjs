@@ -30,8 +30,15 @@ export default function Home() {
   const isMismatched = useNetworkMismatch();
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   const [showConnect, setShowConnect] = useState(false);
+  const [/* loaderaddress, */ setLoaderAddress] = useState(false);
 
   const handleConnectWallet = () => {
+    setShowConnect(!showConnect);
+  };
+
+  const handleConnect = () => {
+    setLoaderAddress(true);
+
     setShowConnect(!showConnect);
   };
 
@@ -54,6 +61,7 @@ export default function Home() {
                 <ConnectWalletModel
                   show={showConnect}
                   handleConnectWallet={handleConnectWallet}
+                  handleConnect={handleConnect}
                 />
                 <Button
                   className='home-meta-btn'
@@ -62,6 +70,12 @@ export default function Home() {
                 </Button>
                 {/* <ConnectWallet modalTitle='Wallet supports only MetaMask, Trust Wallet, and SafePal.' /> */}
               </div>
+              {/* disabled={isSaveLoader}> */}
+              {/* {!loading ? (
+                                  "Save"
+                                ) : (
+                                  <Spinner animation='border' />
+                                )} */}
             </div>
           ) : (
             <span></span>
