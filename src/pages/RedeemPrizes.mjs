@@ -23,7 +23,7 @@ import axios from "axios";
 import FiatPopup from "./models/fiatPopup.mjs";
 import copyIcon from "../images/copied-icon.svg";
 import SuccessModal from "./models/SuccessModal.mjs";
-import Pdf from "../images/SCROOGE Redemption Manual.pdf";
+import Pdf from "../images/Manual.pdf";
 import FastWithdrawPopup from "./models/fastWithdrawPopup.mjs";
 import { validateToken } from "../utils/dateUtils.mjs";
 function RedeemPrizes() {

@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
-import { ThirdwebNftMedia, useDisconnect } from "@thirdweb-dev/react";
+import {
+  ConnectWallet,
+  ThirdwebNftMedia,
+  useDisconnect,
+  useAddress,
+} from "@thirdweb-dev/react";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import hatLogo from "../images/scroogeHatLogo.png";
@@ -21,7 +26,7 @@ import twitter from "../images/footer/twitter.svg";
 import facebook from "../images/footer/facebook.svg";
 // import reddit from "../images/footer/reddit.svg";
 
-import { ConnectWallet } from "@thirdweb-dev/react";
+// import { ConnectWallet } from "@thirdweb-dev/react";
 import CookieConsent from "react-cookie-consent";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
@@ -34,8 +39,9 @@ import {
   scroogeClient,
   slotUrl,
 } from "../config/keys.js";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import AuthContext from "../context/authContext.ts";
+import ConnectWalletModel from "./models/connectWalletModel.mjs";
 
 export const Tooltip = (id, metadata, message) => (
   <Popup
@@ -59,10 +65,13 @@ const useCurrentPath = () => {
 const Layout = ({ children }) => {
   const { user } = useContext(AuthContext);
   const wrapperRef = useRef();
+  const address = useAddress();
+
   // const { user } = useContext(AuthContext);
   const [currentPriceOG, setCurrentPriceOG] = useState("");
   const [priceColor, setPriceColor] = useState("");
   const [navOpen, setNavOpen] = useState(false);
+  const [showConnect, setShowConnect] = useState(false);
   // const [canSpin, setCanSpin] = useState(false);
   // const [spinTimer, setSpinTimer] = useState("");
   const currentRoute = useCurrentPath();
@@ -155,8 +164,16 @@ const Layout = ({ children }) => {
     }, [ref]);
   };
   useOutsideAlerter(wrapperRef);
+
+  const handleConnectWallet = () => {
+    setShowConnect(!showConnect);
+  };
   return (
     <>
+      <ConnectWalletModel
+        show={showConnect}
+        handleConnectWallet={handleConnectWallet}
+      />
       <div className='wrapper'>
         <div className='header' ref={wrapperRef}>
           <Navbar
@@ -244,7 +261,14 @@ const Layout = ({ children }) => {
                     </Navbar.Collapse>
                   </div>
                   <div className='wallet'>
-                    <ConnectWallet modalTitle='Wallet supports only MetaMask, Trust Wallet, and SafePal.' />
+                    {address ? (
+                      <ConnectWallet />
+                    ) : (
+                      <Button onClick={() => handleConnectWallet()}>
+                        Connect Wallet
+                      </Button>
+                    )}
+
                     <div className={priceColor}>${currentPriceOG}</div>
                   </div>
                 </div>
