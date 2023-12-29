@@ -21,7 +21,7 @@ import twitter from "../images/footer/twitter.svg";
 import facebook from "../images/footer/facebook.svg";
 // import reddit from "../images/footer/reddit.svg";
 
-import { ConnectWallet } from "@thirdweb-dev/react";
+// import { ConnectWallet } from "@thirdweb-dev/react";
 import CookieConsent from "react-cookie-consent";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
