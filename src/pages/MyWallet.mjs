@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
-  ConnectWallet,
   useNetworkMismatch,
   useAddress,
   ChainId,
@@ -26,6 +25,8 @@ import { marketPlaceInstance } from "../config/axios.js";
 import { DLGate } from "../components/DLGate.jsx";
 import DLClaimTokens from "./DLClaimTokens.mjs";
 // import HolderClaimChips from "./HolderClaimChips.mjs";
+import ConnectWalletModel from "./models/connectWalletModel.mjs";
+import { Button } from "react-bootstrap";
 // import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses.js";
 export default function MyWallet() {
   const [OGBalance, setOGBalance] = useState("Loading...");
@@ -39,6 +40,8 @@ export default function MyWallet() {
   const [showMerchRedeemed, setShowMerchRedeemed] = useState(false);
   const [showCasinoNFTs, setShowCasinoNFTs] = useState(true);
   const [showCrypto, setShowCrypto] = useState(true);
+  const [showConnect, setShowConnect] = useState(false);
+
   const sdk = useSDK();
   const address = useAddress();
   const signer = useSigner();
@@ -149,6 +152,10 @@ export default function MyWallet() {
     }
   }, [user, isMismatched, address, signer]);
 
+  const handleConnectWallet = () => {
+    setShowConnect(!showConnect);
+  };
+
   return (
     <Layout>
       <div className='container'>
@@ -224,7 +231,15 @@ export default function MyWallet() {
               </p>
 
               <div className='connect-wallet-div'>
-                <ConnectWallet modalTitle='Wallet supports only MetaMask, Trust Wallet, and SafePal.' />
+                <ConnectWalletModel
+                  show={showConnect}
+                  handleConnectWallet={handleConnectWallet}
+                />
+                <Button
+                  className='home-meta-btn'
+                  onClick={() => handleConnectWallet()}>
+                  Connect Wallet
+                </Button>
               </div>
             </div>
           ) : (

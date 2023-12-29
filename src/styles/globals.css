@@ -6511,6 +6511,9 @@ h3.mega-text {
   justify-content: center;
   align-items: center;
 }
+button.tw-connect-wallet.css-1un3lp3 {
+  background-color: yellow;
+}
 
 body > a {
   position: fixed;
@@ -6548,3 +6551,22 @@ h2#radix-\:r4\: {
 h2#radix-\:r1\: {
   color: red !important;
 }
+.support-chain {
+  text-align: center;
+}
+.support-chain p {
+  margin: 0;
+  padding-bottom: 10px;
+  max-width: 200px;
+  width: 100%;
+  text-align: left;
+}
+.support-chain span {
+  padding-bottom: 5px;
+}
+.support-chain ol {
+  max-width: 200px;
+}
+/* .support-chain ol li {
+  text-align: left;
+} */
