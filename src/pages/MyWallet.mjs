@@ -41,6 +41,7 @@ export default function MyWallet() {
   const [showCasinoNFTs, setShowCasinoNFTs] = useState(true);
   const [showCrypto, setShowCrypto] = useState(true);
   const [showConnect, setShowConnect] = useState(false);
+  const [, /* loaderaddress */ setLoaderAddress] = useState(false);
 
   const sdk = useSDK();
   const address = useAddress();
@@ -156,13 +157,19 @@ export default function MyWallet() {
     setShowConnect(!showConnect);
   };
 
+  const handleConnect = () => {
+    setLoaderAddress(true);
+
+    setShowConnect(!showConnect);
+  };
+
   return (
     <Layout>
-      <div className="container">
-        <main className="main my-wallet-page">
+      <div className='container'>
+        <main className='main my-wallet-page'>
           {/* <h1 className='title'>{user?.username}'s SCROOGE CASINO WALLET</h1> */}
-          <h1 className="title">Scrooge Crypto holder rewards</h1>
-          <div className="feature-overview-div">
+          <h1 className='title'>Scrooge Crypto holder rewards</h1>
+          <div className='feature-overview-div'>
             Here is where the magic happens, by holding our Cryptocurrency,
             Scrooge, you are rewarded with free monthly Sweep Tokens based upon
             your value of Scrooge holdings. That’s not all, you can also claim
@@ -172,7 +179,7 @@ export default function MyWallet() {
           </div>
           {!showMerchRedeemed || !showCasinoNFTs || !showCrypto ? (
             <>
-              <div className="min-menu-div">
+              <div className='min-menu-div'>
                 {!showMerchRedeemed ? (
                   <>
                     {/* <div className='new-btn'>
@@ -191,13 +198,12 @@ export default function MyWallet() {
                 )}
                 {!showCasinoNFTs ? (
                   <>
-                    <div className="new-btn">
+                    <div className='new-btn'>
                       <button
                         // className='min-menu-btn'
                         onClick={() => {
                           setShowCasinoNFTs(true);
-                        }}
-                      >
+                        }}>
                         CASINO NFTS
                       </button>
                     </div>
@@ -207,13 +213,12 @@ export default function MyWallet() {
                 )}
                 {!showCrypto ? (
                   <>
-                    <div className="new-btn">
+                    <div className='new-btn'>
                       <button
                         // className='min-menu-btn'
                         onClick={() => {
                           setShowCrypto(true);
-                        }}
-                      >
+                        }}>
                         CRYPTO
                       </button>
                     </div>
@@ -228,19 +233,19 @@ export default function MyWallet() {
           )}
           {!address ? (
             <div>
-              <p className="description yellow">
+              <p className='description yellow'>
                 Get started by connecting your wallet.
               </p>
 
-              <div className="connect-wallet-div">
+              <div className='connect-wallet-div'>
                 <ConnectWalletModel
                   show={showConnect}
                   handleConnectWallet={handleConnectWallet}
+                  handleConnect={handleConnect}
                 />
                 <Button
-                  className="home-meta-btn"
-                  onClick={() => handleConnectWallet()}
-                >
+                  className='home-meta-btn'
+                  onClick={() => handleConnectWallet()}>
                   Connect Wallet
                 </Button>
               </div>
@@ -249,8 +254,8 @@ export default function MyWallet() {
             <span></span>
           )}
           {user ? (
-            <div className="wallet-casino-profile-div">
-              <div className="wallet-casino-top">
+            <div className='wallet-casino-profile-div'>
+              <div className='wallet-casino-top'>
                 {/* <div className="wallet-casino-profile-img-div">
                   <img
                     className="wallet-casino-profile-img"
@@ -262,7 +267,7 @@ export default function MyWallet() {
                     alt="Scrooge Casino profile"
                   />
                 </div> */}
-                <div className="wallet-casino-profile-details">
+                <div className='wallet-casino-profile-details'>
                   {/* <div className="">
                     <span className="wallet-casino-profile-username">
                       {user?.username}
@@ -273,7 +278,7 @@ export default function MyWallet() {
                     </span>
                     <br></br>
                   </div> */}
-                  <div className="balance-column">
+                  <div className='balance-column'>
                     {/* <div className="token-ticket-row">
                       <img
                         className="token-small"
@@ -300,12 +305,12 @@ export default function MyWallet() {
                     </div> */}
                     <div>
                       {/* "gghh" */}
-                      <h6 className="title">Ducky Luck Claims</h6>
+                      <h6 className='title'>Ducky Luck Claims</h6>
                       <DLGate>
                         <DLClaimTokens />
                       </DLGate>
-                      <h6 className="title">Monthly Claims</h6>
-                      <div className="tab-claims">
+                      <h6 className='title'>Monthly Claims</h6>
+                      <div className='tab-claims'>
                         <HolderClaimChips />
                       </div>
                     </div>
@@ -315,27 +320,27 @@ export default function MyWallet() {
 
               {address ? (
                 <>
-                  <div className="crypto-card-grid">
-                    <div className="crypto-balance-div">
-                      <div className="width-100">
-                        <div className="crypto-balance-header">
+                  <div className='crypto-card-grid'>
+                    <div className='crypto-balance-div'>
+                      <div className='width-100'>
+                        <div className='crypto-balance-header'>
                           CRYPTO BALANCE
                         </div>
-                        <div className="crypto-balance-row-new">
-                          <div className="crypto-balance-row-img">
+                        <div className='crypto-balance-row-new'>
+                          <div className='crypto-balance-row-img'>
                             <img
-                              className="token-logo"
+                              className='token-logo'
                               src={ScroogeHatLogo}
-                              alt="Scrooge Casino balances"
+                              alt='Scrooge Casino balances'
                             />
                           </div>
 
-                          <div className="crypto-balance-row-text">
+                          <div className='crypto-balance-row-text'>
                             <p>SCROOGE COIN: {OGBalance}</p>
                             <p> VALUE: ${OGValue.toLocaleString("en-US")}</p>
                           </div>
                         </div>
-                        <div className="claim-pending-div">
+                        <div className='claim-pending-div'>
                           <ClaimOGPending />
                         </div>
                       </div>
@@ -377,20 +382,19 @@ export default function MyWallet() {
           )}
 
           {userRedeemed.length > 0 && showMerchRedeemed ? (
-            <div className="transaction-div">
-              <div className="close-btn-round-div wallet-close">
+            <div className='transaction-div'>
+              <div className='close-btn-round-div wallet-close'>
                 <div
-                  className="close-btn-round"
-                  onClick={() => setShowMerchRedeemed(false)}
-                >
+                  className='close-btn-round'
+                  onClick={() => setShowMerchRedeemed(false)}>
                   X
                 </div>
               </div>
-              <div className="transaction-div-title text-animate">
+              <div className='transaction-div-title text-animate'>
                 <h1> Your Merch Coupon Codes</h1>
               </div>
 
-              <div className="transaction-card-grid">
+              <div className='transaction-card-grid'>
                 {userRedeemed.map((red) => (
                   <>
                     {red.prize_details.map((deet) => (
@@ -402,13 +406,12 @@ export default function MyWallet() {
                                 ? "disabled transaction-card"
                                 : "transaction-card"
                             }
-                            key={red._id}
-                          >
+                            key={red._id}>
                             <div key={deet._id}>
                               {deet.name}
                               <br></br>
                               <p>COUPON CODE:</p>
-                              <div className="transaction-card-coupon-code">
+                              <div className='transaction-card-coupon-code'>
                                 {red.coupon_code}
                               </div>
                               <br></br>
@@ -420,13 +423,12 @@ export default function MyWallet() {
                               <br></br>
                               <br />
                               {red.markRedeemed ? (
-                                <div className="green bold">Redeemed</div>
+                                <div className='green bold'>Redeemed</div>
                               ) : (
-                                <div className="new-btn">
+                                <div className='new-btn'>
                                   <button
                                     // className='claim-btn'
-                                    onClick={() => handleMarkRedeemed(red._id)}
-                                  >
+                                    onClick={() => handleMarkRedeemed(red._id)}>
                                     Mark as Redeemed
                                   </button>
                                 </div>
