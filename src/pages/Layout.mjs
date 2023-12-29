@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
-import { ThirdwebNftMedia, useDisconnect } from "@thirdweb-dev/react";
+import {
+  ConnectWallet,
+  ThirdwebNftMedia,
+  useDisconnect,
+  useAddress,
+} from "@thirdweb-dev/react";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import hatLogo from "../images/scroogeHatLogo.png";
@@ -60,6 +65,8 @@ const useCurrentPath = () => {
 const Layout = ({ children }) => {
   const { user } = useContext(AuthContext);
   const wrapperRef = useRef();
+  const address = useAddress();
+
   // const { user } = useContext(AuthContext);
   const [currentPriceOG, setCurrentPriceOG] = useState("");
   const [priceColor, setPriceColor] = useState("");
@@ -254,9 +261,14 @@ const Layout = ({ children }) => {
                     </Navbar.Collapse>
                   </div>
                   <div className='wallet'>
-                    <Button onClick={() => handleConnectWallet()}>
-                      Connect Wallet
-                    </Button>
+                    {address ? (
+                      <ConnectWallet />
+                    ) : (
+                      <Button onClick={() => handleConnectWallet()}>
+                        Connect Wallet
+                      </Button>
+                    )}
+
                     <div className={priceColor}>${currentPriceOG}</div>
                   </div>
                 </div>

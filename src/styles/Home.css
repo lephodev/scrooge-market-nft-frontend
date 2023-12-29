@@ -152,3 +152,9 @@ main.main.redeem-prizes-page .loading {
   cursor: pointer;
   border: 1px solid #f9ff00;
 }
+button.home-meta-btn.btn.btn-primary {
+  text-align: center;
+  justify-content: center;
+  background-color: black;
+  border: none;
+}

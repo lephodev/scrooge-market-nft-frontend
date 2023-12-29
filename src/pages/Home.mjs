@@ -1,11 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  ConnectWallet,
-  useAddress,
-  useNetworkMismatch,
-  ChainId,
-} from "@thirdweb-dev/react";
-import { useEffect } from "react";
+import { useAddress, useNetworkMismatch, ChainId } from "@thirdweb-dev/react";
+import { useEffect, useState } from "react";
 // import ScroogeCasino from "../images/scroogeCasinoLogo.png";
 import TicketsGIF from "../images/ticketsGif.gif";
 import SlotsGIF from "../images/slotsGif.gif";
@@ -21,6 +16,8 @@ import ChainContext from "../context/Chain.ts";
 import { useContext } from "react";
 import Layout from "./Layout.mjs";
 import { scroogeClient } from "../config/keys.js";
+import ConnectWalletModel from "./models/connectWalletModel.mjs";
+import { Button } from "react-bootstrap";
 
 export default function Home() {
   useEffect(() => {
@@ -32,6 +29,11 @@ export default function Home() {
   const address = useAddress();
   const isMismatched = useNetworkMismatch();
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
+  const [showConnect, setShowConnect] = useState(false);
+
+  const handleConnectWallet = () => {
+    setShowConnect(!showConnect);
+  };
 
   return (
     <Layout>
@@ -49,7 +51,16 @@ export default function Home() {
               </p>
 
               <div className='connect-wallet-div'>
-                <ConnectWallet modalTitle='Wallet supports only MetaMask, Trust Wallet, and SafePal.' />
+                <ConnectWalletModel
+                  show={showConnect}
+                  handleConnectWallet={handleConnectWallet}
+                />
+                <Button
+                  className='home-meta-btn'
+                  onClick={() => handleConnectWallet()}>
+                  Connect Wallet
+                </Button>
+                {/* <ConnectWallet modalTitle='Wallet supports only MetaMask, Trust Wallet, and SafePal.' /> */}
               </div>
             </div>
           ) : (

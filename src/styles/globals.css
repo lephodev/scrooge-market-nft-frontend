@@ -6511,6 +6511,9 @@ h3.mega-text {
   justify-content: center;
   align-items: center;
 }
+button.tw-connect-wallet.css-1un3lp3 {
+  background-color: yellow;
+}
 
 body > a {
   position: fixed;

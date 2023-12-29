@@ -208,7 +208,7 @@ export default function App() {
                 activeChain={selectedChain}
                 supportedWallets={
                   supportedWalletForMob
-                    ? [walletConnect(), metamaskWallet()]
+                    ? [walletConnect()]
                     : [
                         metamaskWallet(),
                         walletConnect() /* ,coinbaseWallet() */,
