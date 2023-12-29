@@ -41,6 +41,7 @@ export default function MyWallet() {
   const [showCasinoNFTs, setShowCasinoNFTs] = useState(true);
   const [showCrypto, setShowCrypto] = useState(true);
   const [showConnect, setShowConnect] = useState(false);
+  const [, /* loaderaddress */ setLoaderAddress] = useState(false);
 
   const sdk = useSDK();
   const address = useAddress();
@@ -156,6 +157,12 @@ export default function MyWallet() {
     setShowConnect(!showConnect);
   };
 
+  const handleConnect = () => {
+    setLoaderAddress(true);
+
+    setShowConnect(!showConnect);
+  };
+
   return (
     <Layout>
       <div className='container'>
@@ -234,6 +241,7 @@ export default function MyWallet() {
                 <ConnectWalletModel
                   show={showConnect}
                   handleConnectWallet={handleConnectWallet}
+                  handleConnect={handleConnect}
                 />
                 <Button
                   className='home-meta-btn'
