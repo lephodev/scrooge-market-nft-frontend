@@ -26,14 +26,23 @@ const ConnectWalletModel = ({ show, handleConnectWallet }) => {
               }}>
               NOTE:
             </span>
-
-            <p style={{ fontSize: "16px" }}>
+            <span
+              style={{
+                fontSize: "16px",
+              }}>
               Preferred contract address:{" "}
-              <span style={{ color: "white" }}>Binance Smart Chain.</span>{" "}
-              <span style={{ display: "flex", justifyContent: "center" }}>
-                Supported apps:
-              </span>
-            </p>
+            </span>
+            <p style={{ color: "white", fontSize: "16px" }}>
+              Binance Smart Chain.
+            </p>{" "}
+            <span
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                fontSize: "16px",
+              }}>
+              Supported apps:
+            </span>
             <p
               style={{
                 color: "white",

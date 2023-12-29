@@ -6551,3 +6551,13 @@ h2#radix-\:r4\: {
 h2#radix-\:r1\: {
   color: red !important;
 }
+.support-chain {
+  text-align: center;
+}
+.support-chain p {
+  margin: 0;
+  padding-bottom: 10px;
+}
+.support-chain span {
+  padding-bottom: 5px;
+}
