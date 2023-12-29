@@ -11,28 +11,38 @@ const ConnectWalletModel = ({ show, handleConnectWallet }) => {
         centered
         animation={false}
         show={show}
-        onHide={handleConnectWallet}>
-        <Modal.Body className='popupBody'>
+        onHide={handleConnectWallet}
+      >
+        <Modal.Body className="popupBody">
           {/* <div>
             Preferred contract address: Binance Smart Chain. Supported apps: 1.
             Trust Wallet 2. MetaMask 3. SafePal
           </div> */}
-          <div className='support-chain'>
+          <div className="support-chain">
             <span
               style={{
                 color: "red",
                 display: "flex",
                 justifyContent: "center",
-              }}>
+              }}
+            >
               NOTE:
             </span>
             <span
               style={{
                 fontSize: "16px",
-              }}>
+              }}
+            >
               Preferred contract address:{" "}
             </span>
-            <p style={{ color: "white", fontSize: "16px" }}>
+            <p
+              style={{
+                color: "white",
+                fontSize: "15px",
+                margin: "0px auto",
+                textAlign: "center",
+              }}
+            >
               Binance Smart Chain.
             </p>{" "}
             <span
@@ -40,34 +50,32 @@ const ConnectWalletModel = ({ show, handleConnectWallet }) => {
                 display: "flex",
                 justifyContent: "center",
                 fontSize: "16px",
-              }}>
+              }}
+            >
               Supported apps:
             </span>
             <p
               style={{
                 color: "white",
-                fontSize: "16px",
-                display: "flex",
-                justifyContent: "center",
-              }}>
+                fontSize: "15px",
+              }}
+            >
               1.Trust Wallet
             </p>
             <p
               style={{
                 color: "white",
-                fontSize: "16px",
-                display: "flex",
-                justifyContent: "center",
-              }}>
+                fontSize: "15px",
+              }}
+            >
               2.MetaMask
             </p>
             <p
               style={{
                 color: "white",
-                fontSize: "16px",
-                display: "flex",
-                justifyContent: "center",
-              }}>
+                fontSize: "15px",
+              }}
+            >
               3.SafePal
             </p>
             {/* <ListGroup as='ol' numbered>
@@ -76,7 +84,7 @@ const ConnectWalletModel = ({ show, handleConnectWallet }) => {
               <ListGroup.Item as='li'>SafePal</ListGroup.Item>
             </ListGroup> */}
           </div>
-          <div className='popupBtn d-flex flex-column'>
+          <div className="popupBtn d-flex flex-column">
             <div onClick={() => handleConnectWallet()}>
               <ConnectWallet />
 
