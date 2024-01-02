@@ -74,18 +74,20 @@ const FastWithdrawPopup = ({ getUserDataInstant }) => {
           onClick={() => {
             handleCopyURL("0x9dfee72aea65dc7e375d50ea2bd90384313a165a");
           }}>
-          0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+          0x9dfee72aea65dc7e375d50ea2bd903843...{" "}
+          <img src={copyIcon} alt='icon' className='copy-icon' />
         </h5>
-        <img src={copyIcon} alt='icon' className='copy-icon' />
       </div>
       <Form onSubmit={handleSubmit(WithdrawRequest)}>
         <div className='fiat-content'>
           <Form.Group className='fiat-group fiat-data-label'>
-            <Form.Label>Withdraw Amount</Form.Label>
+            <Form.Label style={{ fontSize: "14px", color: "red" }}>
+              Minimum 5,000 ST($50) required for crypto withdrawals.
+            </Form.Label>
             <Form.Control
               type='number'
               name='amount'
-              placeholder='Enter Amount'
+              placeholder='Enter Withdraw Amount'
               {...register("amount")}
             />
             {errors?.amount && (
