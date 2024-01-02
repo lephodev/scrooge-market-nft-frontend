@@ -50,7 +50,7 @@ export default function CryptoToGC() {
   const [prizesLoading, setPrizesLoading] = useState(true);
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
-  const [selectedDropdown, setSelectedDropdown] = useState("BUSD");
+  const [selectedDropdown, setSelectedDropdown] = useState("Scrooge");
   const [handler, setHndler] = useState(true);
   const [selectedTypeDropdown, setSelectedTypeDropdown] =
     useState("Credit Card");
@@ -1184,10 +1184,10 @@ export default function CryptoToGC() {
                                 onClick={() => handleChange("Scrooge")}>
                                 Scrooge
                               </Dropdown.Item>
-                              <Dropdown.Item
+                              {/* <Dropdown.Item
                                 onClick={() => handleChange("BUSD")}>
                                 BUSD
-                              </Dropdown.Item>
+                              </Dropdown.Item> */}
                               {/* <Dropdown.Item
                             onClick={() => handleChange("Scrooge Jr")}
                           >

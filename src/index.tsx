@@ -135,13 +135,19 @@ export default function App() {
       const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/city`);
       // eslint-disable-next-line no-console
       // console.log("city", res1?.data);
+      const reg = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
+      console.log("reg", reg);
+      const region = reg?.data;
+      console.log("region", region);
+
       const CurrentCity = res1?.data;
       // eslint-disable-next-line no-constant-condition
       if (
         CurrentCity.toString() === "Washington" ||
         CurrentCity.toString() === "Quebec" ||
         CurrentCity.toString() === "Mumbai" ||
-        CurrentCity.toString() === "Idaho"
+        CurrentCity.toString() === "Idaho" ||
+        region.toString() === "Michigan"
       ) {
         setStateBlock(true);
         // navigates("/CountryBlockblock");
