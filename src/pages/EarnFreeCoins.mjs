@@ -15,7 +15,7 @@ const EarnFreeCoins = () => {
   const [showRoulette, setShowRoulette] = useState(false);
   const [key, setKey] = useState("dailyClaims");
   const [canSpin, setCanSpin] = useState(false);
-  const [spinTimer, setSpinTimer] = useState("");
+  const [, /* spinTimer */ setSpinTimer] = useState("");
   const [show, setShow] = useState(false);
   // const handleclick = (value) => {
   //   localStorage.setItem("class", value);
@@ -105,15 +105,19 @@ const EarnFreeCoins = () => {
               <div className='spin-wheel'>
                 <div className='spin-wheel-img'>
                   <img src={wheel} alt='wheel' />
+
                   <div className='spin-win-text-content'>
-                    <div className='spin-win-text'>
+                    <p style={{ color: "red", marginTop: "20px" }}>
+                      Note: This feature is under development
+                    </p>
+                    {/* <div className='spin-win-text'>
                       <p>spin to win</p>
-                    </div>
+                    </div> */}
                     <div className='spin-button'>
-                      <button onClick={handleOpenRoulette}>
+                      {/* <button disabled={true} onClick={handleOpenRoulette}>
                         {" "}
                         {canSpin ? "Spin Now" : spinTimer}
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </div>
