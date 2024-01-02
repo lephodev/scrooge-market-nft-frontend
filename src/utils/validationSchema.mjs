@@ -49,7 +49,8 @@ export const fastWithdraw = yup.object().shape({
   amount: yup
     .number()
     .typeError("Must be a number") // Displayed if the value is not a number
-    .min(5000, "Must be greater than or equal to 5000"), // Set your minimum value and a corresponding error messag
+    .min(5000, "Must be greater than or equal to 5000") // Set your minimum value and a corresponding error messag
+    .max(99999, "Must be less than or equal to 99999"), // Set your maximum value and a corresponding error message
 });
 
 export const purchaseWithCashApp = yup.object().shape({

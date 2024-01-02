@@ -1,5 +1,4 @@
 import { Form, Spinner } from "react-bootstrap";
-//import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext, useState } from "react";
@@ -10,111 +9,11 @@ import { toast } from "react-toastify";
 import { marketPlaceInstance } from "../../config/axios.js";
 import "../../styles/globals.css";
 import { useAddress } from "@thirdweb-dev/react";
+import copyIcon from "../../images/copied-icon.svg";
 
-// const customStyles = {
-//   container: (provided) => ({
-//     ...provided,
-//     width: "100%",
-//   }),
-//   option: (provided) => ({
-//     ...provided,
-//     background: "#000",
-//     color: "#ddd",
-//     fontWeight: "400",
-//     fontSize: "16px",
-//     padding: "5px 10px",
-//     lineHeight: "16px",
-//     cursor: "pointer",
-//     borderRadius: "4px",
-//     borderBottom: "1px solid #141414",
-//     ":hover": {
-//       background: "#141414",
-//       borderRadius: "4px",
-//     },
-//   }),
-//   menu: (provided) => ({
-//     ...provided,
-//     background: "#000",
-//     borderRadius: "30px",
-//     padding: "10px 20px",
-//     border: "2px solid transparent",
-//   }),
-//   control: () => ({
-//     background: "#000",
-//     border: "1px solid #141414",
-//     borderRadius: "30px",
-//     color: "#fff",
-//     display: "flex",
-//     alignItem: "center",
-//     height: "41",
-//     margin: "2px 0",
-//     boxShadow: "0px 20px 20px #00000091",
-//     cursor: "pointer",
-//     ":hover": {
-//       background: "#141414",
-//       // border: "2px solid #306CFE",
-//     },
-//   }),
-//   singleValue: (provided) => ({
-//     ...provided,
-//     color: "#fff",
-//     fontWeight: "400",
-//     fontSize: "14px",
-//     lineHeight: "16px",
-//   }),
-//   indicatorSeparator: (provided) => ({
-//     ...provided,
-//     display: "none",
-//   }),
-//   placeholder: (provided) => ({
-//     ...provided,
-//     fontWeight: "400",
-//     fontSize: "14px",
-//     lineHeight: "19px",
-//     color: "#858585c7",
-//   }),
-//   input: (provided) => ({
-//     ...provided,
-//     // height: "38px",
-//     color: "fff",
-//   }),
-//   valueContainer: (provided) => ({
-//     ...provided,
-//     padding: "2px 20px",
-//   }),
-//   indicatorsContainer: (provided) => ({
-//     ...provided,
-//     paddingRight: "20px",
-//     color: "#858585c7",
-//   }),
-//   svg: (provided) => ({
-//     ...provided,
-//     fill: "#858585c7 !important",
-//     ":hover": {
-//       fill: "#858585c7 !important",
-//     },
-//   }),
-// };
-// const options = [
-//   // { value: "Cashapp", label: "Cashapp" },
-//   { value: "Paypal", label: "Paypal" },
-// ];
-
-// const paymentoptions = [
-//   { value: 50, label: "$50" },
-//   { value: 100, label: "$100" },
-//   { value: 500, label: "$500" },
-// ];
-
-const FastWithdrawPopup = ({
-  show,
-  setShow,
-  handleCloseFiat,
-  getUserDataInstant,
-}) => {
+const FastWithdrawPopup = ({ getUserDataInstant }) => {
   const { user } = useContext(AuthContext);
   const address = useAddress();
-  // const [paymentType, setPaymentType] = useState();
   const [loading, setLoading] = useState(false);
 
   const {
@@ -127,51 +26,6 @@ const FastWithdrawPopup = ({
     resolver: yupResolver(fastWithdraw),
   });
 
-  // const WithdrawRequest = async (values) => {
-  //   try {
-  //     console.log("values-----------", values);
-  //     if (!user)
-  //       return toast.error("Please login first", { containerId: "login" });
-  //     if (user?.isBlockWallet) {
-  //       return toast.error(`Your wallet blocked by admin`, { toastId: "A" });
-  //     }
-  //     if (!values.redeemPrize) {
-  //       setError("amount", {
-  //         message: "Please Select amount",
-  //       });
-  //       return;
-  //     }
-
-  //     if (!values.paymentType) {
-  //       setError("paymentType", {
-  //         message: "Please Select paymentType",
-  //       });
-  //       return;
-  //     }
-  //     setLoading(true);
-  //     marketPlaceInstance()
-  //       .post(`/WithdrawRequestWithFiat`, values)
-  //       .then((data) => {
-  //         console.log("redeemdata", data);
-  //         if (!data.data.success) {
-  //           toast.error("ERROR! - " + data.data.message, {
-  //             containerId: "error",
-  //           });
-  //           setLoading(false);
-
-  //           handleCloseFiat();
-  //         } else {
-  //           toast.success(data?.data?.message);
-  //           setLoading(false);
-  //           handleCloseFiat();
-  //           reset();
-  //           getUserDataInstant();
-  //         }
-  //       });
-  //   } catch (e) {
-  //     console.log("eee", e);
-  //   }
-  // };
   const WithdrawRequest = (values) => {
     try {
       console.log("values--->", values);
@@ -205,25 +59,28 @@ const FastWithdrawPopup = ({
       console.log("errrr", error);
     }
   };
-  // const handleChnagePayout = (selectedOptions) => {
-  //   setValue("paymentType", selectedOptions?.value);
-  //   setValue("email", "");
-  //   setValue("cashAppid", "");
-  //   setPaymentType(selectedOptions);
-  // };
 
-  // const handleChnagePrice = (selectedOptions) => {
-  //   console.log("selectedOptions", selectedOptions);
-  //   setValue("redeemPrize", selectedOptions?.value);
-  // };
-
+  function handleCopyURL(value) {
+    navigator.clipboard.writeText(value);
+    toast.success("Copied");
+  }
   console.log("errors", errors);
 
   return (
-    <div className='fiat-modal'>
+    <div className='fiat-modal fiat-data'>
+      <p>Scrooge Contract to view tokens in wallet</p>
+      <div className='token-box'>
+        <h5
+          onClick={() => {
+            handleCopyURL("0x9dfee72aea65dc7e375d50ea2bd90384313a165a");
+          }}>
+          0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
+        </h5>
+        <img src={copyIcon} alt='icon' className='copy-icon' />
+      </div>
       <Form onSubmit={handleSubmit(WithdrawRequest)}>
         <div className='fiat-content'>
-          <Form.Group className='fiat-group'>
+          <Form.Group className='fiat-group fiat-data-label'>
             <Form.Label>Withdraw Amount</Form.Label>
             <Form.Control
               type='number'
@@ -235,16 +92,8 @@ const FastWithdrawPopup = ({
               <p className='error-msg'>{errors?.amount?.message}</p>
             )}
           </Form.Group>
-          {/* 
-          <h6 className='deducted-heading'>
-            10% of the amount will be deducted from your redemption amount
-          </h6> */}
         </div>
         <div className='popupBtn'>
-          {/* <button className='greyBtn' onClick={() => setShow(false)}>
-            Cancel
-          </button>
-        */}
           <button className='yellowBtn' variant='primary' type='submit'>
             {!loading ? "Confirm" : <Spinner animation='border' />}{" "}
           </button>

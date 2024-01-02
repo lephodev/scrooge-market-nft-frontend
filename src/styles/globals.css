@@ -5090,8 +5090,8 @@ h3.mega-text {
 }
 .fiat-content p.error-msg {
   font-size: 14px;
-  color: #fa0000;
-  margin: 0;
+  color: #fa0000 !important;
+  margin: 0; 
   padding-top: 5px;
 }
 .fiat-content h6.deducted-heading {
@@ -6570,3 +6570,47 @@ h2#radix-\:r1\: {
 /* .support-chain ol li {
   text-align: left;
 } */
+.fiat-data {
+  text-align: center;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 50px 46px;
+  background: #141314;
+}
+
+.token-box {
+  display: flex;
+  background: #272727;
+  padding: 8px 20px;
+  justify-content: space-between;
+  border-radius: 24px;
+}
+.copy-icon {
+  filter: brightness(0) invert(1);
+  height: 20px;
+  margin-left: 10px;
+  width: 20px;
+}
+
+.fiat-data p,
+.fiat-data-label .form-label {
+  color: #f9ff00 !important;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 30px;
+  margin: 0;
+  font-size: 20px;
+}
+
+.fiat-data h5 {
+  color: #eee;
+  font-size: 18px;
+  margin: 0;
+  text-transform: none;
+  width: 95%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  /* word-break: break-all; */
+}
