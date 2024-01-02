@@ -192,7 +192,7 @@ function RedeemPrizes() {
                 <div className='page-nav-header-btns-row'>
                   <div className='new-btn'>
                     <button onClick={() => filterPrizes("fast_withdraw")}>
-                      Withdrawal amount
+                      Crypto
                     </button>
                   </div>
 
