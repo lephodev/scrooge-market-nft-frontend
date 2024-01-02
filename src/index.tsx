@@ -128,9 +128,11 @@ export default function App() {
   useEffect(() => {
     (async () => {
       const res = await axios.get("https://ipapi.co/ip");
-      const CurrentIp = res?.data?.ip;
+      const CurrentIp = res?.data;
+      console.log("res", res);
+
       // eslint-disable-next-line no-console
-      // console.log("CurrentIpAddress", CurrentIp);
+      console.log("CurrentIpAddress", CurrentIp);
 
       const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/city`);
       // eslint-disable-next-line no-console
