@@ -566,11 +566,18 @@ function RedeemPrizes() {
                       BADGES
                     </button>
                   </div> */}
-                  <div className='new-btn'>
+                  {/* <div className='new-btn'>
                     <button
                       // className='page-nav-header-btn'
                       onClick={() => filterPrizes("Crypto")}>
                       CRYPTO
+                    </button>
+                  </div> */}
+                  <div className='new-btn'>
+                    <button
+                      // className='page-nav-header-btn'
+                      onClick={() => filterPrizes("Crypto")}>
+                      Withdrawal amount
                     </button>
                   </div>
                   {/* <div className='new-btn'>
