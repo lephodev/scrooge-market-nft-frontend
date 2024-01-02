@@ -127,8 +127,8 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get("https://geolocation-db.com/json/");
-      const CurrentIp = res?.data?.IPv4;
+      const res = await axios.get("https://ipapi.co/json");
+      const CurrentIp = res?.data?.ip;
       // eslint-disable-next-line no-console
       // console.log("CurrentIpAddress", CurrentIp);
 
