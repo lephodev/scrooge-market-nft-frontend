@@ -108,7 +108,11 @@ const EarnFreeCoins = () => {
 
                   <div className='spin-win-text-content'>
                     <p style={{ color: "red", marginTop: "20px" }}>
-                      Note: This feature is under development
+                      Note: Our Spin Wheel feature is undergoing some changes,
+                      it will be unavailable in the meantime but it will return.
+                      Timeline for return is currently unknown, but we hope to
+                      have it back without extended delays. Apologies for the
+                      inconvenience.
                     </p>
                     {/* <div className='spin-win-text'>
                       <p>spin to win</p>
