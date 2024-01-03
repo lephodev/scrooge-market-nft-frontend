@@ -6615,3 +6615,9 @@ h2#radix-\:r1\: {
   overflow: hidden;
   /* word-break: break-all; */
 }
+
+p.title-memo {
+  color: yellow;
+  text-shadow: none;
+  text-align: center;
+}

@@ -236,6 +236,10 @@ function HolderClaimChips() {
           )}
           {address ? (
             <div className='prizes_container'>
+              <p className='title-memo' style={{ fontSize: "20px" }}>
+                All monthly claim ST has a 10x play through and a 30 day
+                expiration if not used.
+              </p>
               <div className='prizes-card'>
                 {OGBalance ? (
                   <div className='holder-claim-details'>

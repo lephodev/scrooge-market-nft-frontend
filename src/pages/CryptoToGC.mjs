@@ -1090,6 +1090,12 @@ export default function CryptoToGC() {
                     </div>
                     {/* <div className="feature-overview-div"></div> */}
                     <div className='asterisk-desc cryptoTotoken'>
+                      <p className='title-memo'>
+                        All Sweep Tokens have a one time play through
+                        requirement. In the event of a bonus buy, only the Bonus
+                        ST portion may be tied to a higher play through which
+                        will be indicated on the package details.
+                      </p>
                       <ul>
                         Disclaimer :
                         <li>
