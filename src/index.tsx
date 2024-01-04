@@ -140,6 +140,8 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
+      await checkVPN();
+
       const res = await axios.get("https://geolocation-db.com/json/");
       const CurrentIp = res?.data?.IPv4;
       // eslint-disable-next-line no-console
@@ -147,6 +149,7 @@ export default function App() {
 
       const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/city`);
       const region = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
+      console.log("regionregion", region);
 
       // eslint-disable-next-line no-console
       // console.log("city", res1?.data);
@@ -164,7 +167,6 @@ export default function App() {
       ) {
         setStateBlock(true);
       }
-      await checkVPN();
     })();
   }, []);
 
