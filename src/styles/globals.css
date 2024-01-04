@@ -4525,6 +4525,8 @@ button.shareBtn-disabled {
 
 .popupBtn {
   display: flex;
+  justify-content: center;
+  padding-top: 10px;
   gap: 10px;
 }
 
@@ -5056,21 +5058,16 @@ h3.mega-text {
 .fiat-group {
   padding-bottom: 20px;
 }
-.fiat-content .form-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #ddd !important;
-}
 .fiat-group .form-control {
-  background: #000;
-  border: 1px solid #1c1c1c;
   box-shadow: 0px 20px 20px #00000091;
-  color: #ddd;
-  border-radius: 30px;
   padding: 8px 20px;
-  font-size: 16px;
-  height: 36px;
   font-weight: 400 !important;
+  background: #080808;
+  border: 1px solid #25282e;
+  border-radius: 30px;
+  color: #b6b3b3;
+  font-size: 14px;
+  height: 43px;
 }
 .fiat-group input {
   font-weight: 400 !important;
@@ -5078,6 +5075,7 @@ h3.mega-text {
 }
 .fiat-group input::placeholder {
   font-weight: 400 !important;
+  color: #b6b3b3;
 }
 .fiat-group .form-control:focus,
 .fiat-group input:focus {
@@ -5093,10 +5091,15 @@ h3.mega-text {
   color: #fa0000 !important;
   margin: 0;
   padding-top: 5px;
+  font-weight: 400;
+  text-align: left;
 }
 .fiat-content h6.deducted-heading {
-  font-size: 16px;
-  margin: 0;
+  font-size: 15px;
+  padding-bottom: 15px;
+  max-width: 370px;
+  width: 100%;
+  margin: 0px auto;
 }
 .fiat-modal .popupBtn {
   justify-content: center;
@@ -5119,6 +5122,149 @@ h3.mega-text {
   padding: 0;
   background: transparent;
 }
+
+.payment-success .card-check {
+  border-radius: 200px;
+  height: 150px;
+  width: 150px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button.tw-connect-wallet.css-1un3lp3 {
+  background-color: yellow;
+}
+
+body > a {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+.ip-block-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  padding: 10px 20px;
+  gap: 20px;
+}
+p.ip-block {
+  text-align: center;
+  font-size: 26px;
+  color: red;
+  font-weight: 500;
+  max-width: 700px;
+  width: 100%;
+  margin: 0px auto;
+}
+.ip-block-grid img.maintance-img {
+  height: 90vh;
+  object-fit: contain;
+}
+
+h2#radix-\:r4\: {
+  color: red !important;
+}
+
+h2#radix-\:r1\: {
+  color: red !important;
+}
+.support-chain {
+  text-align: center;
+}
+.support-chain p {
+  margin: 0;
+  padding-bottom: 10px;
+  max-width: 200px;
+  width: 100%;
+  text-align: left;
+}
+.support-chain span {
+  padding-bottom: 5px;
+}
+.support-chain ol {
+  max-width: 200px;
+}
+.fiat-data {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 40px 50px;
+  background: #151515;
+  margin: 40px auto;
+  border: 1px solid #1c1c1c;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px
+}
+
+.token-box {
+  display: flex;
+  align-items: center;
+  padding: 8px 20px;
+  justify-content: space-between;
+  box-shadow: 0px 20px 20px #00000091;
+  font-weight: 400 !important;
+  background: #080808;
+  border: 1px solid #25282e;
+  border-radius: 30px;
+  color: #b6b3b3;
+  font-size: 14px;
+  height: 43px;
+  margin-bottom: 20px;
+
+}
+.copy-icon {
+  filter: brightness(0) invert(1);
+  height: 20px;
+  margin-left: 10px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.fiat-data p,
+.fiat-data .form-label   {
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: 30px;
+  margin: 0;
+  font-size: 14px;
+  padding-bottom: 5px;
+}
+.fiat-data p {
+  font-size: 16px;
+}
+
+.fiat-data h5 {
+  color: #f8d761;
+  font-size: 16px;
+  margin: 0;
+  text-transform: none;
+  width: 95%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+p.title-memo {
+  color: yellow;
+  text-shadow: none;
+  text-align: center;
+}
+.page-sub-title h2 {
+  margin: 0px auto;
+  font-size: 18px;
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  line-height: 1.5;
+}
+
 
 /********************************************************************************************/
 /************* Media Query ******************/
@@ -5801,15 +5947,22 @@ h3.mega-text {
     padding: 30px 15px;
     padding-top: 0px;
   }
-  .fiat-group {
-    padding-bottom: 12px;
-  }
   .fiat-content h6.deducted-heading {
     font-size: 14px;
   }
   .fiat-modal .popupBtn {
     column-gap: 15px;
     padding-top: 20px;
+  }
+  .page-sub-title h2 {
+    font-size: 14px;
+  }
+  .fiat-data {
+    padding: 30px 15px;
+  }
+  .fiat-data p, .fiat-data .form-label {
+    font-size: 14px;
+    line-height: 20px;
   }
 }
 
@@ -6501,123 +6654,3 @@ h3.mega-text {
   }
 }
 
-.payment-success .card-check {
-  border-radius: 200px;
-  height: 150px;
-  width: 150px;
-  margin: 0 auto;
-  /* background-color: #9abc663d; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-button.tw-connect-wallet.css-1un3lp3 {
-  background-color: yellow;
-}
-
-body > a {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-}
-
-.ip-block-grid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-  padding: 10px 20px;
-  gap: 20px;
-}
-p.ip-block {
-  text-align: center;
-  font-size: 26px;
-  color: red;
-  font-weight: 500;
-  max-width: 700px;
-  width: 100%;
-  margin: 0px auto;
-}
-.ip-block-grid img.maintance-img {
-  height: 90vh;
-  object-fit: contain;
-}
-
-h2#radix-\:r4\: {
-  color: red !important;
-}
-
-h2#radix-\:r1\: {
-  color: red !important;
-}
-.support-chain {
-  text-align: center;
-}
-.support-chain p {
-  margin: 0;
-  padding-bottom: 10px;
-  max-width: 200px;
-  width: 100%;
-  text-align: left;
-}
-.support-chain span {
-  padding-bottom: 5px;
-}
-.support-chain ol {
-  max-width: 200px;
-}
-/* .support-chain ol li {
-  text-align: left;
-} */
-.fiat-data {
-  text-align: center;
-  max-width: 620px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 50px 46px;
-  background: #141314;
-}
-
-.token-box {
-  display: flex;
-  background: #272727;
-  padding: 8px 20px;
-  justify-content: space-between;
-  border-radius: 24px;
-}
-.copy-icon {
-  filter: brightness(0) invert(1);
-  height: 20px;
-  margin-left: 10px;
-  width: 20px;
-  cursor: pointer;
-}
-
-.fiat-data p,
-.fiat-data-label .form-label {
-  color: #f9ff00 !important;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  line-height: 30px;
-  margin: 0;
-  font-size: 20px;
-}
-
-.fiat-data h5 {
-  color: #eee;
-  font-size: 18px;
-  margin: 0;
-  text-transform: none;
-  width: 95%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  /* word-break: break-all; */
-}
-
-p.title-memo {
-  color: yellow;
-  text-shadow: none;
-  text-align: center;
-}

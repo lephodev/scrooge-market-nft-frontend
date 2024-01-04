@@ -125,26 +125,27 @@ function RedeemPrizes() {
         handleSuccess100Modal={handleSuccess100Modal}
         handleSuccess500Modal={handleSuccess500Modal}
       />
-      <main className='main redeem-prizes-page redeem-page'>
-        <div className='container'>
+      <main className="main redeem-prizes-page redeem-page">
+        <div className="container">
           {globalLoader && (
-            <div className='loading'>
-              <div className='loading-img-div'>
-                <img src={LoadingPoker} alt='game' className='imageAnimation' />
+            <div className="loading">
+              <div className="loading-img-div">
+                <img src={LoadingPoker} alt="game" className="imageAnimation" />
               </div>
             </div>
           )}
-          <div className='bordered-section'>
+          <div className="bordered-section">
             {redeemSuccess ? (
-              <div className='pageImgContainer'>
-                <div className='loading-txt'>
+              <div className="pageImgContainer">
+                <div className="loading-txt">
                   REDEEMED SUCCESSFULLY<br></br>
                   <button
-                    className='page-nav-header-btn'
+                    className="page-nav-header-btn"
                     onClick={() => {
                       setRedeemSuccess(false);
                       reward();
-                    }}>
+                    }}
+                  >
                     CLOSE
                   </button>
                 </div>
@@ -154,49 +155,49 @@ function RedeemPrizes() {
             )}
             {!globalLoader && (
               <>
-                <div className='scrooge-main-heading'>
-                  <div className='pageTitle'>
-                    <h1 className='title'>Redeem for Prizes</h1>
+                <div className="scrooge-main-heading">
+                  <div className="pageTitle">
+                    <h1 className="title">Redeem for Prizes</h1>
                   </div>
-                  <div className='feature-overview-div'>
-                    Ready to cash in on your big wins? Take a look through our
-                    selection of prize options and pick what suits you best!
-                    Sweep Tokens are redeemed at a 100:1 USD ratio!
+                  <div className="page-sub-title">
+                    <h2>
+                      Ready to cash in on your big wins? Take a look through our
+                      selection of prize options and pick what suits you best!
+                      Sweep Tokens are redeemed at a 100:1 USD ratio!
+                    </h2>
                   </div>
                 </div>
 
-                <div className='prizes-chip-count'>
+                <div className="prizes-chip-count m-0">
                   {user ? (
                     <>
                       <h3>
                         Redeemable Balance:{" "}
                         {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
                       </h3>
-                      <a href={Pdf} target='blank' className='pdf-down'>
+                      <a href={Pdf} target="blank" className="pdf-down">
                         {" "}
                         How it works! Click here to download pdf.
                       </a>
                     </>
                   ) : (
-                    <>
-                      <img
-                        src={LoadingPoker}
-                        alt='game'
-                        className='imageAnimation'
-                        width={100}
-                        height={100}
-                      />
-                    </>
+                    <img
+                      src={LoadingPoker}
+                      alt="game"
+                      className="imageAnimation"
+                      width={100}
+                      height={100}
+                    />
                   )}
                 </div>
-                <div className='page-nav-header-btns-row'>
-                  <div className='new-btn'>
+                <div className="page-nav-header-btns-row">
+                  <div className="new-btn">
                     <button onClick={() => filterPrizes("fast_withdraw")}>
                       Crypto
                     </button>
                   </div>
 
-                  <div className='new-btn'>
+                  <div className="new-btn">
                     <button onClick={() => filterPrizes("Fiat")}>Fiat</button>
                   </div>
                 </div>
@@ -228,8 +229,8 @@ function RedeemPrizes() {
 
 const UnderMaintenanceContent = () => {
   return (
-    <div className='scrooge-under-content'>
-      <img src={scroogelogo} alt='scrooge' />
+    <div className="scrooge-under-content">
+      <img src={scroogelogo} alt="scrooge" />
       <h4>Under Maintainance</h4>
     </div>
   );
