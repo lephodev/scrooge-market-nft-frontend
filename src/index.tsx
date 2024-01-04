@@ -139,6 +139,7 @@ export default function App() {
       // console.log("city", res1?.data);
       const reg = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
       console.log("reg", reg);
+      const countryName = res?.data?.country_name;
       const region = reg?.data;
       console.log("region", region);
 
@@ -147,12 +148,11 @@ export default function App() {
       if (
         CurrentCity.toString() === "Washington" ||
         CurrentCity.toString() === "Quebec" ||
-        CurrentCity.toString() === "Mumbai" ||
+        countryName.toString() === "Brazil" ||
         CurrentCity.toString() === "Idaho" ||
         region.toString() === "Michigan"
       ) {
         setStateBlock(true);
-        // navigates("/CountryBlockblock");
       }
       await checkVPN();
     })();

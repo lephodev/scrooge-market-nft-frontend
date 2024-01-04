@@ -102,13 +102,13 @@ const options = [
   { value: "Paypal", label: "Paypal" },
 ];
 
-const paymentoptions = [
-  // { value: 50, label: "$50" },
-  { value: 100, label: "$100" },
-  { value: 500, label: "$500" },
-];
+// const paymentoptions = [
+//   // { value: 50, label: "$50" },
+//   { value: 100, label: "$100" },
+//   { value: 500, label: "$500" },
+// ];
 
-const FiatPopup = ({ show, handleCloseFiat, getUserDataInstant }) => {
+const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
   const { user } = useContext(AuthContext);
 
   const [paymentType, setPaymentType] = useState();
@@ -181,10 +181,10 @@ const FiatPopup = ({ show, handleCloseFiat, getUserDataInstant }) => {
     setPaymentType(selectedOptions);
   };
 
-  const handleChnagePrice = (selectedOptions) => {
-    console.log("selectedOptions", selectedOptions);
-    setValue("redeemPrize", selectedOptions?.value);
-  };
+  // const handleChnagePrice = (selectedOptions) => {
+  //   console.log("selectedOptions", selectedOptions);
+  //   setValue("redeemPrize", selectedOptions?.value);
+  // };
 
   console.log("errors", errors);
 
@@ -237,14 +237,30 @@ const FiatPopup = ({ show, handleCloseFiat, getUserDataInstant }) => {
           {paymentType && paymentType.value && (
             <Form.Group className='fiat-group'>
               <Form.Label>Redeem Amount</Form.Label>
-              <Select
+              <div className='fiat-content'>
+                <Form.Group className='fiat-group fiat-data-label'>
+                  <Form.Label style={{ fontSize: "14px", color: "red" }}>
+                    Minimum 10000 ST($100) required for crypto withdrawals.
+                  </Form.Label>
+                  <Form.Control
+                    type='number'
+                    name='amount'
+                    placeholder='Enter Withdraw Amount'
+                    {...register("amount")}
+                  />
+                  {errors?.amount && (
+                    <p className='error-msg'>{errors?.amount?.message}</p>
+                  )}
+                </Form.Group>
+              </div>
+              {/* <Select
                 options={paymentoptions}
                 onChange={handleChnagePrice}
                 styles={customStyles}
-              />
-              {errors?.amount && (
+              /> */}
+              {/* {errors?.amount && (
                 <p className='error-msg'>{errors?.amount?.message}</p>
-              )}
+              )} */}
             </Form.Group>
           )}
           <h6 className='deducted-heading'>
