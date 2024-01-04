@@ -136,12 +136,6 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
       if (user?.isBlockWallet) {
         return toast.error(`Your wallet blocked by admin`, { toastId: "A" });
       }
-      if (!values.redeemPrize) {
-        setError("amount", {
-          message: "Please Select amount",
-        });
-        return;
-      }
 
       if (!values.paymentType) {
         setError("paymentType", {
