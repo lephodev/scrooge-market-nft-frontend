@@ -42,13 +42,13 @@ const customStyles = {
     border: "2px solid transparent",
   }),
   control: () => ({
-    background: "#000",
-    border: "1px solid #141414",
     borderRadius: "30px",
     color: "#fff",
     display: "flex",
     alignItem: "center",
-    height: "41",
+    background: "#080808",
+    border: "1px solid #25282e",
+    height: "43px",
     margin: "2px 0",
     boxShadow: "0px 20px 20px #00000091",
     cursor: "pointer",
@@ -180,13 +180,11 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
   //   setValue("redeemPrize", selectedOptions?.value);
   // };
 
-  console.log("errors", errors);
-
   return (
-    <div className='fiat-modal'>
+    <div className="fiat-data">
       <Form onSubmit={handleSubmit(WithdrawRequest)}>
-        <div className='fiat-content'>
-          <Form.Group className='fiat-group'>
+        <div className="fiat-content">
+          <Form.Group className="fiat-group">
             <Form.Label>Withdraw to</Form.Label>
             <Select
               options={options}
@@ -194,79 +192,63 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
               styles={customStyles}
             />
             {errors?.paymentType && (
-              <p className='error-msg'>{errors?.paymentType?.message}</p>
+              <p className="error-msg">{errors?.paymentType?.message}</p>
             )}
           </Form.Group>
-          {console.log("paymentType", paymentType)}
+
           {paymentType && paymentType.value === "Paypal" ? (
-            <Form.Group className='fiat-group'>
+            <Form.Group className="fiat-group">
               <Form.Label>Email</Form.Label>
               <Form.Control
-                type='email'
-                name='email'
-                placeholder='Enter email'
+                type="email"
+                name="email"
+                placeholder="Enter email"
                 {...register("email")}
               />
               {errors?.email && (
-                <p className='error-msg'>{errors?.email?.message}</p>
+                <p className="error-msg">{errors?.email?.message}</p>
               )}
             </Form.Group>
           ) : paymentType && paymentType.value === "Cashapp" ? (
-            <Form.Group className='fiat-group'>
+            <Form.Group className="fiat-group">
               <Form.Label>CashAppId </Form.Label>
               <Form.Control
-                type='text'
-                name='cashAppid'
+                type="text"
+                name="cashAppid"
                 //   defaultValue={singleTournament?.name}
-                placeholder='Enter Cashapp Id'
+                placeholder="Enter Cashapp Id"
                 {...register("cashAppid")}
               />
               {errors?.cashAppid && (
-                <p className='error-msg'>{errors?.cashAppid?.message}</p>
+                <p className="error-msg">{errors?.cashAppid?.message}</p>
               )}
             </Form.Group>
           ) : (
             ""
           )}
           {paymentType && paymentType.value && (
-            <Form.Group className='fiat-group'>
-              <Form.Label>Redeem Amount</Form.Label>
-              <div className='fiat-content'>
-                <Form.Group className='fiat-group fiat-data-label'>
-                  <Form.Label style={{ fontSize: "14px", color: "red" }}>
-                    Minimum 10000 ST($100) required for crypto withdrawals.
-                  </Form.Label>
-                  <Form.Control
-                    type='number'
-                    name='amount'
-                    placeholder='Enter Withdraw Amount'
-                    {...register("amount")}
-                  />
-                  {errors?.amount && (
-                    <p className='error-msg'>{errors?.amount?.message}</p>
-                  )}
-                </Form.Group>
-              </div>
-              {/* <Select
-                options={paymentoptions}
-                onChange={handleChnagePrice}
-                styles={customStyles}
-              /> */}
-              {/* {errors?.amount && (
-                <p className='error-msg'>{errors?.amount?.message}</p>
-              )} */}
+            <Form.Group className="fiat-group">
+              <Form.Label>
+                Minimum 10000 ST($100) required for crypto withdrawals.
+              </Form.Label>
+              <Form.Control
+                type="number"
+                name="amount"
+                placeholder="Enter Withdraw Amount"
+                {...register("amount")}
+              />
+              {errors?.amount && (
+                <p className="error-msg">{errors?.amount?.message}</p>
+              )}
             </Form.Group>
           )}
-          <h6 className='deducted-heading'>
+          <h6 className="deducted-heading">
             10% of the amount will be deducted from your redemption amount
           </h6>
         </div>
-        <div className='popupBtn'>
-          <button className='greyBtn' onClick={handleCloseFiat}>
-            Cancel
-          </button>
-          <button className='yellowBtn' variant='primary' type='submit'>
-            {!loading ? "Confirm" : <Spinner animation='border' />}{" "}
+        <div className="popupBtn">
+          <button className="yellowBtn" variant="primary" type="submit">
+            {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
           </button>
         </div>
       </Form>

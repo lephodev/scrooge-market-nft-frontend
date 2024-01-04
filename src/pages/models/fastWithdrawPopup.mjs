@@ -67,37 +67,37 @@ const FastWithdrawPopup = ({ getUserDataInstant }) => {
   console.log("errors", errors);
 
   return (
-    <div className='fiat-modal fiat-data'>
+    <div className=" fiat-data">
       <p>Scrooge Contract to view tokens in wallet</p>
-      <div className='token-box'>
-        <h5
-          onClick={() => {
-            handleCopyURL("0x9dfee72aea65dc7e375d50ea2bd90384313a165a");
-          }}>
-          0x9dfee72aea65dc7e375d50ea2bd903843...{" "}
-          <img src={copyIcon} alt='icon' className='copy-icon' />
-        </h5>
+      <div
+        className="token-box"
+        onClick={() => {
+          handleCopyURL("0x9dfee72aea65dc7e375d50ea2bd90384313a165a");
+        }}
+      >
+        <h5>0x9dfee72aea65dc7e375d50ea2bd903843... </h5>
+        <img src={copyIcon} alt="icon" className="copy-icon" />
       </div>
       <Form onSubmit={handleSubmit(WithdrawRequest)}>
-        <div className='fiat-content'>
-          <Form.Group className='fiat-group fiat-data-label'>
-            <Form.Label style={{ fontSize: "14px", color: "red" }}>
+        <div className="fiat-content">
+          <Form.Group className="fiat-group">
+            <Form.Label>
               Minimum 5,000 ST($50) required for crypto withdrawals.
             </Form.Label>
             <Form.Control
-              type='number'
-              name='amount'
-              placeholder='Enter Withdraw Amount'
+              type="number"
+              name="amount"
+              placeholder="Enter Withdraw Amount"
               {...register("amount")}
             />
             {errors?.amount && (
-              <p className='error-msg'>{errors?.amount?.message}</p>
+              <p className="error-msg">{errors?.amount?.message}</p>
             )}
           </Form.Group>
         </div>
-        <div className='popupBtn'>
-          <button className='yellowBtn' variant='primary' type='submit'>
-            {!loading ? "Confirm" : <Spinner animation='border' />}{" "}
+        <div className="popupBtn">
+          <button className="yellowBtn" variant="primary" type="submit">
+            {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
           </button>
         </div>
       </Form>
