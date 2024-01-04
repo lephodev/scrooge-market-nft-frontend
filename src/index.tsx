@@ -146,17 +146,23 @@ export default function App() {
       // console.log("CurrentIpAddress", CurrentIp);
 
       const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/city`);
+      const region = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
+
       // eslint-disable-next-line no-console
       // console.log("city", res1?.data);
       const CurrentCity = res1?.data;
+      const countryName = res?.data?.country_name;
+      console.log("countryName", countryName);
+
       // eslint-disable-next-line no-constant-condition
       if (
         CurrentCity.toString() === "Washington" ||
         CurrentCity.toString() === "Quebec" ||
-        CurrentCity.toString() === "Idaho"
+        CurrentCity.toString() === "Idaho" ||
+        countryName.toString() === "Brazil" ||
+        region.data.toString() === "Michigan"
       ) {
         setStateBlock(true);
-        // navigates("/CountryBlockblock");
       }
       await checkVPN();
     })();
