@@ -147,8 +147,11 @@ export default function App() {
       // eslint-disable-next-line no-constant-condition
       if (
         CurrentCity.toString() === "Quebec" ||
+        CurrentCity.toString() === "Washington" ||
         countryName.toString() === "Brazil" ||
         CurrentCity.toString() === "Idaho" ||
+        region.toString() === "Quebec" ||
+        region.toString() === "Idaho" ||
         region.toString() === "Michigan" ||
         region.toString() === "Washington"
       ) {
