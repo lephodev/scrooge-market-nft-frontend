@@ -162,6 +162,8 @@ export default function App() {
         CurrentCity.toString() === "Quebec" ||
         CurrentCity.toString() === "Idaho" ||
         countryName.toString() === "Brazil" ||
+        region.data.toString() === "Quebec" ||
+        region.data.toString() === "Idaho" ||
         region.data.toString() === "Michigan" ||
         region.data.toString() === "Washington"
       ) {
