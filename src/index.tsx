@@ -146,11 +146,14 @@ export default function App() {
       const CurrentCity = res1?.data;
       // eslint-disable-next-line no-constant-condition
       if (
-        CurrentCity.toString() === "Washington" ||
         CurrentCity.toString() === "Quebec" ||
+        CurrentCity.toString() === "Washington" ||
         countryName.toString() === "Brazil" ||
         CurrentCity.toString() === "Idaho" ||
-        region.toString() === "Michigan"
+        region.toString() === "Quebec" ||
+        region.toString() === "Idaho" ||
+        region.toString() === "Michigan" ||
+        region.toString() === "Washington"
       ) {
         setStateBlock(true);
       }
