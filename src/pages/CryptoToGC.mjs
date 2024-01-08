@@ -954,8 +954,8 @@ export default function CryptoToGC() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get("https://geolocation-db.com/json/");
-        const CurrentIp = res?.data?.IPv4;
+        const res = await axios.get("https://ipapi.co/ip");
+        const CurrentIp = res?.data;
 
         // eslint-disable-next-line no-console
         // console.log("CurrentIpAddress", CurrentIp);

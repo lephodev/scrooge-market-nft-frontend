@@ -931,21 +931,11 @@ export default function CryptoToGC() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get("https://geolocation-db.com/json/");
-        const CurrentIp = res?.data?.IPv4;
-
-        // eslint-disable-next-line no-console
-        // console.log("CurrentIpAddress", CurrentIp);
-
+        const res = await axios.get("https://ipapi.co/ip");
+        const CurrentIp = res?.data;
         const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
-        // eslint-disable-next-line no-console
-        // console.log("city", res1?.data);
         const CurrentCity = res1?.data;
-        console.log("CurrentCity", CurrentCity);
         setCurrentState(CurrentCity);
-        // eslint-disable-next-line no-constant-condition
-
-        // navigates("/CountryBlockblock");
       } catch (error) {
         console.log("errr", error);
       }

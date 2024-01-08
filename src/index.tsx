@@ -112,10 +112,10 @@ export default function App() {
 
   const checkVPN = async () => {
     try {
-      const res = await fetch("https://geolocation-db.com/json/").then(
-        (response) => response.json()
-      );
-      const CurrentIp = res?.IPv4;
+      const res = await axios.get("https://ipapi.co/ip");
+      console.log("res-", res);
+
+      const CurrentIp = res?.data;
       const basicAuthToken = validateToken();
 
       // const apiUrl = `http://api.vpnblocker.net/v2/json/${CurrentIp}`;
@@ -142,26 +142,20 @@ export default function App() {
     (async () => {
       await checkVPN();
 
-      const res = await axios.get("https://geolocation-db.com/json/");
-      const CurrentIp = res?.data?.IPv4;
-      // eslint-disable-next-line no-console
-      // console.log("CurrentIpAddress", CurrentIp);
-
+      const res = await axios.get("https://ipapi.co/ip");
+      const CurrentIp = res?.data;
       const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/city`);
       const region = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
-      console.log("regionregion", region);
+      const countryName = await axios.get(
+        `https://ipapi.co/${CurrentIp}/country`
+      );
 
-      // eslint-disable-next-line no-console
-      // console.log("city", res1?.data);
       const CurrentCity = res1?.data;
-      const countryName = res?.data?.country_name;
-      console.log("countryName", countryName);
 
-      // eslint-disable-next-line no-constant-condition
       if (
         CurrentCity.toString() === "Quebec" ||
         CurrentCity.toString() === "Idaho" ||
-        countryName.toString() === "Brazil" ||
+        countryName.data.toString() === "Brazil" ||
         region.data.toString() === "Quebec" ||
         region.data.toString() === "Idaho" ||
         region.data.toString() === "Michigan" ||

@@ -264,8 +264,8 @@ const KYCForm = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get("https://geolocation-db.com/json/");
-        const CurrentIp = res?.data?.IPv4;
+        const res = await axios.get("https://ipapi.co/ip");
+        const CurrentIp = res?.data;
         const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
         const CurrentCity = res1?.data;
         console.log("CurrentCity", CurrentCity);
