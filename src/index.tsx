@@ -141,12 +141,7 @@ export default function App() {
 
   const checkVPN = async () => {
     try {
-      const res = await fetch("https://geolocation-db.com/json/").then(
-        (response) => response.json()
-      );
-      const CurrentIp = res?.IPv4;
-      // const apiUrl = `http://api.vpnblocker.net/v2/json/${CurrentIp}`;
-      const serverUrl = `/auth/validate_VPN?ip=${CurrentIp}&timezone=${null}`;
+      const serverUrl = `/auth/validate_VPN`;
       const checkVPNRes = await authInstance().get(serverUrl);
       setIsVPNEnable(checkVPNRes?.data?.vpnStatus);
 
