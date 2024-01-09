@@ -5779,6 +5779,9 @@ p.title-memo {
   .nft-page .nft-card-grid p {
     text-align: center;
   }
+  .claim-box:hover::before {
+    content: unset;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -6484,6 +6487,9 @@ p.title-memo {
   }
   .my-wallet-page .prizes-chip-count {
     padding: 0px;
+  }
+  .claim-free-page .prizes-card .new-btn button {
+    height: 48px;
   }
   
 }
