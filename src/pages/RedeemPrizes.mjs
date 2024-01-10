@@ -26,6 +26,9 @@ import SuccessModal from "./models/SuccessModal.mjs";
 import Pdf from "../images/Manual.pdf";
 import FastWithdrawPopup from "./models/fastWithdrawPopup.mjs";
 import { validateToken } from "../utils/dateUtils.mjs";
+import { useNetworkMismatch, ChainId, useSigner } from "@thirdweb-dev/react";
+import ChainContext from "../context/Chain.ts";
+import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -48,6 +51,7 @@ function RedeemPrizes() {
   const [buyWithFiat, setBuyWithFiat] = useState(false);
   const [show, setShow] = useState(false);
   const [showFiat, setShowFiat] = useState(false);
+
   // const [sliderValue /* setSliderValue */] = useState(499);
   const [tickets, setTickets] = useState("");
   const [tokens, setTokens] = useState("");
@@ -65,6 +69,23 @@ function RedeemPrizes() {
   const [success50Show, setSuccess50Show] = useState(false);
   const [success100Show, setSuccess100Show] = useState(false);
   const [success500Show, setSuccess500Show] = useState(false);
+  const { selectedChain, setSelectedChain } = useContext(ChainContext);
+
+  const signer = useSigner();
+
+  const isMismatched = useNetworkMismatch();
+  useEffect(() => {
+    if (selectedChain === ChainId.Mainnet) {
+      setSelectedChain(ChainId.BinanceSmartChainMainnet);
+    }
+
+    if (
+      address &&
+      !isMismatched &&
+      selectedChain === ChainId.BinanceSmartChainMainnet
+    ) {
+    }
+  }, [user, isMismatched, address, signer]);
 
   const redemptionUnderMaintainance = false;
 
@@ -587,6 +608,7 @@ function RedeemPrizes() {
                       NFTS
                     </button>
                   </div>
+
                   <div className='new-btn'>
                     {/* <button
                       // className='page-nav-header-btn'
@@ -680,6 +702,17 @@ function RedeemPrizes() {
                     </button>
                   </div>
                 )} */}
+                {isMismatched && address ? (
+                  <>
+                    {
+                      <div style={{ marginTop: "20px" }}>
+                        <SwitchNetworkBSC />
+                      </div>
+                    }
+                  </>
+                ) : (
+                  <span></span>
+                )}
                 <div className='prizes-container'>
                   {showConvert && (
                     <>
@@ -720,7 +753,7 @@ function RedeemPrizes() {
                   <div style={{ width: "100%", textAlign: "center" }}>
                     <div id='rewardId' style={{ margin: "0 auto" }} />
                   </div>
-                  {!prizesLoading ? (
+                  {!isMismatched && !prizesLoading ? (
                     <>
                       <div className='prizes_container'>
                         {/* <div className="prizes-card">
