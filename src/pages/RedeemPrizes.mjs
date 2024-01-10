@@ -16,11 +16,20 @@ import SuccessModal from "./models/SuccessModal.mjs";
 import Pdf from "../images/Manual.pdf";
 import FastWithdrawPopup from "./models/fastWithdrawPopup.mjs";
 import { validateToken } from "../utils/dateUtils.mjs";
+import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
+import {
+  useNetworkMismatch,
+  useAddress,
+  ChainId,
+  useSigner,
+} from "@thirdweb-dev/react";
+import ChainContext from "../context/Chain.ts";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
+
   let prizesReceived = 0;
   const { user, loading, setUser } = useContext(AuthContext);
   console.log(loading);
@@ -32,6 +41,24 @@ function RedeemPrizes() {
   const [success100Show, setSuccess100Show] = useState(false);
   const [success500Show, setSuccess500Show] = useState(false);
   const [showFastWithdraw, setShowFastWithdraw] = useState(false);
+  const { selectedChain, setSelectedChain } = useContext(ChainContext);
+
+  const address = useAddress();
+  const signer = useSigner();
+
+  const isMismatched = useNetworkMismatch();
+  useEffect(() => {
+    if (selectedChain === ChainId.Mainnet) {
+      setSelectedChain(ChainId.BinanceSmartChainMainnet);
+    }
+
+    if (
+      address &&
+      !isMismatched &&
+      selectedChain === ChainId.BinanceSmartChainMainnet
+    ) {
+    }
+  }, [user, isMismatched, address, signer]);
 
   const redemptionUnderMaintainance = false;
 
@@ -125,27 +152,26 @@ function RedeemPrizes() {
         handleSuccess100Modal={handleSuccess100Modal}
         handleSuccess500Modal={handleSuccess500Modal}
       />
-      <main className="main redeem-prizes-page redeem-page">
-        <div className="container">
+      <main className='main redeem-prizes-page redeem-page'>
+        <div className='container'>
           {globalLoader && (
-            <div className="loading">
-              <div className="loading-img-div">
-                <img src={LoadingPoker} alt="game" className="imageAnimation" />
+            <div className='loading'>
+              <div className='loading-img-div'>
+                <img src={LoadingPoker} alt='game' className='imageAnimation' />
               </div>
             </div>
           )}
-          <div className="bordered-section">
+          <div className='bordered-section'>
             {redeemSuccess ? (
-              <div className="pageImgContainer">
-                <div className="loading-txt">
+              <div className='pageImgContainer'>
+                <div className='loading-txt'>
                   REDEEMED SUCCESSFULLY<br></br>
                   <button
-                    className="page-nav-header-btn"
+                    className='page-nav-header-btn'
                     onClick={() => {
                       setRedeemSuccess(false);
                       reward();
-                    }}
-                  >
+                    }}>
                     CLOSE
                   </button>
                 </div>
@@ -155,11 +181,11 @@ function RedeemPrizes() {
             )}
             {!globalLoader && (
               <>
-                <div className="scrooge-main-heading">
-                  <div className="pageTitle">
-                    <h1 className="title">Redeem for Prizes</h1>
+                <div className='scrooge-main-heading'>
+                  <div className='pageTitle'>
+                    <h1 className='title'>Redeem for Prizes</h1>
                   </div>
-                  <div className="page-sub-title">
+                  <div className='page-sub-title'>
                     <h2>
                       Ready to cash in on your big wins? Take a look through our
                       selection of prize options and pick what suits you best!
@@ -167,15 +193,14 @@ function RedeemPrizes() {
                     </h2>
                   </div>
                 </div>
-
-                <div className="prizes-chip-count m-0">
+                <div className='prizes-chip-count m-0'>
                   {user ? (
                     <>
                       <h3>
                         Redeemable Balance:{" "}
                         {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
                       </h3>
-                      <a href={Pdf} target="blank" className="pdf-down">
+                      <a href={Pdf} target='blank' className='pdf-down'>
                         {" "}
                         How it works! Click here to download pdf.
                       </a>
@@ -183,25 +208,35 @@ function RedeemPrizes() {
                   ) : (
                     <img
                       src={LoadingPoker}
-                      alt="game"
-                      className="imageAnimation"
+                      alt='game'
+                      className='imageAnimation'
                       width={100}
                       height={100}
                     />
                   )}
                 </div>
-                <div className="page-nav-header-btns-row">
-                  <div className="new-btn">
+                <div className='page-nav-header-btns-row'>
+                  <div className='new-btn'>
                     <button onClick={() => filterPrizes("fast_withdraw")}>
                       Crypto
                     </button>
                   </div>
 
-                  <div className="new-btn">
+                  <div className='new-btn'>
                     <button onClick={() => filterPrizes("Fiat")}>Fiat</button>
                   </div>
                 </div>
-
+                {isMismatched && address ? (
+                  <>
+                    {showFastWithdraw && (
+                      <div style={{ marginTop: "20px" }}>
+                        <SwitchNetworkBSC />
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <span></span>
+                )}
                 {buyWithFiat && (
                   <FiatPopup
                     show={showFiat}
@@ -209,8 +244,7 @@ function RedeemPrizes() {
                     getUserDataInstant={getUserDataInstant}
                   />
                 )}
-
-                {showFastWithdraw && (
+                {!isMismatched && showFastWithdraw && (
                   <FastWithdrawPopup
                     show={showFastWithdraw}
                     setShow={setShowFastWithdraw}
@@ -229,8 +263,8 @@ function RedeemPrizes() {
 
 const UnderMaintenanceContent = () => {
   return (
-    <div className="scrooge-under-content">
-      <img src={scroogelogo} alt="scrooge" />
+    <div className='scrooge-under-content'>
+      <img src={scroogelogo} alt='scrooge' />
       <h4>Under Maintainance</h4>
     </div>
   );

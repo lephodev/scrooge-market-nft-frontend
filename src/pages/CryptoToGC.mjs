@@ -1227,9 +1227,14 @@ export default function CryptoToGC() {
                             </span>{" "}
                           </ul>
                         </div>
+                      ) : isMismatched && address ? (
+                        <div style={{ marginTop: "20px" }}>
+                          <SwitchNetworkBSC />
+                        </div>
                       ) : (
                         ""
                       )}
+
                       <div className='purchasemodal-cards'>
                         {allPrizes.map((prize, i) => (
                           <>
