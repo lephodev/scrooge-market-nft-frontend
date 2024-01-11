@@ -64,7 +64,7 @@ const useCurrentPath = () => {
 };
 
 const Layout = ({ children }) => {
-  const { user, region } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const wrapperRef = useRef();
   const address = useAddress();
 
@@ -223,52 +223,22 @@ const Layout = ({ children }) => {
                               className={`nav-link ${isActive(scroogeClient)}`}>
                               Home
                             </Link>
-                            {region !== "Michigan" ? (
-                              <>
-                                <Link
-                                  to={`${scroogeClient}/games`}
-                                  className={`nav-link ${isActive(
-                                    `${scroogeClient}/games`
-                                  )}`}>
-                                  Games
-                                </Link>
-                                <Link
-                                  to={`/crypto-to-gc`}
-                                  className={`nav-link ${isActive(
-                                    "/crypto-to-gc"
-                                  )}`}>
-                                  Purchase Center{" "}
-                                </Link>
-                                <Link
-                                  to={`/redeem-prizes`}
-                                  className={`nav-link ${isActive(
-                                    "/redeem-prizes"
-                                  )}`}>
-                                  Redemption Center
-                                </Link>
-                                <Link
-                                  to={`/claim-free-tokens`}
-                                  className={`nav-link ${isActive(
-                                    "/claim-free-tokens"
-                                  )}`}>
-                                  Earn Free Coins
-                                </Link>
-                                <Link
-                                  to={`${scroogeClient}/affiliate`}
-                                  className={`nav-link ${isActive(
-                                    "/affiliate"
-                                  )}`}>
-                                  Affiliate Program
-                                </Link>
-                                <Link
-                                  to={`/my-wallet`}
-                                  className={`nav-link ${isActive(
-                                    "/my-wallet"
-                                  )}`}>
-                                  Holder Claim Center
-                                </Link>
-                              </>
-                            ) : (
+
+                            <>
+                              <Link
+                                to={`${scroogeClient}/games`}
+                                className={`nav-link ${isActive(
+                                  `${scroogeClient}/games`
+                                )}`}>
+                                Games
+                              </Link>
+                              <Link
+                                to={`/crypto-to-gc`}
+                                className={`nav-link ${isActive(
+                                  "/crypto-to-gc"
+                                )}`}>
+                                Purchase Center{" "}
+                              </Link>
                               <Link
                                 to={`/redeem-prizes`}
                                 className={`nav-link ${isActive(
@@ -276,7 +246,36 @@ const Layout = ({ children }) => {
                                 )}`}>
                                 Redemption Center
                               </Link>
-                            )}
+                              <Link
+                                to={`/claim-free-tokens`}
+                                className={`nav-link ${isActive(
+                                  "/claim-free-tokens"
+                                )}`}>
+                                Earn Free Coins
+                              </Link>
+                              <Link
+                                to={`${scroogeClient}/affiliate`}
+                                className={`nav-link ${isActive(
+                                  "/affiliate"
+                                )}`}>
+                                Affiliate Program
+                              </Link>
+                              <Link
+                                to={`/my-wallet`}
+                                className={`nav-link ${isActive(
+                                  "/my-wallet"
+                                )}`}>
+                                Holder Claim Center
+                              </Link>
+                            </>
+
+                            <Link
+                              to={`/redeem-prizes`}
+                              className={`nav-link ${isActive(
+                                "/redeem-prizes"
+                              )}`}>
+                              Redemption Center
+                            </Link>
                           </>
                         ) : (
                           <a

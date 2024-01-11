@@ -43,7 +43,6 @@ import scroogelogo from "./images/scroogeCasinoLogo.png";
 import vpnbanner from "./images/vpn-banner.webp";
 import notaccess from "./images/not-access.webp";
 
-import axios from "axios";
 import PaymentCustom from "./pages/PaymentCustom.mjs";
 import { validateToken } from "./utils/dateUtils.mjs";
 
@@ -53,7 +52,6 @@ export default function App() {
   );
   const [user, setUser] = useState(null);
 
-  const [region, setRegion] = useState("");
   const [spendedAmount, setSpendedAmount] = useState(null);
   const [loading, setLoading] = useState(true);
   const [dateTimeNow, setDateTimeNow] = useState("");
@@ -110,27 +108,43 @@ export default function App() {
       });
   };
 
+  const getGeoLocationDetails = async () => {
+    try {
+      // const apiUrl = `http://api.vpnblocker.net/v2/json/${CurrentIp}`;
+      const serverUrl = `/auth/getgeolocationDetails`;
+      const response = await authInstance().get(serverUrl);
+      console.log("response", response);
+      const ipAddressObject = {
+        [Object.keys(response.data)[1]]:
+          response.data[Object.keys(response.data)[1]],
+      };
+      const ipAddressss = Object.keys(ipAddressObject).find(
+        (key) => key !== "status"
+      );
+      if (ipAddressss) {
+        const { country, region, city } = ipAddressObject[ipAddressss];
+        if (
+          city.toString() === "Quebec" ||
+          city.toString() === "Idaho" ||
+          country.toString() === "Brazil" ||
+          region.toString() === "Quebec" ||
+          region.toString() === "Idaho" ||
+          region.toString() === "Michigan" ||
+          region.toString() === "Washington"
+        ) {
+          setStateBlock(true);
+        }
+      }
+    } catch (error) {
+      console.log("err", error);
+    }
+  };
+
   const checkVPN = async () => {
     try {
-      const res = await axios.get("https://ipapi.co/ip");
-      console.log("res-", res);
-
-      const CurrentIp = res?.data;
-      const basicAuthToken = validateToken();
-
-      // const apiUrl = `http://api.vpnblocker.net/v2/json/${CurrentIp}`;
-      const serverUrl = `/auth/validate_VPN?ip=${CurrentIp}&timezone=${null}`;
-      const checkVPNRes = await authInstance().get(serverUrl, {
-        headers: {
-          Authorization: basicAuthToken,
-        },
-      });
+      const serverUrl = `/auth/validate_VPN`;
+      const checkVPNRes = await authInstance().get(serverUrl);
       setIsVPNEnable(checkVPNRes?.data?.vpnStatus);
-      const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
-      const CurrentCity = res1?.data;
-      console.log("CurrentCity-------------------", CurrentCity);
-
-      setRegion(CurrentCity);
 
       console.log("checkVPNRes", checkVPNRes);
     } catch (error) {
@@ -140,29 +154,8 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
+      await getGeoLocationDetails();
       await checkVPN();
-
-      const res = await axios.get("https://ipapi.co/ip");
-      const CurrentIp = res?.data;
-      const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/city`);
-      const region = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
-      const countryName = await axios.get(
-        `https://ipapi.co/${CurrentIp}/country`
-      );
-
-      const CurrentCity = res1?.data;
-
-      if (
-        CurrentCity.toString() === "Quebec" ||
-        CurrentCity.toString() === "Idaho" ||
-        countryName.data.toString() === "Brazil" ||
-        region.data.toString() === "Quebec" ||
-        region.data.toString() === "Idaho" ||
-        region.data.toString() === "Michigan" ||
-        region.data.toString() === "Washington"
-      ) {
-        setStateBlock(true);
-      }
     })();
   }, []);
 
@@ -211,7 +204,6 @@ export default function App() {
             setLoading,
             setUser,
             dateTimeNow,
-            region,
           }}>
           {loading ? (
             <div className='loading'>
