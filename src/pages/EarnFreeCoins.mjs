@@ -9,13 +9,14 @@ import DailyRewards from "../components/DailyRewards.mjs";
 import AuthContext from "../context/authContext.ts";
 import NewRoulette from "../components/roulette/roulette.mjs";
 import wheel from "../images/wheel-fortune.png";
+import TempRoulette from "../components/tempRoulette/tempRolette.mjs";
 
 const EarnFreeCoins = () => {
   const { user, dateTimeNow } = useContext(AuthContext);
   const [showRoulette, setShowRoulette] = useState(false);
   const [key, setKey] = useState("dailyClaims");
   const [canSpin, setCanSpin] = useState(false);
-  const [, /* spinTimer */ setSpinTimer] = useState("");
+  const [spinTimer, setSpinTimer] = useState("");
   const [show, setShow] = useState(false);
   // const handleclick = (value) => {
   //   localStorage.setItem("class", value);
@@ -56,8 +57,8 @@ const EarnFreeCoins = () => {
         let m = Math.floor((diffTime % 3600) / 60);
         let s = Math.floor((diffTime % 3600) % 60);
         setSpinTimer(`${addZero(h)}:${addZero(m)}:${addZero(s)}`);
-        // setSpinTimer("12:00:00")
-        // setCanSpin(true);
+        setSpinTimer("12:00:00");
+        setCanSpin(true);
       }
       date1 += 1000;
     }, 1000);
@@ -65,11 +66,12 @@ const EarnFreeCoins = () => {
 
   return (
     <Layout>
-      <div className='container'>
-        <div className='tab-btn'>
+      <div className="container">
+        <div className="tab-btn">
           <Button
             className={`${key === "dailyClaims" ? "active-btn" : ""}`}
-            onClick={() => setKey("dailyClaims")}>
+            onClick={() => setKey("dailyClaims")}
+          >
             Daily Claims
           </Button>
           {/* <Button
@@ -85,16 +87,17 @@ const EarnFreeCoins = () => {
         </div>
 
         {showRoulette ? (
-          <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
+          // <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
+          <TempRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
         ) : null}
 
         {key === "dailyClaims" ? (
-          <div className='spin-popup-content'>
-            <div className='spin-wheel'>
-              <div className='spin-wheel-img'>
-                <img src={wheel} alt='wheel' />
+          <div className="spin-popup-content">
+            <div className="spin-wheel">
+              <div className="spin-wheel-img">
+                <img src={wheel} alt="wheel" />
 
-                <div className='spin-win-text-content'>
+                <div className="spin-win-text-content">
                   <p style={{ color: "red", marginTop: "20px" }}>
                     Note: Our Spin Wheel feature is undergoing some changes, it
                     will be unavailable in the meantime but it will return.
@@ -105,11 +108,11 @@ const EarnFreeCoins = () => {
                   {/* <div className='spin-win-text'>
                       <p>spin to win</p>
                     </div> */}
-                  <div className='spin-button'>
-                    {/* <button disabled={true} onClick={handleOpenRoulette}>
-                        {" "}
-                        {canSpin ? "Spin Now" : spinTimer}
-                      </button> */}
+                  <div className="spin-button">
+                    <button onClick={handleOpenRoulette}>
+                      {" "}
+                      {canSpin ? "Spin Now" : spinTimer}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -118,13 +121,13 @@ const EarnFreeCoins = () => {
         ) : (
           ""
         )}
-        <div className='tabs-claim'>
+        <div className="tabs-claim">
           {key === "dailyClaims" ? (
-            <div className='tab-claims'>
+            <div className="tab-claims">
               <DailyRewards />
             </div>
           ) : key === "monthlyClaims" ? (
-            <div className='tab-claims'>
+            <div className="tab-claims">
               <HolderClaimChips />
             </div>
           ) : key === "duckyLuckClaims" ? (
@@ -138,7 +141,7 @@ const EarnFreeCoins = () => {
             ""
           )}
         </div>
-        <div className='flex-row' style={{ margin: "50px auto 0px" }}>
+        <div className="flex-row" style={{ margin: "50px auto 0px" }}>
           <ShowBottomNavCards />
         </div>
       </div>
