@@ -36,10 +36,9 @@ body.modal-open {
 }
 
 .roulette-wrapper {
-
 }
 
-.wheel-wrapper::before {
+/* .wheel-wrapper::before {
   content: "";
   position: absolute;
   height: 100%;
@@ -52,7 +51,7 @@ body.modal-open {
   background-size: 100%;
   z-index: -1;
   background-position: center;
-}
+} */
 
 .wheel-item0::before {
   border-right-color: #f6b205 !important;
@@ -182,7 +181,14 @@ body.modal-open {
 
 .roulette-wheel-game .wheel.spinning {
   transition: transform var(--spinning-duration);
-  transform: rotate(calc((var(--nb-turn) * 360deg + (-360deg * var(--selected-item) / var(--nb-item, 1))) - 90deg));
+  transform: rotate(
+    calc(
+      (
+          var(--nb-turn) * 360deg +
+            (-360deg * var(--selected-item) / var(--nb-item, 1))
+        ) - 90deg
+    )
+  );
 }
 
 .roulette-wheel-game .wheel::after {
@@ -213,9 +219,6 @@ body.modal-open {
   background-position: center;
 }
 
-
-
-
 .roulette-wheel-game .wheel-item {
   display: block;
   position: absolute;
@@ -224,7 +227,8 @@ body.modal-open {
   left: 50%;
   width: 50%;
   transform-origin: center left;
-  transform: translateY(-50%) rotate(calc(var(--item-nb) * (360deg / var(--nb-item, 1))));
+  transform: translateY(-50%)
+    rotate(calc(var(--item-nb) * (360deg / var(--nb-item, 1))));
   color: var(--neutral-color);
   text-align: right;
   padding: 0 10px 0 10px;
@@ -245,8 +249,12 @@ body.modal-open {
   left: 50%;
   transform: translate(-50%, -50%);
   padding-left: 0px;
-  --slice-max-width: calc(var(--PI) * var(--wheel-size) + var(--wheel-size) / 1);
-  --slice-width: calc((var(--slice-max-width) / var(--nb-item)) - var(--wheel-slice-spacing));
+  --slice-max-width: calc(
+    var(--PI) * var(--wheel-size) + var(--wheel-size) / 1
+  );
+  --slice-width: calc(
+    (var(--slice-max-width) / var(--nb-item)) - var(--wheel-slice-spacing)
+  );
   border: solid transparent calc(var(--slice-width) / 2);
   border-left: solid transparent 0;
   border-right: solid var(--neutral-color) calc(var(--wheel-size) / 2);
@@ -254,7 +262,7 @@ body.modal-open {
 
 .roulette-wheel-game .roulette-spinner::before {
   content: "";
-  background: url("../../images/spin/spin-border.png") ;
+  background: url("../../images/spin/spin-border.png");
   position: absolute;
   z-index: 99999;
   background-size: 100%;
@@ -336,7 +344,7 @@ body.modal-open {
   color: #fff;
   cursor: pointer;
   border-radius: 30px;
-    width: 200px;
+  width: 200px;
 }
 
 .winning-popup-content .cancle-win-btn {
@@ -408,12 +416,12 @@ body.modal-open {
   text-align: center;
   font-size: 18px;
   font-weight: 600;
- 
+
   pointer-events: none;
 }
 
-.winning-animation-win>.before,
-.winning-animation-win>.after {
+.winning-animation-win > .before,
+.winning-animation-win > .after {
   z-index: 9999999999;
   position: absolute;
   width: 12px;
@@ -443,7 +451,7 @@ body.modal-open {
   transform: translate(-50%, -50%);
 }
 
-.winning-animation-win>.after {
+.winning-animation-win > .after {
   -moz-animation-delay: 1.25s, 1.25s, 1.25s;
   -webkit-animation-delay: 1.25s, 1.25s, 1.25s;
   -o-animation-delay: 1.25s, 1.25s, 1.25s;
@@ -667,7 +675,6 @@ body.modal-open {
 }
 
 @-webkit-keyframes position {
-
   0%,
   19.9% {
     margin-top: 10%;
@@ -700,7 +707,6 @@ body.modal-open {
 }
 
 @-moz-keyframes position {
-
   0%,
   19.9% {
     margin-top: 10%;
@@ -733,7 +739,6 @@ body.modal-open {
 }
 
 @-o-keyframes position {
-
   0%,
   19.9% {
     margin-top: 10%;
@@ -766,7 +771,6 @@ body.modal-open {
 }
 
 @-ms-keyframes position {
-
   0%,
   19.9% {
     margin-top: 10%;
@@ -799,7 +803,6 @@ body.modal-open {
 }
 
 @keyframes position {
-
   0%,
   19.9% {
     margin-top: 10%;
@@ -847,10 +850,8 @@ body.modal-open {
 }
 
 .spin-btn h6 {
-  
-  
   margin: 0;
-  
+
   font-size: 20px;
   font-family: "Righteous", cursive !important;
   pointer-events: none;
@@ -981,10 +982,9 @@ body.modal-open {
     font-size: 11px;
   }
 
-  .wheel-wrapper {
+  /* .wheel-wrapper {
     transform: scale(0.6);
-  }
-
+  } */
 }
 
 /**** Winner Animation *******/

@@ -41,7 +41,7 @@
 }
 
 /* Conteneur de la roue = cercle rose extérieur */
-.temp-wheel-container  {
+.temp-wheel-container {
   --wheel-font: "DejaVu Sans", sans-serif !important;
   --wheel-size: 440px;
   --wheel-slice-spacing: 50px;
@@ -67,9 +67,9 @@
 
   border-radius: 50%;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* Triangle de sélection = 1 rose +  1 blanc */
@@ -79,7 +79,7 @@
   position: absolute;
   height: 265px;
   z-index: 2;
-  width: 226px;
+  width: 230px;
   top: 0%;
   transform: translateX(-50%);
   right: 0%;
@@ -109,7 +109,7 @@
   z-index: 1;
 }
 
-.temp-wheel::before{
+.temp-wheel::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -122,7 +122,12 @@
 
 .temp-wheel.spinning {
   transition: transform var(--spinning-duration);
-  transform: rotate(calc(var(--nb-turn) * 360deg + (-360deg * var(--selected-item) / var(--nb-item, 1)) - 16deg));
+  transform: rotate(
+    calc(
+      var(--nb-turn) * 360deg +
+        (-360deg * var(--selected-item) / var(--nb-item, 1)) - 16deg
+    )
+  );
 }
 
 /* Centre de la roue = rond blanc au centre */
@@ -153,7 +158,8 @@
   left: 50%;
   width: 50%;
   transform-origin: center left;
-  transform: translateY(-50%) rotate(calc(var(--item-nb) * (360deg / var(--nb-item, 1))));
+  transform: translateY(-50%)
+    rotate(calc(var(--item-nb) * (360deg / var(--nb-item, 1))));
 
   /* texte */
   color: #fff9b0;
@@ -187,7 +193,7 @@
   top: -var(--smallfont);
   left: -13px;
   -webkit-animation: fadeIn 1s infinite;
-          animation: fadeIn 1s infinite;
+  animation: fadeIn 1s infinite;
   z-index: 2;
 }
 
@@ -231,7 +237,7 @@ img.spinTxt {
   z-index: 5;
   width: 90px;
   -webkit-animation: spinTxt 2s ease-in-out infinite;
-          animation: spinTxt 2s ease-in-out infinite;
+  animation: spinTxt 2s ease-in-out infinite;
 }
 
 @-webkit-keyframes spinTxt {
@@ -259,5 +265,19 @@ img.spinTxt {
 
   100% {
     transform: scale(1);
+  }
+}
+@media screen and (max-width: 767px) {
+  .temp-wheel-container {
+    scale: 0.8;
+    left: 50%;
+    transform: translateX(-63%);
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .temp-wheel-container {
+    scale: 0.7;
+    transform: translateX(-71%);
   }
 }

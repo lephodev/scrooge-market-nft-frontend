@@ -88,8 +88,7 @@ export default class Wheel extends React.Component {
               <div
                 className={`wheel ${spinning}`}
                 style={wheelVars}
-                onTransitionEnd={this.handleEvent}
-              >
+                onTransitionEnd={this.handleEvent}>
                 {items?.map((item, index) => (
                   <>
                     <div
@@ -99,8 +98,7 @@ export default class Wheel extends React.Component {
                           : ""
                       }`}
                       key={index}
-                      style={{ "--item-nb": index }}
-                    >
+                      style={{ "--item-nb": index }}>
                       {`${item?.token} ST + ${numFormatter(item?.gc)} GC`}
                     </div>
                   </>
@@ -116,8 +114,7 @@ export default class Wheel extends React.Component {
           className={`spin-btn ${
             this.state.spinButtonDisable ? "spin-disable" : ""
           }`}
-          onClick={this.selectItem}
-        >
+          onClick={this.selectItem}>
           <img src={spinWheel} alt='spin' />
           <h6>{"SPIN NOW"} </h6>
         </div>

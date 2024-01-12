@@ -8,8 +8,8 @@ import Layout from "./Layout.mjs";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import DailyRewards from "../components/DailyRewards.mjs";
 import AuthContext from "../context/authContext.ts";
-import NewRoulette from "../components/roulette/roulette.mjs";
-import LoadingPoker from "../images/scroogeHatLogo.png";
+// import NewRoulette from "../components/roulette/roulette.mjs";
+// import LoadingPoker from "../images/scroogeHatLogo.png";
 
 import wheel from "../images/wheel-fortune.png";
 import { userKycDetails } from "../utils/api.mjs";
@@ -26,7 +26,7 @@ const EarnFreeCoins = () => {
   const [canSpin, setCanSpin] = useState(false);
   const [spinTimer, setSpinTimer] = useState("");
   const [show, setShow] = useState(false);
-  const [globalLoader, setglobalLoader] = useState(true);
+  const [, /* globalLoader */ setglobalLoader] = useState(true);
 
   // const handleclick = (value) => {
   //   localStorage.setItem("class", value);
@@ -67,8 +67,8 @@ const EarnFreeCoins = () => {
         let m = Math.floor((diffTime % 3600) / 60);
         let s = Math.floor((diffTime % 3600) % 60);
         setSpinTimer(`${addZero(h)}:${addZero(m)}:${addZero(s)}`);
-        setSpinTimer("12:00:00");
-        setCanSpin(true);
+        // setSpinTimer("12:00:00");
+        // setCanSpin(true);
       }
       date1 += 1000;
     }, 1000);
@@ -130,17 +130,15 @@ const EarnFreeCoins = () => {
 
                 <div className='spin-win-text-content'>
                   <p style={{ color: "red", marginTop: "20px" }}>
-                    Note: Our Spin Wheel feature is undergoing some changes, it
-                    will be unavailable in the meantime but it will return.
-                    Timeline for return is currently unknown, but we hope to
-                    have it back without extended delays. Apologies for the
-                    inconvenience.
+                    Note: This is a temporary wheel for your enjoyment while we
+                    upgrade this feature. Please allow a few more weeks for the
+                    upgrade.
                   </p>
                   {/* <div className='spin-win-text'>
                       <p>spin to win</p>
                     </div> */}
                   <div className='spin-button'>
-                    <button onClick={handleOpenRoulette}>
+                    <button disabled={!canSpin} onClick={handleOpenRoulette}>
                       {" "}
                       {canSpin ? "Spin Now" : spinTimer}
                     </button>
