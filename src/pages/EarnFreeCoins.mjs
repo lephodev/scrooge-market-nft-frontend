@@ -15,6 +15,7 @@ import wheel from "../images/wheel-fortune.png";
 import { userKycDetails } from "../utils/api.mjs";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import TempRoulette from "../components/tempRoulette/tempRolette.mjs";
 
 const EarnFreeCoins = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const EarnFreeCoins = () => {
   const [showRoulette, setShowRoulette] = useState(false);
   const [key, setKey] = useState("dailyClaims");
   const [canSpin, setCanSpin] = useState(false);
-  const [, /* spinTimer */ setSpinTimer] = useState("");
+  const [spinTimer, setSpinTimer] = useState("");
   const [show, setShow] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
 
@@ -66,8 +67,8 @@ const EarnFreeCoins = () => {
         let m = Math.floor((diffTime % 3600) / 60);
         let s = Math.floor((diffTime % 3600) % 60);
         setSpinTimer(`${addZero(h)}:${addZero(m)}:${addZero(s)}`);
-        // setSpinTimer("12:00:00")
-        // setCanSpin(true);
+        setSpinTimer("12:00:00");
+        setCanSpin(true);
       }
       date1 += 1000;
     }, 1000);
@@ -97,62 +98,75 @@ const EarnFreeCoins = () => {
 
   return (
     <Layout>
-      {globalLoader ? (
-        <div className='loading'>
-          <div className='loading-img-div'>
-            <img src={LoadingPoker} alt='game' className='imageAnimation' />
-          </div>
-        </div>
-      ) : (
-        <div className='container'>
-          <div className='tab-btn'>
-            <Button
-              className={`${key === "dailyClaims" ? "active-btn" : ""}`}
-              onClick={() => setKey("dailyClaims")}>
-              Daily Claims
-            </Button>
-            {/* <Button
+      <div className='container'>
+        <div className='tab-btn'>
+          <Button
+            className={`${key === "dailyClaims" ? "active-btn" : ""}`}
+            onClick={() => setKey("dailyClaims")}>
+            Daily Claims
+          </Button>
+          {/* <Button
             className={`${key === "monthlyClaims" ? "active-btn" : ""}`}
             onClick={() => setKey("monthlyClaims")}>
             Monthly Claims
           </Button> */}
-            {/* <Button
+          {/* <Button
             className={`${key === "duckyLuckClaims" ? "active-btn" : ""}`}
             onClick={() => setKey("duckyLuckClaims")}>
             Ducky Luck Claims
           </Button> */}
-          </div>
+        </div>
 
-          {showRoulette ? (
-            <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
-          ) : null}
+        {showRoulette ? (
+          // <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
+          <TempRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
+        ) : null}
 
-          {key === "dailyClaims" ? (
-            <div className='spin-popup-content'>
-              <div className='spin-wheel'>
-                <div className='spin-wheel-img'>
-                  <img src={wheel} alt='wheel' />
+        {key === "dailyClaims" ? (
+          <div className='spin-popup-content'>
+            <div className='spin-wheel'>
+              <div className='spin-wheel-img'>
+                <img src={wheel} alt='wheel' />
 
-                  <div className='spin-win-text-content'>
-                    <p style={{ color: "red", marginTop: "20px" }}>
-                      Note: Our Spin Wheel feature is undergoing some changes,
-                      it will be unavailable in the meantime but it will return.
-                      Timeline for return is currently unknown, but we hope to
-                      have it back without extended delays. Apologies for the
-                      inconvenience.
-                    </p>
-                    {/* <div className='spin-win-text'>
+                <div className='spin-win-text-content'>
+                  <p style={{ color: "red", marginTop: "20px" }}>
+                    Note: Our Spin Wheel feature is undergoing some changes, it
+                    will be unavailable in the meantime but it will return.
+                    Timeline for return is currently unknown, but we hope to
+                    have it back without extended delays. Apologies for the
+                    inconvenience.
+                  </p>
+                  {/* <div className='spin-win-text'>
                       <p>spin to win</p>
                     </div> */}
-                    <div className='spin-button'>
-                      {/* <button disabled={true} onClick={handleOpenRoulette}>
-                        {" "}
-                        {canSpin ? "Spin Now" : spinTimer}
-                      </button> */}
-                    </div>
+                  <div className='spin-button'>
+                    <button onClick={handleOpenRoulette}>
+                      {" "}
+                      {canSpin ? "Spin Now" : spinTimer}
+                    </button>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+        <div className='tabs-claim'>
+          {key === "dailyClaims" ? (
+            <div className='tab-claims'>
+              <DailyRewards />
+            </div>
+          ) : key === "monthlyClaims" ? (
+            <div className='tab-claims'>
+              <HolderClaimChips />
+            </div>
+          ) : key === "duckyLuckClaims" ? (
+            <div>
+              {/* "gghh" */}
+              <DLGate>
+                <DLClaimTokens />
+              </DLGate>
             </div>
           ) : (
             ""
@@ -181,7 +195,10 @@ const EarnFreeCoins = () => {
             <ShowBottomNavCards />
           </div>
         </div>
-      )}
+        <div className='flex-row' style={{ margin: "50px auto 0px" }}>
+          <ShowBottomNavCards />
+        </div>
+      </div>
     </Layout>
   );
 };
