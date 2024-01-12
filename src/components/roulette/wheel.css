@@ -36,20 +36,14 @@ body.modal-open {
 }
 
 .roulette-wrapper {
-  /* position: fixed;
-  z-index: 999999;
-  top: 0;
-  background: #000000;
-  height: 100%;
-  width: 100%; */
 }
 
-.wheel-wrapper::before {
+/* .wheel-wrapper::before {
   content: "";
   position: absolute;
   height: 100%;
   width: 100%;
-  /* background: url(../../assets/images/profile/light-img.png); */
+  
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
@@ -57,7 +51,7 @@ body.modal-open {
   background-size: 100%;
   z-index: -1;
   background-position: center;
-}
+} */
 
 .wheel-item0::before {
   border-right-color: #f6b205 !important;
@@ -79,54 +73,6 @@ body.modal-open {
   color: #ffffff !important;
 }
 
-/*.wheel .wheel-item0::before {
-    border-right-color: #b42f2f !important;
-}
-.wheel .wheel-item1::before {
-    border-right-color: #ffbb13 !important;
-}
-.wheel .wheel-item2::before {
-	border-right-color: #035c99 !important;
-}
-.wheel .wheel-item3::before {
-    border-right-color: #b42f2f !important;
-}
-.wheel .wheel-item4::before {
-	border-right-color: #ffbb13 !important;
-}
-.wheel .wheel-item5::before {
-	border-right-color: #035c99 !important;
-}
-.wheel .wheel-item6::before {
-	border-right-color: #b42f2f !important;
-}
-.wheel .wheel-item7::before {
-	border-right-color: #ffbb13 !important;
-}
-.wheel .wheel-item8::before {
-	border-right-color: #035c99 !important;
-}
-.wheel .wheel-item9::before {
-	border-right-color: #b42f2f !important;
-}
-.wheel .wheel-item10::before {
-	border-right-color: #ffbb13 !important;
-}
-.wheel .wheel-item11::before {
-	border-right-color: #035c99 !important;
-}
-.wheel .wheel-item12::before {
-	border-right-color: #b42f2f !important;
-}
-.wheel .wheel-item13::before {
-	border-right-color: #ffbb13 !important;
-}
-.wheel .wheel-item14::before {
-	border-right-color: #035c99 !important;
-}
-.wheel .wheel-item15::before {
-	border-right-color: #ffbb13 !important;
-}*/
 .white-bg .pit {
   color: rgb(38, 11, 2);
 }
@@ -235,7 +181,14 @@ body.modal-open {
 
 .roulette-wheel-game .wheel.spinning {
   transition: transform var(--spinning-duration);
-  transform: rotate(calc((var(--nb-turn) * 360deg + (-360deg * var(--selected-item) / var(--nb-item, 1))) - 90deg));
+  transform: rotate(
+    calc(
+      (
+          var(--nb-turn) * 360deg +
+            (-360deg * var(--selected-item) / var(--nb-item, 1))
+        ) - 90deg
+    )
+  );
 }
 
 .roulette-wheel-game .wheel::after {
@@ -266,26 +219,6 @@ body.modal-open {
   background-position: center;
 }
 
-/* .wheel-container:before {
-  content: "";
-  width: 0px;
-  height: 0px;
-  border-style: solid;
-  border-width: 60px 20px 0px 20px;
-  border-color: #fbff12 transparent transparent transparent;
-  display: inline-block;
-  vertical-align: middle;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%) rotate(180deg);
-  transform: translate(-50%, -50%) rotate(180deg);
-  z-index: 999999999999;
-  margin-top: -39px;
-} */
-
-
-
 .roulette-wheel-game .wheel-item {
   display: block;
   position: absolute;
@@ -294,7 +227,8 @@ body.modal-open {
   left: 50%;
   width: 50%;
   transform-origin: center left;
-  transform: translateY(-50%) rotate(calc(var(--item-nb) * (360deg / var(--nb-item, 1))));
+  transform: translateY(-50%)
+    rotate(calc(var(--item-nb) * (360deg / var(--nb-item, 1))));
   color: var(--neutral-color);
   text-align: right;
   padding: 0 10px 0 10px;
@@ -315,8 +249,12 @@ body.modal-open {
   left: 50%;
   transform: translate(-50%, -50%);
   padding-left: 0px;
-  --slice-max-width: calc(var(--PI) * var(--wheel-size) + var(--wheel-size) / 1);
-  --slice-width: calc((var(--slice-max-width) / var(--nb-item)) - var(--wheel-slice-spacing));
+  --slice-max-width: calc(
+    var(--PI) * var(--wheel-size) + var(--wheel-size) / 1
+  );
+  --slice-width: calc(
+    (var(--slice-max-width) / var(--nb-item)) - var(--wheel-slice-spacing)
+  );
   border: solid transparent calc(var(--slice-width) / 2);
   border-left: solid transparent 0;
   border-right: solid var(--neutral-color) calc(var(--wheel-size) / 2);
@@ -324,8 +262,7 @@ body.modal-open {
 
 .roulette-wheel-game .roulette-spinner::before {
   content: "";
-  /* background-color: #fbff12; */
-  background: url("../../images/spin/spin-border.png") ;
+  background: url("../../images/spin/spin-border.png");
   position: absolute;
   z-index: 99999;
   background-size: 100%;
@@ -407,7 +344,7 @@ body.modal-open {
   color: #fff;
   cursor: pointer;
   border-radius: 30px;
-    width: 200px;
+  width: 200px;
 }
 
 .winning-popup-content .cancle-win-btn {
@@ -439,12 +376,6 @@ body.modal-open {
 }
 
 .spin-win-popup .winning-amount {
-  /* position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  margin-top: 37px;
-  padding-left: 40px; */
   font-size: 20px;
   font-family: fantasy;
   padding-bottom: 40px;
@@ -485,12 +416,12 @@ body.modal-open {
   text-align: center;
   font-size: 18px;
   font-weight: 600;
-  /* text-shadow: 0px 0px 5px black; */
+
   pointer-events: none;
 }
 
-.winning-animation-win>.before,
-.winning-animation-win>.after {
+.winning-animation-win > .before,
+.winning-animation-win > .after {
   z-index: 9999999999;
   position: absolute;
   width: 12px;
@@ -520,7 +451,7 @@ body.modal-open {
   transform: translate(-50%, -50%);
 }
 
-.winning-animation-win>.after {
+.winning-animation-win > .after {
   -moz-animation-delay: 1.25s, 1.25s, 1.25s;
   -webkit-animation-delay: 1.25s, 1.25s, 1.25s;
   -o-animation-delay: 1.25s, 1.25s, 1.25s;
@@ -744,7 +675,6 @@ body.modal-open {
 }
 
 @-webkit-keyframes position {
-
   0%,
   19.9% {
     margin-top: 10%;
@@ -777,7 +707,6 @@ body.modal-open {
 }
 
 @-moz-keyframes position {
-
   0%,
   19.9% {
     margin-top: 10%;
@@ -810,7 +739,6 @@ body.modal-open {
 }
 
 @-o-keyframes position {
-
   0%,
   19.9% {
     margin-top: 10%;
@@ -843,7 +771,6 @@ body.modal-open {
 }
 
 @-ms-keyframes position {
-
   0%,
   19.9% {
     margin-top: 10%;
@@ -876,7 +803,6 @@ body.modal-open {
 }
 
 @keyframes position {
-
   0%,
   19.9% {
     margin-top: 10%;
@@ -924,13 +850,8 @@ body.modal-open {
 }
 
 .spin-btn h6 {
-  /* position: absolute;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  top: 50%; */
-  /* width: 100%; */
   margin: 0;
-  /* margin-top: 2px; */
+
   font-size: 20px;
   font-family: "Righteous", cursive !important;
   pointer-events: none;
@@ -1061,15 +982,14 @@ body.modal-open {
     font-size: 11px;
   }
 
-  .wheel-wrapper {
+  /* .wheel-wrapper {
     transform: scale(0.6);
-  }
-
+  } */
 }
 
 /**** Winner Animation *******/
 
-.pyro>.before,
+/* .pyro>.before,
 .pyro>.after {
   position: absolute;
   width: 5px;
@@ -1505,4 +1425,4 @@ body.modal-open {
   background: linear-gradient(270deg, #ffeb3b, #ffcc80);
   background-size: 200% 200%;
   animation: animateGlow 5s linear;
-}
+} */

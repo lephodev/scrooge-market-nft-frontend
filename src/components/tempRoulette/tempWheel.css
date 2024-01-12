@@ -1,0 +1,283 @@
+.spin-wrapper {
+  --wheel-font: "Lato", "Quicksand", sans-serif;
+  --wheel-size: 400px;
+  --wheel-slice-spacing: 50px;
+  --wheel-border-size: 5px;
+  --wheel-color: #00c2c7;
+  --neutral-color: white;
+  --PI: 3.14159265358979;
+  --nb-item: 0;
+  --item-nb: 0;
+  --selected-item: 0;
+  --nb-turn: 5;
+  --spinning-duration: 4s;
+  --reset-duration: 0;
+}
+
+.spin-wrapper .modal-content {
+  background: var(--primary-bg);
+}
+
+.spin-wrapper .modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 40px;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: -19px;
+  right: -19px;
+  padding: 12px;
+  background: var(--primary-color);
+  border-radius: 30px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Conteneur de la roue = cercle rose extérieur */
+.temp-wheel-container {
+  --wheel-font: "DejaVu Sans", sans-serif !important;
+  --wheel-size: 440px;
+  --wheel-slice-spacing: 50px;
+  --wheel-border-size: 5px;
+  --wheel-color: #00c2c7;
+  --neutral-color: white;
+  --PI: 3.14159265358979;
+  --nb-item: 0;
+  --item-nb: 0;
+  --selected-item: 0;
+  --nb-turn: 5;
+  --spinning-duration: 4s;
+  --reset-duration: 0;
+}
+.temp-wheel-container {
+  display: block;
+  position: relative;
+  box-sizing: content-box;
+  width: calc(var(--wheel-size) + 2 * var(--wheel-border-size));
+  height: calc(var(--wheel-size) + 2 * var(--wheel-border-size));
+  padding: 3px;
+  margin: auto;
+
+  border-radius: 50%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Triangle de sélection = 1 rose +  1 blanc */
+.temp-wheel-container::before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 265px;
+  z-index: 2;
+  width: 230px;
+  top: 0%;
+  transform: translateX(-50%);
+  right: 0%;
+  background: url(../../images/tempWheel/spin-arrow.png) no-repeat;
+  background-size: 100%;
+}
+
+.temp-wheel-container::after {
+  right: -5px;
+  border-right-color: var(--neutral-color);
+}
+
+/* Roue */
+.temp-wheel {
+  display: block;
+  position: relative;
+  box-sizing: content-box;
+  margin: auto;
+  width: var(--wheel-size);
+  height: var(--wheel-size);
+  overflow: hidden;
+  border-radius: 50%;
+  transition: transform var(--reset-duration);
+  transform: rotate(-16deg);
+  cursor: pointer;
+  background: transparent;
+  z-index: 1;
+}
+
+.temp-wheel::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(../../images/tempWheel/spin-circle.png) no-repeat;
+  background-position: center;
+  background-size: cover;
+  transform: rotate(16deg);
+}
+
+.temp-wheel.spinning {
+  transition: transform var(--spinning-duration);
+  transform: rotate(
+    calc(
+      var(--nb-turn) * 360deg +
+        (-360deg * var(--selected-item) / var(--nb-item, 1)) - 16deg
+    )
+  );
+}
+
+/* Centre de la roue = rond blanc au centre */
+.temp-wheel-container::after {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 120px;
+  height: 120px;
+  z-index: 2;
+  top: 49%;
+  left: 50.2%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  /* background: url(../asset/image/spinner/centerBall.png) no-repeat; */
+  background-size: 100%;
+  background-position: center;
+}
+
+/* Element sur la roue */
+.temp-wheel-item {
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+
+  /* position de l'item */
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  transform-origin: center left;
+  transform: translateY(-50%)
+    rotate(calc(var(--item-nb) * (360deg / var(--nb-item, 1))));
+
+  /* texte */
+  color: #fff9b0;
+  text-align: center;
+  padding: 0 25px 0 50px;
+  font-family: var(--wheel-font);
+  font-size: 24px;
+}
+
+/* Background de l'élément = triangle rose plus clair */
+.temp-wheel-item:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-left: 0px;
+  opacity: 0.25;
+  border-left: solid transparent 0;
+}
+
+.wheel-bulb img {
+  width: 426px;
+  height: 426px;
+  position: absolute;
+  top: -var(--smallfont);
+  left: -13px;
+  -webkit-animation: fadeIn 1s infinite;
+  animation: fadeIn 1s infinite;
+  z-index: 2;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.spin-wrapper button {
+  width: 143px;
+  height: 42px;
+  background: linear-gradient(215.13deg, #04eef9 0.32%, #00adb5 99.95%), #00adb5;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: var(--smallfont);
+  line-height: 130%;
+  border: none;
+  margin-top: 20px;
+  z-index: 9;
+}
+
+img.spinTxt {
+  position: absolute;
+  top: 44%;
+  left: 40%;
+  z-index: 5;
+  width: 90px;
+  -webkit-animation: spinTxt 2s ease-in-out infinite;
+  animation: spinTxt 2s ease-in-out infinite;
+}
+
+@-webkit-keyframes spinTxt {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2) rotate(-9deg);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes spinTxt {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2) rotate(-9deg);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+@media screen and (max-width: 767px) {
+  .temp-wheel-container {
+    scale: 0.8;
+    left: 50%;
+    transform: translateX(-63%);
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .temp-wheel-container {
+    scale: 0.7;
+    transform: translateX(-71%);
+  }
+}
