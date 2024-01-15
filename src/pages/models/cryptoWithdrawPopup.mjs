@@ -56,7 +56,7 @@ const CryptoWithdrawPopup = ({ getUserDataInstant }) => {
             reset();
             setSuccessShow(true);
             setLoading(false);
-            toast.success(data?.data?.message);
+            // toast.success(data?.data?.message);
             getUserDataInstant();
           }
         });
