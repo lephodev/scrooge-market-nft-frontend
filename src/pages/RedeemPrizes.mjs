@@ -12,9 +12,7 @@ import Layout from "./Layout.mjs";
 import { authInstance } from "../config/axios.js";
 import scroogelogo from "../images/scroogeCasinoLogo.png";
 import FiatPopup from "./models/fiatPopup.mjs";
-import SuccessModal from "./models/SuccessModal.mjs";
 import Pdf from "../images/Manual.pdf";
-import FastWithdrawPopup from "./models/fastWithdrawPopup.mjs";
 import { validateToken } from "../utils/dateUtils.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import {
@@ -24,6 +22,7 @@ import {
   useSigner,
 } from "@thirdweb-dev/react";
 import ChainContext from "../context/Chain.ts";
+import CryptoWithdrawPopup from "./models/cryptoWithdrawPopup.mjs";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -37,9 +36,6 @@ function RedeemPrizes() {
   const [globalLoader, setglobalLoader] = useState(true);
   const [buyWithFiat, setBuyWithFiat] = useState(false);
   const [showFiat, setShowFiat] = useState(false);
-  const [success50Show, setSuccess50Show] = useState(false);
-  const [success100Show, setSuccess100Show] = useState(false);
-  const [success500Show, setSuccess500Show] = useState(false);
   const [showFastWithdraw, setShowFastWithdraw] = useState(false);
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
 
@@ -122,18 +118,6 @@ function RedeemPrizes() {
     checkKYCStatus();
   }, []);
 
-  const handleSuccess50Modal = () => {
-    setSuccess50Show(!success50Show);
-  };
-
-  const handleSuccess100Modal = () => {
-    setSuccess100Show(!success100Show);
-  };
-
-  const handleSuccess500Modal = () => {
-    setSuccess500Show(!success500Show);
-  };
-
   if (redemptionUnderMaintainance) {
     return <UnderMaintenanceContent />;
   }
@@ -144,14 +128,6 @@ function RedeemPrizes() {
 
   return (
     <Layout>
-      <SuccessModal
-        success50Show={success50Show}
-        success100Show={success100Show}
-        success500Show={success500Show}
-        handleSuccess50Modal={handleSuccess50Modal}
-        handleSuccess100Modal={handleSuccess100Modal}
-        handleSuccess500Modal={handleSuccess500Modal}
-      />
       <main className='main redeem-prizes-page redeem-page'>
         <div className='container'>
           {globalLoader && (
@@ -245,7 +221,7 @@ function RedeemPrizes() {
                   />
                 )}
                 {!isMismatched && showFastWithdraw && (
-                  <FastWithdrawPopup
+                  <CryptoWithdrawPopup
                     show={showFastWithdraw}
                     setShow={setShowFastWithdraw}
                     handleCloseFiat={handleCloseFiat}
