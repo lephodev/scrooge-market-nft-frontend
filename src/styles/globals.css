@@ -4970,6 +4970,20 @@ h3.mega-text {
 button.tw-connect-wallet.css-1un3lp3 {
   background-color: yellow;
 }
+.success-modal-content img {
+  position: relative
+}
+.success-modal-content p {
+  position: absolute;
+    top: 24.5%;
+    left: 40%;
+    transform: translateX(-50%);
+    color: #fc0701;
+    margin: 0;
+    font-weight: bold;
+    font-family: "DejaVu Sans";
+    font-size: 40px;
+}
 
 body > a {
   position: fixed;
@@ -5782,6 +5796,11 @@ p.title-memo {
   .claim-box:hover::before {
     content: unset;
   }
+  .success-modal-content p {
+    top: 24.7%;
+    left: 44%;
+    font-size: 28px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -5838,6 +5857,11 @@ p.title-memo {
   .fiat-data p, .fiat-data .form-label {
     font-size: 14px;
     line-height: 20px;
+  }
+  .success-modal-content p {
+    top: 24.7%;
+    left: 44%;
+    font-size: 20px;
   }
 }
 
