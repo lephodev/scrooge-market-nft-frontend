@@ -4971,18 +4971,18 @@ button.tw-connect-wallet.css-1un3lp3 {
   background-color: yellow;
 }
 .success-modal-content img {
-  position: relative
+  position: relative;
 }
 .success-modal-content p {
   position: absolute;
-    top: 24.5%;
-    left: 40%;
-    transform: translateX(-50%);
-    color: #fc0701;
-    margin: 0;
-    font-weight: bold;
-    font-family: "DejaVu Sans";
-    font-size: 40px;
+  top: 24.5%;
+  left: 40%;
+  transform: translateX(-50%);
+  color: #fc0701;
+  margin: 0;
+  font-weight: bold;
+  font-family: "DejaVu Sans";
+  font-size: 40px;
 }
 
 body > a {
@@ -5049,7 +5049,7 @@ h2#radix-\:r1\: {
   margin: 40px auto;
   border: 1px solid #1c1c1c;
   box-shadow: 0px 20px 20px #00000091;
-  border-radius: 10px
+  border-radius: 10px;
 }
 
 .token-box {
@@ -5066,7 +5066,6 @@ h2#radix-\:r1\: {
   font-size: 14px;
   height: 43px;
   margin-bottom: 20px;
-
 }
 .copy-icon {
   filter: brightness(0) invert(1);
@@ -5077,7 +5076,7 @@ h2#radix-\:r1\: {
 }
 
 .fiat-data p,
-.fiat-data .form-label   {
+.fiat-data .form-label {
   color: #fff;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -5163,7 +5162,6 @@ p.title-memo {
 .claim-box .crypto-balance-div:hover {
   background: transparent !important;
 }
-
 
 /********************************************************************************************/
 /************* Media Query ******************/
@@ -5854,14 +5852,15 @@ p.title-memo {
   .fiat-data {
     padding: 30px 15px;
   }
-  .fiat-data p, .fiat-data .form-label {
+  .fiat-data p,
+  .fiat-data .form-label {
     font-size: 14px;
     line-height: 20px;
   }
   .success-modal-content p {
-    top: 24.7%;
+    top: 25.5%;
     left: 44%;
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
@@ -5934,7 +5933,6 @@ p.title-memo {
     padding: 10px 5px;
     border: 3px solid #fbff12;
     border-radius: 10px;
-
   }
 
   .prizes-card {
@@ -6515,7 +6513,6 @@ p.title-memo {
   .claim-free-page .prizes-card .new-btn button {
     height: 48px;
   }
-  
 }
 
 @media screen and (max-width: 480px) {
@@ -6584,4 +6581,3 @@ p.title-memo {
     font-size: 20px;
   }
 }
-
