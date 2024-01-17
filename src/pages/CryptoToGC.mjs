@@ -624,20 +624,6 @@ export default function CryptoToGC() {
     }
     return parseInt(Token) + discount;
   };
-  const [currentState, setCurrentState] = useState("");
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get("https://geolocation-db.com/json/");
-        const CurrentIp = res?.data?.IPv4;
-        const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
-        const CurrentCity = res1?.data;
-        setCurrentState(CurrentCity);
-      } catch (error) {
-        console.log("errr", error);
-      }
-    })();
-  }, []);
 
   const handleOk = async (event) => {
     try {
