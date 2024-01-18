@@ -320,13 +320,34 @@
   padding: 10px;
   border-radius: 10px;
 }
+.image-placeholder {
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: contain;
+  background-position: center;
+  height: 100px;
+}
+.image-placeholder.front-placeholder {
+  filter: brightness(0) invert(1);
+  background-image: url("../images/kyc/frontId_placehoder.png");
+}
+.image-placeholder.selfi-placeholder {
+  background-image: url("../images/kyc/selfi_placehoder.png");
+}
+.image-placeholder.address-placeholder {
+  background-image: url("../images/kyc/address_placehoder.png");
+}
+
+.image-placeholder p {
+  text-align: center;
+  display: none;
+}
 
 .marketPlace_kycForm .no-image-area {
   font-size: 12px;
   width: 100%;
-  display: grid;
-  place-content: center;
   padding: 2px 0px;
+  padding-top: 15px;
 }
 
 .marketPlace_kycForm .login-button.full-w {

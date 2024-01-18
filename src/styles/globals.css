@@ -79,10 +79,6 @@ html {
   font-weight: bolder;
 }
 
-.font-martian {
-  /* font-family: "Poppins"; */
-}
-
 .Toastify__toast-container--top-center {
   top: 1em;
   left: 50%;
@@ -91,10 +87,10 @@ html {
 }
 
 .header {
-  position: sticky;
   top: 0%;
   z-index: 9999;
   background: #000;
+  position: relative;
 }
 
 .header nav {
@@ -129,7 +125,6 @@ html {
   line-height: 20px;
   display: flex;
   align-items: center;
-  /* padding: 3px 30px; */
   padding: 10px 15px;
   transition: all 0.5s;
   border-radius: 30px;
@@ -148,7 +143,6 @@ html {
 .header-btn {
   display: flex;
   max-width: 250px;
-  /* flex-wrap: wrap; */
   gap: 10px;
   width: 100%;
 }
@@ -235,7 +229,6 @@ html {
   border: 4px solid #d2042d;
   border-radius: 10px;
   background-color: transparent;
-  /* font-family: "Poppins"; */
 }
 
 .wallet-casino-profile-img {
@@ -251,7 +244,6 @@ html {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  /* font-family: "Poppins"; */
   font-weight: bold;
   color: #fff;
   font-size: 24px;
@@ -352,6 +344,7 @@ span.wallet-user-name {
   background-color: transparent;
   font-weight: bold;
   font-size: 16px;
+  margin-bottom: 30px !important;
 }
 
 .crypto-balance-header {
@@ -378,7 +371,6 @@ span.wallet-user-name {
 .claim-btn {
   margin-top: 20px;
   padding: 10px 20px !important;
-  /* font-family: "Poppins"; */
   font-size: 14px;
   background-color: #000;
   border: 2px solid #d2042d;
@@ -417,7 +409,6 @@ span.wallet-user-name {
   padding: 20px;
   width: 50%;
   margin: 45px auto 0 auto;
-  /* font-family: "Poppins"; */
   font-size: 24px;
 }
 
@@ -428,7 +419,7 @@ span.wallet-user-name {
   flex-direction: row;
   justify-content: center;
   text-align: center;
-  padding: 0px 10px;
+  padding: 0;
 }
 
 .header-nav-menu-mobile {
@@ -470,7 +461,6 @@ span.wallet-user-name {
 
 .switch-network-div {
   text-align: center;
-  /* font-family: "Poppins"; */
   font-weight: bold;
   color: #fbff12;
   border: 3px solid #fbff12;
@@ -515,7 +505,6 @@ span.wallet-user-name {
 .transaction-div-title {
   width: 100%;
   text-align: center;
-  /* font-family: "Poppins"; */
   font-size: 26px;
   padding: 10px 0 30px 0;
   text-transform: uppercase;
@@ -533,7 +522,6 @@ span.wallet-user-name {
   text-align: center;
   border: 2px solid #f9ff00;
   border-radius: 5px;
-  /* font-family: "Poppins"; */
 }
 
 .transaction-card-coupon-code {
@@ -548,7 +536,6 @@ span.wallet-user-name {
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  /* font-family: "Poppins"; */
   padding: 20px 0 0 0;
 }
 
@@ -558,13 +545,11 @@ span.wallet-user-name {
   justify-content: center;
   flex-wrap: wrap;
   padding: 10px 0 0 0;
-  /* font-family: "Poppins"; */
 }
 
 .page-nav-header-btn {
   padding: 10px 5px;
   margin: 0 10px;
-  /* font-family: "Poppins"; */
   width: 200px;
   border: 2px solid #d2042d;
   background-color: #000000;
@@ -576,7 +561,6 @@ span.wallet-user-name {
   padding: 10px 25px;
   margin: 0 10px;
   background-color: #24262b;
-  /* font-family: "Poppins"; */
   border: none;
   border-radius: 5px;
 }
@@ -653,7 +637,6 @@ span.wallet-user-name {
   border: 2px solid #fbff12;
   border-radius: 5px;
   color: #5ee47e;
-  /* font-family: "Poppins"; */
   font-weight: bold;
 }
 
@@ -695,7 +678,6 @@ span.wallet-user-name {
 .fine-print-txt {
   text-align: center;
   font-size: 16px;
-  /* font-family: "Poppins"; */
 }
 
 .flex-row {
@@ -712,6 +694,7 @@ span.wallet-user-name {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
+  gap: 20px;
 }
 
 .nft-home-sell-div {
@@ -744,7 +727,6 @@ span.wallet-user-name {
   border-radius: 5px;
   margin-top: 15px;
   color: #5ee47e;
-  /* font-family: "Poppins"; */
   font-weight: bold;
 }
 
@@ -762,7 +744,6 @@ span.wallet-user-name {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  /* font-family: "Poppins"; */
   color: #fbff12;
   width: 16%;
 }
@@ -777,7 +758,6 @@ span.wallet-user-name {
   background-color: #1b2129;
   border: 2px solid #d2042d;
   border-radius: 5px;
-  /* font-family: "Poppins"; */
 }
 
 .full-page-container {
@@ -786,7 +766,6 @@ span.wallet-user-name {
   padding: 20px 30px;
   border: 6px solid #fbff12;
   border-radius: 10px;
-  /* font-family: "Poppins"; */
 }
 
 .modal-popup {
@@ -799,7 +778,6 @@ span.wallet-user-name {
 }
 
 .modal-header {
-  /* font-family: "Poppins"; */
   color: #fbff12;
   text-align: center;
   margin-bottom: 25px;
@@ -816,7 +794,6 @@ span.wallet-user-name {
 .modal-popup-btn {
   margin-top: 30px;
   padding: 15px 30px !important;
-  /* font-family: "Poppins"; */
   font-size: 20px;
   color: #fbff12;
   background-color: #000;
@@ -845,14 +822,7 @@ span.wallet-user-name {
 [role="tooltip"].popup-content {
   width: 500px;
   padding: 15px;
-  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px; */
-  /* color: #d2042d; */
-  /* background: #1b2129; */
-  /* font-family: "Poppins"; */
   text-align: center;
-  /* border: 2px solid #fbff12; */
-
-  /* background-color: rgba(255, 255, 255, 0.05); */
   background: #000;
   color: #878d93;
   border: 1px solid #fff;
@@ -982,7 +952,6 @@ span.wallet-user-name {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  /* font-family: "Poppins"; */
   color: #fff;
   width: 100%;
   line-height: 1.5;
@@ -1058,7 +1027,6 @@ span.wallet-user-name {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  /* font-family: "Poppins"; */
   color: #fff;
   width: 100%;
   gap: 30px;
@@ -1095,9 +1063,6 @@ button.active-btn.btn.btn-primary {
   background: #fbff14;
   color: black;
   border-color: #f9ff00;
-}
-
-.erc721Card-rarity-subsection {
 }
 
 .rarity-pct-1 {
@@ -1187,7 +1152,6 @@ button.active-btn.btn.btn-primary {
   text-align: center;
   flex-wrap: wrap;
   align-items: center;
-  /* font-family: "Poppins"; */
   color: #fbff12;
   width: 40%;
 }
@@ -1199,7 +1163,6 @@ button.active-btn.btn.btn-primary {
   border-radius: 5px;
   margin-top: 15px;
   color: #fbff12;
-  /* font-family: "Poppins"; */
   font-weight: bold;
 }
 
@@ -1208,9 +1171,6 @@ button.active-btn.btn.btn-primary {
   border: 2px solid #fbff12;
   color: #5ee47e;
   cursor: pointer;
-}
-
-.erc1155Card-details {
 }
 
 .erc1155-price {
@@ -1290,14 +1250,12 @@ select {
 }
 
 .white-txt {
-  /* font-family: "Poppins"; */
   text-transform: uppercase;
   font-size: 20px;
   margin-bottom: 20px;
 }
 
 .detecting-txt {
-  /* font-family: "Poppins"; */
   text-transform: uppercase;
   font-size: 26px;
   margin-bottom: 20px;
@@ -1343,7 +1301,6 @@ select {
 .submit-btn {
   margin-top: 45px;
   padding: 15px 30px !important;
-  /* font-family: "Poppins"; */
   font-size: 22px;
   background-color: #000;
   border: 2px solid #d2042d;
@@ -1358,7 +1315,6 @@ select {
 
 .button1 {
   padding: 15px 30px !important;
-  /* font-family: "Poppins"; */
   font-size: 24px;
   background-color: #000;
   border: 2px solid #d2042d;
@@ -1373,7 +1329,6 @@ select {
 
 .button2 {
   padding: 15px 30px !important;
-  /* font-family: "Poppins"; */
   font-size: 20px;
   background-color: #000;
   border: 2px solid #d2042d;
@@ -1389,7 +1344,6 @@ select {
 
 .button3 {
   padding: 15px 30px !important;
-  /* font-family: "Poppins"; */
   font-size: 20px;
   background-color: #d2042d;
   border: 2px solid #d2042d;
@@ -1413,7 +1367,6 @@ select {
   border: 2px solid #0dff00;
   border-radius: 5px;
   text-transform: uppercase;
-  /* font-family: "Poppins"; */
   color: #000;
 }
 
@@ -1426,7 +1379,6 @@ select {
 
 .button-inline {
   padding: 5px 10px !important;
-  /* font-family: "Poppins"; */
   font-size: 16px;
   background-color: #000;
   border: 2px solid #d2042d;
@@ -1479,20 +1431,12 @@ select {
 }
 
 .feature-overview-block {
-  padding: 20px 20px;
-  background-color: #d2042d;
-  border-radius: 5px;
-  border: 2px solid #d2042d;
-}
-
-.feature-overview-block {
   padding: 10px 20px;
-  color: #fff;
   cursor: pointer;
   background-color: #d2042d;
   border: 2px solid #fbff12;
+  border-radius: 5px;
   color: #fbff12;
-  /* font-family: "Poppins"; */
   font-weight: bold;
   transition: all 0.5s;
 }
@@ -1502,21 +1446,12 @@ select {
   background-color: transparent;
 }
 
-.flex-row-no-margin {
-  gap: 20px;
-}
-
 .flex-row-no-margin .feature-overview-block:last-child {
   border: none;
   color: #fff;
 }
 
 .half-page-menu-wrapper {
-  /* display: flex; */
-  /* align-items: center; */
-  /* flex-direction: row; */
-  /* justify-content: flex-end; */
-  /* padding: 50px 10px 50px 15%; */
   padding: 50px 0;
 }
 
@@ -1525,8 +1460,6 @@ select {
   justify-content: center;
   align-items: center !important;
   vertical-align: middle;
-  /* padding: 0 20px; */
-  /* background-color: #000; */
   width: 100%;
   gap: 20px;
 }
@@ -1536,7 +1469,6 @@ select {
   margin: 0 auto !important;
   border-radius: 10px;
   min-height: 275px;
-  background-color: transparent;
   border: 1px solid #1c1c1c;
   background: transparent;
   box-shadow: 0px 20px 20px #00000091;
@@ -1568,9 +1500,6 @@ select {
   gap: 10px;
 }
 
-.raffles-page .leaderboard-card-div {
-}
-
 .raffles-page .leaderboard-card-div h1 {
   margin: 30px 0;
 }
@@ -1586,22 +1515,17 @@ select {
   margin: 20px;
   width: 80%;
   padding: 40px;
-  /* border: 4px solid #fbff12; */
   border: 4px solid transparent;
-
   border-radius: 5px;
   text-align: center;
   text-transform: uppercase;
   align-items: center;
-  /* font-family: "Poppins"; */
   color: #ffffff;
   font-size: 20px;
-  /* background-color: #000; */
   background-color: transparent !important;
 }
 
 .prizes-card:hover {
-  /* border: 4px solid #fbff12; */
   border: 4px solid transparent;
 }
 
@@ -1609,7 +1533,6 @@ select {
   text-align: center;
   margin-bottom: 25px;
   color: #0dff00;
-  /* font-family: "Poppins"; */
   font-size: 26px;
   text-transform: uppercase;
 }
@@ -1686,12 +1609,10 @@ select {
 .earn-free-tokens-desc-header {
   text-align: center;
   font-size: 24px;
-  /* font-family: "Poppins"; */
 }
 
 .earn-free-tokens-desc {
   text-align: center;
-  /* font-family: "Poppins"; */
   margin-bottom: 20px;
 }
 
@@ -1984,7 +1905,6 @@ select {
   border-radius: 5px;
   padding: 10px 30px;
   margin: 0 20px;
-  /* font-family: "Poppins"; */
   font-weight: 400;
   font-size: 20px;
   cursor: pointer;
@@ -2040,7 +1960,6 @@ select {
 .close-btn-round {
   padding: 7px 16px;
   background-color: #1b2129;
-  /* font-family: "Poppins"; */
   border-radius: 100%;
   color: #d2042d;
   border: 2px solid #d2042d;
@@ -2182,10 +2101,6 @@ select {
   border-radius: 100%;
 }
 
-.header-nav-container-mobile {
-  padding: 0;
-}
-
 .mobile-menu {
   padding: 15px 10px !important;
 }
@@ -2227,13 +2142,11 @@ select {
   color: #fbff12;
   text-shadow: 2px 2px #d2042d;
 }
+.my-wallet-page.main .title {
+  padding-bottom: 40px;
+}
 
 /*********************** Header *************************/
-
-.header {
-  /* background: #1a1c20; */
-  position: relative;
-}
 
 .header-nav-logo {
   max-width: 92px;
@@ -2410,7 +2323,6 @@ li#walletConnect {
   position: relative;
   max-width: 800px;
   width: 100%;
-  /* border: 1px solid #f9ff00; */
   margin: 20px auto;
   background: #232529;
   border-radius: 10px;
@@ -2436,24 +2348,15 @@ li#walletConnect {
   width: 100%;
 }
 
-/* .spin-win-text {
-  position: absolute;
-  left: 30%;
-} */
-
 .spin-win-text p {
-  /* margin: 0; */
   font-size: 40px;
   font-weight: 700;
   color: #fbff14;
   text-transform: uppercase;
 }
-
-/* **************************************************************** */
 /*********************** Footer *************************/
 
 .footer {
-  /* background: #1a1c20; */
   position: relative;
 }
 
@@ -2608,7 +2511,6 @@ ul.footer-social li a:hover img {
 }
 
 ul.footer-social li a:hover {
-  /* background: var(--main-bg); */
   background: #f9ff00;
 }
 
@@ -2712,7 +2614,6 @@ ul.footer-support li img {
   margin: 0px auto;
   border: 1px solid #1c1c1c;
   background: transparent;
-  /* background: radial-gradient(circle, rgb(28 28 28) 0%, rgb(0 0 0) 100%); */
   box-shadow: 0px 20px 20px #00000091;
 }
 
@@ -2781,7 +2682,6 @@ ul.footer-support li img {
 .grid .card {
   border: 1px solid #1c1c1c;
   background: transparent;
-  /* background: radial-gradient(circle, rgb(28 28 28) 0%, rgb(0 0 0) 100%); */
   box-shadow: 0px 20px 20px #00000091;
   margin: 0;
   max-width: calc(33.33% - 15px);
@@ -2866,7 +2766,6 @@ ul.footer-support li img {
 
 .privacy-page .contact-div h4 {
   margin: 0;
-  /* color: #fff; */
   font-size: 22px;
 }
 
@@ -2965,7 +2864,7 @@ ul.footer-support li img {
 }
 
 .my-wallet-page .wallet-casino-profile-div {
-  border: 1px solid #1c1c1c;
+  border: none;
   background-color: transparent;
   box-shadow: 0px 20px 20px #00000091;
   border-radius: 10px;
@@ -2999,10 +2898,6 @@ ul.footer-support li img {
   gap: 20px;
   margin-bottom: 40px;
 }
-
-/* .my-wallet-page .transaction-div-title {
-  padding: 30px 0;
-} */
 
 .my-wallet-page .wallet-close {
   position: absolute;
@@ -3174,7 +3069,6 @@ ul.footer-support li img {
 
 .social-share-grid .social-share-btn-div {
   margin-top: 30px;
-  margin-top: 30px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -3224,17 +3118,14 @@ button.shareBtn-disabled {
 }
 
 .social-share-card:nth-child(2n + 1) .card-color {
-  /* background-color: #3ecd5e; */
   background-color: rgba(59, 173, 227, 1);
 }
 
 .social-share-card:nth-child(2n) .card-color {
-  /* background-color: #e44002; */
   background-color: rgba(87, 111, 230, 1);
 }
 
 .social-share-card:nth-child(5n - 1) .card-color {
-  /* background-color: #f9b234; */
   background-color: rgba(152, 68, 183, 1);
 }
 
@@ -3319,6 +3210,7 @@ button.shareBtn-disabled {
 
 .earn-token .bordered-section .leaderboard-card-div:hover {
   background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
 }
 
 .earn-token .leaderboard-row {
@@ -3351,10 +3243,6 @@ button.shareBtn-disabled {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.earn-token .bordered-section .leaderboard-card-div:hover {
-  color: #fff;
 }
 
 .earn-token .bordered-section .flex-row-no-margin {
@@ -3434,24 +3322,6 @@ button.shareBtn-disabled {
   gap: 20px;
 }
 
-/* .text-animate {
-  animation: color-change 5s infinite;
-}
-
-@keyframes color-change {
-  0% {
-    color: rgba(59, 173, 227, 1);
-  }
-  50% {
-    color: rgba(87, 111, 230, 1);
-  }
-  75% {
-    color: rgba(152, 68, 183, 1);
-  }
-  100% {
-    color: rgba(255, 53, 127, 1);
-  }
-} */
 .text-animate h1 {
   color: #f9ff00;
   background-image: -webkit-linear-gradient(#d2042d, #f9ff00);
@@ -3470,18 +3340,15 @@ button.shareBtn-disabled {
   font-size: 20px;
   margin: 0;
   color: #f9ff00;
-  /* background-image: -webkit-linear-gradient(#d2042d, #f9ff00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; */
   font-weight: 700;
   letter-spacing: 0.1em;
   line-height: 30px;
 }
 
 .text-animate h3 {
-  font-size: 24px;
+  font-size: 14px;
   margin: 0;
-  color: #f9ff00;
+  color: rgb(249 255 0 / 90%);
   font-weight: 700;
   letter-spacing: 0.1em;
   line-height: 30px;
@@ -3559,7 +3426,6 @@ button.shareBtn-disabled {
   left: 0;
   width: 100%;
   height: 100%;
-  /* background: linear-gradient(#2196f3, #e91e63); */
   background-image: linear-gradient(
     45deg,
     #ff512f 0%,
@@ -3672,9 +3538,11 @@ button.shareBtn-disabled {
 .claim-free-page .feature-overview-div p {
   line-height: 1.5;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   color: #878d93;
   margin: 0;
+  font-weight: 400;
+  padding-bottom: 5px;
 }
 
 .nft-card-grid .green-border-6px {
@@ -3719,7 +3587,6 @@ button.shareBtn-disabled {
   left: 0;
   width: 100%;
   height: 100%;
-  /* background: linear-gradient(#f00, #f0f); */
   background-image: linear-gradient(
     45deg,
     #ff512f 0%,
@@ -3755,12 +3622,9 @@ button.shareBtn-disabled {
   transition: all 0.5s;
   color: #878d93;
   width: 100%;
-  padding: 30px 20px;
+  padding: 30px 0px;
 }
 
-/* .claim-free-page .prizes-card:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-} */
 .claim-free-page .prizes-card .additional-info-div {
   background: transparent;
   padding: 30px;
@@ -3773,6 +3637,7 @@ button.shareBtn-disabled {
   border-radius: 10px;
   box-shadow: 0 20px 20px #00000091;
   width: 100%;
+  font-weight: 400;
 }
 
 .claim-free-page .prizes-card .additional-info-div:hover {
@@ -3805,7 +3670,11 @@ button.shareBtn-disabled {
 
 .claim-free-page .prizes-card .holder-claim-details h4 {
   margin: 0;
-  color: #fbff12;
+  color: #fff;
+  font-size: 18px;
+}
+.claim-free-page .prizes-card .holder-claim-details span {
+  color: #f9ff00;
 }
 
 .claim-free-page .pageImgContainer,
@@ -3813,15 +3682,6 @@ button.shareBtn-disabled {
 .redeem-prizes-page .pageImgContainer,
 .nft-page .pageImgContainer,
 .earn-token .pageImgContainer {
-  /* background-color: rgb(255 255 255 / 45%); */
-  /* background: rgb(231 201 117 / 50%);
-  border: 1px solid #1c1c1c;
-  box-shadow: 0px 20px 20px #00000091;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;
-  margin: 0; */
   background: rgb(0 0 0 / 75%);
   border: 1px solid #1c1c1c;
   box-shadow: 0px 20px 20px #00000091;
@@ -3857,11 +3717,16 @@ button.shareBtn-disabled {
   color: #f9ff00;
   font-size: 32px;
   font-weight: 700;
-  /* letter-spacing: 0.2em; */
   line-height: 30px;
   position: relative;
   text-align: center;
-  /* text-transform: uppercase; */
+}
+.claim-free-page .title {
+  font-size: 24px !important;
+  padding-bottom: 15px !important;
+}
+.claim-free-page .scrooge-main-heading {
+  padding-bottom: 20px;
 }
 
 .earn-token .social-share-card {
@@ -3890,12 +3755,6 @@ button.shareBtn-disabled {
   gap: 20px;
 }
 
-/* .earn-token .social-share-card {
-  background-color: rgba(255, 255, 255, 0.05);
-} */
-/* .earn-token .earn-affiliate-card .earn-card-profile .inlineTitle {
-  text-shadow: 1px 1px #fbff12;
-} */
 .earn-token .earn-card-box .affiliate-card-row p {
   margin: 0;
   font-size: 16px;
@@ -3939,14 +3798,8 @@ button.shareBtn-disabled {
 }
 
 .my-wallet-page .bottom-row-btns-div {
-  /* justify-content: space-between;
-  max-width: 500px;
-  width: 100%;
-  margin: 0 auto; */
   justify-content: center;
-
   width: 100%;
-
   gap: 20px;
 }
 
@@ -3989,15 +3842,6 @@ button.shareBtn-disabled {
   background-image: conic-gradient(from 1turn, #ffd712, #f9ff00) !important;
 }
 
-.gradient-btn {
-  background-image: linear-gradient(
-    45deg,
-    #ff512f 0%,
-    #f09819 51%,
-    #ff512f 100%
-  );
-}
-
 .card-btn {
   display: flex;
   align-items: center;
@@ -4018,6 +3862,12 @@ button.shareBtn-disabled {
   font-weight: 700;
   box-shadow: 0px 0px 14px -7px #f09819;
   cursor: pointer;
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
 }
 
 .gradient-btn:hover {
@@ -4109,7 +3959,6 @@ button.shareBtn-disabled {
   height: 150px;
   width: 150px;
   margin: 0 auto;
-  /* background-color: #9abc663d; */
 }
 
 .payment-success .payment-success-card {
@@ -4149,8 +3998,6 @@ button.shareBtn-disabled {
 
 /* ********************************************************* */
 .check-container {
-  /* width: 6.25rem; */
-  /* height: 7.5rem; */
   width: 150px;
   height: 150px;
   display: flex;
@@ -4160,8 +4007,6 @@ button.shareBtn-disabled {
 }
 
 .check-background {
-  /* width: 100%;
-  height: calc(100% - 1.25rem); */
   width: 120px;
   height: 120px;
   background: linear-gradient(to bottom right, #5de593, #9abc66);
@@ -4339,12 +4184,6 @@ button.shareBtn-disabled {
 
 /* **************************************************************************************** */
 
-.buy-chips-grid {
-  /* display: grid;
-  gap: 30px;
-  grid-template-columns: repeat(4, minmax(0, 1fr)); */
-}
-
 .buy-chips-grid .buy-chips-grid-box {
   display: flex;
   align-items: center;
@@ -4445,7 +4284,7 @@ button.shareBtn-disabled {
 }
 
 .prizes-chip-count-grid {
-  padding: 40px 0;
+  padding: 30px 0;
 }
 
 .disclaimer-Box {
@@ -4454,7 +4293,7 @@ button.shareBtn-disabled {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 6px 15px;
+  padding: 0px;
   margin-bottom: 20px;
 }
 
@@ -4464,7 +4303,7 @@ button.shareBtn-disabled {
 
 .disclaimer-Box p {
   margin: 0px;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .disclaimer-Box button {
@@ -4525,6 +4364,8 @@ button.shareBtn-disabled {
 
 .popupBtn {
   display: flex;
+  justify-content: center;
+  padding-top: 10px;
   gap: 10px;
 }
 
@@ -4709,11 +4550,9 @@ span.input-range__label.input-range__label--value
 
 .purchasemodal-cards img.card-img-top {
   padding-top: 10px;
-  width: 130px;
   max-width: 160px;
   height: 100px;
   margin: 5px auto;
-  /* transform: rotate3d(8, 8, 5, 14deg); */
   width: 100%;
   object-fit: contain;
 }
@@ -4940,7 +4779,6 @@ button.affiliate-dropdownBtn.close::before {
 .popup_inp {
   padding: 0px 10px;
   border-radius: 8px;
-  /* outline: !important; */
   border: 1px solid #6b6b6b;
 }
 
@@ -4958,7 +4796,6 @@ button.affiliate-dropdownBtn.close::before {
 }
 
 .scrooge-under-content h4 {
-  color: #fff;
   font-size: 40px;
   font-weight: 600;
   margin: 0;
@@ -5056,21 +4893,16 @@ h3.mega-text {
 .fiat-group {
   padding-bottom: 20px;
 }
-.fiat-content .form-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #ddd !important;
-}
 .fiat-group .form-control {
-  background: #000;
-  border: 1px solid #1c1c1c;
   box-shadow: 0px 20px 20px #00000091;
-  color: #ddd;
-  border-radius: 30px;
   padding: 8px 20px;
-  font-size: 16px;
-  height: 36px;
   font-weight: 400 !important;
+  background: #080808;
+  border: 1px solid #25282e;
+  border-radius: 30px;
+  color: #b6b3b3;
+  font-size: 14px;
+  height: 43px;
 }
 .fiat-group input {
   font-weight: 400 !important;
@@ -5078,6 +4910,7 @@ h3.mega-text {
 }
 .fiat-group input::placeholder {
   font-weight: 400 !important;
+  color: #b6b3b3;
 }
 .fiat-group .form-control:focus,
 .fiat-group input:focus {
@@ -5090,13 +4923,18 @@ h3.mega-text {
 }
 .fiat-content p.error-msg {
   font-size: 14px;
-  color: #fa0000;
+  color: #fa0000 !important;
   margin: 0;
   padding-top: 5px;
+  font-weight: 400;
+  text-align: left;
 }
 .fiat-content h6.deducted-heading {
-  font-size: 16px;
-  margin: 0;
+  font-size: 15px;
+  padding-bottom: 15px;
+  max-width: 370px;
+  width: 100%;
+  margin: 0px auto;
 }
 .fiat-modal .popupBtn {
   justify-content: center;
@@ -5118,6 +4956,211 @@ h3.mega-text {
 .success-modal .modal-body {
   padding: 0;
   background: transparent;
+}
+
+.payment-success .card-check {
+  border-radius: 200px;
+  height: 150px;
+  width: 150px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button.tw-connect-wallet.css-1un3lp3 {
+  background-color: yellow;
+}
+.success-modal-content img {
+  position: relative;
+}
+.success-modal-content p {
+  position: absolute;
+  top: 24.5%;
+  left: 40%;
+  transform: translateX(-50%);
+  color: #fc0701;
+  margin: 0;
+  font-weight: bold;
+  font-family: "DejaVu Sans";
+  font-size: 40px;
+}
+
+body > a {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+.ip-block-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  padding: 10px 20px;
+  gap: 20px;
+}
+p.ip-block {
+  text-align: center;
+  font-size: 26px;
+  color: red;
+  font-weight: 500;
+  max-width: 700px;
+  width: 100%;
+  margin: 0px auto;
+}
+.ip-block-grid img.maintance-img {
+  height: 90vh;
+  object-fit: contain;
+}
+
+h2#radix-\:r4\: {
+  color: red !important;
+}
+
+h2#radix-\:r1\: {
+  color: red !important;
+}
+.support-chain {
+  text-align: center;
+}
+.support-chain p {
+  margin: 0;
+  padding-bottom: 10px;
+  max-width: 200px;
+  width: 100%;
+  text-align: left;
+}
+.support-chain span {
+  padding-bottom: 5px;
+}
+.support-chain ol {
+  max-width: 200px;
+}
+.fiat-data {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 40px 50px;
+  background: #151515;
+  margin: 40px auto;
+  border: 1px solid #1c1c1c;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+}
+
+.token-box {
+  display: flex;
+  align-items: center;
+  padding: 8px 20px;
+  justify-content: space-between;
+  box-shadow: 0px 20px 20px #00000091;
+  font-weight: 400 !important;
+  background: #080808;
+  border: 1px solid #25282e;
+  border-radius: 30px;
+  color: #b6b3b3;
+  font-size: 14px;
+  height: 43px;
+  margin-bottom: 20px;
+}
+.copy-icon {
+  filter: brightness(0) invert(1);
+  height: 20px;
+  margin-left: 10px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.fiat-data p,
+.fiat-data .form-label {
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: 30px;
+  margin: 0;
+  font-size: 14px;
+  padding-bottom: 5px;
+}
+.fiat-data p {
+  font-size: 16px;
+}
+
+.fiat-data h5 {
+  color: #f8d761;
+  font-size: 16px;
+  margin: 0;
+  text-transform: none;
+  width: 95%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+p.title-memo {
+  color: #f9ff00;
+  text-shadow: none;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+}
+.prizes_container p.title-memo {
+  max-width: 520px;
+  width: 100%;
+  margin: 0;
+}
+.page-sub-title h2 {
+  margin: 0px auto;
+  font-size: 18px;
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  line-height: 1.5;
+}
+.my-wallet-page .claim-free-page .prizes-card {
+  border: none;
+}
+.claim-box {
+  border: 1px solid #1c1c1c;
+  background-color: transparent;
+  box-shadow: 0px 20px 20px #00000091;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s;
+  margin: 0;
+  width: 100%;
+  padding-top: 20px;
+  margin-bottom: 40px;
+}
+.claim-box:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.claim-box:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#2196f3, #e91e63);
+  clip-path: circle(10% at 5% 5%);
+  transition: all 0.5s;
+}
+.claim-box .crypto-balance-div {
+  border: 0px !important;
+  background-color: transparent !important;
+  box-shadow: unset !important;
+  border-radius: 0px !important;
+  position: unset !important;
+  padding: 0px !important;
+  margin: 0px !important;
+}
+.claim-box .crypto-balance-div:hover {
+  background: transparent !important;
 }
 
 /********************************************************************************************/
@@ -5154,14 +5197,10 @@ h3.mega-text {
   }
 
   .wallet-icon-img-mobile {
+    max-width: 135px;
     width: 40%;
     height: 40%;
   }
-
-  .wallet-icon-img-mobile {
-    max-width: 135px;
-  }
-
   .wallet-casino-profile-div {
     width: 100%;
     padding: 20px 10px;
@@ -5244,14 +5283,11 @@ h3.mega-text {
 
   .header .navbar-expand-lg .navbar-nav .nav-link {
     padding: 5px;
+    font-size: 14px;
   }
 
   .navbar-expand-lg .navbar-nav {
     gap: 5px;
-  }
-
-  .header .navbar-expand-lg .navbar-nav .nav-link {
-    font-size: 14px;
   }
 }
 
@@ -5389,16 +5425,13 @@ h3.mega-text {
 
   .header-btn {
     margin-right: 60px;
+    display: none;
   }
 
   .header .navbar-nav {
     padding-top: 30px;
     gap: 20px;
     padding-bottom: 10px;
-  }
-
-  .header-btn {
-    display: none;
   }
 
   .header nav {
@@ -5569,16 +5602,13 @@ h3.mega-text {
 
   .header-btn {
     margin-right: 60px;
+    display: none;
   }
 
   .header .navbar-nav {
     padding-top: 30px;
     gap: 20px;
     padding-bottom: 10px;
-  }
-
-  .header-btn {
-    display: none;
   }
 
   .header nav {
@@ -5638,6 +5668,13 @@ h3.mega-text {
 
   .main .title {
     font-size: 30px;
+  }
+  .my-wallet-page.main .title {
+    padding-bottom: 20px;
+  }
+  .claim-free-page .title {
+    font-size: 20px !important;
+    text-shadow: none;
   }
 
   .connect-wallet-div {
@@ -5754,6 +5791,14 @@ h3.mega-text {
   .nft-page .nft-card-grid p {
     text-align: center;
   }
+  .claim-box:hover::before {
+    content: unset;
+  }
+  .success-modal-content p {
+    top: 24.7%;
+    left: 44%;
+    font-size: 28px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -5770,9 +5815,6 @@ h3.mega-text {
   .spin-popup-content .spin-wheel {
     padding: 20px 10px;
   }
-  /* .spin-win-text {
-    left: 20% !important;
-  } */
   .spin-win-text p {
     font-size: 20px !important;
   }
@@ -5781,10 +5823,6 @@ h3.mega-text {
     margin: 0 20px;
     flex-direction: column;
   }
-
-  /* .spin-button {
-    left: 25% !important;
-  } */
   .asterisk-desc.cryptoTotoken ul {
     max-width: 85%;
   }
@@ -5801,15 +5839,28 @@ h3.mega-text {
     padding: 30px 15px;
     padding-top: 0px;
   }
-  .fiat-group {
-    padding-bottom: 12px;
-  }
   .fiat-content h6.deducted-heading {
     font-size: 14px;
   }
   .fiat-modal .popupBtn {
     column-gap: 15px;
     padding-top: 20px;
+  }
+  .page-sub-title h2 {
+    font-size: 14px;
+  }
+  .fiat-data {
+    padding: 30px 15px;
+  }
+  .fiat-data p,
+  .fiat-data .form-label {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .success-modal-content p {
+    top: 25.5%;
+    left: 44%;
+    font-size: 18px;
   }
 }
 
@@ -5840,7 +5891,7 @@ h3.mega-text {
 
   .header-nav-menu a {
     display: none;
-    /* font-family: "Poppins"; */
+
     color: #d2042d;
     border: 2px solid #000;
     padding: 15px;
@@ -5876,21 +5927,12 @@ h3.mega-text {
     padding: 30px 0 200px 0;
   }
 
-  /* .bordered-section{
-    margin: 20px auto;
-    padding: 15px 5px;
-    width: 100%;
-    border: 3px solid #D2042D;
-    border-radius: 5px;
-    background-color: #1b2129;
-  } */
   .full-page-container {
     min-width: 100%;
     background-color: #1b2129;
     padding: 10px 5px;
     border: 3px solid #fbff12;
     border-radius: 10px;
-    /* font-family: "Poppins"; */
   }
 
   .prizes-card {
@@ -5959,7 +6001,6 @@ h3.mega-text {
     border-radius: 5px;
     margin-top: 15px;
     color: #5ee47e;
-    /* font-family: "Poppins"; */
     font-weight: bold;
   }
 
@@ -6061,6 +6102,10 @@ h3.mega-text {
     margin: 0;
     flex-direction: column;
     padding: 20px 0;
+  }
+  .my-wallet-page .wallet-casino-profile-details {
+    width: 100%;
+    padding: 0px;
   }
 
   .wallet-casino-profile-img-div {
@@ -6432,6 +6477,42 @@ h3.mega-text {
   .prizes-chip-count .pdf-down {
     font-size: 14px;
   }
+  .my-wallet-page .wallet-casino-profile-div {
+    margin: 0px;
+    padding: 0px;
+  }
+  .wallet-casino-top {
+    max-width: 100%;
+  }
+  .claim-free-page .feature-overview-div p {
+    font-size: 14px;
+  }
+  .prizes_container p.title-memo {
+    max-width: 100%;
+    font-size: 14px;
+  }
+  .claim-free-page .prizes-card .holder-claim-details {
+    gap: 5px;
+  }
+  .claim-free-page .prizes-card .holder-claim-details h4 {
+    font-size: 16px;
+  }
+  .my-wallet-page .prizes-chip-count {
+    gap: 10px;
+  }
+  .fine-print-txt {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .my-wallet-page .claim-free-page .prizes-card {
+    padding-bottom: 0;
+  }
+  .my-wallet-page .prizes-chip-count {
+    padding: 0px;
+  }
+  .claim-free-page .prizes-card .new-btn button {
+    height: 48px;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -6500,73 +6581,3 @@ h3.mega-text {
     font-size: 20px;
   }
 }
-
-.payment-success .card-check {
-  border-radius: 200px;
-  height: 150px;
-  width: 150px;
-  margin: 0 auto;
-  /* background-color: #9abc663d; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-button.tw-connect-wallet.css-1un3lp3 {
-  background-color: yellow;
-}
-
-body > a {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-}
-
-.ip-block-grid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-  padding: 10px 20px;
-  gap: 20px;
-}
-p.ip-block {
-  text-align: center;
-  font-size: 26px;
-  color: red;
-  font-weight: 500;
-  max-width: 700px;
-  width: 100%;
-  margin: 0px auto;
-}
-.ip-block-grid img.maintance-img {
-  height: 90vh;
-  object-fit: contain;
-}
-
-h2#radix-\:r4\: {
-  color: red !important;
-}
-
-h2#radix-\:r1\: {
-  color: red !important;
-}
-.support-chain {
-  text-align: center;
-}
-.support-chain p {
-  margin: 0;
-  padding-bottom: 10px;
-  max-width: 200px;
-  width: 100%;
-  text-align: left;
-}
-.support-chain span {
-  padding-bottom: 5px;
-}
-.support-chain ol {
-  max-width: 200px;
-}
-/* .support-chain ol li {
-  text-align: left;
-} */

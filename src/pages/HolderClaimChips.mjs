@@ -190,22 +190,22 @@ function HolderClaimChips() {
   }, []);
 
   return (
-    <main className='main claim-free-page'>
-      <div className='container'>
-        <div className='bordered-section'>
+    <main className=" claim-free-page">
+      <div className="container">
+        <div className="bordered-section">
           {buyLoading ? (
-            <div className='pageImgContainer'>
-              <img src={LoadingPoker} alt='game' className='imageAnimation' />
-              <div className='loading-txt pulse'>CLAIMING TOKENS...</div>
+            <div className="pageImgContainer">
+              <img src={LoadingPoker} alt="game" className="imageAnimation" />
+              <div className="loading-txt pulse">CLAIMING TOKENS...</div>
             </div>
           ) : (
             <></>
           )}
-          <div className='scrooge-main-heading'>
-            <div className='pageTitle'>
-              <h1 className='title'>Claim Free Tokens</h1>
+          <div className="scrooge-main-heading">
+            <div className="pageTitle">
+              <h6 className="title">Claim Free Tokens</h6>
             </div>
-            <div className='feature-overview-div'>
+            <div className="feature-overview-div">
               <p>
                 Did you know that you get FREE TOKENS EVERY MONTH just for
                 holding Scrooge in your wallet? Once every 30 days, you can come
@@ -213,8 +213,9 @@ function HolderClaimChips() {
                 <a
                   href={scroogeClient}
                   //
-                  rel='noreferrer'
-                  alt='claim free tokens to spend in Scrooge Casino'>
+                  rel="noreferrer"
+                  alt="claim free tokens to spend in Scrooge Casino"
+                >
                   Scrooge Casino
                 </a>{" "}
                 tokens just by clicking the CLAIM TOKENS button.
@@ -235,30 +236,39 @@ function HolderClaimChips() {
             <span></span>
           )}
           {address ? (
-            <div className='prizes_container'>
-              <div className='prizes-card'>
+            <div className="prizes_container">
+              <p className="title-memo">
+                All monthly claim ST has a 10x play through and a 30 day
+                expiration if not used.
+              </p>
+              <div className="prizes-card">
                 {OGBalance ? (
-                  <div className='holder-claim-details'>
+                  <div className="holder-claim-details">
                     <h4> Scrooge Coin Balance:</h4>
-                    {OGBalance.toLocaleString("en-US")}
+                    <span>{OGBalance.toLocaleString("en-US")}</span>
                   </div>
                 ) : (
-                  <div className='holder-claim-details'>
-                    <h4> Scrooge Coin Balance:</h4> {OGBalance}
+                  <div className="holder-claim-details">
+                    <h4> Scrooge Coin Balance:</h4> <span>{OGBalance}</span>
                   </div>
                 )}
 
-                <div className='holder-claim-details'>
+                <div className="holder-claim-details">
                   <h4>Scrooge Coin Price:</h4> $
-                  {currentPrice > 0 ? parseFloat(currentPrice).toFixed(10) : 0}
+                  <span>
+                    {" "}
+                    {currentPrice > 0
+                      ? parseFloat(currentPrice).toFixed(10)
+                      : 0}
+                  </span>
                 </div>
 
-                <div className='prizes-chip-count prizes-chip-count-grid'>
-                  <div className='prizes-chip-count-box'>
-                    <div className='text-animate'>
+                <div className="prizes-chip-count prizes-chip-count-grid">
+                  <div className="prizes-chip-count-box">
+                    <div className="text-animate">
                       <h3> Your Claimable Monthly Token Rate:</h3>
                     </div>
-                    <div className='additional-info-div'>
+                    <div className="additional-info-div">
                       <span>
                         Your Balance ({OGBalance.toLocaleString("en-US")})
                       </span>{" "}
@@ -280,8 +290,8 @@ function HolderClaimChips() {
                       Tokens
                     </div>
                   </div>
-                  <div className='prizes-chip-count-box'>
-                    <div className='text-animate'>
+                  <div className="prizes-chip-count-box">
+                    <div className="text-animate">
                       {(OGBalance * currentPrice).toFixed(0) >= 50 ? (
                         <h3>
                           Claim{" "}
@@ -304,8 +314,8 @@ function HolderClaimChips() {
                         <h3>Minimum Claim Token is 50</h3>
                       )}
                     </div>
-                    <div className='additional-info-div'>
-                      <div className='disclaimer-Box'>
+                    <div className="additional-info-div">
+                      <div className="disclaimer-Box">
                         <h4>Disclaimer</h4>
                         <p>
                           Maximum allowable claim every 30 days is 3000 tokens.
@@ -317,12 +327,13 @@ function HolderClaimChips() {
                       {(new Date(nextClaimDate) <= new Date() ||
                         nextClaimDate === "No Entries Found") &&
                       OGBalance >= 0 ? (
-                        <div className='new-btn'>
+                        <div className="new-btn">
                           {(OGBalance * currentPrice).toFixed(0) >= 50 ? (
                             <button
                               disabled={disable}
                               // className='submit-btn'
-                              onClick={() => handleAuthenticate()}>
+                              onClick={() => handleAuthenticate()}
+                            >
                               Claim{" "}
                               {(OGBalance * currentPrice).toFixed(0) > 3000
                                 ? 3000
@@ -343,7 +354,8 @@ function HolderClaimChips() {
                                   toast.error(
                                     "You Must Have $50 or Greater in Scrooge to Claim Monthly Tokens"
                                   );
-                                }}>
+                                }}
+                              >
                                 Claim Unavailable
                               </button>
                             </>
@@ -351,7 +363,7 @@ function HolderClaimChips() {
                         </div>
                       ) : (
                         <>
-                          <div className='prize-name text-animate'>
+                          <div className="prize-name text-animate">
                             {nextClaimDate !== "Loading..." &&
                             (OGBalance * currentPrice).toFixed(0) >= 50 ? (
                               <>
@@ -360,8 +372,9 @@ function HolderClaimChips() {
                                 <Countdown date={nextClaimDate}>
                                   <button
                                     disabled={disable}
-                                    className='submit-btn'
-                                    onClick={() => handleAuthenticate()}>
+                                    className="submit-btn"
+                                    onClick={() => handleAuthenticate()}
+                                  >
                                     Claim{" "}
                                     {currentPrice > 0
                                       ? (OGBalance * currentPrice * 0.1)
@@ -376,8 +389,8 @@ function HolderClaimChips() {
                               <>
                                 <img
                                   src={LoadingPoker}
-                                  alt='game'
-                                  className='imageAnimation'
+                                  alt="game"
+                                  className="imageAnimation"
                                 />
                               </>
                             )}
@@ -390,25 +403,26 @@ function HolderClaimChips() {
                   </div>
                 </div>
                 <div style={{ width: "100%", textAlign: "center" }}>
-                  <div id='rewardId' style={{ margin: "0 auto" }} />
+                  <div id="rewardId" style={{ margin: "0 auto" }} />
                 </div>
 
-                <div className='fine-print-txt'>
+                <div className="fine-print-txt">
                   <p>
                     *Your claimed tokens will automatically be added to your
                     connected{" "}
                     <a
                       href={scroogeClient}
-                      alt='Visit Scrooge Casino'
+                      alt="Visit Scrooge Casino"
                       //
-                      rel='noreferrer'>
+                      rel="noreferrer"
+                    >
                       Scrooge Casino
                     </a>{" "}
                     account.
                   </p>
                 </div>
               </div>
-              <div className='fine-print-txt'>
+              <div className="fine-print-txt">
                 <p>
                   Monthly claimable token rates are calculated based on the
                   current price of the Scrooge cryptocurrency token. This

@@ -44,14 +44,23 @@ export const purchaseWithPaypal = yup.object().shape({
     .string()
     .matches(emailRegex, "Please enter a valid email address")
     .required("Email is required"),
+  amount: yup
+    .number()
+    .typeError("Please enter an amount") // Displayed if the value is not a number
+    .min(10000, "Must be greater than or equal to 10000"), // Set your minimum value and a corresponding error messag
 });
 export const fastWithdraw = yup.object().shape({
   amount: yup
     .number()
-    .typeError("Must be a number") // Displayed if the value is not a number
-    .min(5000, "Must be greater than or equal to 5000"), // Set your minimum value and a corresponding error messag
+    .typeError("Please enter an amount") // Displayed if the value is not a number
+    .min(5000, "Must be greater than or equal to 5000") // Set your minimum value and a corresponding error messag
+    .max(99999, "Must be less than or equal to 99999"), // Set your maximum value and a corresponding error message
 });
 
 export const purchaseWithCashApp = yup.object().shape({
   cashAppid: yup.string().required("cashAppid is required"),
+  amount: yup
+    .number()
+    .typeError("Please enter an amount") // Displayed if the value is not a number
+    .min(10000, "Must be greater than or equal to 10000"), // Set your minimum value and a corresponding error messag
 });

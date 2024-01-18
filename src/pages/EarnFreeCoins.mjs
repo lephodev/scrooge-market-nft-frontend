@@ -92,6 +92,10 @@ const EarnFreeCoins = () => {
 
         {key === "dailyClaims" ? (
           <div className='spin-popup-content'>
+            <p className='title-memo'>
+              Daily wheel spin coins have a one times play through requirement
+              and an expiration of 7 days if not used.
+            </p>
             <div className='spin-wheel'>
               <div className='spin-wheel-img'>
                 <img src={wheel} alt='wheel' />

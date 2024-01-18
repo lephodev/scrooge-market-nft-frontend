@@ -43,7 +43,6 @@ import scroogelogo from "./images/scroogeCasinoLogo.png";
 import vpnbanner from "./images/vpn-banner.webp";
 import notaccess from "./images/not-access.webp";
 
-import axios from "axios";
 import PaymentCustom from "./pages/PaymentCustom.mjs";
 import { validateToken } from "./utils/dateUtils.mjs";
 
@@ -108,14 +107,41 @@ export default function App() {
       });
   };
 
+  const getGeoLocationDetails = async () => {
+    try {
+      // const apiUrl = `http://api.vpnblocker.net/v2/json/${CurrentIp}`;
+      const serverUrl = `/auth/getgeolocationDetails`;
+      const response = await authInstance().get(serverUrl);
+      console.log("response", response);
+      const ipAddressObject = {
+        [Object.keys(response.data)[1]]:
+          response.data[Object.keys(response.data)[1]],
+      };
+      const ipAddressss = Object.keys(ipAddressObject).find(
+        (key) => key !== "status"
+      );
+      if (ipAddressss) {
+        const { country, region, city } = ipAddressObject[ipAddressss];
+        if (
+          city.toString() === "Quebec" ||
+          city.toString() === "Idaho" ||
+          country.toString() === "Brazil" ||
+          region.toString() === "Quebec" ||
+          region.toString() === "Idaho" ||
+          region.toString() === "Michigan" ||
+          region.toString() === "Washington"
+        ) {
+          setStateBlock(true);
+        }
+      }
+    } catch (error) {
+      console.log("err", error);
+    }
+  };
+
   const checkVPN = async () => {
     try {
-      const res = await fetch("https://geolocation-db.com/json/").then(
-        (response) => response.json()
-      );
-      const CurrentIp = res?.IPv4;
-      // const apiUrl = `http://api.vpnblocker.net/v2/json/${CurrentIp}`;
-      const serverUrl = `/auth/validate_VPN?ip=${CurrentIp}&timezone=${null}`;
+      const serverUrl = `/auth/validate_VPN`;
       const checkVPNRes = await authInstance().get(serverUrl);
       setIsVPNEnable(checkVPNRes?.data?.vpnStatus);
 
@@ -127,25 +153,37 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get("https://geolocation-db.com/json/");
-      const CurrentIp = res?.data?.IPv4;
-      // eslint-disable-next-line no-console
+      // const res = await axios.get("https://proxycheck.io/v2/");
+      // const CurrentIp = res?.data;
+      // console.log("res", res);
+
+      // // eslint-disable-next-line no-console
       // console.log("CurrentIpAddress", CurrentIp);
 
-      const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/city`);
-      // eslint-disable-next-line no-console
-      // console.log("city", res1?.data);
-      const CurrentCity = res1?.data;
-      // eslint-disable-next-line no-constant-condition
-      if (
-        CurrentCity.toString() === "Washington" ||
-        CurrentCity.toString() === "Quebec" ||
-        CurrentCity.toString() === "Mumbai" ||
-        CurrentCity.toString() === "Idaho"
-      ) {
-        setStateBlock(true);
-        // navigates("/CountryBlockblock");
-      }
+      // const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/city`);
+      // // eslint-disable-next-line no-console
+      // // console.log("city", res1?.data);
+      // const reg = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
+      // console.log("reg", reg);
+      // const countryName = res?.data?.country_name;
+      // const region = reg?.data;
+      // console.log("region", region);
+
+      // const CurrentCity = res1?.data;
+      // // eslint-disable-next-line no-constant-condition
+      // if (
+      //   CurrentCity.toString() === "Quebec" ||
+      //   CurrentCity.toString() === "Washington" ||
+      //   countryName.toString() === "Brazil" ||
+      //   CurrentCity.toString() === "Idaho" ||
+      //   region.toString() === "Quebec" ||
+      //   region.toString() === "Idaho" ||
+      //   region.toString() === "Michigan" ||
+      //   region.toString() === "Washington"
+      // ) {
+      //   setStateBlock(true);
+      // }
+      await getGeoLocationDetails();
       await checkVPN();
     })();
   }, []);
