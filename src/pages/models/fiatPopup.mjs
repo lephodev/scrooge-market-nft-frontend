@@ -181,10 +181,10 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
   // };
 
   return (
-    <div className="fiat-data">
+    <div className='fiat-data'>
       <Form onSubmit={handleSubmit(WithdrawRequest)}>
-        <div className="fiat-content">
-          <Form.Group className="fiat-group">
+        <div className='fiat-content'>
+          <Form.Group className='fiat-group'>
             <Form.Label>Withdraw to</Form.Label>
             <Select
               options={options}
@@ -192,63 +192,63 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
               styles={customStyles}
             />
             {errors?.paymentType && (
-              <p className="error-msg">{errors?.paymentType?.message}</p>
+              <p className='error-msg'>{errors?.paymentType?.message}</p>
             )}
           </Form.Group>
 
           {paymentType && paymentType.value === "Paypal" ? (
-            <Form.Group className="fiat-group">
+            <Form.Group className='fiat-group'>
               <Form.Label>Email</Form.Label>
               <Form.Control
-                type="email"
-                name="email"
-                placeholder="Enter email"
+                type='email'
+                name='email'
+                placeholder='Enter email'
                 {...register("email")}
               />
               {errors?.email && (
-                <p className="error-msg">{errors?.email?.message}</p>
+                <p className='error-msg'>{errors?.email?.message}</p>
               )}
             </Form.Group>
           ) : paymentType && paymentType.value === "Cashapp" ? (
-            <Form.Group className="fiat-group">
+            <Form.Group className='fiat-group'>
               <Form.Label>CashAppId </Form.Label>
               <Form.Control
-                type="text"
-                name="cashAppid"
+                type='text'
+                name='cashAppid'
                 //   defaultValue={singleTournament?.name}
-                placeholder="Enter Cashapp Id"
+                placeholder='Enter Cashapp Id'
                 {...register("cashAppid")}
               />
               {errors?.cashAppid && (
-                <p className="error-msg">{errors?.cashAppid?.message}</p>
+                <p className='error-msg'>{errors?.cashAppid?.message}</p>
               )}
             </Form.Group>
           ) : (
             ""
           )}
           {paymentType && paymentType.value && (
-            <Form.Group className="fiat-group">
+            <Form.Group className='fiat-group'>
               <Form.Label>
                 Minimum 10000 ST($100) required for crypto withdrawals.
               </Form.Label>
               <Form.Control
-                type="number"
-                name="amount"
-                placeholder="Enter Withdraw Amount"
+                type='number'
+                name='amount'
+                placeholder='Enter Withdraw Amount'
                 {...register("amount")}
               />
               {errors?.amount && (
-                <p className="error-msg">{errors?.amount?.message}</p>
+                <p className='error-msg'>{errors?.amount?.message}</p>
               )}
             </Form.Group>
           )}
-          <h6 className="deducted-heading">
+          {/* <h6 className="deducted-heading">
             10% of the amount will be deducted from your redemption amount
-          </h6>
+          </h6> */}
         </div>
-        <div className="popupBtn">
-          <button className="yellowBtn" variant="primary" type="submit">
-            {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
+        <div className='popupBtn'>
+          <button className='yellowBtn' variant='primary' type='submit'>
+            {!loading ? "Confirm" : <Spinner animation='border' />}{" "}
           </button>
         </div>
       </Form>
