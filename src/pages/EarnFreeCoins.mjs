@@ -9,6 +9,7 @@ import DailyRewards from "../components/DailyRewards.mjs";
 import AuthContext from "../context/authContext.ts";
 import NewRoulette from "../components/roulette/roulette.mjs";
 import wheel from "../images/wheel-fortune.png";
+import MainRoulette from "../components/mainRoulette/mainRoulette.mjs";
 
 const EarnFreeCoins = () => {
   const { user, dateTimeNow } = useContext(AuthContext);
@@ -17,6 +18,7 @@ const EarnFreeCoins = () => {
   const [canSpin, setCanSpin] = useState(false);
   const [spinTimer, setSpinTimer] = useState("");
   const [show, setShow] = useState(false);
+  const [riskWheel, setRiskWheel] = useState(false);
   // const handleclick = (value) => {
   //   localStorage.setItem("class", value);
   //   setActive(value);
@@ -33,8 +35,13 @@ const EarnFreeCoins = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleOpenRoulette = () => {
+  const handleOpenRoulette = (value) => {
     if (canSpin) setShowRoulette(true);
+    if (value === "risk") {
+      setRiskWheel(true);
+    } else {
+      setRiskWheel(false);
+    }
     setShow(!show);
   };
 
@@ -65,11 +72,12 @@ const EarnFreeCoins = () => {
 
   return (
     <Layout>
-      <div className='container'>
-        <div className='tab-btn'>
+      <div className="container">
+        <div className="tab-btn">
           <Button
             className={`${key === "dailyClaims" ? "active-btn" : ""}`}
-            onClick={() => setKey("dailyClaims")}>
+            onClick={() => setKey("dailyClaims")}
+          >
             Daily Claims
           </Button>
           {/* <Button
@@ -87,27 +95,48 @@ const EarnFreeCoins = () => {
         </div>
 
         {showRoulette ? (
-          <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
+          // <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
+          <MainRoulette
+            show={show}
+            handleOpenRoulette={handleOpenRoulette}
+            riskWheel={riskWheel}
+          />
         ) : null}
 
         {key === "dailyClaims" ? (
-          <div className='spin-popup-content'>
-            <p className='title-memo'>
+          <div className="spin-popup-content spin-page-content">
+            <p className="title-memo">
               Daily wheel spin coins have a one times play through requirement
               and an expiration of 7 days if not used.
             </p>
-            <div className='spin-wheel'>
-              <div className='spin-wheel-img'>
-                <img src={wheel} alt='wheel' />
-                <div className='spin-win-text-content'>
-                  <div className='spin-win-text'>
+            <div className="spin-wheel">
+              <div className="spin-wheel-img">
+                <img src={wheel} alt="wheel" />
+                <div className="spin-win-text-content">
+                  <div className="spin-win-text">
                     <p>spin to win</p>
                   </div>
-                  <div className='spin-button'>
-                    <button onClick={handleOpenRoulette}>
-                      {" "}
-                      {canSpin ? "Spin Now" : spinTimer}
-                    </button>
+                  <div className="spin-button">
+                    <div className="risk-grid">
+                      <p>
+                        you may end up with no prize if you risk it for big
+                        wheel on this spin!{" "}
+                      </p>
+                      <button onClick={() => handleOpenRoulette("risk")}>
+                        {" "}
+                        {canSpin ? "Take a Risk" : spinTimer}
+                      </button>
+                    </div>
+                    <div className="risk-grid">
+                      <p>
+                        you may end up with no prize if you risk it for big
+                        wheel on this spin!{" "}
+                      </p>
+                      <button onClick={() => handleOpenRoulette("normal")}>
+                        {" "}
+                        {canSpin ? "Spin Now" : spinTimer}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -116,13 +145,13 @@ const EarnFreeCoins = () => {
         ) : (
           ""
         )}
-        <div className='tabs-claim'>
+        <div className="tabs-claim">
           {key === "dailyClaims" ? (
-            <div className='tab-claims'>
+            <div className="tab-claims">
               <DailyRewards />
             </div>
           ) : key === "monthlyClaims" ? (
-            <div className='tab-claims'>
+            <div className="tab-claims">
               <HolderClaimChips />
             </div>
           ) : key === "duckyLuckClaims" ? (
@@ -136,7 +165,7 @@ const EarnFreeCoins = () => {
             ""
           )}
         </div>
-        <div className='flex-row' style={{ margin: "50px auto 0px" }}>
+        <div className="flex-row" style={{ margin: "50px auto 0px" }}>
           <ShowBottomNavCards />
         </div>
       </div>

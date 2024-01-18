@@ -357,7 +357,7 @@ body.modal-open {
 }
 
 .spin-popup-content img {
-  height: 400px;
+  height: 220px;
 }
 
 .spin-win-popup::before {
@@ -1062,7 +1062,7 @@ body.modal-open {
   }
 
   .wheel-wrapper {
-    transform: scale(0.6);
+    transform: scale(0.9);
   }
 
 }
