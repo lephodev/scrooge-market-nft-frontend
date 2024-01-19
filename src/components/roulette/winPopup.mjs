@@ -30,32 +30,29 @@ const WinPopup = ({ setWinPopup, winAmount }) => {
   // };
 
   return (
-    <div className="spin-win-popup winning-animation-win">
-      <div className="spin-popup-content animate__animated animate__zoomIn">
-        <div className="winning-popup-content">
-          <div className="wining-image">
-            <img src={winn} alt="winimg" />
-            <div className="winning-amount-ribbon">
+    <div className='spin-win-popup winning-animation-win'>
+      <div className='spin-popup-content animate__animated animate__zoomIn'>
+        <div className='winning-popup-content'>
+          <div className='wining-image'>
+            <img src={winn} alt='winimg' />
+            <div className='winning-amount-ribbon'>
               {/* <p>
                 {`${winAmount?.token} ST + ${numFormatter(winAmount?.gc)} GC`}
               </p> */}
               <p>YOU WIN</p>
             </div>
-            <div className="pyro">
-              <div className="before"></div>
-              <div className="after"></div>
+            <div className='pyro'>
+              <div className='before'></div>
+              <div className='after'></div>
             </div>
           </div>
 
-          <div className="winning-amount">
-            {" "}
-            {`${winAmount?.token} ST + ${numFormatter(winAmount?.gc)} GC`}
-          </div>
+          <div className='winning-amount'> {`${winAmount?.token} `}</div>
           {/*<div className="winning-text">
           Great, You are won and just got the huge rewards
         </div>*/}
-          <div className="winning-btn">
-            <div className="win-btn" onClick={handleCollect}>
+          <div className='winning-btn'>
+            <div className='win-btn' onClick={handleCollect}>
               {/* <img
             src={buttonimg}
             alt="btn"
@@ -67,7 +64,7 @@ const WinPopup = ({ setWinPopup, winAmount }) => {
           </div>
 
           {coin ? (
-            <div className="collect-coin">
+            <div className='collect-coin'>
               {/* <Lottie options={coinanim} height={500} width={500} /> */}
             </div>
           ) : (

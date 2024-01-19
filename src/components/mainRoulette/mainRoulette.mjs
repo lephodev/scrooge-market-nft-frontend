@@ -25,13 +25,10 @@ const MainRoulette = ({
     { token: "10 ST", chances: 11 },
     { token: "Relax 10 free spin", chances: 11 },
     { token: "15 ST", chances: 11 },
-
     { token: "Ka 10 free spin", chances: 11 },
     { token: "20 ST", chances: 11 },
-
     { token: "Slot mill 10 free spin", chances: 11 },
     { token: "25 ST", chances: 11 },
-
     { token: "Bgaming 10 free spin", chances: 11 },
     { token: "30 ST", chances: 11 },
   ];
@@ -75,14 +72,13 @@ const MainRoulette = ({
     <Modal
       show={show}
       onHide={handleOpenRoulette}
-      className="roulette-wrapper roulette-wheel-game"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+      className='roulette-wrapper roulette-wheel-game'
+      aria-labelledby='contained-modal-title-vcenter'
+      centered>
       <Modal.Header closeButton></Modal.Header>
 
       <Modal.Body>
-        <div className="wheel-wrapper">
+        <div className='wheel-wrapper'>
           {riskWheel ? (
             <RiskSpinWheel
               items={RiskWheelPlaces}
@@ -118,16 +114,16 @@ const MainRoulette = ({
             winAmount={MainWheelPlaces[winItem]}
           />
         )}
-        <audio className="bg-audio" muted={!volume}>
+        <audio className='bg-audio' muted={!volume}>
           <source src={bgaudio}></source>
         </audio>
-        <audio className="rotate-wheel">
+        <audio className='rotate-wheel'>
           <source src={rotatewheel}></source>
         </audio>
-        <audio className="winitem-wheel">
+        <audio className='winitem-wheel'>
           <source src={winItemaudio}></source>
         </audio>
-        <audio id="coin-audio">
+        <audio id='coin-audio'>
           <source src={coin}></source>
         </audio>
       </Modal.Body>
