@@ -9,8 +9,29 @@ import { getClientSeed } from "../../utils/generateClientSeed.js";
 import { marketPlaceInstance } from "../../config/axios.js";
 import { toast } from "react-toastify";
 import "../../components/roulette/wheel.css";
+import BigSpinWheel from "./bigSpinWheel.mjs";
 
-function MainSpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
+function MainSpinWheel({
+  items,
+  onSelectItem,
+  setWinItem,
+  setWinPopup,
+  handleOpenRoulette,
+  setBigWheel,
+  bigWheel,
+}) {
+  const BigWheelPlaces = [
+    { token: "40 ST", chances: 10 },
+    { token: "45 ST", chances: 10 },
+    { token: "50 ST", chances: 10 },
+    { token: "55 ST", chances: 10 },
+    { token: "60 ST", chances: 10 },
+    { token: "65 ST", chances: 10 },
+    { token: "70 ST", chances: 10 },
+    { token: "80 ST", chances: 10 },
+    { token: "90 ST", chances: 10 },
+    { token: "100 ST", chances: 10 },
+  ];
   const [selectItem, setselectItem] = useState(null);
 
   const [spinButtonDisable, setSpinButtonDisable] = useState(false);
@@ -32,6 +53,11 @@ function MainSpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
         if (selectedItem === -1) return;
         setselectItem(selectedItem + 2);
         setWinItem(selectedItem);
+        if (selectedItem === 0) {
+          setTimeout(() => {
+            setBigWheel(true);
+          }, 5000);
+        }
         // if (this.props.onSelectItem) {
         //   onSelectItem(selectedItem);
         // }
@@ -107,6 +133,7 @@ function MainSpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
           <source src={wheelStop}></source>
         </audio>
       </div>
+      {bigWheel && <BigSpinWheel items={BigWheelPlaces} />}
     </>
   );
 }

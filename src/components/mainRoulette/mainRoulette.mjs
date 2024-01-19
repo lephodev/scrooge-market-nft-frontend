@@ -32,28 +32,17 @@ const MainRoulette = ({
     { token: "Bgaming 10 free spin", chances: 11 },
     { token: "30 ST", chances: 11 },
   ];
-  const BigWheelPlaces = [
-    { token: "40 ST", chances: 10 },
-    { token: "45 ST", chances: 10 },
-    { token: "50 ST", chances: 10 },
-    { token: "55 ST", chances: 10 },
-    { token: "60 ST", chances: 10 },
-    { token: "65 ST", chances: 10 },
-    { token: "70 ST", chances: 10 },
-    { token: "80 ST", chances: 10 },
-    { token: "90 ST", chances: 10 },
-    { token: "100 ST", chances: 10 },
-  ];
+
   const RiskWheelPlaces = [
-    { token: "Red", chances: 10.5 },
-    { token: "Red", chances: 10.5 },
-    { token: "Red", chances: 10.5 },
-    { token: "Red", chances: 10.5 },
-    { token: "Red", chances: 10.5 },
-    { token: "Red", chances: 10.5 },
-    { token: "Red", chances: 10.5 },
-    { token: "Red", chances: 10.5 },
-    { token: "Red", chances: 10.5 },
+    { token: "Red1", chances: 10.5 },
+    { token: "Red2", chances: 10.5 },
+    { token: "Red3", chances: 10.5 },
+    { token: "Red4", chances: 10.5 },
+    { token: "Red5", chances: 10.5 },
+    { token: "Red6", chances: 10.5 },
+    { token: "Red7", chances: 10.5 },
+    { token: "Red8", chances: 10.5 },
+    { token: "Red9", chances: 10.5 },
     { token: "Green", chances: 5.5 },
   ];
   const LoyaltyWheelPlaces = [
@@ -66,6 +55,8 @@ const MainRoulette = ({
   const [winPopup, setWinPopup] = useState(false);
   const [winItem, setWinItem] = useState();
   const [volume, setVolume] = useState(false);
+  const [bigWheel, setBigWheel] = useState(false);
+
   // const [removeAnim, setRemoveAnim] = useState(false);
 
   return (
@@ -87,33 +78,33 @@ const MainRoulette = ({
               setVolume={setVolume}
             />
           ) : (
-            <MainSpinWheel
-              items={MainWheelPlaces}
+            <>
+              {!bigWheel && (
+                <MainSpinWheel
+                  setBigWheel={setBigWheel}
+                  bigWheel={bigWheel}
+                  items={MainWheelPlaces}
+                  setWinPopup={setWinPopup}
+                  setWinItem={setWinItem}
+                  setVolume={setVolume}
+                  handleOpenRoulette={handleOpenRoulette}
+                />
+              )}
+              {/* <LoyaltySpinWheel
+              items={LoyaltyWheelPlaces}
               setWinPopup={setWinPopup}
               setWinItem={setWinItem}
               setVolume={setVolume}
-            />
-            // <LoyaltySpinWheel
-            //   items={LoyaltyWheelPlaces}
-            //   setWinPopup={setWinPopup}
-            //   setWinItem={setWinItem}
-            //   setVolume={setVolume}
-            // />
-
-            // <BigSpinWheel
-            //   items={BigWheelPlaces}
-            //   setWinPopup={setWinPopup}
-            //   setWinItem={setWinItem}
-            //   setVolume={setVolume}
-            // />
+            /> */}
+            </>
           )}
         </div>
-        {winPopup && (
+        {/* {winPopup && !riskWheel && (
           <WinPopup
             setWinPopup={setWinPopup}
             winAmount={MainWheelPlaces[winItem]}
           />
-        )}
+        )} */}
         <audio className='bg-audio' muted={!volume}>
           <source src={bgaudio}></source>
         </audio>
