@@ -229,7 +229,7 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
           {paymentType && paymentType.value && (
             <Form.Group className='fiat-group'>
               <Form.Label>
-                Minimum 10000 ST($100) required for crypto withdrawals.
+                Minimum 10000 ST($100) required for Fiat withdrawals.
               </Form.Label>
               <Form.Control
                 type='number'
