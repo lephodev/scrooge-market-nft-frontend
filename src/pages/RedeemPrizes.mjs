@@ -1,76 +1,45 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useContext } from "react";
 import LoadingPoker from "../images/scroogeHatLogo.png";
-import { useAddress } from "@thirdweb-dev/react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useReward } from "react-rewards";
-// import coin1 from "../images/4.png";
-// import coin2 from "../images/3.png";
-// import coin3 from "../images/2.png";
-// import coin4 from "../images/1.png";
-import sweep from "../images/token.png";
-import ticket from "../images/ticket.png";
-// import InputRange from "react-input-range";
+
 import { userKycDetails } from "../utils/api.mjs";
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
-import { authInstance, marketPlaceInstance } from "../config/axios.js";
-import { Button, Card, Modal } from "react-bootstrap";
+import { authInstance } from "../config/axios.js";
 import scroogelogo from "../images/scroogeCasinoLogo.png";
-import axios from "axios";
 import FiatPopup from "./models/fiatPopup.mjs";
-import copyIcon from "../images/copied-icon.svg";
-import SuccessModal from "./models/SuccessModal.mjs";
 import Pdf from "../images/Manual.pdf";
-import FastWithdrawPopup from "./models/fastWithdrawPopup.mjs";
 import { validateToken } from "../utils/dateUtils.mjs";
-import { useNetworkMismatch, ChainId, useSigner } from "@thirdweb-dev/react";
-import ChainContext from "../context/Chain.ts";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
+import {
+  useNetworkMismatch,
+  useAddress,
+  ChainId,
+  useSigner,
+} from "@thirdweb-dev/react";
+import ChainContext from "../context/Chain.ts";
+import CryptoWithdrawPopup from "./models/cryptoWithdrawPopup.mjs";
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
+
   let prizesReceived = 0;
   const { user, loading, setUser } = useContext(AuthContext);
   console.log(loading);
   const [redeemSuccess, setRedeemSuccess] = useState(false);
-  const [allPrizes, setAllPrizes] = useState([]);
-  const [prizes, setPrizes] = useState([]);
-  const [ticketPrizes, setTicketPrizes] = useState([]);
-  const [disable, setDisable] = useState(false);
-  const [prizesLoading, setPrizesLoading] = useState([]);
-  const [currentPriceOG, setCurrentPriceOG] = useState("Loading...");
-  const [currentPriceJR, setCurrentPriceJR] = useState("Loading...");
-  const [showConvert, setShowConvert] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
-  const [buyTokenTab, setBuyTokenTab] = useState(false);
   const [buyWithFiat, setBuyWithFiat] = useState(false);
-  const [show, setShow] = useState(false);
   const [showFiat, setShowFiat] = useState(false);
-
-  // const [sliderValue /* setSliderValue */] = useState(499);
-  const [tickets, setTickets] = useState("");
-  const [tokens, setTokens] = useState("");
-  const [prizeId, setPrizeId] = useState("");
-  const [OG1000, setOG1000] = useState();
-  const [OG5000, setOG5000] = useState();
-  const [OG10000, setOG10000] = useState();
-  const [OG20000, setOG20000] = useState();
-  const [OG500000, setOG500000] = useState();
-  const [JR1000, setJR1000] = useState();
-  const [JR5000, setJR5000] = useState();
-  const [JR10000, setJR10000] = useState();
-  const [JR20000, setJR20000] = useState();
-  const address = useAddress();
-  const [success50Show, setSuccess50Show] = useState(false);
-  const [success100Show, setSuccess100Show] = useState(false);
-  const [success500Show, setSuccess500Show] = useState(false);
+  const [showFastWithdraw, setShowFastWithdraw] = useState(false);
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
 
+  const address = useAddress();
   const signer = useSigner();
 
   const isMismatched = useNetworkMismatch();
@@ -89,247 +58,21 @@ function RedeemPrizes() {
 
   const redemptionUnderMaintainance = false;
 
-  const handleClose = () => setShow(false);
-  const handleShow = (ticket, token, prizeid) => {
-    // setTickets(ticket);
-    setTokens(token);
-    setPrizeId(prizeid);
-    setShow(true);
-  };
-
-  const confirmBuy = async () => {
-    setDisable(true);
-    try {
-      if (tickets !== "" && tokens !== "") {
-        await convert(tickets, tokens);
-      }
-      if (prizeId !== "") {
-        await confirmRedeem(prizeId);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    setDisable(false);
-    handleClose();
-  };
-
-  const confirmRedeem = (prize_id) => {
-    try {
-      if (!user)
-        return toast.error("Please login first", { containerId: "login" });
-      if (user?.isBlockWallet) {
-        return toast.error(`Your wallet blocked by admin`, { toastId: "A" });
-      }
-      if (!address)
-        return toast.error("Please connect wallet first", {
-          containerId: "connect-wallet",
-        });
-      setglobalLoader(true);
-      marketPlaceInstance()
-        .get(`/WithdrawRequest/${address}/${prize_id}`)
-        .then((data) => {
-          console.log("redeemdata", data);
-          const prize = data?.data?.prize?.price;
-          console.log("prize", prize);
-          if (!data.data.success) {
-            toast.error("ERROR! - " + data.data.message, {
-              containerId: "error",
-            });
-            setglobalLoader(false);
-          } else {
-            if (prize === 5000) {
-              setSuccess50Show(true);
-            }
-            if (prize === "10000") {
-              setSuccess100Show(true);
-            }
-            if (prize === "50000") {
-              setSuccess500Show(true);
-            }
-            // toast.success(data?.data?.message);
-            setglobalLoader(false);
-            getUserDataInstant();
-          }
-        });
-    } catch (error) {
-      console.log("errrr", error);
-    }
-  };
-
-  async function getTicketToTokenPrizes() {
-    setPrizesLoading(true);
-    if (prizes.length < 2) {
-      try {
-        const res = await marketPlaceInstance().get(`/getTicketToToken`);
-        if (res.data) {
-          if (prizes.length < 2) {
-            setPrizesLoading(false);
-            setTicketPrizes(res.data || []);
-          }
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  }
-
-  async function getPrizes() {
-    setPrizesLoading(true);
-    if (prizes.length < 2) {
-      try {
-        const res = await marketPlaceInstance().get(`/getPrizes`);
-        console.log("res", res);
-        if (res.data) {
-          if (prizes.length < 2) {
-            // setPrizes(res.data || []);
-            setPrizes(res.data.filter((prize) => prize.category === "Crypto"));
-            setPrizesLoading(false);
-            setAllPrizes(res.data || []);
-          }
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  }
-
   async function startFetching() {
-    getCoinGeckoDataOG();
-    getCoinGeckoDataJR();
     if (prizesReceived === 0) {
-      getTicketToTokenPrizes();
-      getPrizes();
     }
     prizesReceived = 1;
   }
 
-  // const sortPrizes = (sortOn) => {
-  //   if (sortOn === "priceAscending") {
-  //     setPrizes([...prizes].sort((a, b) => a.price - b.price));
-  //   } else if (sortOn === "priceDescending") {
-  //     setPrizes([...prizes].sort((a, b) => b.price - a.price));
-  //   } else if (sortOn === "nameDescending") {
-  //     setPrizes([...prizes].sort((a, b) => (a.name > b.name ? 1 : -1)));
-  //   } else if (sortOn === "nameAscending") {
-  //     setPrizes([...prizes].sort((a, b) => (a.name > b.name ? -1 : 1)));
-  //   } else if (sortOn === "categoryDescending") {
-  //     setPrizes([...prizes].sort((a, b) => (a.category > b.category ? 1 : -1)));
-  //   } else if (sortOn === "categoryAscending") {
-  //     setPrizes([...prizes].sort((a, b) => (a.category > b.category ? -1 : 1)));
-  //   }
-  // };
-  const [showFastWithdraw, setShowFastWithdraw] = useState(false);
   const filterPrizes = (filterOn) => {
-    if (allPrizes.length > 2) {
-      if (filterOn === "Badges") {
-        setShowFastWithdraw(false);
-        setPrizes(
-          [...allPrizes].filter((prize) => prize.category === "Badges")
-        );
-        setShowConvert(false);
-        //console.log('badges: ',prizes);
-      } else if (filterOn === "Crypto") {
-        setShowFastWithdraw(false);
-        setPrizes(
-          [...allPrizes].filter((prize) => prize.category === "Crypto")
-        );
-        setShowConvert(false);
-        setBuyWithFiat(false);
-
-        //console.log('crypto: ',prizes);
-      } else if (filterOn === "Merch") {
-        setShowFastWithdraw(false);
-        setPrizes([...allPrizes].filter((prize) => prize.category === "Merch"));
-        //console.log('merch: ',prizes);
-      } else if (filterOn === "NFTs") {
-        setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
-        //console.log('nfts: ',prizes);
-        setShowConvert(false);
-        setBuyWithFiat(false);
-        setShowFastWithdraw(false);
-      } else if (filterOn === "convert") {
-        setShowConvert(true);
-        setBuyTokenTab(false);
-        setShowFastWithdraw(false);
-        setPrizes([]);
-        // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
-        //console.log('nfts: ',prizes);
-      } else if (filterOn === "buy_token") {
-        setBuyTokenTab(true);
-        setShowConvert(false);
-        setShowFastWithdraw(false);
-        setPrizes([]);
-        // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
-        //console.log('nfts: ',prizes);
-      } else if (filterOn === "Fiat") {
-        console.log("gggg");
-        setBuyWithFiat(true);
-        setShowFastWithdraw(false);
-        setPrizes([]);
-        // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
-        //console.log('nfts: ',prizes);
-      } else if (filterOn === "fast_withdraw") {
-        console.log("gggg");
-        setShowFastWithdraw(true);
-        setBuyWithFiat(false);
-        setShowConvert(false);
-        setPrizes([]);
-        // setPrizes([...allPrizes].filter((prize) => prize.category === "NFTs"));
-        //console.log('nfts: ',prizes);
-      }
+    if (filterOn === "Fiat") {
+      setBuyWithFiat(true);
+      setShowFastWithdraw(false);
+    } else if (filterOn === "fast_withdraw") {
+      setShowFastWithdraw(true);
+      setBuyWithFiat(false);
     }
   };
-  async function getCoinGeckoDataOG() {
-    await axios
-      .post("https://api.coinbrain.com/public/coin-info", {
-        56: [process.env.REACT_APP_OGCONTRACT_ADDRESS],
-      })
-      .then(
-        (response) => {
-          console.log("abc", response);
-
-          const current_price = response.data[0].priceUsd;
-          console.log("current_price", current_price);
-          console.log(
-            "(10 / current_price / 2).toFixed(0)",
-            (10 / current_price / 2).toFixed(0)
-          );
-          setCurrentPriceOG(current_price);
-          setOG1000((10 / current_price / 2).toFixed(0));
-          setOG5000((40 / current_price / 2).toFixed(0));
-          setOG10000((100 / current_price / 2).toFixed(0));
-          setOG20000((200 / current_price / 2).toFixed(0));
-          setOG500000((1000 / current_price / 2).toFixed(0));
-
-          console.log("OG1000, OG5000, OG10000", OG1000, OG5000, OG10000);
-          return current_price;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-  }
-
-  async function getCoinGeckoDataJR() {
-    await fetch(
-      "https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/0x2e9f79af51dd1bb56bbb1627fbe4cc90aa8985dd"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const current_price = data.market_data.current_price.usd;
-        setCurrentPriceJR(current_price);
-        setJR1000((10 / current_price / 2).toFixed(0));
-        setJR5000((40 / current_price / 2).toFixed(0));
-        setJR10000((100 / current_price / 2).toFixed(0));
-        setJR20000((200 / current_price / 2).toFixed(0));
-        //console.log(JR1000, JR5000, JR10000);
-        return current_price;
-      })
-      .catch((e) => {
-        // console.log(e);
-        return false;
-      });
-  }
 
   const getUserDataInstant = () => {
     const basicAuthToken = validateToken();
@@ -350,75 +93,10 @@ function RedeemPrizes() {
         console.log("error ", err);
       });
   };
-  // const RedeemPrize = async (prize_id) => {
-  //   // console.log("prize_id", prize_id);
-  //   if (!user)
-  //     return toast.error("Please login first", { containerId: "login" });
-  //   if (!address)
-  //     return toast.error("Please connect wallet first", {
-  //       containerId: "connect-wallet",
-  //     });
-  //   // console.log("user", user, prize_id);
-  //   // console.log("add", address);
-  //   // console.log("user.id", user.id);
-  //   // console.log("prize_id", prize_id);
-  //   // console.log("address", address);
-  //   setRedeemLoading(true);
-  //   marketPlaceInstance()
-  //     .get(`/redeemPrize/${address}/${user.id}/${prize_id}`)
-  //     .then((data) => {
-  //       setPrizeId("");
-  //       // console.log("redeemdata", data);
-  //       setRedeemLoading(false);
-  //       if (!data.data.success) {
-  //         toast.error("ERROR! - " + data.data.message, {
-  //           containerId: "error",
-  //         });
-  //       } else {
-  //         setRedeemSuccess(false);
-  //         toast.success(data.data.message + " redeemed successfully!");
-  //         getUserDataInstant();
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       if (err.response.data.message) {
-  //         toast.error(err.response.data.message, {
-  //           containerId: "error-redeen",
-  //         });
-  //       }
-  //     });
-  // };
-
-  const convert = async (ticketPrice, tokenPrice) => {
-    // console.log("convertPrice", ticketPrice, tokenPrice);
-    try {
-      if (parseInt(ticketPrice) > 0) {
-        if (user?.ticket >= parseInt(ticketPrice)) {
-          const res = await marketPlaceInstance().get(
-            `/coverttickettotoken/${ticketPrice}/${tokenPrice}/${user.id}`
-          );
-          const { message, code, data } = res.data;
-          setTickets("");
-          setTokens("");
-          if (code === 200) {
-            console.log("datattat", data);
-            getUserDataInstant();
-            toast.success(message, { id: "A" });
-          } else {
-            toast.error(message, { id: "A" });
-          }
-        } else {
-          toast.error("Not sufficent tokens", { id: "A" });
-        }
-      } else {
-        toast.error("Please enter token", { id: "A" });
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   useEffect(() => {
+    setShowFastWithdraw(true);
+
     async function checkKYCStatus() {
       const response = await userKycDetails();
       if (response?.code === 200) {
@@ -440,39 +118,6 @@ function RedeemPrizes() {
     checkKYCStatus();
   }, []);
 
-  const handleSuccess50Modal = () => {
-    setSuccess50Show(!success50Show);
-  };
-
-  const handleSuccess100Modal = () => {
-    setSuccess100Show(!success100Show);
-  };
-
-  const handleSuccess500Modal = () => {
-    setSuccess500Show(!success500Show);
-  };
-
-  // useEffect(() => {
-  //   handleSuccessModal();
-  // }, []);
-  // console.log("convertPrice",convertPrice);
-  // getTiketToTokenPackages
-  // async function getTicketToTokenPackages() {
-  //   try {
-  //     const res = await marketPlaceInstance().get(`/getTicketToTokenPackages`);
-  //     if (res.data) {
-  //       // setAllPrizes(res.data || []);
-  //       setCryptoToToken(res.data || []);
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getTicketToTokenPackages();
-  // }, []);
-
   if (redemptionUnderMaintainance) {
     return <UnderMaintenanceContent />;
   }
@@ -480,43 +125,11 @@ function RedeemPrizes() {
   const handleCloseFiat = () => {
     setShowFiat(false);
   };
-  function handleCopyURL(value) {
-    navigator.clipboard.writeText(value);
-    toast.success("Copied");
-  }
+
   return (
     <Layout>
-      <SuccessModal
-        success50Show={success50Show}
-        success100Show={success100Show}
-        success500Show={success500Show}
-        handleSuccess50Modal={handleSuccess50Modal}
-        handleSuccess100Modal={handleSuccess100Modal}
-        handleSuccess500Modal={handleSuccess500Modal}
-      />
       <main className='main redeem-prizes-page redeem-page'>
         <div className='container'>
-          <Modal show={show} onHide={handleClose} centered animation={false}>
-            <Modal.Body className='popupBody'>
-              <div>Do You Want To Redeem?</div>
-              <div className='popupBtn'>
-                <button className='greyBtn' onClick={handleClose}>
-                  Cancel
-                </button>
-                <button
-                  className='yellowBtn'
-                  disabled={disable}
-                  onClick={confirmBuy}>
-                  Confirm
-                </button>
-              </div>
-            </Modal.Body>
-          </Modal>
-          {/* {show && (
-            <div className='convertChips'>
-             
-            </div>
-          )} */}
           {globalLoader && (
             <div className='loading'>
               <div className='loading-img-div'>
@@ -548,14 +161,15 @@ function RedeemPrizes() {
                   <div className='pageTitle'>
                     <h1 className='title'>Redeem for Prizes</h1>
                   </div>
-                  <div className='feature-overview-div'>
-                    Ready to cash in on your big wins? Take a look through our
-                    selection of prize options and pick what suits you best!
-                    Sweep Tokens are redeemed at a 100:1 USD ratio!
+                  <div className='page-sub-title'>
+                    <h2>
+                      Ready to cash in on your big wins? Take a look through our
+                      selection of prize options and pick what suits you best!
+                      Sweep Tokens are redeemed at a 100:1 USD ratio!
+                    </h2>
                   </div>
                 </div>
-
-                <div className='prizes-chip-count'>
+                <div className='prizes-chip-count m-0'>
                   {user ? (
                     <>
                       <h3>Redeemable Balance: {parseInt(user?.wallet)}</h3>
@@ -568,90 +182,37 @@ function RedeemPrizes() {
                       </a>
                     </>
                   ) : (
-                    <>
-                      <img
-                        src={LoadingPoker}
-                        alt='game'
-                        className='imageAnimation'
-                        width={100}
-                        height={100}
-                      />
-                    </>
+                    <img
+                      src={LoadingPoker}
+                      alt='game'
+                      className='imageAnimation'
+                      width={100}
+                      height={100}
+                    />
                   )}
                 </div>
                 <div className='page-nav-header-btns-row'>
-                  {/* <div className='new-btn'>
-                    <button
-                      // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("Badges")}>
-                      BADGES
-                    </button>
-                  </div> */}
                   <div className='new-btn'>
-                    <button
-                      // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("Crypto")}>
-                      CRYPTO
-                    </button>
-                  </div>
-                  {/* <div className='new-btn'>
-                    <button
-                      // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("Merch")}>
-                      MERCH
-                    </button>
-                  </div> */}
-                  <div className='new-btn'>
-                    <button
-                      // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("NFTs")}>
-                      NFTS
+                    <button onClick={() => filterPrizes("fast_withdraw")}>
+                      Crypto
                     </button>
                   </div>
 
                   <div className='new-btn'>
-                    {/* <button
-                      // className='page-nav-header-btn'
-                      onClick={() => handleFiat()}>
-                      Fiat
-                    </button> */}
-                    {/* <button
-                      // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("Fiat")}>
-                      Fiat
-                    </button> */}
+                    <button onClick={() => filterPrizes("Fiat")}>Fiat</button>
                   </div>
-                  <div className='new-btn'>
-                    {/* <button
-                      // className='page-nav-header-btn'
-                      onClick={() => handleFiat()}>
-                      Fiat
-                    </button> */}
-                    {/* <button
-                      // className='page-nav-header-btn'
-                      onClick={() => filterPrizes("fast_withdraw")}>
-                      Fast Withdraw
-                    </button> */}
-                  </div>
-                  {/* <div className="new-btn">
-                    <button onClick={() => filterPrizes("convert")}>
-                      Convert ticket to token
-                    </button>
-                  </div> */}
-                  {/* <div className='new-btn'>
-                    <button onClick={() => filterPrizes("buy_token")}>
-                      Buy Tokens
-                    </button>
-                  </div> */}
                 </div>
-
-                {buyTokenTab && (
-                  <div className='buyTokenTab'>
-                    <h2>Buy Tokens Here .. </h2>
-                    <Button className='buyTokensBtn'>Buy Tokens</Button>
-                  </div>
+                {isMismatched && address ? (
+                  <>
+                    {showFastWithdraw && (
+                      <div style={{ marginTop: "20px" }}>
+                        <SwitchNetworkBSC />
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <span></span>
                 )}
-
                 {buyWithFiat && (
                   <FiatPopup
                     show={showFiat}
@@ -659,880 +220,14 @@ function RedeemPrizes() {
                     getUserDataInstant={getUserDataInstant}
                   />
                 )}
-                {showFastWithdraw && (
-                  <FastWithdrawPopup
+                {!isMismatched && showFastWithdraw && (
+                  <CryptoWithdrawPopup
                     show={showFastWithdraw}
                     setShow={setShowFastWithdraw}
                     handleCloseFiat={handleCloseFiat}
                     getUserDataInstant={getUserDataInstant}
                   />
                 )}
-
-                {/* {!buyWithFiat && (
-                  <div className="page-nav-header-btns-subrow">
-                    <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("priceDescending")}>
-                      PRICE HIGH TO LOW
-                    </button>
-                    <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("priceAscending")}>
-                      PRICE LOW TO HIGH
-                    </button>
-                    <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("nameDescending")}>
-                      NAME A-Z
-                    </button>
-                    <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("nameAscending")}>
-                      NAME Z-A
-                    </button>
-                    <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("categoryDescending")}>
-                      CATEGORY A-Z
-                    </button>
-                    <button
-                      className='page-nav-header-subbtn'
-                      onClick={() => sortPrizes("categoryAscending")}>
-                      CATEGORY Z-A
-                    </button>
-                  </div>
-                )} */}
-                {isMismatched && address ? (
-                  <>
-                    {
-                      <div style={{ marginTop: "20px" }}>
-                        <SwitchNetworkBSC />
-                      </div>
-                    }
-                  </>
-                ) : (
-                  <span></span>
-                )}
-                <div className='prizes-container'>
-                  {showConvert && (
-                    <>
-                      <div className='buy-chips-content'>
-                        <div className='buy-chips-grid cryptoTotoken'>
-                          <div className='buy-chips-grid'>
-                            <div className='purchasemodal-cards'>
-                              {ticketPrizes.map((prize) => (
-                                <Card>
-                                  <Card.Img variant='top' src={sweep} />
-                                  <Card.Body>
-                                    <Card.Title>
-                                      Token {prize?.token}
-                                    </Card.Title>
-                                    <Card.Text>Buy Ticket</Card.Text>
-                                    <Button
-                                      variant='primary'
-                                      onClick={() =>
-                                        handleShow(
-                                          prize.ticket,
-                                          prize.token,
-                                          ""
-                                        )
-                                      }>
-                                      <img src={ticket} alt='ticket' />
-                                      <h5>{prize?.ticket}</h5>
-                                    </Button>
-                                  </Card.Body>
-                                </Card>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </>
-                  )}
-
-                  <div style={{ width: "100%", textAlign: "center" }}>
-                    <div id='rewardId' style={{ margin: "0 auto" }} />
-                  </div>
-                  {!isMismatched && !prizesLoading ? (
-                    <>
-                      <div className='prizes_container'>
-                        {/* <div className="prizes-card">
-                  <div className="prize-name bold text-animate">
-                                  <h4>Under token migeration</h4>
-                                </div>
-                               <img className="card-img pulse" src={"https://casino-nft-marketplace.s3.amazonaws.com/scroogeJRAvatar.png"} alt="JR" />
-                               <img className="card-img pulse" src="https://casino-nft-marketplace.s3.amazonaws.com/scroogeHatPrize.png" alt="OG" />
-                                <div>
-                                  <p>We are migrating OG and JR into one token, Crypto redeem will be back soon</p>
-                                  <p>We are sorry for inconvenience</p>
-                                </div>
-                  </div> */}
-                        {prizes
-                          .filter(
-                            (f) =>
-                              f.redeem_action !== "burn" &&
-                              f.category !== "Merch" &&
-                              f.category !== "Badges" &&
-                              f.price !== 500 &&
-                              f.contract_name !== "JR" &&
-                              f._id !== "63cedf0d1736630ad01d5f4e" &&
-                              f._id !== "63b74c51dd789f0383a51d3b"
-                          )
-                          .map((prize) => (
-                            <div className='prizes-card' key={prize._id}>
-                              {/* {console.log("prize", prize._id)} */}
-                              {!prize.isDynamic ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>{prize.name}</h4>
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {/* {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG1000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <p
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />{" "}
-                                    </p>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(OG1000) * currentPriceOG
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )} */}
-                              {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(JR1000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(JR1000) * currentPriceJR
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG1000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(OG1000) * currentPriceOG
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(JR1000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(JR1000) * currentPriceJR
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG5000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(OG5000) * currentPriceOG
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(JR5000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(JR5000) * currentPriceJR
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf761736630ad01d5f52" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG5000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(OG5000) * currentPriceOG
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedfb61736630ad01d5f55" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(JR5000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(JR5000) * currentPriceJR
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf301736630ad01d5f4f" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG10000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(OG10000) * currentPriceOG
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf651736630ad01d5f51" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(JR10000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(JR10000) * currentPriceJR
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG10000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(OG10000) * currentPriceOG
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedfc51736630ad01d5f56" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(JR10000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(JR10000) * currentPriceJR
-                                    ).toLocaleString("en-US")}
-                                    USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "6434f2f5f6bfb431f290a691" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG20000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(OG20000) * currentPriceOG
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "6434f46cf6bfb431f290a692" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(JR20000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(JR20000) * currentPriceJR
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-
-                              {prize._id === "64e2f7cf9a8e251156cfe8f5" ? (
-                                <div className='prize-name bold text-animate'>
-                                  <h4>
-                                    {" "}
-                                    {prize.name.replace(
-                                      "xxxValue",
-                                      parseInt(OG500000).toLocaleString("en-US")
-                                    )}
-                                  </h4>
-                                  <div>
-                                    <p>
-                                      Scrooge Contract to view tokens in wallet
-                                    </p>
-                                    <h5
-                                      onClick={() => {
-                                        handleCopyURL(
-                                          "0x9dfee72aea65dc7e375d50ea2bd90384313a165a"
-                                        );
-                                      }}>
-                                      0x9dfee72aea65dc7e375d50ea2bd90384313a165a{" "}
-                                      <img src={copyIcon} alt='icon' />
-                                    </h5>
-                                  </div>
-                                  *
-                                  <h4>
-                                    {(
-                                      parseInt(OG500000) * currentPriceOG
-                                    ).toLocaleString("en-US")}
-                                    &nbsp;USD In Value
-                                  </h4>{" "}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              <img
-                                className='card-img pulse'
-                                src={prize.image_url}
-                                alt={prize.name}
-                              />
-                              <br></br>
-                              <div className='prize-cost'>
-                                <p>Cost: {prize.price} tokens</p>
-                              </div>
-                              <br></br>
-                              <p>Category : {prize.category}</p>
-                              <br></br>
-
-                              {!prize.isDynamic ? (
-                                <div>
-                                  <p>{prize.description}</p>
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {/* {prize._id === "63b74c51dd789f0383a51d3b" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(OG1000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )} */}
-                              {prize._id === "63b74ce7dd789f0383a51d3c" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(JR1000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63b78b42dd789f0383a51d3d" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(OG1000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63b78c0edd789f0383a51d3f" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(JR1000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf0d1736630ad01d5f4e" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(OG5000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf5a1736630ad01d5f50" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(JR5000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf761736630ad01d5f52" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(OG5000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedfb61736630ad01d5f55" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(JR5000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf301736630ad01d5f4f" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(OG10000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf651736630ad01d5f51" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(JR10000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedf9d1736630ad01d5f54" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(OG10000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "63cedfc51736630ad01d5f56" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(JR10000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "6434f2f5f6bfb431f290a691" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(OG20000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "6434f46cf6bfb431f290a692" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(JR20000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize._id === "64e2f7cf9a8e251156cfe8f5" ? (
-                                <div className=''>
-                                  {prize.description.replace(
-                                    "xxxValue",
-                                    parseInt(OG500000).toLocaleString("en-US")
-                                  )}
-                                  *
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              {prize.isDynamic ? (
-                                <div className='asterisk-desc'>
-                                  *Amount of crypto coins received is calculated
-                                  in real time on redemption and may vary from
-                                  displayed total to equal proper USD value.
-                                  <br></br>
-                                  *Value received on each item will be 1% less
-                                  to cover Blockchain Fees.
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              <br />
-                              <div className='redeem-btn'>
-                                <button
-                                  // className='submit-btn'
-                                  className='gradient-btn'
-                                  onClick={() => handleShow("", "", prize._id)}>
-                                  REDEEM PRIZE
-                                </button>
-                              </div>
-
-                              <br></br>
-                            </div>
-                          ))}
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className='loader-img'>
-                        <img
-                          src={LoadingPoker}
-                          alt='game'
-                          className='imageAnimation'
-                        />
-                      </div>
-                    </>
-                  )}
-                </div>
               </>
             )}
           </div>

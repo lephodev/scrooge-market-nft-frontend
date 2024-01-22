@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import HolderClaimChips from "./HolderClaimChips.mjs";
+// import HolderClaimChips from "./HolderClaimChips.mjs";
 import { DLGate } from "../components/DLGate.jsx";
 import DLClaimTokens from "./DLClaimTokens.mjs";
 import Layout from "./Layout.mjs";
@@ -165,9 +165,7 @@ const EarnFreeCoins = () => {
                 <DailyRewards />
               </div>
             ) : key === "monthlyClaims" ? (
-              <div className='tab-claims'>
-                <HolderClaimChips />
-              </div>
+              <div className='tab-claims'>{/* <HolderClaimChips /> */}</div>
             ) : key === "duckyLuckClaims" ? (
               <div>
                 {/* "gghh" */}
@@ -184,9 +182,7 @@ const EarnFreeCoins = () => {
                   <DailyRewards />
                 </div>
               ) : key === "monthlyClaims" ? (
-                <div className='tab-claims'>
-                  <HolderClaimChips />
-                </div>
+                <div className='tab-claims'>{/* <HolderClaimChips /> */}</div>
               ) : key === "duckyLuckClaims" ? (
                 <div>
                   {/* "gghh" */}

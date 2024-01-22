@@ -154,6 +154,36 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
+      // const res = await axios.get("https://proxycheck.io/v2/");
+      // const CurrentIp = res?.data;
+      // console.log("res", res);
+
+      // // eslint-disable-next-line no-console
+      // console.log("CurrentIpAddress", CurrentIp);
+
+      // const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/city`);
+      // // eslint-disable-next-line no-console
+      // // console.log("city", res1?.data);
+      // const reg = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
+      // console.log("reg", reg);
+      // const countryName = res?.data?.country_name;
+      // const region = reg?.data;
+      // console.log("region", region);
+
+      // const CurrentCity = res1?.data;
+      // // eslint-disable-next-line no-constant-condition
+      // if (
+      //   CurrentCity.toString() === "Quebec" ||
+      //   CurrentCity.toString() === "Washington" ||
+      //   countryName.toString() === "Brazil" ||
+      //   CurrentCity.toString() === "Idaho" ||
+      //   region.toString() === "Quebec" ||
+      //   region.toString() === "Idaho" ||
+      //   region.toString() === "Michigan" ||
+      //   region.toString() === "Washington"
+      // ) {
+      //   setStateBlock(true);
+      // }
       await getGeoLocationDetails();
       await checkVPN();
     })();

@@ -22,8 +22,8 @@ import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
 import { marketPlaceInstance } from "../config/axios.js";
 //import profile from '../images/profile.png'
-import { DLGate } from "../components/DLGate.jsx";
-import DLClaimTokens from "./DLClaimTokens.mjs";
+// import { DLGate } from "../components/DLGate.jsx";
+// import DLClaimTokens from "./DLClaimTokens.mjs";
 // import HolderClaimChips from "./HolderClaimChips.mjs";
 import ConnectWalletModel from "./models/connectWalletModel.mjs";
 import { Button } from "react-bootstrap";
@@ -178,11 +178,10 @@ export default function MyWallet() {
             every month.
           </div>
           {!showMerchRedeemed || !showCasinoNFTs || !showCrypto ? (
-            <>
-              <div className='min-menu-div'>
-                {!showMerchRedeemed ? (
-                  <>
-                    {/* <div className='new-btn'>
+            <div className='min-menu-div'>
+              {!showMerchRedeemed ? (
+                <>
+                  {/* <div className='new-btn'>
                       <button
                         // className='min-menu-btn'
                         onClick={() => {
@@ -192,42 +191,41 @@ export default function MyWallet() {
                         MERCH CODES
                       </button>
                     </div> */}
-                  </>
-                ) : (
-                  <></>
-                )}
-                {!showCasinoNFTs ? (
-                  <>
-                    <div className='new-btn'>
-                      <button
-                        // className='min-menu-btn'
-                        onClick={() => {
-                          setShowCasinoNFTs(true);
-                        }}>
-                        CASINO NFTS
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-                {!showCrypto ? (
-                  <>
-                    <div className='new-btn'>
-                      <button
-                        // className='min-menu-btn'
-                        onClick={() => {
-                          setShowCrypto(true);
-                        }}>
-                        CRYPTO
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>
-            </>
+                </>
+              ) : (
+                <></>
+              )}
+              {!showCasinoNFTs ? (
+                <>
+                  <div className='new-btn'>
+                    <button
+                      // className='min-menu-btn'
+                      onClick={() => {
+                        setShowCasinoNFTs(true);
+                      }}>
+                      CASINO NFTS
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+              {!showCrypto ? (
+                <>
+                  <div className='new-btn'>
+                    <button
+                      // className='min-menu-btn'
+                      onClick={() => {
+                        setShowCrypto(true);
+                      }}>
+                      CRYPTO
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
           ) : (
             <></>
           )}
@@ -253,7 +251,7 @@ export default function MyWallet() {
           ) : (
             <span></span>
           )}
-          {user ? (
+          {user && address ? (
             <div className='wallet-casino-profile-div'>
               <div className='wallet-casino-top'>
                 {/* <div className="wallet-casino-profile-img-div">
@@ -304,48 +302,38 @@ export default function MyWallet() {
                       GOLD COIN: {user?.goldCoin?.toLocaleString('en-US')}
                     </div> */}
                     <div>
-                      {/* "gghh" */}
-                      <h6 className='title'>Ducky Luck Claims</h6>
-                      <DLGate>
-                        <DLClaimTokens />
-                      </DLGate>
-                      {/* <h6 className='title'>Monthly Claims</h6>
-                      <div className='tab-claims'>
-                        <HolderClaimChips />
-                      </div> */}
-                    </div>
-                  </div>
-                </div>
-              </div>
+                      <div className='claim-box'>
+                        <h6 className='title'>Ducky Luck Claims</h6>
+                        {address ? (
+                          <div className='crypto-card-grid'>
+                            <div className='crypto-balance-div'>
+                              <div className='width-100'>
+                                <div className='crypto-balance-header'>
+                                  CRYPTO BALANCE
+                                </div>
+                                <div className='crypto-balance-row-new'>
+                                  <div className='crypto-balance-row-img'>
+                                    <img
+                                      className='token-logo'
+                                      src={ScroogeHatLogo}
+                                      alt='Scrooge Casino balances'
+                                    />
+                                  </div>
 
-              {address ? (
-                <>
-                  <div className='crypto-card-grid'>
-                    <div className='crypto-balance-div'>
-                      <div className='width-100'>
-                        <div className='crypto-balance-header'>
-                          CRYPTO BALANCE
-                        </div>
-                        <div className='crypto-balance-row-new'>
-                          <div className='crypto-balance-row-img'>
-                            <img
-                              className='token-logo'
-                              src={ScroogeHatLogo}
-                              alt='Scrooge Casino balances'
-                            />
-                          </div>
-
-                          <div className='crypto-balance-row-text'>
-                            <p>SCROOGE COIN: {OGBalance}</p>
-                            <p> VALUE: ${OGValue.toLocaleString("en-US")}</p>
-                          </div>
-                        </div>
-                        <div className='claim-pending-div'>
-                          <ClaimOGPending />
-                        </div>
-                      </div>
-                    </div>
-                    {/* <div className='crypto-balance-div'>
+                                  <div className='crypto-balance-row-text'>
+                                    <p>SCROOGE COIN: {OGBalance}</p>
+                                    <p>
+                                      {" "}
+                                      VALUE: ${OGValue.toLocaleString("en-US")}
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className='claim-pending-div'>
+                                  <ClaimOGPending />
+                                </div>
+                              </div>
+                            </div>
+                            {/* <div className='crypto-balance-div'>
                       <div className='width-100'>
                         <div className='crypto-balance-header'>JR BALANCE</div>
 
@@ -367,15 +355,28 @@ export default function MyWallet() {
                         </div>
                       </div>
                     </div> */}
-                  </div>
-                </>
-              ) : (
-                <>
-                  {/* // <div className="connect-wallet-div">
+                          </div>
+                        ) : (
+                          <>
+                            {/* // <div className="connect-wallet-div">
                 //   <ConnectWallet />
                 // </div> */}
-                </>
-              )}
+                          </>
+                        )}
+                      </div>
+                      {/* <DLGate>
+                        <DLClaimTokens />
+                      </DLGate> */}
+                      {/* <div className='claim-box'>
+                        <h6 className='title'>Monthly Claims</h6>
+                        <div className='tab-claims'>
+                          <HolderClaimChips />
+                        </div>
+                      </div> */}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           ) : (
             <></>

@@ -75,7 +75,7 @@
 .kyc-page .login-box {
   max-width: 620px;
   margin: 0px auto;
-  width: 100%
+  width: 100%;
 }
 
 .upload-game-thumnail label.form-label {
@@ -320,12 +320,6 @@
   padding: 10px;
   border-radius: 10px;
 }
-
-.marketPlace_kycForm .no-image-area {
-  font-size: 12px;
-  width: 100%;
-  padding-top: 15px;
-}
 .image-placeholder {
   background-repeat: no-repeat;
   width: 100%;
@@ -347,6 +341,13 @@
 .image-placeholder p {
   text-align: center;
   display: none;
+}
+
+.marketPlace_kycForm .no-image-area {
+  font-size: 12px;
+  width: 100%;
+  padding: 2px 0px;
+  padding-top: 15px;
 }
 
 .marketPlace_kycForm .login-button.full-w {

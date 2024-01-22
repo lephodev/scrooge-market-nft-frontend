@@ -1,10 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { useState, useContext, useEffect, useRef } from "react";
-import { useAcceptJs } from "react-acceptjs";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useContext, useEffect } from "react";
 import { AcceptHosted } from "react-acceptjs";
-
-import { Button, Modal, Form, Card, Dropdown, Spinner } from "react-bootstrap";
+import { Button, Form, Card, Dropdown, Spinner } from "react-bootstrap";
 import Layout from "./Layout.mjs";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import coin4 from "../images/4.png";
@@ -12,16 +10,12 @@ import coin3 from "../images/3.png";
 import coin2 from "../images/2.png";
 import coin1 from "../images/1.png";
 import sweep from "../images/token.png";
-import ticket from "../images/ticket.png";
 import { useSearchParams } from "react-router-dom";
-
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
 
 import {
   useAddress,
-  ConnectWallet,
-  useContractWrite,
   useContract,
   useNetworkMismatch,
   useSDK,
@@ -33,15 +27,9 @@ import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import { BUSD_ADDRESS } from "../config/keys.js";
 import { ethers } from "ethers";
 import axios from "axios";
-import SuccessPurchaseModel from "./models/SuccessPurchaseModel.mjs";
-import { async } from "q";
 import AuthorizeSucessModel from "./models/authrizeSucessModel.mjs";
 let promoCode;
 let goldcoinAmount;
-const authData = {
-  apiLoginID: "92WEDagC2em3",
-  clientKey: "6YnDJ6QV2u4Mw4NjRtzZ8P5vx8Ewuj7ZeQ85C2cfPj5x8FY75ZY45bgYqWhgz6rT",
-};
 
 export default function CryptoToGC() {
   const sdk = useSDK();
@@ -51,26 +39,14 @@ export default function CryptoToGC() {
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
   const [selectedDropdown, setSelectedDropdown] = useState("Scrooge");
-  const [handler, setHndler] = useState(true);
   const [selectedTypeDropdown, setSelectedTypeDropdown] =
     useState("Credit Card");
   const [promocode, setPromoCode] = useState("");
   const [promoLoader, setPromoLoader] = useState(false);
   const [promoDetails, setPromoDetails] = useState({});
-  const [tickets, setTickets] = useState("");
-  const [show, setShow] = useState(false);
-  const [ticketPrizes, setTicketPrizes] = useState([]);
-  const [disable, setDisable] = useState(false);
-  const [tokens, setTokens] = useState("");
-  const [key, setKey] = useState("cryptoToGc");
+  const [key] = useState("cryptoToGc");
   const isMismatched = useNetworkMismatch();
   const [errors, setErrors] = useState("");
-  const [ST500, setST500] = useState(false);
-  const [ST1000, setST1000] = useState(false);
-  const [ST2500, setST2500] = useState(false);
-  const [ST5000, setST5000] = useState(false);
-  const [ST10000, setST10000] = useState(false);
-  const [ST25000, setST25000] = useState(false);
   const [dailyGCPurchaseLimit, setDailyGCPurchaseLimit] = useState(0);
 
   const { reward } = useReward("rewardId", "confetti", {
@@ -82,7 +58,6 @@ export default function CryptoToGC() {
   const { contract: scroogeContract } = useContract(
     process.env.REACT_APP_OGCONTRACT_ADDRESS
   );
-  // console.log("scroogeContract",scroogeContract);
   const { contract: bnbContract } = useContract(
     process.env.REACT_APP_BNBCONTRACT_ADDRESS
   );
@@ -108,7 +83,6 @@ export default function CryptoToGC() {
       }, 20000);
     }
   }, [searchParams]);
-  console.log("status", status);
   const getUserDataInstant = () => {
     let access_token = cookies.token;
     authInstance()
@@ -131,8 +105,6 @@ export default function CryptoToGC() {
       });
   };
 
-  const handleClose = () => setShow(false);
-
   const handlePromoReject = () => {
     setPromoDetails({});
     setPromoCode("");
@@ -141,8 +113,6 @@ export default function CryptoToGC() {
   };
   // Create a new WebSocket provider connected to BSC mainnet
   const provider = sdk.getProvider();
-
-  let handler2 = true;
 
   // getGCPackages
   async function getGCPackages() {
@@ -178,163 +148,7 @@ export default function CryptoToGC() {
     getGCPurcahseLimitPerDay();
   }, []);
 
-  let preventMultilecalls = true;
-
-  useEffect(() => {
-    if (handler2) {
-      window.requestHandler = async (response) => {
-        const {
-          encryptedCardData: { bin },
-        } = response;
-        console.log("binnnn", bin);
-        if (response.messages.resultCode === "Error") {
-          var i = 0;
-          while (i < response.messages.message.length) {
-            // console.log(
-            //   response.messages.message[i].code +
-            //     ": " +
-            //     response.messages.message[i].text
-            // );
-            i = i + 1;
-          }
-        } else if (preventMultilecalls) {
-          try {
-            // console.log("window prize",window.prize)
-            preventMultilecalls = false;
-
-            if (user?.isBlockWallet) {
-              setBuyLoading(false);
-              return toast.error(`Your wallet blocked by admin`, {
-                toastId: "A",
-              });
-            }
-            const res = await marketPlaceInstance().post(
-              `/accept-deceptor`,
-              {
-                bin: bin,
-                dataDescriptor: response.opaqueData.dataDescriptor,
-                dataValue: response.opaqueData.dataValue,
-                item: {
-                  id: window.prize.priceInBUSD,
-                  description: `Purchase GC ${window.prize.gcAmount} and get ${window.prize.freeTokenAmount} ST free`,
-                  price: window.prize.priceInBUSD,
-                  name: window.prize.gcAmount,
-                  actualAmount: window.prize.actualAmount,
-                  promoCode: window.prize.promoCode,
-                },
-              },
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                withCredentials: true,
-                credentials: "include",
-              }
-            );
-
-            setBuyLoading(false);
-            getUserDataInstant();
-
-            if (res.data.success) {
-              setUser({
-                ...res.data.user,
-              });
-              const prizeBusd = res?.data?.purchaseDetails?.priceInBUSD;
-              if (prizeBusd === "5") {
-                setST500(true);
-              }
-              if (prizeBusd === "10") {
-                setST1000(true);
-              }
-              if (prizeBusd === "25") {
-                setST2500(true);
-              }
-              if (prizeBusd === "50") {
-                setST5000(true);
-              }
-
-              if (prizeBusd === "100") {
-                setST10000(true);
-              }
-              if (prizeBusd === "250") {
-                setST25000(true);
-              }
-              // toast.success(res.data.data, { id: "buy-sucess" });
-              getGCPackages();
-              handlePromoReject();
-              getUserDataInstant();
-            } else {
-              getGCPackages();
-              toast.error(res.data.error, { id: "buy-failed" });
-              handlePromoReject();
-              getUserDataInstant();
-            }
-            preventMultilecalls = true;
-            console.log("user======>>>>>>", user);
-            getGCPackages();
-            getUserDataInstant();
-          } catch (e) {
-            setBuyLoading(false);
-            getGCPackages();
-            handlePromoReject();
-            getUserDataInstant();
-            preventMultilecalls = true;
-
-            console.log("ee55", e.response);
-            // console.log("ee55", JSON.parse(e));
-            if (axios.isAxiosError(e) && e?.response) {
-              if (e?.response?.status !== 200) {
-                toast.error(
-                  e?.response?.data?.error || e?.response?.data?.message,
-                  {
-                    toastId: "login",
-                  }
-                );
-              }
-            }
-          }
-        }
-      };
-      handler2 = false;
-    } else {
-      handler2 = true;
-    }
-  }, []);
-
-  useEffect(() => {
-    const getBalance = async () => {
-      const bal = await sdk.wallet.balance();
-    };
-    if (address) {
-      getBalance();
-    }
-  }, [address, sdk]);
-
-  useEffect(() => {
-    // console.log("hello");
-    if (selectedTypeDropdown === "Credit Card" && allPrizes.length) {
-      let script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = "https://js.authorize.net/v3/AcceptUI.js";
-      script.charset = "utf-8";
-      script.id = "accept";
-      document.body.appendChild(script);
-    } else {
-      let s = document.getElementById("accept");
-      if (s) {
-        s.remove();
-      }
-    }
-
-    return () => {
-      let s = document.getElementById("accept");
-      if (s) {
-        s.remove();
-      }
-    };
-  }, [selectedTypeDropdown, allPrizes]);
-
-  const convert = async (usd, gc, pid) => {
+  const convert = async (usd, gc) => {
     if (user?.isBlockWallet) {
       return toast.error(`Your wallet blocked by admin`, { toastId: "A" });
     }
@@ -369,11 +183,9 @@ export default function CryptoToGC() {
         txResult,
         cryptoAmount,
         current_price;
-      let contactSDk;
 
       if (selectedDropdown === "BUSD") {
         contract.events.addEventListener("Transfer", (event) => {
-          // console.log("event busd", event.data.from, event.data.to);
           if (
             event?.data?.from?.toLowerCase() === address.toLowerCase() &&
             ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) &&
@@ -382,7 +194,6 @@ export default function CryptoToGC() {
                 event.data.to.toLowerCase() ===
                   process.env.REACT_APP_OGCONTRACT_ADDRESS.toLowerCase()))
           ) {
-            // console.log("transaction", event.transaction);
             if (event.transaction.transactionHash) {
               const { transactionHash } = event.transaction || {};
               marketPlaceInstance()
@@ -426,7 +237,6 @@ export default function CryptoToGC() {
             }
           }
         });
-        contactSDk = contract;
       } else if (selectedDropdown === "Scrooge") {
         scroogeContract.events.addEventListener("Transfer", async (event) => {
           if (
@@ -478,7 +288,6 @@ export default function CryptoToGC() {
         });
       } else if (selectedDropdown === "BNB") {
         provider.on("block", async (blockNumber) => {
-          // Emitted on every block change
           const block = await provider.getBlockWithTransactions(blockNumber);
           for await (const transaction of block.transactions) {
             if (
@@ -528,41 +337,6 @@ export default function CryptoToGC() {
             }
           }
         });
-        // bnbContract.events.addEventListener("Transfer", (event) => {
-        // console.log("eventbnb -", event, event.data,event.transaction.transactionHash)
-        //     if (
-        //     event?.data?.src?.toLowerCase() === address.toLowerCase() &&
-        //     ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) && event.data.dst.toLowerCase() === BUSD_ADDRESS.toLowerCase())
-        //     || (selectedDropdown === "Scrooge" && event.data.dst.toLowerCase() === process.env.REACT_APP_OGCONTRACT_ADDRESS.toLowerCase())
-        //     )
-        //   ) {
-        //     console.log("transaction", event.transaction);
-        //     if (event.transaction.transactionHash) {
-        //       const { transactionHash } = event.transaction || {};
-        //       marketPlaceInstance()
-        //         .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
-        //         .then((response) => {
-        //           setBuyLoading(false);
-        //           if (response.data.success) {
-        //             setUser(response?.data?.user);
-        //             toast.success(`Successfully Purchased ${gc} goldCoin`);
-        //             reward();
-        //             getUserDataInstant();
-        //           } else {
-        //             setBuyLoading(false);
-        //             toast.error("Failed to buy");
-        //           }
-        //           bnbContract.events.removeAllListeners()
-        //         })
-        //         .catch((error) => {
-        //           setBuyLoading(false);
-        //           toast.error("Token Buy Failed");
-        //           console.log(error);
-        //           bnbContract.events.removeAllListeners()
-        //         });
-        //     }
-        //   }
-        // });
       } else if (selectedDropdown === "USDT") {
         usdtContract.events.addEventListener("Transfer", (event) => {
           //  console.log("eventusdt-", event.data.from, event.data.to);
@@ -615,7 +389,6 @@ export default function CryptoToGC() {
         });
       } else if (selectedDropdown === "USDC") {
         usdcContract.events.addEventListener("Transfer", (event) => {
-          // console.log("eventusdc-", event.data.from, event.data.to);
           if (
             event?.data?.from?.toLowerCase() === address.toLowerCase() &&
             ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) &&
@@ -667,7 +440,6 @@ export default function CryptoToGC() {
 
       if (selectedDropdown === "BUSD") {
         let amt = (usd * Math.pow(10, 18)).toString();
-        // console.log("BUSDamt",amt);
         setTimeout(async () => {
           try {
             txResult = await contract.call("transfer", [BUSD_ADDRESS, amt], {
@@ -749,20 +521,6 @@ export default function CryptoToGC() {
         if (selectedDropdown === "BNB") {
           console.log("cryptoAmount", cryptoAmount);
           txResult = await sdk.wallet.transfer(walletAddress, cryptoAmount);
-          // provider.sendTransaction({
-          //   from: address,
-          //   to: walletAddress,
-          //   value: ethers.utils.parseEther("0.02"),
-          //   gasLimit: 1000000,
-          //   gasPrice: ethers.utils.parseUnits("5", "gwei"),
-          // })
-          // await sdk.wallet.sendRawTransaction({
-          //   from: address,
-          //   to: walletAddress,
-          //   value: ethers.utils.parseEther("0.02"),
-          //   gasLimit: 1000000,
-          //   gasPrice: ethers.utils.parseUnits("5", "gwei"),
-          // })
         } else {
           txResult = await sdk.wallet.transfer(
             walletAddress,
@@ -771,28 +529,6 @@ export default function CryptoToGC() {
           );
         }
       }
-      // if (txResult.receipt) {
-      //   const { transactionHash } = txResult?.receipt || {};
-      //   marketPlaceInstance()
-      //     .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`)
-      //     .then((response) => {
-      //       setBuyLoading(false);
-      //       if (response.data.success) {
-      //         setUser(response?.data?.user);
-      //         toast.success(`Successfully Purchased ${gc} goldCoin`);
-      //         reward();
-      //         getUserDataInstant();
-      //       } else {
-      //         setBuyLoading(false);
-      //         toast.error("Failed to buy");
-      //       }
-      //     })
-      //     .catch((error) => {
-      //       setBuyLoading(false);
-      //       toast.error("Token Buy Failed");
-      //       console.log(error);
-      //     });
-      // }
     } catch (error) {
       console.log("error", error);
       setBuyLoading(false);
@@ -824,68 +560,8 @@ export default function CryptoToGC() {
     setSelectedTypeDropdown(value);
   };
 
-  const handleShow = (ticket, token, prizeid) => {
-    setTickets(ticket);
-    setTokens(token);
-    setShow(true);
-  };
-
-  async function getTicketToTokenPrizes() {
-    setPrizesLoading(true);
-
-    try {
-      const res = await marketPlaceInstance().get(`/getTicketToToken`);
-      if (res.data) {
-        // console.log("res.data",res.data);
-        setPrizesLoading(false);
-        setTicketPrizes(res.data || []);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  useEffect(() => {
-    getTicketToTokenPrizes();
-  }, []);
-
-  const confirmBuy = async () => {
-    setDisable(true);
-    try {
-      if (tickets !== "" && tokens !== "") {
-        try {
-          if (parseInt(tickets) > 0) {
-            if (user?.ticket >= parseInt(tickets)) {
-              const res = await marketPlaceInstance().get(
-                `/coverttickettotoken/${tickets}`
-              );
-              const { message, code, data } = res.data;
-              setTickets("");
-              setTokens("");
-              if (code === 200) {
-                getUserDataInstant();
-                toast.success(message, { id: "A" });
-              } else {
-                toast.error(message, { id: "A" });
-              }
-            } else {
-              toast.error("Not sufficient tickets", { id: "A" });
-            }
-          } else {
-            toast.error("Please enter token", { id: "A" });
-          }
-        } catch (e) {
-          console.log(e);
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    setDisable(false);
-    handleClose();
-  };
-
   const handleChangePromo = (e) => {
-    const { value, name } = e.target;
+    const { value } = e.target;
     setPromoCode(value.trim());
     if (value.trim().length) {
       setErrors("");
@@ -927,7 +603,7 @@ export default function CryptoToGC() {
   };
 
   const getExactGC = (Gc, promo) => {
-    const { coupanType, discountInPercent, discountInAmount } = promo || {};
+    const { coupanType, discountInPercent } = promo || {};
     let discount = 0;
     if (coupanType === "Percent") {
       discount = (Gc * discountInPercent) / 100;
@@ -938,65 +614,15 @@ export default function CryptoToGC() {
   };
 
   const getExactToken = (Token, promo) => {
-    const { coupanType, discountInPercent, discountInAmount } = promo || {};
+    const { coupanType, discountInPercent } = promo || {};
     let discount = 0;
     if (coupanType === "Percent") {
       discount = (Token * discountInPercent) / 100;
-      // }else if(coupanType==="Amount"){
-      //   discount = discountInAmount
     }
     if (coupanType === "2X") {
       discount = parseInt(Token);
     }
     return parseInt(Token) + discount;
-  };
-  const [currentState, setCurrentState] = useState("");
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get("https://ipapi.co/ip");
-        const CurrentIp = res?.data;
-
-        // eslint-disable-next-line no-console
-        // console.log("CurrentIpAddress", CurrentIp);
-
-        const res1 = await axios.get(`https://ipapi.co/${CurrentIp}/region`);
-        // eslint-disable-next-line no-console
-        // console.log("city", res1?.data);
-        const CurrentCity = res1?.data;
-        console.log("CurrentCity", CurrentCity);
-        setCurrentState(CurrentCity);
-        // eslint-disable-next-line no-constant-condition
-
-        // navigates("/CountryBlockblock");
-      } catch (error) {
-        console.log("errr", error);
-      }
-    })();
-  }, []);
-
-  const handleSuccess500Modal = () => {
-    setST500(!ST500);
-  };
-
-  const handleSuccess1000Modal = () => {
-    setST1000(!ST1000);
-  };
-
-  const handleSuccess2500Modal = () => {
-    setST1000(!ST2500);
-  };
-
-  const handleSuccess5000Modal = () => {
-    setST5000(!ST5000);
-  };
-
-  const handleSuccess10000Modal = () => {
-    setST10000(!ST10000);
-  };
-
-  const handleSuccess25000Modal = () => {
-    setST25000(!ST25000);
   };
 
   const handleOk = async (event) => {
@@ -1010,63 +636,21 @@ export default function CryptoToGC() {
     }
   };
 
-  console.log("dailyGCPurchaseLimit", dailyGCPurchaseLimit);
-
   return (
     <>
       {(status === "success" || status === "inprogress") && (
         <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
       )}
-      <SuccessPurchaseModel
-        ST500={ST500}
-        ST1000={ST1000}
-        ST2500={ST2500}
-        ST5000={ST5000}
-        ST10000={ST10000}
-        ST25000={ST25000}
-        handleSuccess500Modal={handleSuccess500Modal}
-        handleSuccess1000Modal={handleSuccess1000Modal}
-        handleSuccess2500Modal={handleSuccess2500Modal}
-        handleSuccess5000Modal={handleSuccess5000Modal}
-        handleSuccess10000Modal={handleSuccess10000Modal}
-        handleSuccess25000Modal={handleSuccess25000Modal}
-      />
+
       {prizesLoading ? (
         <div className='loading'>
           <div className='loading-img-div'>
             <img src={LoadingPoker} alt='game' className='imageAnimation' />
           </div>
         </div>
-      ) : currentState === "Michigan" ? (
-        <div
-          style={{
-            marginTop: "100px",
-            textAlign: "center",
-            color: "white",
-            backgroundColor: "red",
-          }}>
-          Due to state legislations, our application is no longer available in
-          your current location
-        </div>
       ) : (
         <Layout>
           <main className='main redeem-prizes-page'>
-            {/* <div className="tab-btn">
-          <Button
-            className={`${key === "cryptoToGc" ? "active-btn" : ""}`}
-            onClick={() => setKey("cryptoToGc")}
-          >
-            {" "}
-            Convert Crypto to GC
-          </Button>
-          <Button
-            className={`${key === "ticketToToken" ? "active-btn" : ""}`}
-            onClick={() => setKey("ticketToToken")}
-          >
-            {" "}
-            Convert ticket to token
-          </Button>
-        </div> */}
             {key === "cryptoToGc" ? (
               <div className='tab-claims'>
                 <div className='container'>
@@ -1088,8 +672,13 @@ export default function CryptoToGC() {
                     <div className='pageTitle'>
                       <h1 className='title'>Top up your Gold Coins</h1>
                     </div>
-                    {/* <div className="feature-overview-div"></div> */}
                     <div className='asterisk-desc cryptoTotoken'>
+                      <p className='title-memo'>
+                        All Sweep Tokens have a one time play through
+                        requirement. In the event of a bonus buy, only the Bonus
+                        ST portion may be tied to a higher play through which
+                        will be indicated on the package details.
+                      </p>
                       <ul>
                         Disclaimer :
                         <li>
@@ -1119,10 +708,7 @@ export default function CryptoToGC() {
                             }>
                             Credit Card
                           </Dropdown.Item>
-                          {/* <Dropdown.Item
-                            onClick={() => handlePaymentTypeChange("Cashapp")}>
-                            Cashapp
-                          </Dropdown.Item> */}
+
                           <Dropdown.Item
                             onClick={() => handlePaymentTypeChange("Crypto")}>
                             Crypto
@@ -1132,7 +718,6 @@ export default function CryptoToGC() {
                     </div>
                     <div className='enter-promo'>
                       <Form.Group className='form-group'>
-                        {/* <Form.Label>Promo code</Form.Label> */}
                         <Form.Control
                           type='text'
                           name='Promocode'
@@ -1165,9 +750,7 @@ export default function CryptoToGC() {
                       )}
                     </div>
                   </div>
-                  {/* {isMismatched ? (
-                <SwitchNetworkBSC />
-              ) : address ? ( */}
+
                   <div className='buy-chips-content'>
                     <div className='purchase-select'>
                       {selectedTypeDropdown === "Crypto" && (
@@ -1184,15 +767,6 @@ export default function CryptoToGC() {
                                 onClick={() => handleChange("Scrooge")}>
                                 Scrooge
                               </Dropdown.Item>
-                              {/* <Dropdown.Item
-                                onClick={() => handleChange("BUSD")}>
-                                BUSD
-                              </Dropdown.Item> */}
-                              {/* <Dropdown.Item
-                            onClick={() => handleChange("Scrooge Jr")}
-                          >
-                            Scrooge Jr
-                          </Dropdown.Item> */}
                               <Dropdown.Item
                                 onClick={() => handleChange("BNB")}>
                                 BNB
@@ -1228,6 +802,7 @@ export default function CryptoToGC() {
                       ) : (
                         ""
                       )}
+
                       <div className='purchasemodal-cards'>
                         {allPrizes.map((prize, i) => (
                           <>
@@ -1243,12 +818,7 @@ export default function CryptoToGC() {
                                       <Card.Title>
                                         GC {prize?.gcAmount}
                                       </Card.Title>
-                                      {/* {promoDetails?.couponCode && (
-                                        <Card.Title className='cross-text'>
-                                          GC {getExactGC(prize?.gcAmount, {})}
-                                        </Card.Title>
-                                      )} */}
-                                      {/* <Card.Text>$10</Card.Text> */}
+
                                       {selectedTypeDropdown === "Crypto" ? (
                                         getExactPrice(prize?.priceInBUSD) >
                                           0 && (
@@ -1313,12 +883,6 @@ export default function CryptoToGC() {
                                       <img src={sweep} alt='sweep token' />{" "}
                                       {prize?.freeTokenAmount}
                                     </div>
-                                    {/* {promoDetails?.couponCode && (
-                             <div className='goldPurchase-offers'>
-                               Free ST: <img src={sweep} alt='sweep token' />{" "}
-                               {getExactToken(prize?.freeTokenAmount, {})}
-                             </div>
-                           )} */}
                                   </Card>
                                 ) : (
                                   ""
@@ -1352,7 +916,6 @@ export default function CryptoToGC() {
                                       GC {getExactGC(prize?.gcAmount, {})}
                                     </Card.Title>
                                   )}
-                                  {/* <Card.Text>$10</Card.Text> */}
                                   {selectedTypeDropdown === "Crypto" ? (
                                     getExactPrice(
                                       prize?.priceInBUSD,
@@ -1436,12 +999,6 @@ export default function CryptoToGC() {
                                     promoDetails
                                   )}
                                 </div>
-                                {/* {promoDetails?.couponCode && (
-                              <div className='goldPurchase-offers'>
-                                Free ST: <img src={sweep} alt='sweep token' />{" "}
-                                {getExactToken(prize?.freeTokenAmount, {})}
-                              </div>
-                            )} */}
                               </Card>
                             )}
                           </>
@@ -1449,16 +1006,6 @@ export default function CryptoToGC() {
                       </div>
                     </div>
                   </div>
-                  {/* ) : (
-                <div>
-                  <p className='description yellow'>
-                    Get started by connecting your wallet.
-                  </p>
-                  <div className='connect-wallet-div'>
-                    <ConnectWallet />
-                  </div>
-                </div>
-              )} */}
                 </div>
               </div>
             ) : (
@@ -1479,46 +1026,9 @@ export default function CryptoToGC() {
                       </>
                     )}
                   </div>
-                  <div className='buy-chips-grid'>
-                    <div className='purchasemodal-cards'>
-                      {ticketPrizes.map((prize) => (
-                        <Card>
-                          <Card.Img variant='top' src={sweep} />
-                          <Card.Body>
-                            <Card.Title>Token {prize?.token}</Card.Title>
-                            <Card.Text>Buy Token</Card.Text>
-                            <Button
-                              variant='primary'
-                              onClick={() =>
-                                handleShow(prize.ticket, prize.token, "")
-                              }>
-                              <img src={ticket} alt='ticket' />
-                              <h5>{prize?.ticket}</h5>
-                            </Button>
-                          </Card.Body>
-                        </Card>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </div>
             )}
-            <Modal show={show} onHide={handleClose} centered animation={false}>
-              <Modal.Body className='popupBody'>
-                <div>Do You Want To Redeem?</div>
-                <div className='popupBtn'>
-                  <button className='greyBtn' onClick={handleClose}>
-                    Cancel
-                  </button>
-                  <button
-                    className='yellowBtn'
-                    disabled={disable}
-                    onClick={confirmBuy}>
-                    Confirm
-                  </button>
-                </div>
-              </Modal.Body>
-            </Modal>
           </main>
         </Layout>
       )}
@@ -1526,49 +1036,17 @@ export default function CryptoToGC() {
   );
 }
 
-// const PayWithCard = ({
-//   prize,
-//   getExactPrice,
-//   promoDetails,
-//   getExactToken,
-//   getExactGC,
-// }) => {
-//   const handleCLick = () => {
-//     console.log("handleCLickhandleCLickhandleCLick");
-//     let payload = {
-//       freeTokenAmount: getExactToken(prize.freeTokenAmount, promoDetails),
-//       gcAmount: getExactGC(prize.gcAmount, promoDetails),
-//       priceInBUSD: getExactPrice(prize?.priceInBUSD, promoDetails).toString(),
-//       _id: prize._id,
-//       actualAmount: prize?.priceInBUSD,
-//       promoCode: promoCode,
-//     };
-//     window.prize = payload;
-//     document.getElementById("paycard").click();
-//   };
-//   return (
-//     <button onClick={handleCLick}>
-//       {" "}
-//       Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}
-//     </button>
-//   );
-// };
 const PayWithCard = ({
   prize,
   getExactPrice,
   promoDetails,
-  getExactToken,
-  getExactGC,
   dailyGCPurchaseLimit,
 }) => {
   const [liveFormToken, setFormToken] = useState(null);
-  const [response, setResponse] = useState(null);
-  const acceptHostedButtonRef = useRef(null);
   const [loader, setLoading] = useState(false);
 
   const handleCLick = async () => {
     try {
-      console.log("dailyGCPurchaseLimit");
       if (dailyGCPurchaseLimit >= 4) {
         return toast.error("Credit card daily purchase limit are reached");
       }
@@ -1587,34 +1065,12 @@ const PayWithCard = ({
           credentials: "include",
         }
       );
-      console.log("res", res);
-
       const responseData = res?.data?.response;
-      console.log("responseData", responseData);
       setFormToken(responseData?.token);
-      // setLoading(false);
     } catch (error) {
-      // setLoading(false);
-
       console.error("Error fetching form token:", error);
     }
   };
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-
-  //   }, 4000);
-  // }, []);
-  // const a = () => {
-  //   if (liveFormToken && acceptHostedButtonRef.current) {
-  //     console.log("acceptHostedButtonRef");
-  //     acceptHostedButtonRef.current.click();
-  //   }
-  // };
-  // useEffect(() => {
-  //   // Trigger the click event after the component has mounted
-  //   acceptHostedButtonRef.current.click();
-  // }, []); // Empty dependency array ensures that this effect runs only once after the initial render
 
   useEffect(() => {
     if (liveFormToken) {
@@ -1638,7 +1094,6 @@ const PayWithCard = ({
       ) : (
         <button onClick={handleCLick}>
           {" "}
-          {/* {!loading ? "Save" : <Spinner animation='border' />} */}
           {!liveFormToken ? (
             !loader ? (
               `Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}`
