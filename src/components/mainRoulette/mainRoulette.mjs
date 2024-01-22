@@ -23,13 +23,13 @@ const MainRoulette = ({
   const MainWheelPlaces = [
     { token: "Big wheel", chances: 1 },
     { token: "10 ST", chances: 11 },
-    { token: "Relax 10 free spin", chances: 11 },
-    { token: "15 ST", chances: 11 },
-    { token: "Ka 10 free spin", chances: 11 },
-    { token: "20 ST", chances: 11 },
-    { token: "Slot mill 10 free spin", chances: 11 },
     { token: "25 ST", chances: 11 },
-    { token: "Bgaming 10 free spin", chances: 11 },
+    { token: "15 ST", chances: 11 },
+    { token: "30 ST", chances: 11 },
+    { token: "20 ST", chances: 11 },
+    { token: "10 ST", chances: 11 },
+    { token: "25 ST", chances: 11 },
+    { token: "15 ST", chances: 11 },
     { token: "30 ST", chances: 11 },
   ];
 
