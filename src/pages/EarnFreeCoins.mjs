@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import HolderClaimChips from "./HolderClaimChips.mjs";
@@ -7,16 +8,26 @@ import Layout from "./Layout.mjs";
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import DailyRewards from "../components/DailyRewards.mjs";
 import AuthContext from "../context/authContext.ts";
-import NewRoulette from "../components/roulette/roulette.mjs";
+// import NewRoulette from "../components/roulette/roulette.mjs";
+// import LoadingPoker from "../images/scroogeHatLogo.png";
+
 import wheel from "../images/wheel-fortune.png";
+import { userKycDetails } from "../utils/api.mjs";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import TempRoulette from "../components/tempRoulette/tempRolette.mjs";
 
 const EarnFreeCoins = () => {
+  const navigate = useNavigate();
+
   const { user, dateTimeNow } = useContext(AuthContext);
   const [showRoulette, setShowRoulette] = useState(false);
   const [key, setKey] = useState("dailyClaims");
   const [canSpin, setCanSpin] = useState(false);
   const [spinTimer, setSpinTimer] = useState("");
   const [show, setShow] = useState(false);
+  const [, /* globalLoader */ setglobalLoader] = useState(true);
+
   // const handleclick = (value) => {
   //   localStorage.setItem("class", value);
   //   setActive(value);
@@ -56,12 +67,34 @@ const EarnFreeCoins = () => {
         let m = Math.floor((diffTime % 3600) / 60);
         let s = Math.floor((diffTime % 3600) % 60);
         setSpinTimer(`${addZero(h)}:${addZero(m)}:${addZero(s)}`);
-        // setSpinTimer("12:00:00")
+        // setSpinTimer("12:00:00");
         // setCanSpin(true);
       }
       date1 += 1000;
     }, 1000);
   };
+
+  useEffect(() => {
+    async function checkKYCStatus() {
+      const response = await userKycDetails();
+      if (response?.code === 200) {
+        if (response.message !== "accept") {
+          setglobalLoader(false);
+          navigate("/kyc");
+        } else {
+          setglobalLoader(false);
+          // startFetching();
+        }
+      } else {
+        setglobalLoader(false);
+        toast.error(response.message, {
+          toastId: "error-fetching-kyc-details",
+        });
+        navigate("/");
+      }
+    }
+    checkKYCStatus();
+  }, []);
 
   return (
     <Layout>
@@ -76,10 +109,8 @@ const EarnFreeCoins = () => {
             className={`${key === "monthlyClaims" ? "active-btn" : ""}`}
             onClick={() => setKey("monthlyClaims")}>
             Monthly Claims
-          </Button>  */}
+          </Button> */}
           {/* <Button
-          </Button>
-          <Button
             className={`${key === "duckyLuckClaims" ? "active-btn" : ""}`}
             onClick={() => setKey("duckyLuckClaims")}>
             Ducky Luck Claims
@@ -87,7 +118,8 @@ const EarnFreeCoins = () => {
         </div>
 
         {showRoulette ? (
-          <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
+          // <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
+          <TempRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
         ) : null}
 
         {key === "dailyClaims" ? (
@@ -99,12 +131,18 @@ const EarnFreeCoins = () => {
             <div className='spin-wheel'>
               <div className='spin-wheel-img'>
                 <img src={wheel} alt='wheel' />
+
                 <div className='spin-win-text-content'>
-                  <div className='spin-win-text'>
-                    <p>spin to win</p>
-                  </div>
+                  <p style={{ color: "red", marginTop: "20px" }}>
+                    Note: This is a temporary wheel for your enjoyment while we
+                    upgrade this feature. Please allow a few more weeks for the
+                    upgrade.
+                  </p>
+                  {/* <div className='spin-win-text'>
+                      <p>spin to win</p>
+                    </div> */}
                   <div className='spin-button'>
-                    <button onClick={handleOpenRoulette}>
+                    <button disabled={!canSpin} onClick={handleOpenRoulette}>
                       {" "}
                       {canSpin ? "Spin Now" : spinTimer}
                     </button>
@@ -135,6 +173,29 @@ const EarnFreeCoins = () => {
           ) : (
             ""
           )}
+          <div className='tabs-claim'>
+            {key === "dailyClaims" ? (
+              <div className='tab-claims'>
+                <DailyRewards />
+              </div>
+            ) : key === "monthlyClaims" ? (
+              <div className='tab-claims'>
+                <HolderClaimChips />
+              </div>
+            ) : key === "duckyLuckClaims" ? (
+              <div>
+                {/* "gghh" */}
+                <DLGate>
+                  <DLClaimTokens />
+                </DLGate>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className='flex-row' style={{ margin: "50px auto 0px" }}>
+            <ShowBottomNavCards />
+          </div>
         </div>
         <div className='flex-row' style={{ margin: "50px auto 0px" }}>
           <ShowBottomNavCards />
