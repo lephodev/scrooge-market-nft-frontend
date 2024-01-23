@@ -583,7 +583,10 @@ const KYCForm = () => {
                               )}
                             </Form.Group>
                             <Form.Group className='form-group '>
-                              <Form.Label>Upload Selfie with ID</Form.Label>
+                              <Form.Label>
+                                Upload a Selfie Holding ID as well as a piece of
+                                paper with TODAYS date written on it.
+                              </Form.Label>
                               <div className='upload-game-thumnail'>
                                 <Form.Control
                                   type='file'
@@ -642,7 +645,8 @@ const KYCForm = () => {
 
                             <Form.Group className='form-group '>
                               <Form.Label>
-                                Alternate Address Check(Optional)
+                                Proof of Address if ID and profile are not
+                                matching. (Optional)
                               </Form.Label>
                               <div className='upload-game-thumnail'>
                                 <Form.Control
