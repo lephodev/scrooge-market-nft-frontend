@@ -4,6 +4,8 @@ import { useState, useContext, useEffect } from "react";
 import { AcceptHosted } from "react-acceptjs";
 import { Button, Form, Card, Dropdown, Spinner } from "react-bootstrap";
 import Layout from "./Layout.mjs";
+import { Helmet } from "react-helmet";
+
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import coin4 from "../images/4.png";
 import coin3 from "../images/3.png";
@@ -638,6 +640,36 @@ export default function CryptoToGC() {
 
   return (
     <>
+      <Helmet>
+        <script
+          async
+          src='https://www.googletagmanager.com/gtag/js?id=AW-11280008930'></script>
+        <script>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "AW-11280008930");
+          `}
+        </script>
+        <script
+          async
+          custom-element='amp-analytics'
+          src='https://cdn.ampproject.org/v0/amp-analytics-0.1.js'></script>
+        <amp-analytics type='gtag' data-credentials='include'>
+          <script type='application/json'>
+            {`
+          "vars": {
+            "gtag_id": "AW-11280008930",
+            "config": { "AW-11280008930": { "groups": "default" } }
+          },
+          "triggers": {}
+        `}
+          </script>
+        </amp-analytics>
+      </Helmet>
       {(status === "success" || status === "inprogress") && (
         <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
       )}
