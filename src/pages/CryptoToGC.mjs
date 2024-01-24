@@ -807,7 +807,7 @@ export default function CryptoToGC() {
                       <div className='purchasemodal-cards'>
                         {allPrizes.map((prize, i) => (
                           <>
-                            {prize.priceInBUSD === "9.99" ? (
+                            {prize.offerType === "MegaOffer" ? (
                               <>
                                 {!user.isGCPurchase ? (
                                   <Card key={prize._id}>
