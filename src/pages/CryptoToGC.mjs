@@ -795,6 +795,119 @@ export default function CryptoToGC() {
                               purchases per day.
                             </span>{" "}
                           </ul>
+                          {user.megaOffer.length !== 3 && (
+                            <div className='special-offer-grid'>
+                              <h5>Special Offer</h5>
+                              <div className='purchasemodal-cards'>
+                                {allPrizes.map((prize, i) => (
+                                  <>
+                                    {prize.offerType === "MegaOffer" && (
+                                      <>
+                                        {!user.megaOffer.includes(
+                                          prize?.priceInBUSD
+                                        ) ? (
+                                          <Card key={prize._id}>
+                                            <h3 className='mega-text pulses'>
+                                              Mega Offer
+                                            </h3>
+                                            <Card.Img
+                                              variant='top'
+                                              src={coin3}
+                                            />
+                                            <Card.Body>
+                                              <Card.Title>
+                                                GC {prize?.gcAmount}
+                                              </Card.Title>
+
+                                              {selectedTypeDropdown ===
+                                              "Crypto" ? (
+                                                getExactPrice(
+                                                  prize?.priceInBUSD
+                                                ) > 0 && (
+                                                  <Button
+                                                    variant='primary'
+                                                    onClick={() =>
+                                                      convert(
+                                                        getExactPrice(
+                                                          prize?.priceInBUSD
+                                                        ),
+                                                        getExactGC(
+                                                          prize?.gcAmount
+                                                        ),
+                                                        prize?._id,
+                                                        prize?.priceInBUSD
+                                                      )
+                                                    }>
+                                                    <p>Buy </p>{" "}
+                                                    <span>
+                                                      $
+                                                      {getExactPrice(
+                                                        prize?.priceInBUSD
+                                                      )}
+                                                    </span>
+                                                  </Button>
+                                                )
+                                              ) : selectedTypeDropdown ===
+                                                "Credit Card" ? (
+                                                getExactPrice(
+                                                  prize?.priceInBUSD
+                                                ) > 0 && (
+                                                  <PayWithCard
+                                                    prize={prize}
+                                                    getExactPrice={
+                                                      getExactPrice
+                                                    }
+                                                    getExactGC={getExactGC}
+                                                    getExactToken={
+                                                      getExactToken
+                                                    }
+                                                    promoDetails={promoDetails}
+                                                    index={i}
+                                                    setBuyLoading={
+                                                      setBuyLoading
+                                                    }
+                                                    selectedTypeDropdown={
+                                                      selectedTypeDropdown
+                                                    }
+                                                    dailyGCPurchaseLimit={
+                                                      dailyGCPurchaseLimit
+                                                    }
+                                                  />
+                                                )
+                                              ) : (
+                                                <>
+                                                  {" "}
+                                                  <Button variant='primary'>
+                                                    <p>Buy with Cash App </p>{" "}
+                                                    <span>
+                                                      $
+                                                      {getExactPrice(
+                                                        prize?.priceInBUSD
+                                                      )}
+                                                    </span>
+                                                  </Button>
+                                                </>
+                                              )}
+                                            </Card.Body>
+                                            <div className='goldPurchase-offers'>
+                                              Free ST:{" "}
+                                              <img
+                                                src={sweep}
+                                                alt='sweep token'
+                                              />{" "}
+                                              {prize?.freeTokenAmount}
+                                            </div>
+                                          </Card>
+                                        ) : (
+                                          ""
+                                        )}
+                                      </>
+                                    )}
+                                  </>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </div>
                       ) : isMismatched && address ? (
                         <div style={{ marginTop: "20px" }}>
@@ -807,89 +920,7 @@ export default function CryptoToGC() {
                       <div className='purchasemodal-cards'>
                         {allPrizes.map((prize, i) => (
                           <>
-                            {prize.offerType === "MegaOffer" ? (
-                              <>
-                                {!user.isGCPurchase ? (
-                                  <Card key={prize._id}>
-                                    <h3 className='mega-text pulses'>
-                                      Mega Offer
-                                    </h3>
-                                    <Card.Img variant='top' src={coin3} />
-                                    <Card.Body>
-                                      <Card.Title>
-                                        GC {prize?.gcAmount}
-                                      </Card.Title>
-
-                                      {selectedTypeDropdown === "Crypto" ? (
-                                        getExactPrice(prize?.priceInBUSD) >
-                                          0 && (
-                                          <Button
-                                            variant='primary'
-                                            onClick={() =>
-                                              convert(
-                                                getExactPrice(
-                                                  prize?.priceInBUSD
-                                                ),
-                                                getExactGC(prize?.gcAmount),
-                                                prize?._id,
-                                                prize?.priceInBUSD
-                                              )
-                                            }>
-                                            <p>Buy </p>{" "}
-                                            <span>
-                                              $
-                                              {getExactPrice(
-                                                prize?.priceInBUSD
-                                              )}
-                                            </span>
-                                          </Button>
-                                        )
-                                      ) : selectedTypeDropdown ===
-                                        "Credit Card" ? (
-                                        getExactPrice(prize?.priceInBUSD) >
-                                          0 && (
-                                          <PayWithCard
-                                            prize={prize}
-                                            getExactPrice={getExactPrice}
-                                            getExactGC={getExactGC}
-                                            getExactToken={getExactToken}
-                                            promoDetails={promoDetails}
-                                            index={i}
-                                            setBuyLoading={setBuyLoading}
-                                            selectedTypeDropdown={
-                                              selectedTypeDropdown
-                                            }
-                                            dailyGCPurchaseLimit={
-                                              dailyGCPurchaseLimit
-                                            }
-                                          />
-                                        )
-                                      ) : (
-                                        <>
-                                          {" "}
-                                          <Button variant='primary'>
-                                            <p>Buy with Cash App </p>{" "}
-                                            <span>
-                                              $
-                                              {getExactPrice(
-                                                prize?.priceInBUSD
-                                              )}
-                                            </span>
-                                          </Button>
-                                        </>
-                                      )}
-                                    </Card.Body>
-                                    <div className='goldPurchase-offers'>
-                                      Free ST:{" "}
-                                      <img src={sweep} alt='sweep token' />{" "}
-                                      {prize?.freeTokenAmount}
-                                    </div>
-                                  </Card>
-                                ) : (
-                                  ""
-                                )}
-                              </>
-                            ) : (
+                            {prize.offerType !== "MegaOffer" && (
                               <Card key={prize._id}>
                                 <Card.Img
                                   variant='top'
