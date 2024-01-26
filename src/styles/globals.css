@@ -5174,6 +5174,22 @@ p.title-memo {
 .claim-box .crypto-balance-div:hover {
   background: transparent !important;
 }
+.special-offer-grid {
+  padding-top: 20px;
+}
+.special-offer-grid h5 {
+  text-align: center;
+  font-size: 26px;
+  margin: 0;
+  color: #fbff12;
+  text-shadow: 2px 2px #d2042d;
+  padding-bottom: 10px;
+}
+.special-offer-grid .purchasemodal-cards {
+  margin: 0px auto;
+  border: 1px solid #1c1c1c;
+  max-width: 60%;
+}
 
 /********************************************************************************************/
 /************* Media Query ******************/
@@ -5895,6 +5911,9 @@ p.title-memo {
     top: 25.5%;
     left: 44%;
     font-size: 18px;
+  }
+  .special-offer-grid .purchasemodal-cards {
+    max-width: 80%;
   }
 }
 
