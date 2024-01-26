@@ -3047,7 +3047,7 @@ ul.footer-support li img {
 }
 
 .my-wallet-page .wallet-casino-profile-div .crypto-balance-div:hover:before {
-  content: "";
+  content: unset;
   position: absolute;
   top: 0;
   left: 0;
@@ -5152,7 +5152,7 @@ p.title-memo {
   background-color: rgba(255, 255, 255, 0.05);
 }
 .claim-box:hover::before {
-  content: "";
+  content: unset;
   position: absolute;
   top: 0;
   left: 0;
@@ -5286,6 +5286,11 @@ p.title-memo {
     font-size: 16px;
   }
 }
+@media screen and (max-width: 1330px) {
+  .special-offer-grid .purchasemodal-cards {
+    max-width: 65%;
+  }
+}
 
 @media screen and (max-width: 1080px) {
   .footer-info {
@@ -5296,6 +5301,11 @@ p.title-memo {
   .header-menu ul {
     gap: 30px;
     text-align: center;
+  }
+  @media screen and (max-width: 1330px) {
+    .special-offer-grid .purchasemodal-cards {
+      max-width: 80%;
+    }
   }
 }
 
