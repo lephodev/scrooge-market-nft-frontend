@@ -5302,10 +5302,8 @@ p.title-memo {
     gap: 30px;
     text-align: center;
   }
-  @media screen and (max-width: 1330px) {
-    .special-offer-grid .purchasemodal-cards {
-      max-width: 80%;
-    }
+  .special-offer-grid .purchasemodal-cards {
+    max-width: 80%;
   }
 }
 
