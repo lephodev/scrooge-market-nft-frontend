@@ -3047,7 +3047,7 @@ ul.footer-support li img {
 }
 
 .my-wallet-page .wallet-casino-profile-div .crypto-balance-div:hover:before {
-  content: "";
+  content: unset;
   position: absolute;
   top: 0;
   left: 0;
@@ -5152,7 +5152,7 @@ p.title-memo {
   background-color: rgba(255, 255, 255, 0.05);
 }
 .claim-box:hover::before {
-  content: "";
+  content: unset;
   position: absolute;
   top: 0;
   left: 0;
@@ -5173,6 +5173,22 @@ p.title-memo {
 }
 .claim-box .crypto-balance-div:hover {
   background: transparent !important;
+}
+.special-offer-grid {
+  padding-top: 20px;
+}
+.special-offer-grid h5 {
+  text-align: center;
+  font-size: 26px;
+  margin: 0;
+  color: #fbff12;
+  text-shadow: 2px 2px #d2042d;
+  padding-bottom: 10px;
+}
+.special-offer-grid .purchasemodal-cards {
+  margin: 0px auto;
+  border: 1px solid #1c1c1c;
+  max-width: 60%;
 }
 
 /********************************************************************************************/
@@ -5270,6 +5286,11 @@ p.title-memo {
     font-size: 16px;
   }
 }
+@media screen and (max-width: 1330px) {
+  .special-offer-grid .purchasemodal-cards {
+    max-width: 65%;
+  }
+}
 
 @media screen and (max-width: 1080px) {
   .footer-info {
@@ -5280,6 +5301,9 @@ p.title-memo {
   .header-menu ul {
     gap: 30px;
     text-align: center;
+  }
+  .special-offer-grid .purchasemodal-cards {
+    max-width: 80%;
   }
 }
 
@@ -5895,6 +5919,9 @@ p.title-memo {
     top: 25.5%;
     left: 44%;
     font-size: 18px;
+  }
+  .special-offer-grid .purchasemodal-cards {
+    max-width: 80%;
   }
 }
 
