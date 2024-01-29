@@ -151,6 +151,7 @@ export default function CryptoToGC() {
   }, []);
 
   const convert = async (usd, gc) => {
+    console.log("usd", usd);
     if (user?.isBlockWallet) {
       return toast.error(`Your wallet blocked by admin`, { toastId: "A" });
     }
@@ -200,7 +201,7 @@ export default function CryptoToGC() {
               const { transactionHash } = event.transaction || {};
               marketPlaceInstance()
                 .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`, {
-                  params: { promoCode },
+                  params: { promoCode, usd },
                 })
                 .then((response) => {
                   setBuyLoading(false);
@@ -253,7 +254,7 @@ export default function CryptoToGC() {
               const { transactionHash } = event.transaction || {};
               marketPlaceInstance()
                 .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`, {
-                  params: { promoCode },
+                  params: { promoCode, usd },
                 })
                 .then((response) => {
                   setBuyLoading(false);
@@ -302,7 +303,7 @@ export default function CryptoToGC() {
                   const res = await marketPlaceInstance().get(
                     `convertCryptoToGoldCoin/${address}/${transaction.hash}`,
                     {
-                      params: { promoCode },
+                      params: { promoCode, usd },
                     }
                   );
 
@@ -354,7 +355,7 @@ export default function CryptoToGC() {
               const { transactionHash } = event.transaction || {};
               marketPlaceInstance()
                 .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`, {
-                  params: { promoCode },
+                  params: { promoCode, usd },
                 })
                 .then((response) => {
                   setBuyLoading(false);
@@ -403,7 +404,7 @@ export default function CryptoToGC() {
               const { transactionHash } = event.transaction || {};
               marketPlaceInstance()
                 .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`, {
-                  params: { promoCode },
+                  params: { promoCode, usd },
                 })
                 .then((response) => {
                   setBuyLoading(false);
@@ -835,92 +836,108 @@ export default function CryptoToGC() {
                         ""
                       )}
 
+                      {console.log("user.megaOffer", user.megaOffer)}
+                      {user.megaOffer.length !== 3 && (
+                        <div className='special-offer-grid'>
+                          <h5>Special Offer</h5>
+                          <div className='purchasemodal-cards'>
+                            {allPrizes.map((prize, i) => (
+                              <>
+                                {prize.offerType === "MegaOffer" && (
+                                  <>
+                                    {!user.megaOffer.includes(
+                                      parseFloat(prize?.priceInBUSD)
+                                    ) ? (
+                                      <Card key={prize._id}>
+                                        <h3 className='mega-text pulses'>
+                                          Mega Offer
+                                        </h3>
+                                        <Card.Img variant='top' src={coin3} />
+                                        <Card.Body>
+                                          <Card.Title>
+                                            GC {prize?.gcAmount}
+                                          </Card.Title>
+
+                                          {selectedTypeDropdown === "Crypto" ? (
+                                            getExactPrice(prize?.priceInBUSD) >
+                                              0 && (
+                                              <Button
+                                                variant='primary'
+                                                onClick={() =>
+                                                  convert(
+                                                    getExactPrice(
+                                                      prize?.priceInBUSD
+                                                    ),
+                                                    getExactGC(prize?.gcAmount),
+                                                    prize?._id,
+                                                    prize?.priceInBUSD
+                                                  )
+                                                }>
+                                                <p>Buy </p>{" "}
+                                                <span>
+                                                  $
+                                                  {getExactPrice(
+                                                    prize?.priceInBUSD
+                                                  )}
+                                                </span>
+                                              </Button>
+                                            )
+                                          ) : selectedTypeDropdown ===
+                                            "Credit Card" ? (
+                                            getExactPrice(prize?.priceInBUSD) >
+                                              0 && (
+                                              <PayWithCard
+                                                prize={prize}
+                                                getExactPrice={getExactPrice}
+                                                getExactGC={getExactGC}
+                                                getExactToken={getExactToken}
+                                                promoDetails={promoDetails}
+                                                index={i}
+                                                setBuyLoading={setBuyLoading}
+                                                selectedTypeDropdown={
+                                                  selectedTypeDropdown
+                                                }
+                                                dailyGCPurchaseLimit={
+                                                  dailyGCPurchaseLimit
+                                                }
+                                              />
+                                            )
+                                          ) : (
+                                            <>
+                                              {" "}
+                                              <Button variant='primary'>
+                                                <p>Buy with Cash App </p>{" "}
+                                                <span>
+                                                  $
+                                                  {getExactPrice(
+                                                    prize?.priceInBUSD
+                                                  )}
+                                                </span>
+                                              </Button>
+                                            </>
+                                          )}
+                                        </Card.Body>
+                                        <div className='goldPurchase-offers'>
+                                          Free ST:{" "}
+                                          <img src={sweep} alt='sweep token' />{" "}
+                                          {prize?.freeTokenAmount}
+                                        </div>
+                                      </Card>
+                                    ) : (
+                                      ""
+                                    )}
+                                  </>
+                                )}
+                              </>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                       <div className='purchasemodal-cards'>
                         {allPrizes.map((prize, i) => (
                           <>
-                            {prize.priceInBUSD === "9.99" ? (
-                              <>
-                                {!user.isGCPurchase ? (
-                                  <Card key={prize._id}>
-                                    <h3 className='mega-text pulses'>
-                                      Mega Offer
-                                    </h3>
-                                    <Card.Img variant='top' src={coin3} />
-                                    <Card.Body>
-                                      <Card.Title>
-                                        GC {prize?.gcAmount}
-                                      </Card.Title>
-
-                                      {selectedTypeDropdown === "Crypto" ? (
-                                        getExactPrice(prize?.priceInBUSD) >
-                                          0 && (
-                                          <Button
-                                            variant='primary'
-                                            onClick={() =>
-                                              convert(
-                                                getExactPrice(
-                                                  prize?.priceInBUSD
-                                                ),
-                                                getExactGC(prize?.gcAmount),
-                                                prize?._id,
-                                                prize?.priceInBUSD
-                                              )
-                                            }>
-                                            <p>Buy </p>{" "}
-                                            <span>
-                                              $
-                                              {getExactPrice(
-                                                prize?.priceInBUSD
-                                              )}
-                                            </span>
-                                          </Button>
-                                        )
-                                      ) : selectedTypeDropdown ===
-                                        "Credit Card" ? (
-                                        getExactPrice(prize?.priceInBUSD) >
-                                          0 && (
-                                          <PayWithCard
-                                            prize={prize}
-                                            getExactPrice={getExactPrice}
-                                            getExactGC={getExactGC}
-                                            getExactToken={getExactToken}
-                                            promoDetails={promoDetails}
-                                            index={i}
-                                            setBuyLoading={setBuyLoading}
-                                            selectedTypeDropdown={
-                                              selectedTypeDropdown
-                                            }
-                                            dailyGCPurchaseLimit={
-                                              dailyGCPurchaseLimit
-                                            }
-                                          />
-                                        )
-                                      ) : (
-                                        <>
-                                          {" "}
-                                          <Button variant='primary'>
-                                            <p>Buy with Cash App </p>{" "}
-                                            <span>
-                                              $
-                                              {getExactPrice(
-                                                prize?.priceInBUSD
-                                              )}
-                                            </span>
-                                          </Button>
-                                        </>
-                                      )}
-                                    </Card.Body>
-                                    <div className='goldPurchase-offers'>
-                                      Free ST:{" "}
-                                      <img src={sweep} alt='sweep token' />{" "}
-                                      {prize?.freeTokenAmount}
-                                    </div>
-                                  </Card>
-                                ) : (
-                                  ""
-                                )}
-                              </>
-                            ) : (
+                            {prize.offerType !== "MegaOffer" && (
                               <Card key={prize._id}>
                                 <Card.Img
                                   variant='top'
