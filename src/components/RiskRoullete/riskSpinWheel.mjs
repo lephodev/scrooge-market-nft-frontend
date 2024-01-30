@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import spinWheel from "../../images/spinWheel.png";
 import "../mainRoulette/mainWheel.css";
 import rotatewheel from "../../images/sounds/wheel-rotate.wav";
+import BetterLuckNextTimePopup from "../roulette/BetterLuckNextTimePopup.mjs";
 import bgaudio from "../../images/sounds/wheel-win3.wav";
 import winItemaudio from "../../images/sounds/wheel-win.wav";
 import wheelStop from "../../images/sounds/wheel-stop.wav";
@@ -9,9 +10,12 @@ import { getClientSeed } from "../../utils/generateClientSeed.js";
 import { marketPlaceInstance } from "../../config/axios.js";
 import { toast } from "react-toastify";
 import "../../components/roulette/wheel.css";
+import WinPopup from "../roulette/winPopup.mjs";
 
-function RiskSpinWheel({ items, setWinItem, setWinPopup }) {
+function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
   const [selectItem, setselectItem] = useState(null);
+  const [isWinResult, setIsWinResult] = useState(false);
+  const [wheelResult, setWheelResult] = useState();
 
   const [spinButtonDisable, setSpinButtonDisable] = useState(false);
 
@@ -35,9 +39,13 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup }) {
         if (selectedItem === -1) return;
         setselectItem(selectedItem + 2);
         setWinItem(selectedItem);
-        // if (this.props.onSelectItem) {
-        //   onSelectItem(selectedItem);
-        // }
+        setWheelResult(selectedItem);
+
+        if (selectedItem === 9) {
+          setTimeout(() => {
+            setBigWheel(true);
+          }, 5000);
+        }
         let ele = document.getElementById("rotate-wheel");
         if (ele) {
           ele.play();
@@ -62,7 +70,7 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup }) {
 
   const handleEvent = () => {
     setWinPopup(true);
-    // this.props.handleSpin(this.state.selectedItem);
+    setIsWinResult(true);
     let ele = document.getElementById("winitem-wheel");
     if (ele) {
       ele.play();
@@ -91,6 +99,13 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup }) {
             </div>
           ))}
         </div>
+        {isWinResult && wheelResult === 9 ? (
+          <WinPopup setWinPopup={setWinPopup} winAmount={items[wheelResult]} />
+        ) : isWinResult ? (
+          <BetterLuckNextTimePopup />
+        ) : (
+          ""
+        )}
       </div>
       <div
         className={`spin-btn ${spinButtonDisable ? "spin-disable" : ""}`}

@@ -34,18 +34,6 @@ const MainRoulette = ({
     { token: 30, chances: 11 },
   ];
 
-  // const RiskWheelPlaces = [
-  //   { token: "Red1", chances: 10.5 },
-  //   { token: "Red2", chances: 10.5 },
-  //   { token: "Red3", chances: 10.5 },
-  //   { token: "Red4", chances: 10.5 },
-  //   { token: "Red5", chances: 10.5 },
-  //   { token: "Red6", chances: 10.5 },
-  //   { token: "Red7", chances: 10.5 },
-  //   { token: "Red8", chances: 10.5 },
-  //   { token: "Red9", chances: 10.5 },
-  //   { token: "Green", chances: 5.5 },
-  // ];
   // const LoyaltyWheelPlaces = [
   //   { token: "150 ST", chances: 10 },
   //   { token: "175 ST", chances: 10 },
@@ -70,8 +58,6 @@ const MainRoulette = ({
   const [winItem, setWinItem] = useState();
   const [volume, setVolume] = useState(false);
   const [bigWheel, setBigWheel] = useState(false);
-
-  // const [removeAnim, setRemoveAnim] = useState(false);
 
   return (
     <Modal
