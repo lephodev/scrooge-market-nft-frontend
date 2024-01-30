@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import spinWheel from "../../images/spinWheel.png";
-import "./mainWheel.css";
+import "../mainRoulette/mainWheel.css";
 import rotatewheel from "../../images/sounds/wheel-rotate.wav";
 import bgaudio from "../../images/sounds/wheel-win3.wav";
 import winItemaudio from "../../images/sounds/wheel-win.wav";
@@ -10,7 +10,7 @@ import { marketPlaceInstance } from "../../config/axios.js";
 import { toast } from "react-toastify";
 import "../../components/roulette/wheel.css";
 
-function RiskSpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
+function RiskSpinWheel({ items, setWinItem, setWinPopup }) {
   const [selectItem, setselectItem] = useState(null);
 
   const [spinButtonDisable, setSpinButtonDisable] = useState(false);

@@ -9,6 +9,7 @@ import DailyRewards from "../components/DailyRewards.mjs";
 import AuthContext from "../context/authContext.ts";
 import wheel from "../images/wheel-fortune.png";
 import MainRoulette from "../components/mainRoulette/mainRoulette.mjs";
+import RiskWheel from "../components/RiskRoullete/riskWheel.mjs";
 
 const EarnFreeCoins = () => {
   const { user, dateTimeNow } = useContext(AuthContext);
@@ -93,8 +94,15 @@ const EarnFreeCoins = () => {
         </div>
 
         {showRoulette ? (
-          // <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
           <MainRoulette
+            show={show}
+            handleOpenRoulette={handleOpenRoulette}
+            riskWheel={riskWheel}
+          />
+        ) : null}
+
+        {riskWheel ? (
+          <RiskWheel
             show={show}
             handleOpenRoulette={handleOpenRoulette}
             riskWheel={riskWheel}
