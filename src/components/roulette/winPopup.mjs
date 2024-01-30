@@ -50,17 +50,19 @@ const WinPopup = ({ winAmount }) => {
           {/*<div className="winning-text">
           Great, You are won and just got the huge rewards
         </div>*/}
-          <div className='winning-btn'>
-            <div className='win-btn' onClick={handleCollect}>
-              {/* <img
+          {winAmount?.token !== "Big wheel" && (
+            <div className='winning-btn'>
+              <div className='win-btn' onClick={handleCollect}>
+                {/* <img
             src={buttonimg}
             alt="btn"
             onClick={handleCollect}
             role="presentation"
           /> */}
-              <p>COLLECT</p>
+                <p>COLLECT</p>
+              </div>
             </div>
-          </div>
+          )}
 
           {coin ? (
             <div className='collect-coin'>
