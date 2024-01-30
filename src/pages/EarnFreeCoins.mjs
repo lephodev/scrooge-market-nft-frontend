@@ -10,6 +10,7 @@ import AuthContext from "../context/authContext.ts";
 import wheel from "../images/wheel-fortune.png";
 import MainRoulette from "../components/mainRoulette/mainRoulette.mjs";
 import RiskWheel from "../components/RiskRoullete/riskWheel.mjs";
+import LoyalityWheel from "../components/loyalityWheel/loyalityWheel.mjs";
 
 const EarnFreeCoins = () => {
   const { user, dateTimeNow } = useContext(AuthContext);
@@ -19,6 +20,7 @@ const EarnFreeCoins = () => {
   const [spinTimer, setSpinTimer] = useState("");
   const [show, setShow] = useState(false);
   const [riskWheel, setRiskWheel] = useState(false);
+  const [loyalityWheel, setLoylityWheel] = useState(false);
   // const handleclick = (value) => {
   //   localStorage.setItem("class", value);
   //   setActive(value);
@@ -36,11 +38,23 @@ const EarnFreeCoins = () => {
   }, []);
 
   const handleOpenRoulette = (value) => {
-    if (canSpin) setShowRoulette(true);
+    console.log("valuevaluevalue", value);
+    // if (canSpin) {
+    //   setShowRoulette(true);
+    // }
     if (value === "risk") {
       setRiskWheel(true);
-    } else {
+      setShowRoulette(false);
+      setLoylityWheel(false);
+    }
+    if (value === "loyality") {
+      setLoylityWheel(true);
+      setShowRoulette(false);
       setRiskWheel(false);
+    } else if (value === "normal") {
+      setShowRoulette(true);
+      setRiskWheel(false);
+      setLoylityWheel(false);
     }
     setShow(!show);
   };
@@ -94,6 +108,7 @@ const EarnFreeCoins = () => {
         </div>
 
         {showRoulette ? (
+          // <NewRoulette show={show} handleOpenRoulette={handleOpenRoulette} />
           <MainRoulette
             show={show}
             handleOpenRoulette={handleOpenRoulette}
@@ -108,6 +123,16 @@ const EarnFreeCoins = () => {
             riskWheel={riskWheel}
           />
         ) : null}
+
+        {loyalityWheel ? (
+          <LoyalityWheel
+            show={show}
+            handleOpenRoulette={handleOpenRoulette}
+            loyalityWheel={loyalityWheel}
+          />
+        ) : (
+          ""
+        )}
 
         {key === "dailyClaims" ? (
           <div className='spin-popup-content spin-page-content'>
@@ -131,6 +156,13 @@ const EarnFreeCoins = () => {
                       <button onClick={() => handleOpenRoulette("risk")}>
                         {" "}
                         {canSpin ? "Take a Risk" : spinTimer}
+                      </button>
+                    </div>
+                    <div className='risk-grid'>
+                      <p>Loyality wheel on this spin! </p>
+                      <button onClick={() => handleOpenRoulette("loyality")}>
+                        {" "}
+                        {canSpin ? "Loyality" : spinTimer}
                       </button>
                     </div>
                     <div className='risk-grid'>
