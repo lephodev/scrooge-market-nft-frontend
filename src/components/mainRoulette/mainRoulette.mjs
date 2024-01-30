@@ -34,14 +34,6 @@ const MainRoulette = ({
     { token: 30, chances: 11 },
   ];
 
-  // const LoyaltyWheelPlaces = [
-  //   { token: "150 ST", chances: 10 },
-  //   { token: "175 ST", chances: 10 },
-  //   { token: "200 ST", chances: 10 },
-  //   { token: "225 ST", chances: 10 },
-  //   { token: "250 ST", chances: 10 },
-  // ];
-
   const BigWheelPlaces = [
     { token: 40, chances: 10 },
     { token: 45, chances: 10 },
