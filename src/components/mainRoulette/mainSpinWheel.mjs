@@ -9,32 +9,14 @@ import { getClientSeed } from "../../utils/generateClientSeed.js";
 import { marketPlaceInstance } from "../../config/axios.js";
 import { toast } from "react-toastify";
 import "../../components/roulette/wheel.css";
-import BigSpinWheel from "./bigSpinWheel.mjs";
+import WinPopup from "../roulette/winPopup.mjs";
 
-function MainSpinWheel({
-  items,
-  onSelectItem,
-  setWinItem,
-  setWinPopup,
-  handleOpenRoulette,
-  setBigWheel,
-  bigWheel,
-}) {
-  const BigWheelPlaces = [
-    { token: "40 ST", chances: 10 },
-    { token: "45 ST", chances: 10 },
-    { token: "50 ST", chances: 10 },
-    { token: "55 ST", chances: 10 },
-    { token: "60 ST", chances: 10 },
-    { token: "65 ST", chances: 10 },
-    { token: "70 ST", chances: 10 },
-    { token: "80 ST", chances: 10 },
-    { token: "90 ST", chances: 10 },
-    { token: "100 ST", chances: 10 },
-  ];
+function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
   const [selectItem, setselectItem] = useState(null);
 
   const [spinButtonDisable, setSpinButtonDisable] = useState(false);
+  const [wheelResult, setWheelResult] = useState();
+  const [isWinResult, setIsWinResult] = useState(false);
 
   const select = async () => {
     if (selectItem === null) {
@@ -52,7 +34,7 @@ function MainSpinWheel({
         console.log("selectedItem", selectedItem);
         if (selectedItem === -1) return;
         setselectItem(selectedItem + 2);
-        setWinItem(selectedItem);
+        setWheelResult(selectedItem);
         if (selectedItem === 0) {
           setTimeout(() => {
             setBigWheel(true);
@@ -85,6 +67,7 @@ function MainSpinWheel({
 
   const handleEvent = () => {
     setWinPopup(true);
+    setIsWinResult(true);
     // this.props.handleSpin(this.state.selectedItem);
     let ele = document.getElementById("winitem-wheel");
     if (ele) {
@@ -114,6 +97,9 @@ function MainSpinWheel({
             </div>
           ))}
         </div>
+        {isWinResult && (
+          <WinPopup setWinPopup={setWinPopup} winAmount={items[wheelResult]} />
+        )}
       </div>
       <div
         className={`spin-btn ${spinButtonDisable ? "spin-disable" : ""}`}
@@ -133,7 +119,6 @@ function MainSpinWheel({
           <source src={wheelStop}></source>
         </audio>
       </div>
-      {bigWheel && <BigSpinWheel items={BigWheelPlaces} />}
     </>
   );
 }

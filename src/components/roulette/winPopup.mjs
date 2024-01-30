@@ -4,11 +4,10 @@ import React from "react";
 // import buttonimg from "../../assets/images/roulette/btn.png";
 import winn from "../../images/ribbon.png";
 import { useState } from "react";
-import { numFormatter } from "../../utils/generateClientSeed.js";
 // import coinicon from "../../assets/animation/collect-coin.json";
 // import coinicon from "../../images/animation/collect-coin.json";
 
-const WinPopup = ({ setWinPopup, winAmount }) => {
+const WinPopup = ({ winAmount }) => {
   const [coin, setCoin] = useState(false);
 
   const handleCollect = () => {
