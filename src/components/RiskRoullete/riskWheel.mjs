@@ -15,7 +15,7 @@ import BigSpinWheel from "../mainRoulette/bigSpinWheel.mjs";
 // import RiskSpinWheel fro./riskSpinWheel.mjs
 // import LoyaltySpinWheel from "./loyaltySpinWheel.mjs";
 
-const RiskWheel = ({ idToken, uid, handleOpenRoulette, show, riskWheel }) => {
+const RiskWheel = ({ handleOpenRoulette, show }) => {
   const RiskWheelPlaces = [
     { token: "Red1", chances: 10.5 },
     { token: "Red2", chances: 10.5 },
