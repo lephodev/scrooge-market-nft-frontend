@@ -9,9 +9,12 @@ import { getClientSeed } from "../../utils/generateClientSeed.js";
 import { marketPlaceInstance } from "../../config/axios.js";
 import { toast } from "react-toastify";
 import "../../components/roulette/wheel.css";
+import WinPopup from "../roulette/winPopup.mjs";
 
-function BigSpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
+function BigSpinWheel({ items, setWinPopup }) {
   const [selectItem, setselectItem] = useState(null);
+  const [isWinResult, setIsWinResult] = useState(false);
+  const [wheelResult, setWheelResult] = useState();
 
   const [spinButtonDisable, setSpinButtonDisable] = useState(false);
 
@@ -21,20 +24,21 @@ function BigSpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
         const clientSeed = getClientSeed();
         // console.log({ clientSeed });
         setSpinButtonDisable(true);
-        const response = await marketPlaceInstance().get("/gameResult", {
-          params: { clientSeed },
-        });
+        const response = await marketPlaceInstance().get(
+          "/gameResultForBigWheel",
+          {
+            params: { clientSeed },
+          }
+        );
         console.log("==>>>", response);
         const selectedItem = items.findIndex(
           (el) => el.token === response?.data?.resultData?.token
         );
         console.log("selectedItem", selectedItem);
         if (selectedItem === -1) return;
-        setselectItem(selectedItem + 1);
-        setWinItem(selectedItem);
-        // if (this.props.onSelectItem) {
-        //   onSelectItem(selectedItem);
-        // }
+        setselectItem(selectedItem + 2);
+        setWheelResult(selectedItem);
+
         let ele = document.getElementById("rotate-wheel");
         if (ele) {
           ele.play();
@@ -59,6 +63,7 @@ function BigSpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
 
   const handleEvent = () => {
     setWinPopup(true);
+    setIsWinResult(true);
     let ele = document.getElementById("winitem-wheel");
     if (ele) {
       ele.play();
@@ -73,39 +78,39 @@ function BigSpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
   const spinning = selectItem !== null ? "spinning" : "";
   return (
     <>
-      <div className="big-wheel-container">
+      <div className='big-wheel-container'>
         <div
           className={`big-wheel ${spinning}`}
           style={wheelVars}
-          onTransitionEnd={handleEvent}
-        >
+          onTransitionEnd={handleEvent}>
           {items.map((item, index) => (
             <div
-              className="big-wheel-item"
+              className='big-wheel-item'
               key={`item-${index + 1}`}
-              style={{ "--item-nb": index }}
-            >
+              style={{ "--item-nb": index }}>
               {/* {item.token} */}
             </div>
           ))}
         </div>
+        {isWinResult && (
+          <WinPopup setWinPopup={setWinPopup} winAmount={items[wheelResult]} />
+        )}
       </div>
       <div
         className={`spin-btn ${spinButtonDisable ? "spin-disable" : ""}`}
-        onClick={select}
-      >
-        <img src={spinWheel} alt="spin" />
+        onClick={select}>
+        <img src={spinWheel} alt='spin' />
         <h6>{"SPIN NOW"} </h6>
-        <audio id="bg-audio">
+        <audio id='bg-audio'>
           <source src={bgaudio}></source>
         </audio>
-        <audio id="rotate-wheel">
+        <audio id='rotate-wheel'>
           <source src={rotatewheel}></source>
         </audio>
-        <audio id="winitem-wheel">
+        <audio id='winitem-wheel'>
           <source src={winItemaudio}></source>
         </audio>
-        <audio id="wheel-stop">
+        <audio id='wheel-stop'>
           <source src={wheelStop}></source>
         </audio>
       </div>
