@@ -35,9 +35,6 @@ const WinPopup = ({ winAmount }) => {
           <div className='wining-image'>
             <img src={winn} alt='winimg' />
             <div className='winning-amount-ribbon'>
-              {/* <p>
-                {`${winAmount?.token} ST + ${numFormatter(winAmount?.gc)} GC`}
-              </p> */}
               <p>YOU WIN</p>
             </div>
             <div className='pyro'>
@@ -47,18 +44,11 @@ const WinPopup = ({ winAmount }) => {
           </div>
 
           <div className='winning-amount'> {`${winAmount?.token} `}</div>
-          {/*<div className="winning-text">
-          Great, You are won and just got the huge rewards
-        </div>*/}
-          {winAmount?.token !== "Big wheel" && (
+
+          {(winAmount?.token !== "Big wheel" ||
+            winAmount?.token !== "Green") && (
             <div className='winning-btn'>
               <div className='win-btn' onClick={handleCollect}>
-                {/* <img
-            src={buttonimg}
-            alt="btn"
-            onClick={handleCollect}
-            role="presentation"
-          /> */}
                 <p>COLLECT</p>
               </div>
             </div>

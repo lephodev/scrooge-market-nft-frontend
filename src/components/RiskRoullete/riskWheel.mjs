@@ -9,6 +9,7 @@ import rotatewheel from "../../images/spin/wheel-rotate.wav";
 import coin from "../../images/spin/wheel-win2.wav";
 import { Modal } from "react-bootstrap";
 import RiskSpinWheel from "./riskSpinWheel.mjs";
+import BigSpinWheel from "../mainRoulette/bigSpinWheel.mjs";
 // import WinPopup from "../roulette/winPopup.mjs";
 // import BigSpinWheel from "./bigSpinWheel.mjs";
 // import RiskSpinWheel fro./riskSpinWheel.mjs
@@ -57,15 +58,17 @@ const RiskWheel = ({ idToken, uid, handleOpenRoulette, show, riskWheel }) => {
       <Modal.Body>
         <div className='wheel-wrapper'>
           <>
-            <RiskSpinWheel
-              items={RiskWheelPlaces}
-              setWinPopup={setWinPopup}
-              setWinItem={setWinItem}
-              setVolume={setVolume}
-            />
-            {/* ) : (
+            {!bigWheel ? (
+              <RiskSpinWheel
+                items={RiskWheelPlaces}
+                setWinPopup={setWinPopup}
+                setWinItem={setWinItem}
+                setVolume={setVolume}
+                setBigWheel={setBigWheel}
+              />
+            ) : (
               <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} />
-            )} */}
+            )}
           </>
         </div>
 
