@@ -12,6 +12,7 @@ import MainRoulette from "../components/mainRoulette/mainRoulette.mjs";
 import RiskWheel from "../components/RiskRoullete/riskWheel.mjs";
 import LoyalityWheel from "../components/loyalityWheel/loyalityWheel.mjs";
 import WeeklyWheel from "../components/weeklyWheel/weeklyWheel.mjs";
+import { marketPlaceInstance } from "../config/axios.js";
 
 const EarnFreeCoins = () => {
   const { user, dateTimeNow } = useContext(AuthContext);
@@ -23,13 +24,29 @@ const EarnFreeCoins = () => {
   const [riskWheel, setRiskWheel] = useState(false);
   const [loyalityWheel, setLoylityWheel] = useState(false);
   const [weeklyWheel, setWeeklyWheel] = useState(false);
+  const [isWeeklyWheelActive, setIsWeeklyWheelActive] = useState(false);
 
   // const handleclick = (value) => {
   //   localStorage.setItem("class", value);
   //   setActive(value);
   // };
 
+  const getWeeklyWheel = async () => {
+    try {
+      const response = await marketPlaceInstance().get("/getWeeklyWheel");
+      const { success, isWeeklySpin } = response.data;
+      if (success) {
+        // console.log("isWeeklySpin", isWeeklySpin);
+        setIsWeeklyWheelActive(isWeeklySpin);
+      } else {
+        setIsWeeklyWheelActive(isWeeklySpin);
+        // console.log("else isWeeklySpin", isWeeklySpin);
+      }
+    } catch (error) {}
+  };
+
   useEffect(() => {
+    getWeeklyWheel();
     if (window !== "undefined") {
       // const ab = localStorage.getItem("class");
       // setActive(ab);
@@ -41,7 +58,6 @@ const EarnFreeCoins = () => {
   }, []);
 
   const handleOpenRoulette = (value) => {
-    console.log("valuevaluevalue", value);
     // if (canSpin) {
     //   setShowRoulette(true);
     // }
@@ -206,17 +222,20 @@ const EarnFreeCoins = () => {
                     ) : (
                       ""
                     )}
-
-                    <div className='risk-grid'>
-                      <p>
-                        you may end up with no prize if you risk it for big
-                        wheel on this spin!{" "}
-                      </p>
-                      <button onClick={() => handleOpenRoulette("weekly")}>
-                        {" "}
-                        {canSpin ? "Weekly" : spinTimer}
-                      </button>
-                    </div>
+                    {isWeeklyWheelActive ? (
+                      <div className='risk-grid'>
+                        <p>
+                          you may end up with no prize if you risk it for big
+                          wheel on this spin!{" "}
+                        </p>
+                        <button onClick={() => handleOpenRoulette("weekly")}>
+                          {" "}
+                          {canSpin ? "Weekly" : spinTimer}
+                        </button>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               </div>
