@@ -43,7 +43,14 @@ const WinPopup = ({ winAmount }) => {
             </div>
           </div>
 
-          <div className='winning-amount'> {`${winAmount?.token} `}</div>
+          <div className='winning-amount'>
+            {" "}
+            {`${
+              winAmount?.token === "Green" || winAmount?.token === "Big wheel"
+                ? winAmount?.token
+                : winAmount?.token + "ST"
+            }  `}
+          </div>
 
           {(winAmount?.token !== "Big wheel" ||
             winAmount?.token !== "Green") && (

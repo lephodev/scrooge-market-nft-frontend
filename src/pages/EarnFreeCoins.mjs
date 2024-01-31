@@ -11,6 +11,7 @@ import wheel from "../images/wheel-fortune.png";
 import MainRoulette from "../components/mainRoulette/mainRoulette.mjs";
 import RiskWheel from "../components/RiskRoullete/riskWheel.mjs";
 import LoyalityWheel from "../components/loyalityWheel/loyalityWheel.mjs";
+import WeeklyWheel from "../components/weeklyWheel/weeklyWheel.mjs";
 
 const EarnFreeCoins = () => {
   const { user, dateTimeNow } = useContext(AuthContext);
@@ -21,6 +22,8 @@ const EarnFreeCoins = () => {
   const [show, setShow] = useState(false);
   const [riskWheel, setRiskWheel] = useState(false);
   const [loyalityWheel, setLoylityWheel] = useState(false);
+  const [weeklyWheel, setWeeklyWheel] = useState(false);
+
   // const handleclick = (value) => {
   //   localStorage.setItem("class", value);
   //   setActive(value);
@@ -44,16 +47,24 @@ const EarnFreeCoins = () => {
     // }
     if (value === "risk") {
       setRiskWheel(true);
+      setWeeklyWheel(false);
       setShowRoulette(false);
       setLoylityWheel(false);
     }
     if (value === "loyality") {
       setLoylityWheel(true);
       setShowRoulette(false);
+      setWeeklyWheel(false);
       setRiskWheel(false);
     } else if (value === "normal") {
       setShowRoulette(true);
       setRiskWheel(false);
+      setWeeklyWheel(false);
+      setLoylityWheel(false);
+    } else if (value === "weekly") {
+      setShowRoulette(false);
+      setRiskWheel(false);
+      setWeeklyWheel(true);
       setLoylityWheel(false);
     }
     setShow(!show);
@@ -134,6 +145,16 @@ const EarnFreeCoins = () => {
           ""
         )}
 
+        {weeklyWheel ? (
+          <WeeklyWheel
+            show={show}
+            handleOpenRoulette={handleOpenRoulette}
+            weeklyWheel={weeklyWheel}
+          />
+        ) : (
+          ""
+        )}
+
         {key === "dailyClaims" ? (
           <div className='spin-popup-content spin-page-content'>
             <p className='title-memo'>
@@ -148,16 +169,21 @@ const EarnFreeCoins = () => {
                     <p>spin to win</p>
                   </div>
                   <div className='spin-button'>
-                    <div className='risk-grid'>
-                      <p>
-                        you may end up with no prize if you risk it for big
-                        wheel on this spin!{" "}
-                      </p>
-                      <button onClick={() => handleOpenRoulette("risk")}>
-                        {" "}
-                        {canSpin ? "Take a Risk" : spinTimer}
-                      </button>
-                    </div>
+                    {user?.loyalitySpinCount !== 29 ? (
+                      <div className='risk-grid'>
+                        <p>
+                          you may end up with no prize if you risk it for big
+                          wheel on this spin!{" "}
+                        </p>
+                        <button onClick={() => handleOpenRoulette("risk")}>
+                          {" "}
+                          {canSpin ? "Take a Risk" : spinTimer}
+                        </button>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {/* {user?.loyalitySpinCount === 29 && ( */}
                     <div className='risk-grid'>
                       <p>Loyality wheel on this spin! </p>
                       <button onClick={() => handleOpenRoulette("loyality")}>
@@ -165,14 +191,30 @@ const EarnFreeCoins = () => {
                         {canSpin ? "Loyality" : spinTimer}
                       </button>
                     </div>
+                    {/* )} */}
+                    {user?.loyalitySpinCount !== 29 ? (
+                      <div className='risk-grid'>
+                        <p>
+                          you may end up with no prize if you risk it for big
+                          wheel on this spin!{" "}
+                        </p>
+                        <button onClick={() => handleOpenRoulette("normal")}>
+                          {" "}
+                          {canSpin ? "Spin Now" : spinTimer}
+                        </button>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+
                     <div className='risk-grid'>
                       <p>
                         you may end up with no prize if you risk it for big
                         wheel on this spin!{" "}
                       </p>
-                      <button onClick={() => handleOpenRoulette("normal")}>
+                      <button onClick={() => handleOpenRoulette("weekly")}>
                         {" "}
-                        {canSpin ? "Spin Now" : spinTimer}
+                        {canSpin ? "Weekly" : spinTimer}
                       </button>
                     </div>
                   </div>
