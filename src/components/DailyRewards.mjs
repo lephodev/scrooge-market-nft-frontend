@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-undef */
 import { useState, useEffect, useContext } from "react";
@@ -21,15 +22,6 @@ function DailyRewards() {
   const [loader, setLoader] = useState(true);
   const [fullDailyRewards, setFullDailyRewards] = useState(false);
   const [affUser, setAffUser] = useState({});
-  console.log(
-    "nextClaimDate",
-    nextClaimDate,
-    loader,
-    fullDailyRewards,
-    setBuyLoading
-  );
-
-  console.log("Affuser", affUser);
 
   const address = useAddress();
   // function notify(message) {
@@ -348,16 +340,16 @@ function DailyRewards() {
 </a>
   </div>}    */}
       {buyLoading ? (
-        <div className="pageImgContainer">
-          <img src={LoadingPoker} alt="game" className="imageAnimation" />
-          <div className="loading-txt pulse">CLAIMING TOKENS...</div>
+        <div className='pageImgContainer'>
+          <img src={LoadingPoker} alt='game' className='imageAnimation' />
+          <div className='loading-txt pulse'>CLAIMING TOKENS...</div>
         </div>
       ) : (
         <></>
       )}
 
       <ToastContainer
-        position="top-center"
+        position='top-center'
         autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -366,7 +358,7 @@ function DailyRewards() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme='light'
       />
     </>
   );
