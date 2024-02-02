@@ -9,11 +9,13 @@ import { getClientSeed } from "../../utils/generateClientSeed.js";
 import { marketPlaceInstance } from "../../config/axios.js";
 import { toast } from "react-toastify";
 import "../../components/roulette/wheel.css";
+import WinPopup from "../roulette/winPopup.mjs";
 
 function LoyaltySpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
   const [selectItem, setselectItem] = useState(null);
-
   const [spinButtonDisable, setSpinButtonDisable] = useState(false);
+  const [isWinResult, setIsWinResult] = useState(false);
+  const [wheelResult, setWheelResult] = useState();
 
   const select = async () => {
     if (selectItem === null) {
@@ -35,6 +37,8 @@ function LoyaltySpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
         if (selectedItem === -1) return;
         setselectItem(selectedItem + 1);
         setWinItem(selectedItem);
+        setWheelResult(selectedItem);
+
         // if (this.props.onSelectItem) {
         //   onSelectItem(selectedItem);
         // }
@@ -62,6 +66,7 @@ function LoyaltySpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
 
   const handleEvent = () => {
     setWinPopup(true);
+    setIsWinResult(true);
     let ele = document.getElementById("winitem-wheel");
     if (ele) {
       ele.play();
@@ -92,6 +97,9 @@ function LoyaltySpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
             </div>
           ))}
         </div>
+        {isWinResult && (
+          <WinPopup setWinPopup={setWinPopup} winAmount={items[wheelResult]} />
+        )}
       </div>
       <div
         className={`spin-btn ${spinButtonDisable ? "spin-disable" : ""}`}

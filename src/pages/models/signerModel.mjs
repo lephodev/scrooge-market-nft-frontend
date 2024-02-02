@@ -6,8 +6,6 @@ const SignerModel = ({
   handleAuthenticate,
   handleInputChange,
 }) => {
-  console.log("showSigner", showSigner);
-
   return (
     <div>
       {" "}
