@@ -24,14 +24,14 @@ const MainRoulette = ({
   const MainWheelPlaces = [
     { token: "Big wheel", chances: 1 },
     { token: 10, chances: 11 },
-    { token: 25, chances: 11 },
     { token: 15, chances: 11 },
-    { token: 30, chances: 11 },
     { token: 20, chances: 11 },
-    { token: 10, chances: 11 },
     { token: 25, chances: 11 },
-    { token: 15, chances: 11 },
     { token: 30, chances: 11 },
+    { token: 10, chances: 11 },
+    { token: 15, chances: 11 },
+    { token: 20, chances: 11 },
+    { token: 25, chances: 11 },
   ];
 
   const BigWheelPlaces = [
@@ -55,38 +55,37 @@ const MainRoulette = ({
     <Modal
       show={show}
       onHide={handleOpenRoulette}
-      className='roulette-wrapper roulette-wheel-game'
-      aria-labelledby='contained-modal-title-vcenter'
-      centered>
+      className="roulette-wrapper roulette-wheel-game"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
-        <div className='wheel-wrapper'>
-          <>
-            {!bigWheel ? (
-              <MainSpinWheel
-                setBigWheel={setBigWheel}
-                bigWheel={bigWheel}
-                items={MainWheelPlaces}
-                setWinPopup={setWinPopup}
-                setVolume={setVolume}
-                handleOpenRoulette={handleOpenRoulette}
-              />
-            ) : (
-              <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} />
-            )}
-          </>
-        </div>
+        <>
+          {!bigWheel ? (
+            <MainSpinWheel
+              setBigWheel={setBigWheel}
+              bigWheel={bigWheel}
+              items={MainWheelPlaces}
+              setWinPopup={setWinPopup}
+              setVolume={setVolume}
+              handleOpenRoulette={handleOpenRoulette}
+            />
+          ) : (
+            <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} />
+          )}
+        </>
 
-        <audio className='bg-audio' muted={!volume}>
+        <audio className="bg-audio" muted={!volume}>
           <source src={bgaudio}></source>
         </audio>
-        <audio className='rotate-wheel'>
+        <audio className="rotate-wheel">
           <source src={rotatewheel}></source>
         </audio>
-        <audio className='winitem-wheel'>
+        <audio className="winitem-wheel">
           <source src={winItemaudio}></source>
         </audio>
-        <audio id='coin-audio'>
+        <audio id="coin-audio">
           <source src={coin}></source>
         </audio>
       </Modal.Body>
