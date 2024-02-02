@@ -12,6 +12,7 @@ import AuthContext from "../../context/authContext.ts";
 import { toast } from "react-toastify";
 import { marketPlaceInstance } from "../../config/axios.js";
 import "../../styles/globals.css";
+import SuccessModal from "./SuccessModal.mjs";
 
 const customStyles = {
   container: (provided) => ({
@@ -113,6 +114,8 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
 
   const [paymentType, setPaymentType] = useState();
   const [loading, setLoading] = useState(false);
+  const [successShow, setSuccessShow] = useState(false);
+  const [purchaseAmount, setPurchaseAmount] = useState();
 
   const {
     handleSubmit,
@@ -130,6 +133,7 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
 
   const WithdrawRequest = async (values) => {
     try {
+      setPurchaseAmount(values?.amount);
       console.log("values-----------", values);
       if (!user)
         return toast.error("Please login first", { containerId: "login" });
@@ -156,8 +160,9 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
 
             handleCloseFiat();
           } else {
-            toast.success(data?.data?.message);
+            // toast.success(data?.data?.message);
             setLoading(false);
+            setSuccessShow(true);
             handleCloseFiat();
             reset();
             getUserDataInstant();
@@ -179,6 +184,10 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
   //   console.log("selectedOptions", selectedOptions);
   //   setValue("redeemPrize", selectedOptions?.value);
   // };
+
+  const handleSuccessModal = () => {
+    setSuccessShow(!successShow);
+  };
 
   return (
     <div className='fiat-data'>
@@ -242,6 +251,11 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
               )}
             </Form.Group>
           )}
+          <SuccessModal
+            successShow={successShow}
+            handleSuccessModal={handleSuccessModal}
+            purchaseAmount={purchaseAmount}
+          />
           {/* <h6 className="deducted-heading">
             10% of the amount will be deducted from your redemption amount
           </h6> */}

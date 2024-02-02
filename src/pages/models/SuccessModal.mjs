@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import redemption from "../../images/succes/redemption.webp";
+import redemption from "../../images/succes/redemption submitted.png";
 
 const SuccessModal = ({ successShow, handleSuccessModal, purchaseAmount }) => {
   return (
