@@ -14,6 +14,79 @@
   --reset-duration: 0;
 }
 
+.main-wheel-wrapper, .risk-wheel-wrapper, .loyalty-wheel-wrapper, .big-wheel-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.main-wheel-wrapper {
+  scale: 0.9;
+}
+/* .big-wheel-wrapper {
+  height: 650px;
+} */
+
+.main-wheel-wrapper::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: url("../../images/wheel/main-wheel/base.png");
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  margin-top: -36px;
+}
+.risk-wheel-wrapper::before {
+  content: "";
+  position: absolute;
+  height: 450px;
+  width: 450px;
+  background: url("../../images/wheel/risk-wheel/base.png");
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  margin-top: -35px;
+}
+.big-wheel-wrapper::before {
+  content: "";
+  position: absolute;
+  height: 450px;
+  width: 450px;
+  background: url("../../images/wheel/big-wheel/base.png");
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin-top: -28px;
+}
+.loyalty-wheel-wrapper::before {
+  content: "";
+  position: absolute;
+  height: 420px;
+  width: 420px;
+  background: url("../../images/wheel/loyalty-wheel/base.png");
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  margin-top: -34px;
+}
+
+
 .spin-wrapper .modal-content {
   background: var(--primary-bg);
 }
@@ -43,7 +116,7 @@
 /* Conteneur de la roue = cercle rose extérieur */
 .main-wheel-container, .big-wheel-container, .risk-wheel-container, .loyalty-wheel-container {
   --wheel-font: "DejaVu Sans", sans-serif !important;
-  --wheel-size: 440px;
+  --wheel-size: 430px;
   --wheel-slice-spacing: 50px;
   --wheel-border-size: 5px;
   --wheel-color: #00c2c7;
@@ -62,7 +135,7 @@
   box-sizing: content-box;
   width: calc(var(--wheel-size) + 2 * var(--wheel-border-size));
   height: calc(var(--wheel-size) + 2 * var(--wheel-border-size));
-  padding: 3px;
+  padding: 5px;
   margin: auto;
 
   border-radius: 50%;
@@ -81,13 +154,13 @@
   transform: translateX(-50%);
  
 
-  background: url(../../images/wheel/main-wheel/main-wheel-arrow.png) no-repeat;
+  background: url(../../images/wheel/main-wheel/marker.png) no-repeat;
   background-size: 100%;
-  height: 230px;
-  width: 123px;
-  top: 5%;
+  height: 270px;
+  width: 120px;
+  top: 0%;
   transform: translateX(-50%);
-  right: 23.5%;
+  left: 50%;
 }
 .big-wheel-container::before {
   content: "";
@@ -96,13 +169,13 @@
   z-index: 4;
   transform: translateX(-50%);
 
-  background: url(../../images/wheel/big-wheel/big-wheel-arrow.png) no-repeat;
+  background: url(../../images/wheel/big-wheel/marker.png) no-repeat;
   background-size: 100%;
-  height: 65px;
-  width: 50px;
-  top: 0%;
+  height: 145px;
+  width: 72px;
+  top: 23%;
   transform: translateX(-50%);
-  right: 37%;
+  left: 50%;
 }
 .risk-wheel-container::before {
   content: "";
@@ -111,13 +184,13 @@
   z-index: 4;
   transform: translateX(-50%);
 
-  background: url(../../images/wheel/risk-wheel/risk-wheel-arrow.png) no-repeat;
+  background: url(../../images/wheel/risk-wheel/marker.png) no-repeat;
   background-size: 100%;
-  height: 55px;
-  width: 35px;
-  top: 5%;
+  height: 240px;
+  width: 70px;
+  top: 0%;
   transform: translateX(-50%);
-  right: 42%;
+  left: 50%;
 }
 .loyalty-wheel-container::before {
   content: "";
@@ -127,13 +200,13 @@
   transform: translateX(-50%);
  
 
-  background: url(../../images/wheel/loyalty-wheel/loyalty-wheel-arrow.png) no-repeat;
+  background: url(../../images/wheel/loyalty-wheel/marker-1.png) no-repeat;
   background-size: 100%;
-  height: 80px;
-  width: 50px;
-  top: 0%;
+  height: 290px;
+  width: 168px;
+  top: -1%;
   transform: translateX(-50%);
-  right: 37%;
+  left: 50%;
 }
 
 /* Roue */
@@ -147,7 +220,7 @@
   overflow: hidden;
   border-radius: 50%;
   transition: transform var(--reset-duration);
-  transform: rotate(-16deg);
+  transform: rotate(-90deg);
   cursor: pointer;
   background: transparent;
   z-index: 3;
@@ -156,48 +229,62 @@
 .main-wheel::before {
   content: "";
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url(../../images/wheel/main-wheel/main-wheel-v1.png) no-repeat;
+  width: 348px;
+  height: 348px;
+  background: url(../../images/wheel/main-wheel/content.png) no-repeat;
   background-position: center;
   background-size: cover;
-  transform: rotate(90deg);
+  transform: translate(-50%, -50%) rotate(90deg);
+  top: 50%;
+  left: 50%;
 }
 /* for big circle */
 .big-wheel::before {
   content: "";
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url(../../images/wheel/big-wheel/big-wheel.png) no-repeat;
+  width: 230px;
+  height: 230px;
+  background: url(../../images/wheel/big-wheel/content.png) no-repeat;
   background-position: center;
   background-size: cover;
-  transform: rotate(90deg);
+  transform: translate(-50%, -50%) rotate(90deg);
+  top: 50%;
+  left: 50%;
 }
 /* for risk circle */
 .risk-wheel::before {
   content: "";
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url(../../images/wheel/risk-wheel/risk-wheel.png) no-repeat;
+  width: 320px;
+  height: 320px;
+  background: url(../../images/wheel/risk-wheel/content.png) no-repeat;
   background-position: center;
   background-size: cover;
-  transform: rotate(145deg);
+  transform: translate(-50%, -50%) rotate(90deg);
+  top: 50%;
+  left: 50%;
 }
 /* for loyalty circle */
 .loyalty-wheel::before {
   content: "";
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url(../../images/wheel/loyalty-wheel/loyalty-wheel.png) no-repeat;
+  width: 290px;
+  height: 290px;
+  background: url(../../images/wheel/loyalty-wheel/content.png) no-repeat;
   background-position: center;
   background-size: cover;
-  transform: rotate(90deg);
+  transform: translate(-50%, -50%) rotate(90deg);
+  top: 50%;
+  left: 50%;
 }
 
 .main-wheel.spinning, .big-wheel.spinning, .risk-wheel.spinning, .loyalty-wheel.spinning {
+  transition: transform var(--spinning-duration);
+  transform: rotate(calc((var(--nb-turn) * 360deg + (-360deg * var(--selected-item) / var(--nb-item, 1))) - 90deg));
+  /* width: 450px;
+  height: 450px; */
+}
+/* .main-wheel.spinning, .big-wheel.spinning, .risk-wheel.spinning, .loyalty-wheel.spinning {
   transition: transform var(--spinning-duration);
   transform: rotate(
     calc(
@@ -205,13 +292,13 @@
         (-360deg * var(--selected-item) / var(--nb-item, 1)) - 16deg
     )
   );
-}
+} */
 
 /* CSS For stand */
 .main-wheel-container::after  {
   display: block;
   position: absolute;
-  content: "";
+  content: unset;
   width: 100%;
   height: 36%;
   bottom: -2%;
@@ -225,7 +312,7 @@
 .big-wheel-container::after  {
   display: block;
   position: absolute;
-  content: "";
+  content: unset;
   width: 100%;
   height: 65%;
   bottom: 0%;
@@ -241,7 +328,7 @@
  .risk-wheel-container::after  {
   display: block;
   position: absolute;
-  content: "";
+  content: unset;
   width: 100%;
   height: 100%;
   bottom: -7%;
@@ -256,7 +343,7 @@
 .loyalty-wheel-container::after  {
   display: block;
   position: absolute;
-  content: "";
+  content: unset;
   width: 100%;
   height: 50%;
   bottom: -6%;
@@ -316,6 +403,32 @@
   -webkit-animation: fadeIn 1s infinite;
   animation: fadeIn 1s infinite;
   z-index: 2;
+}
+.spin-btn {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+  justify-content: center;
+  height: 60px;
+}
+
+.spin-btn img {
+  height: 60px;
+  cursor: pointer;
+  max-width: 170px;
+  width: 100%;
+}
+.spin-btn h6 {
+  margin: 0;
+  font-size: 20px;
+  font-family: "Righteous", cursive !important;
+  pointer-events: none;
+  color: #000;
+  padding-left: 30px;
 }
 
 @keyframes fadeIn {
@@ -397,11 +510,51 @@ img.spinTxt {
   .big-wheel-container::after {
     left: 12px;
   }
+  .risk-wheel-wrapper {
+    scale: 0.75;
+  }
+.loyalty-wheel-wrapper {
+    scale: 0.9;
+  }
+  .risk-wheel-container::before {
+    width: 85px;
+    height: 289px;
+    top: -10%;
+  }
+  .loyalty-wheel::before {
+    width: 360px;
+    height: 360px;
+  }
+  .loyalty-wheel-container::before {
+    height: 350px;
+    width: 204px;
+    top: -13%;
+  }
+  .spin-btn img {
+    height: 70px;
+    max-width: 200px;
+    width: 100%;
+  }
+  .risk-wheel::before {
+    width: 400px;
+    height: 400px;
+  }
+  .big-wheel::before {
+    width: 280px;
+    height: 280px;
+  }
+  .big-wheel-container::before {
+    height: 165px;
+    width: 82px;
+    top: 19%;
+    transform: translateX(-50%);
+    left: 50%;
+  }
 }
 
 @media screen and (max-width: 375px) {
-  .main-wheel-container, .big-wheel-container, .risk-wheel-container, .loyalty-wheel-container {
+  /* .main-wheel-container, .big-wheel-container, .risk-wheel-container, .loyalty-wheel-container {
     scale: 0.7;
     transform: translateX(-71%);
-  }
+  } */
 }

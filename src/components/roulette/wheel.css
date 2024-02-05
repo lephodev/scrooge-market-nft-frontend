@@ -131,16 +131,7 @@ body.modal-open {
   color: rgb(38, 11, 2);
 }
 
-.spin-btn {
-  margin-top: 60px;
-}
 
-.spin-btn img {
-  height: 52px;
-  cursor: pointer;
-  position: absolute;
-  left: 0;
-}
 
 .spin-left {
   text-align: center;
@@ -167,13 +158,13 @@ body.modal-open {
 }
 
 .roulette-wrapper.roulette-wheel-game .modal-content {
-  height: 550px;
-  background: #151515;
+  /* height: 550px; */
+  background: #171719;
   border-radius: 10px;
 }
 
 .roulette-wrapper.roulette-wheel-game .modal-body {
-  padding: 0px 10px;
+  padding: 0px 0px;
 }
 
 .roulette-wrapper.roulette-wheel-game .modal-header {
@@ -185,6 +176,8 @@ body.modal-open {
   filter: invert(1);
   width: 6px;
   height: 6px;
+  z-index: 9;
+  position: relative;
 }
 
 .modal {
@@ -908,35 +901,7 @@ body.modal-open {
   }
 }
 
-.spin-btn {
-  position: relative;
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 200px;
-  color: #fff;
-  background: #f9ff00;
-  border-radius: 30px;
-  cursor: pointer;
-  justify-content: center;
-  height: 52px;
-}
 
-.spin-btn h6 {
-  /* position: absolute;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  top: 50%; */
-  /* width: 100%; */
-  margin: 0;
-  /* margin-top: 2px; */
-  font-size: 20px;
-  font-family: "Righteous", cursive !important;
-  pointer-events: none;
-  color: #000;
-  padding-left: 30px;
-}
 
 .wheel .wheel-item.seleted-item {
   color: #fde475 !important;
@@ -979,9 +944,7 @@ body.modal-open {
 }
 
 @media screen and (max-width: 1660px) {
-  .spin-btn {
-    margin-top: 35px;
-  }
+
 
   .spin-left {
     bottom: -60px;

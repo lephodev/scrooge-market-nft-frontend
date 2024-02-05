@@ -23,6 +23,11 @@ const LoyalityWheel = ({ handleOpenRoulette, show }) => {
     { token: 200, chances: 10 },
     { token: 225, chances: 10 },
     { token: 250, chances: 10 },
+    { token: 150, chances: 10 },
+    { token: 175, chances: 10 },
+    { token: 200, chances: 10 },
+    { token: 225, chances: 10 },
+    { token: 250, chances: 10 },
   ];
 
   return (
@@ -34,17 +39,14 @@ const LoyalityWheel = ({ handleOpenRoulette, show }) => {
       centered>
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
-        <div className='wheel-wrapper'>
-          {console.log("LoyaltyWheelPlaces", LoyaltyWheelPlaces)}
-          <>
-            <LoyaltyWheel
-              items={LoyaltyWheelPlaces}
-              setWinPopup={setWinPopup}
-              setWinItem={setWinItem}
-              setVolume={setVolume}
-            />
-          </>
-        </div>
+        <>
+          <LoyaltyWheel
+            items={LoyaltyWheelPlaces}
+            setWinPopup={setWinPopup}
+            setWinItem={setWinItem}
+            setVolume={setVolume}
+          />
+        </>
 
         <audio className='bg-audio' muted={!volume}>
           <source src={bgaudio}></source>

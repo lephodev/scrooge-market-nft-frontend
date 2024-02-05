@@ -17,16 +17,16 @@ import BigSpinWheel from "../mainRoulette/bigSpinWheel.mjs";
 
 const RiskWheel = ({ handleOpenRoulette, show }) => {
   const RiskWheelPlaces = [
-    { token: "Red1", chances: 10.5 },
-    { token: "Red2", chances: 10.5 },
-    { token: "Red3", chances: 10.5 },
-    { token: "Red4", chances: 10.5 },
-    { token: "Red5", chances: 10.5 },
-    { token: "Red6", chances: 10.5 },
-    { token: "Red7", chances: 10.5 },
-    { token: "Red8", chances: 10.5 },
-    { token: "Red9", chances: 10.5 },
-    { token: "Green", chances: 5.5 },
+    { token: "Green1", chances: 10 },
+    { token: "Green2", chances: 10 },
+    { token: "Red7", chances: 10 },
+    { token: "Red1", chances: 10 },
+    { token: "Red2", chances: 10 },
+    { token: "Red3", chances: 10 },
+    { token: "Red4", chances: 10 },
+    { token: "Red5", chances: 10 },
+    { token: "Red6", chances: 10 },
+    { token: "Green3", chances: 10 },
   ];
 
   const BigWheelPlaces = [
@@ -56,21 +56,19 @@ const RiskWheel = ({ handleOpenRoulette, show }) => {
       centered>
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
-        <div className='wheel-wrapper'>
-          <>
-            {!bigWheel ? (
-              <RiskSpinWheel
-                items={RiskWheelPlaces}
-                setWinPopup={setWinPopup}
-                setWinItem={setWinItem}
-                setVolume={setVolume}
-                setBigWheel={setBigWheel}
-              />
-            ) : (
-              <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} />
-            )}
-          </>
-        </div>
+        <>
+          {!bigWheel ? (
+            <RiskSpinWheel
+              items={RiskWheelPlaces}
+              setWinPopup={setWinPopup}
+              setWinItem={setWinItem}
+              setVolume={setVolume}
+              setBigWheel={setBigWheel}
+            />
+          ) : (
+            <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} />
+          )}
+        </>
 
         <audio className='bg-audio' muted={!volume}>
           <source src={bgaudio}></source>

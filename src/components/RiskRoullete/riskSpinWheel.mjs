@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import spinWheel from "../../images/spinWheel.png";
+import spinbtn from "../../images/wheel/risk-wheel/risk-wheel-btn.png";
 import "../mainRoulette/mainWheel.css";
 import rotatewheel from "../../images/sounds/wheel-rotate.wav";
 import BetterLuckNextTimePopup from "../roulette/BetterLuckNextTimePopup.mjs";
@@ -37,11 +37,12 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
         );
         console.log("selectedItem", selectedItem);
         if (selectedItem === -1) return;
-        setselectItem(selectedItem + 2);
+
+        setselectItem(selectedItem);
         setWinItem(selectedItem);
         setWheelResult(selectedItem);
 
-        if (selectedItem === 9) {
+        if (selectedItem === 0 || selectedItem === 1 || selectedItem === 9) {
           setTimeout(() => {
             setBigWheel(true);
           }, 5000);
@@ -84,7 +85,7 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
 
   const spinning = selectItem !== null ? "spinning" : "";
   return (
-    <>
+    <div className='risk-wheel-wrapper'>
       <div className='risk-wheel-container'>
         <div
           className={`risk-wheel ${spinning}`}
@@ -99,7 +100,9 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
             </div>
           ))}
         </div>
-        {isWinResult && wheelResult === 9 ? (
+        {console.log("wheelResult", wheelResult)}
+        {isWinResult &&
+        (wheelResult === 0 || wheelResult === 1 || wheelResult === 9) ? (
           <WinPopup setWinPopup={setWinPopup} winAmount={items[wheelResult]} />
         ) : isWinResult ? (
           <BetterLuckNextTimePopup />
@@ -110,8 +113,8 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
       <div
         className={`spin-btn ${spinButtonDisable ? "spin-disable" : ""}`}
         onClick={select}>
-        <img src={spinWheel} alt='spin' />
-        <h6>{"SPIN NOW"} </h6>
+        <img src={spinbtn} alt='spin' />
+        {/* <h6>{"SPIN NOW"} </h6> */}
         <audio id='bg-audio'>
           <source src={bgaudio}></source>
         </audio>
@@ -125,7 +128,7 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
           <source src={wheelStop}></source>
         </audio>
       </div>
-    </>
+    </div>
   );
 }
 

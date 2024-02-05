@@ -22,11 +22,15 @@ const WinPopup = ({ winAmount }) => {
     }, 700);
   };
 
-  // const coinanim = {
-  //   loop: true,
-  //   autoplay: true,
-  //   animationData: coinicon,
-  // };
+  const displayToken = (token) => {
+    if (typeof token === "string" && token === "Big wheel") {
+      return winAmount?.token;
+    } else if (typeof token === "string" && token.startsWith("Green")) {
+      return "";
+    } else {
+      return `${winAmount?.token}ST`;
+    }
+  };
 
   return (
     <div className='spin-win-popup winning-animation-win'>
@@ -45,15 +49,10 @@ const WinPopup = ({ winAmount }) => {
 
           <div className='winning-amount'>
             {" "}
-            {`${
-              winAmount?.token === "Green" || winAmount?.token === "Big wheel"
-                ? winAmount?.token
-                : winAmount?.token + "ST"
-            }  `}
+            {displayToken(winAmount?.token)}
           </div>
 
-          {(winAmount?.token !== "Big wheel" ||
-            winAmount?.token !== "Green") && (
+          {displayToken(winAmount?.token) && (
             <div className='winning-btn'>
               <div className='win-btn' onClick={handleCollect}>
                 <p>COLLECT</p>

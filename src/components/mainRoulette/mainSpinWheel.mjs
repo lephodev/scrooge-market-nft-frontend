@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import spinWheel from "../../images/spinWheel.png";
+// import spinWheel from "../../images/spinWheel.png";
+import spinbtn from "../../images/wheel/main-wheel/main-wheel-btn.png";
 import "./mainWheel.css";
 import rotatewheel from "../../images/sounds/wheel-rotate.wav";
 import bgaudio from "../../images/sounds/wheel-win3.wav";
@@ -33,7 +34,7 @@ function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
         );
         console.log("selectedItem", selectedItem);
         if (selectedItem === -1) return;
-        setselectItem(selectedItem + 2);
+        setselectItem(selectedItem);
         setWheelResult(selectedItem);
         if (selectedItem === 0) {
           setTimeout(() => {
@@ -82,7 +83,7 @@ function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
 
   const spinning = selectItem !== null ? "spinning" : "";
   return (
-    <>
+    <div className='main-wheel-wrapper'>
       <div className='main-wheel-container'>
         <div
           className={`main-wheel ${spinning}`}
@@ -104,8 +105,8 @@ function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
       <div
         className={`spin-btn ${spinButtonDisable ? "spin-disable" : ""}`}
         onClick={select}>
-        <img src={spinWheel} alt='spin' />
-        <h6>{"SPIN NOW"} </h6>
+        <img src={spinbtn} alt='spin' />
+        {/* <h6>{"SPIN NOW"} </h6> */}
         <audio id='bg-audio'>
           <source src={bgaudio}></source>
         </audio>
@@ -119,7 +120,7 @@ function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
           <source src={wheelStop}></source>
         </audio>
       </div>
-    </>
+    </div>
   );
 }
 

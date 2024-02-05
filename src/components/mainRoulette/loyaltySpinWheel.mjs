@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import spinWheel from "../../images/spinWheel.png";
+import spinbtn from "../../images/wheel/loyalty-wheel/loyalty-wheel-btn.png";
 import "./mainWheel.css";
 import rotatewheel from "../../images/sounds/wheel-rotate.wav";
 import bgaudio from "../../images/sounds/wheel-win3.wav";
@@ -35,7 +35,7 @@ function LoyaltySpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
         );
         console.log("selectedItem", selectedItem);
         if (selectedItem === -1) return;
-        setselectItem(selectedItem + 1);
+        setselectItem(selectedItem);
         setWinItem(selectedItem);
         setWheelResult(selectedItem);
 
@@ -80,7 +80,7 @@ function LoyaltySpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
 
   const spinning = selectItem !== null ? "spinning" : "";
   return (
-    <>
+    <div className='loyalty-wheel-wrapper'>
       <div className='loyalty-wheel-container'>
         <div
           className={`loyalty-wheel ${spinning}`}
@@ -102,8 +102,8 @@ function LoyaltySpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
       <div
         className={`spin-btn ${spinButtonDisable ? "spin-disable" : ""}`}
         onClick={select}>
-        <img src={spinWheel} alt='spin' />
-        <h6>{"SPIN NOW"} </h6>
+        <img src={spinbtn} alt='spin' />
+        {/* <h6>{"SPIN NOW"} </h6> */}
         <audio id='bg-audio'>
           <source src={bgaudio}></source>
         </audio>
@@ -117,7 +117,7 @@ function LoyaltySpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
           <source src={wheelStop}></source>
         </audio>
       </div>
-    </>
+    </div>
   );
 }
 
