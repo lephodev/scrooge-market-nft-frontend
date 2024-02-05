@@ -34,7 +34,7 @@ function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
         );
         console.log("selectedItem", selectedItem);
         if (selectedItem === -1) return;
-        setselectItem(selectedItem + 2);
+        setselectItem(selectedItem);
         setWheelResult(selectedItem);
         if (selectedItem === 0) {
           setTimeout(() => {
@@ -83,19 +83,17 @@ function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
 
   const spinning = selectItem !== null ? "spinning" : "";
   return (
-    <div className="main-wheel-wrapper">
-      <div className="main-wheel-container">
+    <div className='main-wheel-wrapper'>
+      <div className='main-wheel-container'>
         <div
           className={`main-wheel ${spinning}`}
           style={wheelVars}
-          onTransitionEnd={handleEvent}
-        >
+          onTransitionEnd={handleEvent}>
           {items.map((item, index) => (
             <div
-              className="main-wheel-item"
+              className='main-wheel-item'
               key={`item-${index + 1}`}
-              style={{ "--item-nb": index }}
-            >
+              style={{ "--item-nb": index }}>
               {/* {item.token} */}
             </div>
           ))}
@@ -106,20 +104,19 @@ function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
       </div>
       <div
         className={`spin-btn ${spinButtonDisable ? "spin-disable" : ""}`}
-        onClick={select}
-      >
-        <img src={spinbtn} alt="spin" />
+        onClick={select}>
+        <img src={spinbtn} alt='spin' />
         {/* <h6>{"SPIN NOW"} </h6> */}
-        <audio id="bg-audio">
+        <audio id='bg-audio'>
           <source src={bgaudio}></source>
         </audio>
-        <audio id="rotate-wheel">
+        <audio id='rotate-wheel'>
           <source src={rotatewheel}></source>
         </audio>
-        <audio id="winitem-wheel">
+        <audio id='winitem-wheel'>
           <source src={winItemaudio}></source>
         </audio>
-        <audio id="wheel-stop">
+        <audio id='wheel-stop'>
           <source src={wheelStop}></source>
         </audio>
       </div>

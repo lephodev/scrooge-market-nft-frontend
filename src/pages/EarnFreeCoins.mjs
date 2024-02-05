@@ -188,10 +188,13 @@ const EarnFreeCoins = () => {
                     {user?.loyalitySpinCount !== 29 ? (
                       <div className='risk-grid'>
                         <p>
-                          you may end up with no prize if you risk it for big
-                          wheel on this spin!{" "}
+                          Risk your guaranteed prize for better odds to hit the
+                          Big Wheel! Choose careful, you can be left with no
+                          daily reward.{" "}
                         </p>
-                        <button onClick={() => handleOpenRoulette("risk")}>
+                        <button
+                          disabled={!canSpin}
+                          onClick={() => handleOpenRoulette("risk")}>
                           {" "}
                           {canSpin ? "Take a Risk" : spinTimer}
                         </button>
@@ -199,24 +202,28 @@ const EarnFreeCoins = () => {
                     ) : (
                       ""
                     )}
-                    {/* {user?.loyalitySpinCount === 29 && ( */}
-                    <div className='risk-grid'>
-                      <p>Loyality wheel on this spin! </p>
-                      <button onClick={() => handleOpenRoulette("loyality")}>
-                        {" "}
-                        {canSpin ? "Loyality" : spinTimer}
-                      </button>
-                    </div>
-                    {/* )} */}
-                    {user?.loyalitySpinCount !== 29 ? (
+                    {user?.loyalitySpinCount === 29 && (
                       <div className='risk-grid'>
                         <p>
-                          you may end up with no prize if you risk it for big
-                          wheel on this spin!{" "}
+                          Congrats on 30 straight days of spinning, here is a
+                          Bonus Wheel for today’s spin{" "}
                         </p>
-                        <button onClick={() => handleOpenRoulette("normal")}>
+                        <button
+                          disabled={!canSpin}
+                          onClick={() => handleOpenRoulette("loyality")}>
                           {" "}
-                          {canSpin ? "Spin Now" : spinTimer}
+                          {canSpin ? "Loyality Wheel" : spinTimer}
+                        </button>
+                      </div>
+                    )}
+                    {user?.loyalitySpinCount !== 29 ? (
+                      <div className='risk-grid'>
+                        <p>Spin for guaranteed prize </p>
+                        <button
+                          disabled={!canSpin}
+                          onClick={() => handleOpenRoulette("normal")}>
+                          {" "}
+                          {canSpin ? "Regular Wheel" : spinTimer}
                         </button>
                       </div>
                     ) : (
@@ -225,12 +232,14 @@ const EarnFreeCoins = () => {
                     {isWeeklyWheelActive ? (
                       <div className='risk-grid'>
                         <p>
-                          you may end up with no prize if you risk it for big
-                          wheel on this spin!{" "}
+                          Thank you for being a loyal Scrooge user, you have
+                          been rewarded 7 days of access to the Big Wheel!{" "}
                         </p>
-                        <button onClick={() => handleOpenRoulette("weekly")}>
+                        <button
+                          disabled={!canSpin}
+                          onClick={() => handleOpenRoulette("weekly")}>
                           {" "}
-                          {canSpin ? "Weekly" : spinTimer}
+                          {canSpin ? "Weekly Wheel" : spinTimer}
                         </button>
                       </div>
                     ) : (

@@ -17,16 +17,16 @@ import BigSpinWheel from "../mainRoulette/bigSpinWheel.mjs";
 
 const RiskWheel = ({ handleOpenRoulette, show }) => {
   const RiskWheelPlaces = [
-    { token: "Red1", chances: 10.5 },
-    { token: "Red2", chances: 10.5 },
-    { token: "Red3", chances: 10.5 },
-    { token: "Red4", chances: 10.5 },
-    { token: "Red5", chances: 10.5 },
-    { token: "Red6", chances: 10.5 },
-    { token: "Red7", chances: 10.5 },
-    { token: "Red8", chances: 10.5 },
-    { token: "Red9", chances: 10.5 },
-    { token: "Green", chances: 5.5 },
+    { token: "Green1", chances: 10 },
+    { token: "Green2", chances: 10 },
+    { token: "Red7", chances: 10 },
+    { token: "Red1", chances: 10 },
+    { token: "Red2", chances: 10 },
+    { token: "Red3", chances: 10 },
+    { token: "Red4", chances: 10 },
+    { token: "Red5", chances: 10 },
+    { token: "Red6", chances: 10 },
+    { token: "Green3", chances: 10 },
   ];
 
   const BigWheelPlaces = [
@@ -51,10 +51,9 @@ const RiskWheel = ({ handleOpenRoulette, show }) => {
     <Modal
       show={show}
       onHide={handleOpenRoulette}
-      className="roulette-wrapper roulette-wheel-game"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+      className='roulette-wrapper roulette-wheel-game'
+      aria-labelledby='contained-modal-title-vcenter'
+      centered>
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <>
@@ -71,16 +70,16 @@ const RiskWheel = ({ handleOpenRoulette, show }) => {
           )}
         </>
 
-        <audio className="bg-audio" muted={!volume}>
+        <audio className='bg-audio' muted={!volume}>
           <source src={bgaudio}></source>
         </audio>
-        <audio className="rotate-wheel">
+        <audio className='rotate-wheel'>
           <source src={rotatewheel}></source>
         </audio>
-        <audio className="winitem-wheel">
+        <audio className='winitem-wheel'>
           <source src={winItemaudio}></source>
         </audio>
-        <audio id="coin-audio">
+        <audio id='coin-audio'>
           <source src={coin}></source>
         </audio>
       </Modal.Body>
