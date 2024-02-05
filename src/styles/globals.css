@@ -2253,6 +2253,17 @@ li#walletConnect {
 .spin-button.single-wheel {
   justify-content: center;
 }
+.current-streak {
+  position: absolute;
+  right: 10px;
+}
+.current-streak p {
+  margin: 0;
+}
+.current-streak p span {
+  color: #fbff14;
+  font-weight: 600;
+}
 .or-grid {
   width: 4%;
   text-align: center;
@@ -5875,6 +5886,9 @@ p.title-memo {
   .spin-win-text p {
     font-size: 20px !important;
   }
+  .spin-win-text-content {
+    align-items: flex-start;
+  }
 
   .spin-wheel-img {
     margin: 0;
@@ -5894,7 +5908,7 @@ p.title-memo {
      width: 75%;
   }
   .risk-grid p {
-    font-size: 13px;
+    font-size: 12px;
     margin: 0;
   }
   .or-grid span {
