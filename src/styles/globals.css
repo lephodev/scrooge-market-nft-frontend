@@ -2248,13 +2248,43 @@ li#walletConnect {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 0px 30px;
-  gap: 20px;
+  align-items: center;
+}
+.spin-button.single-wheel {
+  justify-content: center;
+}
+.or-grid {
+  width: 4%;
+  text-align: center;
+}
+.or-grid span {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fa0000;
+  text-transform: uppercase;
 }
 .risk-grid {
   text-align: center;
   width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
+.risk-grid img {
+  max-width: 220px;
+  height: 220px;
+  width: 100%;
+  object-fit: contain;
+}
+.risk-grid p {
+  height: 72px;
+}
+.spin-button.single-wheel .risk-grid img {
+  max-width: 250px;
+  height: 250px;
+}
 .spin-button button {
   background-color: #fbff14;
   border-radius: 26px;
@@ -2340,10 +2370,6 @@ li#walletConnect {
   padding: 10px 10px 40px 10px;
 }
 
-.spin-popup-content .spin-wheel img {
-  border-radius: 20px;
-}
-
 .spin-wheel-img {
   position: relative;
   display: flex;
@@ -2364,7 +2390,6 @@ li#walletConnect {
   font-size: 30px;
   font-weight: 700;
   color: #fbff14;
-  text-transform: uppercase;
 }
 /*********************** Footer *************************/
 
@@ -5730,11 +5755,6 @@ p.title-memo {
     width: 40%;
   }
 
-  .spin-popup-content .spin-wheel img {
-    max-width: 300px;
-    height: 300px;
-  }
-
   .spin-win-text p {
     font-size: 30px !important;
   }
@@ -5841,13 +5861,6 @@ p.title-memo {
   .dlNft-grid .erc721Card-4th-col {
     width: 200px;
   }
-
-  .spin-popup-content .spin-wheel img {
-    height: 235px;
-    max-width: 400px;
-    object-fit: cover;
-    width: 100%;
-  }
   .spin-page-content {
     padding-top: 30px;
   }
@@ -5869,13 +5882,23 @@ p.title-memo {
   }
   .spin-button {
     padding: 0px;
-    gap: 10px;
   }
   .risk-grid {
     width: 48%;
   }
+  .risk-grid img, .spin-button.single-wheel .risk-grid img {
+    max-width: 150px;
+    height: 150px;
+  }
+  .spin-button.single-wheel .risk-grid {
+     width: 75%;
+  }
   .risk-grid p {
     font-size: 13px;
+    margin: 0;
+  }
+  .or-grid span {
+    font-size: 16px;
   }
   .spin-button button {
     font-size: 14px;
