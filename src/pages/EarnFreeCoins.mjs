@@ -188,6 +188,13 @@ const EarnFreeCoins = () => {
                     <p>Pick one</p>
                   </div>
                 ) : null}
+                {user?.loyalitySpinCount !== 29 ? (
+                  <div className="current-streak">
+                    <p>
+                      Current streak : <span>{user?.loyalitySpinCount}</span>{" "}
+                    </p>
+                  </div>
+                ) : null}
                 <div
                   className={`spin-button ${
                     isWeeklyWheelActive && user?.loyalitySpinCount === 29
