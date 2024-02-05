@@ -349,9 +349,6 @@ body.modal-open {
   align-items: center;
 }
 
-.spin-popup-content img {
-  height: 220px;
-}
 
 .spin-win-popup::before {
   content: "";
@@ -978,9 +975,7 @@ body.modal-open {
 }
 
 @media only screen and (min-device-width: 280px) and (max-device-width: 991px) and (orientation: landscape) {
-  .spin-popup-content img {
-    height: 280px;
-  }
+
 
   .winning-text {
     display: none;
