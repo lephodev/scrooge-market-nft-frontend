@@ -1036,7 +1036,7 @@ span.wallet-user-name {
 .tab-btn {
   justify-content: center;
   gap: 12px;
-  display: flex;
+  display: none;
   align-items: center;
   margin: 20px 0px;
 }
@@ -2243,7 +2243,65 @@ li#walletConnect {
 }
 
 /* ********************** spin button ************************** */
+.spin-button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0px 30px;
+  align-items: center;
+}
+.spin-button.single-wheel {
+  justify-content: center;
+  padding-top: 5px;
+}
+.current-streak {
+  position: absolute;
+  right: 10px;
+}
+.current-streak p {
+  margin: 0;
+}
+.current-streak p span {
+  color: #fbff14;
+  font-weight: 600;
+}
+.or-grid {
+  width: 4%;
+  text-align: center;
+}
+.or-grid span {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fa0000;
+  text-transform: uppercase;
+}
+.risk-grid {
+  text-align: center;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
 
+.risk-grid img {
+  max-width: 220px;
+  height: 220px;
+  width: 100%;
+  object-fit: contain;
+}
+.risk-grid p {
+  height: 72px;
+}
+.spin-button.single-wheel .risk-grid img {
+  max-width: 250px;
+  height: 250px;
+}
+.big-wheel-label-grid img {
+  max-width: 150px !important;
+  width: 100% !important;
+  height: unset !important;
+}
 .spin-button button {
   background-color: #fbff14;
   border-radius: 26px;
@@ -2326,19 +2384,16 @@ li#walletConnect {
   margin: 20px auto;
   background: #232529;
   border-radius: 10px;
-  padding: 10px 40px 10px 10px;
-}
-
-.spin-popup-content .spin-wheel img {
-  border-radius: 20px;
+  padding: 10px 10px 40px 10px;
 }
 
 .spin-wheel-img {
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
+  width: 100%;
 }
 
 .spin-win-text-content {
@@ -2349,10 +2404,9 @@ li#walletConnect {
 }
 
 .spin-win-text p {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 700;
   color: #fbff14;
-  text-transform: uppercase;
 }
 /*********************** Footer *************************/
 
@@ -5718,11 +5772,6 @@ p.title-memo {
     width: 40%;
   }
 
-  .spin-popup-content .spin-wheel img {
-    max-width: 300px;
-    height: 300px;
-  }
-
   .spin-win-text p {
     font-size: 30px !important;
   }
@@ -5829,23 +5878,58 @@ p.title-memo {
   .dlNft-grid .erc721Card-4th-col {
     width: 200px;
   }
-
-  .spin-popup-content .spin-wheel img {
-    height: 250px;
-    max-width: 400px;
-    object-fit: cover;
-    width: 100%;
+  .spin-page-content {
+    padding-top: 30px;
+  }
+  .spin-page-content p.title-memo {
+    font-size: 16px;
+    line-height: 130%;
   }
   .spin-popup-content .spin-wheel {
     padding: 20px 10px;
+    padding-top: 15px;
   }
   .spin-win-text p {
     font-size: 20px !important;
   }
+  .spin-win-text-content {
+    align-items: flex-start;
+  }
 
   .spin-wheel-img {
-    margin: 0 20px;
+    margin: 0;
     flex-direction: column;
+  }
+  .spin-button {
+    padding: 0px;
+  }
+  .risk-grid {
+    width: 48%;
+  }
+  .risk-grid img, .spin-button.single-wheel .risk-grid img {
+    max-width: 150px;
+    height: 150px;
+  }
+  .big-wheel-label-grid img {
+    max-width: 120px !important;
+    padding: 20px 0px 10px;
+  }
+  .spin-button.single-wheel .risk-grid {
+     width: 75%;
+  }
+  .risk-grid p {
+    font-size: 12px;
+    margin: 0;
+  }
+  .current-streak p {
+    font-size: 14px;
+  }
+  .or-grid span {
+    font-size: 16px;
+  }
+  .spin-button button {
+    font-size: 14px;
+    padding: 10px 20px;
   }
   .asterisk-desc.cryptoTotoken ul {
     max-width: 85%;

@@ -1,0 +1,560 @@
+.spin-wrapper {
+  --wheel-font: "Lato", "Quicksand", sans-serif;
+  --wheel-size: 400px;
+  --wheel-slice-spacing: 50px;
+  --wheel-border-size: 5px;
+  --wheel-color: #00c2c7;
+  --neutral-color: white;
+  --PI: 3.14159265358979;
+  --nb-item: 0;
+  --item-nb: 0;
+  --selected-item: 0;
+  --nb-turn: 5;
+  --spinning-duration: 4s;
+  --reset-duration: 0;
+}
+
+.main-wheel-wrapper, .risk-wheel-wrapper, .loyalty-wheel-wrapper, .big-wheel-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.main-wheel-wrapper {
+  scale: 0.9;
+}
+/* .big-wheel-wrapper {
+  height: 650px;
+} */
+
+.main-wheel-wrapper::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: url("../../images/wheel/main-wheel/base.png");
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  margin-top: -36px;
+}
+.risk-wheel-wrapper::before {
+  content: "";
+  position: absolute;
+  height: 450px;
+  width: 450px;
+  background: url("../../images/wheel/risk-wheel/base.png");
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  margin-top: -35px;
+}
+.big-wheel-wrapper::before {
+  content: "";
+  position: absolute;
+  height: 450px;
+  width: 450px;
+  background: url("../../images/wheel/big-wheel/base.png");
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin-top: -28px;
+}
+.loyalty-wheel-wrapper::before {
+  content: "";
+  position: absolute;
+  height: 420px;
+  width: 420px;
+  background: url("../../images/wheel/loyalty-wheel/base.png");
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  margin-top: -34px;
+}
+
+
+.spin-wrapper .modal-content {
+  background: var(--primary-bg);
+}
+
+.spin-wrapper .modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 40px;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: -19px;
+  right: -19px;
+  padding: 12px;
+  background: var(--primary-color);
+  border-radius: 30px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Conteneur de la roue = cercle rose extérieur */
+.main-wheel-container, .big-wheel-container, .risk-wheel-container, .loyalty-wheel-container {
+  --wheel-font: "DejaVu Sans", sans-serif !important;
+  --wheel-size: 430px;
+  --wheel-slice-spacing: 50px;
+  --wheel-border-size: 5px;
+  --wheel-color: #00c2c7;
+  --neutral-color: white;
+  --PI: 3.14159265358979;
+  --nb-item: 0;
+  --item-nb: 0;
+  --selected-item: 0;
+  --nb-turn: 5;
+  --spinning-duration: 4s;
+  --reset-duration: 0;
+}
+.main-wheel-container, .big-wheel-container, .risk-wheel-container, .loyalty-wheel-container {
+  display: block;
+  position: relative;
+  box-sizing: content-box;
+  width: calc(var(--wheel-size) + 2 * var(--wheel-border-size));
+  height: calc(var(--wheel-size) + 2 * var(--wheel-border-size));
+  padding: 5px;
+  margin: auto;
+
+  border-radius: 50%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* for full arrow */
+.main-wheel-container::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 4;
+  transform: translateX(-50%);
+ 
+
+  background: url(../../images/wheel/main-wheel/marker.png) no-repeat;
+  background-size: 100%;
+  height: 270px;
+  width: 120px;
+  top: 0%;
+  transform: translateX(-50%);
+  left: 50%;
+}
+.big-wheel-container::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 4;
+  transform: translateX(-50%);
+
+  background: url(../../images/wheel/big-wheel/marker.png) no-repeat;
+  background-size: 100%;
+  height: 145px;
+  width: 72px;
+  top: 23%;
+  transform: translateX(-50%);
+  left: 50%;
+}
+.risk-wheel-container::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 4;
+  transform: translateX(-50%);
+
+  background: url(../../images/wheel/risk-wheel/marker.png) no-repeat;
+  background-size: 100%;
+  height: 240px;
+  width: 70px;
+  top: 0%;
+  transform: translateX(-50%);
+  left: 50%;
+}
+.loyalty-wheel-container::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 4;
+  transform: translateX(-50%);
+ 
+
+  background: url(../../images/wheel/loyalty-wheel/marker-1.png) no-repeat;
+  background-size: 100%;
+  height: 290px;
+  width: 168px;
+  top: -1%;
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+/* Roue */
+.main-wheel, .big-wheel, .risk-wheel, .loyalty-wheel {
+  display: block;
+  position: relative;
+  box-sizing: content-box;
+  margin: auto;
+  width: var(--wheel-size);
+  height: var(--wheel-size);
+  overflow: hidden;
+  border-radius: 50%;
+  transition: transform var(--reset-duration);
+  transform: rotate(-90deg);
+  cursor: pointer;
+  background: transparent;
+  z-index: 3;
+}
+/* for main circle */
+.main-wheel::before {
+  content: "";
+  position: absolute;
+  width: 348px;
+  height: 348px;
+  background: url(../../images/wheel/main-wheel/content.png) no-repeat;
+  background-position: center;
+  background-size: cover;
+  transform: translate(-50%, -50%) rotate(90deg);
+  top: 50%;
+  left: 50%;
+}
+/* for big circle */
+.big-wheel::before {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  background: url(../../images/wheel/big-wheel/content.png) no-repeat;
+  background-position: center;
+  background-size: cover;
+  transform: translate(-50%, -50%) rotate(90deg);
+  top: 50%;
+  left: 50%;
+}
+/* for risk circle */
+.risk-wheel::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background: url(../../images/wheel/risk-wheel/content.png) no-repeat;
+  background-position: center;
+  background-size: cover;
+  transform: translate(-50%, -50%) rotate(90deg);
+  top: 50%;
+  left: 50%;
+}
+/* for loyalty circle */
+.loyalty-wheel::before {
+  content: "";
+  position: absolute;
+  width: 290px;
+  height: 290px;
+  background: url(../../images/wheel/loyalty-wheel/content.png) no-repeat;
+  background-position: center;
+  background-size: cover;
+  transform: translate(-50%, -50%) rotate(90deg);
+  top: 50%;
+  left: 50%;
+}
+
+.main-wheel.spinning, .big-wheel.spinning, .risk-wheel.spinning, .loyalty-wheel.spinning {
+  transition: transform var(--spinning-duration);
+  transform: rotate(calc((var(--nb-turn) * 360deg + (-360deg * var(--selected-item) / var(--nb-item, 1))) - 90deg));
+  /* width: 450px;
+  height: 450px; */
+}
+/* .main-wheel.spinning, .big-wheel.spinning, .risk-wheel.spinning, .loyalty-wheel.spinning {
+  transition: transform var(--spinning-duration);
+  transform: rotate(
+    calc(
+      var(--nb-turn) * 360deg +
+        (-360deg * var(--selected-item) / var(--nb-item, 1)) - 16deg
+    )
+  );
+} */
+
+/* CSS For stand */
+.main-wheel-container::after  {
+  display: block;
+  position: absolute;
+  content: unset;
+  width: 100%;
+  height: 36%;
+  bottom: -2%;
+  left: 0;
+  transform: translate(0%, 50%);
+  background: url(../../images/wheel/main-wheel/main-stand.png) no-repeat;
+  background-size: 100%;
+  background-position: center;
+  scale: 0.6;
+}
+.big-wheel-container::after  {
+  display: block;
+  position: absolute;
+  content: unset;
+  width: 100%;
+  height: 65%;
+  bottom: 0%;
+  left: 0;
+  transform: translate(0%, 50%);
+  background: url(../../images/wheel/big-wheel/big-stand.png) no-repeat;
+  background-size: 100%;
+  background-position: center;
+  scale: 0.6;
+}
+
+
+ .risk-wheel-container::after  {
+  display: block;
+  position: absolute;
+  content: unset;
+  width: 100%;
+  height: 100%;
+  bottom: -7%;
+  left: 0;
+  transform: translate(0%, 50%);
+  background: url(../../images/wheel/risk-wheel/risk-stand.png) no-repeat;
+  background-size: 100%;
+  background-position: center;
+  scale: 0.7;
+}
+
+.loyalty-wheel-container::after  {
+  display: block;
+  position: absolute;
+  content: unset;
+  width: 100%;
+  height: 50%;
+  bottom: -6%;
+  left: 0;
+  transform: translate(0%, 50%);
+  background: url(../../images/wheel/loyalty-wheel/loyalty-stand.png) no-repeat;
+  background-size: 100%;
+  background-position: center;
+  scale: 0.5;
+}
+
+/* Element sur la roue */
+.main-wheel-item, .big-wheel-item, .risk-wheel-item, .loyalty-wheel-item {
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+
+  /* position de l'item */
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  transform-origin: center left;
+  transform: translateY(-50%)
+    rotate(calc(var(--item-nb) * (360deg / var(--nb-item, 1))));
+
+  /* texte */
+  color: #000;
+  text-align: center;
+  padding: 0 25px 0 50px;
+  font-family: var(--wheel-font);
+  font-size: 14px;
+}
+
+/* Background de l'élément = triangle rose plus clair */
+.main-wheel-item:before, .big-wheel-item:before, .risk-wheel-item:before, .loyalty-wheel-item:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-left: 0px;
+  opacity: 0.25;
+  border-left: solid transparent 0;
+}
+
+.wheel-bulb img {
+  width: 426px;
+  height: 426px;
+  position: absolute;
+  top: -var(--smallfont);
+  left: -13px;
+  -webkit-animation: fadeIn 1s infinite;
+  animation: fadeIn 1s infinite;
+  z-index: 2;
+}
+.spin-btn {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+  justify-content: center;
+  height: 60px;
+}
+
+.spin-btn img {
+  height: 60px;
+  cursor: pointer;
+  max-width: 170px;
+  width: 100%;
+}
+.spin-btn h6 {
+  margin: 0;
+  font-size: 20px;
+  font-family: "Righteous", cursive !important;
+  pointer-events: none;
+  color: #000;
+  padding-left: 30px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.spin-wrapper button {
+  width: 143px;
+  height: 42px;
+  background: linear-gradient(215.13deg, #04eef9 0.32%, #00adb5 99.95%), #00adb5;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: var(--smallfont);
+  line-height: 130%;
+  border: none;
+  margin-top: 20px;
+  z-index: 9;
+}
+
+img.spinTxt {
+  position: absolute;
+  top: 44%;
+  left: 40%;
+  z-index: 5;
+  width: 90px;
+  -webkit-animation: spinTxt 2s ease-in-out infinite;
+  animation: spinTxt 2s ease-in-out infinite;
+}
+
+@-webkit-keyframes spinTxt {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2) rotate(-9deg);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes spinTxt {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2) rotate(-9deg);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+@media screen and (max-width: 767px) {
+  .main-wheel-container, .big-wheel-container, .risk-wheel-container, .loyalty-wheel-container {
+    scale: 0.8;
+    left: 50%;
+    transform: translateX(-63%);
+  }
+  .big-wheel-container::after {
+    left: 12px;
+  }
+  .risk-wheel-wrapper {
+    scale: 0.75;
+  }
+.loyalty-wheel-wrapper {
+    scale: 0.9;
+  }
+  .risk-wheel-container::before {
+    width: 85px;
+    height: 289px;
+    top: -10%;
+  }
+  .loyalty-wheel::before {
+    width: 360px;
+    height: 360px;
+  }
+  .loyalty-wheel-container::before {
+    height: 350px;
+    width: 204px;
+    top: -13%;
+  }
+  .spin-btn img {
+    height: 70px;
+    max-width: 200px;
+    width: 100%;
+  }
+  .risk-wheel::before {
+    width: 400px;
+    height: 400px;
+  }
+  .big-wheel::before {
+    width: 280px;
+    height: 280px;
+  }
+  .big-wheel-container::before {
+    height: 165px;
+    width: 82px;
+    top: 19%;
+    transform: translateX(-50%);
+    left: 50%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  /* .main-wheel-container, .big-wheel-container, .risk-wheel-container, .loyalty-wheel-container {
+    scale: 0.7;
+    transform: translateX(-71%);
+  } */
+}

@@ -2,8 +2,6 @@ import { ConnectWallet } from "@thirdweb-dev/react";
 import { Modal } from "react-bootstrap";
 
 const ConnectWalletModel = ({ show, handleConnectWallet, handleConnect }) => {
-  console.log("showSigner", show);
-
   return (
     <div>
       {" "}
