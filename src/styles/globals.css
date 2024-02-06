@@ -2252,6 +2252,7 @@ li#walletConnect {
 }
 .spin-button.single-wheel {
   justify-content: center;
+  padding-top: 5px;
 }
 .current-streak {
   position: absolute;
@@ -2295,6 +2296,11 @@ li#walletConnect {
 .spin-button.single-wheel .risk-grid img {
   max-width: 250px;
   height: 250px;
+}
+.big-wheel-label-grid img {
+  max-width: 150px !important;
+  width: 100% !important;
+  height: unset !important;
 }
 .spin-button button {
   background-color: #fbff14;
@@ -5904,12 +5910,19 @@ p.title-memo {
     max-width: 150px;
     height: 150px;
   }
+  .big-wheel-label-grid img {
+    max-width: 120px !important;
+    padding: 20px 0px 10px;
+  }
   .spin-button.single-wheel .risk-grid {
      width: 75%;
   }
   .risk-grid p {
     font-size: 12px;
     margin: 0;
+  }
+  .current-streak p {
+    font-size: 14px;
   }
   .or-grid span {
     font-size: 16px;
