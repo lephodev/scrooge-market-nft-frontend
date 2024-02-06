@@ -7,7 +7,7 @@ import { useState } from "react";
 // import coinicon from "../../assets/animation/collect-coin.json";
 // import coinicon from "../../images/animation/collect-coin.json";
 
-const WinPopup = ({ setWinPopup, winAmount }) => {
+const WinPopup = ({ winAmount }) => {
   const [coin, setCoin] = useState(false);
 
   const handleCollect = () => {
@@ -22,11 +22,15 @@ const WinPopup = ({ setWinPopup, winAmount }) => {
     }, 700);
   };
 
-  // const coinanim = {
-  //   loop: true,
-  //   autoplay: true,
-  //   animationData: coinicon,
-  // };
+  const displayToken = (token) => {
+    if (typeof token === "string" && token === "Big wheel") {
+      return winAmount?.token;
+    } else if (typeof token === "string" && token.startsWith("Green")) {
+      return "";
+    } else {
+      return `${winAmount?.token}ST`;
+    }
+  };
 
   return (
     <div className='spin-win-popup winning-animation-win'>
@@ -35,9 +39,6 @@ const WinPopup = ({ setWinPopup, winAmount }) => {
           <div className='wining-image'>
             <img src={winn} alt='winimg' />
             <div className='winning-amount-ribbon'>
-              {/* <p>
-                {`${winAmount?.token} ST + ${numFormatter(winAmount?.gc)} GC`}
-              </p> */}
               <p>YOU WIN</p>
             </div>
             <div className='pyro'>
@@ -46,21 +47,18 @@ const WinPopup = ({ setWinPopup, winAmount }) => {
             </div>
           </div>
 
-          <div className='winning-amount'> {`${winAmount?.token} ST`}</div>
-          {/*<div className="winning-text">
-          Great, You are won and just got the huge rewards
-        </div>*/}
-          <div className='winning-btn'>
-            <div className='win-btn' onClick={handleCollect}>
-              {/* <img
-            src={buttonimg}
-            alt="btn"
-            onClick={handleCollect}
-            role="presentation"
-          /> */}
-              <p>COLLECT</p>
-            </div>
+          <div className='winning-amount'>
+            {" "}
+            {displayToken(winAmount?.token)}
           </div>
+
+          {displayToken(winAmount?.token) && (
+            <div className='winning-btn'>
+              <div className='win-btn' onClick={handleCollect}>
+                <p>COLLECT</p>
+              </div>
+            </div>
+          )}
 
           {coin ? (
             <div className='collect-coin'>

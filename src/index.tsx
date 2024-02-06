@@ -113,7 +113,6 @@ export default function App() {
       // const apiUrl = `http://api.vpnblocker.net/v2/json/${CurrentIp}`;
       const serverUrl = `/auth/getgeolocationDetails`;
       const response = await authInstance().get(serverUrl);
-      console.log("response", response);
       const ipAddressObject = {
         [Object.keys(response.data)[1]]:
           response.data[Object.keys(response.data)[1]],
@@ -153,8 +152,6 @@ export default function App() {
       const serverUrl = `/auth/validate_VPN`;
       const checkVPNRes = await authInstance().get(serverUrl);
       setIsVPNEnable(checkVPNRes?.data?.vpnStatus);
-
-      console.log("checkVPNRes", checkVPNRes);
     } catch (error) {
       console.log("err", error);
     }
