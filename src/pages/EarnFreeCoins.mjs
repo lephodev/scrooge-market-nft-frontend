@@ -16,7 +16,7 @@ import regularThumbnail from "../images/wheel/main-wheel/main-thumbnail.png";
 import riskThumbnail from "../images/wheel/risk-wheel/risk-thumbnail.png";
 import bigThumbnail from "../images/wheel/big-wheel/big-thumbnail.png";
 import loyaltyThumbnail from "../images/wheel/loyalty-wheel/loyalty-thumbnail.png";
-
+import bigText from "../images/wheel/big-wheel/Big-Wheel-Text.webp";
 const EarnFreeCoins = () => {
   const { user, dateTimeNow } = useContext(AuthContext);
   const [showRoulette, setShowRoulette] = useState(false);
@@ -280,24 +280,35 @@ const EarnFreeCoins = () => {
                   )}
 
                   {isWeeklyWheelActive ? (
-                    <div className="risk-grid">
-                      <img
-                        src={bigThumbnail}
-                        alt="big-thumbnail"
-                        className="img-fulid"
-                      />
-                      <p>
-                        Thank you for being a loyal Scrooge user, you have been
-                        rewarded 7 days of access to the Big Wheel!{" "}
-                      </p>
-                      <button
-                        disabled={!canSpin}
-                        onClick={() => handleOpenRoulette("weekly")}
-                      >
-                        {" "}
-                        {canSpin ? "Weekly Wheel" : spinTimer}
-                      </button>
-                    </div>
+                    <>
+                      <div className="risk-grid">
+                        <div className="big-wheel-image-grid">
+                          <div className="big-wheel-label-grid">
+                            <img
+                              src={bigText}
+                              alt="big-wheel-label"
+                              className="img-fluid"
+                            />
+                          </div>
+                          <img
+                            src={bigThumbnail}
+                            alt="big-thumbnail"
+                            className="img-fulid"
+                          />
+                        </div>
+                        <p>
+                          Thank you for being a loyal Scrooge user, you have
+                          been rewarded 7 days of access to the Big Wheel!{" "}
+                        </p>
+                        <button
+                          disabled={!canSpin}
+                          onClick={() => handleOpenRoulette("weekly")}
+                        >
+                          {" "}
+                          {canSpin ? "Big Wheel " : spinTimer}
+                        </button>
+                      </div>
+                    </>
                   ) : (
                     ""
                   )}
