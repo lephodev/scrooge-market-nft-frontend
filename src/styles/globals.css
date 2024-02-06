@@ -2243,6 +2243,9 @@ li#walletConnect {
 }
 
 /* ********************** spin button ************************** */
+.free-coin-page .loading {
+  position: relative;
+}
 .spin-button {
   display: flex;
   flex-wrap: wrap;

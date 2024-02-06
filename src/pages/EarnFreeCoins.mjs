@@ -156,18 +156,19 @@ const EarnFreeCoins = () => {
 
   return (
     <Layout>
-      {globalLoader && (
-        <div className='loading'>
-          <div className='loading-img-div'>
-            <img src={LoadingPoker} alt='game' className='imageAnimation' />
+      <div className="container free-coin-page">
+        {globalLoader && (
+          <div className="loading">
+            <div className="loading-img-div">
+              <img src={LoadingPoker} alt="game" className="imageAnimation" />
+            </div>
           </div>
-        </div>
-      )}
-      <div className='container'>
-        <div className='tab-btn'>
+        )}
+        <div className="tab-btn">
           <Button
             className={`${key === "dailyClaims" ? "active-btn" : ""}`}
-            onClick={() => setKey("dailyClaims")}>
+            onClick={() => setKey("dailyClaims")}
+          >
             Daily Claims
           </Button>
         </div>
@@ -209,22 +210,24 @@ const EarnFreeCoins = () => {
         )}
 
         {key === "dailyClaims" ? (
-          <div className='spin-popup-content spin-page-content'>
-            <p className='title-memo'>
-              Daily wheel spin coins have a one times play through requirement
-              and an expiration of 7 days if not used.
-            </p>
+          <div className="spin-popup-content spin-page-content">
+            {!globalLoader && (
+              <p className="title-memo">
+                Daily wheel spin coins have a one times play through requirement
+                and an expiration of 7 days if not used.
+              </p>
+            )}
             {!globalLoader && (
               <>
-                <div className='spin-wheel'>
-                  <div className='spin-win-text-content'>
+                <div className="spin-wheel">
+                  <div className="spin-win-text-content">
                     {!isWeeklyWheelActive && user?.loyalitySpinCount !== 29 ? (
-                      <div className='spin-win-text'>
+                      <div className="spin-win-text">
                         <p>Pick one</p>
                       </div>
                     ) : null}
                     {user?.loyalitySpinCount !== 29 ? (
-                      <div className='current-streak'>
+                      <div className="current-streak">
                         <p>
                           Current streak :{" "}
                           <span>{user?.loyalitySpinCount}</span>{" "}
@@ -240,20 +243,22 @@ const EarnFreeCoins = () => {
                           : user?.loyalitySpinCount === 29
                           ? "single-wheel"
                           : ""
-                      }`}>
+                      }`}
+                    >
                       {!isWeeklyWheelActive ? (
                         <>
                           {user?.loyalitySpinCount !== 29 ? (
-                            <div className='risk-grid'>
+                            <div className="risk-grid">
                               <img
                                 src={regularThumbnail}
-                                alt='regular-thumbnail'
-                                className='img-fulid'
+                                alt="regular-thumbnail"
+                                className="img-fulid"
                               />
                               <p>Spin me for guaranteed prizing </p>
                               <button
                                 disabled={!canSpin}
-                                onClick={() => handleOpenRoulette("normal")}>
+                                onClick={() => handleOpenRoulette("normal")}
+                              >
                                 {" "}
                                 {canSpin ? "Regular Wheel" : spinTimer}
                               </button>
@@ -262,16 +267,16 @@ const EarnFreeCoins = () => {
                             ""
                           )}
                           {user?.loyalitySpinCount !== 29 ? (
-                            <div className='or-grid'>
+                            <div className="or-grid">
                               <span>or</span>
                             </div>
                           ) : null}
                           {user?.loyalitySpinCount !== 29 ? (
-                            <div className='risk-grid'>
+                            <div className="risk-grid">
                               <img
                                 src={riskThumbnail}
-                                alt='risk-thumbnail'
-                                className='img-fulid'
+                                alt="risk-thumbnail"
+                                className="img-fulid"
                               />
                               <p>
                                 Take a risk for higher odds at the big wheel.
@@ -279,7 +284,8 @@ const EarnFreeCoins = () => {
                               </p>
                               <button
                                 disabled={!canSpin}
-                                onClick={() => handleOpenRoulette("risk")}>
+                                onClick={() => handleOpenRoulette("risk")}
+                              >
                                 {" "}
                                 {canSpin ? "Take a Risk" : spinTimer}
                               </button>
@@ -292,11 +298,11 @@ const EarnFreeCoins = () => {
                         ""
                       )}
                       {user?.loyalitySpinCount === 29 && (
-                        <div className='risk-grid'>
+                        <div className="risk-grid">
                           <img
                             src={loyaltyThumbnail}
-                            alt='loyalty-thumbnail'
-                            className='img-fulid'
+                            alt="loyalty-thumbnail"
+                            className="img-fulid"
                           />
                           <p>
                             Congrats on 30 straight days of spinning, here is a
@@ -304,7 +310,8 @@ const EarnFreeCoins = () => {
                           </p>
                           <button
                             disabled={!canSpin}
-                            onClick={() => handleOpenRoulette("loyality")}>
+                            onClick={() => handleOpenRoulette("loyality")}
+                          >
                             {" "}
                             {canSpin ? "Loyality Wheel" : spinTimer}
                           </button>
@@ -313,19 +320,19 @@ const EarnFreeCoins = () => {
 
                       {isWeeklyWheelActive ? (
                         <>
-                          <div className='risk-grid'>
-                            <div className='big-wheel-image-grid'>
-                              <div className='big-wheel-label-grid'>
+                          <div className="risk-grid">
+                            <div className="big-wheel-image-grid">
+                              <div className="big-wheel-label-grid">
                                 <img
                                   src={bigText}
-                                  alt='big-wheel-label'
-                                  className='img-fluid'
+                                  alt="big-wheel-label"
+                                  className="img-fluid"
                                 />
                               </div>
                               <img
                                 src={bigThumbnail}
-                                alt='big-thumbnail'
-                                className='img-fulid'
+                                alt="big-thumbnail"
+                                className="img-fulid"
                               />
                             </div>
                             <p>
@@ -334,7 +341,8 @@ const EarnFreeCoins = () => {
                             </p>
                             <button
                               disabled={!canSpin}
-                              onClick={() => handleOpenRoulette("weekly")}>
+                              onClick={() => handleOpenRoulette("weekly")}
+                            >
                               {" "}
                               {canSpin ? "Big Wheel " : spinTimer}
                             </button>
@@ -352,13 +360,13 @@ const EarnFreeCoins = () => {
         ) : (
           ""
         )}
-        <div className='tabs-claim'>
+        <div className="tabs-claim">
           {key === "dailyClaims" ? (
-            <div className='tab-claims'>
+            <div className="tab-claims">
               <DailyRewards />
             </div>
           ) : key === "monthlyClaims" ? (
-            <div className='tab-claims'>
+            <div className="tab-claims">
               <HolderClaimChips />
             </div>
           ) : key === "duckyLuckClaims" ? (
@@ -395,7 +403,7 @@ const EarnFreeCoins = () => {
             <ShowBottomNavCards />
           </div>
         </div>
-        <div className='flex-row' style={{ margin: "50px auto 0px" }}>
+        <div className="flex-row" style={{ margin: "50px auto 0px" }}>
           <ShowBottomNavCards />
         </div>
       </div>
