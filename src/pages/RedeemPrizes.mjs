@@ -199,7 +199,7 @@ function RedeemPrizes() {
                   </div>
 
                   <div className='new-btn'>
-                    <button onClick={() => filterPrizes("Fiat")}>Fiat</button>
+                    <button onClick={() => filterPrizes("Fiat")}>Cash</button>
                   </div>
                 </div>
                 {isMismatched && address ? (
