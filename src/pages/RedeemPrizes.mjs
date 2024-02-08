@@ -172,9 +172,16 @@ function RedeemPrizes() {
                 <div className='prizes-chip-count m-0'>
                   {user ? (
                     <>
-                      <h3>Redeemable Balance: {parseInt(user?.wallet)}</h3>
                       <h3>
-                        Redeemable Value: ${(user?.wallet / 100).toFixed(2)}
+                        Redeemable Balance:{" "}
+                        {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
+                      </h3>
+                      <h3>
+                        Redeemable Value: $
+                        {(
+                          user?.wallet / 100 -
+                          user?.nonWithdrawableAmt / 100
+                        ).toFixed(2)}
                       </h3>
                       <a href={Pdf} target='blank' className='pdf-down'>
                         {" "}
