@@ -176,6 +176,13 @@ function RedeemPrizes() {
                         Redeemable Balance:{" "}
                         {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
                       </h3>
+                      <h3>
+                        Redeemable Value: $
+                        {(
+                          user?.wallet / 100 -
+                          user?.nonWithdrawableAmt / 100
+                        ).toFixed(2)}
+                      </h3>
                       <a href={Pdf} target='blank' className='pdf-down'>
                         {" "}
                         How it works! Click here to download pdf.
