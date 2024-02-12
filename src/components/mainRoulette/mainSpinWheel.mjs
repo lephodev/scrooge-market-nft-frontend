@@ -25,7 +25,7 @@ function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
         const clientSeed = getClientSeed();
         // console.log({ clientSeed });
         setSpinButtonDisable(true);
-        const response = await marketPlaceInstance().get("/gameResult", {
+        const response = await (await marketPlaceInstance()).get("/gameResult", {
           params: { clientSeed },
         });
         console.log("==>>>", response);

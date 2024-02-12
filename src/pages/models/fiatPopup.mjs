@@ -148,7 +148,7 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
         return;
       }
       setLoading(true);
-      marketPlaceInstance()
+      (await marketPlaceInstance())
         .post(`/WithdrawRequestWithFiat`, values)
         .then((data) => {
           console.log("redeemdata", data);

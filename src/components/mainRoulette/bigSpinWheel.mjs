@@ -24,7 +24,7 @@ function BigSpinWheel({ items, setWinPopup }) {
         const clientSeed = getClientSeed();
         // console.log({ clientSeed });
         setSpinButtonDisable(true);
-        const response = await marketPlaceInstance().get(
+        const response = await (await marketPlaceInstance()).get(
           "/gameResultForBigWheel",
           {
             params: { clientSeed },

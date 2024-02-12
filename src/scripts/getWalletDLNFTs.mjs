@@ -47,10 +47,10 @@ export default function GetWalletDLNFTs() {
 
   const [claimDateArray, setClaimDateArray] = useState([]);
 
-  const claimTokens = (token_id) => {
+  const claimTokens = async (token_id) => {
     setBuyLoading(true);
     try {
-      marketPlaceInstance()
+      (await marketPlaceInstance())
         .get(`/claimDLTokens/${address}/${user?.id}/${token_id}`)
         .then(async (data) => {
           mapClaimDates(ownedNFTs);
@@ -67,7 +67,7 @@ export default function GetWalletDLNFTs() {
   };
 
   async function getNextClaimDate(token_id) {
-    await marketPlaceInstance()
+    await (await marketPlaceInstance())
       .get(`/getNextClaimDate/${address}/dl/${user?.id}/${token_id}`)
       .then(async (data) => {
         if (data.data.success) {
@@ -85,9 +85,9 @@ export default function GetWalletDLNFTs() {
     return nextClaimDate;
   }
 
-  const getUserDataInstant = () => {
+  const getUserDataInstant = async () => {
     const basicAuthToken = validateToken();
-    authInstance()
+    (await authInstance())
       .get("/auth/check-auth", {
         headers: {
           Authorization: basicAuthToken,

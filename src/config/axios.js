@@ -9,40 +9,49 @@ export const getToken = () => {
   return tokenData;
 };
 
-export const getAuthorizationHeader = () => {
-  const basicAuthToken = validateToken();
+export const getAuthorizationHeader = async () => {
+  const basicAuthToken = await validateToken();
   return basicAuthToken;
 };
 
-export const marketPlaceInstance = () =>
-  axios.create({
+export const marketPlaceInstance = async () => {
+  const token = await getAuthorizationHeader();
+  return axios.create({
     baseURL: `${server}/api`,
     headers: {
-      Authorization: getAuthorizationHeader(),
+      Authorization: token,
       "Permissions-Policy": "geolocation=*",
     },
     withCredentials: true,
     credentials: "include",
   });
+}
 
-export const kycInstance = () =>
-  axios.create({
+
+export const kycInstance = async () => {
+  const token = await getAuthorizationHeader();
+  return axios.create({
     baseURL: `${scroogeServer}/v1`,
     headers: {
-      Authorization: getAuthorizationHeader(),
+      Authorization: token,
       "Permissions-Policy": "geolocation=*",
     },
     withCredentials: true,
     credentials: "include",
   });
+}
+  
 
-export const authInstance = () =>
-  axios.create({
+export const authInstance = async () => {
+  const token = await getAuthorizationHeader();
+  return axios.create({
     baseURL: `${scroogeServer}/v1`,
     headers: {
-      Authorization: getAuthorizationHeader(),
+      Authorization: token,
       "Permissions-Policy": "geolocation=*",
     },
     withCredentials: true,
     credentials: "include",
   });
+}
+  

@@ -18,7 +18,7 @@ export async function CheckDLOnPage(address) {
   //check if user has DL (send to backend)
   let bal = 0
   try {
-    await marketPlaceInstance()
+    await (await marketPlaceInstance())
       .get(`/getWalletDLBalance/${address}`)
       .then(res => {
         if (res.data >= 0) {
