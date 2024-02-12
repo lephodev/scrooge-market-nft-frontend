@@ -34,11 +34,11 @@ export default function BuyTokenFromOGJR() {
     let access_token = cookies.token;
     (await authInstance())
       .get("/auth/check-auth", {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-          "Permissions-Policy": "geolocation=*",
+        // headers: {
+        //   Authorization: `Bearer ${access_token}`,
+        //   "Permissions-Policy": "geolocation=*",
 
-        },
+        // },
       })
       .then((res) => {
         if (res.data.user) {

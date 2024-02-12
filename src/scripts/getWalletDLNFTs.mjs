@@ -17,7 +17,7 @@ import AuthContext from "../context/authContext.ts";
 import { scroogeClient } from "../config/keys.js";
 import { authInstance, marketPlaceInstance } from "../config/axios.js";
 import { toast } from "react-toastify";
-import { validateToken } from "../utils/dateUtils.mjs";
+// import { validateToken } from "../utils/dateUtils.mjs";
 
 export default function GetWalletDLNFTs() {
   const { user, setUser } = useContext(AuthContext);
@@ -86,12 +86,12 @@ export default function GetWalletDLNFTs() {
   }
 
   const getUserDataInstant = async () => {
-    const basicAuthToken = validateToken();
+    // const basicAuthToken = validateToken();
     (await authInstance())
       .get("/auth/check-auth", {
-        headers: {
-          Authorization: basicAuthToken,
-        },
+        // headers: {
+        //   Authorization: basicAuthToken,
+        // },
       })
       .then((res) => {
         if (res.data.user) {

@@ -37,6 +37,7 @@ const getUtcTime = async () => {
 export const validateToken = async () => {
   try {
     const utcDtTime = await getUtcTime();
+    console.log("utcDtTime=====>", utcDtTime);
     // const getPass = new Date().toISOString();
     const newDt = new Date(utcDtTime).getTime();
     const base64Credentials = btoa(`scr@@ze:${newDt}`);

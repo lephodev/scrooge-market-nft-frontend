@@ -44,7 +44,7 @@ import vpnbanner from "./images/vpn-banner.webp";
 import notaccess from "./images/not-access.webp";
 
 import PaymentCustom from "./pages/PaymentCustom.mjs";
-import { validateToken } from "./utils/dateUtils.mjs";
+// import { validateToken } from "./utils/dateUtils.mjs";
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
@@ -76,12 +76,12 @@ export default function App() {
   // call this function when you want to authenticate the user
   const login = async () => {
     setLoading(true);
-    const basicAuthToken = validateToken();
+    // const basicAuthToken = validateToken();
     (await authInstance())
       .get("/auth/check-auth", {
-        headers: {
-          Authorization: basicAuthToken,
-        },
+        // headers: {
+        //   Authorization: basicAuthToken,
+        // },
       })
       .then((res: any) => {
         // console.log(convertedData)

@@ -87,10 +87,10 @@ export default function CryptoToGC() {
     let access_token = cookies.token;
     (await authInstance())
       .get("/auth", {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-          "Permissions-Policy": "geolocation=*",
-        },
+        // headers: {
+        //   Authorization: `Bearer ${access_token}`,
+        //   "Permissions-Policy": "geolocation=*",
+        // },
       })
       .then((res) => {
         if (res.data.user) {
