@@ -13,7 +13,7 @@ import { authInstance } from "../config/axios.js";
 import scroogelogo from "../images/scroogeCasinoLogo.png";
 import FiatPopup from "./models/fiatPopup.mjs";
 import Pdf from "../images/Manual.pdf";
-import { validateToken } from "../utils/dateUtils.mjs";
+// import { validateToken } from "../utils/dateUtils.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import {
   useNetworkMismatch,
@@ -75,12 +75,12 @@ function RedeemPrizes() {
   };
 
   const getUserDataInstant = async () => {
-    const basicAuthToken = validateToken();
+    // const basicAuthToken = validateToken();
     (await authInstance())
       .get("/auth/check-auth", {
-        headers: {
-          Authorization: basicAuthToken,
-        },
+        // headers: {
+        //   Authorization: basicAuthToken,
+        // },
       })
       .then((res) => {
         if (res.data.user) {
