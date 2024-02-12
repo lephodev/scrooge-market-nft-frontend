@@ -97,7 +97,7 @@ export default function MyWallet() {
       });
   }
 
-  const handleMarkRedeemed = (trans_id) => {
+  const handleMarkRedeemed = async (trans_id) => {
     (await marketPlaceInstance())
       .get(`/markMerchCouponRedeemed/${trans_id}/${user.id}`)
       .then((res) => {
@@ -106,7 +106,7 @@ export default function MyWallet() {
       });
   };
 
-  const getUserRedeemed = () => {
+  const getUserRedeemed = async () => {
     //console.log('user: ', user[0]);
     (await marketPlaceInstance())
       .get(`/getUserRedeemed/${user.id}`)

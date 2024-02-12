@@ -109,7 +109,7 @@ function HolderClaimChips() {
   //   setShowSigner(true);
   // };
 
-  const claimTokens = (signature) => {
+  const claimTokens = async (signature) => {
     console.log("showowoowo");
     if (user?.isBlockWallet) {
       return toast.error(`Your wallet blocked by admin`, { toastId: "A" });

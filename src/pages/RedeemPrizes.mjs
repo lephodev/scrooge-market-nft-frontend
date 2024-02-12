@@ -74,7 +74,7 @@ function RedeemPrizes() {
     }
   };
 
-  const getUserDataInstant = () => {
+  const getUserDataInstant = async () => {
     const basicAuthToken = validateToken();
     (await authInstance())
       .get("/auth/check-auth", {

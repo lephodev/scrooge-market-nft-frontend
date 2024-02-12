@@ -29,7 +29,7 @@ const CryptoWithdrawPopup = ({ getUserDataInstant }) => {
     resolver: yupResolver(fastWithdraw),
   });
 
-  const WithdrawRequest = (values) => {
+  const WithdrawRequest = async (values) => {
     try {
       console.log("values--->", values);
       setPurchaseAmount(values?.amount);
