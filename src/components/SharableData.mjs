@@ -48,7 +48,7 @@ export default function SharableData() {
   const [, /* allMessages */ setAllMessages] = useState([]);
   const [messages, setMessages] = useState([]);
   const [randomMessage, setRandomMessage] = useState([]);
-  const getMessages = () => {
+  const getMessages = async () => {
     try {
       (await marketPlaceInstance())
         .get(`/getSharableMessages`)
@@ -63,7 +63,7 @@ export default function SharableData() {
     }
   };
 
-  const getSocialShare = () => {
+  const getSocialShare = async () => {
     try {
       (await marketPlaceInstance())
         .get(`/getSocialShare/${user?.id}`)

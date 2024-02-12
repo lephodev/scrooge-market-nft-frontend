@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-vars */
 import { useState, useContext, useEffect } from "react";
 import Layout from "./Layout.mjs";
@@ -29,7 +30,7 @@ export default function BuyTokenFromOGJR() {
   const OGWalletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS
   const JRWalletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS
 
-  const getUserDataInstant = () => {
+  const getUserDataInstant = async () => {
     let access_token = cookies.token;
     (await authInstance())
       .get("/auth/check-auth", {
@@ -76,10 +77,9 @@ export default function BuyTokenFromOGJR() {
 
       sdk.wallet
         .transfer(walletAddress, cryptoAmount, contractAddresss,)
-        .then((txResult) => {
+        .then( async (txResult) => {
           const {transactionHash}=txResult?.receipt||{}
-          (await marketPlaceInstance())
-            .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}/${transactionHash}`)
+          (await marketPlaceInstance()).get(`convertCryptoToToken/${user?.id}/${address}/${tokens}/${transactionHash}`)
             .then((response) => {
               setBuyLoading(false);
               if (response.data.success) {

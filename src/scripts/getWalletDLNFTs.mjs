@@ -47,7 +47,7 @@ export default function GetWalletDLNFTs() {
 
   const [claimDateArray, setClaimDateArray] = useState([]);
 
-  const claimTokens = (token_id) => {
+  const claimTokens = async (token_id) => {
     setBuyLoading(true);
     try {
       (await marketPlaceInstance())
@@ -85,7 +85,7 @@ export default function GetWalletDLNFTs() {
     return nextClaimDate;
   }
 
-  const getUserDataInstant = () => {
+  const getUserDataInstant = async () => {
     const basicAuthToken = validateToken();
     (await authInstance())
       .get("/auth/check-auth", {
