@@ -50,7 +50,7 @@ export default function SharableData() {
   const [randomMessage, setRandomMessage] = useState([]);
   const getMessages = () => {
     try {
-      marketPlaceInstance()
+      (await marketPlaceInstance())
         .get(`/getSharableMessages`)
         .then((data) => {
           if (data.data.success) {
@@ -65,7 +65,7 @@ export default function SharableData() {
 
   const getSocialShare = () => {
     try {
-      marketPlaceInstance()
+      (await marketPlaceInstance())
         .get(`/getSocialShare/${user?.id}`)
         .then((data) => {
           if (data.data.success) {
@@ -92,7 +92,7 @@ export default function SharableData() {
   //   const uri = "https://mozilla.org/?x=шеллы";
   //   const encoded = encodeURIComponent(uri);
   //   try {
-  //     marketPlaceInstance()
+  //     (await marketPlaceInstance())
   //       .get(`/getShortLink/${encoded}`)
   //       .then((data) => {
   //         //console.log("short link: ", data.data);
@@ -151,7 +151,7 @@ export default function SharableData() {
   //   const prompt =
   //     "Give me a tweet about Scrooge Casino, an online casino where you can win awesome prizes playing live poker, blackjack, slots, and other games.";
   //   try {
-  //     marketPlaceInstance()
+  //     (await marketPlaceInstance())
   //       .get(`/getAIMessage/${prompt}/${user?.id}/message`)
   //       .then((data) => {
   //         //console.log("getAIMessage: ", data.data);
@@ -185,7 +185,7 @@ export default function SharableData() {
   // const clickevt=(message_id)=>{
   //   console.count("ggg");
   //   try {
-  //     marketPlaceInstance()
+  //     (await marketPlaceInstance())
   //     .get(`/shareReward/${affUser?.data?.user_id}/${message_id}`)
   //       .then((data) => {
   //       console.log("shareableamessage", data);

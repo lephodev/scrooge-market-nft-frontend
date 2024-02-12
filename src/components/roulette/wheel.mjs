@@ -27,7 +27,7 @@ export default class Wheel extends React.Component {
         const clientSeed = getClientSeed();
         // console.log({ clientSeed });
         this.setState({ spinButtonDisable: true });
-        const response = await marketPlaceInstance().get("/gameResult", {
+        const response = await (await marketPlaceInstance()).get("/gameResult", {
           params: { clientSeed },
         });
         // console.log("==>>>", response);

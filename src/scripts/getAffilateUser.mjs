@@ -5,7 +5,7 @@ export default async function getAffiliateUser(user_id) {
   let affilateUser;
   try {
 
-    await marketPlaceInstance()
+    await (await marketPlaceInstance())
       .get(`/getAffiliateUser/${user_id}`)
       .then((data) => {
         affilateUser = data.data;
@@ -24,7 +24,7 @@ export async function createAffiliateUser(user_id) {
     let resp;
     try {
       const res = await Axios.get('https://geolocation-db.com/json/');
-      await marketPlaceInstance()
+      await (await marketPlaceInstance())
         .get(`/createAffiliateUser/${user_id}/${res.data.IPv4}`)
         .then((data) => {
           //console.log("data: ", data.data);

@@ -23,7 +23,7 @@ export default function AffiliateLeaderboard() {
 
   const getAffLeadersByCount = async (limit = 10, days = 0) => {
     try {
-      const data = await marketPlaceInstance().get(
+      const data = await (await marketPlaceInstance()).get(
         `/getAffLeadersByCount/${limit}/${days}`
       );
       // console.log("getbycount", data);
@@ -40,7 +40,7 @@ export default function AffiliateLeaderboard() {
 
   const getAffLeadersByTokens = async (limit = 10, days = 0) => {
     try {
-      const data = await marketPlaceInstance().get(
+      const data = await (await marketPlaceInstance()).get(
         `/getAffLeadersByTokens/${limit}/${days}`
       );
       if (data.data.success) {
@@ -56,7 +56,7 @@ export default function AffiliateLeaderboard() {
 
   const getAffLeadersHottestNewcomers = async (limit = 10, days = 7) => {
     try {
-      const data = await marketPlaceInstance().get(
+      const data = await (await marketPlaceInstance()).get(
         `/getAffLeadersByTokens/${limit}/${days}`
       );
 
@@ -74,7 +74,7 @@ export default function AffiliateLeaderboard() {
 
   const getAffLeadersMonthlyMovers = async (limit = 10, days = 30) => {
     try {
-      const data = await marketPlaceInstance().get(
+      const data = await (await marketPlaceInstance()).get(
         `/getAffLeadersByTokens/${limit}/${days}`
       );
       if (data.data.success) {
@@ -90,7 +90,7 @@ export default function AffiliateLeaderboard() {
 
   async function getAffLeadersTopSales(type = "order", limit = 10, days = 0) {
     try {
-      marketPlaceInstance()
+      (await marketPlaceInstance())
         .get(`/getAffLeadersByType/${type}/${limit}/${days}`)
         .then((data) => {
           if (typeof data.data !== "string")
@@ -108,7 +108,7 @@ export default function AffiliateLeaderboard() {
     days = 0
   ) {
     try {
-      const data = await marketPlaceInstance().get(
+      const data = await (await marketPlaceInstance()).get(
         `/getAffLeadersByType/${type}/${limit}/${days}`
       );
       //console.log("getAffLeadersByTokens: ", data.data);

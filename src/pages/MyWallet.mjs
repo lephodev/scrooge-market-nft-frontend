@@ -49,7 +49,7 @@ export default function MyWallet() {
 
   async function checkToken() {
     try {
-      marketPlaceInstance()
+      (await marketPlaceInstance())
         .get(`/getUserRedeemed/${user.id}`)
         .then((data) => {
           //console.log('data: ', data);
@@ -98,7 +98,7 @@ export default function MyWallet() {
   }
 
   const handleMarkRedeemed = (trans_id) => {
-    marketPlaceInstance()
+    (await marketPlaceInstance())
       .get(`/markMerchCouponRedeemed/${trans_id}/${user.id}`)
       .then((res) => {
         //console.log('handle: ', res);
@@ -108,7 +108,7 @@ export default function MyWallet() {
 
   const getUserRedeemed = () => {
     //console.log('user: ', user[0]);
-    marketPlaceInstance()
+    (await marketPlaceInstance())
       .get(`/getUserRedeemed/${user.id}`)
       .then((data) => {
         //console.log('post get data: ', data);

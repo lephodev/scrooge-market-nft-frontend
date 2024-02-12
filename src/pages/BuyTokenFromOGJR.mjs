@@ -31,7 +31,7 @@ export default function BuyTokenFromOGJR() {
 
   const getUserDataInstant = () => {
     let access_token = cookies.token;
-    authInstance()
+    (await authInstance())
       .get("/auth/check-auth", {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -78,7 +78,7 @@ export default function BuyTokenFromOGJR() {
         .transfer(walletAddress, cryptoAmount, contractAddresss,)
         .then((txResult) => {
           const {transactionHash}=txResult?.receipt||{}
-          marketPlaceInstance()
+          (await marketPlaceInstance())
             .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}/${transactionHash}`)
             .then((response) => {
               setBuyLoading(false);

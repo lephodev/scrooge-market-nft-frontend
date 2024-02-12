@@ -53,7 +53,7 @@ export default function GetWalletERC1155NFTs() {
       //alert('Your email is '+emailaddress);
       setShowModal(false);
       setBurnLoading(true);
-      marketPlaceInstance()
+      (await marketPlaceInstance())
         .get(`/verifyEmail/${emailaddress}`)
         .then((data) => {
           //setNFTBalance(data.data);
@@ -85,7 +85,7 @@ export default function GetWalletERC1155NFTs() {
             try {
               //const result = await contract.erc1155.burnFrom(address, token_id, qty);
               //console.log("NFT REDEEMED!! Your chips will be added shortly.");
-              marketPlaceInstance()
+              (await marketPlaceInstance())
                 .get(
                   `/redeemTokenNFT/${address}/${token_id}/${user?.id}/${qty}`
                 )
