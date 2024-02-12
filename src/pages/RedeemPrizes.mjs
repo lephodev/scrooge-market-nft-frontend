@@ -173,7 +173,7 @@ function RedeemPrizes() {
                   {user ? (
                     <>
                       <h3>
-                        Redeemable Balance:{" "}
+                        USD Equivelant value:{" "}
                         {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
                       </h3>
                       <h3>
