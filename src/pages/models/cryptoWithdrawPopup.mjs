@@ -43,7 +43,7 @@ const CryptoWithdrawPopup = ({ getUserDataInstant }) => {
           containerId: "connect-wallet",
         });
       setLoading(true);
-      marketPlaceInstance()
+      (await marketPlaceInstance())
         .get(`/FastWithdrawRequest/${address}/${values?.amount}`)
         .then((data) => {
           if (!data.data.success) {

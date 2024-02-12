@@ -73,7 +73,7 @@ function HolderClaimChips() {
 
   async function getNextClaimDate() {
     if (user) {
-      marketPlaceInstance()
+      (await marketPlaceInstance())
         .get(`/getNextClaimDate/${address}/holder/${user.id}/0`)
         .then((data) => {
           if (data.data.success) {
@@ -120,7 +120,7 @@ function HolderClaimChips() {
     }, 4000);
     setBuyLoading(true);
     try {
-      marketPlaceInstance()
+      (await marketPlaceInstance())
         .get(`/claimHolderTokens/${address}/${signature}`)
         .then(async (data) => {
           if (data?.data?.code === 200) {

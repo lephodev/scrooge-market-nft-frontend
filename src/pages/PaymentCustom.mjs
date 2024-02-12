@@ -34,7 +34,7 @@ const PaymentForm = () => {
   useEffect(() => {
     const fetchFormToken = async () => {
       try {
-        const res = await marketPlaceInstance().post(
+        const res = await (await marketPlaceInstance()).post(
           `/getFormToken`,
 
           {
