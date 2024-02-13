@@ -31,7 +31,7 @@ function DailyRewards() {
   async function getNextClaimDate() {
     try {
       if (user.id) {
-        const data = await marketPlaceInstance().get(
+        const data = await (await marketPlaceInstance()).get(
           `/getNextClaimDate/${address}/daily/${user.id}/0`
         );
         setLoader(false);
@@ -57,7 +57,7 @@ function DailyRewards() {
   // const claimTokens = async () => {
   //   setBuyLoading(true);
   //   try {
-  //     const data = await marketPlaceInstance().get(
+  //     const data = await (await marketPlaceInstance()).get(
   //       `/claimDailyRewards/${user.id}`
   //     );
   //     const {success,message}=data?.data

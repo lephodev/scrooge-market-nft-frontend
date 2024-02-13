@@ -13,7 +13,7 @@ import { authInstance } from "../config/axios.js";
 import scroogelogo from "../images/scroogeCasinoLogo.png";
 import FiatPopup from "./models/fiatPopup.mjs";
 import Pdf from "../images/Manual.pdf";
-import { validateToken } from "../utils/dateUtils.mjs";
+// import { validateToken } from "../utils/dateUtils.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import {
   useNetworkMismatch,
@@ -74,13 +74,13 @@ function RedeemPrizes() {
     }
   };
 
-  const getUserDataInstant = () => {
-    const basicAuthToken = validateToken();
-    authInstance()
+  const getUserDataInstant = async () => {
+    // const basicAuthToken = validateToken();
+    (await authInstance())
       .get("/auth/check-auth", {
-        headers: {
-          Authorization: basicAuthToken,
-        },
+        // headers: {
+        //   Authorization: basicAuthToken,
+        // },
       })
       .then((res) => {
         if (res.data.user) {
@@ -173,8 +173,15 @@ function RedeemPrizes() {
                   {user ? (
                     <>
                       <h3>
-                        Redeemable Balance:{" "}
+                        USD Equivelant value:{" "}
                         {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
+                      </h3>
+                      <h3>
+                        Redeemable Value: $
+                        {(
+                          user?.wallet / 100 -
+                          user?.nonWithdrawableAmt / 100
+                        ).toFixed(2)}
                       </h3>
                       <a href={Pdf} target='blank' className='pdf-down'>
                         {" "}

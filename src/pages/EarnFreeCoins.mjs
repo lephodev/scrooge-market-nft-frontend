@@ -45,7 +45,7 @@ const EarnFreeCoins = () => {
     setglobalLoader(true);
 
     try {
-      const response = await marketPlaceInstance().get("/getWeeklyWheel");
+      const response = await (await marketPlaceInstance()).get("/getWeeklyWheel");
       const { success, isWeeklySpin } = response.data;
       if (success) {
         setglobalLoader(false);

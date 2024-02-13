@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-vars */
 import { useState, useContext, useEffect } from "react";
 import Layout from "./Layout.mjs";
@@ -29,15 +30,15 @@ export default function BuyTokenFromOGJR() {
   const OGWalletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS
   const JRWalletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS
 
-  const getUserDataInstant = () => {
+  const getUserDataInstant = async () => {
     let access_token = cookies.token;
-    authInstance()
+    (await authInstance())
       .get("/auth/check-auth", {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-          "Permissions-Policy": "geolocation=*",
+        // headers: {
+        //   Authorization: `Bearer ${access_token}`,
+        //   "Permissions-Policy": "geolocation=*",
 
-        },
+        // },
       })
       .then((res) => {
         if (res.data.user) {
@@ -76,10 +77,9 @@ export default function BuyTokenFromOGJR() {
 
       sdk.wallet
         .transfer(walletAddress, cryptoAmount, contractAddresss,)
-        .then((txResult) => {
+        .then( async (txResult) => {
           const {transactionHash}=txResult?.receipt||{}
-          marketPlaceInstance()
-            .get(`convertCryptoToToken/${user?.id}/${address}/${tokens}/${transactionHash}`)
+          (await marketPlaceInstance()).get(`convertCryptoToToken/${user?.id}/${address}/${tokens}/${transactionHash}`)
             .then((response) => {
               setBuyLoading(false);
               if (response.data.success) {
