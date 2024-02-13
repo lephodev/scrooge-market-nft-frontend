@@ -44,7 +44,7 @@ import vpnbanner from "./images/vpn-banner.webp";
 import notaccess from "./images/not-access.webp";
 
 import PaymentCustom from "./pages/PaymentCustom.mjs";
-import { validateToken } from "./utils/dateUtils.mjs";
+// import { validateToken } from "./utils/dateUtils.mjs";
 
 export default function App() {
   const [selectedChain, setSelectedChain] = useState<ChainId>(
@@ -77,12 +77,12 @@ export default function App() {
   // call this function when you want to authenticate the user
   const login = async () => {
     setLoading(true);
-    const basicAuthToken = validateToken();
-    authInstance()
+    // const basicAuthToken = validateToken();
+    (await authInstance())
       .get("/auth/check-auth", {
-        headers: {
-          Authorization: basicAuthToken,
-        },
+        // headers: {
+        //   Authorization: basicAuthToken,
+        // },
       })
       .then((res: any) => {
         // console.log(convertedData)
@@ -112,7 +112,7 @@ export default function App() {
     try {
       // const apiUrl = `http://api.vpnblocker.net/v2/json/${CurrentIp}`;
       const serverUrl = `/auth/getgeolocationDetails`;
-      const response = await authInstance().get(serverUrl);
+      const response = await (await authInstance()).get(serverUrl);
       const ipAddressObject = {
         [Object.keys(response.data)[1]]:
           response.data[Object.keys(response.data)[1]],
@@ -149,8 +149,9 @@ export default function App() {
 
   const checkVPN = async () => {
     try {
+      if (localStorage.getItem("adminType") === "admin") return;
       const serverUrl = `/auth/validate_VPN`;
-      const checkVPNRes = await authInstance().get(serverUrl);
+      const checkVPNRes = await (await authInstance()).get(serverUrl);
       setIsVPNEnable(checkVPNRes?.data?.vpnStatus);
     } catch (error) {
       console.log("err", error);

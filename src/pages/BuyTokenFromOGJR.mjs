@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-vars */
 import { useState, useContext, useEffect } from "react";
 import Layout from "./Layout.mjs";
@@ -30,15 +31,14 @@ export default function BuyTokenFromOGJR() {
   const OGWalletAddress = process.env.REACT_APP_OG_WALLET_ADDRESS;
   const JRWalletAddress = process.env.REACT_APP_JR_WALLET_ADDRESS;
 
-  const getUserDataInstant = () => {
-    // let access_token = cookies.token;
-    const basicAuthToken = validateToken();
-
-    authInstance()
+  const getUserDataInstant = async () => {
+    let access_token = cookies.token;
+    (await authInstance())
       .get("/auth/check-auth", {
-        headers: {
-          Authorization: basicAuthToken,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${access_token}`,
+        //   "Permissions-Policy": "geolocation=*",
+        // },
       })
       .then((res) => {
         if (res.data.user) {
@@ -75,28 +75,29 @@ export default function BuyTokenFromOGJR() {
 
       sdk.wallet
         .transfer(walletAddress, cryptoAmount, contractAddresss)
-        .then((txResult) => {
-          const { transactionHash } = txResult?.receipt || {};
-          marketPlaceInstance()
-            .get(
-              `convertCryptoToToken/${user?.id}/${address}/${tokens}/${transactionHash}`
-            )
-            .then((response) => {
-              setBuyLoading(false);
-              if (response.data.success) {
-                setUser(response?.data?.user);
-                toast.success(`Successfully Purchased ${tokens} Tokens`);
-                reward();
-                getUserDataInstant();
-              } else {
-                toast.error(response?.data?.message);
-              }
-            })
-            .catch((error) => {
-              setBuyLoading(false);
-              toast.error("Token Buy Failed");
-              console.log(error);
-            });
+        .then(async (txResult) => {
+          const { transactionHash } =
+            txResult?.receipt ||
+            {}(await marketPlaceInstance())
+              .get(
+                `convertCryptoToToken/${user?.id}/${address}/${tokens}/${transactionHash}`
+              )
+              .then((response) => {
+                setBuyLoading(false);
+                if (response.data.success) {
+                  setUser(response?.data?.user);
+                  toast.success(`Successfully Purchased ${tokens} Tokens`);
+                  reward();
+                  getUserDataInstant();
+                } else {
+                  toast.error(response?.data?.message);
+                }
+              })
+              .catch((error) => {
+                setBuyLoading(false);
+                toast.error("Token Buy Failed");
+                console.log(error);
+              });
         })
         .catch((error) => {
           console.log(error);

@@ -85,14 +85,14 @@ export default function CryptoToGC() {
       }, 20000);
     }
   }, [searchParams]);
-  const getUserDataInstant = () => {
+  const getUserDataInstant = async () => {
     let access_token = cookies.token;
-    authInstance()
+    (await authInstance())
       .get("/auth", {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-          "Permissions-Policy": "geolocation=*",
-        },
+        // headers: {
+        //   Authorization: `Bearer ${access_token}`,
+        //   "Permissions-Policy": "geolocation=*",
+        // },
       })
       .then((res) => {
         if (res.data.user) {
@@ -120,7 +120,7 @@ export default function CryptoToGC() {
   async function getGCPackages() {
     setPrizesLoading(true);
     try {
-      const res = await marketPlaceInstance().get(`/getGCPackages`);
+      const res = await (await marketPlaceInstance()).get(`/getGCPackages`);
       if (res.data) {
         const sortedAsc = res.data.sort(
           (a, b) => parseInt(a.priceInBUSD) - parseInt(b.priceInBUSD)
@@ -136,7 +136,7 @@ export default function CryptoToGC() {
 
   async function getGCPurcahseLimitPerDay() {
     try {
-      const res = await marketPlaceInstance().get(`/getGCPurcahseLimitPerDay`);
+      const res = await (await marketPlaceInstance()).get(`/getGCPurcahseLimitPerDay`);
       const { findTransactionIfExist } = res?.data;
 
       setDailyGCPurchaseLimit(findTransactionIfExist);
@@ -188,7 +188,7 @@ export default function CryptoToGC() {
         current_price;
 
       if (selectedDropdown === "BUSD") {
-        contract.events.addEventListener("Transfer", (event) => {
+        contract.events.addEventListener("Transfer", async (event) => {
           if (
             event?.data?.from?.toLowerCase() === address.toLowerCase() &&
             ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) &&
@@ -199,7 +199,7 @@ export default function CryptoToGC() {
           ) {
             if (event.transaction.transactionHash) {
               const { transactionHash } = event.transaction || {};
-              marketPlaceInstance()
+              await (await marketPlaceInstance())
                 .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`, {
                   params: { promoCode, usd },
                 })
@@ -252,7 +252,7 @@ export default function CryptoToGC() {
           ) {
             if (event.transaction.transactionHash) {
               const { transactionHash } = event.transaction || {};
-              marketPlaceInstance()
+              (await marketPlaceInstance())
                 .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`, {
                   params: { promoCode, usd },
                 })
@@ -300,7 +300,7 @@ export default function CryptoToGC() {
             ) {
               if (transaction.hash) {
                 try {
-                  const res = await marketPlaceInstance().get(
+                  const res = await (await marketPlaceInstance()).get(
                     `convertCryptoToGoldCoin/${address}/${transaction.hash}`,
                     {
                       params: { promoCode, usd },
@@ -341,7 +341,7 @@ export default function CryptoToGC() {
           }
         });
       } else if (selectedDropdown === "USDT") {
-        usdtContract.events.addEventListener("Transfer", (event) => {
+        usdtContract.events.addEventListener("Transfer", async (event) => {
           //  console.log("eventusdt-", event.data.from, event.data.to);
           if (
             event?.data?.from?.toLowerCase() === address.toLowerCase() &&
@@ -353,7 +353,7 @@ export default function CryptoToGC() {
           ) {
             if (event.transaction.transactionHash) {
               const { transactionHash } = event.transaction || {};
-              marketPlaceInstance()
+              (await marketPlaceInstance())
                 .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`, {
                   params: { promoCode, usd },
                 })
@@ -391,7 +391,7 @@ export default function CryptoToGC() {
           }
         });
       } else if (selectedDropdown === "USDC") {
-        usdcContract.events.addEventListener("Transfer", (event) => {
+        usdcContract.events.addEventListener("Transfer", async (event) => {
           if (
             event?.data?.from?.toLowerCase() === address.toLowerCase() &&
             ((["USDC", "USDT", "BNB", "BUSD"].includes(selectedDropdown) &&
@@ -402,7 +402,7 @@ export default function CryptoToGC() {
           ) {
             if (event.transaction.transactionHash) {
               const { transactionHash } = event.transaction || {};
-              marketPlaceInstance()
+              (await marketPlaceInstance())
                 .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`, {
                   params: { promoCode, usd },
                 })
@@ -582,7 +582,7 @@ export default function CryptoToGC() {
       const payload = {
         promocode,
       };
-      const res = await marketPlaceInstance().post("/applyPromoCode", payload);
+      const res = await (await marketPlaceInstance()).post("/applyPromoCode", payload);
       const { code, message, getPromo } = res.data;
       setPromoDetails(getPromo);
       if (code === 200) {
@@ -1063,7 +1063,7 @@ export default function CryptoToGC() {
                   <div className='prizes-chip-count'>
                     {user ? (
                       <>
-                        <h3>Redeemable Balance: {user?.wallet.toFixed(2)}</h3>
+                        <h3>USD Equivelant value: {user?.wallet.toFixed(2)}</h3>
                       </>
                     ) : (
                       <>
@@ -1100,7 +1100,7 @@ const PayWithCard = ({
         return toast.error("Credit card daily purchase limit are reached");
       }
       setLoading(true);
-      const res = await marketPlaceInstance().post(
+      const res = await (await marketPlaceInstance()).post(
         `/getFormToken`,
         {
           amount: prize?.priceInBUSD,
