@@ -148,6 +148,7 @@ export default function App() {
 
   const checkVPN = async () => {
     try {
+      if (localStorage.getItem("adminType") === "admin") return;
       const serverUrl = `/auth/validate_VPN`;
       const checkVPNRes = await (await authInstance()).get(serverUrl);
       setIsVPNEnable(checkVPNRes?.data?.vpnStatus);
