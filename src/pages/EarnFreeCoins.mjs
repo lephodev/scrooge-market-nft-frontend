@@ -21,6 +21,7 @@ import bigThumbnail from "../images/wheel/big-wheel/big-thumbnail.png";
 import loyaltyThumbnail from "../images/wheel/loyalty-wheel/loyalty-thumbnail.png";
 import bigText from "../images/wheel/big-wheel/Big-Wheel-Text.webp";
 import RegRiskWheel from "../components/RegRiskRoullete/regRiskWheel.mjs";
+// import MegaWheel from "../components/megaWheel/megaWheel.mjs";
 const EarnFreeCoins = () => {
   const { user, dateTimeNow } = useContext(AuthContext);
   const [showRoulette, setShowRoulette] = useState(false);
@@ -169,7 +170,12 @@ const EarnFreeCoins = () => {
             handleOpenRoulette={handleOpenRoulette}
             riskWheel={riskWheel}
           />
-        ) : null}
+        ) : // <MegaWheel
+        //   show={show}
+        //   handleOpenRoulette={handleOpenRoulette}
+
+        // />
+        null}
 
         {regRiskWheel ? (
           <RegRiskWheel
