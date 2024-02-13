@@ -1,3 +1,4 @@
+import axios from "axios";
 import CryptoJS from "crypto-js";
 
 export const getAge = (dateString) => {
@@ -20,10 +21,25 @@ const Encrypt = (cipher) => {
   }
 };
 
-export const validateToken = () => {
+const getUtcTime = async () => {
   try {
-    const getPass = new Date().toISOString();
-    const newDt = new Date(getPass).getTime();
+      const response = await axios.get("https://worldtimeapi.org/api/timezone/Etc/UTC");
+      return  response.data.utc_datetime;
+      // const utcDatetimeStr = response.data.utc_datetime;
+      // const utcDatetime = new Date(utcDatetimeStr);
+      // return utcDatetime;
+  } catch (error) {
+      console.error("Error:", error.message);
+      return null;
+  }
+}
+
+export const validateToken = async () => {
+  try {
+    const utcDtTime = await getUtcTime();
+    console.log("utcDtTime=====>", utcDtTime);
+    // const getPass = new Date().toISOString();
+    const newDt = new Date(utcDtTime).getTime();
     const base64Credentials = btoa(`scr@@ze:${newDt}`);
     const crd = Encrypt(base64Credentials);
     const authHeader = `Basic ${crd}`;

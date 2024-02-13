@@ -31,7 +31,7 @@ export default function AllCurrentRaffles() {
 
   const handlePurchase = async (amt, item_id) => {
     try {
-      const initEntryPurchase =  await marketPlaceInstance().get(`/initEntryPurchase/${user[0]}/${address}/${amt}/${item_id}`)
+      const initEntryPurchase =  await (await marketPlaceInstance()).get(`/initEntryPurchase/${user[0]}/${address}/${amt}/${item_id}`)
       .then(async (data) => {
         const price = (amt / currentPriceOG).toFixed(0);
         const purchase = await sdk.wallet.transfer(
@@ -40,7 +40,7 @@ export default function AllCurrentRaffles() {
           "0xe9e7cea3dedca5984780bafc599bd69add087d56"
         );
         //console.log('purchase: ', purchase); //${purchase.receipt.transactionHash}
-        const finalizeEntryPurchase =await marketPlaceInstance().get(`/finalizeEntryPurchase/${user[0]}/${address}/${amt}/${data.data}/${purchase.receipt.transactionHash}`
+        const finalizeEntryPurchase =await (await marketPlaceInstance()).get(`/finalizeEntryPurchase/${user[0]}/${address}/${amt}/${data.data}/${purchase.receipt.transactionHash}`
         ).then(async (resp) => {
           if (resp.data >= 1) {
             toast("Purchase successful! You bought " + resp.data + " tickets!");
@@ -61,7 +61,7 @@ export default function AllCurrentRaffles() {
     setData("");
     const base64data = Buffer.from("Product 1").toString("base64");
     try {
-      await marketPlaceInstance().get(`/encrypt/${base64data}`).then(
+      await (await marketPlaceInstance()).get(`/encrypt/${base64data}`).then(
         async (data) => {
           //console.log("encrypt: ", data.data);
           encrypted = data.data;
@@ -81,7 +81,7 @@ export default function AllCurrentRaffles() {
     //setData('');
     //const base64data = Buffer.from(data).toString('base64');
     try {
-      await marketPlaceInstance().get(`/decrypt/${data}`).then(
+      await (await marketPlaceInstance()).get(`/decrypt/${data}`).then(
         async (data) => {
           //console.log("decrypt: ", data.data);
           encrypted = data.data;
@@ -109,7 +109,7 @@ export default function AllCurrentRaffles() {
 
   async function getCurrentRaffles() {
     try {
-      const res = await marketPlaceInstance().get(`/getCurrentRaffles/0/0`);
+      const res = await (await marketPlaceInstance()).get(`/getCurrentRaffles/0/0`);
       if (res.data) {
         setRaffles(res.data);
         return res.data;
@@ -133,7 +133,7 @@ export default function AllCurrentRaffles() {
   //   }
   async function getItems() {
     try {
-      const res = await marketPlaceInstance().get(`/getItems/entry`);
+      const res = await (await marketPlaceInstance()).get(`/getItems/entry`);
       if (res.data) {
         setItems(res.data);
         return res.data;
@@ -157,7 +157,7 @@ export default function AllCurrentRaffles() {
 
   async function enterRaffle(raffle_id) {
     try {
-      const res = await marketPlaceInstance().get(
+      const res = await (await marketPlaceInstance()).get(
         `enterRaffle/${raffle_id}/${user[0]}/${address}`
       );
       if (res.data) {
@@ -172,7 +172,7 @@ export default function AllCurrentRaffles() {
   async function checkToken() {
     const initUser = async () => {
       try {
-        await marketPlaceInstance().get(`/getUserRaffleTickets/${user.id}`
+        await (await marketPlaceInstance()).get(`/getUserRaffleTickets/${user.id}`
         ).then(async (data) => {
           setUserRaffleTickets(data.data.tickets);
           return data.data;

@@ -64,7 +64,7 @@ export default function ShowAllTokenNFTs() {
       );
       const buyout = await contract.buyoutListing(token_id, qty);
       console.log("buyoutbuyoutbuyout", buyout);
-      marketPlaceInstance()
+      (await marketPlaceInstance())
         .post(`/getFreeTokens`, {
           address: address,
           token_id: assetId,
@@ -126,7 +126,7 @@ export default function ShowAllTokenNFTs() {
   //   console.log("itemitemitem", item);
   //   let stripe;
   //   stripe = await stripePromise;
-  //   const response = await marketPlaceInstance().post("/user/depositMoney", {
+  //   const response = await (await marketPlaceInstance()).post("/user/depositMoney", {
   //     ...item,
   //     userId: user?.id,
   //     address,

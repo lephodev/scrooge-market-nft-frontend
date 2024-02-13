@@ -31,7 +31,7 @@ const NewRoulette = ({ idToken, uid, handleOpenRoulette, show }) => {
   const [volume, setVolume] = useState(false);
   // const [removeAnim, setRemoveAnim] = useState(false);
   const handleSpin = async (winItem) => {
-    // const response =   await marketPlaceInstance().('/winAmount',{  params: { winAmount: places[winItem] },});
+    // const response =   await (await marketPlaceInstance()).('/winAmount',{  params: { winAmount: places[winItem] },});
     // await axios.get("https://lucky-wheel-t3e66zpola-uc.a.run.app/", {
     //   headers: { idtoken: idToken },
     //   params: { winAmount: places[winItem] },

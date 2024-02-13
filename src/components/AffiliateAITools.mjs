@@ -18,7 +18,7 @@ export default function AffiliateAITools() {
     const prompt =
       "Give me one unique, new, or interesting tip on how to successfully promote my Scrooge Casino affiliate link to get more people to sign up or make purchases at Scrooge Casino, which is an online casino where players can win real prizes playing live poker, blackjack, slots, and other casino games.";
     try {
-      const res = await marketPlaceInstance().get(
+      const res = await (await marketPlaceInstance()).get(
         `/getAIMessage/${prompt}/6399cb2354a1dd8bdd842a1a/suggestion`
       );
       if (res.data) {
