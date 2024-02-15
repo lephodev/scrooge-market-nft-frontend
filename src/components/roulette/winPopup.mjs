@@ -23,6 +23,7 @@ const WinPopup = ({ winAmount }) => {
   };
 
   const displayToken = (token) => {
+    console.log("tokentoken", token);
     if (typeof token === "string" && token === "Big wheel") {
       return winAmount?.token;
     } else if (typeof token === "string" && token.startsWith("Green")) {

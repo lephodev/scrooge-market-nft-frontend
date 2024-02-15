@@ -8,27 +8,15 @@ import winItemaudio from "../../images/spin/wheel-win.wav";
 import rotatewheel from "../../images/spin/wheel-rotate.wav";
 import coin from "../../images/spin/wheel-win2.wav";
 import { Modal } from "react-bootstrap";
-import RiskSpinWheel from "./riskSpinWheel.mjs";
-import BigSpinWheel from "../mainRoulette/bigSpinWheel.mjs";
-import MegaSpinWheel from "../megaWheel/megaSpinWheel.mjs";
-// import WinPopup from "../roulette/winPopup.mjs";
-// import BigSpinWheel from "./bigSpinWheel.mjs";
-// import RiskSpinWheel fro./riskSpinWheel.mjs
-// import LoyaltySpinWheel from "./loyaltySpinWheel.mjs";
 
-const RiskWheel = ({ handleOpenRoulette, show }) => {
-  const RiskWheelPlaces = [
-    { token: "Green1", chances: 10 },
-    { token: "Red1", chances: 10 },
-    { token: "Red2", chances: 10 },
-    { token: "Red3", chances: 10 },
-    { token: "Red4", chances: 10 },
-    { token: "Green2", chances: 10 },
-    { token: "Red5", chances: 10 },
-    { token: "Red6", chances: 10 },
-    { token: "Red7", chances: 10 },
-    { token: "red8", chances: 10 },
-  ];
+import LoyaltyWheel from "../mainRoulette/loyaltySpinWheel.mjs";
+import MegaSpinWheel from "./megaSpinWheel.mjs";
+
+const MegaWheel = ({ handleOpenRoulette, show }) => {
+  const [winPopup, setWinPopup] = useState(false);
+  const [winItem, setWinItem] = useState();
+  const [volume, setVolume] = useState(false);
+  const [bigWheel, setBigWheel] = useState(false);
 
   const MegaWheelPlaces = [
     { token: 500, chances: 10 },
@@ -43,11 +31,6 @@ const RiskWheel = ({ handleOpenRoulette, show }) => {
     { token: 275, chances: 10 },
   ];
 
-  const [winPopup, setWinPopup] = useState(false);
-  const [winItem, setWinItem] = useState();
-  const [volume, setVolume] = useState(false);
-  const [bigWheel, setBigWheel] = useState(false);
-
   return (
     <Modal
       show={show}
@@ -58,17 +41,12 @@ const RiskWheel = ({ handleOpenRoulette, show }) => {
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <>
-          {!bigWheel ? (
-            <RiskSpinWheel
-              items={RiskWheelPlaces}
-              setWinPopup={setWinPopup}
-              setWinItem={setWinItem}
-              setVolume={setVolume}
-              setBigWheel={setBigWheel}
-            />
-          ) : (
-            <MegaSpinWheel items={MegaWheelPlaces} setWinPopup={setWinPopup} />
-          )}
+          <MegaSpinWheel
+            items={MegaWheelPlaces}
+            setWinPopup={setWinPopup}
+            setWinItem={setWinItem}
+            setVolume={setVolume}
+          />
         </>
 
         <audio className='bg-audio' muted={!volume}>
@@ -87,4 +65,4 @@ const RiskWheel = ({ handleOpenRoulette, show }) => {
     </Modal>
   );
 };
-export default RiskWheel;
+export default MegaWheel;
