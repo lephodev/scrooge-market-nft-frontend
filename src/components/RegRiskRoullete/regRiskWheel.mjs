@@ -10,7 +10,7 @@ import BigSpinWheel from "../mainRoulette/bigSpinWheel.mjs";
 import RegRiskSpinWheel from "./regRiskSpinWheel.mjs";
 
 const RegRiskWheel = ({ handleOpenRoulette, show }) => {
-  const RiskWheelPlaces = [
+  const RegularRiskWheelPlaces = [
     { token: "Green1", chances: 10 },
     { token: "Green2", chances: 10 },
     { token: "Red7", chances: 10 },
@@ -45,16 +45,15 @@ const RegRiskWheel = ({ handleOpenRoulette, show }) => {
     <Modal
       show={show}
       onHide={handleOpenRoulette}
-      className="roulette-wrapper roulette-wheel-game"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+      className='roulette-wrapper roulette-wheel-game'
+      aria-labelledby='contained-modal-title-vcenter'
+      centered>
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <>
           {!bigWheel ? (
             <RegRiskSpinWheel
-              items={RiskWheelPlaces}
+              items={RegularRiskWheelPlaces}
               setWinPopup={setWinPopup}
               setWinItem={setWinItem}
               setVolume={setVolume}
@@ -65,16 +64,16 @@ const RegRiskWheel = ({ handleOpenRoulette, show }) => {
           )}
         </>
 
-        <audio className="bg-audio" muted={!volume}>
+        <audio className='bg-audio' muted={!volume}>
           <source src={bgaudio}></source>
         </audio>
-        <audio className="rotate-wheel">
+        <audio className='rotate-wheel'>
           <source src={rotatewheel}></source>
         </audio>
-        <audio className="winitem-wheel">
+        <audio className='winitem-wheel'>
           <source src={winItemaudio}></source>
         </audio>
-        <audio id="coin-audio">
+        <audio id='coin-audio'>
           <source src={coin}></source>
         </audio>
       </Modal.Body>

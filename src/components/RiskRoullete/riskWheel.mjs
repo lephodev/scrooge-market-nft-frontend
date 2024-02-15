@@ -10,6 +10,7 @@ import coin from "../../images/spin/wheel-win2.wav";
 import { Modal } from "react-bootstrap";
 import RiskSpinWheel from "./riskSpinWheel.mjs";
 import BigSpinWheel from "../mainRoulette/bigSpinWheel.mjs";
+import MegaSpinWheel from "../megaWheel/megaSpinWheel.mjs";
 // import WinPopup from "../roulette/winPopup.mjs";
 // import BigSpinWheel from "./bigSpinWheel.mjs";
 // import RiskSpinWheel fro./riskSpinWheel.mjs
@@ -18,28 +19,28 @@ import BigSpinWheel from "../mainRoulette/bigSpinWheel.mjs";
 const RiskWheel = ({ handleOpenRoulette, show }) => {
   const RiskWheelPlaces = [
     { token: "Green1", chances: 10 },
-    { token: "Green2", chances: 10 },
-    { token: "Red7", chances: 10 },
     { token: "Red1", chances: 10 },
     { token: "Red2", chances: 10 },
     { token: "Red3", chances: 10 },
     { token: "Red4", chances: 10 },
+    { token: "Green2", chances: 10 },
     { token: "Red5", chances: 10 },
     { token: "Red6", chances: 10 },
-    { token: "Green3", chances: 10 },
+    { token: "Red7", chances: 10 },
+    { token: "red8", chances: 10 },
   ];
 
-  const BigWheelPlaces = [
-    { token: 40, chances: 10 },
-    { token: 45, chances: 10 },
-    { token: 50, chances: 10 },
-    { token: 55, chances: 10 },
-    { token: 60, chances: 10 },
-    { token: 65, chances: 10 },
-    { token: 70, chances: 10 },
-    { token: 80, chances: 10 },
-    { token: 90, chances: 10 },
-    { token: 100, chances: 10 },
+  const MegaWheelPlaces = [
+    { token: 500, chances: 10 },
+    { token: 200, chances: 10 },
+    { token: 225, chances: 10 },
+    { token: 250, chances: 10 },
+    { token: 275, chances: 10 },
+    { token: 350, chances: 10 },
+    { token: 200, chances: 10 },
+    { token: 225, chances: 10 },
+    { token: 250, chances: 10 },
+    { token: 275, chances: 10 },
   ];
 
   const [winPopup, setWinPopup] = useState(false);
@@ -66,7 +67,7 @@ const RiskWheel = ({ handleOpenRoulette, show }) => {
               setBigWheel={setBigWheel}
             />
           ) : (
-            <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} />
+            <MegaSpinWheel items={MegaWheelPlaces} setWinPopup={setWinPopup} />
           )}
         </>
 

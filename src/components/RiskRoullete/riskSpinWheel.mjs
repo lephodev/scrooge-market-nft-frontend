@@ -20,29 +20,27 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
   const [spinButtonDisable, setSpinButtonDisable] = useState(false);
 
   const select = async () => {
+    console.log("wwwwwwwww");
     if (selectItem === null) {
       try {
         const clientSeed = getClientSeed();
         // console.log({ clientSeed });
         setSpinButtonDisable(true);
-        const response = await (await marketPlaceInstance()).get(
-          "/gameResultForRiskWheel",
-          {
-            params: { clientSeed },
-          }
-        );
+        const response = await (
+          await marketPlaceInstance()
+        ).get("/gameResultForRiskWheel", {
+          params: { clientSeed },
+        });
         console.log("==>>>", response);
         const selectedItem = items.findIndex(
           (el) => el.token === response?.data?.resultData?.token
         );
         console.log("selectedItem", selectedItem);
         if (selectedItem === -1) return;
-
         setselectItem(selectedItem);
         setWinItem(selectedItem);
         setWheelResult(selectedItem);
-
-        if (selectedItem === 0 || selectedItem === 1 || selectedItem === 9) {
+        if (selectedItem === 0 || selectedItem === 5) {
           setTimeout(() => {
             setBigWheel(true);
           }, 5000);
@@ -101,8 +99,7 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
           ))}
         </div>
         {console.log("wheelResult", wheelResult)}
-        {isWinResult &&
-        (wheelResult === 0 || wheelResult === 1 || wheelResult === 9) ? (
+        {isWinResult && (wheelResult === 0 || wheelResult === 5) ? (
           <WinPopup setWinPopup={setWinPopup} winAmount={items[wheelResult]} />
         ) : isWinResult ? (
           <BetterLuckNextTimePopup />
