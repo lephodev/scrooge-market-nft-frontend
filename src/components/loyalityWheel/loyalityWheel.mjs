@@ -18,12 +18,12 @@ const LoyalityWheel = ({ handleOpenRoulette, show }) => {
   const [bigWheel, setBigWheel] = useState(false);
 
   const LoyaltyWheelPlaces = [
-    { token: 500, chances: 0.005 },
+    { token: 500, chances: 0.5 },
     { token: 275, chances: 12.375 },
     { token: 200, chances: 12.375 },
     { token: 225, chances: 12.375 },
     { token: 250, chances: 12.375 },
-    { token: 1000, chances: 0.005 },
+    { token: 1000, chances: 0.5 },
     { token: 275, chances: 12.375 },
     { token: 200, chances: 12.375 },
     { token: 225, chances: 12.375 },
@@ -34,10 +34,9 @@ const LoyalityWheel = ({ handleOpenRoulette, show }) => {
     <Modal
       show={show}
       onHide={handleOpenRoulette}
-      className="roulette-wrapper roulette-wheel-game"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+      className='roulette-wrapper roulette-wheel-game'
+      aria-labelledby='contained-modal-title-vcenter'
+      centered>
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <>
@@ -49,16 +48,16 @@ const LoyalityWheel = ({ handleOpenRoulette, show }) => {
           />
         </>
 
-        <audio className="bg-audio" muted={!volume}>
+        <audio className='bg-audio' muted={!volume}>
           <source src={bgaudio}></source>
         </audio>
-        <audio className="rotate-wheel">
+        <audio className='rotate-wheel'>
           <source src={rotatewheel}></source>
         </audio>
-        <audio className="winitem-wheel">
+        <audio className='winitem-wheel'>
           <source src={winItemaudio}></source>
         </audio>
-        <audio id="coin-audio">
+        <audio id='coin-audio'>
           <source src={coin}></source>
         </audio>
       </Modal.Body>
