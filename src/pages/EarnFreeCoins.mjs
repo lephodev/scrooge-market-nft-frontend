@@ -15,10 +15,13 @@ import LoyalityWheel from "../components/loyalityWheel/loyalityWheel.mjs";
 import WeeklyWheel from "../components/weeklyWheel/weeklyWheel.mjs";
 import { marketPlaceInstance } from "../config/axios.js";
 import regularThumbnail from "../images/wheel/main-wheel/main-thumbnail.png";
+import regRiskThumbnail from "../images/wheel/regular-risk-wheel/reg-risk-thumbnail.png";
 import riskThumbnail from "../images/wheel/risk-wheel/risk-thumbnail.png";
 import bigThumbnail from "../images/wheel/big-wheel/big-thumbnail.png";
 import loyaltyThumbnail from "../images/wheel/loyalty-wheel/loyalty-thumbnail.png";
 import bigText from "../images/wheel/big-wheel/Big-Wheel-Text.webp";
+import RegRiskWheel from "../components/RegRiskRoullete/regRiskWheel.mjs";
+// import MegaWheel from "../components/megaWheel/megaWheel.mjs";
 const EarnFreeCoins = () => {
   const { user, dateTimeNow } = useContext(AuthContext);
   const [showRoulette, setShowRoulette] = useState(false);
@@ -27,6 +30,7 @@ const EarnFreeCoins = () => {
   const [spinTimer, setSpinTimer] = useState("");
   const [show, setShow] = useState(false);
   const [riskWheel, setRiskWheel] = useState(false);
+  const [regRiskWheel, setRegRiskWheel] = useState(false);
   const [loyalityWheel, setLoylityWheel] = useState(false);
   const [weeklyWheel, setWeeklyWheel] = useState(false);
   const [isWeeklyWheelActive, setIsWeeklyWheelActive] = useState(false);
@@ -73,27 +77,37 @@ const EarnFreeCoins = () => {
     // if (canSpin) {
     //   setShowRoulette(true);
     // }
-    if (value === "risk") {
-      setRiskWheel(true);
+    if (value === "regRisk") {
+      setRiskWheel(false);
       setWeeklyWheel(false);
       setShowRoulette(false);
       setLoylityWheel(false);
+      setRegRiskWheel(true);
     }
     if (value === "loyality") {
       setLoylityWheel(true);
       setShowRoulette(false);
       setWeeklyWheel(false);
       setRiskWheel(false);
+      setRegRiskWheel(false);
     } else if (value === "normal") {
       setShowRoulette(true);
       setRiskWheel(false);
+      setRegRiskWheel(false);
       setWeeklyWheel(false);
       setLoylityWheel(false);
     } else if (value === "weekly") {
       setShowRoulette(false);
       setRiskWheel(false);
+      setRegRiskWheel(false);
       setWeeklyWheel(true);
       setLoylityWheel(false);
+    } else if (value === "risk") {
+      setRiskWheel(true);
+      setWeeklyWheel(false);
+      setShowRoulette(false);
+      setLoylityWheel(false);
+      setRegRiskWheel(false);
     }
     setShow(!show);
   };
@@ -146,7 +160,7 @@ const EarnFreeCoins = () => {
           <MainRoulette
             show={show}
             handleOpenRoulette={handleOpenRoulette}
-            riskWheel={riskWheel}
+            regRiskWheel={regRiskWheel}
           />
         ) : null}
 
@@ -155,6 +169,19 @@ const EarnFreeCoins = () => {
             show={show}
             handleOpenRoulette={handleOpenRoulette}
             riskWheel={riskWheel}
+          />
+        ) : // <MegaWheel
+        //   show={show}
+        //   handleOpenRoulette={handleOpenRoulette}
+
+        // />
+        null}
+
+        {regRiskWheel ? (
+          <RegRiskWheel
+            show={show}
+            handleOpenRoulette={handleOpenRoulette}
+            regRiskWheel={regRiskWheel}
           />
         ) : null}
 
@@ -207,8 +234,6 @@ const EarnFreeCoins = () => {
                       className={`spin-button ${
                         isWeeklyWheelActive && user?.loyalitySpinCount === 29
                           ? ""
-                          : isWeeklyWheelActive
-                          ? "single-wheel"
                           : user?.loyalitySpinCount === 29
                           ? "single-wheel"
                           : ""
@@ -243,7 +268,7 @@ const EarnFreeCoins = () => {
                           {user?.loyalitySpinCount !== 29 ? (
                             <div className="risk-grid">
                               <img
-                                src={riskThumbnail}
+                                src={regRiskThumbnail}
                                 alt="risk-thumbnail"
                                 className="img-fulid"
                               />
@@ -253,7 +278,7 @@ const EarnFreeCoins = () => {
                               </p>
                               <button
                                 disabled={!canSpin}
-                                onClick={() => handleOpenRoulette("risk")}
+                                onClick={() => handleOpenRoulette("regRisk")}
                               >
                                 {" "}
                                 {canSpin ? "Take a Risk" : spinTimer}
@@ -314,6 +339,34 @@ const EarnFreeCoins = () => {
                             >
                               {" "}
                               {canSpin ? "Big Wheel " : spinTimer}
+                            </button>
+                          </div>
+                          {user?.loyalitySpinCount !== 29 ? (
+                            <div className="or-grid">
+                              <span>or</span>
+                            </div>
+                          ) : null}
+                          <div
+                            className={`risk-grid ${
+                              isWeeklyWheelActive ? "second-wheel-padd" : ""
+                            }`}
+                          >
+                            <img
+                              src={riskThumbnail}
+                              alt="risk-thumbnail"
+                              className="img-fulid"
+                            />
+                            <p>
+                              Risk it for an even larger Mega Wheel. Choose
+                              carefully, as you can be left with no daily
+                              reward.
+                            </p>
+                            <button
+                              disabled={!canSpin}
+                              onClick={() => handleOpenRoulette("risk")}
+                            >
+                              {" "}
+                              {canSpin ? "Take a Risk" : spinTimer}
                             </button>
                           </div>
                         </>
