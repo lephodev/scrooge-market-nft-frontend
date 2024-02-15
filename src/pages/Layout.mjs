@@ -257,7 +257,7 @@ const Layout = ({ children }) => {
                                 "/claim-free-tokens"
                               )}`}
                             >
-                              Earn Free Coins
+                              Daily Wheel Spin
                             </Link>
                             <Link
                               to={`${scroogeClient}/affiliate`}

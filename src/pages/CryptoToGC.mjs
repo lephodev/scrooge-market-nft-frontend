@@ -4,6 +4,8 @@ import { useState, useContext, useEffect } from "react";
 import { AcceptHosted } from "react-acceptjs";
 import { Button, Form, Card, Dropdown, Spinner } from "react-bootstrap";
 import Layout from "./Layout.mjs";
+import { Helmet } from "react-helmet";
+
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import coin4 from "../images/4.png";
 import coin3 from "../images/3.png";
@@ -134,7 +136,9 @@ export default function CryptoToGC() {
 
   async function getGCPurcahseLimitPerDay() {
     try {
-      const res = await (await marketPlaceInstance()).get(`/getGCPurcahseLimitPerDay`);
+      const res = await (
+        await marketPlaceInstance()
+      ).get(`/getGCPurcahseLimitPerDay`);
       const { findTransactionIfExist } = res?.data;
 
       setDailyGCPurchaseLimit(findTransactionIfExist);
@@ -154,22 +158,17 @@ export default function CryptoToGC() {
       return toast.error(`Your wallet blocked by admin`, { toastId: "A" });
     }
     goldcoinAmount = gc;
-    if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
-      return toast.error("Your daily limit is exceeding");
+    if (spendedAmount.spended_today > user.dailyGoldCoinSpendingLimit) {
+      console.log();
+      return toast.error("Your daily limit is exceeding", { toastId: "A" });
     }
 
-    if (
-      spendedAmount.spened_this_week + usd >
-      user.weeklyGoldCoinSpendingLimit
-    ) {
-      return toast.error("Your weekly limit is exceeding");
+    if (spendedAmount.spened_this_week > user.weeklyGoldCoinSpendingLimit) {
+      return toast.error("Your weekly limit is exceeding", { toastId: "B" });
     }
 
-    if (
-      spendedAmount.spneded_this_month + usd >
-      user.monthlyGoldCoinSpendingLimit
-    ) {
-      return toast.error("Your monthly limit is exceeding");
+    if (spendedAmount.spneded_this_month > user.monthlyGoldCoinSpendingLimit) {
+      return toast.error("Your monthly limit is exceeding", { toastId: "C" });
     }
     setBuyLoading(true);
 
@@ -197,7 +196,9 @@ export default function CryptoToGC() {
           ) {
             if (event.transaction.transactionHash) {
               const { transactionHash } = event.transaction || {};
-              await (await marketPlaceInstance())
+              await (
+                await marketPlaceInstance()
+              )
                 .get(`convertCryptoToGoldCoin/${address}/${transactionHash}`, {
                   params: { promoCode, usd },
                 })
@@ -298,7 +299,9 @@ export default function CryptoToGC() {
             ) {
               if (transaction.hash) {
                 try {
-                  const res = await (await marketPlaceInstance()).get(
+                  const res = await (
+                    await marketPlaceInstance()
+                  ).get(
                     `convertCryptoToGoldCoin/${address}/${transaction.hash}`,
                     {
                       params: { promoCode, usd },
@@ -580,7 +583,9 @@ export default function CryptoToGC() {
       const payload = {
         promocode,
       };
-      const res = await (await marketPlaceInstance()).post("/applyPromoCode", payload);
+      const res = await (
+        await marketPlaceInstance()
+      ).post("/applyPromoCode", payload);
       const { code, message, getPromo } = res.data;
       setPromoDetails(getPromo);
       if (code === 200) {
@@ -639,6 +644,36 @@ export default function CryptoToGC() {
 
   return (
     <>
+      <Helmet>
+        <script
+          async
+          src='https://www.googletagmanager.com/gtag/js?id=AW-11280008930'></script>
+        <script>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "AW-11280008930");
+          `}
+        </script>
+        <script
+          async
+          custom-element='amp-analytics'
+          src='https://cdn.ampproject.org/v0/amp-analytics-0.1.js'></script>
+        <amp-analytics type='gtag' data-credentials='include'>
+          <script type='application/json'>
+            {`
+          "vars": {
+            "gtag_id": "AW-11280008930",
+            "config": { "AW-11280008930": { "groups": "default" } }
+          },
+          "triggers": {}
+        `}
+          </script>
+        </amp-analytics>
+      </Helmet>
       {(status === "success" || status === "inprogress") && (
         <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
       )}
@@ -768,7 +803,6 @@ export default function CryptoToGC() {
                                 onClick={() => handleChange("Scrooge")}>
                                 Scrooge
                               </Dropdown.Item>
-
                               <Dropdown.Item
                                 onClick={() => handleChange("BNB")}>
                                 BNB
@@ -856,6 +890,7 @@ export default function CryptoToGC() {
                                             getExactPrice(prize?.priceInBUSD) >
                                               0 && (
                                               <PayWithCard
+                                                spendedAmount={spendedAmount}
                                                 prize={prize}
                                                 getExactPrice={getExactPrice}
                                                 getExactGC={getExactGC}
@@ -869,6 +904,7 @@ export default function CryptoToGC() {
                                                 dailyGCPurchaseLimit={
                                                   dailyGCPurchaseLimit
                                                 }
+                                                user={user}
                                               />
                                             )
                                           ) : (
@@ -971,6 +1007,7 @@ export default function CryptoToGC() {
                                       promoDetails
                                     ) > 0 && (
                                       <PayWithCard
+                                        spendedAmount={spendedAmount}
                                         prize={prize}
                                         getExactPrice={getExactPrice}
                                         getExactGC={getExactGC}
@@ -984,6 +1021,7 @@ export default function CryptoToGC() {
                                         dailyGCPurchaseLimit={
                                           dailyGCPurchaseLimit
                                         }
+                                        user={user}
                                       />
                                     )
                                   ) : (
@@ -1059,17 +1097,38 @@ const PayWithCard = ({
   getExactPrice,
   promoDetails,
   dailyGCPurchaseLimit,
+  spendedAmount,
+  user,
 }) => {
   const [liveFormToken, setFormToken] = useState(null);
   const [loader, setLoading] = useState(false);
 
-  const handleCLick = async () => {
+  const handleCLick = async (gc, usd) => {
+    console.log(
+      "spendedAmount.spended_today + usd",
+      spendedAmount.spended_today,
+      usd,
+      user.dailyGoldCoinSpendingLimit
+    );
     try {
-      if (dailyGCPurchaseLimit >= 4) {
-        return toast.error("Credit card daily purchase limit are reached");
+      goldcoinAmount = gc;
+      if (spendedAmount.spended_today > user.dailyGoldCoinSpendingLimit) {
+        return toast.error("Your daily limit is exceeding", { toastId: "A" });
+      }
+
+      if (spendedAmount.spened_this_week > user.weeklyGoldCoinSpendingLimit) {
+        return toast.error("Your weekly limit is exceeding", { toastId: "B" });
+      }
+
+      if (
+        spendedAmount.spneded_this_month > user.monthlyGoldCoinSpendingLimit
+      ) {
+        return toast.error("Your monthly limit is exceeding", { toastId: "C" });
       }
       setLoading(true);
-      const res = await (await marketPlaceInstance()).post(
+      const res = await (
+        await marketPlaceInstance()
+      ).post(
         `/getFormToken`,
         {
           amount: prize?.priceInBUSD,
@@ -1110,7 +1169,10 @@ const PayWithCard = ({
           </AcceptHosted>
         </button>
       ) : (
-        <button onClick={handleCLick}>
+        <button
+          onClick={() =>
+            handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
+          }>
           {" "}
           {!liveFormToken ? (
             !loader ? (
