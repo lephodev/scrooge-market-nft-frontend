@@ -158,22 +158,26 @@ export default function CryptoToGC() {
       return toast.error(`Your wallet blocked by admin`, { toastId: "A" });
     }
     goldcoinAmount = gc;
-    if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
-      return toast.error("Your daily limit is exceeding");
+    if (
+      spendedAmount.spended_today + parseFloat(usd) >
+      user.dailyGoldCoinSpendingLimit
+    ) {
+      console.log();
+      return toast.error("Your daily limit is exceeding", { toastId: "A" });
     }
 
     if (
-      spendedAmount.spened_this_week + usd >
+      spendedAmount.spened_this_week + parseFloat(usd) >
       user.weeklyGoldCoinSpendingLimit
     ) {
-      return toast.error("Your weekly limit is exceeding");
+      return toast.error("Your weekly limit is exceeding", { toastId: "B" });
     }
 
     if (
-      spendedAmount.spneded_this_month + usd >
+      spendedAmount.spneded_this_month + parseFloat(usd) >
       user.monthlyGoldCoinSpendingLimit
     ) {
-      return toast.error("Your monthly limit is exceeding");
+      return toast.error("Your monthly limit is exceeding", { toastId: "C" });
     }
     setBuyLoading(true);
 
@@ -1109,24 +1113,30 @@ const PayWithCard = ({
   const [loader, setLoading] = useState(false);
 
   const handleCLick = async (gc, usd) => {
+    console.log(
+      "spendedAmount.spended_today + usd",
+      spendedAmount.spended_today,
+      usd,
+      user.dailyGoldCoinSpendingLimit
+    );
     try {
       goldcoinAmount = gc;
       if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
-        return toast.error("Your daily limit is exceeding");
+        return toast.error("Your daily limit is exceeding", { toastId: "A" });
       }
 
       if (
         spendedAmount.spened_this_week + usd >
         user.weeklyGoldCoinSpendingLimit
       ) {
-        return toast.error("Your weekly limit is exceeding");
+        return toast.error("Your weekly limit is exceeding", { toastId: "B" });
       }
 
       if (
         spendedAmount.spneded_this_month + usd >
         user.monthlyGoldCoinSpendingLimit
       ) {
-        return toast.error("Your monthly limit is exceeding");
+        return toast.error("Your monthly limit is exceeding", { toastId: "C" });
       }
       setLoading(true);
       const res = await (
@@ -1173,7 +1183,9 @@ const PayWithCard = ({
         </button>
       ) : (
         <button
-          onClick={() => handleCLick(prize?.gcAmount, prize?.priceInBUSD)}>
+          onClick={() =>
+            handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
+          }>
           {" "}
           {!liveFormToken ? (
             !loader ? (
