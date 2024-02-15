@@ -250,7 +250,7 @@ const Layout = ({ children }) => {
                               className={`nav-link ${isActive(
                                 "/claim-free-tokens"
                               )}`}>
-                              Earn Free Coins
+                              Daily Wheel Spin
                             </Link>
                             <Link
                               to={`${scroogeClient}/affiliate`}

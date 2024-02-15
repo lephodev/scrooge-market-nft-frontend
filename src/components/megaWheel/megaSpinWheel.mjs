@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import spinbtn from "../../images/wheel/risk-wheel/risk-wheel-btn.png";
+import spinbtn from "../../images/wheel/mega-wheel/mega-wheel-btn.png";
 import "../mainRoulette/mainWheel.css";
 import rotatewheel from "../../images/sounds/wheel-rotate.wav";
-import BetterLuckNextTimePopup from "../roulette/BetterLuckNextTimePopup.mjs";
 import bgaudio from "../../images/sounds/wheel-win3.wav";
 import winItemaudio from "../../images/sounds/wheel-win.wav";
 import wheelStop from "../../images/sounds/wheel-stop.wav";
@@ -12,23 +11,21 @@ import { toast } from "react-toastify";
 import "../../components/roulette/wheel.css";
 import WinPopup from "../roulette/winPopup.mjs";
 
-function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
+function MegaSpinWheel({ items, setWinPopup }) {
   const [selectItem, setselectItem] = useState(null);
+  const [spinButtonDisable, setSpinButtonDisable] = useState(false);
   const [isWinResult, setIsWinResult] = useState(false);
   const [wheelResult, setWheelResult] = useState();
 
-  const [spinButtonDisable, setSpinButtonDisable] = useState(false);
-
   const select = async () => {
-    console.log("wwwwwwwww");
     if (selectItem === null) {
       try {
         const clientSeed = getClientSeed();
-        // console.log({ clientSeed });
-        setSpinButtonDisable(true);
+        console.log({ clientSeed });
+        // setSpinButtonDisable(true);
         const response = await (
           await marketPlaceInstance()
-        ).get("/gameResultForRiskWheel", {
+        ).get("/MegaWheelgameResult", {
           params: { clientSeed },
         });
         console.log("==>>>", response);
@@ -37,14 +34,16 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
         );
         console.log("selectedItem", selectedItem);
         if (selectedItem === -1) return;
+
+        console.log("selectedItemselectedItem", selectedItem);
         setselectItem(selectedItem);
-        setWinItem(selectedItem);
+        // setWinItem(selectedItem);
+
         setWheelResult(selectedItem);
-        if (selectedItem === 0 || selectedItem === 5) {
-          setTimeout(() => {
-            setBigWheel(true);
-          }, 5000);
-        }
+
+        // if (this.props.onSelectItem) {
+        //   onSelectItem(selectedItem);
+        // }
         let ele = document.getElementById("rotate-wheel");
         if (ele) {
           ele.play();
@@ -56,6 +55,7 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
           }
         }, 3400);
       } catch (error) {
+        console.log("errrr", error);
         if (error?.response?.data?.msg) {
           toast.error(error?.response?.data?.msg, { toastId: "spin-wheel" });
         }
@@ -83,28 +83,23 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
 
   const spinning = selectItem !== null ? "spinning" : "";
   return (
-    <div className='risk-wheel-wrapper'>
-      <div className='risk-wheel-container'>
+    <div className='mega-wheel-wrapper'>
+      <div className='mega-wheel-container'>
         <div
-          className={`risk-wheel ${spinning}`}
+          className={`mega-wheel ${spinning}`}
           style={wheelVars}
           onTransitionEnd={handleEvent}>
           {items.map((item, index) => (
             <div
-              className='risk-wheel-item'
+              className='mega-wheel-item'
               key={`item-${index + 1}`}
               style={{ "--item-nb": index }}>
               {/* {item.token} */}
             </div>
           ))}
         </div>
-        {console.log("wheelResult", wheelResult)}
-        {isWinResult && (wheelResult === 0 || wheelResult === 5) ? (
+        {isWinResult && (
           <WinPopup setWinPopup={setWinPopup} winAmount={items[wheelResult]} />
-        ) : isWinResult ? (
-          <BetterLuckNextTimePopup />
-        ) : (
-          ""
         )}
       </div>
       <div
@@ -129,4 +124,4 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
   );
 }
 
-export default RiskSpinWheel;
+export default MegaSpinWheel;

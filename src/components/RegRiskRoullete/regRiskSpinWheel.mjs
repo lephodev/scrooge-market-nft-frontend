@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import spinbtn from "../../images/wheel/risk-wheel/risk-wheel-btn.png";
+import spinbtn from "../../images/wheel/regular-risk-wheel/reg-risk-wheel-btn.png";
 import "../mainRoulette/mainWheel.css";
 import rotatewheel from "../../images/sounds/wheel-rotate.wav";
 import BetterLuckNextTimePopup from "../roulette/BetterLuckNextTimePopup.mjs";
@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import "../../components/roulette/wheel.css";
 import WinPopup from "../roulette/winPopup.mjs";
 
-function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
+function RegRiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
   const [selectItem, setselectItem] = useState(null);
   const [isWinResult, setIsWinResult] = useState(false);
   const [wheelResult, setWheelResult] = useState();
@@ -20,7 +20,6 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
   const [spinButtonDisable, setSpinButtonDisable] = useState(false);
 
   const select = async () => {
-    console.log("wwwwwwwww");
     if (selectItem === null) {
       try {
         const clientSeed = getClientSeed();
@@ -28,7 +27,7 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
         setSpinButtonDisable(true);
         const response = await (
           await marketPlaceInstance()
-        ).get("/gameResultForRiskWheel", {
+        ).get("/gameResultForRegularRiskWheel", {
           params: { clientSeed },
         });
         console.log("==>>>", response);
@@ -37,10 +36,12 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
         );
         console.log("selectedItem", selectedItem);
         if (selectedItem === -1) return;
+
         setselectItem(selectedItem);
         setWinItem(selectedItem);
         setWheelResult(selectedItem);
-        if (selectedItem === 0 || selectedItem === 5) {
+
+        if (selectedItem === 0 || selectedItem === 1 || selectedItem === 9) {
           setTimeout(() => {
             setBigWheel(true);
           }, 5000);
@@ -83,15 +84,15 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
 
   const spinning = selectItem !== null ? "spinning" : "";
   return (
-    <div className='risk-wheel-wrapper'>
-      <div className='risk-wheel-container'>
+    <div className='reg-risk-wheel-wrapper'>
+      <div className='reg-risk-wheel-container'>
         <div
-          className={`risk-wheel ${spinning}`}
+          className={`reg-risk-wheel ${spinning}`}
           style={wheelVars}
           onTransitionEnd={handleEvent}>
           {items.map((item, index) => (
             <div
-              className='risk-wheel-item'
+              className='reg-risk-wheel-item'
               key={`item-${index + 1}`}
               style={{ "--item-nb": index }}>
               {/* {item.token} */}
@@ -99,7 +100,8 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
           ))}
         </div>
         {console.log("wheelResult", wheelResult)}
-        {isWinResult && (wheelResult === 0 || wheelResult === 5) ? (
+        {isWinResult &&
+        (wheelResult === 0 || wheelResult === 1 || wheelResult === 9) ? (
           <WinPopup setWinPopup={setWinPopup} winAmount={items[wheelResult]} />
         ) : isWinResult ? (
           <BetterLuckNextTimePopup />
@@ -129,4 +131,4 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
   );
 }
 
-export default RiskSpinWheel;
+export default RegRiskSpinWheel;

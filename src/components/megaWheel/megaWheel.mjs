@@ -10,24 +10,25 @@ import coin from "../../images/spin/wheel-win2.wav";
 import { Modal } from "react-bootstrap";
 
 import LoyaltyWheel from "../mainRoulette/loyaltySpinWheel.mjs";
+import MegaSpinWheel from "./megaSpinWheel.mjs";
 
-const LoyalityWheel = ({ handleOpenRoulette, show }) => {
+const MegaWheel = ({ handleOpenRoulette, show }) => {
   const [winPopup, setWinPopup] = useState(false);
   const [winItem, setWinItem] = useState();
   const [volume, setVolume] = useState(false);
   const [bigWheel, setBigWheel] = useState(false);
 
-  const LoyaltyWheelPlaces = [
-    { token: 500, chances: 0.5 },
-    { token: 275, chances: 12.375 },
-    { token: 200, chances: 12.375 },
-    { token: 225, chances: 12.375 },
-    { token: 250, chances: 12.375 },
-    { token: 1000, chances: 0.5 },
-    { token: 275, chances: 12.375 },
-    { token: 200, chances: 12.375 },
-    { token: 225, chances: 12.375 },
-    { token: 250, chances: 12.375 },
+  const MegaWheelPlaces = [
+    { token: 500, chances: 10 },
+    { token: 200, chances: 10 },
+    { token: 225, chances: 10 },
+    { token: 250, chances: 10 },
+    { token: 275, chances: 10 },
+    { token: 350, chances: 10 },
+    { token: 200, chances: 10 },
+    { token: 225, chances: 10 },
+    { token: 250, chances: 10 },
+    { token: 275, chances: 10 },
   ];
 
   return (
@@ -40,8 +41,8 @@ const LoyalityWheel = ({ handleOpenRoulette, show }) => {
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <>
-          <LoyaltyWheel
-            items={LoyaltyWheelPlaces}
+          <MegaSpinWheel
+            items={MegaWheelPlaces}
             setWinPopup={setWinPopup}
             setWinItem={setWinItem}
             setVolume={setVolume}
@@ -64,4 +65,4 @@ const LoyalityWheel = ({ handleOpenRoulette, show }) => {
     </Modal>
   );
 };
-export default LoyalityWheel;
+export default MegaWheel;
