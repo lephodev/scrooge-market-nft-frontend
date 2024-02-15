@@ -218,12 +218,12 @@ const EarnFreeCoins = () => {
               <>
                 <div className='spin-wheel'>
                   <div className='spin-win-text-content'>
-                    {!isWeeklyWheelActive && user?.loyalitySpinCount !== 29 ? (
+                    {!isWeeklyWheelActive && user?.loyalitySpinCount !== 30 ? (
                       <div className='spin-win-text'>
                         <p>Pick one</p>
                       </div>
                     ) : null}
-                    {user?.loyalitySpinCount !== 29 ? (
+                    {user?.loyalitySpinCount !== 30 ? (
                       <div className='current-streak'>
                         <p>
                           Current streak :{" "}
@@ -233,15 +233,15 @@ const EarnFreeCoins = () => {
                     ) : null}
                     <div
                       className={`spin-button ${
-                        isWeeklyWheelActive && user?.loyalitySpinCount === 29
-                          ? ""
-                          : user?.loyalitySpinCount === 29
+                        isWeeklyWheelActive && user?.loyalitySpinCount === 30
+                          ? "single-wheel"
+                          : user?.loyalitySpinCount === 30
                           ? "single-wheel"
                           : ""
                       }`}>
                       {!isWeeklyWheelActive ? (
                         <>
-                          {user?.loyalitySpinCount !== 29 ? (
+                          {user?.loyalitySpinCount !== 30 ? (
                             <div className='risk-grid'>
                               <img
                                 src={regularThumbnail}
@@ -259,12 +259,12 @@ const EarnFreeCoins = () => {
                           ) : (
                             ""
                           )}
-                          {user?.loyalitySpinCount !== 29 ? (
+                          {user?.loyalitySpinCount !== 30 ? (
                             <div className='or-grid'>
                               <span>or</span>
                             </div>
                           ) : null}
-                          {user?.loyalitySpinCount !== 29 ? (
+                          {user?.loyalitySpinCount !== 30 ? (
                             <div className='risk-grid'>
                               <img
                                 src={regRiskThumbnail}
@@ -289,7 +289,7 @@ const EarnFreeCoins = () => {
                       ) : (
                         ""
                       )}
-                      {user?.loyalitySpinCount === 29 && (
+                      {user?.loyalitySpinCount === 30 && (
                         <div className='risk-grid'>
                           <img
                             src={loyaltyThumbnail}
@@ -309,7 +309,7 @@ const EarnFreeCoins = () => {
                         </div>
                       )}
 
-                      {isWeeklyWheelActive && user?.loyalitySpinCount !== 29 ? (
+                      {isWeeklyWheelActive && user?.loyalitySpinCount !== 30 ? (
                         <>
                           <div className='risk-grid'>
                             <div className='big-wheel-image-grid'>
@@ -337,7 +337,7 @@ const EarnFreeCoins = () => {
                               {canSpin ? "Big Wheel " : spinTimer}
                             </button>
                           </div>
-                          {user?.loyalitySpinCount !== 29 ? (
+                          {user?.loyalitySpinCount !== 30 ? (
                             <div className='or-grid'>
                               <span>or</span>
                             </div>
