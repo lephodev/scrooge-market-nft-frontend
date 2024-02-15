@@ -27,7 +27,7 @@ const RiskWheel = ({ handleOpenRoulette, show }) => {
     { token: "Red5", chances: 10 },
     { token: "Red6", chances: 10 },
     { token: "Red7", chances: 10 },
-    { token: "red8", chances: 10 },
+    { token: "Red8", chances: 10 },
   ];
 
   const MegaWheelPlaces = [
