@@ -1070,7 +1070,7 @@ export default function CryptoToGC() {
                   <div className='prizes-chip-count'>
                     {user ? (
                       <>
-                        <h3>USD Equivelant value: {user?.wallet.toFixed(2)}</h3>
+                        <h3>SWEEP TOKEN BALANCE: {user?.wallet.toFixed(2)}</h3>
                       </>
                     ) : (
                       <>

@@ -173,11 +173,11 @@ function RedeemPrizes() {
                   {user ? (
                     <>
                       <h3>
-                        USD Equivelant value:{" "}
+                        SWEEP TOKEN BALANCE:{" "}
                         {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
                       </h3>
                       <h3>
-                        Redeemable Value: $
+                        USD EQUIVELANT VALUE: $
                         {(
                           user?.wallet / 100 -
                           user?.nonWithdrawableAmt / 100
