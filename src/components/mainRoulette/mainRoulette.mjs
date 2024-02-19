@@ -20,6 +20,8 @@ const MainRoulette = ({
   handleOpenRoulette,
   show,
   riskWheel,
+  user,
+  setUser,
 }) => {
   const MainWheelPlaces = [
     { token: "Big wheel", chances: 1 },
@@ -50,19 +52,21 @@ const MainRoulette = ({
   const [winItem, setWinItem] = useState();
   const [volume, setVolume] = useState(false);
   const [bigWheel, setBigWheel] = useState(false);
-
+  console.log("user", user);
   return (
     <Modal
       show={show}
       onHide={handleOpenRoulette}
-      className="roulette-wrapper roulette-wheel-game"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+      className='roulette-wrapper roulette-wheel-game'
+      aria-labelledby='contained-modal-title-vcenter'
+      centered>
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
+        {user?.wheelType === "Big wheel" && (
+          <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} />
+        )}
         <>
-          {!bigWheel ? (
+          {user?.wheelType !== "Big wheel" && !bigWheel ? (
             <MainSpinWheel
               setBigWheel={setBigWheel}
               bigWheel={bigWheel}
@@ -72,20 +76,20 @@ const MainRoulette = ({
               handleOpenRoulette={handleOpenRoulette}
             />
           ) : (
-            <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} />
+            ""
           )}
         </>
 
-        <audio className="bg-audio" muted={!volume}>
+        <audio className='bg-audio' muted={!volume}>
           <source src={bgaudio}></source>
         </audio>
-        <audio className="rotate-wheel">
+        <audio className='rotate-wheel'>
           <source src={rotatewheel}></source>
         </audio>
-        <audio className="winitem-wheel">
+        <audio className='winitem-wheel'>
           <source src={winItemaudio}></source>
         </audio>
-        <audio id="coin-audio">
+        <audio id='coin-audio'>
           <source src={coin}></source>
         </audio>
       </Modal.Body>
