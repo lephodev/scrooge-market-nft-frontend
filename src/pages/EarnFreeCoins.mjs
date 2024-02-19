@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import HolderClaimChips from "./HolderClaimChips.mjs";
@@ -21,6 +22,10 @@ import bigThumbnail from "../images/wheel/big-wheel/big-thumbnail.png";
 import loyaltyThumbnail from "../images/wheel/loyalty-wheel/loyalty-thumbnail.png";
 import bigText from "../images/wheel/big-wheel/Big-Wheel-Text.webp";
 import RegRiskWheel from "../components/RegRiskRoullete/regRiskWheel.mjs";
+import { userKycDetails } from "../utils/api.mjs";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 // import MegaWheel from "../components/megaWheel/megaWheel.mjs";
 const EarnFreeCoins = () => {
   const { user, dateTimeNow } = useContext(AuthContext);
@@ -35,6 +40,8 @@ const EarnFreeCoins = () => {
   const [weeklyWheel, setWeeklyWheel] = useState(false);
   const [isWeeklyWheelActive, setIsWeeklyWheelActive] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
+
+  const navigate = useNavigate();
 
   // const handleclick = (value) => {
   //   localStorage.setItem("class", value);
@@ -139,6 +146,27 @@ const EarnFreeCoins = () => {
     }, 1000);
   };
 
+  useEffect(() => {
+    async function checkKYCStatus() {
+      const response = await userKycDetails();
+      if (response?.code === 200) {
+        if (response.message !== "accept") {
+          setglobalLoader(false);
+          navigate("/kyc");
+        } else {
+          setglobalLoader(false);
+          // startFetching();
+        }
+      } else {
+        setglobalLoader(false);
+        toast.error(response.message, {
+          toastId: "error-fetching-kyc-details",
+        });
+        navigate("/");
+      }
+    }
+    checkKYCStatus();
+  }, []);
   return (
     <Layout>
       <div className='container free-coin-page'>

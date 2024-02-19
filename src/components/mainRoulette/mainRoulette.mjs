@@ -66,7 +66,7 @@ const MainRoulette = ({
           <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} />
         )}
         <>
-          {user?.wheelType !== "Big wheel" && !bigWheel ? (
+          {user?.wheelType !== "Big wheel" && !bigWheel && (
             <MainSpinWheel
               setBigWheel={setBigWheel}
               bigWheel={bigWheel}
@@ -75,8 +75,6 @@ const MainRoulette = ({
               setVolume={setVolume}
               handleOpenRoulette={handleOpenRoulette}
             />
-          ) : (
-            ""
           )}
         </>
 
