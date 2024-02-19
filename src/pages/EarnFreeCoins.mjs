@@ -159,6 +159,7 @@ const EarnFreeCoins = () => {
 
         {showRoulette ? (
           <MainRoulette
+            user={user}
             show={show}
             handleOpenRoulette={handleOpenRoulette}
             regRiskWheel={regRiskWheel}
@@ -180,6 +181,7 @@ const EarnFreeCoins = () => {
 
         {regRiskWheel ? (
           <RegRiskWheel
+            user={user}
             show={show}
             handleOpenRoulette={handleOpenRoulette}
             regRiskWheel={regRiskWheel}
