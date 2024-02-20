@@ -163,21 +163,30 @@ export default function CryptoToGC() {
       user.dailyGoldCoinSpendingLimit
     ) {
       console.log();
-      return toast.error("Your daily limit is exceeding", { toastId: "A" });
+      return toast.error(
+        "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "A" }
+      );
     }
 
     if (
       spendedAmount.spened_this_week + parseFloat(usd) >
       user.weeklyGoldCoinSpendingLimit
     ) {
-      return toast.error("Your weekly limit is exceeding", { toastId: "B" });
+      return toast.error(
+        "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "B" }
+      );
     }
 
     if (
       spendedAmount.spneded_this_month + parseFloat(usd) >
       user.monthlyGoldCoinSpendingLimit
     ) {
-      return toast.error("Your monthly limit is exceeding", { toastId: "C" });
+      return toast.error(
+        "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "C" }
+      );
     }
     setBuyLoading(true);
 
