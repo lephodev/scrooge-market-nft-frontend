@@ -158,18 +158,36 @@ export default function CryptoToGC() {
       return toast.error(`Your wallet blocked by admin`, { toastId: "A" });
     }
     goldcoinAmount = gc;
-    // if (spendedAmount.spended_today > user.dailyGoldCoinSpendingLimit) {
-    //   console.log();
-    //   return toast.error("Your daily limit is exceeding", { toastId: "A" });
-    // }
+    if (
+      spendedAmount.spended_today + parseFloat(usd) >
+      user.dailyGoldCoinSpendingLimit
+    ) {
+      console.log();
+      return toast.error(
+        "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "A" }
+      );
+    }
 
-    // if (spendedAmount.spened_this_week > user.weeklyGoldCoinSpendingLimit) {
-    //   return toast.error("Your weekly limit is exceeding", { toastId: "B" });
-    // }
+    if (
+      spendedAmount.spened_this_week + parseFloat(usd) >
+      user.weeklyGoldCoinSpendingLimit
+    ) {
+      return toast.error(
+        "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "B" }
+      );
+    }
 
-    // if (spendedAmount.spneded_this_month > user.monthlyGoldCoinSpendingLimit) {
-    //   return toast.error("Your monthly limit is exceeding", { toastId: "C" });
-    // }
+    if (
+      spendedAmount.spneded_this_month + parseFloat(usd) >
+      user.monthlyGoldCoinSpendingLimit
+    ) {
+      return toast.error(
+        "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "C" }
+      );
+    }
     setBuyLoading(true);
 
     if (!address) {
@@ -1107,27 +1125,35 @@ const PayWithCard = ({
     if (dailyGCPurchaseLimit >= 4) {
       return toast.error("Credit card daily purchase limit are reached");
     }
-    // console.log(
-    //   "spendedAmount.spended_today + usd",
-    //   spendedAmount.spended_today,
-    //   usd,
-    //   user.dailyGoldCoinSpendingLimit
-    // );
+
     try {
-      // goldcoinAmount = gc;
-      // if (spendedAmount.spended_today > user.dailyGoldCoinSpendingLimit) {
-      //   return toast.error("Your daily limit is exceeding", { toastId: "A" });
-      // }
+      goldcoinAmount = gc;
+      if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
+        return toast.error(
+          "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
+          { toastId: "A" }
+        );
+      }
 
-      // if (spendedAmount.spened_this_week > user.weeklyGoldCoinSpendingLimit) {
-      //   return toast.error("Your weekly limit is exceeding", { toastId: "B" });
-      // }
+      if (
+        spendedAmount.spened_this_week + usd >
+        user.weeklyGoldCoinSpendingLimit
+      ) {
+        return toast.error(
+          "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+          { toastId: "B" }
+        );
+      }
 
-      // if (
-      //   spendedAmount.spneded_this_month > user.monthlyGoldCoinSpendingLimit
-      // ) {
-      //   return toast.error("Your monthly limit is exceeding", { toastId: "C" });
-      // }
+      if (
+        spendedAmount.spneded_this_month + usd >
+        user.monthlyGoldCoinSpendingLimit
+      ) {
+        return toast.error(
+          "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+          { toastId: "C" }
+        );
+      }
       setLoading(true);
       const res = await (
         await marketPlaceInstance()
