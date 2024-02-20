@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 // import spinWheel from "../../images/spinWheel.png";
 import spinbtn from "../../images/wheel/main-wheel/main-wheel-btn.png";
 import "./mainWheel.css";
@@ -11,8 +11,11 @@ import { marketPlaceInstance } from "../../config/axios.js";
 import { toast } from "react-toastify";
 import "../../components/roulette/wheel.css";
 import WinPopup from "../roulette/winPopup.mjs";
+import AuthContext from "../../context/authContext.ts";
 
 function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
+  const { setUser } = useContext(AuthContext);
+
   const [selectItem, setselectItem] = useState(null);
 
   const [spinButtonDisable, setSpinButtonDisable] = useState(false);
@@ -25,19 +28,23 @@ function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
         const clientSeed = getClientSeed();
         // console.log({ clientSeed });
         setSpinButtonDisable(true);
-        const response = await (await marketPlaceInstance()).get("/gameResult", {
+        const response = await (
+          await marketPlaceInstance()
+        ).get("/gameResult", {
           params: { clientSeed },
         });
         console.log("==>>>", response);
         const selectedItem = items.findIndex(
           (el) => el.token === response?.data?.resultData?.token
         );
+
         console.log("selectedItem", selectedItem);
         if (selectedItem === -1) return;
         setselectItem(selectedItem);
         setWheelResult(selectedItem);
         if (selectedItem === 0) {
           setTimeout(() => {
+            setUser(response.data.user);
             setBigWheel(true);
           }, 5000);
         }

@@ -28,6 +28,7 @@ import bigText from "../images/wheel/big-wheel/Big-Wheel-Text.webp";
 import RiskWheel from "../components/RiskRoullete/riskWheel.mjs";
 import MainRoulette from "../components/mainRoulette/mainRoulette.mjs";
 import RegRiskWheel from "../components/RegRiskRoullete/regRiskWheel.mjs";
+
 // import MegaWheel from "../components/megaWheel/megaWheel.mjs";
 const EarnFreeCoins = () => {
   const navigate = useNavigate();
@@ -169,7 +170,6 @@ const EarnFreeCoins = () => {
     }
     checkKYCStatus();
   }, []);
-
   return (
     <Layout>
       <div className='container free-coin-page'>
@@ -190,6 +190,7 @@ const EarnFreeCoins = () => {
 
         {showRoulette ? (
           <MainRoulette
+            user={user}
             show={show}
             handleOpenRoulette={handleOpenRoulette}
             regRiskWheel={regRiskWheel}
@@ -211,6 +212,7 @@ const EarnFreeCoins = () => {
 
         {regRiskWheel ? (
           <RegRiskWheel
+            user={user}
             show={show}
             handleOpenRoulette={handleOpenRoulette}
             regRiskWheel={regRiskWheel}

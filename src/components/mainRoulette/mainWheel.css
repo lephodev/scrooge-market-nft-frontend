@@ -596,11 +596,17 @@ img.spinTxt {
     left: 50%;
     transform: translateX(-63%);
   }
+  .reg-risk-wheel-container {
+    transform: translateX(-62%);
+  }
   .big-wheel-container::after {
     left: 12px;
   }
-  .risk-wheel-wrapper, .reg-risk-wheel-wrapper {
+  .risk-wheel-wrapper{
     scale: 0.75;
+  }
+  .reg-risk-wheel-wrapper {
+    scale: 0.8;
   }
 .loyalty-wheel-wrapper {
     scale: 0.9;
@@ -614,8 +620,8 @@ img.spinTxt {
     top: -10%;
   }
   .reg-risk-wheel-container::before {
-    width: 85px;
-    height: 289px;
+    width: 185px;
+    height: 330px;
     top: -10%;
   }
   .loyalty-wheel::before {
@@ -646,8 +652,8 @@ img.spinTxt {
     height: 400px;
   }
   .reg-risk-wheel::before {
-    width: 400px;
-    height: 400px;
+    width: 410px;
+    height: 410px;
   }
   .big-wheel::before {
     width: 280px;

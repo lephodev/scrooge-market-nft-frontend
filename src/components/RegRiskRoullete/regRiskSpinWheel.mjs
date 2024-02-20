@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import spinbtn from "../../images/wheel/regular-risk-wheel/reg-risk-wheel-btn.png";
 import "../mainRoulette/mainWheel.css";
 import rotatewheel from "../../images/sounds/wheel-rotate.wav";
@@ -11,11 +11,13 @@ import { marketPlaceInstance } from "../../config/axios.js";
 import { toast } from "react-toastify";
 import "../../components/roulette/wheel.css";
 import WinPopup from "../roulette/winPopup.mjs";
+import AuthContext from "../../context/authContext.ts";
 
 function RegRiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
   const [selectItem, setselectItem] = useState(null);
   const [isWinResult, setIsWinResult] = useState(false);
   const [wheelResult, setWheelResult] = useState();
+  const { setUser } = useContext(AuthContext);
 
   const [spinButtonDisable, setSpinButtonDisable] = useState(false);
 
@@ -43,6 +45,8 @@ function RegRiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
 
         if (selectedItem === 0 || selectedItem === 1 || selectedItem === 9) {
           setTimeout(() => {
+            setUser(response.data.user);
+
             setBigWheel(true);
           }, 5000);
         }

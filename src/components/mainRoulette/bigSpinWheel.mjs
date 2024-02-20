@@ -24,16 +24,16 @@ function BigSpinWheel({ items, setWinPopup }) {
         const clientSeed = getClientSeed();
         // console.log({ clientSeed });
         setSpinButtonDisable(true);
-        const response = await (await marketPlaceInstance()).get(
-          "/gameResultForBigWheel",
-          {
-            params: { clientSeed },
-          }
-        );
+        const response = await (
+          await marketPlaceInstance()
+        ).get("/gameResultForBigWheel", {
+          params: { clientSeed },
+        });
         console.log("==>>>", response);
         const selectedItem = items.findIndex(
           (el) => el.token === response?.data?.resultData?.token
         );
+        localStorage.removeItem("wheelType");
         console.log("selectedItem", selectedItem);
         if (selectedItem === -1) return;
         setselectItem(selectedItem);
