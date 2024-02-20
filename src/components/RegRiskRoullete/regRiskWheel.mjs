@@ -9,7 +9,7 @@ import { Modal } from "react-bootstrap";
 import BigSpinWheel from "../mainRoulette/bigSpinWheel.mjs";
 import RegRiskSpinWheel from "./regRiskSpinWheel.mjs";
 
-const RegRiskWheel = ({ handleOpenRoulette, show }) => {
+const RegRiskWheel = ({ handleOpenRoulette, show, user }) => {
   const RegularRiskWheelPlaces = [
     { token: "Green1", chances: 10 },
     { token: "Green2", chances: 10 },
@@ -51,7 +51,10 @@ const RegRiskWheel = ({ handleOpenRoulette, show }) => {
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <>
-          {!bigWheel ? (
+          {user?.wheelType === "Big wheel" && (
+            <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} />
+          )}
+          {user?.wheelType !== "Big wheel" && !bigWheel && (
             <RegRiskSpinWheel
               items={RegularRiskWheelPlaces}
               setWinPopup={setWinPopup}
@@ -59,8 +62,6 @@ const RegRiskWheel = ({ handleOpenRoulette, show }) => {
               setVolume={setVolume}
               setBigWheel={setBigWheel}
             />
-          ) : (
-            <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} />
           )}
         </>
 

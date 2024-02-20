@@ -220,12 +220,12 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
             </Form.Group>
           ) : paymentType && paymentType.value === "Cashapp" ? (
             <Form.Group className='fiat-group'>
-              <Form.Label>CashAppId </Form.Label>
+              <Form.Label>$Cashtag </Form.Label>
               <Form.Control
                 type='text'
                 name='cashAppid'
                 //   defaultValue={singleTournament?.name}
-                placeholder='Enter Cashapp Id'
+                placeholder='Enter $Cashtag'
                 {...register("cashAppid")}
               />
               {errors?.cashAppid && (
