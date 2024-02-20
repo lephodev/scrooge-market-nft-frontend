@@ -1122,21 +1122,30 @@ const PayWithCard = ({
     try {
       goldcoinAmount = gc;
       if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
-        return toast.error("Your daily limit is exceeding", { toastId: "A" });
+        return toast.error(
+          "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
+          { toastId: "A" }
+        );
       }
 
       if (
         spendedAmount.spened_this_week + usd >
         user.weeklyGoldCoinSpendingLimit
       ) {
-        return toast.error("Your weekly limit is exceeding", { toastId: "B" });
+        return toast.error(
+          "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+          { toastId: "B" }
+        );
       }
 
       if (
         spendedAmount.spneded_this_month + usd >
         user.monthlyGoldCoinSpendingLimit
       ) {
-        return toast.error("Your monthly limit is exceeding", { toastId: "C" });
+        return toast.error(
+          "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+          { toastId: "C" }
+        );
       }
       setLoading(true);
       const res = await (
