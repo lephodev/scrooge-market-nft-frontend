@@ -679,6 +679,14 @@ export default function CryptoToGC() {
     }
   };
 
+  let arr = [9.99, 19.99, 24.99];
+
+  const handleShowMegaBuys = (price) => {
+    let filteredArr = arr.filter((item) => !user.megaOffer.includes(item));
+    if (parseFloat(price?.priceInBUSD) === parseFloat(filteredArr[0])) {
+      return true;
+    }
+  };
   return (
     <>
       <Helmet>
@@ -885,9 +893,7 @@ export default function CryptoToGC() {
                                 {isMegaBuyShow &&
                                   prize.offerType === "MegaOffer" && (
                                     <>
-                                      {!user.megaOffer.includes(
-                                        parseFloat(prize?.priceInBUSD)
-                                      ) ? (
+                                      {handleShowMegaBuys(prize) ? (
                                         <Card key={prize._id}>
                                           <h3 className='mega-text pulses'>
                                             Mega Offer
