@@ -8,6 +8,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import hatLogo from "../images/scroogeHatLogo.png";
+import newLogo from "../images/new-logo.webp";
 import { useContext } from "react";
 import playPolicy from "../images/SCROOGE CASINO Game Play Policy.docx";
 
@@ -206,7 +207,17 @@ const Layout = ({ children }) => {
                 <div className="header-content">
                   <div className="logo">
                     <Link to={scroogeClient}>
-                      <img src={hatLogo} alt="" />
+                      {user ? (
+                        <img
+                          src={newLogo}
+                          alt="logo"
+                          height={110}
+                          width={110}
+                          className="new-logo"
+                        />
+                      ) : (
+                        <img src={hatLogo} alt="logo" />
+                      )}
                     </Link>
                   </div>
                   <div className="main-menu">
@@ -214,7 +225,17 @@ const Layout = ({ children }) => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                       <div className="logo-mobile">
                         <Link to={scroogeClient}>
-                          <img src={hatLogo} alt="" />
+                          {user ? (
+                            <img
+                              src={newLogo}
+                              alt="logo"
+                              height={45}
+                              width={45}
+                              className="new-logo"
+                            />
+                          ) : (
+                            <img src={hatLogo} alt="logo" />
+                          )}
                         </Link>
                       </div>
 

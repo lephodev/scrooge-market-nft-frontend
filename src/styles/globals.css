@@ -192,6 +192,9 @@ html {
   max-width: 120px;
   padding: 8px;
 }
+.logo img.new-logo {
+  max-width: 110px;
+}
 
 .menu-logo-img {
   width: 50px;
@@ -5419,6 +5422,11 @@ p.title-memo {
   .logo-mobile img {
     max-width: 80px;
   }
+  .logo-mobile img.new-logo {
+    max-width: 70px;
+    width: 100%;
+    height: 70px;
+  }
 
   .wallet .green {
     font-size: 14px;
@@ -5626,6 +5634,11 @@ p.title-memo {
 
   .logo img {
     max-width: 76px;
+  }
+  .logo img.new-logo {
+    height: 60px;
+    max-width: 60px;
+    width: 100%;
   }
 
   .header .collapsed .navbar-toggler-icon {
