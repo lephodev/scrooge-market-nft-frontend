@@ -598,9 +598,17 @@ span.wallet-user-name {
   text-align: left;
   font-size: 18px;
 }
+.asterisk-desc.cryptoTotoken.first-grid ul li {
+  text-align: center !important;
+  font-size: 14px !important;
+  width: 100% !important;
+  list-style: none;
+}
+.asterisk-desc.cryptoTotoken.first-grid ul li span {
+  color: #ff0000;
+}
 
 .asterisk-desc.cryptoTotoken.abc {
-  margin-top: -22px;
   font-size: 11px !important;
   color: #c6bfbf;
   text-align: center;
@@ -2147,6 +2155,9 @@ select {
 }
 .my-wallet-page.main .title {
   padding-bottom: 40px;
+}
+.cryptoToGc.main .title {
+  color: #fff;
 }
 
 /*********************** Header *************************/
@@ -5235,9 +5246,7 @@ p.title-memo {
 .claim-box .crypto-balance-div:hover {
   background: transparent !important;
 }
-.special-offer-grid {
-  padding-top: 20px;
-}
+
 .special-offer-grid h5 {
   text-align: center;
   font-size: 26px;
