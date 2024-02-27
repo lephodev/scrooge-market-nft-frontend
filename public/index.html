@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -27,16 +27,29 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
     <title>Scrooge NFT Marketplace</title>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GECZMQEE19"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-GECZMQEE19");
+    </script>
 
     <script
       src="https://cdn.gravitec.net/storage/0d43dde3056917d01870e890d3912af2/client.js"
       async
     ></script>
   </head>
+
   <body>
     <noscript>You need to enable JavaScript to run this awesome app.</noscript>
     <div id="root"></div>
-    <!-- Google tag (gtag.js) -->
   </body>
   <!-- (c) 2005, 2023. Authorize.Net is a registered trademark of CyberSource Corporation -->
   <script type="text/javascript" language="javascript">

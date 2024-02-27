@@ -690,6 +690,7 @@ export default function CryptoToGC() {
   return (
     <>
       <Helmet>
+        <html className='crypto-to-gc' lang='en' />
         <script
           async
           src='https://www.googletagmanager.com/gtag/js?id=AW-11280008930'></script>
