@@ -76,36 +76,43 @@ const CryptoWithdrawPopup = ({ getUserDataInstant }) => {
     setSuccessShow(!successShow);
   };
   return (
-    <div className=' fiat-data'>
-      <p>Scrooge Contract to view tokens in wallet</p>
+    <div className=" fiat-data">
+      <p>
+        Scroogecoin Decentralized Cryptocurrency{" "}
+        <span>Please read PDF for details</span>
+      </p>
       <div
-        className='token-box'
+        className="token-box"
         onClick={() => {
           handleCopyURL("0x9dfee72aea65dc7e375d50ea2bd90384313a165a");
-        }}>
+        }}
+      >
         <h5>0x9dfee72aea65dc7e375d50ea2bd903843... </h5>
-        <img src={copyIcon} alt='icon' className='copy-icon' />
+        <img src={copyIcon} alt="icon" className="copy-icon" />
+      </div>
+      <div className="asset-wallet">
+        <h6>Contract to add asset to wallet</h6>
       </div>
       <Form onSubmit={handleSubmit(WithdrawRequest)}>
-        <div className='fiat-content'>
-          <Form.Group className='fiat-group'>
+        <div className="fiat-content">
+          <Form.Group className="fiat-group">
             <Form.Label>
               Minimum 5,000 ST($50) required for crypto withdrawals.
             </Form.Label>
             <Form.Control
-              type='number'
-              name='amount'
-              placeholder='Enter Withdraw Amount'
+              type="number"
+              name="amount"
+              placeholder="Enter Withdraw Amount"
               {...register("amount")}
             />
             {errors?.amount && (
-              <p className='error-msg'>{errors?.amount?.message}</p>
+              <p className="error-msg">{errors?.amount?.message}</p>
             )}
           </Form.Group>
         </div>
-        <div className='popupBtn'>
-          <button className='yellowBtn' variant='primary' type='submit'>
-            {!loading ? "Confirm" : <Spinner animation='border' />}{" "}
+        <div className="popupBtn">
+          <button className="yellowBtn" variant="primary" type="submit">
+            {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
           </button>
         </div>
       </Form>
