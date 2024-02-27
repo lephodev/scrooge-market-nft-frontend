@@ -202,7 +202,7 @@ const KYCForm = () => {
         toast.error("Unable to Upload the Kyc");
       }
     } catch (error) {
-      toast.error("Please try to upload diffrent images");
+      toast.error("Upload Failed, please contact support for assistance.");
       setLoading(false);
       console.log("error", error);
     }
