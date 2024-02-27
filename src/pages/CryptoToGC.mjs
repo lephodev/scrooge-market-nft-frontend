@@ -1246,7 +1246,10 @@ const PayWithCard = ({
           {" "}
           {!liveFormToken ? (
             !loader ? (
-              `Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}`
+              `Buy With Card $${getExactPrice(
+                prize?.priceInBUSD,
+                promoDetails
+              )}`
             ) : (
               <Spinner animation="border" />
             )
