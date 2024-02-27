@@ -192,6 +192,9 @@ html {
   max-width: 120px;
   padding: 8px;
 }
+.logo img.new-logo {
+  max-width: 110px;
+}
 
 .menu-logo-img {
   width: 50px;
@@ -5126,7 +5129,7 @@ h2#radix-\:r1\: {
   color: #b6b3b3;
   font-size: 14px;
   height: 43px;
-  margin-bottom: 20px;
+  
 }
 .copy-icon {
   filter: brightness(0) invert(1);
@@ -5134,6 +5137,12 @@ h2#radix-\:r1\: {
   margin-left: 10px;
   width: 20px;
   cursor: pointer;
+}
+.asset-wallet {
+  margin-bottom: 20px;
+}
+.asset-wallet h6 {
+  font-size: 12px;
 }
 
 .fiat-data p,
@@ -5148,6 +5157,9 @@ h2#radix-\:r1\: {
 }
 .fiat-data p {
   font-size: 16px;
+}
+.fiat-data p span {
+  display: block;
 }
 
 .fiat-data h5 {
@@ -5419,6 +5431,11 @@ p.title-memo {
   .logo-mobile img {
     max-width: 80px;
   }
+  .logo-mobile img.new-logo {
+    max-width: 70px;
+    width: 100%;
+    height: 70px;
+  }
 
   .wallet .green {
     font-size: 14px;
@@ -5626,6 +5643,11 @@ p.title-memo {
 
   .logo img {
     max-width: 76px;
+  }
+  .logo img.new-logo {
+    height: 60px;
+    max-width: 60px;
+    width: 100%;
   }
 
   .header .collapsed .navbar-toggler-icon {
@@ -5966,7 +5988,7 @@ p.title-memo {
     font-size: 14px;
   }
   .fiat-data {
-    padding: 30px 15px;
+    padding: 30px 10px;
   }
   .fiat-data p,
   .fiat-data .form-label {
