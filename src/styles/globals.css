@@ -2159,6 +2159,9 @@ select {
 .cryptoToGc.main .title {
   color: #fff;
 }
+.main.cryptoToGc, .main.redeem-page  {
+  padding-top: 30px;
+}
 
 /*********************** Header *************************/
 
@@ -5582,6 +5585,9 @@ p.title-memo {
 @media screen and (max-width: 991px) {
   .main {
     padding: 50px 0px !important;
+  }
+  .main.cryptoToGc, .main.redeem-page {
+    padding-top: 30px !important;
   }
 
   .footer-grid {
