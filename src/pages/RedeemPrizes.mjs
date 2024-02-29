@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useContext } from "react";
-import LoadingPoker from "../images/scroogeHatLogo.png";
+import scroogeHat from "../images/scroogeHatLogo.png";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,10 @@ import {
 } from "@thirdweb-dev/react";
 import ChainContext from "../context/Chain.ts";
 import CryptoWithdrawPopup from "./models/cryptoWithdrawPopup.mjs";
+import binanceIcon from "../images/redemption/binance-icon.svg";
+import cashAppIcon from "../images/redemption/cashapp-icon.svg";
+import payPalIcon from "../images/redemption/paypal-icon.svg";
+
 function RedeemPrizes() {
   const navigate = useNavigate();
   const { reward } = useReward("rewardId", "confetti", {
@@ -95,7 +99,7 @@ function RedeemPrizes() {
   };
 
   useEffect(() => {
-    setShowFastWithdraw(true);
+    // setShowFastWithdraw(true);
 
     async function checkKYCStatus() {
       const response = await userKycDetails();
@@ -118,12 +122,30 @@ function RedeemPrizes() {
     checkKYCStatus();
   }, []);
 
+  useEffect(() => {
+    handleScroll();
+  }, [showFastWithdraw, buyWithFiat]);
+
   if (redemptionUnderMaintainance) {
     return <UnderMaintenanceContent />;
   }
 
   const handleCloseFiat = () => {
     setShowFiat(false);
+  };
+
+  const handleScroll = () => {
+    const element1 =
+      document.getElementById("crypto-form") ||
+      document.getElementById("fiat-form");
+    if (element1) {
+      element1.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center",
+      });
+    }
+    console.log("element1", element1);
   };
 
   return (
@@ -133,7 +155,7 @@ function RedeemPrizes() {
           {globalLoader && (
             <div className="loading">
               <div className="loading-img-div">
-                <img src={LoadingPoker} alt="game" className="imageAnimation" />
+                <img src={scroogeHat} alt="game" className="imageAnimation" />
               </div>
             </div>
           )}
@@ -160,38 +182,40 @@ function RedeemPrizes() {
               <>
                 <div className="scrooge-main-heading">
                   <div className="pageTitle">
-                    <h1 className="title">Redeem for Prizes</h1>
+                    <h1 className="title">Sweepstakes Redemption</h1>
                   </div>
-                  <div className="page-sub-title">
+                  {/* <div className="page-sub-title">
                     <h2>
                       Ready to cash in on your big wins? Take a look through our
                       selection of prize options and pick what suits you best!
                       Sweep Tokens are redeemed at a 100:1 USD ratio!
                     </h2>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="prizes-chip-count m-0">
                   {user ? (
                     <>
                       <h3>
-                        Sweep Token Balance :{" "}
-                        {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
+                        Redeemable ST Balance :{" "}
+                        <span>
+                          {" "}
+                          {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
+                        </span>
                       </h3>
                       <h3>
-                        USD Equivelant Value: $
-                        {(
-                          user?.wallet / 100 -
-                          user?.nonWithdrawableAmt / 100
-                        ).toFixed(2)}
+                        USD Value: $
+                        <span>
+                          {" "}
+                          {(
+                            user?.wallet / 100 -
+                            user?.nonWithdrawableAmt / 100
+                          ).toFixed(2)}
+                        </span>
                       </h3>
-                      <a href={Pdf} target="blank" className="pdf-down">
-                        {" "}
-                        How it works! Click here to download pdf.
-                      </a>
                     </>
                   ) : (
                     <img
-                      src={LoadingPoker}
+                      src={scroogeHat}
                       alt="game"
                       className="imageAnimation"
                       width={100}
@@ -200,14 +224,62 @@ function RedeemPrizes() {
                   )}
                 </div>
                 <div className="page-nav-header-btns-row">
-                  <div className="new-btn">
-                    <button onClick={() => filterPrizes("fast_withdraw")}>
-                      Crypto
-                    </button>
+                  <div
+                    className="redeem-method-box"
+                    onClick={() => filterPrizes("fast_withdraw")}
+                  >
+                    <div className="redeem-method-title">
+                      <h4>Crypto Prize</h4>
+                    </div>
+                    <div className="redeem-icon-grid">
+                      <img
+                        src={binanceIcon}
+                        alt="binanceIcon"
+                        width={64}
+                        height={64}
+                      />
+                      <img
+                        src={scroogeHat}
+                        alt="scroogeHat"
+                        width={64}
+                        height={64}
+                      />
+                    </div>
+                    <div className="redeem-info-grid">
+                      <h5>
+                        <span>Get ScroogeCoin</span> Sent To Your Defi Wallet
+                      </h5>
+                      <h6>Minimum 5,000 ST Required</h6>
+                    </div>
                   </div>
 
-                  <div className="new-btn">
-                    <button onClick={() => filterPrizes("Fiat")}>Cash</button>
+                  <div
+                    className="redeem-method-box"
+                    onClick={() => filterPrizes("Fiat")}
+                  >
+                    <div className="redeem-method-title">
+                      <h4> Cash Prize</h4>
+                    </div>
+                    <div className="redeem-icon-grid">
+                      <img
+                        src={cashAppIcon}
+                        alt="cashAppIcon"
+                        width={64}
+                        height={64}
+                      />
+                      <img
+                        src={payPalIcon}
+                        alt="payPalIcon"
+                        width={64}
+                        height={64}
+                      />
+                    </div>
+                    <div className="redeem-info-grid">
+                      <h5>
+                        <span>Redeemable To</span> Cashapp or Paypal
+                      </h5>
+                      <h6> 10,000 ST Minimum</h6>
+                    </div>
                   </div>
                 </div>
                 {isMismatched && address ? (
@@ -236,6 +308,12 @@ function RedeemPrizes() {
                     getUserDataInstant={getUserDataInstant}
                   />
                 )}
+                <div className="download-pdf-grid">
+                  <a href={Pdf} target="blank" className="pdf-down">
+                    {" "}
+                    How it works! Click here to download pdf.
+                  </a>
+                </div>
               </>
             )}
           </div>
