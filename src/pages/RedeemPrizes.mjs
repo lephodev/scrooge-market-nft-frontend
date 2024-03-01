@@ -315,7 +315,7 @@ function RedeemPrizes() {
                 )}
                 <div className="redemption-history">
                   <a
-                    href={`${scroogeClient}/profile?redeemHist`}
+                    href={`${scroogeClient}/profile?active=redemption`}
                     target="_blank"
                     className="pdf-down"
                     rel="noreferrer"
