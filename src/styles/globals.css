@@ -2156,12 +2156,38 @@ select {
 }
 .my-wallet-page.main .title {
   padding-bottom: 40px;
+  text-transform: uppercase;
 }
-.cryptoToGc.main .title,  .redeem-page.main .title {
+.cryptoToGc.main .title,  .redeem-page.main .title, .my-wallet-page .title {
   color: #fff;
+  letter-spacing: 2px;
 }
-.main.cryptoToGc, .main.redeem-page  {
+.main.cryptoToGc, .main.redeem-page, .main.my-wallet-page  {
   padding-top: 30px;
+}
+.redeem-method-box.box-active {
+  background: #151515;
+  box-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px 0 #0000000f;
+}
+.redemption-history {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  
+}
+.redemption-history a {
+  background: #222121;
+  border-radius: 24px;
+  text-align: center;
+  padding: 5px 20px;
+  max-width: 250px;
+  width: 100%;
+  margin: 0px auto;
+  cursor: pointer;
+  color: #f9ff00;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 /*********************** Header *************************/
@@ -2950,6 +2976,8 @@ ul.footer-support li img {
   padding: 20px;
   gap: 40px;
   flex-wrap: wrap;
+  padding-top: 0;
+  margin-top: 0;
 }
 
 .my-wallet-page .wallet-casino-profile-details {
@@ -5642,7 +5670,7 @@ p.title-memo {
   .main {
     padding: 50px 0px !important;
   }
-  .main.cryptoToGc, .main.redeem-page {
+  .main.cryptoToGc, .main.redeem-page, .main.my-wallet-page {
     padding-top: 30px !important;
   }
 

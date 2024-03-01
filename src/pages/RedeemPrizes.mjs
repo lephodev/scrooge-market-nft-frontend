@@ -26,6 +26,7 @@ import CryptoWithdrawPopup from "./models/cryptoWithdrawPopup.mjs";
 import binanceIcon from "../images/redemption/binance-icon.svg";
 import cashAppIcon from "../images/redemption/cashapp-icon.svg";
 import payPalIcon from "../images/redemption/paypal-icon.svg";
+import { scroogeClient } from "../config/keys.js";
 
 function RedeemPrizes() {
   const navigate = useNavigate();
@@ -225,7 +226,9 @@ function RedeemPrizes() {
                 </div>
                 <div className="page-nav-header-btns-row">
                   <div
-                    className="redeem-method-box"
+                    className={`redeem-method-box ${
+                      showFastWithdraw ? "box-active" : ""
+                    }`}
                     onClick={() => filterPrizes("fast_withdraw")}
                   >
                     <div className="redeem-method-title">
@@ -254,7 +257,9 @@ function RedeemPrizes() {
                   </div>
 
                   <div
-                    className="redeem-method-box"
+                    className={`redeem-method-box ${
+                      buyWithFiat ? "box-active" : ""
+                    }`}
                     onClick={() => filterPrizes("Fiat")}
                   >
                     <div className="redeem-method-title">
@@ -308,6 +313,16 @@ function RedeemPrizes() {
                     getUserDataInstant={getUserDataInstant}
                   />
                 )}
+                <div className="redemption-history">
+                  <a
+                    href={`${scroogeClient}/profile?active=redemption`}
+                    target="_blank"
+                    className="pdf-down"
+                    rel="noreferrer"
+                  >
+                    Click Here to View Redemption History
+                  </a>
+                </div>
                 <div className="download-pdf-grid">
                   <a href={Pdf} target="blank" className="pdf-down">
                     {" "}
