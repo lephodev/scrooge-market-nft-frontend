@@ -30,6 +30,7 @@ import { BUSD_ADDRESS } from "../config/keys.js";
 import { ethers } from "ethers";
 import axios from "axios";
 import AuthorizeSucessModel from "./models/authrizeSucessModel.mjs";
+import PageLoader from "../components/pageLoader/loader.mjs";
 let promoCode;
 let goldcoinAmount;
 
@@ -727,11 +728,7 @@ export default function CryptoToGC() {
       )}
 
       {prizesLoading ? (
-        <div className="loading">
-          <div className="loading-img-div">
-            <img src={LoadingPoker} alt="game" className="imageAnimation" />
-          </div>
-        </div>
+        <PageLoader />
       ) : (
         <Layout>
           <main className="main redeem-prizes-page cryptoToGc">
