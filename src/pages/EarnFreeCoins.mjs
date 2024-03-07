@@ -5,7 +5,6 @@ import HolderClaimChips from "./HolderClaimChips.mjs";
 import { DLGate } from "../components/DLGate.jsx";
 import DLClaimTokens from "./DLClaimTokens.mjs";
 import Layout from "./Layout.mjs";
-import LoadingPoker from "../images/scroogeHatLogo.png";
 
 import ShowBottomNavCards from "../scripts/showBottomNavCards.mjs";
 import DailyRewards from "../components/DailyRewards.mjs";
