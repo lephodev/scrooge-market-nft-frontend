@@ -76,7 +76,7 @@ const CryptoWithdrawPopup = ({ getUserDataInstant }) => {
     setSuccessShow(!successShow);
   };
   return (
-    <div className=" fiat-data">
+    <div className=" fiat-data" id="crypto-form">
       <p>
         Scroogecoin Decentralized Cryptocurrency{" "}
         <span>Please read PDF for details</span>

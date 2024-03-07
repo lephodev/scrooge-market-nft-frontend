@@ -539,6 +539,7 @@ span.wallet-user-name {
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 120px;
   padding: 20px 0 0 0;
 }
 
@@ -598,9 +599,17 @@ span.wallet-user-name {
   text-align: left;
   font-size: 18px;
 }
+.asterisk-desc.cryptoTotoken.first-grid ul li {
+  text-align: center !important;
+  font-size: 14px !important;
+  width: 100% !important;
+  list-style: none;
+}
+.asterisk-desc.cryptoTotoken.first-grid ul li span {
+  color: #ff0000;
+}
 
 .asterisk-desc.cryptoTotoken.abc {
-  margin-top: -22px;
   font-size: 11px !important;
   color: #c6bfbf;
   text-align: center;
@@ -2147,6 +2156,38 @@ select {
 }
 .my-wallet-page.main .title {
   padding-bottom: 40px;
+  text-transform: uppercase;
+}
+.cryptoToGc.main .title,  .redeem-page.main .title, .my-wallet-page .title {
+  color: #fff;
+  letter-spacing: 2px;
+}
+.main.cryptoToGc, .main.redeem-page, .main.my-wallet-page  {
+  padding-top: 30px;
+}
+.redeem-method-box.box-active {
+  background: #151515;
+  box-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px 0 #0000000f;
+}
+.redemption-history {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  
+}
+.redemption-history a {
+  background: #222121;
+  border-radius: 24px;
+  text-align: center;
+  padding: 5px 20px;
+  max-width: 250px;
+  width: 100%;
+  margin: 0px auto;
+  cursor: pointer;
+  color: #f9ff00;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 /*********************** Header *************************/
@@ -2935,6 +2976,8 @@ ul.footer-support li img {
   padding: 20px;
   gap: 40px;
   flex-wrap: wrap;
+  padding-top: 0;
+  margin-top: 0;
 }
 
 .my-wallet-page .wallet-casino-profile-details {
@@ -3006,8 +3049,11 @@ ul.footer-support li img {
 }
 
 .redeem-prizes-page .prizes-chip-count h3 {
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 500;
+}
+.redeem-prizes-page .prizes-chip-count h3 span {
+  color: #fff;
 }
 
 .claim-free-page .pageTitle,
@@ -3019,8 +3065,7 @@ ul.footer-support li img {
   padding-top: 30px;
 }
 
-.redeem-prizes-page .page-nav-header-btns-subrow,
-.redeem-prizes-page .page-nav-header-btns-row {
+.redeem-prizes-page .page-nav-header-btns-subrow{
   gap: 20px;
 }
 
@@ -3104,6 +3149,59 @@ ul.footer-support li img {
   background: linear-gradient(#2196f3, #e91e63);
   clip-path: circle(10% at 5% 5%);
   transition: all 0.5s;
+}
+
+.redeem-method-box {
+  background: #222121;
+  border-radius: 35px;
+  text-align: center;
+  padding: 20px 10px;
+  padding-bottom: 30px;
+  max-width: 295px;
+  width: 100%;
+  cursor: pointer;
+}
+.redeem-method-title h4 {
+  color: #fff;
+  font-size: 30px;
+  margin: 0;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.redeem-icon-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px 0px;
+}
+.redeem-info-grid h5 {
+  color: #f8d761;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 150%;
+  margin: 0;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+.redeem-info-grid h5 span {
+  display: block;
+}
+.redeem-info-grid h6 {
+  color: #ff0000;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 150%;
+  text-transform: uppercase;
+}
+
+.download-pdf-grid {
+  text-align: center;
+  padding-top: 20px;
+}
+.download-pdf-grid a {
+  font-size: 18px;
+  font-weight: 600;
 }
 
 /* ************************** social-card ************************** */
@@ -5235,9 +5333,7 @@ p.title-memo {
 .claim-box .crypto-balance-div:hover {
   background: transparent !important;
 }
-.special-offer-grid {
-  padding-top: 20px;
-}
+
 .special-offer-grid h5 {
   text-align: center;
   font-size: 26px;
@@ -5573,6 +5669,9 @@ p.title-memo {
 @media screen and (max-width: 991px) {
   .main {
     padding: 50px 0px !important;
+  }
+  .main.cryptoToGc, .main.redeem-page, .main.my-wallet-page {
+    padding-top: 30px !important;
   }
 
   .footer-grid {
@@ -6002,6 +6101,29 @@ p.title-memo {
   }
   .special-offer-grid .purchasemodal-cards {
     max-width: 80%;
+  }
+  .page-nav-header-btns-row {
+    gap: 30px;
+  }
+  .redeem-method-title h4 {
+    font-size: 26px;
+  }
+  .redeem-icon-grid img {
+    height: 48px;
+    width: 48px;
+  }
+  .redeem-info-grid h5 {
+    font-size: 16px;
+    padding-bottom: 5px;
+  }
+  .redeem-info-grid h6 {
+    font-size: 16px;
+  }
+  .redeem-method-box {
+    padding-bottom: 20px;
+  }
+  .download-pdf-grid a {
+    font-size: 16px;
   }
 }
 
@@ -6670,11 +6792,6 @@ p.title-memo {
     max-width: 100%;
     padding-top: 0;
   }
-
-  .page-nav-header-btns-row {
-    gap: 10px;
-  }
-
   .wallet button {
     gap: 6px !important;
     padding: 8px 6px !important;

@@ -169,14 +169,14 @@ export default function MyWallet() {
         <main className="main my-wallet-page">
           {/* <h1 className='title'>{user?.username}'s SCROOGE CASINO WALLET</h1> */}
           <h1 className="title">Scrooge Crypto holder rewards</h1>
-          <div className="feature-overview-div">
+          {/* <div className="feature-overview-div">
             Here is where the magic happens, by holding our Cryptocurrency,
             Scrooge, you are rewarded with free monthly Sweep Tokens based upon
             your value of Scrooge holdings. That’s not all, you can also claim
             your pending USDT from Scrooge reflections! Don’t forget the Ducky
             Lucks NFTs that also allot you even more free Sweep Tokens each and
             every month.
-          </div>
+          </div> */}
           {!showMerchRedeemed || !showCasinoNFTs || !showCrypto ? (
             <div className="min-menu-div">
               {!showMerchRedeemed ? (
@@ -306,7 +306,7 @@ export default function MyWallet() {
                     </div> */}
                     <div>
                       <div className="claim-box">
-                        <h6 className="title">Ducky Luck Claims</h6>
+                        {/* <h6 className="title">Ducky Luck Claims</h6> */}
                         {address ? (
                           <div className="crypto-card-grid">
                             <div className="crypto-balance-div">
