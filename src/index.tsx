@@ -33,7 +33,6 @@ import Raffles from "./pages/Raffles.mjs";
 import AuthContext from "./context/authContext";
 import { ToastContainer } from "react-toastify";
 import { authInstance } from "./config/axios";
-import LoadingPoker from "./images/scroogeHatLogo.png";
 import PaymentSuccess from "./pages/PaymentSuccess.mjs";
 import KycForm from "./pages/KycForm.mjs";
 import BuyTokenFromOGJR from "./pages/BuyTokenFromOGJR.mjs";
@@ -44,6 +43,7 @@ import vpnbanner from "./images/vpn-banner.webp";
 import notaccess from "./images/not-access.webp";
 
 import PaymentCustom from "./pages/PaymentCustom.mjs";
+import PageLoader from "./components/pageLoader/loader.mjs";
 // import { validateToken } from "./utils/dateUtils.mjs";
 
 export default function App() {
@@ -241,11 +241,7 @@ export default function App() {
             dateTimeNow,
           }}>
           {loading ? (
-            <div className='loading'>
-              <div className='loading-img-div'>
-                <img src={LoadingPoker} alt='game' className='imageAnimation' />
-              </div>
-            </div>
+           <PageLoader />
           ) : (
             <ChainContext.Provider value={{ selectedChain, setSelectedChain }}>
               <ThirdwebProvider

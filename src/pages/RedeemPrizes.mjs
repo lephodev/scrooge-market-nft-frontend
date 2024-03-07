@@ -27,6 +27,7 @@ import binanceIcon from "../images/redemption/binance-icon.svg";
 import cashAppIcon from "../images/redemption/cashapp-icon.svg";
 import payPalIcon from "../images/redemption/paypal-icon.svg";
 import { scroogeClient } from "../config/keys.js";
+import PageLoader from "../components/pageLoader/loader.mjs";
 
 function RedeemPrizes() {
   const navigate = useNavigate();
@@ -153,13 +154,7 @@ function RedeemPrizes() {
     <Layout>
       <main className="main redeem-prizes-page redeem-page">
         <div className="container">
-          {globalLoader && (
-            <div className="loading">
-              <div className="loading-img-div">
-                <img src={scroogeHat} alt="game" className="imageAnimation" />
-              </div>
-            </div>
-          )}
+          {globalLoader && <PageLoader />}
           <div className="bordered-section">
             {redeemSuccess ? (
               <div className="pageImgContainer">
@@ -204,9 +199,9 @@ function RedeemPrizes() {
                         </span>
                       </h3>
                       <h3>
-                        USD Value: $
+                        USD Value :{" "}
                         <span>
-                          {" "}
+                          ${" "}
                           {(
                             user?.wallet / 100 -
                             user?.nonWithdrawableAmt / 100
