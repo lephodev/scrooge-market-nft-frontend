@@ -1156,6 +1156,10 @@ const PayWithCard = ({
   const [loader, setLoading] = useState(false);
 
   const handleCLick = async (gc, usd) => {
+    console.log("dailyGCPurchaseLimit",dailyGCPurchaseLimit);
+    if (dailyGCPurchaseLimit >= 4) {
+      return toast.error("Credit card daily purchase limit are reached");
+    }
     console.log(
       "spendedAmount.spended_today + usd",
       spendedAmount.spended_today,
