@@ -6839,4 +6839,15 @@ p.title-memo {
     font-weight: 600;
     font-size: 20px;
   }
+  .disable-btn-purchase {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
+
+.disable-btn-purchase {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
