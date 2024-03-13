@@ -174,6 +174,15 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
   };
 
   const handleChnagePayout = (selectedOptions) => {
+    console.log("selectedOptions", selectedOptions);
+    setPaymentType(selectedOptions);
+
+    if (selectedOptions.value === "Cashapp") {
+      return toast.error("availability subject to sending limitations", {
+        toastId: "A",
+      });
+    }
+
     setValue("paymentType", selectedOptions?.value);
     setValue("email", "");
     setValue("cashAppid", "");
@@ -219,23 +228,24 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
               )}
             </Form.Group>
           ) : paymentType && paymentType.value === "Cashapp" ? (
-            <Form.Group className="fiat-group">
-              <Form.Label>$Cashtag </Form.Label>
-              <Form.Control
-                type="text"
-                name="cashAppid"
-                //   defaultValue={singleTournament?.name}
-                placeholder="Enter $Cashtag"
-                {...register("cashAppid")}
-              />
-              {errors?.cashAppid && (
-                <p className="error-msg">{errors?.cashAppid?.message}</p>
-              )}
-            </Form.Group>
+            ""
           ) : (
+            // <Form.Group className="fiat-group">
+            //   <Form.Label>$Cashtag </Form.Label>
+            //   <Form.Control
+            //     type="text"
+            //     name="cashAppid"
+            //     //   defaultValue={singleTournament?.name}
+            //     placeholder="Enter $Cashtag"
+            //     {...register("cashAppid")}
+            //   />
+            //   {errors?.cashAppid && (
+            //     <p className="error-msg">{errors?.cashAppid?.message}</p>
+            //   )}
+            // </Form.Group>
             ""
           )}
-          {paymentType && paymentType.value && (
+          {paymentType && paymentType.value !== "Cashapp" && (
             <Form.Group className="fiat-group">
               <Form.Label>
                 Minimum 10000 ST($100) required for Fiat withdrawals.
@@ -260,11 +270,13 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
             10% of the amount will be deducted from your redemption amount
           </h6> */}
         </div>
-        <div className="popupBtn">
-          <button className="yellowBtn" variant="primary" type="submit">
-            {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
-          </button>
-        </div>
+        {paymentType && paymentType.value !== "Cashapp" && (
+          <div className="popupBtn">
+            <button className="yellowBtn" variant="primary" type="submit">
+              {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
+            </button>
+          </div>
+        )}
       </Form>
     </div>
   );
