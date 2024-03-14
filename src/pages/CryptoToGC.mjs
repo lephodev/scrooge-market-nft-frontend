@@ -1156,6 +1156,10 @@ const PayWithCard = ({
   const [loader, setLoading] = useState(false);
 
   const handleCLick = async (gc, usd) => {
+    console.log("dailyGCPurchaseLimit",dailyGCPurchaseLimit);
+    if (dailyGCPurchaseLimit >= 4) {
+      return toast.error("Credit card daily purchase limit are reached");
+    }
     console.log(
       "spendedAmount.spended_today + usd",
       spendedAmount.spended_today,
@@ -1222,6 +1226,28 @@ const PayWithCard = ({
     }
   }, [liveFormToken]);
 
+  const handleLimitCheck=(usd)=>{
+    if(spendedAmount.spneded_this_month + usd >
+      user.monthlyGoldCoinSpendingLimit){
+        console.log("spendedAmount.spneded_this_month",spendedAmount.spneded_this_month, user.monthlyGoldCoinSpendingLimit,usd);
+
+    return true
+      }
+      if(spendedAmount.spened_this_week + usd >
+        user.weeklyGoldCoinSpendingLimit){
+          console.log("spendedAmount.spneded_this_week",spendedAmount.spened_this_week,
+          user.weeklyGoldCoinSpendingLimit,usd);
+
+      return true
+        }
+        if(spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit){
+          console.log("spendedAmount.spneded_this_day",spendedAmount.spended_today,user.dailyGoldCoinSpendingLimit,usd)
+        return true
+          }
+
+    return false;
+  }
+
   return (
     <>
       {liveFormToken ? (
@@ -1236,6 +1262,8 @@ const PayWithCard = ({
         </button>
       ) : (
         <button
+        className={handleLimitCheck(parseFloat(prize?.priceInBUSD))?"disable-btn-purchase":""}
+        disabled={handleLimitCheck(parseFloat(prize?.priceInBUSD))}
           onClick={() =>
             handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
           }

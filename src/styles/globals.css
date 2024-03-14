@@ -4964,17 +4964,18 @@ button.affiliate-dropdownBtn.close::before {
 h3.mega-text {
   background: #fa0000;
   border: 1px solid #f9ff00;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
   padding: 4px 14px;
   text-align: center;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  color: white;
-  font-size: 14px;
-  margin: 0;
+  width: 50%;
+  margin: 0px auto;
   margin-top: -6px;
-  font-weight: 600;
 }
 .pulses {
   display: block;
@@ -6838,4 +6839,15 @@ p.title-memo {
     font-weight: 600;
     font-size: 20px;
   }
+  .disable-btn-purchase {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
+
+.disable-btn-purchase {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+

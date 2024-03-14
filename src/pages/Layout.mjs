@@ -408,7 +408,7 @@ const Layout = ({ children }) => {
                   <li>
                     {" "}
                     <a href={playPolicy} target="blank">
-                      Game Play policy
+                      Responsible Social Gameplay
                     </a>
                   </li>
                   <li>
