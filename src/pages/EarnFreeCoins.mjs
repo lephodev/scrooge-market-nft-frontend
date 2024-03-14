@@ -329,7 +329,7 @@ const EarnFreeCoins = () => {
                           />
                           <p>
                             Congrats on 30 straight days of spinning, here is a
-                            Bonus Wheel for today’s spin{" "}
+                            Bonus Wheel for your next spin.{" "}
                           </p>
                           <button
                             disabled={!canSpin}
@@ -430,13 +430,13 @@ const EarnFreeCoins = () => {
           ) : (
             ""
           )}
-          <div className='tabs-claim'>
+          <div className="tabs-claim">
             {key === "dailyClaims" ? (
-              <div className='tab-claims'>
+              <div className="tab-claims">
                 <DailyRewards />
               </div>
             ) : key === "monthlyClaims" ? (
-              <div className='tab-claims'>
+              <div className="tab-claims">
                 <HolderClaimChips />
               </div>
             ) : key === "duckyLuckClaims" ? (
@@ -450,7 +450,7 @@ const EarnFreeCoins = () => {
               ""
             )}
           </div>
-          <div className='flex-row' style={{ margin: "50px auto 0px" }}>
+          <div className="flex-row" style={{ margin: "50px auto 0px" }}>
             <ShowBottomNavCards />
           </div>
         </div>
