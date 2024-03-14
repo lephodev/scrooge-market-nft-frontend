@@ -48,9 +48,10 @@ import ConnectWalletModel from "./models/connectWalletModel.mjs";
 export const Tooltip = (id, metadata, message) => (
   <Popup
     trigger={<ThirdwebNftMedia key={id} metadata={metadata} height={200} />}
-    position='bottom center'
+    position="bottom center"
     on={["hover", "focus"]}
-    closeOnDocumentClick>
+    closeOnDocumentClick
+  >
     <span> {message} </span>
   </Popup>
 );
@@ -191,105 +192,114 @@ const Layout = ({ children }) => {
         handleConnectWallet={handleConnectWallet}
         handleConnect={handleConnect}
       />
-      <div className='wrapper'>
-        <div className='header' ref={wrapperRef}>
+      <div className="wrapper">
+        <div className="header" ref={wrapperRef}>
           <Navbar
             collapseOnSelect
-            expand='lg'
+            expand="lg"
             expanded={navOpen}
             onToggle={() => {
               setNavOpen(!navOpen);
-            }}>
+            }}
+          >
             <Container>
-              <div className='header-Container'>
-                <div className='header-content'>
-                  <div className='logo'>
+              <div className="header-Container">
+                <div className="header-content">
+                  <div className="logo">
                     <Link to={scroogeClient}>
                       {user ? (
                         <img
                           src={newLogo}
-                          alt='logo'
+                          alt="logo"
                           height={110}
                           width={110}
-                          className='new-logo'
+                          className="new-logo"
                         />
                       ) : (
-                        <img src={hatLogo} alt='logo' />
+                        <img src={hatLogo} alt="logo" />
                       )}
                     </Link>
                   </div>
-                  <div className='main-menu'>
-                    <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-                    <Navbar.Collapse id='responsive-navbar-nav'>
-                      <div className='logo-mobile'>
+                  <div className="main-menu">
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                      <div className="logo-mobile">
                         <Link to={scroogeClient}>
                           {user ? (
                             <img
                               src={newLogo}
-                              alt='logo'
+                              alt="logo"
                               height={45}
                               width={45}
-                              className='new-logo'
+                              className="new-logo"
                             />
                           ) : (
-                            <img src={hatLogo} alt='logo' />
+                            <img src={hatLogo} alt="logo" />
                           )}
                         </Link>
                       </div>
 
-                      <Nav className='mr-auto'>
+                      <Nav className="mr-auto">
                         {user ? (
                           <>
                             <Link
                               to={scroogeClient}
-                              className={`nav-link ${isActive(scroogeClient)}`}>
+                              className={`nav-link ${isActive(scroogeClient)}`}
+                            >
                               Home
                             </Link>
                             <Link
                               to={`${scroogeClient}/games`}
                               className={`nav-link ${isActive(
                                 `${scroogeClient}/games`
-                              )}`}>
+                              )}`}
+                            >
                               Games
                             </Link>
                             <Link
                               to={`/crypto-to-gc`}
                               className={`nav-link ${isActive(
                                 "/crypto-to-gc"
-                              )}`}>
+                              )}`}
+                            >
                               Purchase Center{" "}
                             </Link>
                             <Link
                               to={`/redeem-prizes`}
                               className={`nav-link ${isActive(
                                 "/redeem-prizes"
-                              )}`}>
+                              )}`}
+                            >
                               Redemption Center
                             </Link>
                             <Link
                               to={`/claim-free-tokens`}
                               className={`nav-link ${isActive(
                                 "/claim-free-tokens"
-                              )}`}>
+                              )}`}
+                            >
                               Daily Wheel Spin
                             </Link>
                             <Link
                               to={`${scroogeClient}/affiliate`}
-                              className={`nav-link ${isActive("/affiliate")}`}>
+                              className={`nav-link ${isActive("/affiliate")}`}
+                            >
                               Affiliate Program
                             </Link>
                             <Link
                               to={`/my-wallet`}
-                              className={`nav-link ${isActive("/my-wallet")}`}>
+                              className={`nav-link ${isActive("/my-wallet")}`}
+                            >
                               Holder Claim Center
                             </Link>
                           </>
                         ) : (
                           <a
                             href={`${scroogeClient}/login`}
-                            /* target="_blank" */ rel='noreferrer'
-                            alt='Login to Scrooge Casino'>
-                            <button className='submit-btn'>
+                            /* target="_blank" */ rel="noreferrer"
+                            alt="Login to Scrooge Casino"
+                          >
+                            <button className="submit-btn">
                               LOGIN TO YOUR SCROOGE CASINO ACCOUNT
                             </button>
                           </a>
@@ -297,7 +307,7 @@ const Layout = ({ children }) => {
                       </Nav>
                     </Navbar.Collapse>
                   </div>
-                  <div className='wallet'>
+                  <div className="wallet">
                     {address ? (
                       <ConnectWallet />
                     ) : (
@@ -305,7 +315,7 @@ const Layout = ({ children }) => {
                         {!loaderaddress ? (
                           "Connect Wallet"
                         ) : (
-                          <Spinner animation='border' />
+                          <Spinner animation="border" />
                         )}
                       </Button>
                     )}
@@ -318,14 +328,14 @@ const Layout = ({ children }) => {
           </Navbar>
         </div>
 
-        <div className='content'>{children}</div>
+        <div className="content">{children}</div>
 
-        <div className='footer'>
-          <div className='container'>
-            <div className='footer-grid'>
-              <div className='footer-info'>
+        <div className="footer">
+          <div className="container">
+            <div className="footer-grid">
+              <div className="footer-info">
                 <Link to={scroogeClient}>
-                  <img src={logo} alt='scrooge casino nft token packages' />
+                  <img src={logo} alt="scrooge casino nft token packages" />
                 </Link>
                 <h6>
                   Want to stay ahead of your competition. Subscribe and be the
@@ -336,56 +346,60 @@ const Layout = ({ children }) => {
                 </p>
               </div>
 
-              <div className='footer-menu'>
+              <div className="footer-menu">
                 <h3>Destinations</h3>
                 <ul>
                   {/* <li>
                   <Link to='/nft-tokens'>NFT Marketplace</Link>
                 </li> */}
                   <li>
-                    <a href={scroogeClient} rel='noreferrer'>
+                    <a href={scroogeClient} rel="noreferrer">
                       Scrooge Casino Home
                     </a>
                   </li>
                   <li>
                     <a
                       href={`${user ? pokerUrl : `${scroogeClient}/login`}`}
-                      rel='noreferrer'>
+                      rel="noreferrer"
+                    >
                       Poker
                     </a>
                   </li>
                   <li>
                     <a
                       href={`${user ? blackjackUrl : `${scroogeClient}/login`}`}
-                      rel='noreferrer'>
+                      rel="noreferrer"
+                    >
                       Blackjack
                     </a>
                   </li>
                   <li>
                     <a
                       href={`${user ? slotUrl : `${scroogeClient}/login`}`}
-                      rel='noreferrer'>
+                      rel="noreferrer"
+                    >
                       Slot
                     </a>
                   </li>
                   <li>
                     <a
                       href={`${user ? rouletteUrl : `${scroogeClient}/login`}`}
-                      rel='noreferrer'>
+                      rel="noreferrer"
+                    >
                       Roulette
                     </a>
                   </li>
                 </ul>
               </div>
 
-              <div className='footer-menu'>
+              <div className="footer-menu">
                 <h3>Policy</h3>
                 <ul>
                   <li>
-                    <Link to='/privacy'>Privacy Policy</Link>
+                    <Link to="/privacy">Privacy Policy</Link>
                   </li>
                   <li>
-                    <Link to='/terms'>Terms and Conditions</Link>
+                    <Link to="/terms">Terms and Conditions</Link>
                   </li>
 
                   {/* <li>
@@ -393,8 +407,8 @@ const Layout = ({ children }) => {
                   </li> */}
                   <li>
                     {" "}
-                    <a href={playPolicy} target='blank'>
-                      Game Play policy
+                    <a href={playPolicy} target="blank">
+                      Responsible Social Gameplay
                     </a>
                   </li>
                   <li>
@@ -403,21 +417,23 @@ const Layout = ({ children }) => {
                 </ul>
               </div>
 
-              <div className='footer-contact'>
+              <div className="footer-contact">
                 <h3>Follow us</h3>
-                <ul className='footer-social'>
+                <ul className="footer-social">
                   <li>
                     <a
-                      href='https://www.facebook.com/scroogegold/'
-                      rel='noopener noreferrer'>
-                      <img src={facebook} alt='' />
+                      href="https://www.facebook.com/scroogegold/"
+                      rel="noopener noreferrer"
+                    >
+                      <img src={facebook} alt="" />
                     </a>
                   </li>
                   <li>
                     <a
-                      href='https://twitter.com/Scrooge_Casino'
-                      rel='noopener noreferrer'>
-                      <img src={twitter} alt='' />
+                      href="https://twitter.com/Scrooge_Casino"
+                      rel="noopener noreferrer"
+                    >
+                      <img src={twitter} alt="" />
                     </a>
                   </li>
                   {/* <li>
@@ -445,12 +461,13 @@ const Layout = ({ children }) => {
                   </li> */}
                 </ul>
                 <h3>Contact Us</h3>
-                <ul className='footer-support'>
+                <ul className="footer-support">
                   <li>
                     <a
-                      href='mailto:info@scrooge.casino'
-                      rel='noopener noreferrer'>
-                      <img src={envelope} alt='' />
+                      href="mailto:info@scrooge.casino"
+                      rel="noopener noreferrer"
+                    >
+                      <img src={envelope} alt="" />
                       info@scrooge.casino {/* support@scroogegold.com */}
                     </a>
                   </li>
@@ -460,10 +477,11 @@ const Layout = ({ children }) => {
           </div>
 
           <CookieConsent
-            location='bottom'
-            buttonText='ACCEPT'
-            cookieName='nftMarketCookieConsent'
-            expires={150}>
+            location="bottom"
+            buttonText="ACCEPT"
+            cookieName="nftMarketCookieConsent"
+            expires={150}
+          >
             <h4>Cookies Policy</h4>
             <p>
               This website uses delicious cookies to enhance the user

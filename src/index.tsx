@@ -58,6 +58,7 @@ export default function App() {
   const [supportedWalletForMob, setSupportedWalletForMob] = useState(false);
   const [isVPNEnable, setIsVPNEnable] = useState(false);
   const [stateBlock, setStateBlock] = useState(false);
+  const [inactiveTime, setInactiveTime] = useState(0);
 
   const underMaintainance = false;
 
@@ -195,6 +196,96 @@ export default function App() {
     })();
   }, []);
 
+  const handleLogout = async () => {
+    if (user) {
+      const tokenData = localStorage.getItem("refreshToken") || "";
+      await (
+        await authInstance()
+      ).post(
+        "/auth/logout",
+        { refreshToken: tokenData },
+      );
+     
+    }
+    // localStorage.clear();
+    setUser(null);
+    window.location.href = "/";
+  };
+
+
+  useEffect(() => {
+    const resetTimer = () => {
+      setInactiveTime(0);
+    };
+    const handleMouseMove = () => {
+      resetTimer();
+      console.log("executed ===>", user);
+      if(user){
+        console.log("user============>", user);
+        localStorage.setItem("lastActive", `${new Date()}`);
+      }
+    };
+    const interval = setInterval( async () => {
+      setInactiveTime((prevInactiveTime) => prevInactiveTime + 1);
+      console.log("inactiveTime", inactiveTime);
+      if (inactiveTime >= 30) {
+        // Do something when the user has been inactive for 30 minutes
+        console.log("User has been inactive for 30 minutes");
+        await handleLogout();
+        // You can perform additional actions or show a modal, etc.
+        // Reset the timer after handling the inactivity
+        resetTimer();
+      }
+    }, 60000); // 1 minute interval
+
+    // Add event listeners to the component's DOM element
+    const componentElement = document.getElementById("table-main-wrap");
+
+    if (componentElement) {
+      componentElement.addEventListener("mousemove", handleMouseMove);
+    }
+    return () => {
+      // Clean up event listeners and intervals
+      if (componentElement) {
+        componentElement.removeEventListener("mousemove", handleMouseMove);
+      }
+      clearInterval(interval);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inactiveTime]);
+
+  useEffect(()=>{
+    console.log("user ====>", user);
+    if(user && localStorage.getItem("lastActive") && localStorage.getItem("isAdmin") !== "admin"){
+      const logout = async ()=>{
+        localStorage.removeItem("lastActive");
+        await handleLogout();
+      }
+  
+      let lastActive:any = localStorage.getItem("lastActive");
+  
+      if(!lastActive && user) logout();
+
+      console.log("lastActive ==>", lastActive);
+  
+      lastActive =  new Date(lastActive).getTime();
+      const crrTm = new Date().getTime();
+
+      
+      console.log(lastActive, crrTm);
+  
+      const elapsedTime = crrTm - lastActive;
+  
+      const thirtyMinutesInMillis = 30 * 60 * 1000;
+      console.log(lastActive, crrTm, elapsedTime, thirtyMinutesInMillis, user);
+      if (elapsedTime > thirtyMinutesInMillis) {
+        setUser(null);
+        logout(); // Perform logout if elapsed time exceeds 30 minutes
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
   // call this function to sign out logged in user
   const logout = () => {
     setUser(null);
@@ -203,6 +294,9 @@ export default function App() {
   if (underMaintainance) {
     return <UnderMaintenanceContent />;
   }
+
+
+ 
 
   return (
     <>
