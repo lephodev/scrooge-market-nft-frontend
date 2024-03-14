@@ -227,7 +227,7 @@ export default function App() {
     const interval = setInterval( async () => {
       setInactiveTime((prevInactiveTime) => prevInactiveTime + 1);
       console.log("inactiveTime", inactiveTime);
-      if (inactiveTime >= 1) {
+      if (inactiveTime >= 30) {
         // Do something when the user has been inactive for 30 minutes
         console.log("User has been inactive for 30 minutes");
         await handleLogout();
