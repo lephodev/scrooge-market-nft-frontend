@@ -12,7 +12,7 @@ import Layout from "./Layout.mjs";
 import { authInstance } from "../config/axios.js";
 import scroogelogo from "../images/scroogeCasinoLogo.png";
 import FiatPopup from "./models/fiatPopup.mjs";
-import Pdf from "../images/Manual.pdf";
+import Pdf from "../images/RedemptionManual.pdf";
 // import { validateToken } from "../utils/dateUtils.mjs";
 import SwitchNetworkBSC from "../scripts/switchNetworkBSC.mjs";
 import {
