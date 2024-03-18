@@ -207,7 +207,7 @@ const FiatPopup = ({
   return (
     <div className="fiat-data" id="fiat-form">
       {!fiatActiveInActive?.Cashapp && !fiatActiveInActive?.Paypal ? (
-        "Cash Prize is Temporarly Unavailable"
+        "Cash Prize is Temporarily Unavailable"
       ) : (
         <Form onSubmit={handleSubmit(WithdrawRequest)}>
           <div className="fiat-content">
