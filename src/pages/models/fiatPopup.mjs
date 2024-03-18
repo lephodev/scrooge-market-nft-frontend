@@ -192,14 +192,12 @@ const FiatPopup = ({
   };
 
   useEffect(() => {
-    console.log("Options", options);
     if (fiatActiveInActive.Cashapp && fiatActiveInActive.Paypal) {
       setOptions([
         { value: "Cashapp", label: "Cashapp" },
         { value: "Paypal", label: "Paypal" },
       ]);
     } else if (fiatActiveInActive?.Cashapp) {
-      console.log("fiatActiveInActive?.Cashapp", fiatActiveInActive?.Cashapp);
       setOptions([{ value: "Cashapp", label: "Cashapp" }]);
     } else if (fiatActiveInActive?.Paypal) {
       setOptions([{ value: "Paypal", label: "Paypal" }]);
@@ -209,7 +207,7 @@ const FiatPopup = ({
   return (
     <div className="fiat-data" id="fiat-form">
       {!fiatActiveInActive?.Cashapp && !fiatActiveInActive?.Paypal ? (
-        ""
+        "Cash Prize is Temporarly Unavailable"
       ) : (
         <Form onSubmit={handleSubmit(WithdrawRequest)}>
           <div className="fiat-content">
