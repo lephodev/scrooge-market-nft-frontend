@@ -204,7 +204,7 @@ const FiatPopup = ({
   };
 
   useEffect(() => {
-    if (fiatActiveInActive.Cashapp && fiatActiveInActive.Paypal) {
+    if (fiatActiveInActive?.Cashapp && fiatActiveInActive?.Paypal) {
       setOptions([
         { value: "Cashapp", label: "Cashapp" },
         { value: "Paypal", label: "Paypal" },
