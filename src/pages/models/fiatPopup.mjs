@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Form, Spinner } from "react-bootstrap";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import {
   purchaseWithCashApp,
@@ -98,10 +99,6 @@ const customStyles = {
     },
   }),
 };
-const options = [
-  { value: "Cashapp", label: "Cashapp" },
-  { value: "Paypal", label: "Paypal" },
-];
 
 // const paymentoptions = [
 //   // { value: 50, label: "$50" },
@@ -109,13 +106,18 @@ const options = [
 //   { value: 500, label: "$500" },
 // ];
 
-const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
+const FiatPopup = ({
+  handleCloseFiat,
+  getUserDataInstant,
+  fiatActiveInActive,
+}) => {
   const { user } = useContext(AuthContext);
 
   const [paymentType, setPaymentType] = useState();
   const [loading, setLoading] = useState(false);
   const [successShow, setSuccessShow] = useState(false);
   const [purchaseAmount, setPurchaseAmount] = useState();
+  let [options, setOptions] = useState([]);
 
   const {
     handleSubmit,
@@ -201,86 +203,100 @@ const FiatPopup = ({ handleCloseFiat, getUserDataInstant }) => {
     setSuccessShow(!successShow);
   };
 
+  useEffect(() => {
+    if (fiatActiveInActive.Cashapp && fiatActiveInActive.Paypal) {
+      setOptions([
+        { value: "Cashapp", label: "Cashapp" },
+        { value: "Paypal", label: "Paypal" },
+      ]);
+    } else if (fiatActiveInActive?.Cashapp) {
+      setOptions([{ value: "Cashapp", label: "Cashapp" }]);
+    } else if (fiatActiveInActive?.Paypal) {
+      setOptions([{ value: "Paypal", label: "Paypal" }]);
+    }
+  }, []);
+
   return (
     <div className="fiat-data" id="fiat-form">
-      <Form onSubmit={handleSubmit(WithdrawRequest)}>
-        <div className="fiat-content">
-          <Form.Group className="fiat-group">
-            <Form.Label>Withdraw to</Form.Label>
-            <Select
-              options={options}
-              onChange={handleChnagePayout}
-              styles={customStyles}
-            />
-            {errors?.paymentType && (
-              <p className="error-msg">{errors?.paymentType?.message}</p>
-            )}
-          </Form.Group>
+      {!fiatActiveInActive?.Cashapp && !fiatActiveInActive?.Paypal ? (
+        "Cash Prize is Temporarily Unavailable"
+      ) : (
+        <Form onSubmit={handleSubmit(WithdrawRequest)}>
+          <div className="fiat-content">
+            <Form.Group className="fiat-group">
+              <Form.Label>Withdraw to</Form.Label>
+              <Select
+                options={options}
+                onChange={handleChnagePayout}
+                styles={customStyles}
+              />
+              {errors?.paymentType && (
+                <p className="error-msg">{errors?.paymentType?.message}</p>
+              )}
+            </Form.Group>
 
-          {paymentType && paymentType.value === "Paypal" ? (
-            <Form.Group className="fiat-group">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                placeholder="Enter email"
-                {...register("email")}
-              />
-              {errors?.email && (
-                <p className="error-msg">{errors?.email?.message}</p>
-              )}
-            </Form.Group>
-          ) : paymentType && paymentType.value === "Cashapp" ? (
-            ""
-          ) : (
-            // <Form.Group className="fiat-group">
-            //   <Form.Label>$Cashtag </Form.Label>
-            //   <Form.Control
-            //     type="text"
-            //     name="cashAppid"
-            //     //   defaultValue={singleTournament?.name}
-            //     placeholder="Enter $Cashtag"
-            //     {...register("cashAppid")}
-            //   />
-            //   {errors?.cashAppid && (
-            //     <p className="error-msg">{errors?.cashAppid?.message}</p>
-            //   )}
-            // </Form.Group>
-            ""
-          )}
-          {paymentType && paymentType.value !== "Cashapp" && (
-            <Form.Group className="fiat-group">
-              <Form.Label>
-                Minimum 10000 ST($100) required for Fiat withdrawals.
-              </Form.Label>
-              <Form.Control
-                type="number"
-                name="amount"
-                placeholder="Enter Withdraw Amount"
-                {...register("amount")}
-              />
-              {errors?.amount && (
-                <p className="error-msg">{errors?.amount?.message}</p>
-              )}
-            </Form.Group>
-          )}
-          <SuccessModal
-            successShow={successShow}
-            handleSuccessModal={handleSuccessModal}
-            purchaseAmount={purchaseAmount}
-          />
-          {/* <h6 className="deducted-heading">
+            {paymentType && paymentType.value === "Paypal" ? (
+              <Form.Group className="fiat-group">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  placeholder="Enter email"
+                  {...register("email")}
+                />
+                {errors?.email && (
+                  <p className="error-msg">{errors?.email?.message}</p>
+                )}
+              </Form.Group>
+            ) : paymentType && paymentType.value === "Cashapp" ? (
+              <Form.Group className="fiat-group">
+                <Form.Label>$Cashtag </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="cashAppid"
+                  //   defaultValue={singleTournament?.name}
+                  placeholder="Enter $Cashtag"
+                  {...register("cashAppid")}
+                />
+                {errors?.cashAppid && (
+                  <p className="error-msg">{errors?.cashAppid?.message}</p>
+                )}
+              </Form.Group>
+            ) : (
+              ""
+            )}
+            {paymentType && paymentType.value && (
+              <Form.Group className="fiat-group">
+                <Form.Label>
+                  Minimum 10000 ST($100) required for Fiat withdrawals.
+                </Form.Label>
+                <Form.Control
+                  type="number"
+                  name="amount"
+                  placeholder="Enter Withdraw Amount"
+                  {...register("amount")}
+                />
+                {errors?.amount && (
+                  <p className="error-msg">{errors?.amount?.message}</p>
+                )}
+              </Form.Group>
+            )}
+            <SuccessModal
+              successShow={successShow}
+              handleSuccessModal={handleSuccessModal}
+              purchaseAmount={purchaseAmount}
+            />
+            {/* <h6 className="deducted-heading">
             10% of the amount will be deducted from your redemption amount
           </h6> */}
-        </div>
-        {paymentType && paymentType.value !== "Cashapp" && (
+          </div>
           <div className="popupBtn">
             <button className="yellowBtn" variant="primary" type="submit">
               {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
             </button>
           </div>
-        )}
-      </Form>
+        </Form>
+      )}
     </div>
   );
 };

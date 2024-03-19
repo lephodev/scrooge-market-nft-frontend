@@ -9,7 +9,7 @@ import { useReward } from "react-rewards";
 import { userKycDetails } from "../utils/api.mjs";
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
-import { authInstance } from "../config/axios.js";
+import { authInstance, marketPlaceInstance } from "../config/axios.js";
 import scroogelogo from "../images/scroogeCasinoLogo.png";
 import FiatPopup from "./models/fiatPopup.mjs";
 import Pdf from "../images/RedemptionManual.pdf";
@@ -44,6 +44,7 @@ function RedeemPrizes() {
   const [showFiat, setShowFiat] = useState(false);
   const [showFastWithdraw, setShowFastWithdraw] = useState(false);
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
+  const [fiatActiveInActive, setFiatActiveInActive] = useState({});
 
   const address = useAddress();
   const signer = useSigner();
@@ -100,7 +101,27 @@ function RedeemPrizes() {
       });
   };
 
+  const getAdminSettings = async () => {
+    // const basicAuthToken = validateToken();
+    (await marketPlaceInstance())
+      .get("/getAdminSettings", {
+        // headers: {
+        //   Authorization: basicAuthToken,
+        // },
+      })
+      .then((res) => {
+        if (res.data.adminSettings) {
+          const { redemptionActiveAndInActive } = res.data.adminSettings;
+          setFiatActiveInActive(redemptionActiveAndInActive);
+        }
+      })
+      .catch((err) => {
+        console.log("error ", err);
+      });
+  };
+
   useEffect(() => {
+    getAdminSettings();
     // setShowFastWithdraw(true);
 
     async function checkKYCStatus() {
@@ -297,6 +318,7 @@ function RedeemPrizes() {
                     show={showFiat}
                     handleCloseFiat={handleCloseFiat}
                     getUserDataInstant={getUserDataInstant}
+                    fiatActiveInActive={fiatActiveInActive}
                   />
                 )}
                 {!isMismatched && showFastWithdraw && (

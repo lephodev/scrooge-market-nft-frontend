@@ -1285,7 +1285,7 @@ const PayWithCard = ({
               ? "disable-btn-purchase"
               : ""
           }
-          disabled={handleLimitCheck(parseFloat(prize?.priceInBUSD))}
+          // disabled={handleLimitCheck(parseFloat(prize?.priceInBUSD))}
           onClick={() =>
             handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
           }
