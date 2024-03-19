@@ -24,16 +24,16 @@ const RegRiskWheel = ({ handleOpenRoulette, show, user }) => {
   ];
 
   const BigWheelPlaces = [
-    { token: 40, chances: 10 },
-    { token: 45, chances: 10 },
-    { token: 50, chances: 10 },
-    { token: 55, chances: 10 },
-    { token: 60, chances: 10 },
-    { token: 65, chances: 10 },
-    { token: 70, chances: 10 },
-    { token: 80, chances: 10 },
-    { token: 90, chances: 10 },
-    { token: 100, chances: 10 },
+    { token: 60, chances: 12.4875 },
+    { token: 65, chances: 12.4875 },
+    { token: 70, chances: 12.4875 },
+    { token: 75, chances: 12.4875 },
+    { token: 80, chances: 12.4875 },
+    { token: 85, chances: 12.4875 },
+    { token: 90, chances: 12.4875 },
+    { token: 100, chances: 12.4875 },
+    { token: 500, chances: 0.09 },
+    { token: 3000, chances: 0.01 },
   ];
 
   const [winPopup, setWinPopup] = useState(false);
@@ -45,9 +45,10 @@ const RegRiskWheel = ({ handleOpenRoulette, show, user }) => {
     <Modal
       show={show}
       onHide={handleOpenRoulette}
-      className='roulette-wrapper roulette-wheel-game'
-      aria-labelledby='contained-modal-title-vcenter'
-      centered>
+      className="roulette-wrapper roulette-wheel-game"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <>
@@ -65,16 +66,16 @@ const RegRiskWheel = ({ handleOpenRoulette, show, user }) => {
           )}
         </>
 
-        <audio className='bg-audio' muted={!volume}>
+        <audio className="bg-audio" muted={!volume}>
           <source src={bgaudio}></source>
         </audio>
-        <audio className='rotate-wheel'>
+        <audio className="rotate-wheel">
           <source src={rotatewheel}></source>
         </audio>
-        <audio className='winitem-wheel'>
+        <audio className="winitem-wheel">
           <source src={winItemaudio}></source>
         </audio>
-        <audio id='coin-audio'>
+        <audio id="coin-audio">
           <source src={coin}></source>
         </audio>
       </Modal.Body>

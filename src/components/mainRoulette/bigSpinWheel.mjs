@@ -77,17 +77,19 @@ function BigSpinWheel({ items, setWinPopup }) {
 
   const spinning = selectItem !== null ? "spinning" : "";
   return (
-    <div className='big-wheel-wrapper'>
-      <div className='big-wheel-container'>
+    <div className="big-wheel-wrapper">
+      <div className="big-wheel-container">
         <div
           className={`big-wheel ${spinning}`}
           style={wheelVars}
-          onTransitionEnd={handleEvent}>
+          onTransitionEnd={handleEvent}
+        >
           {items.map((item, index) => (
             <div
-              className='big-wheel-item'
+              className="big-wheel-item"
               key={`item-${index + 1}`}
-              style={{ "--item-nb": index }}>
+              style={{ "--item-nb": index }}
+            >
               {/* {item.token} */}
             </div>
           ))}
@@ -98,19 +100,21 @@ function BigSpinWheel({ items, setWinPopup }) {
       </div>
       <div
         className={`spin-btn ${spinButtonDisable ? "spin-disable" : ""}`}
-        onClick={select}>
-        <img src={spinbtn} alt='spin' />
+        onClick={select}
+      >
+        <img src={spinbtn} alt="spin" />
         {/* <h6>{"SPIN NOW"} </h6> */}
-        <audio id='bg-audio'>
+        <audio id="bg-audio">
           <source src={bgaudio}></source>
         </audio>
-        <audio id='rotate-wheel'>
+
+        <audio id="rotate-wheel">
           <source src={rotatewheel}></source>
         </audio>
-        <audio id='winitem-wheel'>
+        <audio id="winitem-wheel">
           <source src={winItemaudio}></source>
         </audio>
-        <audio id='wheel-stop'>
+        <audio id="wheel-stop">
           <source src={wheelStop}></source>
         </audio>
       </div>
