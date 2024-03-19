@@ -107,7 +107,6 @@ function BigSpinWheel({ items, setWinPopup }) {
         <audio id="bg-audio">
           <source src={bgaudio}></source>
         </audio>
-
         <audio id="rotate-wheel">
           <source src={rotatewheel}></source>
         </audio>
