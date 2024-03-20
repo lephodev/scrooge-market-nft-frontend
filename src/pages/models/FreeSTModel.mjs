@@ -3,7 +3,12 @@ import { marketPlaceInstance } from "../../config/axios.js";
 import { toast } from "react-toastify";
 import { useState } from "react";
 
-const FreeSTModel = ({ showFreeST, handleCloseFreeST, freeSTDetail }) => {
+const FreeSTModel = ({
+  showFreeST,
+  handleCloseFreeST,
+  freeSTDetail,
+  setPromoCode,
+}) => {
   const [promoLoader, setPromoLoader] = useState(false);
   const handleRedeemFreeST = async () => {
     console.log("handleRedeemFreeST", freeSTDetail);
@@ -22,6 +27,7 @@ const FreeSTModel = ({ showFreeST, handleCloseFreeST, freeSTDetail }) => {
       if (code === 200) {
         toast.success(message, { toastId: "A" });
         handleCloseFreeST();
+        setPromoCode("");
       } else if (code === 404) {
         toast.error(message, { toastId: "B" });
         setPromoLoader(false);

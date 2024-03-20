@@ -741,6 +741,7 @@ export default function CryptoToGC() {
         showFreeST={showFreeST}
         handleCloseFreeST={handleCloseFreeST}
         freeSTDetail={freeSTDetail}
+        setPromoCode={setPromoCode}
       />
       {(status === "success" || status === "inprogress") && (
         <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
