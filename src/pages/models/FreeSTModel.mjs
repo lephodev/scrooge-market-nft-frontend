@@ -38,11 +38,8 @@ const FreeSTModel = ({ showFreeST, handleCloseFreeST, freeSTDetail }) => {
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>You want to redeem {freeSTDetail?.token}ST</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseFreeST}>
-          Close
-        </Button>
         <Button variant="primary" onClick={() => handleRedeemFreeST()}>
-          {!promoLoader ? "Redeem" : <Spinner animation="border" />}{" "}
+          {!promoLoader ? "Claim" : <Spinner animation="border" />}{" "}
         </Button>
       </Modal.Footer>
     </Modal>
