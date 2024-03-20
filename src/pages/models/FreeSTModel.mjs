@@ -40,14 +40,22 @@ const FreeSTModel = ({
     }
   };
   return (
-    <Modal show={showFreeST} onHide={handleCloseFreeST}>
-      <Modal.Header closeButton></Modal.Header>
-      <Modal.Body>You want to redeem {freeSTDetail?.token}ST</Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" onClick={() => handleRedeemFreeST()}>
-          {!promoLoader ? "Claim" : <Spinner animation="border" />}{" "}
-        </Button>
-      </Modal.Footer>
+    <Modal
+      show={showFreeST}
+      onHide={handleCloseFreeST}
+      centered
+      backdrop={"static"}
+      className="free-st-popup"
+    >
+      <Modal.Body>
+        <div className="free-st-content">
+          <h5>Congratulations! Enjoy your free ST!</h5>
+          <h6>{freeSTDetail?.token}ST </h6>
+          <Button variant="primary" onClick={() => handleRedeemFreeST()}>
+            {!promoLoader ? "Claim" : <Spinner animation="border" />}{" "}
+          </Button>{" "}
+        </div>
+      </Modal.Body>
     </Modal>
   );
 };
