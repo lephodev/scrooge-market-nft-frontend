@@ -31,6 +31,7 @@ import { ethers } from "ethers";
 import axios from "axios";
 import AuthorizeSucessModel from "./models/authrizeSucessModel.mjs";
 import PageLoader from "../components/pageLoader/loader.mjs";
+import FreeSTModel from "./models/FreeSTModel.mjs";
 let promoCode;
 let goldcoinAmount;
 
@@ -52,6 +53,8 @@ export default function CryptoToGC() {
   const [errors, setErrors] = useState("");
   const [dailyGCPurchaseLimit, setDailyGCPurchaseLimit] = useState(0);
   const [isMegaBuyShow, setIsMegaBuyShow] = useState(true);
+  const [showFreeST, setShowFreeST] = useState(false);
+  const [freeSTDetail, setFreeSTDetails] = useState({});
 
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
@@ -625,7 +628,13 @@ export default function CryptoToGC() {
         await marketPlaceInstance()
       ).post("/applyPromoCode", payload);
       const { code, message, getPromo } = res.data;
-      setPromoDetails(getPromo);
+      console.log("getPromo", getPromo);
+      if (getPromo?.coupanType === "Free ST") {
+        setShowFreeST(true);
+        setFreeSTDetails(getPromo);
+      } else {
+        setPromoDetails(getPromo);
+      }
       if (code === 200) {
         toast.success(message, { toastId: "A" });
       } else if (code === 404) {
@@ -688,6 +697,10 @@ export default function CryptoToGC() {
       return true;
     }
   };
+
+  const handleCloseFreeST = () => {
+    setShowFreeST(false);
+  };
   return (
     <>
       <Helmet>
@@ -723,6 +736,12 @@ export default function CryptoToGC() {
           </script>
         </amp-analytics>
       </Helmet>
+
+      <FreeSTModel
+        showFreeST={showFreeST}
+        handleCloseFreeST={handleCloseFreeST}
+        freeSTDetail={freeSTDetail}
+      />
       {(status === "success" || status === "inprogress") && (
         <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
       )}
