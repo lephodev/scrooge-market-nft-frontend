@@ -772,11 +772,11 @@ export default function CryptoToGC() {
                             Credit Card
                           </Dropdown.Item>
 
-                          <Dropdown.Item
+                          {/* <Dropdown.Item
                             onClick={() => handlePaymentTypeChange("Crypto")}
                           >
                             Crypto
-                          </Dropdown.Item>
+                          </Dropdown.Item> */}
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
