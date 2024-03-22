@@ -178,16 +178,6 @@ const FiatPopup = ({
   const handleChnagePayout = (selectedOptions) => {
     console.log("selectedOptions", selectedOptions);
     setPaymentType(selectedOptions);
-
-    if (selectedOptions.value === "Cashapp") {
-      return toast.error(
-        "Temporarily Unavailable, please use PayPal or Crypto for alternatives",
-        {
-          toastId: "A",
-        }
-      );
-    }
-
     setValue("paymentType", selectedOptions?.value);
     setValue("email", "");
     setValue("cashAppid", "");
