@@ -55,7 +55,7 @@ export default function CryptoToGC() {
   const [isMegaBuyShow, setIsMegaBuyShow] = useState(true);
   const [showFreeST, setShowFreeST] = useState(false);
   const [freeSTDetail, setFreeSTDetails] = useState({});
-
+  const [avgValue, setAvgValue] = useState(0);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
@@ -126,8 +126,9 @@ export default function CryptoToGC() {
     setPrizesLoading(true);
     try {
       const res = await (await marketPlaceInstance()).get(`/getGCPackages`);
-      if (res.data) {
-        const sortedAsc = res.data.sort(
+      setAvgValue(res?.data?.averageValue);
+      if (res?.data?.allPackages) {
+        const sortedAsc = res.data.allPackages.sort(
           (a, b) => parseInt(a.priceInBUSD) - parseInt(b.priceInBUSD)
         );
 
@@ -689,10 +690,16 @@ export default function CryptoToGC() {
     }
   };
 
+  let arrc = [4.99, 14.99, 49.99, 99.99];
+  console.log("avsgggs", avgValue);
+  let greaterThanValue = arrc.filter((value) => value > avgValue);
+  console.log("greaterThanValue", greaterThanValue);
+
   let arr = [9.99, 19.99, 24.99];
+  arrc = greaterThanValue.concat(arr);
 
   const handleShowMegaBuys = (price) => {
-    let filteredArr = arr.filter((item) => !user.megaOffer.includes(item));
+    let filteredArr = arrc.filter((item) => !user.megaOffer.includes(item));
     if (parseFloat(price?.priceInBUSD) === parseFloat(filteredArr[0])) {
       return true;
     }
@@ -884,7 +891,7 @@ export default function CryptoToGC() {
 
                   <div className="buy-chips-content">
                     <div className="buy-chips-grid cryptoToGC">
-                      {isMegaBuyShow && user.megaOffer.length !== 3 && (
+                      {isMegaBuyShow /* && user.megaOffer.length !== 3 */ && (
                         <div className="special-offer-grid">
                           <h5>Special Offer</h5>
                           <div className="purchasemodal-cards">
