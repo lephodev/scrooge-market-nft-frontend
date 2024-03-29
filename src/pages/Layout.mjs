@@ -80,6 +80,7 @@ const Layout = ({ children }) => {
   // const [canSpin, setCanSpin] = useState(false);
   // const [spinTimer, setSpinTimer] = useState("");
   const currentRoute = useCurrentPath();
+  const location = useLocation();
   const isActive = (routeName) => (routeName === currentRoute ? "active" : "");
   const disconnect = useDisconnect();
   const OGPrice = async () => {
@@ -307,21 +308,23 @@ const Layout = ({ children }) => {
                       </Nav>
                     </Navbar.Collapse>
                   </div>
-                  <div className="wallet">
-                    {address ? (
-                      <ConnectWallet />
-                    ) : (
-                      <Button onClick={() => handleConnectWallet()}>
-                        {!loaderaddress ? (
-                          "Connect Wallet"
-                        ) : (
-                          <Spinner animation="border" />
-                        )}
-                      </Button>
-                    )}
+                  {location.pathname !== "/crypto-to-gc" && (
+                    <div className="wallet">
+                      {address ? (
+                        <ConnectWallet />
+                      ) : (
+                        <Button onClick={() => handleConnectWallet()}>
+                          {!loaderaddress ? (
+                            "Connect Wallet"
+                          ) : (
+                            <Spinner animation="border" />
+                          )}
+                        </Button>
+                      )}
 
-                    <div className={priceColor}>${currentPriceOG}</div>
-                  </div>
+                      <div className={priceColor}>${currentPriceOG}</div>
+                    </div>
+                  )}
                 </div>
               </div>
             </Container>
