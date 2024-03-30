@@ -1155,8 +1155,16 @@ const PayWithCard = ({
   const [liveFormToken, setFormToken] = useState(null);
   const [loader, setLoading] = useState(false);
 
+  const getPromoCode = () => {
+    if (prize.offerType !== "MegaOffer") {
+      return promoCode ? promoCode : "";
+    } else {
+      return "";
+    }
+  };
+
   const handleCLick = async (gc, usd) => {
-    console.log("dailyGCPurchaseLimit", dailyGCPurchaseLimit);
+    console.log("dailyGCPurchaseLimit", prize);
     if (dailyGCPurchaseLimit >= 4) {
       return toast.error("Credit card daily purchase limit are reached");
     }
@@ -1201,7 +1209,7 @@ const PayWithCard = ({
         `/getFormToken`,
         {
           amount: prize?.priceInBUSD,
-          promoCode: promoCode ? promoCode : "",
+          promoCode: getPromoCode(),
         },
         {
           headers: {
