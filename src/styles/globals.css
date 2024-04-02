@@ -4983,6 +4983,54 @@ h3.mega-text {
   box-shadow: 0 0 0 #f9ff00;
   animation: pulses 2s infinite;
 }
+.free-st-popup .modal-content {
+  background: #171719;
+  border-radius: 10px;
+}
+.free-st-popup .modal-body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.free-st-content h5 {
+  font-size: 30px;
+  margin: 0;
+  padding-bottom: 20px;
+  text-align: center;
+  color: #fff;
+  letter-spacing: 2px;
+  max-width: 330px;
+  width: 100%;
+  margin: 0px auto;
+}
+.free-st-content h6 {
+  font-size: 30px;
+  margin: 0;
+  padding-bottom: 30px;
+  text-align: center;
+  text-shadow: 2px 2px #d2042d;
+  color: #fff;
+  font-weight: 600;
+}
+.free-st-content button, .free-st-content button:hover, .free-st-content .btn:focus-visible {
+  align-items: center;
+  background: #f9ff00;
+  border: 1px solid #f9ff00;
+  border-radius: 30px;
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  font-weight: 600;
+  gap: 4px;
+  height: 36px;
+  justify-content: center;
+  padding: 2px 12px;
+  max-width: 218px;
+  width: 100%;
+  margin: 0px auto;
+  height: 44px;
+  box-shadow: none;
+}
 
 @-webkit-keyframes pulses {
   0% {

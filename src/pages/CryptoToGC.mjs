@@ -31,6 +31,7 @@ import { ethers } from "ethers";
 import axios from "axios";
 import AuthorizeSucessModel from "./models/authrizeSucessModel.mjs";
 import PageLoader from "../components/pageLoader/loader.mjs";
+import FreeSTModel from "./models/FreeSTModel.mjs";
 let promoCode;
 let goldcoinAmount;
 
@@ -52,7 +53,9 @@ export default function CryptoToGC() {
   const [errors, setErrors] = useState("");
   const [dailyGCPurchaseLimit, setDailyGCPurchaseLimit] = useState(0);
   const [isMegaBuyShow, setIsMegaBuyShow] = useState(true);
-
+  const [showFreeST, setShowFreeST] = useState(false);
+  const [freeSTDetail, setFreeSTDetails] = useState({});
+  const [avgValue, setAvgValue] = useState(0);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
@@ -123,8 +126,9 @@ export default function CryptoToGC() {
     setPrizesLoading(true);
     try {
       const res = await (await marketPlaceInstance()).get(`/getGCPackages`);
-      if (res.data) {
-        const sortedAsc = res.data.sort(
+      setAvgValue(res?.data?.averageValue);
+      if (res?.data?.allPackages) {
+        const sortedAsc = res.data.allPackages.sort(
           (a, b) => parseInt(a.priceInBUSD) - parseInt(b.priceInBUSD)
         );
 
@@ -625,14 +629,29 @@ export default function CryptoToGC() {
         await marketPlaceInstance()
       ).post("/applyPromoCode", payload);
       const { code, message, getPromo } = res.data;
-      setPromoDetails(getPromo);
+      console.log("getPromo", getPromo);
+      if (getPromo?.coupanType === "Free ST") {
+        setShowFreeST(true);
+        setFreeSTDetails(getPromo);
+      } else {
+        setPromoDetails(getPromo);
+      }
       if (code === 200) {
         toast.success(message, { toastId: "A" });
       } else if (code === 404) {
+        setPromoDetails({});
+        setPromoCode("");
+        promoCode = "";
+        goldcoinAmount = "";
         toast.error(message, { toastId: "B" });
       }
       setPromoLoader(false);
     } catch (error) {
+      setPromoDetails({});
+      setPromoCode("");
+      promoCode = "";
+      goldcoinAmount = "";
+
       if (axios.isAxiosError(error) && error?.response) {
         if (error?.response?.status !== 200) {
           toast.error(error?.response?.data?.message, { toastId: "login" });
@@ -647,6 +666,9 @@ export default function CryptoToGC() {
   };
 
   const getExactGC = (Gc, promo) => {
+    if (Gc === "25000000") {
+      return Gc;
+    }
     const { coupanType, discountInPercent } = promo || {};
     let discount = 0;
     if (coupanType === "Percent") {
@@ -658,6 +680,10 @@ export default function CryptoToGC() {
   };
 
   const getExactToken = (Token, promo) => {
+    if (Token === "25000") {
+      return Token;
+    }
+    console.log("Token", Token, "promo", promo);
     const { coupanType, discountInPercent } = promo || {};
     let discount = 0;
     if (coupanType === "Percent") {
@@ -680,13 +706,23 @@ export default function CryptoToGC() {
     }
   };
 
+  let arrc = [4.99, 14.99, 49.99, 99.99];
+  console.log("avsgggs", avgValue);
+  let greaterThanValue = arrc.filter((value) => value > avgValue);
+  console.log("greaterThanValue", greaterThanValue);
+
   let arr = [9.99, 19.99, 24.99];
+  arrc = greaterThanValue.concat(arr);
 
   const handleShowMegaBuys = (price) => {
-    let filteredArr = arr.filter((item) => !user.megaOffer.includes(item));
+    let filteredArr = arrc.filter((item) => !user.megaOffer.includes(item));
     if (parseFloat(price?.priceInBUSD) === parseFloat(filteredArr[0])) {
       return true;
     }
+  };
+
+  const handleCloseFreeST = () => {
+    setShowFreeST(false);
   };
   return (
     <>
@@ -723,6 +759,13 @@ export default function CryptoToGC() {
           </script>
         </amp-analytics>
       </Helmet>
+
+      <FreeSTModel
+        showFreeST={showFreeST}
+        handleCloseFreeST={handleCloseFreeST}
+        freeSTDetail={freeSTDetail}
+        setPromoCode={setPromoCode}
+      />
       {(status === "success" || status === "inprogress") && (
         <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
       )}
@@ -864,7 +907,7 @@ export default function CryptoToGC() {
 
                   <div className="buy-chips-content">
                     <div className="buy-chips-grid cryptoToGC">
-                      {isMegaBuyShow && user.megaOffer.length !== 3 && (
+                      {isMegaBuyShow /* && user.megaOffer.length !== 3 */ && (
                         <div className="special-offer-grid">
                           <h5>Special Offer</h5>
                           <div className="purchasemodal-cards">
@@ -998,9 +1041,13 @@ export default function CryptoToGC() {
                                     {getExactGC(prize?.gcAmount, promoDetails)}
                                   </Card.Title>
                                   {promoDetails?.couponCode && (
-                                    <Card.Title className="cross-text">
-                                      GC {getExactGC(prize?.gcAmount, {})}
-                                    </Card.Title>
+                                    <>
+                                      {prize.freeTokenAmount !== "25000" && (
+                                        <Card.Title className="cross-text">
+                                          GC {getExactGC(prize?.gcAmount, {})}
+                                        </Card.Title>
+                                      )}
+                                    </>
                                   )}
                                   {selectedTypeDropdown === "Crypto" ? (
                                     getExactPrice(
@@ -1076,12 +1123,16 @@ export default function CryptoToGC() {
                                 <div className="goldPurchase-offers">
                                   Free ST: <img src={sweep} alt="sweep token" />{" "}
                                   {promoDetails?.couponCode && (
-                                    <span className="cross-text">
-                                      {getExactToken(
-                                        prize?.freeTokenAmount,
-                                        {}
+                                    <>
+                                      {prize.freeTokenAmount !== "25000" && (
+                                        <span className="cross-text">
+                                          {getExactToken(
+                                            prize?.freeTokenAmount,
+                                            {}
+                                          )}
+                                        </span>
                                       )}
-                                    </span>
+                                    </>
                                   )}{" "}
                                   {getExactToken(
                                     prize?.freeTokenAmount,
@@ -1155,6 +1206,15 @@ const PayWithCard = ({
   const [liveFormToken, setFormToken] = useState(null);
   const [loader, setLoading] = useState(false);
 
+  const getPromoCode = () => {
+    console.log("prizehgfghgfhfgh", prize.priceInBUSD, promoCode);
+    if (prize.offerType !== "MegaOffer" && prize?.priceInBUSD !== "250") {
+      return promoCode ? promoCode : "";
+    } else {
+      return "";
+    }
+  };
+
   const handleCLick = async (gc, usd) => {
     console.log("dailyGCPurchaseLimit", dailyGCPurchaseLimit);
     if (dailyGCPurchaseLimit >= 4) {
@@ -1201,7 +1261,7 @@ const PayWithCard = ({
         `/getFormToken`,
         {
           amount: prize?.priceInBUSD,
-          promoCode: promoCode ? promoCode : "",
+          promoCode: getPromoCode(),
         },
         {
           headers: {
