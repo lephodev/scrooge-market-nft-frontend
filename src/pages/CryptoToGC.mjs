@@ -706,16 +706,16 @@ export default function CryptoToGC() {
     }
   };
 
-  let arrc = [4.99, 14.99, 49.99, 99.99];
-  console.log("avsgggs", avgValue);
-  let greaterThanValue = arrc.filter((value) => value > avgValue);
-  console.log("greaterThanValue", greaterThanValue);
+  // let arrc = [4.99, 14.99, 49.99, 99.99];
+  // console.log("avsgggs", avgValue);
+  // let greaterThanValue = arrc.filter((value) => value > avgValue);
+  // console.log("greaterThanValue", greaterThanValue);
 
   let arr = [9.99, 19.99, 24.99];
-  arrc = greaterThanValue.concat(arr);
+  // arrc = greaterThanValue.concat(arr);
 
   const handleShowMegaBuys = (price) => {
-    let filteredArr = arrc.filter((item) => !user.megaOffer.includes(item));
+    let filteredArr = arr.filter((item) => !user.megaOffer.includes(item));
     if (parseFloat(price?.priceInBUSD) === parseFloat(filteredArr[0])) {
       return true;
     }
