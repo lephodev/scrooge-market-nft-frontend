@@ -639,10 +639,19 @@ export default function CryptoToGC() {
       if (code === 200) {
         toast.success(message, { toastId: "A" });
       } else if (code === 404) {
+        setPromoDetails({});
+        setPromoCode("");
+        promoCode = "";
+        goldcoinAmount = "";
         toast.error(message, { toastId: "B" });
       }
       setPromoLoader(false);
     } catch (error) {
+      setPromoDetails({});
+      setPromoCode("");
+      promoCode = "";
+      goldcoinAmount = "";
+
       if (axios.isAxiosError(error) && error?.response) {
         if (error?.response?.status !== 200) {
           toast.error(error?.response?.data?.message, { toastId: "login" });
@@ -657,6 +666,9 @@ export default function CryptoToGC() {
   };
 
   const getExactGC = (Gc, promo) => {
+    if (Gc === "25000000") {
+      return Gc;
+    }
     const { coupanType, discountInPercent } = promo || {};
     let discount = 0;
     if (coupanType === "Percent") {
@@ -668,6 +680,10 @@ export default function CryptoToGC() {
   };
 
   const getExactToken = (Token, promo) => {
+    if (Token === "25000") {
+      return Token;
+    }
+    console.log("Token", Token, "promo", promo);
     const { coupanType, discountInPercent } = promo || {};
     let discount = 0;
     if (coupanType === "Percent") {
@@ -1025,9 +1041,13 @@ export default function CryptoToGC() {
                                     {getExactGC(prize?.gcAmount, promoDetails)}
                                   </Card.Title>
                                   {promoDetails?.couponCode && (
-                                    <Card.Title className="cross-text">
-                                      GC {getExactGC(prize?.gcAmount, {})}
-                                    </Card.Title>
+                                    <>
+                                      {prize.freeTokenAmount !== "25000" && (
+                                        <Card.Title className="cross-text">
+                                          GC {getExactGC(prize?.gcAmount, {})}
+                                        </Card.Title>
+                                      )}
+                                    </>
                                   )}
                                   {selectedTypeDropdown === "Crypto" ? (
                                     getExactPrice(
@@ -1103,12 +1123,16 @@ export default function CryptoToGC() {
                                 <div className="goldPurchase-offers">
                                   Free ST: <img src={sweep} alt="sweep token" />{" "}
                                   {promoDetails?.couponCode && (
-                                    <span className="cross-text">
-                                      {getExactToken(
-                                        prize?.freeTokenAmount,
-                                        {}
+                                    <>
+                                      {prize.freeTokenAmount !== "25000" && (
+                                        <span className="cross-text">
+                                          {getExactToken(
+                                            prize?.freeTokenAmount,
+                                            {}
+                                          )}
+                                        </span>
                                       )}
-                                    </span>
+                                    </>
                                   )}{" "}
                                   {getExactToken(
                                     prize?.freeTokenAmount,
@@ -1182,6 +1206,15 @@ const PayWithCard = ({
   const [liveFormToken, setFormToken] = useState(null);
   const [loader, setLoading] = useState(false);
 
+  const getPromoCode = () => {
+    console.log("prizehgfghgfhfgh", prize.priceInBUSD, promoCode);
+    if (prize.offerType !== "MegaOffer" && prize?.priceInBUSD !== "250") {
+      return promoCode ? promoCode : "";
+    } else {
+      return "";
+    }
+  };
+
   const handleCLick = async (gc, usd) => {
     console.log("dailyGCPurchaseLimit", dailyGCPurchaseLimit);
     if (dailyGCPurchaseLimit >= 4) {
@@ -1228,7 +1261,7 @@ const PayWithCard = ({
         `/getFormToken`,
         {
           amount: prize?.priceInBUSD,
-          promoCode: promoCode ? promoCode : "",
+          promoCode: getPromoCode(),
         },
         {
           headers: {
