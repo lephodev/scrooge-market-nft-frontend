@@ -1156,10 +1156,6 @@ export default function CryptoToGC() {
                     <ul>
                       Disclaimer :
                       <li>
-                        +16% Will be added to Scroogecoin Crypto payment method
-                        to cover blockchain fees and contract taxes!
-                      </li>
-                      <li>
                         All sales are final. SCROOGE LLC has a zero refund
                         policy.
                       </li>
