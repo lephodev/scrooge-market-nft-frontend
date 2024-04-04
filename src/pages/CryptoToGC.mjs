@@ -1257,7 +1257,7 @@ const PayWithCard = ({
         `/getFormToken`,
         {
           amount: prize?.priceInBUSD,
-          promoCode: getPromoCode(),
+          promoCode: getPromoCode().trim(),
         },
         {
           headers: {
