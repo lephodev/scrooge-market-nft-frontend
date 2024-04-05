@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -144,80 +145,80 @@ const KYCForm = () => {
     }
   };
 
-  const handleOnChange = (e) => {
-    const { value } = e.target;
-    setActiveRatioType(value);
-  };
+  // const handleOnChange = (e) => {
+  //   const { value } = e.target;
+  //   setActiveRatioType(value);
+  // };
 
-  const saveData = async (value) => {
-    // setIsSaveLoader(true);
-    const formData = new FormData();
-    let payload = { ...value };
+  // const saveData = async (value) => {
+  //   // setIsSaveLoader(true);
+  //   const formData = new FormData();
+  //   let payload = { ...value };
 
-    if (frontIdImage.length !== 1) {
-      setError("IDimageFront", {
-        message: "Please uplaod front image of ID",
-      });
-      return;
-    }
+  //   if (frontIdImage.length !== 1) {
+  //     setError("IDimageFront", {
+  //       message: "Please uplaod front image of ID",
+  //     });
+  //     return;
+  //   }
 
-    if (backIdImage.length !== 1) {
-      setError("IDimageBack", {
-        message: "Please upload your selfie with your Id",
-      });
-      return;
-    }
-    let mbLimit = 10 * 1024 * 1024;
+  //   if (backIdImage.length !== 1) {
+  //     setError("IDimageBack", {
+  //       message: "Please upload your selfie with your Id",
+  //     });
+  //     return;
+  //   }
+  //   let mbLimit = 10 * 1024 * 1024;
 
-    if (frontIdImage[0]?.size > mbLimit) {
-      setError("IDimageFront", {
-        message: "Front image of ID size should not be greater than 10 MB.",
-      });
-      return;
-    }
+  //   if (frontIdImage[0]?.size > mbLimit) {
+  //     setError("IDimageFront", {
+  //       message: "Front image of ID size should not be greater than 10 MB.",
+  //     });
+  //     return;
+  //   }
 
-    if (backIdImage[0]?.size > mbLimit) {
-      setError("IDimageBack", {
-        message:
-          "Selfie with your Id image size should not be greater than 10 MB.",
-      });
-      return;
-    }
+  //   if (backIdImage[0]?.size > mbLimit) {
+  //     setError("IDimageBack", {
+  //       message:
+  //         "Selfie with your Id image size should not be greater than 10 MB.",
+  //     });
+  //     return;
+  //   }
 
-    if (optionalIdImage[0]?.size > mbLimit) {
-      setError("IDimageOptional", {
-        message: "Optional image size should not be greater than 10 MB.",
-      });
-      return;
-    }
+  //   if (optionalIdImage[0]?.size > mbLimit) {
+  //     setError("IDimageOptional", {
+  //       message: "Optional image size should not be greater than 10 MB.",
+  //     });
+  //     return;
+  //   }
 
-    payload.gender = activeRatioType;
-    formData.append("IDimageFront", frontIdImage[0]);
-    formData.append("IDimageBack", backIdImage[0]);
-    formData.append("IDimageOptional", optionalIdImage[0]);
+  //   payload.gender = activeRatioType;
+  //   formData.append("IDimageFront", frontIdImage[0]);
+  //   formData.append("IDimageBack", backIdImage[0]);
+  //   formData.append("IDimageOptional", optionalIdImage[0]);
 
-    formData.append("formValues", JSON.stringify(payload));
-    setLoading(true);
-    const res = await createKYC(formData);
-    setLoading(false);
-    if (res.status === 201) {
-      getKYCStatus();
-    } else {
-      toast.error("Unable to Upload the Kyc");
-    }
-  };
+  //   formData.append("formValues", JSON.stringify(payload));
+  //   setLoading(true);
+  //   const res = await createKYC(formData);
+  //   setLoading(false);
+  //   if (res.status === 201) {
+  //     getKYCStatus();
+  //   } else {
+  //     toast.error("Unable to Upload the Kyc");
+  //   }
+  // };
 
-  const handleRemoveImage = (index, imgCheck, prevCheck) => {
-    if (imgCheck) {
-      if (!prevCheck) {
-        const copyBannerImg = [...frontIdImage];
-        copyBannerImg.splice(index, 1);
-        setfrontIdImage(copyBannerImg);
-      } else {
-        // copyPreviewyBannerImg.splice(index, 1);
-      }
-    }
-  };
+  // const handleRemoveImage = (index, imgCheck, prevCheck) => {
+  //   if (imgCheck) {
+  //     if (!prevCheck) {
+  //       const copyBannerImg = [...frontIdImage];
+  //       copyBannerImg.splice(index, 1);
+  //       setfrontIdImage(copyBannerImg);
+  //     } else {
+  //       // copyPreviewyBannerImg.splice(index, 1);
+  //     }
+  //   }
+  // };
 
   const reapply = async () => {
     setglobalLoader(true);
@@ -327,409 +328,7 @@ const KYCForm = () => {
                       <div className="login-form">
                         <h1>Know Your Customer</h1>
 
-                        <p>
-                          <span style={{ color: "red" }}>Note: </span> Please
-                          fill in your details for verification If your address
-                          on ID doesn’t match profile, please submit a utility,
-                          mobile or other document verifying address on profile
-                        </p>
-                        <p className="auth-para">
-                          Please fill your details to verify KYC
-                        </p>
-                        <div className="login-box">
-                          <Form onSubmit={handleSubmit(saveData)}>
-                            <Form.Group className="form-group">
-                              <Form.Label>First Name</Form.Label>
-                              <Form.Control
-                                type="text"
-                                name="firstName"
-                                placeholder="Enter your first name"
-                                autoComplete="off"
-                                readOnly={getValues("firstName") ? true : false}
-                                className={
-                                  errors.firstName ? "error-field" : ""
-                                }
-                                {...register("firstName")}
-                              />
-                              {errors?.firstName ? (
-                                <p className="error-text">
-                                  {errors?.firstName?.message}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                            </Form.Group>
-                            <Form.Group className="form-group">
-                              <Form.Label>Last Name</Form.Label>
-                              <Form.Control
-                                type="text"
-                                name="lastName"
-                                placeholder="Enter your last name"
-                                autoComplete="off"
-                                readOnly={getValues("lastName") ? true : false}
-                                className={errors.lastName ? "error-field" : ""}
-                                {...register("lastName")}
-                              />
-                              {errors?.lastName ? (
-                                <p className="error-text">
-                                  {errors?.lastName?.message}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                            </Form.Group>
-                            <div className="select-banner-area form-group">
-                              <Form.Label>Gender</Form.Label>
-                              <div className="select-banner-option">
-                                <Form.Group
-                                  className={`form-group ${
-                                    activeRatioType === "Male" ? "active" : ""
-                                  } deposit-cash-app`}
-                                  htmlFor="Male"
-                                >
-                                  <Form.Check
-                                    label="Male"
-                                    name="bannerRatio"
-                                    type="radio"
-                                    id="Male"
-                                    value="Male"
-                                    defaultChecked={
-                                      activeRatioType === "Male" ? true : false
-                                    }
-                                    onChange={handleOnChange}
-                                  />
-                                </Form.Group>
-                                <Form.Group
-                                  className={`form-group ${
-                                    activeRatioType === "Female" ? "active" : ""
-                                  } deposit-cash-app`}
-                                  htmlFor="Female"
-                                >
-                                  <Form.Check
-                                    label="Female"
-                                    name="bannerRatio"
-                                    type="radio"
-                                    id="Female"
-                                    value="Female"
-                                    defaultChecked={
-                                      activeRatioType === "Female"
-                                        ? true
-                                        : false
-                                    }
-                                    onChange={handleOnChange}
-                                  />
-                                </Form.Group>
-                              </div>
-                            </div>
-                            <div className="select-banner-area form-group">
-                              <Form.Label>Date of Birth</Form.Label>
-                              <input
-                                type="date"
-                                readOnly={getValues("birthDate") ? true : false}
-                                className="form-control"
-                                {...register("birthDate")}
-                              />
-
-                              {errors?.birthDate ? (
-                                <p className="error-text">
-                                  {errors?.birthDate?.message}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                            </div>
-
-                            <Form.Group className="form-group">
-                              <Form.Label>City</Form.Label>
-                              <Form.Control
-                                type="text"
-                                name="city"
-                                placeholder="Enter your city"
-                                autoComplete="off"
-                                className={errors.city ? "error-field" : ""}
-                                readOnly={getValues("city") ? true : false}
-                                {...register("city")}
-                              />
-                              {errors?.city ? (
-                                <p className="error-text">
-                                  {errors?.city?.message}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                            </Form.Group>
-                            <Form.Group className="form-group">
-                              <Form.Label>State</Form.Label>
-                              <Form.Control
-                                type="text"
-                                name="state"
-                                placeholder="Enter your state"
-                                autoComplete="off"
-                                className={errors.state ? "error-field" : ""}
-                                readOnly={getValues("state") ? true : false}
-                                {...register("state")}
-                              />
-                              {errors?.state ? (
-                                <p className="error-text">
-                                  {errors?.state?.message}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                            </Form.Group>
-                            <Form.Group className="form-group">
-                              <Form.Label>Country</Form.Label>
-                              <Form.Control
-                                type="text"
-                                name="country"
-                                placeholder="Enter your country"
-                                autoComplete="off"
-                                className={errors.country ? "error-field" : ""}
-                                {...register("country")}
-                                readOnly={getValues("country") ? true : false}
-                              />
-                              {errors?.country ? (
-                                <p className="error-text">
-                                  {errors?.country?.message}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                            </Form.Group>
-                            <Form.Group className="form-group">
-                              <Form.Label>Postal / Zip code</Form.Label>
-                              <Form.Control
-                                type="text"
-                                name="zipCode"
-                                placeholder="Enter your postal / zip code"
-                                autoComplete="off"
-                                className={errors.zipCode ? "error-field" : ""}
-                                readOnly={getValues("zipCode") ? true : false}
-                                {...register("zipCode")}
-                              />
-                              {errors?.zipCode ? (
-                                <p className="error-text">
-                                  {errors?.zipCode?.message}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                            </Form.Group>
-                            <Form.Group className="form-group full-w">
-                              <Form.Label>Full Address</Form.Label>
-                              <Form.Control
-                                type="text"
-                                name="address"
-                                placeholder="Enter your full address"
-                                autoComplete="off"
-                                className={errors.address ? "error-field" : ""}
-                                readOnly={getValues("address") ? true : false}
-                                {...register("address")}
-                              />
-                              {errors?.address ? (
-                                <p className="error-text">
-                                  {errors?.address?.message}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                            </Form.Group>
-                            <Form.Group className="form-group ">
-                              <Form.Label>Upload Front Id</Form.Label>
-                              <div className="upload-game-thumnail">
-                                <Form.Control
-                                  type="file"
-                                  id="IDimageFront"
-                                  name="IDimageFront"
-                                  accept=".png, .jpg, .jpeg"
-                                  onChange={handleImageChange}
-                                />
-                                <Form.Label htmlFor="IDimageFront">
-                                  <div className="no-image-area">
-                                    {frontIdImage.length > 0 ? (
-                                      <>
-                                        {" "}
-                                        {frontIdImage.length > 0 && (
-                                          <div className="upload-grid">
-                                            <img
-                                              src={cross}
-                                              alt="cross"
-                                              className="crossImg"
-                                              onClick={() =>
-                                                handleRemoveImage(
-                                                  0,
-                                                  false,
-                                                  false
-                                                )
-                                              }
-                                            />
-                                            {unSupportedImg && (
-                                              <img
-                                                src={window.URL.createObjectURL(
-                                                  frontIdImage[0]
-                                                )}
-                                                alt="logo-img"
-                                              />
-                                            )}
-                                          </div>
-                                        )}
-                                        <div></div>
-                                      </>
-                                    ) : (
-                                      <div className="image-placeholder front-placeholder">
-                                        <p>
-                                          <span> Upload </span> the Image.
-                                        </p>
-                                      </div>
-                                    )}
-                                  </div>
-                                </Form.Label>
-                              </div>
-                              {errors?.IDimageFront ? (
-                                <p className="error-text">
-                                  {errors?.IDimageFront?.message}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                            </Form.Group>
-                            <Form.Group className="form-group ">
-                              <Form.Label>
-                                Upload a Selfie Holding ID as well as a piece of
-                                paper with TODAYS date written on it.
-                              </Form.Label>
-                              <div className="upload-game-thumnail">
-                                <Form.Control
-                                  type="file"
-                                  id="IDimageBack"
-                                  name="IDimageBack"
-                                  accept=".png, .jpg, .jpeg"
-                                  onChange={handleImageChange}
-                                />
-                                <Form.Label htmlFor="IDimageBack">
-                                  <div className="no-image-area">
-                                    {backIdImage.length > 0 ? (
-                                      <>
-                                        {" "}
-                                        {backIdImage.length > 0 && (
-                                          <div className="upload-grid">
-                                            <img
-                                              src={cross}
-                                              alt="cross"
-                                              className="crossImg"
-                                              onClick={() =>
-                                                handleRemoveImage(
-                                                  0,
-                                                  false,
-                                                  false
-                                                )
-                                              }
-                                            />
-                                            <img
-                                              src={window.URL.createObjectURL(
-                                                backIdImage[0]
-                                              )}
-                                              alt="logo-img"
-                                            />
-                                          </div>
-                                        )}
-                                        <div></div>
-                                      </>
-                                    ) : (
-                                      <div className="image-placeholder selfi-placeholder">
-                                        <p>
-                                          <span> Upload </span> the Image.
-                                        </p>
-                                      </div>
-                                    )}
-                                  </div>
-                                </Form.Label>
-                              </div>
-                              {errors?.IDimageBack ? (
-                                <p className="error-text">
-                                  {errors?.IDimageBack?.message}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                            </Form.Group>
-
-                            <Form.Group className="form-group ">
-                              <Form.Label>
-                                Proof of Address if ID and profile are not
-                                matching. (Optional)
-                              </Form.Label>
-                              <div className="upload-game-thumnail">
-                                <Form.Control
-                                  type="file"
-                                  id="IDimageOptional"
-                                  name="IDimageOptional"
-                                  accept=".png, .jpg, .jpeg"
-                                  onChange={handleImageChange}
-                                />
-                                <Form.Label htmlFor="IDimageOptional">
-                                  <div className="no-image-area">
-                                    {optionalIdImage.length > 0 ? (
-                                      <>
-                                        {" "}
-                                        {optionalIdImage.length > 0 && (
-                                          <div className="upload-grid">
-                                            <img
-                                              src={cross}
-                                              alt="cross"
-                                              className="crossImg"
-                                              onClick={() =>
-                                                handleRemoveImage(
-                                                  0,
-                                                  false,
-                                                  false
-                                                )
-                                              }
-                                            />
-                                            <img
-                                              src={window.URL.createObjectURL(
-                                                optionalIdImage[0]
-                                              )}
-                                              alt="logo-img"
-                                            />
-                                          </div>
-                                        )}
-                                        <div></div>
-                                      </>
-                                    ) : (
-                                      <div className="image-placeholder address-placeholder">
-                                        <p>
-                                          <span> Upload </span> the Image.
-                                        </p>
-                                      </div>
-                                    )}
-                                  </div>
-                                </Form.Label>
-                              </div>
-                              {errors?.IDimageOptional ? (
-                                <p className="error-text">
-                                  {errors?.IDimageOptional?.message}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                            </Form.Group>
-
-                            <div className="login-button full-w">
-                              <Button
-                                type="submit"
-                                className="l-btn "
-                                disabled={isSaveLoader}
-                              >
-                                {!loading ? (
-                                  "Save"
-                                ) : (
-                                  <Spinner animation="border" />
-                                )}
-                              </Button>
-                            </div>
-                          </Form>
-                        </div>
+                        <Button onClick={() => handleVerify()}>Verify</Button>
                       </div>
                     )}
 
@@ -748,7 +347,6 @@ const KYCForm = () => {
                     )}
                   </div>
                 )}
-                <Button onClick={() => handleVerify()}>Verify</Button>
               </>
             )}
           </div>
