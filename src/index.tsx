@@ -62,7 +62,6 @@ export default function App() {
 
   const underMaintainance = false;
 
-  window.location.href = "http://scrooge.casino/";
 
   useEffect(() => {
     login();
