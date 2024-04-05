@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -35,8 +36,9 @@ const KYCForm = () => {
   const [unSupportedImg, setUnsupportedImg] = useState(true);
   // const [successMsg, setSuccessMsg] = useState("");
   const [currentState, setCurrentState] = useState("");
-
+  const [iframUrl, setIframeUrl] = useState("");
   const [activeRatioType, setActiveRatioType] = useState("Male");
+  const [iframeLoaded, setIframeLoaded] = useState(false);
 
   const {
     handleSubmit,
@@ -283,13 +285,23 @@ const KYCForm = () => {
   }, []);
 
   const handleVerify = async () => {
-    const res = await VerifySessions();
-    console.log("res", res);
-    if (res.status === "success") {
-      let url = res?.verification?.url;
-      window.location.href = `${url}`;
+    try {
+      setLoading(true);
+      const res = await VerifySessions();
+      console.log("res", res);
+      if (res.status === "success") {
+        let url = res?.verification?.url;
+        window.location.href = `${url}`;
+        setIframeUrl(url);
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log("error", error);
     }
   };
+
+  console.log("iframUrliframUrl", iframUrl);
 
   return (
     <Layout>
@@ -328,7 +340,13 @@ const KYCForm = () => {
                       <div className="login-form">
                         <h1>Know Your Customer</h1>
 
-                        <Button onClick={() => handleVerify()}>Verify</Button>
+                        <Button
+                          disabled={loading ? true : false}
+                          className="verif-btn"
+                          onClick={() => handleVerify()}
+                        >
+                          {!loading ? "Verify" : <Spinner animation="border" />}
+                        </Button>
                       </div>
                     )}
 

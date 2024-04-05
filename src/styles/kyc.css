@@ -490,3 +490,13 @@
     font-size: 12px;
   }
 }
+
+.button.verif-btn {
+  background-image: linear-gradient(rgb(18 88 158 / 85%), rgb(24 54 81 / 89%) 52%) !important;
+  box-shadow: rgb(15 63 73 / 24%) 0 2px 2px, rgb(22 70 111 / 40%) -4px 6px 9px 2px !important;
+  letter-spacing: 0.2rem !important;
+  font-size: 21px;
+  border: none;
+  font-family: math;
+  width: 20vh;
+}
