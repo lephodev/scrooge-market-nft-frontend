@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 /* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
@@ -22,6 +23,7 @@ import success from "../images/success.png";
 import pending from "../images/pending.webp";
 import "../styles/kyc.css";
 import axios from "axios";
+import { createVeriffFrame, MESSAGES } from "@veriff/incontext-sdk";
 
 const KYCForm = () => {
   const navigate = useNavigate();
@@ -291,7 +293,19 @@ const KYCForm = () => {
       console.log("res", res);
       if (res.status === "success") {
         let url = res?.verification?.url;
-        window.location.href = `${url}`;
+
+        createVeriffFrame({
+          url: url,
+          onEvent: function (msg) {
+            switch (msg) {
+              case MESSAGES.CANCELED:
+                //
+                break;
+            }
+          },
+        });
+
+        // window.location.href = `${url}`;
         setIframeUrl(url);
         setLoading(false);
       }
