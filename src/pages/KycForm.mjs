@@ -297,9 +297,10 @@ const KYCForm = () => {
         createVeriffFrame({
           url: url,
           onEvent: function (msg) {
+            console.log("msg", msg);
             switch (msg) {
-              case MESSAGES.CANCELED:
-                //
+              case MESSAGES.FINISHED:
+                window.location.reload();
                 break;
             }
           },
