@@ -5,7 +5,8 @@ import { AcceptHosted } from "react-acceptjs";
 import { Button, Form, Card, Dropdown, Spinner } from "react-bootstrap";
 import Layout from "./Layout.mjs";
 import { Helmet } from "react-helmet";
-
+import kountSDK from "@kount/kount-web-client-sdk";
+import { v4 as uuidv4 } from "uuid";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import coin4 from "../images/4.png";
 import coin3 from "../images/3.png";
@@ -1210,8 +1211,29 @@ const PayWithCard = ({
     }
   };
 
+  const getDDC = () => {
+    const sessionID = uuidv4().replace(/-/g, "");
+    console.log("sessionID", sessionID);
+    // const sessionID = 'ghghghg';
+    const kountConfig = {
+      clientID: 10211,
+      environment: "TEST",
+      isSinglePageApp: true,
+    };
+    const sdk = kountSDK(kountConfig, sessionID);
+    console.log("sdk", sdk);
+    console.log("sdk", sdk?.sessionID);
+
+    if (sdk) {
+      console.log("Anti-fraud SDK activated!");
+      return sdk;
+      // Any non-blocking post-initialization logic can go here
+    }
+  };
+
   const handleCLick = async (gc, usd) => {
-    console.log("dailyGCPurchaseLimit", prize);
+    let sessionId = getDDC()?.sessionID;
+    console.log("dailyGCPurchaseLimit", dailyGCPurchaseLimit);
     if (dailyGCPurchaseLimit >= 4) {
       return toast.error("Credit card daily purchase limit are reached");
     }
@@ -1257,6 +1279,7 @@ const PayWithCard = ({
         {
           amount: prize?.priceInBUSD,
           promoCode: getPromoCode().trim(),
+          sessionId,
         },
         {
           headers: {

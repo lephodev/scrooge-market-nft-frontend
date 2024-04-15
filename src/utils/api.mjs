@@ -33,3 +33,14 @@ export const reApply = async () => {
     return error?.response?.data;
   }
 };
+
+export const VerifySessions = async () => {
+  try {
+    const response = await (await kycInstance()).post(`users/veriffSessions`);
+    console.info("get Kyc Details", response);
+    return response.data;
+  } catch (error) {
+    console.info("error in deposit>>", error);
+    return error?.response?.data;
+  }
+};
