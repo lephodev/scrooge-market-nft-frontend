@@ -6917,5 +6917,5 @@ p.title-memo {
 @media screen and (max-width: 767px){
 .kycForm.marketPlace_kycForm .login-form {
     padding: 70px 20px;
-    height: 33vh;
+    /* height: 33vh; */
 }}
