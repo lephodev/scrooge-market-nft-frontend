@@ -51,6 +51,7 @@ export default function App() {
     ChainId.BinanceSmartChainMainnet
   );
   const [user, setUser] = useState(null);
+
   const [spendedAmount, setSpendedAmount] = useState(null);
   const [loading, setLoading] = useState(true);
   const [dateTimeNow, setDateTimeNow] = useState("");
@@ -60,6 +61,7 @@ export default function App() {
   const [inactiveTime, setInactiveTime] = useState(0);
 
   const underMaintainance = false;
+
 
   useEffect(() => {
     login();
@@ -132,12 +134,12 @@ export default function App() {
         }
         if (
           city.toString() === "Quebec" ||
-          city.toString() === "Idaho" ||
+          // city.toString() === "Idaho" ||
           country.toString() === "Brazil" ||
-          region.toString() === "Quebec" ||
-          region.toString() === "Idaho" ||
-          region.toString() === "Michigan" ||
-          region.toString() === "Washington"
+          region.toString() === "Quebec" 
+          // region.toString() === "Idaho" ||
+          // region.toString() === "Michigan" ||
+          // region.toString() === "Washington"
         ) {
           setStateBlock(true);
         }
@@ -370,7 +372,7 @@ export default function App() {
                       element={<ProtectedRoute component={<MyWallet />} />}
                     />
                     <Route
-                      path='/pay'
+                      path='/pay-cctoGC'
                       element={<ProtectedRoute component={<PaymentCustom />} />}
                     />
                     {/* <Route
