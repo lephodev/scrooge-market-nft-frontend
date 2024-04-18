@@ -5302,6 +5302,12 @@ h2#radix-\:r1\: {
   font-size: 14px;
   padding-bottom: 5px;
 }
+.fiat-data .form-text {
+  display: block;
+  color: #ff0000;
+  font-size: 12px;
+  padding-bottom: 5px;
+}
 .fiat-data p {
   font-size: 16px;
 }
