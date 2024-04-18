@@ -20,7 +20,7 @@ const customStyles = {
     ...provided,
     width: "100%",
   }),
-  option: (provided) => ({
+  option: (provided, { data }) => ({
     ...provided,
     background: "#000",
     color: "#ddd",
@@ -28,7 +28,8 @@ const customStyles = {
     fontSize: "16px",
     padding: "5px 10px",
     lineHeight: "16px",
-    cursor: "pointer",
+    cursor: data.isDisabled ? "not-allowed" : "pointer",
+    opacity: data.isDisabled ? "0.5" : "1",
     borderRadius: "4px",
     borderBottom: "1px solid #141414",
     ":hover": {
@@ -192,17 +193,14 @@ const FiatPopup = ({
   };
 
   useEffect(() => {
-    if (fiatActiveInActive.Cashapp && fiatActiveInActive.Paypal) {
-      setOptions([
-        { value: "Cashapp", label: "Cashapp" },
-        { value: "Paypal", label: "Paypal" },
-      ]);
-    } else if (fiatActiveInActive?.Cashapp) {
-      setOptions([{ value: "Cashapp", label: "Cashapp" }]);
-    } else if (fiatActiveInActive?.Paypal) {
-      setOptions([{ value: "Paypal", label: "Paypal" }]);
-    }
-  }, []);
+    const cashappDisabled = !fiatActiveInActive.Cashapp;
+    const paypalDisabled = !fiatActiveInActive.Paypal;
+
+    setOptions([
+      { value: "Cashapp", label: "Cashapp", isDisabled: cashappDisabled },
+      { value: "Paypal", label: "Paypal", isDisabled: paypalDisabled },
+    ]);
+  }, [fiatActiveInActive]);
 
   return (
     <div className="fiat-data" id="fiat-form">
@@ -213,6 +211,19 @@ const FiatPopup = ({
           <div className="fiat-content">
             <Form.Group className="fiat-group">
               <Form.Label>Withdraw to</Form.Label>
+              {!fiatActiveInActive.Cashapp && (
+                <Form.Text>
+                  Cashapp availability is subject to the apps sending limits.
+                  When limits are reached, the option is disabled temporarily.
+                </Form.Text>
+              )}
+              {!fiatActiveInActive.Paypal && (
+                <Form.Text>
+                  Paypal availability is subject to the apps sending limits.
+                  When limits are reached, the option is disabled temporarily.
+                </Form.Text>
+              )}
+
               <Select
                 options={options}
                 onChange={handleChnagePayout}
