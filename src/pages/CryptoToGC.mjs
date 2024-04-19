@@ -5,8 +5,6 @@ import { AcceptHosted } from "react-acceptjs";
 import { Button, Form, Card, Dropdown, Spinner } from "react-bootstrap";
 import Layout from "./Layout.mjs";
 import { Helmet } from "react-helmet";
-import kountSDK from "@kount/kount-web-client-sdk";
-import { v4 as uuidv4 } from "uuid";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import coin4 from "../images/4.png";
 import coin3 from "../images/3.png";
@@ -33,6 +31,7 @@ import axios from "axios";
 import AuthorizeSucessModel from "./models/authrizeSucessModel.mjs";
 import PageLoader from "../components/pageLoader/loader.mjs";
 import FreeSTModel from "./models/FreeSTModel.mjs";
+import AuthrizeCustomModel from "./models/authrizeCustomModel.mjs";
 let promoCode;
 let goldcoinAmount;
 
@@ -844,7 +843,7 @@ export default function CryptoToGC() {
               </div>
             )}
 
-            <button
+            {/* <button
               style={{ visibility: "hidden" }}
               type="button"
               id="paycard"
@@ -857,7 +856,7 @@ export default function CryptoToGC() {
               data-responseHandler={`requestHandler`}
             >
               pay
-            </button>
+            </button> */}
           </main>
         </Layout>
       )}
@@ -875,10 +874,39 @@ const PayWithCard = ({
   spendedAmount,
   user,
 }) => {
-  const handleCLick = () => {
+  const [showAuthForm, setShowAuthForm] = useState(false);
+  const handleCLick = (gc, usd) => {
     if (dailyGCPurchaseLimit >= 4) {
       return toast.error("Credit card daily purchase limit are reached");
     }
+    goldcoinAmount = gc;
+    if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
+      return toast.error(
+        "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "A" }
+      );
+    }
+
+    if (
+      spendedAmount.spened_this_week + usd >
+      user.weeklyGoldCoinSpendingLimit
+    ) {
+      return toast.error(
+        "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "B" }
+      );
+    }
+
+    if (
+      spendedAmount.spneded_this_month + usd >
+      user.monthlyGoldCoinSpendingLimit
+    ) {
+      return toast.error(
+        "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "C" }
+      );
+    }
+    setShowAuthForm(true);
 
     let payload = {
       freeTokenAmount: getExactToken(prize.freeTokenAmount, promoDetails),
@@ -891,11 +919,28 @@ const PayWithCard = ({
     window.prize = payload;
     document.getElementById("paycard").click();
   };
+
+  const handleClosePayForm = () => {
+    setShowAuthForm(!showAuthForm);
+  };
   return (
-    <button onClick={handleCLick}>
-      {" "}
-      Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}
-    </button>
+    <>
+      <button
+        onClick={() =>
+          handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
+        }
+      >
+        {" "}
+        Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}
+      </button>
+      <AuthrizeCustomModel
+        showAuthForm={showAuthForm}
+        handleClosePayForm={handleClosePayForm}
+        amount={prize?.priceInBUSD}
+        promoCode={promoCode}
+        prize={prize}
+      />
+    </>
   );
 };
 
