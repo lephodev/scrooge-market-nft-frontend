@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Form, Spinner } from "react-bootstrap";
@@ -16,6 +16,7 @@ import success from "../images/success.png";
 import pending from "../images/pending.webp";
 import "../styles/kyc.css";
 import axios from "axios";
+import AuthContext from "../context/authContext.ts";
 
 const KYCForm = () => {
   // const navigate = useNavigate();
@@ -30,6 +31,7 @@ const KYCForm = () => {
   // const [unSupportedImg, setUnsupportedImg] = useState(true);
   // const [successMsg, setSuccessMsg] = useState("");
   const [currentState, setCurrentState] = useState("");
+  const { user } = useContext(AuthContext);
 
   // const [activeRatioType, setActiveRatioType] = useState("Male");
 
@@ -263,8 +265,9 @@ const KYCForm = () => {
   //   navigate("/login");
   // };
 
+  console.log("user in kyc", user);
   const kycRedirection = ()=>{
-    window.location.href = "https://flow-dev.togggle.io/scrooge/kyc";
+    window.location.href = `https://flow-dev.togggle.io/scrooge/kyc?email=${user?.email}`;
   }
 
   useEffect(() => {
