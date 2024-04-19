@@ -3,38 +3,39 @@ import { Modal, Button } from "react-bootstrap";
 const AuthorizeSucessModel = ({ show, status, handleOk }) => {
   return (
     <>
-      <Modal centered show={show} size='lg' className='success-modal'>
+      <Modal centered show={show} size="lg" className="success-modal">
         <Modal.Body>
-          <div className='payment-success-content'>
-            <div className='container'>
-              <div className='payment-success'>
-                <div className='payment-success-card'>
-                  <div className='card-check'>
+          <div className="payment-success-content">
+            <div className="container">
+              <div className="payment-success">
+                <div className="payment-success-card">
+                  <div className="card-check">
                     {status === "inprogress" ? (
                       <>
-                        <div className='loader'>
-                          <span className='hour'></span>
-                          <span className='min'></span>
-                          <span className='circel'></span>
+                        <div className="loader">
+                          <span className="hour"></span>
+                          <span className="min"></span>
+                          <span className="circel"></span>
                         </div>
                       </>
                     ) : status === "success" ? (
-                      <div class='check-container'>
-                        <div className='check-background'>
+                      <div class="check-container">
+                        <div className="check-background">
                           <svg
-                            viewBox='0 0 65 51'
-                            fill='none'
-                            xmlns='http://www.w3.org/2000/svg'>
+                            viewBox="0 0 65 51"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
                             <path
-                              d='M7 25L27.3077 44L58.5 7'
-                              stroke='white'
-                              stroke-width='11'
-                              stroke-linecap='round'
-                              stroke-linejoin='round'
+                              d="M7 25L27.3077 44L58.5 7"
+                              stroke="white"
+                              stroke-width="11"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
                             />
                           </svg>
                         </div>
-                        <div class='check-shadow'></div>
+                        <div class="check-shadow"></div>
                       </div>
                     ) : (
                       ""
