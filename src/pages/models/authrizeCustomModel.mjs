@@ -109,7 +109,11 @@ const AuthrizeCustomModel = ({
       );
       setLoader(false);
       console.log("res", res);
-      if (res.data.success) {
+      if (res?.data?.success) {
+        handleClosePayForm();
+        setCardNumber("");
+        setExpDate("");
+        setCardCode("");
         toast.success(res.data.message, { id: "buy-sucess" });
       } else {
         toast.error(res.data.error, { id: "buy-failed" });
@@ -145,7 +149,7 @@ const AuthrizeCustomModel = ({
         <Form onSubmit={handleSubmit(pay)}>
           <div className="select-banner-option">
             <Form.Group controlId="cardNumber">
-              <Form.Label>Card Number</Form.Label>
+              <Form.Label>Card Number*</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="1234 5678 9123 4567"
@@ -153,6 +157,7 @@ const AuthrizeCustomModel = ({
                 value={cardNumber}
                 onChange={handleChange}
                 isInvalid={!isValid}
+                required
               />
               {!isValid && (
                 <Form.Control.Feedback type="invalid">
@@ -160,28 +165,20 @@ const AuthrizeCustomModel = ({
                 </Form.Control.Feedback>
               )}
             </Form.Group>
-            {/* <Form.Group className="form-group">
-              <Form.Label>Card Number</Form.Label>
-              <Form.Control
-                type="number"
-                name="cardNumber"
-                placeholder="Enter Your Card Number"
-                autoComplete="off"
-                {...register("cardNumber")}
-              />
-            </Form.Group> */}
+
             <Form.Group className="form-group">
-              <Form.Label>Exp. Date</Form.Label>
+              <Form.Label>Exp. Date*</Form.Label>
               <Form.Control
                 type="text"
                 name="expDate"
                 placeholder="Ex. 07/29"
                 onKeyUp={handleExpDateChange}
                 maxLength={5}
+                required
               />
             </Form.Group>
             <Form.Group className="form-group">
-              <Form.Label>Card Code</Form.Label>
+              <Form.Label>Card Code*</Form.Label>
               <Form.Control
                 type="text"
                 name="cardCode"
@@ -199,77 +196,84 @@ const AuthrizeCustomModel = ({
           </Modal.Header>
           <div className="select-banner-option">
             <Form.Group className="form-group">
-              <Form.Label>First Name</Form.Label>
+              <Form.Label>First Name*</Form.Label>
               <Form.Control
                 type="text"
                 name="firstName"
-                placeholder="Enter Your First Name"
+                placeholder="Ex. John"
                 autoComplete="off"
                 {...register("firstName")}
+                required
               />
             </Form.Group>
             <Form.Group className="form-group">
-              <Form.Label>Last Name</Form.Label>
+              <Form.Label>Last Name*</Form.Label>
               <Form.Control
                 type="text"
                 name="lastName"
-                placeholder="Enter Your Last Name"
+                placeholder="Ex. Smith"
                 autoComplete="off"
                 {...register("lastName")}
+                required
               />
             </Form.Group>
             <Form.Group className="form-group">
-              <Form.Label>Country</Form.Label>
+              <Form.Label>Country*</Form.Label>
               <Form.Control
                 type="text"
                 name="country"
-                placeholder="Enter Your Country"
+                placeholder="Country"
                 autoComplete="off"
                 {...register("country")}
+                required
               />
             </Form.Group>
           </div>
           <div className="select-banner-option">
             <Form.Group className="form-group">
-              <Form.Label>Zip Code</Form.Label>
+              <Form.Label>Zip Code*</Form.Label>
               <Form.Control
                 type="text"
                 name="zipCode"
-                placeholder="Enter Your Zip Code"
+                placeholder="Ex. 898989ee"
                 autoComplete="off"
                 {...register("zipCode")}
+                required
               />
             </Form.Group>
             <Form.Group className="form-group">
-              <Form.Label>Street Address</Form.Label>
+              <Form.Label>Street Address*</Form.Label>
               <Form.Control
                 type="text"
                 name="streetAddress"
-                placeholder="Enter Street Address"
+                placeholder="Street Address"
                 autoComplete="off"
                 {...register("streetAddress")}
+                required
               />
             </Form.Group>
             <Form.Group className="form-group">
-              <Form.Label>City</Form.Label>
+              <Form.Label>City*</Form.Label>
               <Form.Control
                 type="text"
                 name="city"
-                placeholder="Enter Your City"
+                placeholder="City"
                 autoComplete="off"
                 {...register("city")}
+                required
               />
             </Form.Group>
           </div>
           <div className="select-banner-option">
             <Form.Group className="form-group">
-              <Form.Label>State</Form.Label>
+              <Form.Label>State*</Form.Label>
               <Form.Control
                 type="text"
                 name="state"
-                placeholder="Enter Your State"
+                placeholder="State"
                 autoComplete="off"
                 {...register("state")}
+                required
               />
             </Form.Group>
             <Form.Group className="form-group">
@@ -277,7 +281,7 @@ const AuthrizeCustomModel = ({
               <Form.Control
                 type="number"
                 name="phoneNumber"
-                placeholder="Enter Phone Number"
+                placeholder="Phone Number"
                 autoComplete="off"
                 {...register("phoneNumber")}
               />
@@ -285,6 +289,7 @@ const AuthrizeCustomModel = ({
           </div>
           <div className="popupBtn">
             <button
+              disabled={loader}
               className="yellowBtn greenBtn"
               variant="primary"
               type="submit"
