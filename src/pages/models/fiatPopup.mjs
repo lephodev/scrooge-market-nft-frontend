@@ -215,6 +215,11 @@ const FiatPopup = ({
           <div className="fiat-content">
             <Form.Group className="fiat-group">
               <Form.Label>Withdraw to</Form.Label>
+              <br />
+              <span style={{ color: "red", fontSize: "14px" }}>
+                Cashapp availability is subject to the apps sending limits and
+                may be temporarily unavailable at times.{" "}
+              </span>
               <Select
                 options={options}
                 onChange={handleChnagePayout}
