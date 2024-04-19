@@ -5402,7 +5402,53 @@ p.title-memo {
   border: 1px solid #1c1c1c;
   max-width: 60%;
 }
+.payment-header {
+  border-bottom:none !important ;
+  padding-top: 20px;
+  padding: 10px 0px !important;
+  margin-bottom: 10px !important;
+  color: white !important;
+}
+.payment_popup .select-banner-option {
+  padding-bottom: 17px;
+  display: grid !important;
+  /* align-items: center; */
+  gap: 20px !important;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+}
 
+.payment_popup .form-label {
+  margin-bottom: 4px;
+}
+
+
+.payment_popup .modal-body{
+  padding: 40px !important;
+  position: relative !important;
+}
+
+.payment_popup .form-control{
+  background-color:#d7d7d7 !important;
+  padding: 0.275rem .75rem !important;
+  font-size: 14px !important;
+}
+
+.invalid-feedback {
+  position: absolute !important;
+}
+.payment_popup .paymentCrossIcon {
+  position: absolute;
+  top: 8px;
+  right: 20px;
+}
+.payment_popup .paymentCrossIcon svg {
+  height: 30px;
+  width: 30px;
+}
+.greenBtn {
+  background-color: #52BF52 !important;
+  width: 150px !important;
+}
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
