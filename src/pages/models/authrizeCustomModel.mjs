@@ -202,8 +202,13 @@ const AuthrizeCustomModel = ({
                 name="firstName"
                 placeholder="Ex. John"
                 autoComplete="off"
-                {...register("firstName")}
-                required
+                onKeyPress={(e) => {
+                  const regex = /^[A-Za-z]+$/;
+                  if (!regex.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
+                {...register("firstName", { required: true })}
               />
             </Form.Group>
             <Form.Group className="form-group">
@@ -213,6 +218,12 @@ const AuthrizeCustomModel = ({
                 name="lastName"
                 placeholder="Ex. Smith"
                 autoComplete="off"
+                onKeyPress={(e) => {
+                  const regex = /^[A-Za-z]+$/;
+                  if (!regex.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
                 {...register("lastName")}
                 required
               />
@@ -224,6 +235,12 @@ const AuthrizeCustomModel = ({
                 name="country"
                 placeholder="Country"
                 autoComplete="off"
+                onKeyPress={(e) => {
+                  const regex = /^[A-Za-z]+$/;
+                  if (!regex.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
                 {...register("country")}
                 required
               />
@@ -259,6 +276,12 @@ const AuthrizeCustomModel = ({
                 name="city"
                 placeholder="City"
                 autoComplete="off"
+                onKeyPress={(e) => {
+                  const regex = /^[A-Za-z]+$/;
+                  if (!regex.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
                 {...register("city")}
                 required
               />
@@ -272,6 +295,12 @@ const AuthrizeCustomModel = ({
                 name="state"
                 placeholder="State"
                 autoComplete="off"
+                onKeyPress={(e) => {
+                  const regex = /^[A-Za-z]+$/;
+                  if (!regex.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
                 {...register("state")}
                 required
               />
