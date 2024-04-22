@@ -1,15 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-useless-escape */
 import { Modal, Spinner, Form } from "react-bootstrap";
 import { marketPlaceInstance } from "../../config/axios.js";
-import { toast } from "react-toastify";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { getDDC } from "../../utils/dateUtils.mjs";
 import { number } from "card-validator";
-import { countries } from "../../utils/countries.mjs";
 import Select from "react-select";
 import AuthorizeSucessModel from "./authrizeSucessModel.mjs";
+import AuthContext from "../../context/authContext.ts";
 
 const AuthrizeCustomModel = ({
   showAuthForm,
@@ -18,7 +18,15 @@ const AuthrizeCustomModel = ({
   promoCode,
   prize,
 }) => {
+  const { user } = useContext(AuthContext);
+
   const { handleSubmit, register, reset, setValue } = useForm({
+    defaultValues: {
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+
+      // phone: user?.phone,
+    },
     mode: "onBlur",
   });
 
@@ -118,6 +126,11 @@ const AuthrizeCustomModel = ({
     value: "United States",
     label: "United States",
   });
+
+  const countries = [
+    { value: "United States", label: "United States" },
+    { value: "Canada", label: "Canada" },
+  ];
   const handleClosePayForm = () => {
     reset();
     setIsValid(true);
@@ -230,7 +243,7 @@ const AuthrizeCustomModel = ({
         // toast.success(res.data.message, { id: "buy-sucess" });
       } else {
         setErrorMsg(res.data.error);
-        toast.error(res.data.error, { id: "buy-failed" });
+        // toast.error(res.data.error, { id: "buy-failed" });
       }
     } catch (e) {
       setLoader(false);
@@ -239,9 +252,9 @@ const AuthrizeCustomModel = ({
       if (axios.isAxiosError(e) && e?.response) {
         if (e?.response?.status !== 200) {
           setErrorMsg(e?.response?.data?.error || e?.response?.data?.message);
-          toast.error(e?.response?.data?.error || e?.response?.data?.message, {
-            toastId: "login",
-          });
+          // toast.error(e?.response?.data?.error || e?.response?.data?.message, {
+          //   toastId: "login",
+          // });
         }
       }
     }
@@ -253,6 +266,10 @@ const AuthrizeCustomModel = ({
       console.log("error", error);
     }
   };
+
+  useEffect(() => {
+    setValue("country", "United States");
+  }, []);
 
   return (
     <>
@@ -333,6 +350,8 @@ const AuthrizeCustomModel = ({
                   <Form.Label>First Name*</Form.Label>
                   <Form.Control
                     type="text"
+                    readOnly
+                    disabled
                     name="firstName"
                     placeholder="Ex. John"
                     autoComplete="off"
@@ -350,6 +369,8 @@ const AuthrizeCustomModel = ({
                   <Form.Label>Last Name*</Form.Label>
                   <Form.Control
                     type="text"
+                    readOnly
+                    disabled
                     name="lastName"
                     placeholder="Ex. Smith"
                     autoComplete="off"
