@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { getDDC } from "../../utils/dateUtils.mjs";
 import { number } from "card-validator";
+import { countries } from "../../utils/countries.mjs";
+import Select from "react-select";
 
 const AuthrizeCustomModel = ({
   showAuthForm,
@@ -15,16 +17,104 @@ const AuthrizeCustomModel = ({
   promoCode,
   prize,
 }) => {
-  const { handleSubmit, register, reset } = useForm({
+  const { handleSubmit, register, reset, setValue } = useForm({
     mode: "onBlur",
   });
+
+  const customStyles = {
+    container: (provided) => ({
+      ...provided,
+      width: "100%",
+    }),
+    option: (provided) => ({
+      ...provided,
+      background: "#000",
+      color: "#ddd",
+      fontWeight: "400",
+      fontSize: "16px",
+      padding: "10px 20px",
+      lineHeight: "16px",
+      cursor: "pointer",
+      borderRadius: "4px",
+      borderBottom: "1px solid #141414",
+      ":hover": {
+        background: "#141414",
+        borderRadius: "4px",
+      },
+    }),
+    menu: (provided) => ({
+      ...provided,
+      background: "#000",
+      borderRadius: "30px",
+      padding: "10px 20px",
+      border: "2px solid transparent",
+    }),
+    control: () => ({
+      background: "#000",
+      border: "2px solid #000",
+      borderRadius: "30px",
+      color: "#fff",
+      display: "flex",
+      alignItem: "center",
+      height: "41",
+      margin: "2px 0",
+      boxShadow: " 0 2px 10px #000000a5",
+      cursor: "pointer",
+      ":hover": {
+        background: "#000",
+        // border: "2px solid #306CFE",
+      },
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: "#fff",
+      fontWeight: "400",
+      fontSize: "14px",
+      lineHeight: "16px",
+    }),
+    indicatorSeparator: (provided) => ({
+      ...provided,
+      display: "none",
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      fontWeight: "400",
+      fontSize: "14px",
+      lineHeight: "19px",
+      color: "#858585c7",
+    }),
+    input: (provided) => ({
+      ...provided,
+      // height: "38px",
+      color: "fff",
+    }),
+    valueContainer: (provided) => ({
+      ...provided,
+      padding: "2px 20px",
+    }),
+    indicatorsContainer: (provided) => ({
+      ...provided,
+      paddingRight: "20px",
+      color: "#858585c7",
+    }),
+    svg: (provided) => ({
+      ...provided,
+      fill: "#858585c7 !important",
+      ":hover": {
+        fill: "#858585c7 !important",
+      },
+    }),
+  };
 
   const [loader, setLoader] = useState(false);
   const [cardNumber, setCardNumber] = useState("");
   const [isValid, setIsValid] = useState(true); // Assuming initial state is valid
   const [expDate, setExpDate] = useState("");
   const [cardCode, setCardCode] = useState("");
-
+  const [country, setCountry] = useState({
+    value: "USA",
+    label: "USA",
+  });
   const handleClosePayForm = () => {
     reset();
     setIsValid(true);
@@ -85,6 +175,11 @@ const AuthrizeCustomModel = ({
     setCardCode(inputValue);
   };
 
+  const handleCountryChange = (selectedOption) => {
+    setValue("country", selectedOption?.label);
+    setCountry(selectedOption);
+  };
+
   const getPromoCode = () => {
     console.log("prizehgfghgfhfgh", prize.priceInBUSD, promoCode);
     if (prize.offerType !== "MegaOffer" && prize?.priceInBUSD !== "250") {
@@ -142,6 +237,7 @@ const AuthrizeCustomModel = ({
       }
     }
   };
+
   return (
     <Modal
       show={showAuthForm}
@@ -241,7 +337,14 @@ const AuthrizeCustomModel = ({
             </Form.Group>
             <Form.Group className="form-group">
               <Form.Label>Country*</Form.Label>
-              <Form.Control
+              <Select
+                id="country"
+                value={country}
+                onChange={handleCountryChange}
+                options={countries}
+                styles={customStyles}
+              />
+              {/* <Form.Control
                 type="text"
                 name="country"
                 placeholder="Country"
@@ -254,7 +357,7 @@ const AuthrizeCustomModel = ({
                 }}
                 {...register("country")}
                 required
-              />
+              /> */}
             </Form.Group>
           </div>
           <div className="select-banner-option">
