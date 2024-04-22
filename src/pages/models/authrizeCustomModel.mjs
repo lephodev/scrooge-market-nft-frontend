@@ -2,13 +2,14 @@
 /* eslint-disable no-useless-escape */
 import { Modal, Spinner, Form } from "react-bootstrap";
 import { marketPlaceInstance } from "../../config/axios.js";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { getDDC } from "../../utils/dateUtils.mjs";
 import { number } from "card-validator";
 import Select from "react-select";
 import AuthorizeSucessModel from "./authrizeSucessModel.mjs";
+import AuthContext from "../../context/authContext.ts";
 
 const AuthrizeCustomModel = ({
   showAuthForm,
@@ -17,7 +18,15 @@ const AuthrizeCustomModel = ({
   promoCode,
   prize,
 }) => {
+  const { user } = useContext(AuthContext);
+
   const { handleSubmit, register, reset, setValue } = useForm({
+    defaultValues: {
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+
+      // phone: user?.phone,
+    },
     mode: "onBlur",
   });
 
@@ -341,6 +350,8 @@ const AuthrizeCustomModel = ({
                   <Form.Label>First Name*</Form.Label>
                   <Form.Control
                     type="text"
+                    readOnly
+                    disabled
                     name="firstName"
                     placeholder="Ex. John"
                     autoComplete="off"
@@ -358,6 +369,8 @@ const AuthrizeCustomModel = ({
                   <Form.Label>Last Name*</Form.Label>
                   <Form.Control
                     type="text"
+                    readOnly
+                    disabled
                     name="lastName"
                     placeholder="Ex. Smith"
                     autoComplete="off"
