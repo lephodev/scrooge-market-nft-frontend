@@ -9,6 +9,7 @@ import { getDDC } from "../../utils/dateUtils.mjs";
 import { number } from "card-validator";
 import { countries } from "../../utils/countries.mjs";
 import Select from "react-select";
+import AuthorizeSucessModel from "./authrizeSucessModel.mjs";
 
 const AuthrizeCustomModel = ({
   showAuthForm,
@@ -111,9 +112,10 @@ const AuthrizeCustomModel = ({
   const [isValid, setIsValid] = useState(true); // Assuming initial state is valid
   const [expDate, setExpDate] = useState("");
   const [cardCode, setCardCode] = useState("");
+  const [success, setSuccess] = useState(false);
   const [country, setCountry] = useState({
-    value: "USA",
-    label: "USA",
+    value: "United States",
+    label: "United States",
   });
   const handleClosePayForm = () => {
     reset();
@@ -223,7 +225,8 @@ const AuthrizeCustomModel = ({
         setCardNumber("");
         setExpDate("");
         setCardCode("");
-        toast.success(res.data.message, { id: "buy-sucess" });
+        setSuccess(true);
+        // toast.success(res.data.message, { id: "buy-sucess" });
       } else {
         toast.error(res.data.error, { id: "buy-failed" });
       }
@@ -240,198 +243,227 @@ const AuthrizeCustomModel = ({
       }
     }
   };
+  const handleOk = async (event) => {
+    try {
+      setSuccess(false);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
   return (
-    <Modal
-      show={showAuthForm}
-      onHide={handleClosePayForm}
-      centered
-      size="lg"
-      backdrop={"static"}
-      className="free-st-popup payment_popup"
-    >
-      <Modal.Body>
-        <Modal.Header className="payment-header">Payment Form</Modal.Header>
-        <div className="paymentCrossIcon" onClick={() => handleClosePayForm()}>
-          {" "}
-          <CrossIconSVG />
-        </div>
-        <Form onSubmit={handleSubmit(pay)}>
-          <div className="select-banner-option">
-            <Form.Group controlId="cardNumber">
-              <Form.Label>Card Number*</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="1234 5678 9123 4567"
-                autoComplete="off"
-                value={cardNumber}
-                onChange={handleChange}
-                isInvalid={!isValid}
-                required
-              />
-              {!isValid && (
-                <Form.Control.Feedback type="invalid">
-                  Invalid card number
-                </Form.Control.Feedback>
-              )}
-            </Form.Group>
-
-            <Form.Group className="form-group">
-              <Form.Label>Exp. Date*</Form.Label>
-              <Form.Control
-                type="text"
-                name="expDate"
-                placeholder="Ex. 07/29"
-                onKeyUp={handleExpDateChange}
-                maxLength={5}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="form-group">
-              <Form.Label>Card Code*</Form.Label>
-              <Form.Control
-                type="text"
-                name="cardCode"
-                placeholder="CVV"
-                autoComplete="off"
-                value={cardCode}
-                onChange={handleInputCardCodeChange} // Call handleInputChange on input change
-                maxLength={5} // Limit input to 4 characters
-                required // Make the field required if needed
-              />
-            </Form.Group>
-          </div>
-          <Modal.Header className="payment-header">
-            Billing Address
-          </Modal.Header>
-          <div className="select-banner-option">
-            <Form.Group className="form-group">
-              <Form.Label>First Name*</Form.Label>
-              <Form.Control
-                type="text"
-                name="firstName"
-                placeholder="Ex. John"
-                autoComplete="off"
-                onInput={(e) => {
-                  e.target.value = e.target.value.replace(/[^A-Za-z]/gi, ""); // Remove non-alphabetical characters
-                }}
-                {...register("firstName", { required: true })}
-              />
-            </Form.Group>
-            <Form.Group className="form-group">
-              <Form.Label>Last Name*</Form.Label>
-              <Form.Control
-                type="text"
-                name="lastName"
-                placeholder="Ex. Smith"
-                autoComplete="off"
-                onInput={(e) => {
-                  e.target.value = e.target.value.replace(/[^A-Za-z]/gi, ""); // Remove non-alphabetical characters
-                }}
-                {...register("lastName")}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="form-group">
-              <Form.Label>Country*</Form.Label>
-              <Select
-                id="country"
-                className="country_select"
-                value={country}
-                onChange={handleCountryChange}
-                options={countries}
-                styles={customStyles}
-              />
-            </Form.Group>
-          </div>
-          <div className="select-banner-option">
-            <Form.Group className="form-group">
-              <Form.Label>Zip Code*</Form.Label>
-              <Form.Control
-                type="text"
-                name="zipCode"
-                placeholder="Ex. 898989ee"
-                autoComplete="off"
-                maxLength={20}
-                {...register("zipCode")}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="form-group">
-              <Form.Label>Street Address*</Form.Label>
-              <Form.Control
-                type="text"
-                name="streetAddress"
-                placeholder="Street Address"
-                autoComplete="off"
-                {...register("streetAddress")}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="form-group">
-              <Form.Label>City*</Form.Label>
-              <Form.Control
-                type="text"
-                name="city"
-                placeholder="City"
-                autoComplete="off"
-                onInput={(e) => {
-                  e.target.value = e.target.value.replace(/[^A-Za-z]/gi, ""); // Remove non-alphabetical characters
-                }}
-                {...register("city")}
-                required
-              />
-            </Form.Group>
-          </div>
-          <div className="select-banner-option">
-            <Form.Group className="form-group">
-              <Form.Label>State*</Form.Label>
-              <Form.Control
-                type="text"
-                name="state"
-                placeholder="State"
-                autoComplete="off"
-                onKeyPress={(e) => {
-                  const regex = /^[A-Za-z]+$/;
-                  if (!regex.test(e.key)) {
-                    e.preventDefault();
-                  }
-                }}
-                {...register("state")}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="form-group">
-              <Form.Label>Phone Number</Form.Label>
-              <Form.Control
-                type="number"
-                name="phoneNumber"
-                placeholder="Phone Number"
-                autoComplete="off"
-                {...register("phoneNumber")}
-              />
-            </Form.Group>
-          </div>
-          <div className="popupBtn">
-            <button
-              disabled={loader}
-              className="yellowBtn greenBtn"
-              variant="primary"
-              type="submit"
-            >
-              {loader ? <Spinner animation="border" /> : "Pay"}
-            </button>
-            {/* <Button
-              className="yellowBtn"
-              variant="primary"
+    <>
+      {success ? (
+        <AuthorizeSucessModel
+          show={true}
+          status={"success"}
+          handleOk={handleOk}
+        />
+      ) : (
+        <Modal
+          show={showAuthForm}
+          onHide={handleClosePayForm}
+          centered
+          size="lg"
+          backdrop={"static"}
+          className="free-st-popup payment_popup"
+        >
+          <Modal.Body>
+            <Modal.Header className="payment-header">Payment Form</Modal.Header>
+            <div
+              className="paymentCrossIcon"
               onClick={() => handleClosePayForm()}
             >
-              Cancel
-            </Button> */}
-          </div>
-        </Form>
-      </Modal.Body>
-    </Modal>
+              {" "}
+              <CrossIconSVG />
+            </div>
+            <Form onSubmit={handleSubmit(pay)}>
+              <div className="select-banner-option">
+                <Form.Group controlId="cardNumber">
+                  <Form.Label>Card Number*</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="1234 5678 9123 4567"
+                    autoComplete="off"
+                    value={cardNumber}
+                    onChange={handleChange}
+                    isInvalid={!isValid}
+                    required
+                  />
+                  {!isValid && (
+                    <Form.Control.Feedback type="invalid">
+                      Invalid card number
+                    </Form.Control.Feedback>
+                  )}
+                </Form.Group>
+
+                <Form.Group className="form-group">
+                  <Form.Label>Exp. Date*</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="expDate"
+                    placeholder="Ex. 07/29"
+                    onKeyUp={handleExpDateChange}
+                    maxLength={5}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="form-group">
+                  <Form.Label>Card Code*</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="cardCode"
+                    placeholder="CVV"
+                    autoComplete="off"
+                    value={cardCode}
+                    onChange={handleInputCardCodeChange} // Call handleInputChange on input change
+                    maxLength={5} // Limit input to 4 characters
+                    required // Make the field required if needed
+                  />
+                </Form.Group>
+              </div>
+              <Modal.Header className="payment-header">
+                Billing Address
+              </Modal.Header>
+              <div className="select-banner-option">
+                <Form.Group className="form-group">
+                  <Form.Label>First Name*</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="firstName"
+                    placeholder="Ex. John"
+                    autoComplete="off"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(
+                        /[^A-Za-z]/gi,
+                        ""
+                      ); // Remove non-alphabetical characters
+                    }}
+                    {...register("firstName", { required: true })}
+                  />
+                </Form.Group>
+                <Form.Group className="form-group">
+                  <Form.Label>Last Name*</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="lastName"
+                    placeholder="Ex. Smith"
+                    autoComplete="off"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(
+                        /[^A-Za-z]/gi,
+                        ""
+                      ); // Remove non-alphabetical characters
+                    }}
+                    {...register("lastName")}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="form-group">
+                  <Form.Label>Country*</Form.Label>
+                  <Select
+                    id="country"
+                    className="country_select"
+                    value={country}
+                    onChange={handleCountryChange}
+                    options={countries}
+                    styles={customStyles}
+                  />
+                </Form.Group>
+              </div>
+              <div className="select-banner-option">
+                <Form.Group className="form-group">
+                  <Form.Label>Zip Code*</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="zipCode"
+                    placeholder="Ex. 898989ee"
+                    autoComplete="off"
+                    maxLength={20}
+                    {...register("zipCode")}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="form-group">
+                  <Form.Label>Street Address*</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="streetAddress"
+                    placeholder="Street Address"
+                    autoComplete="off"
+                    {...register("streetAddress")}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="form-group">
+                  <Form.Label>City*</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="city"
+                    placeholder="City"
+                    autoComplete="off"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(
+                        /[^A-Za-z]/gi,
+                        ""
+                      ); // Remove non-alphabetical characters
+                    }}
+                    {...register("city")}
+                    required
+                  />
+                </Form.Group>
+              </div>
+              <div className="select-banner-option">
+                <Form.Group className="form-group">
+                  <Form.Label>State*</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="state"
+                    placeholder="State"
+                    autoComplete="off"
+                    onKeyPress={(e) => {
+                      const regex = /^[A-Za-z]+$/;
+                      if (!regex.test(e.key)) {
+                        e.preventDefault();
+                      }
+                    }}
+                    {...register("state")}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="form-group">
+                  <Form.Label>Phone Number</Form.Label>
+                  <Form.Control
+                    type="number"
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    autoComplete="off"
+                    {...register("phoneNumber")}
+                  />
+                </Form.Group>
+              </div>
+              <div className="popupBtn">
+                <button
+                  disabled={loader}
+                  className="yellowBtn greenBtn"
+                  variant="primary"
+                  type="submit"
+                >
+                  {loader ? <Spinner animation="border" /> : "Pay"}
+                </button>
+                {/* <Button
+      className="yellowBtn"
+      variant="primary"
+      onClick={() => handleClosePayForm()}
+    >
+      Cancel
+    </Button> */}
+              </div>
+            </Form>
+          </Modal.Body>
+        </Modal>
+      )}
+    </>
   );
 };
 
