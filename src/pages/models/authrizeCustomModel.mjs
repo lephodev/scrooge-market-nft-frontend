@@ -113,6 +113,7 @@ const AuthrizeCustomModel = ({
   const [expDate, setExpDate] = useState("");
   const [cardCode, setCardCode] = useState("");
   const [success, setSuccess] = useState(false);
+  const [error, setErrorMsg] = useState("");
   const [country, setCountry] = useState({
     value: "United States",
     label: "United States",
@@ -228,6 +229,7 @@ const AuthrizeCustomModel = ({
         setSuccess(true);
         // toast.success(res.data.message, { id: "buy-sucess" });
       } else {
+        setErrorMsg(res.data.error);
         toast.error(res.data.error, { id: "buy-failed" });
       }
     } catch (e) {
@@ -236,6 +238,7 @@ const AuthrizeCustomModel = ({
       // console.log("ee55", JSON.parse(e));
       if (axios.isAxiosError(e) && e?.response) {
         if (e?.response?.status !== 200) {
+          setErrorMsg(e?.response?.data?.error || e?.response?.data?.message);
           toast.error(e?.response?.data?.error || e?.response?.data?.message, {
             toastId: "login",
           });
@@ -339,7 +342,8 @@ const AuthrizeCustomModel = ({
                         ""
                       ); // Remove non-alphabetical characters
                     }}
-                    {...register("firstName", { required: true })}
+                    {...register("firstName")}
+                    required
                   />
                 </Form.Group>
                 <Form.Group className="form-group">
@@ -442,6 +446,9 @@ const AuthrizeCustomModel = ({
                   />
                 </Form.Group>
               </div>
+              {error && (
+                <div style={{ color: "red", textAlign: "center" }}>{error}</div>
+              )}
               <div className="popupBtn">
                 <button
                   disabled={loader}
@@ -451,6 +458,7 @@ const AuthrizeCustomModel = ({
                 >
                   {loader ? <Spinner animation="border" /> : "Pay"}
                 </button>
+
                 {/* <Button
       className="yellowBtn"
       variant="primary"
