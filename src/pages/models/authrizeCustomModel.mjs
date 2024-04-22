@@ -125,7 +125,10 @@ const AuthrizeCustomModel = ({
 
   const handleChange = (e) => {
     const { value } = e.target;
-    if (value && value.length > 20) {
+    // if (value && !value.match(/^[0-9]{1,19}$/)) {
+    //   return;
+    // }
+    if (value && value.length > 19) {
       return;
     }
     setCardNumber(value);
@@ -258,7 +261,7 @@ const AuthrizeCustomModel = ({
             <Form.Group controlId="cardNumber">
               <Form.Label>Card Number*</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="1234 5678 9123 4567"
                 autoComplete="off"
                 value={cardNumber}
