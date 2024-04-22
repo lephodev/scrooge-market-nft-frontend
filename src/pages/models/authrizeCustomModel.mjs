@@ -10,12 +10,12 @@ import { number } from "card-validator";
 
 const AuthrizeCustomModel = ({
   showAuthForm,
-  handleClosePayForm,
+  setShowAuthForm,
   amount,
   promoCode,
   prize,
 }) => {
-  const { handleSubmit, register } = useForm({
+  const { handleSubmit, register, reset } = useForm({
     mode: "onBlur",
   });
 
@@ -25,9 +25,15 @@ const AuthrizeCustomModel = ({
   const [expDate, setExpDate] = useState("");
   const [cardCode, setCardCode] = useState("");
 
+  const handleClosePayForm = () => {
+    reset();
+    setCardCode("");
+    setCardNumber("");
+    setShowAuthForm(!showAuthForm);
+  };
+
   const handleChange = (e) => {
     const { value } = e.target;
-    console.log("value", value);
     if (value && !value.match(/^[0-9]{1,19}$/)) {
       return;
     }
@@ -190,7 +196,7 @@ const AuthrizeCustomModel = ({
                 autoComplete="off"
                 value={cardCode}
                 onChange={handleInputCardCodeChange} // Call handleInputChange on input change
-                maxLength={3} // Limit input to 4 characters
+                maxLength={5} // Limit input to 4 characters
                 required // Make the field required if needed
               />
             </Form.Group>

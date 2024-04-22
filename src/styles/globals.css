@@ -5444,6 +5444,7 @@ p.title-memo {
 .payment_popup .paymentCrossIcon svg {
   height: 30px;
   width: 30px;
+  cursor: pointer;
 }
 .greenBtn {
   background-color: #52BF52 !important;

@@ -920,9 +920,6 @@ const PayWithCard = ({
     document.getElementById("paycard").click();
   };
 
-  const handleClosePayForm = () => {
-    setShowAuthForm(!showAuthForm);
-  };
   return (
     <>
       <button
@@ -935,7 +932,7 @@ const PayWithCard = ({
       </button>
       <AuthrizeCustomModel
         showAuthForm={showAuthForm}
-        handleClosePayForm={handleClosePayForm}
+        setShowAuthForm={setShowAuthForm}
         amount={prize?.priceInBUSD}
         promoCode={promoCode}
         prize={prize}
