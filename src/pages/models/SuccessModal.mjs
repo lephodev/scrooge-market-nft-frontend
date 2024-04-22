@@ -7,11 +7,12 @@ const SuccessModal = ({ successShow, handleSuccessModal, purchaseAmount }) => {
       centered
       show={successShow}
       onHide={handleSuccessModal}
-      size='lg'
-      className='success-modal'>
+      size="lg"
+      className="success-modal"
+    >
       <Modal.Body>
-        <div className='success-modal-content'>
-          <img src={redemption} alt='redemption' className='img-fluid' />
+        <div className="success-modal-content">
+          <img src={redemption} alt="redemption" className="img-fluid" />
           <p>${purchaseAmount / 100}</p>
         </div>
       </Modal.Body>
