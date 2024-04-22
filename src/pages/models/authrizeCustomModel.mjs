@@ -125,7 +125,7 @@ const AuthrizeCustomModel = ({
 
   const handleChange = (e) => {
     const { value } = e.target;
-    if (value && !value.match(/^[0-9]{1,19}$/)) {
+    if (value && value.length > 20) {
       return;
     }
     setCardNumber(value);
