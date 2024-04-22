@@ -28,32 +28,32 @@ const AuthrizeCustomModel = ({
     }),
     option: (provided) => ({
       ...provided,
-      background: "#000",
-      color: "#ddd",
+      background: "#d7d7d7",
+      color: "#212529",
       fontWeight: "400",
       fontSize: "16px",
       padding: "10px 20px",
       lineHeight: "16px",
       cursor: "pointer",
       borderRadius: "4px",
-      borderBottom: "1px solid #141414",
+      borderBottom: "1px solid #212529",
       ":hover": {
-        background: "#141414",
+        background: "#d7d7d7",
         borderRadius: "4px",
       },
     }),
     menu: (provided) => ({
       ...provided,
-      background: "#000",
-      borderRadius: "30px",
+      background: "#d7d7d7",
+      borderRadius: "6px",
       padding: "10px 20px",
       border: "2px solid transparent",
     }),
     control: () => ({
-      background: "#000",
+      background: "#d7d7d7",
       border: "2px solid #000",
-      borderRadius: "30px",
-      color: "#fff",
+      borderRadius: "6px",
+      color: "#212529",
       display: "flex",
       alignItem: "center",
       height: "41",
@@ -61,13 +61,13 @@ const AuthrizeCustomModel = ({
       boxShadow: " 0 2px 10px #000000a5",
       cursor: "pointer",
       ":hover": {
-        background: "#000",
+        background: "#d7d7d7",
         // border: "2px solid #306CFE",
       },
     }),
     singleValue: (provided) => ({
       ...provided,
-      color: "#fff",
+      color: "#212529",
       fontWeight: "400",
       fontSize: "14px",
       lineHeight: "16px",
@@ -81,12 +81,12 @@ const AuthrizeCustomModel = ({
       fontWeight: "400",
       fontSize: "14px",
       lineHeight: "19px",
-      color: "#858585c7",
+      color: "#212529",
     }),
     input: (provided) => ({
       ...provided,
       // height: "38px",
-      color: "fff",
+      color: "#212529",
     }),
     valueContainer: (provided) => ({
       ...provided,
@@ -95,13 +95,13 @@ const AuthrizeCustomModel = ({
     indicatorsContainer: (provided) => ({
       ...provided,
       paddingRight: "20px",
-      color: "#858585c7",
+      color: "#212529",
     }),
     svg: (provided) => ({
       ...provided,
-      fill: "#858585c7 !important",
+      fill: "#d7d7d7 !important",
       ":hover": {
-        fill: "#858585c7 !important",
+        fill: "#d7d7d7 !important",
       },
     }),
   };
@@ -309,11 +309,8 @@ const AuthrizeCustomModel = ({
                 name="firstName"
                 placeholder="Ex. John"
                 autoComplete="off"
-                onKeyPress={(e) => {
-                  const regex = /^[A-Za-z]+$/;
-                  if (!regex.test(e.key)) {
-                    e.preventDefault();
-                  }
+                onInput={(e) => {
+                  e.target.value = e.target.value.replace(/[^A-Za-z]/gi, ""); // Remove non-alphabetical characters
                 }}
                 {...register("firstName", { required: true })}
               />
@@ -325,11 +322,8 @@ const AuthrizeCustomModel = ({
                 name="lastName"
                 placeholder="Ex. Smith"
                 autoComplete="off"
-                onKeyPress={(e) => {
-                  const regex = /^[A-Za-z]+$/;
-                  if (!regex.test(e.key)) {
-                    e.preventDefault();
-                  }
+                onInput={(e) => {
+                  e.target.value = e.target.value.replace(/[^A-Za-z]/gi, ""); // Remove non-alphabetical characters
                 }}
                 {...register("lastName")}
                 required
@@ -339,25 +333,12 @@ const AuthrizeCustomModel = ({
               <Form.Label>Country*</Form.Label>
               <Select
                 id="country"
+                className="country_select"
                 value={country}
                 onChange={handleCountryChange}
                 options={countries}
                 styles={customStyles}
               />
-              {/* <Form.Control
-                type="text"
-                name="country"
-                placeholder="Country"
-                autoComplete="off"
-                onKeyPress={(e) => {
-                  const regex = /^[A-Za-z]+$/;
-                  if (!regex.test(e.key)) {
-                    e.preventDefault();
-                  }
-                }}
-                {...register("country")}
-                required
-              /> */}
             </Form.Group>
           </div>
           <div className="select-banner-option">
@@ -368,6 +349,7 @@ const AuthrizeCustomModel = ({
                 name="zipCode"
                 placeholder="Ex. 898989ee"
                 autoComplete="off"
+                maxLength={20}
                 {...register("zipCode")}
                 required
               />
@@ -390,11 +372,8 @@ const AuthrizeCustomModel = ({
                 name="city"
                 placeholder="City"
                 autoComplete="off"
-                onKeyPress={(e) => {
-                  const regex = /^[A-Za-z]+$/;
-                  if (!regex.test(e.key)) {
-                    e.preventDefault();
-                  }
+                onInput={(e) => {
+                  e.target.value = e.target.value.replace(/[^A-Za-z]/gi, ""); // Remove non-alphabetical characters
                 }}
                 {...register("city")}
                 required
