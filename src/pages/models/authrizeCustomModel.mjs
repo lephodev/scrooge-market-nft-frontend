@@ -27,6 +27,7 @@ const AuthrizeCustomModel = ({
 
   const handleClosePayForm = () => {
     reset();
+    setIsValid(true);
     setCardCode("");
     setCardNumber("");
     setShowAuthForm(!showAuthForm);
