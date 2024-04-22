@@ -285,7 +285,7 @@ const AuthrizeCustomModel = ({
           onHide={handleClosePayForm}
           centered
           size="lg"
-          backdrop={"static"}
+          backdrop="static"
           className="free-st-popup payment_popup"
         >
           <Modal.Body>
