@@ -114,12 +114,12 @@ const AuthrizeCustomModel = ({
   const [success, setSuccess] = useState(false);
   const [error, setErrorMsg] = useState("");
   const [country, setCountry] = useState({
-    value: "USA",
-    label: "USA",
+    value: "United States",
+    label: "United States",
   });
 
   const countries = [
-    { value: "USA", label: "USA" },
+    { value: "United States", label: "United States" },
     { value: "Canada", label: "Canada" },
   ];
   const handleClosePayForm = () => {
@@ -259,7 +259,7 @@ const AuthrizeCustomModel = ({
   };
 
   useEffect(() => {
-    setValue("country", "USA");
+    setValue("country", "United States");
   }, []);
 
   return (
