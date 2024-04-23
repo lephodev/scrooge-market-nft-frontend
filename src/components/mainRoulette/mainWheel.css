@@ -293,9 +293,12 @@
   background: url(../../images/wheel/main-wheel/content.png) no-repeat;
   background-position: center;
   background-size: cover;
-  transform: translate(-50%, -50%) rotate(90deg);
+  transform: translate(-50%, -50%) rotate(107deg);
   top: 50%;
   left: 50%;
+}
+.main-wheel.spinning::before {
+  transform: translate(-50%, -50%) rotate(90deg);
 }
 /* for big circle */
 .big-wheel::before {
@@ -306,9 +309,12 @@
   background: url(../../images/wheel/big-wheel/content.png) no-repeat;
   background-position: center;
   background-size: cover;
-  transform: translate(-50%, -50%) rotate(90deg);
+  transform: translate(-50%, -50%) rotate(108deg);
   top: 50%;
   left: 50%;
+}
+.big-wheel.spinning::before {
+  transform: translate(-50%, -50%) rotate(90deg);
 }
 /* for risk circle */
 .risk-wheel::before {
@@ -319,9 +325,12 @@
   background: url(../../images/wheel/risk-wheel/content.png) no-repeat;
   background-position: center;
   background-size: cover;
-  transform: translate(-50%, -50%) rotate(90deg);
+  transform: translate(-50%, -50%) rotate(107deg);
   top: 50%;
   left: 50%;
+}
+.risk-wheel.spinning::before {
+  transform: translate(-50%, -50%) rotate(90deg);
 }
 /* for Regular risk circle */
 .reg-risk-wheel::before {
@@ -332,9 +341,12 @@
   background: url(../../images/wheel/regular-risk-wheel/content.png) no-repeat;
   background-position: center;
   background-size: cover;
-  transform: translate(-50%, -50%) rotate(90deg);
+  transform: translate(-50%, -50%) rotate(145deg);
   top: 50%;
   left: 50%;
+}
+.reg-risk-wheel.spinning::before {
+  transform: translate(-50%, -50%) rotate(90deg);
 }
 /* for loyalty circle */
 .loyalty-wheel::before {
@@ -345,9 +357,12 @@
   background: url(../../images/wheel/loyalty-wheel/content.png) no-repeat;
   background-position: center;
   background-size: cover;
-  transform: translate(-50%, -50%) rotate(90deg);
+  transform: translate(-50%, -50%) rotate(108deg);
   top: 50%;
   left: 50%;
+}
+.loyalty-wheel.spinning::before {
+  transform: translate(-50%, -50%) rotate(90deg);
 }
 /* for Mega circle */
 .mega-wheel::before {
@@ -358,9 +373,12 @@
   background: url(../../images/wheel/mega-wheel/content.png) no-repeat;
   background-position: center;
   background-size: cover;
-  transform: translate(-50%, -50%) rotate(90deg);
+  transform: translate(-50%, -50%) rotate(109deg);
   top: 50%;
   left: 50%;
+}
+.mega-wheel.spinning::before {
+  transform: translate(-50%, -50%) rotate(90deg);
 }
 
 .main-wheel.spinning, .big-wheel.spinning, .risk-wheel.spinning, .loyalty-wheel.spinning, .reg-risk-wheel.spinning, .mega-wheel.spinning {
