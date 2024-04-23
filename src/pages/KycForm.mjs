@@ -267,7 +267,7 @@ const KYCForm = () => {
 
   console.log("user in kyc", user);
   const kycRedirection = ()=>{
-    window.location.href = `https://flow-dev.togggle.io/scrooge/kyc?email=${user?.email}`;
+    window.location.href = `https://flow-dev.togggle.io/scrooge/kyc?uid=${user?._id || user?.id}`;
   }
 
   useEffect(() => {
