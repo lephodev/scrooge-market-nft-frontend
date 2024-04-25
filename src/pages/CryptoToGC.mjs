@@ -596,6 +596,15 @@ export default function CryptoToGC() {
                   ) : (
                     ""
                   )}
+                  {promocode && (
+                    <div className="asterisk-desc cryptoTotoken playthrough ">
+                      <ul>
+                        <li>$25 is 3x playthrough on bonus value only</li>
+                        <li>$50 is 6x playthrough on bonus value only</li>
+                        <li>$100 is 10x playthrough on bonus value only</li>
+                      </ul>
+                    </div>
+                  )}
 
                   <div className="buy-chips-content">
                     <div className="buy-chips-grid cryptoToGC">

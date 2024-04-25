@@ -605,6 +605,15 @@ span.wallet-user-name {
   width: 100% !important;
   list-style: none;
 }
+.asterisk-desc.cryptoTotoken.playthrough ul {
+  max-width: 24%;
+}
+.asterisk-desc.cryptoTotoken.playthrough ul li{
+  list-style: disc;
+  color: #c6bfbf;
+  text-align: center ;
+  font-size: 14px ;
+}
 .asterisk-desc.cryptoTotoken.first-grid ul li span {
   color: #ff0000;
 }
@@ -6168,6 +6177,15 @@ body.modal-open {
   .asterisk-desc.cryptoTotoken ul {
     max-width: 85%;
   }
+  .asterisk-desc.cryptoTotoken.playthrough ul {
+    max-width: 91%;
+  }
+  .asterisk-desc.cryptoTotoken.playthrough ul li {
+    text-align: left;
+  }
+  .asterisk-desc.cryptoTotoken.playthrough  {
+    margin-top: 8px;
+  } 
   .asterisk-desc.cryptoTotoken ul li {
     width: 100%;
     font-size: 20px;
