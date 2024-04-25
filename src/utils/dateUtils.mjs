@@ -59,7 +59,7 @@ export const getDDC = () => {
   // const sessionID = 'ghghghg';
   const kountConfig = {
     clientID: "102119",
-    environment: "TEST",
+    environment: "PROD",
     isSinglePageApp: true,
   };
   const sdk = kountSDK(kountConfig, sessionID);
