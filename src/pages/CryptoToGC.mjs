@@ -32,6 +32,7 @@ import AuthorizeSucessModel from "./models/authrizeSucessModel.mjs";
 import PageLoader from "../components/pageLoader/loader.mjs";
 import FreeSTModel from "./models/FreeSTModel.mjs";
 import AuthrizeCustomModel from "./models/authrizeCustomModel.mjs";
+import PaypalModel from "./models/paypalModel.mjs";
 let promoCode;
 let goldcoinAmount;
 
@@ -60,6 +61,8 @@ export default function CryptoToGC() {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
   const [cookies] = useCookies(["token"]);
+  const [showPaypal, setShowPyapal] = useState(false);
+  const [paypalAmount, setPaypalAmount] = useState();
   const address = useAddress();
   const { contract } = useContract(process.env.REACT_APP_NATIVE_TOKEN_ADDRESS);
   const { contract: scroogeContract } = useContract(
@@ -408,6 +411,11 @@ export default function CryptoToGC() {
   const handleCloseFreeST = () => {
     setShowFreeST(false);
   };
+
+  const handleShowPaypalModel = (amount, promodetails) => {
+    setShowPyapal(!showPaypal);
+    setPaypalAmount(amount);
+  };
   return (
     <>
       <Helmet>
@@ -500,14 +508,14 @@ export default function CryptoToGC() {
                           </Dropdown.Item>
 
                           <Dropdown.Item
-                            onClick={() => handlePaymentTypeChange("Crypto")}
+                            onClick={() => handlePaymentTypeChange("Paypal")}
                           >
-                            Crypto
+                            Paypal
                           </Dropdown.Item>
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
-                    {selectedTypeDropdown === "Crypto" && (
+                    {selectedTypeDropdown === "Paypal" && (
                       <div className="purchaseSelect-Box">
                         <h4>Purchase with</h4>
                         <Dropdown>
@@ -588,6 +596,15 @@ export default function CryptoToGC() {
                   ) : (
                     ""
                   )}
+                  {promocode && (
+                    <div className="asterisk-desc cryptoTotoken playthrough ">
+                      <ul>
+                        <li>$25 is 3x playthrough on bonus value only</li>
+                        <li>$50 is 6x playthrough on bonus value only</li>
+                        <li>$100 is 10x playthrough on bonus value only</li>
+                      </ul>
+                    </div>
+                  )}
 
                   <div className="buy-chips-content">
                     <div className="buy-chips-grid cryptoToGC">
@@ -612,7 +629,7 @@ export default function CryptoToGC() {
                                             </Card.Title>
 
                                             {selectedTypeDropdown ===
-                                            "Crypto" ? (
+                                            "Paypal" ? (
                                               getExactPrice(
                                                 prize?.priceInBUSD
                                               ) > 0 && (
@@ -719,13 +736,21 @@ export default function CryptoToGC() {
                                       )}
                                     </>
                                   )}
-                                  {selectedTypeDropdown === "Crypto" ? (
+                                  {selectedTypeDropdown === "Paypal" ? (
                                     getExactPrice(
                                       prize?.priceInBUSD,
                                       promoDetails
                                     ) > 0 && (
-                                      <Button variant="primary">
-                                        <p>Buy </p>{" "}
+                                      <Button
+                                        variant="primary"
+                                        onClick={() =>
+                                          handleShowPaypalModel(
+                                            prize?.priceInBUSD,
+                                            promoDetails
+                                          )
+                                        }
+                                      >
+                                        <p>Buy With Paypal</p>{" "}
                                         <span>
                                           $
                                           {getExactPrice(
@@ -858,6 +883,11 @@ export default function CryptoToGC() {
               pay
             </button> */}
           </main>
+          <PaypalModel
+            showPaypal={showPaypal}
+            handleShowPaypalModel={handleShowPaypalModel}
+            amount={paypalAmount}
+          />
         </Layout>
       )}
     </>
@@ -920,9 +950,6 @@ const PayWithCard = ({
     document.getElementById("paycard").click();
   };
 
-  const handleClosePayForm = () => {
-    setShowAuthForm(!showAuthForm);
-  };
   return (
     <>
       <button
@@ -935,7 +962,7 @@ const PayWithCard = ({
       </button>
       <AuthrizeCustomModel
         showAuthForm={showAuthForm}
-        handleClosePayForm={handleClosePayForm}
+        setShowAuthForm={setShowAuthForm}
         amount={prize?.priceInBUSD}
         promoCode={promoCode}
         prize={prize}

@@ -58,7 +58,7 @@ export const getDDC = () => {
   console.log("sessionID", sessionID);
   // const sessionID = 'ghghghg';
   const kountConfig = {
-    clientID: 10211,
+    clientID: "102119",
     environment: "TEST",
     isSinglePageApp: true,
   };
