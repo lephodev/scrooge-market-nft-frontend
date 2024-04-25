@@ -605,6 +605,15 @@ span.wallet-user-name {
   width: 100% !important;
   list-style: none;
 }
+.asterisk-desc.cryptoTotoken.playthrough ul {
+  max-width: 24%;
+}
+.asterisk-desc.cryptoTotoken.playthrough ul li{
+  list-style: disc;
+  color: #c6bfbf;
+  text-align: center ;
+  font-size: 14px ;
+}
 .asterisk-desc.cryptoTotoken.first-grid ul li span {
   color: #ff0000;
 }
@@ -5302,6 +5311,12 @@ h2#radix-\:r1\: {
   font-size: 14px;
   padding-bottom: 5px;
 }
+.fiat-data .form-text {
+  display: block;
+  color: #ff0000;
+  font-size: 12px;
+  padding-bottom: 5px;
+}
 .fiat-data p {
   font-size: 16px;
 }
@@ -5396,7 +5411,57 @@ p.title-memo {
   border: 1px solid #1c1c1c;
   max-width: 60%;
 }
+.payment-header {
+  border-bottom:none !important ;
+  padding-top: 20px;
+  padding: 10px 0px !important;
+  margin-bottom: 10px !important;
+  color: white !important;
+}
+.payment_popup .select-banner-option {
+  padding-bottom: 17px;
+  display: grid !important;
+  /* align-items: center; */
+  gap: 20px !important;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+}
 
+.payment_popup .form-label {
+  margin-bottom: 4px;
+}
+
+
+.payment_popup .modal-body{
+  padding: 40px !important;
+  position: relative !important;
+}
+
+.payment_popup .form-control{
+  background-color:#d7d7d7 !important;
+  padding: 0.275rem .75rem !important;
+  font-size: 14px !important;
+}
+
+.invalid-feedback {
+  position: absolute !important;
+}
+.payment_popup .paymentCrossIcon {
+  position: absolute;
+  top: 8px;
+  right: 20px;
+}
+.payment_popup .paymentCrossIcon svg {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+.greenBtn {
+  background-color: #52BF52 !important;
+  width: 150px !important;
+}
+body.modal-open {
+  height: 100vh;
+}
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
@@ -6112,6 +6177,15 @@ p.title-memo {
   .asterisk-desc.cryptoTotoken ul {
     max-width: 85%;
   }
+  .asterisk-desc.cryptoTotoken.playthrough ul {
+    max-width: 91%;
+  }
+  .asterisk-desc.cryptoTotoken.playthrough ul li {
+    text-align: left;
+  }
+  .asterisk-desc.cryptoTotoken.playthrough  {
+    margin-top: 8px;
+  } 
   .asterisk-desc.cryptoTotoken ul li {
     width: 100%;
     font-size: 20px;
