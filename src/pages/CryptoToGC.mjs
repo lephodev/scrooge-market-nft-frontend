@@ -889,275 +889,275 @@ export default function CryptoToGC() {
   );
 }
 
-const PayWithCard = ({
-  prize,
-  getExactPrice,
-  promoDetails,
-  getExactToken,
-  getExactGC,
-  dailyGCPurchaseLimit,
-  spendedAmount,
-  user,
-}) => {
-  const [showAuthForm, setShowAuthForm] = useState(false);
-  const handleCLick = (gc, usd) => {
-    if (dailyGCPurchaseLimit >= 4) {
-      return toast.error("Credit card daily purchase limit are reached");
-    }
-    goldcoinAmount = gc;
-    if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
-      return toast.error(
-        "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
-        { toastId: "A" }
-      );
-    }
-
-    if (
-      spendedAmount.spened_this_week + usd >
-      user.weeklyGoldCoinSpendingLimit
-    ) {
-      return toast.error(
-        "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
-        { toastId: "B" }
-      );
-    }
-
-    if (
-      spendedAmount.spneded_this_month + usd >
-      user.monthlyGoldCoinSpendingLimit
-    ) {
-      return toast.error(
-        "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
-        { toastId: "C" }
-      );
-    }
-    setShowAuthForm(true);
-
-    let payload = {
-      freeTokenAmount: getExactToken(prize.freeTokenAmount, promoDetails),
-      gcAmount: getExactGC(prize.gcAmount, promoDetails),
-      priceInBUSD: getExactPrice(prize?.priceInBUSD, promoDetails).toString(),
-      _id: prize._id,
-      actualAmount: prize?.priceInBUSD,
-      promoCode: promoCode,
-    };
-    window.prize = payload;
-    document.getElementById("paycard").click();
-  };
-
-  return (
-    <>
-      <button
-        onClick={() =>
-          handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
-        }
-      >
-        {" "}
-        Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}
-      </button>
-      <AuthrizeCustomModel
-        showAuthForm={showAuthForm}
-        setShowAuthForm={setShowAuthForm}
-        amount={prize?.priceInBUSD}
-        promoCode={promoCode}
-        prize={prize}
-      />
-    </>
-  );
-};
-
 // const PayWithCard = ({
-// prize,
-// getExactPrice,
-// promoDetails,
-// dailyGCPurchaseLimit,
-// spendedAmount,
-// user,
+//   prize,
+//   getExactPrice,
+//   promoDetails,
+//   getExactToken,
+//   getExactGC,
+//   dailyGCPurchaseLimit,
+//   spendedAmount,
+//   user,
 // }) => {
-//   const [liveFormToken, setFormToken] = useState(null);
-//   const [loader, setLoading] = useState(false);
-
-//   const getPromoCode = () => {
-//     console.log("prizehgfghgfhfgh", prize.priceInBUSD, promoCode);
-//     if (prize.offerType !== "MegaOffer" && prize?.priceInBUSD !== "250") {
-//       return promoCode ? promoCode : "";
-//     } else {
-//       return "";
+//   const [showAuthForm, setShowAuthForm] = useState(false);
+//   const handleCLick = (gc, usd) => {
+//     if (dailyGCPurchaseLimit >= 4) {
+//       return toast.error("Credit card daily purchase limit are reached");
 //     }
-//   };
-
-//   const getDDC = () => {
-//     const sessionID = uuidv4().replace(/-/g, "");
-//     console.log("sessionID", sessionID);
-//     // const sessionID = 'ghghghg';
-//     const kountConfig = {
-//       clientID: 10211,
-//       environment: "TEST",
-//       isSinglePageApp: true,
-//     };
-//     const sdk = kountSDK(kountConfig, sessionID);
-//     console.log("sdk", sdk);
-//     console.log("sdk", sdk?.sessionID);
-
-//     if (sdk) {
-//       console.log("Anti-fraud SDK activated!");
-//       return sdk;
-//       // Any non-blocking post-initialization logic can go here
-//     }
-//   };
-
-//   const handleCLick = async (gc, usd) => {
-//     let sessionId = getDDC()?.sessionID;
-//     console.log("dailyGCPurchaseLimit", dailyGCPurchaseLimit);
-// if (dailyGCPurchaseLimit >= 4) {
-//   return toast.error("Credit card daily purchase limit are reached");
-// }
-//     console.log(
-//       "spendedAmount.spended_today + usd",
-//       spendedAmount.spended_today,
-//       usd,
-//       user.dailyGoldCoinSpendingLimit
-//     );
-//     try {
-// goldcoinAmount = gc;
-// if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
-//   return toast.error(
-//     "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
-//     { toastId: "A" }
-//   );
-// }
-
-// if (
-//   spendedAmount.spened_this_week + usd >
-//   user.weeklyGoldCoinSpendingLimit
-// ) {
-//   return toast.error(
-//     "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
-//     { toastId: "B" }
-//   );
-// }
-
-// if (
-//   spendedAmount.spneded_this_month + usd >
-//   user.monthlyGoldCoinSpendingLimit
-// ) {
-//   return toast.error(
-//     "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
-//     { toastId: "C" }
-//   );
-// }
-//       setLoading(true);
-//       const res = await (
-//         await marketPlaceInstance()
-//       ).post(
-//         `/getFormToken`,
-//         {
-//           amount: prize?.priceInBUSD,
-//           promoCode: getPromoCode().trim(),
-//           sessionId,
-//         },
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           withCredentials: true,
-//           credentials: "include",
-//         }
+//     goldcoinAmount = gc;
+//     if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
+//       return toast.error(
+//         "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
+//         { toastId: "A" }
 //       );
-//       const responseData = res?.data?.response;
-//       setFormToken(responseData?.token);
-//     } catch (error) {
-//       console.error("Error fetching form token:", error);
 //     }
-//   };
 
-//   useEffect(() => {
-//     if (liveFormToken) {
-//       setTimeout(() => {
-//         document.getElementsByTagName("form")[0][1].click();
-//       }, 1000);
-//     }
-//   }, [liveFormToken]);
-
-//   const handleLimitCheck = (usd) => {
-//     if (
-//       spendedAmount.spneded_this_month + usd >
-//       user.monthlyGoldCoinSpendingLimit
-//     ) {
-//       console.log(
-//         "spendedAmount.spneded_this_month",
-//         spendedAmount.spneded_this_month,
-//         user.monthlyGoldCoinSpendingLimit,
-//         usd
-//       );
-
-//       return true;
-//     }
 //     if (
 //       spendedAmount.spened_this_week + usd >
 //       user.weeklyGoldCoinSpendingLimit
 //     ) {
-//       console.log(
-//         "spendedAmount.spneded_this_week",
-//         spendedAmount.spened_this_week,
-//         user.weeklyGoldCoinSpendingLimit,
-//         usd
+//       return toast.error(
+//         "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+//         { toastId: "B" }
 //       );
-
-//       return true;
-//     }
-//     if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
-//       console.log(
-//         "spendedAmount.spneded_this_day",
-//         spendedAmount.spended_today,
-//         user.dailyGoldCoinSpendingLimit,
-//         usd
-//       );
-//       return true;
 //     }
 
-//     return false;
+//     if (
+//       spendedAmount.spneded_this_month + usd >
+//       user.monthlyGoldCoinSpendingLimit
+//     ) {
+//       return toast.error(
+//         "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+//         { toastId: "C" }
+//       );
+//     }
+//     setShowAuthForm(true);
+
+//     let payload = {
+//       freeTokenAmount: getExactToken(prize.freeTokenAmount, promoDetails),
+//       gcAmount: getExactGC(prize.gcAmount, promoDetails),
+//       priceInBUSD: getExactPrice(prize?.priceInBUSD, promoDetails).toString(),
+//       _id: prize._id,
+//       actualAmount: prize?.priceInBUSD,
+//       promoCode: promoCode,
+//     };
+//     window.prize = payload;
+//     document.getElementById("paycard").click();
 //   };
 
 //   return (
 //     <>
-//       {liveFormToken ? (
-//         <button id="payRedirection">
-//           <AcceptHosted
-//             formToken={liveFormToken}
-//             environment="PRODUCTION"
-//             integration="redirect"
-//           >
-//             <Spinner animation="border" />
-//           </AcceptHosted>
-//         </button>
-//       ) : (
-//         <button
-//           className={
-//             handleLimitCheck(parseFloat(prize?.priceInBUSD))
-//               ? "disable-btn-purchase"
-//               : ""
-//           }
-//           // disabled={handleLimitCheck(parseFloat(prize?.priceInBUSD))}
-//           onClick={() =>
-//             handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
-//           }
-//         >
-//           {" "}
-//           {!liveFormToken ? (
-//             !loader ? (
-//               `Buy With Card $${getExactPrice(
-//                 prize?.priceInBUSD,
-//                 promoDetails
-//               )}`
-//             ) : (
-//               <Spinner animation="border" />
-//             )
-//           ) : (
-//             ""
-//           )}
-//         </button>
-//       )}
+//       <button
+//         onClick={() =>
+//           handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
+//         }
+//       >
+//         {" "}
+//         Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}
+//       </button>
+//       <AuthrizeCustomModel
+//         showAuthForm={showAuthForm}
+//         setShowAuthForm={setShowAuthForm}
+//         amount={prize?.priceInBUSD}
+//         promoCode={promoCode}
+//         prize={prize}
+//       />
 //     </>
 //   );
 // };
+
+const PayWithCard = ({
+  prize,
+  getExactPrice,
+  promoDetails,
+  dailyGCPurchaseLimit,
+  spendedAmount,
+  user,
+}) => {
+  const [liveFormToken, setFormToken] = useState(null);
+  const [loader, setLoading] = useState(false);
+
+  const getPromoCode = () => {
+    console.log("prizehgfghgfhfgh", prize.priceInBUSD, promoCode);
+    if (prize.offerType !== "MegaOffer" && prize?.priceInBUSD !== "250") {
+      return promoCode ? promoCode : "";
+    } else {
+      return "";
+    }
+  };
+
+  // const getDDC = () => {
+  //   const sessionID = uuidv4().replace(/-/g, "");
+  //   console.log("sessionID", sessionID);
+  //   // const sessionID = 'ghghghg';
+  //   const kountConfig = {
+  //     clientID: 10211,
+  //     environment: "TEST",
+  //     isSinglePageApp: true,
+  //   };
+  //   const sdk = kountSDK(kountConfig, sessionID);
+  //   console.log("sdk", sdk);
+  //   console.log("sdk", sdk?.sessionID);
+
+  //   if (sdk) {
+  //     console.log("Anti-fraud SDK activated!");
+  //     return sdk;
+  //     // Any non-blocking post-initialization logic can go here
+  //   }
+  // };
+
+  const handleCLick = async (gc, usd) => {
+    // let sessionId = getDDC()?.sessionID;
+    console.log("dailyGCPurchaseLimit", dailyGCPurchaseLimit);
+    if (dailyGCPurchaseLimit >= 4) {
+      return toast.error("Credit card daily purchase limit are reached");
+    }
+    console.log(
+      "spendedAmount.spended_today + usd",
+      spendedAmount.spended_today,
+      usd,
+      user.dailyGoldCoinSpendingLimit
+    );
+    try {
+      goldcoinAmount = gc;
+      if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
+        return toast.error(
+          "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
+          { toastId: "A" }
+        );
+      }
+
+      if (
+        spendedAmount.spened_this_week + usd >
+        user.weeklyGoldCoinSpendingLimit
+      ) {
+        return toast.error(
+          "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+          { toastId: "B" }
+        );
+      }
+
+      if (
+        spendedAmount.spneded_this_month + usd >
+        user.monthlyGoldCoinSpendingLimit
+      ) {
+        return toast.error(
+          "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+          { toastId: "C" }
+        );
+      }
+      setLoading(true);
+      const res = await (
+        await marketPlaceInstance()
+      ).post(
+        `/getFormToken`,
+        {
+          amount: prize?.priceInBUSD,
+          promoCode: getPromoCode().trim(),
+          // sessionId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+          credentials: "include",
+        }
+      );
+      const responseData = res?.data?.response;
+      setFormToken(responseData?.token);
+    } catch (error) {
+      console.error("Error fetching form token:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (liveFormToken) {
+      setTimeout(() => {
+        document.getElementsByTagName("form")[0][1].click();
+      }, 1000);
+    }
+  }, [liveFormToken]);
+
+  const handleLimitCheck = (usd) => {
+    if (
+      spendedAmount.spneded_this_month + usd >
+      user.monthlyGoldCoinSpendingLimit
+    ) {
+      console.log(
+        "spendedAmount.spneded_this_month",
+        spendedAmount.spneded_this_month,
+        user.monthlyGoldCoinSpendingLimit,
+        usd
+      );
+
+      return true;
+    }
+    if (
+      spendedAmount.spened_this_week + usd >
+      user.weeklyGoldCoinSpendingLimit
+    ) {
+      console.log(
+        "spendedAmount.spneded_this_week",
+        spendedAmount.spened_this_week,
+        user.weeklyGoldCoinSpendingLimit,
+        usd
+      );
+
+      return true;
+    }
+    if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
+      console.log(
+        "spendedAmount.spneded_this_day",
+        spendedAmount.spended_today,
+        user.dailyGoldCoinSpendingLimit,
+        usd
+      );
+      return true;
+    }
+
+    return false;
+  };
+
+  return (
+    <>
+      {liveFormToken ? (
+        <button id="payRedirection">
+          <AcceptHosted
+            formToken={liveFormToken}
+            environment="PRODUCTION"
+            integration="redirect"
+          >
+            <Spinner animation="border" />
+          </AcceptHosted>
+        </button>
+      ) : (
+        <button
+          className={
+            handleLimitCheck(parseFloat(prize?.priceInBUSD))
+              ? "disable-btn-purchase"
+              : ""
+          }
+          // disabled={handleLimitCheck(parseFloat(prize?.priceInBUSD))}
+          onClick={() =>
+            handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
+          }
+        >
+          {" "}
+          {!liveFormToken ? (
+            !loader ? (
+              `Buy With Card $${getExactPrice(
+                prize?.priceInBUSD,
+                promoDetails
+              )}`
+            ) : (
+              <Spinner animation="border" />
+            )
+          ) : (
+            ""
+          )}
+        </button>
+      )}
+    </>
+  );
+};
