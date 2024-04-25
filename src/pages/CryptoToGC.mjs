@@ -515,35 +515,7 @@ export default function CryptoToGC() {
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
-                    {selectedTypeDropdown === "Paypal" && (
-                      <div className="purchaseSelect-Box">
-                        <h4>Purchase with</h4>
-                        <Dropdown>
-                          <Dropdown.Toggle
-                            variant="success"
-                            id="dropdown-basic"
-                          >
-                            {!selectedDropdown ? "BUSD" : selectedDropdown}
-                          </Dropdown.Toggle>
-                          <Dropdown.Menu>
-                            <Dropdown.Item
-                              onClick={() => handleChange("Scrooge")}
-                            >
-                              Scrooge
-                            </Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleChange("BNB")}>
-                              BNB
-                            </Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleChange("USDC")}>
-                              USDC
-                            </Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleChange("USDT")}>
-                              USDT
-                            </Dropdown.Item>
-                          </Dropdown.Menu>
-                        </Dropdown>
-                      </div>
-                    )}
+
                     <div className="enter-promo">
                       <Form.Group className="form-group">
                         <Form.Control
