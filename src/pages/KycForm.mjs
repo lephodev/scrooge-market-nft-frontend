@@ -354,7 +354,7 @@ const KYCForm = () => {
                       />
                     )}
 
-                    {/* {statusKyc === "idle" && (
+                    {statusKyc === "idle" && (
                       <SubmitKYC handleLogOut={handleLogOut} />
                     )}
                     {statusKyc === "reject" && (
@@ -366,7 +366,7 @@ const KYCForm = () => {
                     )}
                     {statusKyc === "accept" && (
                       <SuccessKYC handleLogOut={handleLogOut} />
-                    )} */}
+                    )}
                   </div>
                 )}
               </>
