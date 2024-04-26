@@ -62,7 +62,7 @@ const PaypalModel = ({
           <PayPalScriptProvider
             options={{
               clientId:
-                "AWhlgQRrgSVnSTYT3LJJFNEf4khB0cBuWdPWIJtkueu-Vh_9cU9y-mwL5x5vaaKPEjdynWo5q6gC7tei",
+                "ASVq331SjyBbgW1akqdOLs5hJ_VMopNmqI4r_h4cHf6YLDkoEqOQ_YjHxYKvxp8QFLz7E0BRaTqVH-jv",
               disableFunding: "paylater",
             }}
           >
