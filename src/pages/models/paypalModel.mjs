@@ -7,11 +7,17 @@ import { marketPlaceInstance } from "../../config/axios.js";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const PaypalModel = ({ showPaypal, handleShowPaypalModel, amount }) => {
+const PaypalModel = ({
+  showPaypal,
+  handleShowPaypalModel,
+  amount,
+  promoCode,
+}) => {
   const onApprove = async (data) => {
     try {
       const payload = {
         orderID: data.orderID,
+        promoCode,
       };
       const paypalres = await (
         await marketPlaceInstance()

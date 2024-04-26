@@ -859,6 +859,7 @@ export default function CryptoToGC() {
             showPaypal={showPaypal}
             handleShowPaypalModel={handleShowPaypalModel}
             amount={paypalAmount}
+            promoCode={promoCode}
           />
         </Layout>
       )}
