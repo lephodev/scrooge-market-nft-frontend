@@ -57,6 +57,7 @@ const PaypalModel = ({ showPaypal, handleShowPaypalModel, amount }) => {
             options={{
               clientId:
                 "AWhlgQRrgSVnSTYT3LJJFNEf4khB0cBuWdPWIJtkueu-Vh_9cU9y-mwL5x5vaaKPEjdynWo5q6gC7tei",
+              disableFunding: "paylater",
             }}
           >
             <PayPalButtons
