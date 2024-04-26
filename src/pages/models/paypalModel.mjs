@@ -60,7 +60,7 @@ const PaypalModel = ({ showPaypal, handleShowPaypalModel, amount }) => {
             }}
           >
             <PayPalButtons
-              style={{ layout: "horizontal" }}
+              style={{ layout: "vertical" }}
               createOrder={(data, actions) => {
                 return actions.order.create({
                   purchase_units: [
