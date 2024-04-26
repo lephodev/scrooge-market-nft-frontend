@@ -4806,7 +4806,7 @@ span.input-range__label.input-range__label--value
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-end;
   flex-wrap: wrap;
   gap: 12px;
 }
@@ -4824,10 +4824,36 @@ span.input-range__label.input-range__label--value
 
 .purchase-select h4 {
   margin: 0px;
-  font-size: 18px;
+  font-size: 16px;
   color: #fff;
-  padding: 6px 17px;
-  border-radius: 8px;
+  padding-bottom: 10px;
+  font-weight: 600;
+}
+.purchase-with-grid {
+  display: flex;
+  gap: 10px;
+}
+.purchase-with-grid span {
+  opacity: 0.65;
+  background: #f9ff00;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid #f9ff00;
+  border-radius: 18px;
+  padding: 2px 15px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 130px;
+}
+.purchase-with-grid span:hover {
+  opacity: 0.9;
+}
+.purchase-with-grid span.active-method {
+  opacity: 1;
 }
 
 .purchase-select button#dropdown-basic {
@@ -6247,6 +6273,11 @@ body.modal-open {
   }
   .download-pdf-grid a {
     font-size: 16px;
+  }
+  .purchase-with-grid span {
+    min-width: 90px;
+    font-size: 14px;
+    padding: 2px 10px;
   }
 }
 
