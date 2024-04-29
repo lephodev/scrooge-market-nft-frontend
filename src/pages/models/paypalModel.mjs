@@ -82,7 +82,7 @@ const PaypalModel = ({
             <PayPalScriptProvider
               options={{
                 clientId: paypalClientKey,
-                disableFunding: "paylater",
+                disableFunding: "paylater,credit,card",
                 enableFunding: "venmo",
               }}
             >
