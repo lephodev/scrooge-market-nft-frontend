@@ -39,6 +39,11 @@ const PaypalModel = ({
       }
     }
   };
+  const InEligibleError = ({ text }) => (
+    <h3 style={{ color: "#dc3545", textTransform: "capitalize" }}>
+      {text || "The component is ineligible to render"}
+    </h3>
+  );
   return (
     <>
       <Modal
@@ -62,8 +67,9 @@ const PaypalModel = ({
           <PayPalScriptProvider
             options={{
               clientId:
-                "ASVq331SjyBbgW1akqdOLs5hJ_VMopNmqI4r_h4cHf6YLDkoEqOQ_YjHxYKvxp8QFLz7E0BRaTqVH-jv",
+                "AWhlgQRrgSVnSTYT3LJJFNEf4khB0cBuWdPWIJtkueu-Vh_9cU9y-mwL5x5vaaKPEjdynWo5q6gC7tei",
               disableFunding: "paylater",
+              enableFunding: "venmo",
             }}
           >
             <PayPalButtons
@@ -81,6 +87,7 @@ const PaypalModel = ({
               }}
               onApprove={onApprove}
             />{" "}
+            <InEligibleError text="You are not eligible to pay with Venmo." />
           </PayPalScriptProvider>
         </Modal.Body>
       </Modal>
