@@ -40,11 +40,7 @@ const PaypalModel = ({
       }
     }
   };
-  const InEligibleError = ({ text }) => (
-    <h3 style={{ color: "#dc3545", textTransform: "capitalize" }}>
-      {text || "The component is ineligible to render"}
-    </h3>
-  );
+
   return (
     <>
       <Modal
@@ -87,7 +83,6 @@ const PaypalModel = ({
               }}
               onApprove={onApprove}
             />{" "}
-            <InEligibleError text="You are not eligible to pay with Venmo." />
           </PayPalScriptProvider>
         </Modal.Body>
       </Modal>
