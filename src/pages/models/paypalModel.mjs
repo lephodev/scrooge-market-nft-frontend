@@ -6,6 +6,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { marketPlaceInstance } from "../../config/axios.js";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { paypalClientKey } from "../../config/keys.js";
 
 const PaypalModel = ({
   showPaypal,
@@ -66,8 +67,7 @@ const PaypalModel = ({
 
           <PayPalScriptProvider
             options={{
-              clientId:
-                "AWhlgQRrgSVnSTYT3LJJFNEf4khB0cBuWdPWIJtkueu-Vh_9cU9y-mwL5x5vaaKPEjdynWo5q6gC7tei",
+              clientId: paypalClientKey,
               disableFunding: "paylater",
               enableFunding: "venmo",
             }}
