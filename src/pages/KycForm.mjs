@@ -732,9 +732,7 @@ const OldForm = ({
           </Form.Group>
 
           <Form.Group className="form-group ">
-            <Form.Label>
-              Proof of Address if ID and profile are not matching
-            </Form.Label>
+            <Form.Label>Proof of Address.</Form.Label>
             <div className="upload-game-thumnail">
               <Form.Control
                 type="file"
