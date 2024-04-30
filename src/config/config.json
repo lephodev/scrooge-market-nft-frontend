@@ -9,7 +9,9 @@
     "BUSD_ADDRESS": "0x29EfB15bDcD0A6cE5BCF0B7811f227080fBa0427",
     "slotUrl": "https://devslot.scrooge.casino",
     "rouletteUrl": "https://dev.scrooge.casino/roulette",
-    "stripeKey": "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT"
+    "stripeKey": "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT",
+    "paypalClientKey": "AWhlgQRrgSVnSTYT3LJJFNEf4khB0cBuWdPWIJtkueu-Vh_9cU9y-mwL5x5vaaKPEjdynWo5q6gC7tei"
+
   },
   "development": {
     "client": "https://devmarket.scrooge.casino",
@@ -21,7 +23,9 @@
     "blackjackUrl": "https://devblackjack.scrooge.casino",
     "slotUrl": "https://devslot.scrooge.casino",
     "rouletteUrl": "https://dev.scrooge.casino/roulette",
-    "stripeKey": "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT"
+    "stripeKey": "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT",
+    "paypalClientKey": "ASVq331SjyBbgW1akqdOLs5hJ_VMopNmqI4r_h4cHf6YLDkoEqOQ_YjHxYKvxp8QFLz7E0BRaTqVH-jv"
+
   },
   "staging": {
     "client": "https://betamarket.scrooge.casino",
@@ -33,7 +37,9 @@
     "blackjackUrl": "https://betablackjack.scrooge.casino",
     "slotUrl": "https://betaslot.scrooge.casino",
     "rouletteUrl": "https://beta.scrooge.casino/roulette",
-    "stripeKey": "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT"
+    "stripeKey": "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT",
+    "paypalClientKey": "ASVq331SjyBbgW1akqdOLs5hJ_VMopNmqI4r_h4cHf6YLDkoEqOQ_YjHxYKvxp8QFLz7E0BRaTqVH-jv"
+
   },
   "production": {
     "client": "https://market.scrooge.casino",
@@ -45,6 +51,8 @@
     "blackjackUrl": "https://blackjack.scrooge.casino",
     "slotUrl": "https://blackjack.scrooge.casino",
     "rouletteUrl": "https://scrooge.casino/roulette",
-    "stripeKey": "pk_live_51Mo3YgIintOuilEoqh3MvPlytP8mgx59iCnvobhQqQ3ZO9vM34YxCHuzbyjmkGlIdSsAv5sHoVdIWTtsUPnK5XhD00vbhc88hl"
+    "stripeKey": "pk_live_51Mo3YgIintOuilEoqh3MvPlytP8mgx59iCnvobhQqQ3ZO9vM34YxCHuzbyjmkGlIdSsAv5sHoVdIWTtsUPnK5XhD00vbhc88hl",
+    "paypalClientKey": "ASVq331SjyBbgW1akqdOLs5hJ_VMopNmqI4r_h4cHf6YLDkoEqOQ_YjHxYKvxp8QFLz7E0BRaTqVH-jv"
+
   }
 }
