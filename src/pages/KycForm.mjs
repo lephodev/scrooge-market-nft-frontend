@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Form, Spinner } from "react-bootstrap";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import cross from "../images/close-icon.svg";
-import { userKycDetails, reApply } from "../utils/api.mjs"; //createKYC
+import { userKycDetails, reApply, createKYC } from "../utils/api.mjs"; //
 import { createKYCSchema } from "../utils/validationSchema.mjs";
 import { toast } from "react-toastify";
 import Layout from "./Layout.mjs";
@@ -20,208 +20,215 @@ import AuthContext from "../context/authContext.ts";
 
 const KYCForm = () => {
   const navigate = useNavigate();
-  // const [frontIdImage, setfrontIdImage] = useState([]);
-  // const [backIdImage, setbackIdImage] = useState([]);
-  // const [optionalIdImage, setOptionalIdImage] = useState([]);
+  const [frontIdImage, setfrontIdImage] = useState([]);
+  const [backIdImage, setbackIdImage] = useState([]);
+  const [optionalIdImage, setOptionalIdImage] = useState([]);
   const [statusKyc, setstatusKyc] = useState(null);
   const [rejectionMessage, setRejectionMessage] = useState(""); //rejectionMessage
-  // const [loading, setLoading] = useState(false);
-  // const [isSaveLoader /* setIsSaveLoader */] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isSaveLoader /* setIsSaveLoader */] = useState(false);
   const [globalLoader, setglobalLoader] = useState(true);
-  // const [unSupportedImg, setUnsupportedImg] = useState(true);
+  const [unSupportedImg, setUnsupportedImg] = useState(true);
   // const [successMsg, setSuccessMsg] = useState("");
   const [currentState, setCurrentState] = useState("");
   const { user } = useContext(AuthContext);
 
-  // const [activeRatioType, setActiveRatioType] = useState("Male");
+  const [activeRatioType, setActiveRatioType] = useState("Male");
 
   const {
-    // handleSubmit,
-    // register,
-    // setError,
+    handleSubmit,
+    register,
+    setError,
     setValue,
-    // getValues,
-    // formState: { errors },
-    // clearErrors,
+    getValues,
+    formState: { errors },
+    clearErrors,
   } = useForm({ resolver: yupResolver(createKYCSchema) });
 
-  // const handleImageChange = (e) => {
-  //   const { name } = e.target;
-  //   console.log("e", e.target);
-  //   const acceptedImageTypes = ["image/jpeg", "image/png"]; // Add more types if needed
+  const handleImageChange = (e) => {
+    const { name } = e.target;
+    console.log("e", e.target);
+    const acceptedImageTypes = ["image/jpeg", "image/png"]; // Add more types if needed
 
-  //   if (name === "IDimageFront") {
-  //     const files = e.target.files;
-  //     setUnsupportedImg(true);
-  //     // Check if any files are selected
-  //     if (files.length === 0) {
-  //       clearErrors("IDimageFront");
-  //       return;
-  //     }
+    if (name === "IDimageFront") {
+      const files = e.target.files;
+      setUnsupportedImg(true);
+      // Check if any files are selected
+      if (files.length === 0) {
+        clearErrors("IDimageFront");
+        return;
+      }
 
-  //     // Check if all selected files are image files
-  //     const allAreImages = Array.from(files).every((file) =>
-  //       acceptedImageTypes.includes(file.type)
-  //     );
-  //     console.log("allAreImages", files);
+      // Check if all selected files are image files
+      const allAreImages = Array.from(files).every((file) =>
+        acceptedImageTypes.includes(file.type)
+      );
+      console.log("allAreImages", files);
 
-  //     if (allAreImages) {
-  //       setUnsupportedImg(true);
-  //       setfrontIdImage([...files]);
-  //       clearErrors("IDimageFront");
-  //     } else {
-  //       setUnsupportedImg(false);
-  //       setError("IDimageFront", {
-  //         message:
-  //           "Unsupported File Format. Please upload images in JPEG or PNG format",
-  //       }); // Handle the case where one or more selected files are not images
-  //       // You can display an error message or perform other actions here
-  //     }
-  //   }
+      if (allAreImages) {
+        setUnsupportedImg(true);
+        setfrontIdImage([...files]);
+        clearErrors("IDimageFront");
+      } else {
+        setUnsupportedImg(false);
+        setError("IDimageFront", {
+          message:
+            "Unsupported File Format. Please upload images in JPEG or PNG format",
+        }); // Handle the case where one or more selected files are not images
+        // You can display an error message or perform other actions here
+      }
+    }
 
-  //   if (name === "IDimageBack") {
-  //     setUnsupportedImg(true);
+    if (name === "IDimageBack") {
+      setUnsupportedImg(true);
 
-  //     const files = e.target.files;
+      const files = e.target.files;
 
-  //     // Check if any files are selected
-  //     if (files.length === 0) {
-  //       clearErrors("IDimageBack");
-  //       return;
-  //     }
+      // Check if any files are selected
+      if (files.length === 0) {
+        clearErrors("IDimageBack");
+        return;
+      }
 
-  //     // Check if all selected files are image files
-  //     const allAreImages = Array.from(files).every((file) =>
-  //       acceptedImageTypes.includes(file.type)
-  //     );
-  //     setUnsupportedImg(true);
+      // Check if all selected files are image files
+      const allAreImages = Array.from(files).every((file) =>
+        acceptedImageTypes.includes(file.type)
+      );
+      setUnsupportedImg(true);
 
-  //     console.log("allAreImages", allAreImages);
-  //     if (allAreImages) {
-  //       setbackIdImage([...files]);
-  //       clearErrors("IDimageBack");
-  //     } else {
-  //       setError("IDimageBack", {
-  //         message:
-  //           "Unsupported File Format. Please upload images in JPEG or PNG format",
-  //       });
-  //       // Handle the case where one or more selected files are not images
-  //       // You can display an error message or perform other actions here
-  //     }
-  //   }
+      console.log("allAreImages", allAreImages);
+      if (allAreImages) {
+        setbackIdImage([...files]);
+        clearErrors("IDimageBack");
+      } else {
+        setError("IDimageBack", {
+          message:
+            "Unsupported File Format. Please upload images in JPEG or PNG format",
+        });
+        // Handle the case where one or more selected files are not images
+        // You can display an error message or perform other actions here
+      }
+    }
 
-  //   if (name === "IDimageOptional") {
-  //     setUnsupportedImg(true);
+    if (name === "IDimageOptional") {
+      setUnsupportedImg(true);
 
-  //     const files = e.target.files;
+      const files = e.target.files;
 
-  //     // Check if any files are selected
-  //     if (files.length === 0) {
-  //       clearErrors("IDimageOptional");
-  //       return;
-  //     }
+      // Check if any files are selected
+      if (files.length === 0) {
+        clearErrors("IDimageOptional");
+        return;
+      }
 
-  //     // Check if all selected files are image files
-  //     const allAreImages = Array.from(files).every((file) =>
-  //       acceptedImageTypes.includes(file.type)
-  //     );
-  //     setUnsupportedImg(true);
+      // Check if all selected files are image files
+      const allAreImages = Array.from(files).every((file) =>
+        acceptedImageTypes.includes(file.type)
+      );
+      setUnsupportedImg(true);
 
-  //     console.log("allAreImages", allAreImages);
-  //     if (allAreImages) {
-  //       setOptionalIdImage([...files]);
-  //       clearErrors("IDimageOptional");
-  //     } else {
-  //       setError("IDimageOptional", {
-  //         message:
-  //           "Unsupported File Format. Please upload images in JPEG or PNG format",
-  //       });
-  //       // Handle the case where one or more selected files are not images
-  //       // You can display an error message or perform other actions here
-  //     }
-  //   }
-  // };
+      console.log("allAreImages", allAreImages);
+      if (allAreImages) {
+        setOptionalIdImage([...files]);
+        clearErrors("IDimageOptional");
+      } else {
+        setError("IDimageOptional", {
+          message:
+            "Unsupported File Format. Please upload images in JPEG or PNG format",
+        });
+        // Handle the case where one or more selected files are not images
+        // You can display an error message or perform other actions here
+      }
+    }
+  };
 
-  // const handleOnChange = (e) => {
-  //   const { value } = e.target;
-  //   setActiveRatioType(value);
-  // };
+  const handleOnChange = (e) => {
+    const { value } = e.target;
+    setActiveRatioType(value);
+  };
 
-  // const saveData = async (value) => {
-  //   try {
-  //     // setIsSaveLoader(true);
-  //     const formData = new FormData();
-  //     let payload = { ...value };
+  const saveData = async (value) => {
+    try {
+      // setIsSaveLoader(true);
+      const formData = new FormData();
+      let payload = { ...value };
 
-  //     if (frontIdImage.length !== 1) {
-  //       setError("IDimageFront", {
-  //         message: "Please uplaod front image of ID",
-  //       });
-  //       return;
-  //     }
+      if (frontIdImage.length !== 1) {
+        setError("IDimageFront", {
+          message: "Please uplaod front image of ID",
+        });
+        return;
+      }
 
-  //     if (backIdImage.length !== 1) {
-  //       setError("IDimageBack", {
-  //         message: "Please upload your selfie with your Id",
-  //       });
-  //       return;
-  //     }
-  //     let mbLimit = 10 * 1024 * 1024;
+      if (backIdImage.length !== 1) {
+        setError("IDimageBack", {
+          message: "Please upload your selfie with your Id",
+        });
+        return;
+      }
 
-  //     if (frontIdImage[0]?.size > mbLimit) {
-  //       setError("IDimageFront", {
-  //         message: "Front image of ID size should not be greater than 10 MB.",
-  //       });
-  //       return;
-  //     }
+      if (optionalIdImage.length !== 1) {
+        setError("IDimageOptional", {
+          message: "Please upload your Proof of Address Id",
+        });
+        return;
+      }
+      let mbLimit = 10 * 1024 * 1024;
 
-  //     if (backIdImage[0]?.size > mbLimit) {
-  //       setError("IDimageBack", {
-  //         message:
-  //           "Selfie with your Id image size should not be greater than 10 MB.",
-  //       });
-  //       return;
-  //     }
+      if (frontIdImage[0]?.size > mbLimit) {
+        setError("IDimageFront", {
+          message: "Front image of ID size should not be greater than 10 MB.",
+        });
+        return;
+      }
 
-  //     if (optionalIdImage[0]?.size > mbLimit) {
-  //       setError("IDimageOptional", {
-  //         message: "Optional image size should not be greater than 10 MB.",
-  //       });
-  //       return;
-  //     }
+      if (backIdImage[0]?.size > mbLimit) {
+        setError("IDimageBack", {
+          message:
+            "Selfie with your Id image size should not be greater than 10 MB.",
+        });
+        return;
+      }
 
-  //     payload.gender = activeRatioType;
-  //     formData.append("IDimageFront", frontIdImage[0]);
-  //     formData.append("IDimageBack", backIdImage[0]);
-  //     formData.append("IDimageOptional", optionalIdImage[0]);
+      if (optionalIdImage[0]?.size > mbLimit) {
+        setError("IDimageOptional", {
+          message: "Optional image size should not be greater than 10 MB.",
+        });
+        return;
+      }
 
-  //     formData.append("formValues", JSON.stringify(payload));
-  //     setLoading(true);
-  //     const res = await createKYC(formData);
-  //     setLoading(false);
-  //     if (res.status === 201) {
-  //       getKYCStatus();
-  //     } else {
-  //       toast.error("Unable to Upload the Kyc");
-  //     }
-  //   } catch (error) {
-  //     toast.error("Upload Failed, please contact support for assistance.");
-  //     setLoading(false);
-  //     console.log("error", error);
-  //   }
-  // };
+      payload.gender = activeRatioType;
+      formData.append("IDimageFront", frontIdImage[0]);
+      formData.append("IDimageBack", backIdImage[0]);
+      formData.append("IDimageOptional", optionalIdImage[0]);
 
-  // const handleRemoveImage = (index, imgCheck, prevCheck) => {
-  //   if (imgCheck) {
-  //     if (!prevCheck) {
-  //       const copyBannerImg = [...frontIdImage];
-  //       copyBannerImg.splice(index, 1);
-  //       setfrontIdImage(copyBannerImg);
-  //     } else {
-  //       // copyPreviewyBannerImg.splice(index, 1);
-  //     }
-  //   }
-  // };
+      formData.append("formValues", JSON.stringify(payload));
+      setLoading(true);
+      const res = await createKYC(formData);
+      setLoading(false);
+      if (res.status === 201) {
+        getKYCStatus();
+      } else {
+        toast.error("Unable to Upload the Kyc");
+      }
+    } catch (error) {
+      toast.error("Upload Failed, please contact support for assistance.");
+      setLoading(false);
+      console.log("error", error);
+    }
+  };
+
+  const handleRemoveImage = (index, imgCheck, prevCheck) => {
+    if (imgCheck) {
+      if (!prevCheck) {
+        const copyBannerImg = [...frontIdImage];
+        copyBannerImg.splice(index, 1);
+        setfrontIdImage(copyBannerImg);
+      } else {
+        // copyPreviewyBannerImg.splice(index, 1);
+      }
+    }
+  };
 
   const reapply = async () => {
     setglobalLoader(true);
@@ -326,35 +333,35 @@ const KYCForm = () => {
                 ) : (
                   <div className="kycForm marketPlace_kycForm">
                     {statusKyc === "NotApplied" && (
-                      // <OldForm
-                      //   handleSubmit={handleSubmit}
-                      //   saveData={saveData}
-                      //   getValues={getValues}
-                      //   errors={errors}
-                      //   register={register}
-                      //   activeRatioType={activeRatioType}
-                      //   handleOnChange={handleOnChange}
-                      //   handleImageChange={handleImageChange}
-                      //   frontIdImage={frontIdImage}
-                      //   handleRemoveImage={handleRemoveImage}
-                      //   unSupportedImg={unSupportedImg}
-                      //   backIdImage={backIdImage}
-                      //   optionalIdImage={optionalIdImage}
-                      //   isSaveLoader={isSaveLoader}
-                      //   loading={loading}
-                      // />
-                      <Button onClick={kycRedirection}>Verify KYC</Button>
+                      <OldForm
+                        handleSubmit={handleSubmit}
+                        saveData={saveData}
+                        getValues={getValues}
+                        errors={errors}
+                        register={register}
+                        activeRatioType={activeRatioType}
+                        handleOnChange={handleOnChange}
+                        handleImageChange={handleImageChange}
+                        frontIdImage={frontIdImage}
+                        handleRemoveImage={handleRemoveImage}
+                        unSupportedImg={unSupportedImg}
+                        backIdImage={backIdImage}
+                        optionalIdImage={optionalIdImage}
+                        isSaveLoader={isSaveLoader}
+                        loading={loading}
+                      />
+                      // <Button onClick={kycRedirection}>Verify KYC</Button>
                     )}
 
-                    {statusKyc === "reject" && (
+                    {/* {statusKyc === "reject" && (
                       <FailedKYC
                         handleLogOut={handleLogOut}
                         reapply={reapply}
                         rejectionMessage={rejectionMessage}
                       />
-                    )}
+                    )} */}
 
-                    {/* {statusKyc === "idle" && (
+                    {statusKyc === "idle" && (
                       <SubmitKYC handleLogOut={handleLogOut} />
                     )}
                     {statusKyc === "reject" && (
@@ -366,7 +373,7 @@ const KYCForm = () => {
                     )}
                     {statusKyc === "accept" && (
                       <SuccessKYC handleLogOut={handleLogOut} />
-                    )} */}
+                    )}
                   </div>
                 )}
               </>
@@ -726,7 +733,7 @@ const OldForm = ({
 
           <Form.Group className="form-group ">
             <Form.Label>
-              Proof of Address if ID and profile are not matching. (Optional)
+              Proof of Address if ID and profile are not matching
             </Form.Label>
             <div className="upload-game-thumnail">
               <Form.Control
