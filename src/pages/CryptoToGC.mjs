@@ -411,7 +411,40 @@ export default function CryptoToGC() {
     setShowFreeST(false);
   };
 
-  const handleShowPaypalModel = (amount, promodetails) => {
+  const handleShowPaypalModel = (amount, gc) => {
+    if (dailyGCPurchaseLimit >= 4) {
+      return toast.error("Credit card daily purchase limit are reached");
+    }
+    goldcoinAmount = gc;
+    if (
+      spendedAmount.spended_today + amount >
+      user.dailyGoldCoinSpendingLimit
+    ) {
+      return toast.error(
+        "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "A" }
+      );
+    }
+
+    if (
+      spendedAmount.spened_this_week + amount >
+      user.weeklyGoldCoinSpendingLimit
+    ) {
+      return toast.error(
+        "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "B" }
+      );
+    }
+
+    if (
+      spendedAmount.spneded_this_month + amount >
+      user.monthlyGoldCoinSpendingLimit
+    ) {
+      return toast.error(
+        "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "C" }
+      );
+    }
     setShowPyapal(!showPaypal);
     setPaypalAmount(amount);
   };
@@ -644,7 +677,7 @@ export default function CryptoToGC() {
                                                   onClick={() =>
                                                     handleShowPaypalModel(
                                                       prize?.priceInBUSD,
-                                                      promoDetails
+                                                      prize.gcAmount
                                                     )
                                                   }
                                                 >
@@ -761,7 +794,7 @@ export default function CryptoToGC() {
                                         onClick={() =>
                                           handleShowPaypalModel(
                                             prize?.priceInBUSD,
-                                            promoDetails
+                                            prize?.gcAmount
                                           )
                                         }
                                       >
