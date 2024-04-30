@@ -490,9 +490,44 @@ export default function CryptoToGC() {
                     </div>
                   </div>
                   <div className="purchase-select">
-                    <div className="purchaseSelect-Box">
-                      <h4>Purchase with</h4>
-                      <Dropdown>
+                    <div className="purchase-with-content">
+                      <h4>Purchase with: </h4>
+                      <div className="purchase-with-grid">
+                        <span
+                          onClick={() => handlePaymentTypeChange("Credit Card")}
+                          className={
+                            selectedTypeDropdown === "Credit Card"
+                              ? "active-method"
+                              : ""
+                          }
+                        >
+                          Credit Card{" "}
+                        </span>
+                        <span
+                          onClick={() => handlePaymentTypeChange("Paypal")}
+                          className={
+                            selectedTypeDropdown === "Paypal"
+                              ? "active-method"
+                              : ""
+                          }
+                        >
+                          Paypal{" "}
+                        </span>
+                        {/* 
+                        
+                        ******** CashApp option*******
+                        <span
+                          onClick={() => handlePaymentTypeChange("CashApp")}
+                          className={
+                            selectedTypeDropdown === "CashApp"
+                              ? "active-method"
+                              : ""
+                          }
+                        >
+                          CashApp
+                        </span> */}
+                      </div>
+                      {/* <Dropdown>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
                           {!selectedTypeDropdown
                             ? "Credit Card"
@@ -513,37 +548,9 @@ export default function CryptoToGC() {
                             Paypal
                           </Dropdown.Item>
                         </Dropdown.Menu>
-                      </Dropdown>
+                      </Dropdown> */}
                     </div>
-                    {selectedTypeDropdown === "Paypal" && (
-                      <div className="purchaseSelect-Box">
-                        <h4>Purchase with</h4>
-                        <Dropdown>
-                          <Dropdown.Toggle
-                            variant="success"
-                            id="dropdown-basic"
-                          >
-                            {!selectedDropdown ? "BUSD" : selectedDropdown}
-                          </Dropdown.Toggle>
-                          <Dropdown.Menu>
-                            <Dropdown.Item
-                              onClick={() => handleChange("Scrooge")}
-                            >
-                              Scrooge
-                            </Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleChange("BNB")}>
-                              BNB
-                            </Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleChange("USDC")}>
-                              USDC
-                            </Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleChange("USDT")}>
-                              USDT
-                            </Dropdown.Item>
-                          </Dropdown.Menu>
-                        </Dropdown>
-                      </div>
-                    )}
+
                     <div className="enter-promo">
                       <Form.Group className="form-group">
                         <Form.Control
@@ -887,6 +894,7 @@ export default function CryptoToGC() {
             showPaypal={showPaypal}
             handleShowPaypalModel={handleShowPaypalModel}
             amount={paypalAmount}
+            promoCode={promoCode}
           />
         </Layout>
       )}
