@@ -166,6 +166,13 @@ const KYCForm = () => {
         });
         return;
       }
+
+      if (optionalIdImage.length !== 1) {
+        setError("IDimageOptional", {
+          message: "Please upload your Proof of Address Id",
+        });
+        return;
+      }
       let mbLimit = 10 * 1024 * 1024;
 
       if (frontIdImage[0]?.size > mbLimit) {
@@ -346,13 +353,13 @@ const KYCForm = () => {
                       // <Button onClick={kycRedirection}>Verify KYC</Button>
                     )}
 
-                    {statusKyc === "reject" && (
+                    {/* {statusKyc === "reject" && (
                       <FailedKYC
                         handleLogOut={handleLogOut}
                         reapply={reapply}
                         rejectionMessage={rejectionMessage}
                       />
-                    )}
+                    )} */}
 
                     {statusKyc === "idle" && (
                       <SubmitKYC handleLogOut={handleLogOut} />
@@ -726,7 +733,7 @@ const OldForm = ({
 
           <Form.Group className="form-group ">
             <Form.Label>
-              Proof of Address if ID and profile are not matching. (Optional)
+              Proof of Address if ID and profile are not matching
             </Form.Label>
             <div className="upload-game-thumnail">
               <Form.Control
