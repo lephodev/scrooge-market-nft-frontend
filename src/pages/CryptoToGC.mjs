@@ -639,12 +639,21 @@ export default function CryptoToGC() {
                                               getExactPrice(
                                                 prize?.priceInBUSD
                                               ) > 0 && (
-                                                <Button variant="primary">
-                                                  <p>Buy </p>{" "}
+                                                <Button
+                                                  variant="primary"
+                                                  onClick={() =>
+                                                    handleShowPaypalModel(
+                                                      prize?.priceInBUSD,
+                                                      promoDetails
+                                                    )
+                                                  }
+                                                >
+                                                  <p>Buy With Paypal</p>{" "}
                                                   <span>
                                                     $
                                                     {getExactPrice(
-                                                      prize?.priceInBUSD
+                                                      prize?.priceInBUSD,
+                                                      promoDetails
                                                     )}
                                                   </span>
                                                 </Button>
