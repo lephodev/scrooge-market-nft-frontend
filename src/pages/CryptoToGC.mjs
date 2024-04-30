@@ -677,7 +677,9 @@ export default function CryptoToGC() {
                                                   variant="primary"
                                                   onClick={() =>
                                                     handleShowPaypalModel(
-                                                      prize?.priceInBUSD,
+                                                      parseFloat(
+                                                        prize?.priceInBUSD
+                                                      ),
                                                       prize.gcAmount
                                                     )
                                                   }
@@ -794,7 +796,7 @@ export default function CryptoToGC() {
                                         variant="primary"
                                         onClick={() =>
                                           handleShowPaypalModel(
-                                            prize?.priceInBUSD,
+                                            parseFloat(prize?.priceInBUSD),
                                             prize?.gcAmount
                                           )
                                         }
