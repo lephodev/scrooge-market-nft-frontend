@@ -546,8 +546,8 @@ export default function CryptoToGC() {
                           >
                             Crypto
                           </Dropdown.Item> */}
-                        </Dropdown.Menu>
-                      </Dropdown> */}
+                      {/* </Dropdown.Menu> */}
+                      {/* </Dropdown> */}
                     </div>
 
                     <div className="enter-promo">
