@@ -83,7 +83,7 @@ const PaypalModel = ({
               options={{
                 clientId: paypalClientKey,
                 disableFunding: "paylater,credit,card",
-                enableFunding: "venmo",
+                enableFunding: "venmo,applepay",
               }}
             >
               <PayPalButtons
