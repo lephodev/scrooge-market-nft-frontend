@@ -240,6 +240,7 @@ const AuthrizeCustomModel = ({
         setExpDate("");
         setCardCode("");
         setSuccess(true);
+
         // toast.success(res.data.message, { id: "buy-sucess" });
       } else {
         setErrorMsg(res.data.error);
@@ -261,7 +262,10 @@ const AuthrizeCustomModel = ({
   };
   const handleOk = async (event) => {
     try {
+      window.location.href = "/crypto-to-gc";
+
       setSuccess(false);
+      window.location.href = "/crypto-to-gc";
     } catch (error) {
       console.log("error", error);
     }
