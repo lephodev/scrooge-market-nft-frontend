@@ -535,7 +535,7 @@ export default function CryptoToGC() {
                         >
                           Credit Card{" "}
                         </span>
-                        <span
+                        {/* <span
                           onClick={() => handlePaymentTypeChange("Paypal")}
                           className={
                             selectedTypeDropdown === "Paypal"
@@ -544,7 +544,7 @@ export default function CryptoToGC() {
                           }
                         >
                           Paypal{" "}
-                        </span>
+                        </span> */}
                         {/* 
                         
                         ******** CashApp option*******
