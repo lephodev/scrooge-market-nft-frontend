@@ -681,10 +681,7 @@ const OldForm = ({
             )}
           </Form.Group>
           <Form.Group className="form-group ">
-            <Form.Label>
-              Upload a Selfie Holding ID as well as a piece of paper with TODAYS
-              date written on it.
-            </Form.Label>
+            <Form.Label>Upload Back Image</Form.Label>
             <div className="upload-game-thumnail">
               <Form.Control
                 type="file"
@@ -732,7 +729,7 @@ const OldForm = ({
           </Form.Group>
 
           <Form.Group className="form-group ">
-            <Form.Label>Proof of Address.</Form.Label>
+            <Form.Label>Upload selfi.</Form.Label>
             <div className="upload-game-thumnail">
               <Form.Control
                 type="file"
