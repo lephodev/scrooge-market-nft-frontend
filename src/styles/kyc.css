@@ -497,6 +497,9 @@
   .affiliateurllink{
     font-size: 13px;
   }
+  .urlparentspan{
+    display: flex;
+  }
 }
 
 .button.verif-btn {

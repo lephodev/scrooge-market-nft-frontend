@@ -395,7 +395,10 @@ const KYCForm = () => {
                                 Reference:
                               </span>{" "}
                               {analyzeData?.reference}
-                              <span style={{ display: "Block" }}>
+                              <span
+                                className="urlparentspan"
+                                style={{ display: "flex" }}
+                              >
                                 {" "}
                                 <span style={{ color: "yellow" }}>
                                   URL:
@@ -406,7 +409,9 @@ const KYCForm = () => {
                                     cursor: "pointer",
                                     color: "white",
                                     textDecoration: "underline",
-                                    fontSize: "14px",
+                                    fontSize: "15px",
+                                    overflowWrap: "anywhere",
+                                    paddingLeft: "5px",
                                   }}
                                   onClick={() => handleIframe(analyzeData?.url)}
                                 >
