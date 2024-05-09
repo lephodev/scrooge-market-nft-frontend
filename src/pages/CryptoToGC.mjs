@@ -958,6 +958,7 @@ const PayWithCard = ({
   user,
 }) => {
   const [showAuthForm, setShowAuthForm] = useState(false);
+  const [loader, setLoader] = useState(false);
   const kycStatus = async () => {
     const response = await userKycDetails();
     if (response?.code === 200) {
@@ -967,11 +968,14 @@ const PayWithCard = ({
     }
   };
   const handleCLick = async (gc, usd) => {
+    setLoader(true);
     if (dailyGCPurchaseLimit >= 4) {
+      setLoader(false);
       return toast.error("Credit card daily purchase limit are reached");
     }
     goldcoinAmount = gc;
     if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
+      setLoader(false);
       return toast.error(
         "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
         { toastId: "A" }
@@ -982,6 +986,7 @@ const PayWithCard = ({
       spendedAmount.spened_this_week + usd >
       user.weeklyGoldCoinSpendingLimit
     ) {
+      setLoader(false);
       return toast.error(
         "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
         { toastId: "B" }
@@ -992,6 +997,7 @@ const PayWithCard = ({
       spendedAmount.spneded_this_month + usd >
       user.monthlyGoldCoinSpendingLimit
     ) {
+      setLoader(false);
       return toast.error(
         "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
         { toastId: "C" }
@@ -1000,11 +1006,14 @@ const PayWithCard = ({
     console.log("usd", usd);
     let status = await kycStatus();
     if (usd >= 25 && status !== "accept") {
+      setLoader(false);
+
       return toast.error(
         "KYC must be approved to access full purchase center.",
         { toastId: "D" }
       );
     }
+    setLoader(false);
     setShowAuthForm(true);
 
     let payload = {
@@ -1027,7 +1036,11 @@ const PayWithCard = ({
         }
       >
         {" "}
-        Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}
+        {loader ? (
+          <Spinner animation="border" />
+        ) : (
+          `Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}`
+        )}
       </button>
       <AuthrizeCustomModel
         showAuthForm={showAuthForm}
