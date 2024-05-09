@@ -33,6 +33,7 @@ import PageLoader from "../components/pageLoader/loader.mjs";
 import FreeSTModel from "./models/FreeSTModel.mjs";
 import AuthrizeCustomModel from "./models/authrizeCustomModel.mjs";
 import PaypalModel from "./models/paypalModel.mjs";
+import { userKycDetails } from "../utils/api.mjs";
 let promoCode;
 let goldcoinAmount;
 
@@ -957,7 +958,15 @@ const PayWithCard = ({
   user,
 }) => {
   const [showAuthForm, setShowAuthForm] = useState(false);
-  const handleCLick = (gc, usd) => {
+  const kycStatus = async () => {
+    const response = await userKycDetails();
+    if (response?.code === 200) {
+      if (response.message !== "accept") {
+        return response.message;
+      }
+    }
+  };
+  const handleCLick = async (gc, usd) => {
     if (dailyGCPurchaseLimit >= 4) {
       return toast.error("Credit card daily purchase limit are reached");
     }
@@ -986,6 +995,14 @@ const PayWithCard = ({
       return toast.error(
         "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
         { toastId: "C" }
+      );
+    }
+    console.log("usd", usd);
+    let status = await kycStatus();
+    if (usd >= 25 && status !== "accept") {
+      return toast.error(
+        "KYC must be approved to access full purchase center.",
+        { toastId: "D" }
       );
     }
     setShowAuthForm(true);

@@ -338,7 +338,7 @@ const KYCForm = () => {
               width="100%"
               height="800px"
               allowFullScreen
-              allow="midi 'src'; geolocation 'src'; microphone 'src'; camera 'src';
+              allow="otp-credentials midi 'src'; geolocation 'src'; microphone 'src'; camera 'src';
                display-capture 'src'; otp-credentials 'src'; encrypted-media 'src';"
             />
           ) : (
