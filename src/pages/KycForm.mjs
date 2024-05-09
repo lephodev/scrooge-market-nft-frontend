@@ -324,15 +324,15 @@ const KYCForm = () => {
     }
   };
 
-  const handleIframe = (url) => {
-    setIframUrl(url);
-  };
+  // const handleIframe = (url) => {
+  //   setIframUrl(url);
+  // };
 
   return (
     <Layout>
       <div className="kyc-page">
         <div className="auth-page">
-          {iframeUrl ? (
+          {/* {iframeUrl ? (
             <iframe
               src={iframeUrl}
               width="100%"
@@ -341,130 +341,129 @@ const KYCForm = () => {
               allow="otp-credentials midi 'src'; geolocation 'src'; microphone 'src'; camera 'src';
                display-capture 'src'; otp-credentials 'src'; encrypted-media 'src';"
             />
-          ) : (
-            <div className="container">
-              {globalLoader && (
-                <div className="loading">
-                  <div className="loading-img-div">
-                    <img
-                      src={LoadingPoker}
-                      alt="game"
-                      className="imageAnimation"
-                    />
-                  </div>
+          ) : ( */}
+          <div className="container">
+            {globalLoader && (
+              <div className="loading">
+                <div className="loading-img-div">
+                  <img
+                    src={LoadingPoker}
+                    alt="game"
+                    className="imageAnimation"
+                  />
                 </div>
-              )}
+              </div>
+            )}
 
-              {!globalLoader && (
-                <>
-                  {currentState === "Michigan" ? (
-                    <div
-                      style={{
-                        marginTop: "100px",
-                        textAlign: "center",
-                        color: "white",
-                        backgroundColor: "red",
-                      }}
-                    >
-                      Due to state legislations, our application is no longer
-                      available in your current location
-                    </div>
-                  ) : (
-                    <div className="kycForm marketPlace_kycForm">
-                      {statusKyc === "NotApplied" && (
-                        <div className="login-button full-w">
-                          {Object.keys(analyzeData).length <= 0 ? (
-                            <>
-                              <Button
-                                className="l-btn "
-                                disabled={analyzeLoader}
-                                onClick={() => handleVerify()}
-                              >
-                                {!analyzeLoader ? (
-                                  "Verify"
-                                ) : (
-                                  <Spinner animation="border" />
-                                )}
-                              </Button>
-                            </>
-                          ) : (
-                            <>
-                              <span
-                                style={{ color: "yellow", marginTop: "10px" }}
-                              >
-                                Reference:
-                              </span>{" "}
-                              {analyzeData?.reference}
-                              <span
-                                className="urlparentspan"
-                                style={{ display: "flex" }}
-                              >
-                                {" "}
-                                <span style={{ color: "yellow" }}>
-                                  URL:
-                                </span>{" "}
-                                <span
-                                  className="affiliateurllink"
-                                  style={{
-                                    cursor: "pointer",
-                                    color: "white",
-                                    textDecoration: "underline",
-                                    fontSize: "15px",
-                                    overflowWrap: "anywhere",
-                                    paddingLeft: "5px",
-                                  }}
-                                  onClick={() => handleIframe(analyzeData?.url)}
-                                >
-                                  {analyzeData?.url}
-                                </span>
-                              </span>
-                              <div
+            {!globalLoader && (
+              <>
+                {currentState === "Michigan" ? (
+                  <div
+                    style={{
+                      marginTop: "100px",
+                      textAlign: "center",
+                      color: "white",
+                      backgroundColor: "red",
+                    }}
+                  >
+                    Due to state legislations, our application is no longer
+                    available in your current location
+                  </div>
+                ) : (
+                  <div className="kycForm marketPlace_kycForm">
+                    {statusKyc === "NotApplied" && (
+                      <div className="login-button full-w">
+                        {Object.keys(analyzeData).length <= 0 ? (
+                          <>
+                            <Button
+                              className="l-btn "
+                              disabled={analyzeLoader}
+                              onClick={() => handleVerify()}
+                            >
+                              {!analyzeLoader ? (
+                                "Verify"
+                              ) : (
+                                <Spinner animation="border" />
+                              )}
+                            </Button>
+                          </>
+                        ) : (
+                          <>
+                            <span
+                              style={{ color: "yellow", marginTop: "10px" }}
+                            >
+                              Reference:
+                            </span>{" "}
+                            {analyzeData?.reference}
+                            <span
+                              className="urlparentspan"
+                              style={{ display: "flex" }}
+                            >
+                              {" "}
+                              <span style={{ color: "yellow" }}>URL:</span>{" "}
+                              <a
+                                href={analyzeData?.url}
+                                className="affiliateurllink"
                                 style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  paddingTop: "16px",
+                                  cursor: "pointer",
+                                  color: "white",
+                                  textDecoration: "underline",
+                                  fontSize: "15px",
+                                  overflowWrap: "anywhere",
+                                  paddingLeft: "5px",
                                 }}
+                                // onClick={() => handleIframe(analyzeData?.url)}
                               >
-                                <img
-                                  style={{ height: "190px", width: "190px" }}
-                                  src={analyzeData?.qrCode}
-                                  alt="cross"
-                                  className="crossImg"
-                                  onClick={() =>
-                                    handleRemoveImage(0, false, false)
-                                  }
-                                />
-                              </div>
-                            </>
-                          )}
-                        </div>
+                                {analyzeData?.url}
+                              </a>
+                            </span>
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                paddingTop: "16px",
+                              }}
+                            >
+                              <img
+                                style={{ height: "190px", width: "190px" }}
+                                src={analyzeData?.qrCode}
+                                alt="cross"
+                                className="crossImg"
+                                onClick={() =>
+                                  handleRemoveImage(0, false, false)
+                                }
+                              />
+                            </div>
+                          </>
+                        )}
+                      </div>
 
-                        // <OldForm
-                        //   handleSubmit={handleSubmit}
-                        //   saveData={saveData}
-                        //   getValues={getValues}
-                        //   errors={errors}
-                        //   register={register}
-                        //   activeRatioType={activeRatioType}
-                        //   handleOnChange={handleOnChange}
-                        //   handleImageChange={handleImageChange}
-                        //   frontIdImage={frontIdImage}
-                        //   handleRemoveImage={handleRemoveImage}
-                        //   unSupportedImg={unSupportedImg}
-                        //   backIdImage={backIdImage}
-                        //   optionalIdImage={optionalIdImage}
-                        //   isSaveLoader={isSaveLoader}
-                        //   loading={loading}
-                        //   handleVerify={handleVerify}
-                        //   analyzeLoader={analyzeLoader}
-                        //   analyzeData={analyzeData}
-                        //   handleIframe={handleIframe}
-                        // />
-                        // <Button onClick={kycRedirection}>Verify KYC</Button>
-                      )}
+                      // <OldForm
+                      //   handleSubmit={handleSubmit}
+                      //   saveData={saveData}
+                      //   getValues={getValues}
+                      //   errors={errors}
+                      //   register={register}
+                      //   activeRatioType={activeRatioType}
+                      //   handleOnChange={handleOnChange}
+                      //   handleImageChange={handleImageChange}
+                      //   frontIdImage={frontIdImage}
+                      //   handleRemoveImage={handleRemoveImage}
+                      //   unSupportedImg={unSupportedImg}
+                      //   backIdImage={backIdImage}
+                      //   optionalIdImage={optionalIdImage}
+                      //   isSaveLoader={isSaveLoader}
+                      //   loading={loading}
+                      //   handleVerify={handleVerify}
+                      //   analyzeLoader={analyzeLoader}
+                      //   analyzeData={analyzeData}
+                      //   handleIframe={handleIframe}
+                      // />
+                      // <Button onClick={kycRedirection}>Verify KYC</Button>
+                    )}
 
-                      {/* {statusKyc === "reject" && (
+                    {/* {statusKyc === "reject" && (
                       <FailedKYC
                         handleLogOut={handleLogOut}
                         reapply={reapply}
@@ -472,25 +471,25 @@ const KYCForm = () => {
                       />
                     )} */}
 
-                      {statusKyc === "idle" && (
-                        <SubmitKYC handleLogOut={handleLogOut} />
-                      )}
-                      {statusKyc === "reject" && (
-                        <FailedKYC
-                          handleLogOut={handleLogOut}
-                          reapply={reapply}
-                          rejectionMessage={rejectionMessage}
-                        />
-                      )}
-                      {statusKyc === "accept" && (
-                        <SuccessKYC handleLogOut={handleLogOut} />
-                      )}
-                    </div>
-                  )}
-                </>
-              )}
-            </div>
-          )}
+                    {statusKyc === "idle" && (
+                      <SubmitKYC handleLogOut={handleLogOut} />
+                    )}
+                    {statusKyc === "reject" && (
+                      <FailedKYC
+                        handleLogOut={handleLogOut}
+                        reapply={reapply}
+                        rejectionMessage={rejectionMessage}
+                      />
+                    )}
+                    {statusKyc === "accept" && (
+                      <SuccessKYC handleLogOut={handleLogOut} />
+                    )}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+          {/* )} */}
         </div>
       </div>
     </Layout>
