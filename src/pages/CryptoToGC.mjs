@@ -1000,14 +1000,14 @@ const PayWithCard = ({
     }
 
     let status = await kycStatus();
-    if (usd >= 25 && status !== "accept") {
-      setLoader(false);
+    // if (usd >= 25 && status !== "accept") {
+    //   setLoader(false);
 
-      return toast.error(
-        "KYC must be approved to access full purchase center.",
-        { toastId: "D" }
-      );
-    }
+    //   return toast.error(
+    //     "KYC must be approved to access full purchase center.",
+    //     { toastId: "D" }
+    //   );
+    // }
     setLoader(false);
     setShowAuthForm(true);
 
