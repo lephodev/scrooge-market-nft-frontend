@@ -957,9 +957,7 @@ const PayWithCard = ({
   const kycStatus = async () => {
     const response = await userKycDetails();
     if (response?.code === 200) {
-      if (response.message !== "accept") {
-        return response.message;
-      }
+      return response.message;
     }
   };
   const handleCLick = async (gc, usd) => {
@@ -1000,14 +998,15 @@ const PayWithCard = ({
     }
 
     let status = await kycStatus();
-    // if (usd >= 25 && status !== "accept") {
-    //   setLoader(false);
+    console.log("status", status);
+    if (usd >= 25 && status !== "accept") {
+      setLoader(false);
 
-    //   return toast.error(
-    //     "KYC must be approved to access full purchase center.",
-    //     { toastId: "D" }
-    //   );
-    // }
+      return toast.error(
+        "KYC must be approved to access full purchase center.",
+        { toastId: "D" }
+      );
+    }
     setLoader(false);
     setShowAuthForm(true);
 
