@@ -305,12 +305,14 @@ const KYCForm = () => {
     })();
   }, []);
 
-  const handleVerify = async () => {
+  const handleVerify = async (value) => {
+    let payload = { ...value };
+
     try {
       setAnalyzerLoader(true);
       const response = await (
         await marketPlaceInstance()
-      ).post("/IdAnalyzerWithDocupass");
+      ).post("/IdAnalyzerWithDocupass", payload);
       console.log("IdAnalyzerWithDocupass", response);
       if (response.status === 200) {
         setAnalyzeData(response?.data?.response);
@@ -372,94 +374,28 @@ const KYCForm = () => {
                 ) : (
                   <div className="kycForm marketPlace_kycForm">
                     {statusKyc === "NotApplied" && (
-                      <div className="login-button full-w">
-                        {Object.keys(analyzeData).length <= 0 ? (
-                          <>
-                            <Button
-                              className="l-btn "
-                              disabled={analyzeLoader}
-                              onClick={() => handleVerify()}
-                            >
-                              {!analyzeLoader ? (
-                                "Verify"
-                              ) : (
-                                <Spinner animation="border" />
-                              )}
-                            </Button>
-                          </>
-                        ) : (
-                          <>
-                            <span
-                              style={{ color: "yellow", marginTop: "10px" }}
-                            >
-                              Reference:
-                            </span>{" "}
-                            {analyzeData?.reference}
-                            <span
-                              className="urlparentspan"
-                              style={{ display: "flex" }}
-                            >
-                              {" "}
-                              <span style={{ color: "yellow" }}>URL:</span>{" "}
-                              <a
-                                href={analyzeData?.url}
-                                className="affiliateurllink"
-                                style={{
-                                  cursor: "pointer",
-                                  color: "white",
-                                  textDecoration: "underline",
-                                  fontSize: "15px",
-                                  overflowWrap: "anywhere",
-                                  paddingLeft: "5px",
-                                }}
-                                // onClick={() => handleIframe(analyzeData?.url)}
-                              >
-                                {analyzeData?.url}
-                              </a>
-                            </span>
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                paddingTop: "16px",
-                              }}
-                            >
-                              <img
-                                style={{ height: "190px", width: "190px" }}
-                                src={analyzeData?.qrCode}
-                                alt="cross"
-                                className="crossImg"
-                                onClick={() =>
-                                  handleRemoveImage(0, false, false)
-                                }
-                              />
-                            </div>
-                          </>
-                        )}
-                      </div>
-
-                      // <OldForm
-                      //   handleSubmit={handleSubmit}
-                      //   saveData={saveData}
-                      //   getValues={getValues}
-                      //   errors={errors}
-                      //   register={register}
-                      //   activeRatioType={activeRatioType}
-                      //   handleOnChange={handleOnChange}
-                      //   handleImageChange={handleImageChange}
-                      //   frontIdImage={frontIdImage}
-                      //   handleRemoveImage={handleRemoveImage}
-                      //   unSupportedImg={unSupportedImg}
-                      //   backIdImage={backIdImage}
-                      //   optionalIdImage={optionalIdImage}
-                      //   isSaveLoader={isSaveLoader}
-                      //   loading={loading}
-                      //   handleVerify={handleVerify}
-                      //   analyzeLoader={analyzeLoader}
-                      //   analyzeData={analyzeData}
-                      //   handleIframe={handleIframe}
-                      // />
+                      <>
+                        <OldForm
+                          handleSubmit={handleSubmit}
+                          saveData={saveData}
+                          getValues={getValues}
+                          errors={errors}
+                          register={register}
+                          activeRatioType={activeRatioType}
+                          handleOnChange={handleOnChange}
+                          handleImageChange={handleImageChange}
+                          frontIdImage={frontIdImage}
+                          handleRemoveImage={handleRemoveImage}
+                          unSupportedImg={unSupportedImg}
+                          backIdImage={backIdImage}
+                          optionalIdImage={optionalIdImage}
+                          isSaveLoader={isSaveLoader}
+                          loading={loading}
+                          handleVerify={handleVerify}
+                          analyzeLoader={analyzeLoader}
+                          analyzeData={analyzeData}
+                        />
+                      </>
                       // <Button onClick={kycRedirection}>Verify KYC</Button>
                     )}
 
@@ -575,7 +511,7 @@ const OldForm = ({
         </p>
         <p className="auth-para">Please fill your details to verify KYC</p>
         <div className="login-box">
-          <Form onSubmit={handleSubmit(saveData)}>
+          <Form onSubmit={handleSubmit(handleVerify)}>
             <Form.Group className="form-group">
               <Form.Label>First Name</Form.Label>
               <Form.Control
@@ -583,7 +519,7 @@ const OldForm = ({
                 name="firstName"
                 placeholder="Enter your first name"
                 autoComplete="off"
-                readOnly={getValues("firstName") ? true : false}
+                // readOnly={getValues("firstName") ? true : false}
                 className={errors.firstName ? "error-field" : ""}
                 {...register("firstName")}
               />
@@ -722,7 +658,7 @@ const OldForm = ({
                 placeholder="Enter your postal / zip code"
                 autoComplete="off"
                 className={errors.zipCode ? "error-field" : ""}
-                readOnly={getValues("zipCode") ? true : false}
+                // readOnly={getValues("zipCode") ? true : false}
                 {...register("zipCode")}
               />
               {errors?.zipCode ? (
@@ -748,7 +684,7 @@ const OldForm = ({
                 ""
               )}
             </Form.Group>
-            <Form.Group className="form-group ">
+            {/* <Form.Group className="form-group ">
               <Form.Label>Upload Front Id</Form.Label>
               <div className="upload-game-thumnail">
                 <Form.Control
@@ -895,12 +831,73 @@ const OldForm = ({
               ) : (
                 ""
               )}
-            </Form.Group>
+            </Form.Group> */}
 
             <div className="login-button full-w">
-              <Button type="submit" className="l-btn " disabled={isSaveLoader}>
-                {!loading ? "Save" : <Spinner animation="border" />}
+              <>
+                {/* <Button
+                  className="l-btn "
+                  disabled={analyzeLoader}
+                  onClick={() => handleVerify()}
+                >
+                  {!analyzeLoader ? "Verify" : <Spinner animation="border" />}
+                </Button> */}
+              </>
+              <Button type="submit" className="l-btn " disabled={analyzeLoader}>
+                {!analyzeLoader ? "Verify" : <Spinner animation="border" />}
               </Button>
+              {console.log(
+                "Object.keys(analyzeData).length",
+                Object.keys(analyzeData).length
+              )}
+              {Object.keys(analyzeData).length > 0 && (
+                <>
+                  <div className="login-button full-w">
+                    <>
+                      <span style={{ color: "yellow", marginTop: "10px" }}>
+                        Reference:
+                      </span>{" "}
+                      {analyzeData?.reference}
+                      <span
+                        className="urlparentspan"
+                        style={{ display: "flex" }}
+                      >
+                        {" "}
+                        <span style={{ color: "yellow" }}>URL:</span>{" "}
+                        <a
+                          href={analyzeData?.url}
+                          className="affiliateurllink"
+                          style={{
+                            cursor: "pointer",
+                            color: "white",
+                            textDecoration: "underline",
+                            fontSize: "15px",
+                            overflowWrap: "anywhere",
+                            paddingLeft: "5px",
+                          }}
+                        >
+                          {analyzeData?.url}
+                        </a>
+                      </span>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          paddingTop: "16px",
+                        }}
+                      >
+                        <img
+                          style={{ height: "190px", width: "190px" }}
+                          src={analyzeData?.qrCode}
+                          alt="cross"
+                          className="crossImg"
+                        />
+                      </div>
+                    </>
+                  </div>
+                </>
+              )}
             </div>
           </Form>
         </div>
