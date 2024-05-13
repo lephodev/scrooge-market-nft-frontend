@@ -10,6 +10,7 @@ import { number } from "card-validator";
 import Select from "react-select";
 import AuthorizeSucessModel from "./authrizeSucessModel.mjs";
 import AuthContext from "../../context/authContext.ts";
+import { Encrypt } from "../../config/incript.mjs";
 
 const AuthrizeCustomModel = ({
   showAuthForm,
@@ -210,6 +211,7 @@ const AuthrizeCustomModel = ({
   const pay = async (values) => {
     setLoader(true);
     console.log("valuesvalues", values);
+    const encryptedCardNumber = Encrypt(cardNumber.replace(/\s/g, ""));
     try {
       const res = await (
         await marketPlaceInstance()
@@ -219,7 +221,7 @@ const AuthrizeCustomModel = ({
           ...values,
           cardCode,
           expDate,
-          cardNumber: cardNumber.replace(/\s/g, ""),
+          cardNumber: encryptedCardNumber,
           amount,
           sessionId: await getDDC(),
           promoCode: getPromoCode().trim(),
