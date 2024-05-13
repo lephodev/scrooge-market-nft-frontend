@@ -262,6 +262,10 @@ const KYCForm = () => {
       setValue("country", response?.userDetails?.country);
       setValue("address", response?.userDetails?.address);
       setValue("zipCode", response?.userDetails?.zipCode);
+      setValue("phone", response?.userDetails?.phone);
+
+      console.log(" response?.userDetails", response?.userDetails);
+
       setglobalLoader(false);
     } else {
       setglobalLoader(false);
@@ -546,6 +550,7 @@ const OldForm = ({
                 ""
               )}
             </Form.Group>
+
             <div className="select-banner-area form-group">
               <Form.Label>Gender</Form.Label>
               <div className="select-banner-option">
@@ -667,7 +672,7 @@ const OldForm = ({
                 ""
               )}
             </Form.Group>
-            <Form.Group className="form-group full-w">
+            <Form.Group className="form-group">
               <Form.Label>Full Address</Form.Label>
               <Form.Control
                 type="text"
@@ -684,6 +689,25 @@ const OldForm = ({
                 ""
               )}
             </Form.Group>
+
+            <Form.Group className="form-group">
+              <Form.Label>Phone Number</Form.Label>
+              <Form.Control
+                type="number"
+                name="phone"
+                placeholder="Enter your phone number"
+                autoComplete="off"
+                className={errors.phone ? "error-field" : ""}
+                readOnly={getValues("phone") ? true : false}
+                {...register("phone")}
+              />
+              {errors?.phone ? (
+                <p className="error-text">{errors?.phone?.message}</p>
+              ) : (
+                ""
+              )}
+            </Form.Group>
+
             {/* <Form.Group className="form-group ">
               <Form.Label>Upload Front Id</Form.Label>
               <div className="upload-game-thumnail">
