@@ -6,7 +6,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Form, Spinner } from "react-bootstrap";
 import LoadingPoker from "../images/scroogeHatLogo.png";
 import cross from "../images/close-icon.svg";
-import { userKycDetails, reApply, createKYC } from "../utils/api.mjs"; //
+import {
+  userKycDetails,
+  reApply,
+  createKYC,
+  UpdateKycImage,
+} from "../utils/api.mjs"; //
 import { createKYCSchema } from "../utils/validationSchema.mjs";
 import { toast } from "react-toastify";
 import Layout from "./Layout.mjs";
@@ -330,6 +335,39 @@ const KYCForm = () => {
     }
   };
 
+  const hadleUpdateProofImage = async () => {
+    try {
+      let mbLimit = 10 * 1024 * 1024;
+      const formData = new FormData();
+
+      console.log("hadleUpdateProofImage", optionalIdImage[0]);
+      if (optionalIdImage.length !== 1) {
+        setError("IDimageOptional", {
+          message: "Please upload your Proof of Address Id",
+        });
+        return;
+      }
+      if (optionalIdImage[0]?.size > mbLimit) {
+        setError("IDimageOptional", {
+          message: "Optional image size should not be greater than 10 MB.",
+        });
+        return;
+      }
+      formData.append("IDimageOptional", optionalIdImage[0]);
+
+      const res = await UpdateKycImage(formData);
+      const {
+        status,
+        data: { message },
+      } = res;
+      if (status === 200) {
+        toast.success(message);
+      }
+    } catch (err) {
+      console.log("errorerror", err);
+    }
+  };
+
   // const handleIframe = (url) => {
   //   setIframUrl(url);
   // };
@@ -413,7 +451,14 @@ const KYCForm = () => {
                       <SubmitKYC handleLogOut={handleLogOut} />
                     )}
                     {statusKyc === "review" && (
-                      <ReviewKYC handleLogOut={handleLogOut} />
+                      <ReviewKYC
+                        handleLogOut={handleLogOut}
+                        handleImageChange={handleImageChange}
+                        optionalIdImage={optionalIdImage}
+                        handleRemoveImage={handleRemoveImage}
+                        errors={errors}
+                        hadleUpdateProofImage={hadleUpdateProofImage}
+                      />
                     )}
                     {statusKyc === "reject" && (
                       <FailedKYC
@@ -473,7 +518,13 @@ const FailedKYC = ({ reapply, rejectionMessage }) => {
   );
 };
 
-const ReviewKYC = ({ handleLogOut, reapply, rejectionMessage }) => {
+const ReviewKYC = ({
+  handleRemoveImage,
+  handleImageChange,
+  optionalIdImage,
+  errors,
+  hadleUpdateProofImage,
+}) => {
   return (
     <div className="kyc-msg-grid failedErrorBox">
       <div className="kyc-form-msg">
@@ -482,6 +533,66 @@ const ReviewKYC = ({ handleLogOut, reapply, rejectionMessage }) => {
         <p>
           KYC submission is In Review . Please contact support for assistance.
         </p>
+        <Form /* onSubmit={handleSubmit(handleVerify)} */>
+          <Form.Group className="form-group ">
+            <Form.Label>Upload proof of address.</Form.Label>
+            <div className="upload-game-thumnail">
+              <Form.Control
+                type="file"
+                id="IDimageOptional"
+                name="IDimageOptional"
+                accept=".png, .jpg, .jpeg"
+                onChange={handleImageChange}
+              />
+              <Form.Label htmlFor="IDimageOptional">
+                <div className="no-image-area">
+                  {optionalIdImage.length > 0 ? (
+                    <>
+                      {" "}
+                      {optionalIdImage.length > 0 && (
+                        <div className="upload-grid">
+                          <img
+                            src={cross}
+                            alt="cross"
+                            className="crossImg"
+                            onClick={() => handleRemoveImage(0, false, false)}
+                          />
+                          <img
+                            src={window.URL.createObjectURL(optionalIdImage[0])}
+                            alt="logo-img"
+                          />
+                        </div>
+                      )}
+                      <div></div>
+                    </>
+                  ) : (
+                    <div className="image-placeholder address-placeholder">
+                      <p>
+                        <span> Upload </span> the Image.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </Form.Label>
+            </div>
+            {errors?.IDimageOptional ? (
+              <p className="error-text">{errors?.IDimageOptional?.message}</p>
+            ) : (
+              ""
+            )}
+          </Form.Group>
+
+          {/* <Button type="submit" className="l-btn " disabled={analyzeLoader}>
+                {!analyzeLoader ? "Verify" : <Spinner animation="border" />}
+              </Button> */}
+          <Button
+            style={{ alignItems: "center", alignContent: "center" }}
+            className="l-btn "
+            onClick={() => hadleUpdateProofImage()}
+          >
+            Update
+          </Button>
+        </Form>
         {/* <p className="reject-reason">
           <span>Reason </span> : {rejectionMessage}
         </p> */}

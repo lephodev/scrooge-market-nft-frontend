@@ -44,3 +44,15 @@ export const VerifySessions = async () => {
     return error?.response?.data;
   }
 };
+
+export const UpdateKycImage = async (requestData) => {
+  try {
+    const res = await (
+      await kycInstance()
+    ).post(`users/UpdateKycProofImage`, requestData);
+    return res;
+  } catch (error) {
+    console.log("Error in KYC brands api =>", error);
+    return error.response.data;
+  }
+};
