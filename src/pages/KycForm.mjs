@@ -402,7 +402,6 @@ const KYCForm = () => {
                       </>
                       // <Button onClick={kycRedirection}>Verify KYC</Button>
                     )}
-
                     {/* {statusKyc === "reject" && (
                       <FailedKYC
                         handleLogOut={handleLogOut}
@@ -410,9 +409,11 @@ const KYCForm = () => {
                         rejectionMessage={rejectionMessage}
                       />
                     )} */}
-
                     {statusKyc === "idle" && (
                       <SubmitKYC handleLogOut={handleLogOut} />
+                    )}
+                    {statusKyc === "review" && (
+                      <ReviewKYC handleLogOut={handleLogOut} />
                     )}
                     {statusKyc === "reject" && (
                       <FailedKYC
@@ -465,6 +466,25 @@ const FailedKYC = ({ handleLogOut, reapply, rejectionMessage }) => {
   );
 };
 
+const ReviewKYC = ({ handleLogOut, reapply, rejectionMessage }) => {
+  return (
+    <div className="kyc-msg-grid failedErrorBox">
+      <div className="kyc-form-msg">
+        <h4>Review !</h4>
+        <img src={failed} alt="failed" />
+        <p>
+          KYC submission is In Review . Please contact support for assistance.
+        </p>
+        {/* <p className="reject-reason">
+          <span>Reason </span> : {rejectionMessage}
+        </p> */}
+        {/* <button onClick={reapply}>Re-Apply</button> */}
+        {/* <Link to="/">Contact Support</Link>
+        <span onClick={handleLogOut}>Logout</span> */}
+      </div>
+    </div>
+  );
+};
 const SuccessKYC = ({ handleLogOut }) => {
   return (
     <div className="kyc-msg-grid failedErrorBox">
