@@ -449,6 +449,9 @@ const SubmitKYC = ({ handleLogOut }) => {
 };
 
 const FailedKYC = ({ handleLogOut, reapply, rejectionMessage }) => {
+  console.log("rejectionMessage", rejectionMessage);
+  const uniqueReasons = [...new Set(rejectionMessage)];
+
   return (
     <div className="kyc-msg-grid failedErrorBox">
       <div className="kyc-form-msg">
@@ -456,8 +459,13 @@ const FailedKYC = ({ handleLogOut, reapply, rejectionMessage }) => {
         <img src={failed} alt="failed" />
         <p>KYC submission rejected. Please contact support for assistance.</p>
         <p className="reject-reason">
-          <span>Reason </span> : {rejectionMessage}
+          <span>Reason:</span>
         </p>
+        <ul>
+          {uniqueReasons.map((reason) => (
+            <li key={reason}>{reason}</li>
+          ))}
+        </ul>
         <button onClick={reapply}>Re-Apply</button>
         {/* <Link to="/">Contact Support</Link>
         <span onClick={handleLogOut}>Logout</span> */}
