@@ -448,8 +448,7 @@ const SubmitKYC = ({ handleLogOut }) => {
   );
 };
 
-const FailedKYC = ({ handleLogOut, reapply, rejectionMessage }) => {
-  console.log("rejectionMessage", rejectionMessage);
+const FailedKYC = ({ reapply, rejectionMessage }) => {
   const uniqueReasons = [...new Set(rejectionMessage)];
 
   return (
