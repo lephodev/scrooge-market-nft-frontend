@@ -34,6 +34,7 @@ export const createKYCSchema = yup.object().shape({
     }),
   zipCode: yup.string().required("Postal / Zip Code is required"),
   address: yup.string().required("Full address is required"),
+  phone: yup.string().required("Phone number is required"),
   // gender: yup.string().required('Gender is required')
 });
 
