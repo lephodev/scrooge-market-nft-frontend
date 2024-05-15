@@ -566,7 +566,11 @@ const ReviewKYC = ({
         ) : (
           <Form /* onSubmit={handleSubmit(handleVerify)} */>
             <Form.Group className="form-group ">
-              <Form.Label>Upload proof of address.</Form.Label>
+              <Form.Label>
+                Upload Proof of address. Acceptable items include: Utility bill
+                (Gas, electric, cable, television, water) Property Tax Receipt
+                Govt mail.
+              </Form.Label>
               <div className="upload-game-thumnail">
                 <Form.Control
                   type="file"
