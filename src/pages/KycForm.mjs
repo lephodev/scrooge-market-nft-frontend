@@ -661,7 +661,7 @@ const OldForm = ({
                 name="firstName"
                 placeholder="Enter your first name"
                 autoComplete="off"
-                // readOnly={getValues("firstName") ? true : false}
+                readOnly={getValues("firstName") ? true : false}
                 className={errors.firstName ? "error-field" : ""}
                 {...register("firstName")}
               />
@@ -801,7 +801,7 @@ const OldForm = ({
                 placeholder="Enter your postal / zip code"
                 autoComplete="off"
                 className={errors.zipCode ? "error-field" : ""}
-                // readOnly={getValues("zipCode") ? true : false}
+                readOnly={getValues("zipCode") ? true : false}
                 {...register("zipCode")}
               />
               {errors?.zipCode ? (
