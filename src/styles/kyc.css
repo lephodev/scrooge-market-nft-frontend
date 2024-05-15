@@ -500,6 +500,10 @@
   .urlparentspan{
     display: flex;
   }
+
+  .l-btn-formbutton{
+    margin: 0px 40px 0px 40px!important;
+  }
 }
 
 .button.verif-btn {

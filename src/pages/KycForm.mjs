@@ -609,7 +609,9 @@ const ReviewKYC = ({
                 </Form.Label>
               </div>
               {errors?.IDimageOptional ? (
-                <p className="error-text">{errors?.IDimageOptional?.message}</p>
+                <p className="error-text" style={{ color: "red" }}>
+                  {errors?.IDimageOptional?.message}
+                </p>
               ) : (
                 ""
               )}
@@ -620,11 +622,16 @@ const ReviewKYC = ({
               </Button> */}
             <Button
               disabled={analyzeLoader}
-              style={{ alignItems: "center", alignContent: "center" }}
-              className="l-btn "
+              style={{
+                alignItems: "center",
+                alignContent: "center",
+                marginLeft: "11vh",
+                width: "35vh",
+              }}
+              className="l-btn-formbutton"
               onClick={() => hadleUpdateProofImage()}
             >
-              {!analyzeLoader ? "update" : <Spinner animation="border" />}
+              {!analyzeLoader ? "Update" : <Spinner animation="border" />}
             </Button>
           </Form>
         )}
