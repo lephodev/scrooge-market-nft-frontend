@@ -1058,8 +1058,14 @@ const OldForm = ({
                 "Object.keys(analyzeData).length",
                 Object.keys(analyzeData).length
               )}
+
               {Object.keys(analyzeData).length > 0 && (
                 <>
+                  <p style={{ color: "red", marginTop: "10px" }}>
+                    Click the link below and proceed through the indicated
+                    steps. If using Pc, you need to scan the QR code and
+                    complete with a mobile device.
+                  </p>
                   <div className="login-button full-w">
                     <>
                       <span style={{ color: "yellow", marginTop: "10px" }}>
