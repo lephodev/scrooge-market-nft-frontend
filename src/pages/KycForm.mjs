@@ -548,7 +548,7 @@ const ReviewKYC = ({
           KYC submission is In Review . Please contact support for assistance.
         </p>
         {timeStamp.IDimageOptional !== "" ? (
-          "Request  submited to admin"
+          "Request  submitted to admin"
         ) : (
           <Form /* onSubmit={handleSubmit(handleVerify)} */>
             <Form.Group className="form-group ">
