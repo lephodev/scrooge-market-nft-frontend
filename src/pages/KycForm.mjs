@@ -39,6 +39,7 @@ const KYCForm = () => {
   const [unSupportedImg, setUnsupportedImg] = useState(true);
   const [analyzeLoader, setAnalyzerLoader] = useState(false);
   const [analyzeData, setAnalyzeData] = useState({});
+  const [kycData, setKycData] = useState({});
   // const [successMsg, setSuccessMsg] = useState("");
   const [currentState, setCurrentState] = useState("");
   const { user } = useContext(AuthContext);
@@ -268,6 +269,7 @@ const KYCForm = () => {
       setValue("address", response?.userDetails?.address);
       setValue("zipCode", response?.userDetails?.zipCode);
       setValue("phone", response?.userDetails?.phone);
+      setKycData(response);
 
       console.log(" response?.userDetails", response?.userDetails);
 
@@ -336,6 +338,8 @@ const KYCForm = () => {
   };
 
   const hadleUpdateProofImage = async () => {
+    setAnalyzerLoader(true);
+
     try {
       let mbLimit = 10 * 1024 * 1024;
       const formData = new FormData();
@@ -345,12 +349,16 @@ const KYCForm = () => {
         setError("IDimageOptional", {
           message: "Please upload your Proof of Address Id",
         });
+        setAnalyzerLoader(false);
+
         return;
       }
       if (optionalIdImage[0]?.size > mbLimit) {
         setError("IDimageOptional", {
           message: "Optional image size should not be greater than 10 MB.",
         });
+        setAnalyzerLoader(false);
+
         return;
       }
       formData.append("IDimageOptional", optionalIdImage[0]);
@@ -362,6 +370,7 @@ const KYCForm = () => {
       } = res;
       if (status === 200) {
         toast.success(message);
+        setAnalyzerLoader(false);
       }
     } catch (err) {
       console.log("errorerror", err);
@@ -458,6 +467,8 @@ const KYCForm = () => {
                         handleRemoveImage={handleRemoveImage}
                         errors={errors}
                         hadleUpdateProofImage={hadleUpdateProofImage}
+                        analyzeLoader={analyzeLoader}
+                        kycData={kycData}
                       />
                     )}
                     {statusKyc === "reject" && (
@@ -524,7 +535,10 @@ const ReviewKYC = ({
   optionalIdImage,
   errors,
   hadleUpdateProofImage,
+  analyzeLoader,
+  kycData,
 }) => {
+  const { timeStamp } = kycData;
   return (
     <div className="kyc-msg-grid failedErrorBox">
       <div className="kyc-form-msg">
@@ -533,66 +547,73 @@ const ReviewKYC = ({
         <p>
           KYC submission is In Review . Please contact support for assistance.
         </p>
-        <Form /* onSubmit={handleSubmit(handleVerify)} */>
-          <Form.Group className="form-group ">
-            <Form.Label>Upload proof of address.</Form.Label>
-            <div className="upload-game-thumnail">
-              <Form.Control
-                type="file"
-                id="IDimageOptional"
-                name="IDimageOptional"
-                accept=".png, .jpg, .jpeg"
-                onChange={handleImageChange}
-              />
-              <Form.Label htmlFor="IDimageOptional">
-                <div className="no-image-area">
-                  {optionalIdImage.length > 0 ? (
-                    <>
-                      {" "}
-                      {optionalIdImage.length > 0 && (
-                        <div className="upload-grid">
-                          <img
-                            src={cross}
-                            alt="cross"
-                            className="crossImg"
-                            onClick={() => handleRemoveImage(0, false, false)}
-                          />
-                          <img
-                            src={window.URL.createObjectURL(optionalIdImage[0])}
-                            alt="logo-img"
-                          />
-                        </div>
-                      )}
-                      <div></div>
-                    </>
-                  ) : (
-                    <div className="image-placeholder address-placeholder">
-                      <p>
-                        <span> Upload </span> the Image.
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </Form.Label>
-            </div>
-            {errors?.IDimageOptional ? (
-              <p className="error-text">{errors?.IDimageOptional?.message}</p>
-            ) : (
-              ""
-            )}
-          </Form.Group>
+        {timeStamp.IDimageOptional !== "" ? (
+          "Request  submited to admin"
+        ) : (
+          <Form /* onSubmit={handleSubmit(handleVerify)} */>
+            <Form.Group className="form-group ">
+              <Form.Label>Upload proof of address.</Form.Label>
+              <div className="upload-game-thumnail">
+                <Form.Control
+                  type="file"
+                  id="IDimageOptional"
+                  name="IDimageOptional"
+                  accept=".png, .jpg, .jpeg"
+                  onChange={handleImageChange}
+                />
+                <Form.Label htmlFor="IDimageOptional">
+                  <div className="no-image-area">
+                    {optionalIdImage.length > 0 ? (
+                      <>
+                        {" "}
+                        {optionalIdImage.length > 0 && (
+                          <div className="upload-grid">
+                            <img
+                              src={cross}
+                              alt="cross"
+                              className="crossImg"
+                              onClick={() => handleRemoveImage(0, false, false)}
+                            />
+                            <img
+                              src={window.URL.createObjectURL(
+                                optionalIdImage[0]
+                              )}
+                              alt="logo-img"
+                            />
+                          </div>
+                        )}
+                        <div></div>
+                      </>
+                    ) : (
+                      <div className="image-placeholder address-placeholder">
+                        <p>
+                          <span> Upload </span> the Image.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </Form.Label>
+              </div>
+              {errors?.IDimageOptional ? (
+                <p className="error-text">{errors?.IDimageOptional?.message}</p>
+              ) : (
+                ""
+              )}
+            </Form.Group>
 
-          {/* <Button type="submit" className="l-btn " disabled={analyzeLoader}>
+            {/* <Button type="submit" className="l-btn " disabled={analyzeLoader}>
                 {!analyzeLoader ? "Verify" : <Spinner animation="border" />}
               </Button> */}
-          <Button
-            style={{ alignItems: "center", alignContent: "center" }}
-            className="l-btn "
-            onClick={() => hadleUpdateProofImage()}
-          >
-            Update
-          </Button>
-        </Form>
+            <Button
+              disabled={analyzeLoader}
+              style={{ alignItems: "center", alignContent: "center" }}
+              className="l-btn "
+              onClick={() => hadleUpdateProofImage()}
+            >
+              {!analyzeLoader ? "update" : <Spinner animation="border" />}
+            </Button>
+          </Form>
+        )}
         {/* <p className="reject-reason">
           <span>Reason </span> : {rejectionMessage}
         </p> */}
