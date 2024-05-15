@@ -369,6 +369,7 @@ const KYCForm = () => {
         data: { message },
       } = res;
       if (status === 200) {
+        getKYCStatus();
         toast.success(message);
         setAnalyzerLoader(false);
       }
@@ -469,6 +470,7 @@ const KYCForm = () => {
                         hadleUpdateProofImage={hadleUpdateProofImage}
                         analyzeLoader={analyzeLoader}
                         kycData={kycData}
+                        rejectionMessage={rejectionMessage}
                       />
                     )}
                     {statusKyc === "reject" && (
@@ -537,7 +539,11 @@ const ReviewKYC = ({
   hadleUpdateProofImage,
   analyzeLoader,
   kycData,
+  rejectionMessage,
 }) => {
+  console.log("rejectionMessage", rejectionMessage);
+  const uniqueReasons = [...new Set(rejectionMessage)];
+  console.log("uniqueReasons", uniqueReasons);
   const { timeStamp } = kycData;
   return (
     <div className="kyc-msg-grid failedErrorBox">
@@ -548,7 +554,15 @@ const ReviewKYC = ({
           KYC submission is In Review . Please contact support for assistance.
         </p>
         {timeStamp?.IDimageOptional && timeStamp?.IDimageOptional !== "" ? (
-          "Request  submitted to admin"
+          <>
+            <p> Request submitted to admin</p>
+            Reasion{" "}
+            <ul>
+              {uniqueReasons.map((reason) => (
+                <li key={reason}>{reason}</li>
+              ))}
+            </ul>
+          </>
         ) : (
           <Form /* onSubmit={handleSubmit(handleVerify)} */>
             <Form.Group className="form-group ">
