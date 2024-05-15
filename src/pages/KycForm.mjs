@@ -547,7 +547,7 @@ const ReviewKYC = ({
         <p>
           KYC submission is In Review . Please contact support for assistance.
         </p>
-        {timeStamp.IDimageOptional !== "" ? (
+        {timeStamp?.IDimageOptional && timeStamp?.IDimageOptional !== "" ? (
           "Request  submitted to admin"
         ) : (
           <Form /* onSubmit={handleSubmit(handleVerify)} */>
@@ -710,7 +710,7 @@ const OldForm = ({
               )}
             </Form.Group>
 
-            <div className="select-banner-area form-group">
+            {/* <div className="select-banner-area form-group">
               <Form.Label>Gender</Form.Label>
               <div className="select-banner-option">
                 <Form.Group
@@ -746,7 +746,7 @@ const OldForm = ({
                   />
                 </Form.Group>
               </div>
-            </div>
+            </div> */}
             <div className="select-banner-area form-group">
               <Form.Label>Date of Birth</Form.Label>
               <input
