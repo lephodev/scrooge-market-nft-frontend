@@ -555,7 +555,7 @@ const ReviewKYC = ({
         </p>
         <>
           <p> Request submitted to admin</p>
-          Reasion{" "}
+          Reason{" "}
           <ul>
             {uniqueReasons.map((reason) => (
               <li key={reason}>{reason}</li>
