@@ -957,9 +957,7 @@ const PayWithCard = ({
   const kycStatus = async () => {
     const response = await userKycDetails();
     if (response?.code === 200) {
-      if (response.message !== "accept") {
-        return response.message;
-      }
+      return response.message;
     }
   };
   const handleCLick = async (gc, usd) => {
