@@ -957,7 +957,9 @@ const PayWithCard = ({
   const kycStatus = async () => {
     const response = await userKycDetails();
     if (response?.code === 200) {
-      return response.message;
+      if (response.message !== "accept") {
+        return response.message;
+      }
     }
   };
   const handleCLick = async (gc, usd) => {
@@ -996,10 +998,9 @@ const PayWithCard = ({
         { toastId: "C" }
       );
     }
-
+    console.log("usd", usd);
     let status = await kycStatus();
-    console.log("status", status);
-    if (usd > 25 && status !== "accept") {
+    if (usd >= 25 && status !== "accept") {
       setLoader(false);
 
       return toast.error(

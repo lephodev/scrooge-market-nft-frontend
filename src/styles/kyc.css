@@ -489,6 +489,21 @@
   .marketPlace_kycForm p {
     font-size: 12px;
   }
+
+  .login-button{
+    min-width: 9px;
+
+  }
+  .affiliateurllink{
+    font-size: 13px;
+  }
+  .urlparentspan{
+    display: flex;
+  }
+
+  .l-btn-formbutton{
+    margin: 0px 40px 0px 40px!important;
+  }
 }
 
 .button.verif-btn {

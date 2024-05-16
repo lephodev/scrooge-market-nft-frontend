@@ -287,12 +287,12 @@ const Layout = ({ children }) => {
                             >
                               Affiliate Program
                             </Link>
-                            <Link
+                            {/* <Link
                               to={`/my-wallet`}
                               className={`nav-link ${isActive("/my-wallet")}`}
                             >
                               Holder Claim Center
-                            </Link>
+                            </Link> */}
                           </>
                         ) : (
                           <a
