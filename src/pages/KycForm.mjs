@@ -553,92 +553,94 @@ const ReviewKYC = ({
         <p>
           KYC submission is In Review . Please contact support for assistance.
         </p>
-        {timeStamp?.IDimageOptional && timeStamp?.IDimageOptional !== "" ? (
-          <>
-            <p> Request submitted to admin</p>
-            Reasion{" "}
-            <ul>
-              {uniqueReasons.map((reason) => (
-                <li key={reason}>{reason}</li>
-              ))}
-            </ul>
-          </>
-        ) : (
-          <Form /* onSubmit={handleSubmit(handleVerify)} */>
-            <Form.Group className="form-group ">
-              <Form.Label>
-                Upload Proof of address. Acceptable items include: Utility bill
-                (Gas, electric, cable, television, water) Property Tax Receipt
-                Govt mail.
+        <>
+          <p> Request submitted to admin</p>
+          Reasion{" "}
+          <ul>
+            {uniqueReasons.map((reason) => (
+              <li key={reason}>{reason}</li>
+            ))}
+          </ul>
+        </>
+        <Form /* onSubmit={handleSubmit(handleVerify)} */>
+          <Form.Group className="form-group ">
+            <Form.Label>
+              Upload Proof of address. Acceptable items include: Utility bill
+              (Gas, electric, cable, television, water) Property Tax Receipt
+              Govt mail.
+            </Form.Label>
+            <div className="upload-game-thumnail">
+              <Form.Control
+                type="file"
+                id="IDimageOptional"
+                name="IDimageOptional"
+                accept=".png, .jpg, .jpeg"
+                onChange={handleImageChange}
+              />
+              <Form.Label htmlFor="IDimageOptional">
+                <div className="no-image-area">
+                  {optionalIdImage.length > 0 ? (
+                    <>
+                      {" "}
+                      {optionalIdImage.length > 0 && (
+                        <div className="upload-grid">
+                          <img
+                            src={cross}
+                            alt="cross"
+                            className="crossImg"
+                            onClick={() => handleRemoveImage(0, false, false)}
+                          />
+                          <img
+                            src={window.URL.createObjectURL(
+                              optionalIdImage[0]
+                            )}
+                            alt="logo-img"
+                          />
+                        </div>
+                      )}
+                      <div></div>
+                    </>
+                  ) : (
+                    <div className="image-placeholder address-placeholder">
+                      <p>
+                        <span> Upload </span> the Image.
+                      </p>
+                    </div>
+                  )}
+                </div>
               </Form.Label>
-              <div className="upload-game-thumnail">
-                <Form.Control
-                  type="file"
-                  id="IDimageOptional"
-                  name="IDimageOptional"
-                  accept=".png, .jpg, .jpeg"
-                  onChange={handleImageChange}
-                />
-                <Form.Label htmlFor="IDimageOptional">
-                  <div className="no-image-area">
-                    {optionalIdImage.length > 0 ? (
-                      <>
-                        {" "}
-                        {optionalIdImage.length > 0 && (
-                          <div className="upload-grid">
-                            <img
-                              src={cross}
-                              alt="cross"
-                              className="crossImg"
-                              onClick={() => handleRemoveImage(0, false, false)}
-                            />
-                            <img
-                              src={window.URL.createObjectURL(
-                                optionalIdImage[0]
-                              )}
-                              alt="logo-img"
-                            />
-                          </div>
-                        )}
-                        <div></div>
-                      </>
-                    ) : (
-                      <div className="image-placeholder address-placeholder">
-                        <p>
-                          <span> Upload </span> the Image.
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </Form.Label>
-              </div>
-              {errors?.IDimageOptional ? (
-                <p className="error-text" style={{ color: "red" }}>
-                  {errors?.IDimageOptional?.message}
-                </p>
-              ) : (
-                ""
-              )}
-            </Form.Group>
+            </div>
+            {errors?.IDimageOptional ? (
+              <p className="error-text" style={{ color: "red" }}>
+                {errors?.IDimageOptional?.message}
+              </p>
+            ) : (
+              ""
+            )}
+          </Form.Group>
 
-            {/* <Button type="submit" className="l-btn " disabled={analyzeLoader}>
-                {!analyzeLoader ? "Verify" : <Spinner animation="border" />}
-              </Button> */}
-            <Button
-              disabled={analyzeLoader}
-              style={{
-                alignItems: "center",
-                alignContent: "center",
-                marginLeft: "11vh",
-                width: "35vh",
-              }}
-              className="l-btn-formbutton"
-              onClick={() => hadleUpdateProofImage()}
-            >
-              {!analyzeLoader ? "Update" : <Spinner animation="border" />}
-            </Button>
-          </Form>
-        )}
+          {/* <Button type="submit" className="l-btn " disabled={analyzeLoader}>
+              {!analyzeLoader ? "Verify" : <Spinner animation="border" />}
+            </Button> */}
+          <Button
+            disabled={analyzeLoader}
+            style={{
+              alignItems: "center",
+              alignContent: "center",
+              marginLeft: "11vh",
+              width: "35vh",
+            }}
+            className="l-btn-formbutton"
+            onClick={() => hadleUpdateProofImage()}
+          >
+            {!analyzeLoader ? "Update" : <Spinner animation="border" />}
+          </Button>
+        </Form>
+        {/* {timeStamp?.IDimageOptional && timeStamp?.IDimageOptional !== "" ? (
+          
+        ) : (
+          
+        )} */}
         {/* <p className="reject-reason">
           <span>Reason </span> : {rejectionMessage}
         </p> */}
