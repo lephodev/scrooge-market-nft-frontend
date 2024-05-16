@@ -998,7 +998,7 @@ const PayWithCard = ({
     }
     console.log("usd", usd);
     let status = await kycStatus();
-    if (usd >= 25 && status !== "accept") {
+    if (usd > 25 && status !== "accept") {
       setLoader(false);
 
       return toast.error(
