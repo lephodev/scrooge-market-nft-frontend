@@ -35,6 +35,8 @@ const FreeSTModel = ({
       }
       setPromoLoader(false);
     } catch (error) {
+      handleCloseFreeST();
+      setPromoCode("");
       if (axios.isAxiosError(error) && error?.response) {
         if (error?.response?.status !== 200) {
           toast.error(error?.response?.data?.message, { toastId: "login" });
