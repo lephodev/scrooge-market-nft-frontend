@@ -22,7 +22,7 @@ const PersonaComponent = () => {
   useEffect(() => {
     // Initialize the Persona client and store it in state
     const personaClient = new Persona.Client({
-      templateId: "itmpl_HqjFkqSmMSmE3cCDzb28wcd4Bheq", // Your template ID
+      templateId: "itmpl_CZuaAe3eTnfzoQ4qp1Z2yHMJAqeH", // Your template ID
       environmentId: "env_QCjXWTLVKgSABin4Y1wP22TwYkVH",
       fields: {
         nameFirst: firstName,
