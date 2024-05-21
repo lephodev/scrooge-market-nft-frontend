@@ -17,6 +17,7 @@ import pending from "../images/pending.webp";
 import "../styles/kyc.css";
 import axios from "axios";
 import AuthContext from "../context/authContext.ts";
+import PersonaComponent from "./persona.mjs";
 
 const KYCForm = () => {
   const navigate = useNavigate();
@@ -805,6 +806,10 @@ const OldForm = ({
             <Button type="submit" className="l-btn " disabled={isSaveLoader}>
               {!loading ? "Save" : <Spinner animation="border" />}
             </Button>
+          </div>
+          <div>
+            <h1>Welcome to Persona Integration</h1>
+            <PersonaComponent />
           </div>
         </Form>
       </div>
