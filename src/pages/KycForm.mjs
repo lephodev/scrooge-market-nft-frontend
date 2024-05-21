@@ -18,6 +18,7 @@ import "../styles/kyc.css";
 import axios from "axios";
 import AuthContext from "../context/authContext.ts";
 import PersonaComponent from "./persona.mjs";
+import { client } from "../config/keys";
 
 const KYCForm = () => {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const KYCForm = () => {
   // const [successMsg, setSuccessMsg] = useState("");
   const [currentState, setCurrentState] = useState("");
   const { user } = useContext(AuthContext);
+  const [client, setClient] = useState(null);
 
   const [activeRatioType, setActiveRatioType] = useState("Male");
 
@@ -352,6 +354,8 @@ const KYCForm = () => {
                         optionalIdImage={optionalIdImage}
                         isSaveLoader={isSaveLoader}
                         loading={loading}
+                        client={client}
+                        setClient={setClient}
                       />
                       // <Button onClick={kycRedirection}>Verify KYC</Button>
                     )}
@@ -449,6 +453,8 @@ const OldForm = ({
   optionalIdImage,
   isSaveLoader,
   loading,
+  setClient,
+  client,
 }) => {
   return (
     <div className="login-form">
@@ -654,7 +660,7 @@ const OldForm = ({
             )}
           </Form.Group>
 
-          <Form.Group className="form-group ">
+          {/* <Form.Group className="form-group ">
             <Form.Label>Upload Front Id</Form.Label>
             <div className="upload-game-thumnail">
               <Form.Control
@@ -703,6 +709,7 @@ const OldForm = ({
               ""
             )}
           </Form.Group>
+
           <Form.Group className="form-group ">
             <Form.Label>
               Upload a Selfie Holding ID as well as a piece of paper with TODAYS
@@ -800,15 +807,14 @@ const OldForm = ({
             ) : (
               ""
             )}
-          </Form.Group>
+          </Form.Group> */}
 
-          <div className="login-button full-w">
+          {/* <div className="login-button full-w">
             <Button type="submit" className="l-btn " disabled={isSaveLoader}>
               {!loading ? "Save" : <Spinner animation="border" />}
             </Button>
-          </div>
-          <div>
-            <h1>Welcome to Persona Integration</h1>
+          </div> */}
+          <div className="login-button full-w">
             <PersonaComponent />
           </div>
         </Form>
