@@ -17,6 +17,8 @@ const PersonaComponent = () => {
     phone,
     zipCode,
     email,
+    _id,
+    id,
   } = user;
 
   useEffect(() => {
@@ -24,7 +26,7 @@ const PersonaComponent = () => {
     const personaClient = new Persona.Client({
       templateId: "itmpl_CZuaAe3eTnfzoQ4qp1Z2yHMJAqeH", // Your template ID
       environmentId: "env_QCjXWTLVKgSABin4Y1wP22TwYkVH",
-      referenceId: "23hgh",
+      referenceId: _id || id,
       fields: {
         nameFirst: firstName,
         nameLast: lastName,
