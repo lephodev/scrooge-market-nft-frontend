@@ -44,6 +44,7 @@ const PersonaComponent = () => {
       },
       onComplete: ({ inquiryId, status, fields }) => {
         console.log("onComplete", inquiryId, status, fields);
+        window.location.herf = "/kyc";
       },
       onCancel: ({ inquiryId, sessionToken }) => {
         console.log("onCancel", inquiryId, sessionToken);
