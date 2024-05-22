@@ -24,6 +24,7 @@ const PersonaComponent = () => {
     const personaClient = new Persona.Client({
       templateId: "itmpl_CZuaAe3eTnfzoQ4qp1Z2yHMJAqeH", // Your template ID
       environmentId: "env_QCjXWTLVKgSABin4Y1wP22TwYkVH",
+      referenceId: "23hgh",
       fields: {
         nameFirst: firstName,
         nameLast: lastName,
