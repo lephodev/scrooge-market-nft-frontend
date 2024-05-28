@@ -28,6 +28,7 @@ import RiskWheel from "../components/RiskRoullete/riskWheel.mjs";
 import MainRoulette from "../components/mainRoulette/mainRoulette.mjs";
 import RegRiskWheel from "../components/RegRiskRoullete/regRiskWheel.mjs";
 import PageLoader from "../components/pageLoader/loader.mjs";
+import { getNext7Days } from "../utils/generateClientSeed.js";
 
 // import MegaWheel from "../components/megaWheel/megaWheel.mjs";
 const EarnFreeCoins = () => {
@@ -44,6 +45,8 @@ const EarnFreeCoins = () => {
   const [loyalityWheel, setLoylityWheel] = useState(false);
   const [weeklyWheel, setWeeklyWheel] = useState(false);
   const [isWeeklyWheelActive, setIsWeeklyWheelActive] = useState(false);
+  const [isSignUpWheel, setIsSignUpWheel] = useState(false);
+
   const [globalLoader, setglobalLoader] = useState(true);
 
   // const handleclick = (value) => {
@@ -150,25 +153,37 @@ const EarnFreeCoins = () => {
   };
 
   useEffect(() => {
-    async function checkKYCStatus() {
-      const response = await userKycDetails();
-      if (response?.code === 200) {
-        if (response.message !== "accept") {
-          setglobalLoader(false);
-          navigate("/kyc");
+    try {
+      async function checkKYCStatus() {
+        const response = await userKycDetails();
+        console.log("response", response);
+        if (response?.code === 200) {
+          if (response?.message === "accept") {
+            let lastDate = getNext7Days(
+              new Date(response?.timeStamp?.updatedAt)
+            );
+            setIsSignUpWheel(lastDate);
+            console.log("lastDate", lastDate);
+          }
+          if (response.message !== "accept") {
+            setglobalLoader(false);
+            navigate("/kyc");
+          } else {
+            setglobalLoader(false);
+            // startFetching();
+          }
         } else {
           setglobalLoader(false);
-          // startFetching();
+          toast.error(response.message, {
+            toastId: "error-fetching-kyc-details",
+          });
+          navigate("/");
         }
-      } else {
-        setglobalLoader(false);
-        toast.error(response.message, {
-          toastId: "error-fetching-kyc-details",
-        });
-        navigate("/");
       }
+      checkKYCStatus();
+    } catch (error) {
+      console.log("error", error);
     }
-    checkKYCStatus();
   }, []);
   return (
     <Layout>
@@ -265,10 +280,12 @@ const EarnFreeCoins = () => {
                           ? "single-wheel"
                           : user?.loyalitySpinCount === 30
                           ? "single-wheel"
+                          : isSignUpWheel
+                          ? "single-wheel"
                           : ""
                       }`}
                     >
-                      {!isWeeklyWheelActive ? (
+                      {!isSignUpWheel && !isWeeklyWheelActive ? (
                         <>
                           {user?.loyalitySpinCount !== 30 ? (
                             <div className="risk-grid">
@@ -401,6 +418,36 @@ const EarnFreeCoins = () => {
                         </>
                       ) : (
                         ""
+                      )}
+
+                      {isSignUpWheel && (
+                        <div className="risk-grid">
+                          <div className="big-wheel-image-grid">
+                            <div className="big-wheel-label-grid">
+                              <img
+                                src={bigText}
+                                alt="big-wheel-label"
+                                className="img-fluid"
+                              />
+                            </div>
+                            <img
+                              src={bigThumbnail}
+                              alt="big-thumbnail"
+                              className="img-fulid"
+                            />
+                          </div>
+                          <p>
+                            you have been rewarded 7 days trial of access to the
+                            Big Wheel!{" "}
+                          </p>
+                          <button
+                            disabled={!canSpin}
+                            onClick={() => handleOpenRoulette("weekly")}
+                          >
+                            {" "}
+                            {canSpin ? "Big Wheel " : spinTimer}
+                          </button>
+                        </div>
                       )}
                     </div>
                   </div>
