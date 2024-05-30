@@ -9,7 +9,7 @@ export const getNext7Days = (date) => {
   try {
     let lastDate = new Date(date);
     lastDate.setDate(date.getDate() + 6);
-    if (date <= lastDate) {
+    if (lastDate >= new Date()) {
       console.log(
         ` if The created date ${date.toISOString()} is less than or equal to the last date ${lastDate.toISOString()}.`
       );
