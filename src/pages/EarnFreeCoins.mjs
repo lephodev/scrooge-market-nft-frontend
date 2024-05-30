@@ -45,7 +45,7 @@ const EarnFreeCoins = () => {
   const [loyalityWheel, setLoylityWheel] = useState(false);
   const [weeklyWheel, setWeeklyWheel] = useState(false);
   const [isWeeklyWheelActive, setIsWeeklyWheelActive] = useState(false);
-  const [, /* isSignUpWheel */ setIsSignUpWheel] = useState(false);
+  const [isSignUpWheel, setIsSignUpWheel] = useState(false);
 
   const [globalLoader, setglobalLoader] = useState(true);
 
@@ -280,66 +280,63 @@ const EarnFreeCoins = () => {
                           ? "single-wheel"
                           : user?.loyalitySpinCount === 30
                           ? "single-wheel"
-                          : // : isSignUpWheel
-                            // ? "single-wheel"
-                            ""
+                          : isSignUpWheel
+                          ? "single-wheel"
+                          : ""
                       }`}
                     >
-                      {
-                        /* !isSignUpWheel && */ !isWeeklyWheelActive ? (
-                          <>
-                            {user?.loyalitySpinCount !== 30 ? (
-                              <div className="risk-grid">
-                                <img
-                                  src={regularThumbnail}
-                                  alt="regular-thumbnail"
-                                  className="img-fulid"
-                                />
-                                <p>Spin me for guaranteed prizing </p>
-                                <button
-                                  disabled={!canSpin}
-                                  onClick={() => handleOpenRoulette("normal")}
-                                >
-                                  {" "}
-                                  {canSpin ? "Regular Wheel" : spinTimer}
-                                </button>
-                              </div>
-                            ) : (
-                              ""
-                            )}
-                            {user?.loyalitySpinCount !== 30 ? (
-                              <div className="or-grid">
-                                <span>or</span>
-                              </div>
-                            ) : null}
-                            {user?.loyalitySpinCount !== 30 ? (
-                              <div className="risk-grid">
-                                <img
-                                  src={regRiskThumbnail}
-                                  alt="risk-thumbnail"
-                                  className="img-fulid"
-                                />
-                                <p>
-                                  Take a risk for higher odds at the big wheel.
-                                  Choose carefully, you may end up with no
-                                  prize.{" "}
-                                </p>
-                                <button
-                                  disabled={!canSpin}
-                                  onClick={() => handleOpenRoulette("regRisk")}
-                                >
-                                  {" "}
-                                  {canSpin ? "Take a Risk" : spinTimer}
-                                </button>
-                              </div>
-                            ) : (
-                              ""
-                            )}
-                          </>
-                        ) : (
-                          ""
-                        )
-                      }
+                      {!isSignUpWheel && !isWeeklyWheelActive ? (
+                        <>
+                          {user?.loyalitySpinCount !== 30 ? (
+                            <div className="risk-grid">
+                              <img
+                                src={regularThumbnail}
+                                alt="regular-thumbnail"
+                                className="img-fulid"
+                              />
+                              <p>Spin me for guaranteed prizing </p>
+                              <button
+                                disabled={!canSpin}
+                                onClick={() => handleOpenRoulette("normal")}
+                              >
+                                {" "}
+                                {canSpin ? "Regular Wheel" : spinTimer}
+                              </button>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                          {user?.loyalitySpinCount !== 30 ? (
+                            <div className="or-grid">
+                              <span>or</span>
+                            </div>
+                          ) : null}
+                          {user?.loyalitySpinCount !== 30 ? (
+                            <div className="risk-grid">
+                              <img
+                                src={regRiskThumbnail}
+                                alt="risk-thumbnail"
+                                className="img-fulid"
+                              />
+                              <p>
+                                Take a risk for higher odds at the big wheel.
+                                Choose carefully, you may end up with no prize.{" "}
+                              </p>
+                              <button
+                                disabled={!canSpin}
+                                onClick={() => handleOpenRoulette("regRisk")}
+                              >
+                                {" "}
+                                {canSpin ? "Take a Risk" : spinTimer}
+                              </button>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                        </>
+                      ) : (
+                        ""
+                      )}
                       {user?.loyalitySpinCount === 30 && (
                         <div className="risk-grid">
                           <img
@@ -423,7 +420,7 @@ const EarnFreeCoins = () => {
                         ""
                       )}
 
-                      {/* {isSignUpWheel && (
+                      {isSignUpWheel && (
                         <div className="risk-grid">
                           <div className="big-wheel-image-grid">
                             <div className="big-wheel-label-grid">
@@ -451,7 +448,7 @@ const EarnFreeCoins = () => {
                             {canSpin ? "Big Wheel " : spinTimer}
                           </button>
                         </div>
-                      )} */}
+                      )}
                     </div>
                   </div>
                 </div>
