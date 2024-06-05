@@ -261,6 +261,8 @@ const KYCForm = () => {
       setValue("country", response?.userDetails?.country);
       setValue("address", response?.userDetails?.address);
       setValue("zipCode", response?.userDetails?.zipCode);
+      setValue("phone", response?.userDetails?.phone);
+
       setglobalLoader(false);
     } else {
       setglobalLoader(false);
@@ -628,7 +630,7 @@ const OldForm = ({
           <Form.Group className="form-group">
             <Form.Label>Phone Number</Form.Label>
             <Form.Control
-              type="number"
+              type="text"
               name="phone"
               placeholder="Enter your phone number"
               autoComplete="off"
