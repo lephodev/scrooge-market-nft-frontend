@@ -17,8 +17,6 @@ import pending from "../images/pending.webp";
 import "../styles/kyc.css";
 import axios from "axios";
 import AuthContext from "../context/authContext.ts";
-import PersonaComponent from "./persona.mjs";
-import { client } from "../config/keys";
 
 const KYCForm = () => {
   const navigate = useNavigate();
@@ -34,8 +32,6 @@ const KYCForm = () => {
   // const [successMsg, setSuccessMsg] = useState("");
   const [currentState, setCurrentState] = useState("");
   const { user } = useContext(AuthContext);
-  const [client, setClient] = useState(null);
-  const [phoneNum, setPhoneNum] = useState();
 
   const [activeRatioType, setActiveRatioType] = useState("Male");
 
@@ -224,18 +220,6 @@ const KYCForm = () => {
     }
   };
 
-  const saveData2 = async (value) => {
-    try {
-      console.log("jhhjhjhjh", value);
-      // setIsSaveLoader(true);
-      const formData = new FormData();
-      let payload = { ...value };
-    } catch (error) {
-      setLoading(false);
-      console.log("error", error);
-    }
-  };
-
   const handleRemoveImage = (index, imgCheck, prevCheck) => {
     if (imgCheck) {
       if (!prevCheck) {
@@ -274,9 +258,6 @@ const KYCForm = () => {
       setValue("country", response?.userDetails?.country);
       setValue("address", response?.userDetails?.address);
       setValue("zipCode", response?.userDetails?.zipCode);
-      setValue("phone", response?.userDetails?.phone);
-      setPhoneNum(response?.userDetails?.phone);
-
       setglobalLoader(false);
     } else {
       setglobalLoader(false);
@@ -320,10 +301,6 @@ const KYCForm = () => {
     })();
   }, []);
 
-  const handlePhoneChange = (e) => {
-    setPhoneNum(e.target.value);
-  };
-
   return (
     <Layout>
       <div className="kyc-page">
@@ -361,9 +338,7 @@ const KYCForm = () => {
                       <OldForm
                         handleSubmit={handleSubmit}
                         saveData={saveData}
-                        saveData2={saveData2}
                         getValues={getValues}
-                        handlePhoneChange={handlePhoneChange}
                         errors={errors}
                         register={register}
                         activeRatioType={activeRatioType}
@@ -376,9 +351,6 @@ const KYCForm = () => {
                         optionalIdImage={optionalIdImage}
                         isSaveLoader={isSaveLoader}
                         loading={loading}
-                        client={client}
-                        setClient={setClient}
-                        phoneNum={phoneNum}
                       />
                       // <Button onClick={kycRedirection}>Verify KYC</Button>
                     )}
@@ -476,11 +448,6 @@ const OldForm = ({
   optionalIdImage,
   isSaveLoader,
   loading,
-  setClient,
-  client,
-  saveData2,
-  handlePhoneChange,
-  phoneNum,
 }) => {
   return (
     <div className="login-form">
@@ -493,7 +460,7 @@ const OldForm = ({
       </p>
       <p className="auth-para">Please fill your details to verify KYC</p>
       <div className="login-box">
-        <Form onSubmit={handleSubmit(saveData2)}>
+        <Form onSubmit={handleSubmit(saveData)}>
           <Form.Group className="form-group">
             <Form.Label>First Name</Form.Label>
             <Form.Control
@@ -654,14 +621,13 @@ const OldForm = ({
           <Form.Group className="form-group">
             <Form.Label>Phone Number</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               name="phone"
               placeholder="Enter your phone number"
               autoComplete="off"
               className={errors.phone ? "error-field" : ""}
               // readOnly={getValues("phone")? ? true : false}
               {...register("phone")}
-              onChange={handlePhoneChange}
             />
             {errors?.phone ? (
               <p className="error-text">{errors?.phone?.message}</p>
@@ -687,7 +653,7 @@ const OldForm = ({
             )}
           </Form.Group>
 
-          {/* <Form.Group className="form-group ">
+          <Form.Group className="form-group ">
             <Form.Label>Upload Front Id</Form.Label>
             <div className="upload-game-thumnail">
               <Form.Control
@@ -736,7 +702,6 @@ const OldForm = ({
               ""
             )}
           </Form.Group>
-
           <Form.Group className="form-group ">
             <Form.Label>
               Upload a Selfie Holding ID as well as a piece of paper with TODAYS
@@ -834,21 +799,11 @@ const OldForm = ({
             ) : (
               ""
             )}
-          </Form.Group> */}
+          </Form.Group>
 
-          {/* <div className="login-button full-w">
-            <Button type="submit" className="l-btn " disabled={isSaveLoader}>
-              {!loading ? "Save" : <Spinner animation="border" />}
-            </Button>
-          </div> */}
-          {console.log("errors", getValues("phone"))}
           <div className="login-button full-w">
             <Button type="submit" className="l-btn " disabled={isSaveLoader}>
-              <PersonaComponent
-                errors={errors}
-                number={getValues("phone")}
-                phoneNum={phoneNum}
-              />
+              {!loading ? "Save" : <Spinner animation="border" />}
             </Button>
           </div>
         </Form>
