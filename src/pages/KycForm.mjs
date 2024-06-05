@@ -35,6 +35,7 @@ const KYCForm = () => {
   const [currentState, setCurrentState] = useState("");
   const { user } = useContext(AuthContext);
   const [client, setClient] = useState(null);
+  const [phoneNum, setPhoneNum] = useState();
 
   const [activeRatioType, setActiveRatioType] = useState("Male");
 
@@ -223,6 +224,18 @@ const KYCForm = () => {
     }
   };
 
+  const saveData2 = async (value) => {
+    try {
+      console.log("jhhjhjhjh", value);
+      // setIsSaveLoader(true);
+      const formData = new FormData();
+      let payload = { ...value };
+    } catch (error) {
+      setLoading(false);
+      console.log("error", error);
+    }
+  };
+
   const handleRemoveImage = (index, imgCheck, prevCheck) => {
     if (imgCheck) {
       if (!prevCheck) {
@@ -262,6 +275,7 @@ const KYCForm = () => {
       setValue("address", response?.userDetails?.address);
       setValue("zipCode", response?.userDetails?.zipCode);
       setValue("phone", response?.userDetails?.phone);
+      setPhoneNum(response?.userDetails?.phone);
 
       setglobalLoader(false);
     } else {
@@ -306,6 +320,10 @@ const KYCForm = () => {
     })();
   }, []);
 
+  const handlePhoneChange = (e) => {
+    setPhoneNum(e.target.value);
+  };
+
   return (
     <Layout>
       <div className="kyc-page">
@@ -343,7 +361,9 @@ const KYCForm = () => {
                       <OldForm
                         handleSubmit={handleSubmit}
                         saveData={saveData}
+                        saveData2={saveData2}
                         getValues={getValues}
+                        handlePhoneChange={handlePhoneChange}
                         errors={errors}
                         register={register}
                         activeRatioType={activeRatioType}
@@ -358,6 +378,7 @@ const KYCForm = () => {
                         loading={loading}
                         client={client}
                         setClient={setClient}
+                        phoneNum={phoneNum}
                       />
                       // <Button onClick={kycRedirection}>Verify KYC</Button>
                     )}
@@ -457,6 +478,9 @@ const OldForm = ({
   loading,
   setClient,
   client,
+  saveData2,
+  handlePhoneChange,
+  phoneNum,
 }) => {
   return (
     <div className="login-form">
@@ -469,7 +493,7 @@ const OldForm = ({
       </p>
       <p className="auth-para">Please fill your details to verify KYC</p>
       <div className="login-box">
-        <Form onSubmit={handleSubmit(saveData)}>
+        <Form onSubmit={handleSubmit(saveData2)}>
           <Form.Group className="form-group">
             <Form.Label>First Name</Form.Label>
             <Form.Control
@@ -637,6 +661,7 @@ const OldForm = ({
               className={errors.phone ? "error-field" : ""}
               // readOnly={getValues("phone")? ? true : false}
               {...register("phone")}
+              onChange={handlePhoneChange}
             />
             {errors?.phone ? (
               <p className="error-text">{errors?.phone?.message}</p>
@@ -816,8 +841,15 @@ const OldForm = ({
               {!loading ? "Save" : <Spinner animation="border" />}
             </Button>
           </div> */}
+          {console.log("errors", getValues("phone"))}
           <div className="login-button full-w">
-            <PersonaComponent />
+            <Button type="submit" className="l-btn " disabled={isSaveLoader}>
+              <PersonaComponent
+                errors={errors}
+                number={getValues("phone")}
+                phoneNum={phoneNum}
+              />
+            </Button>
           </div>
         </Form>
       </div>

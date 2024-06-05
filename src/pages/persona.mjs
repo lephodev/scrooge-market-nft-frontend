@@ -4,7 +4,8 @@ import Persona from "persona";
 import { Button } from "react-bootstrap";
 import AuthContext from "../context/authContext.ts";
 
-const PersonaComponent = () => {
+const PersonaComponent = ({ errors, number, phoneNum }) => {
+  console.log("numbernumbernumber", number);
   const [client, setClient] = useState(null);
   const { user } = useContext(AuthContext);
   console.log("user", user);
@@ -14,7 +15,6 @@ const PersonaComponent = () => {
     birthDate,
     address,
     city,
-    phone,
     zipCode,
     email,
     _id,
@@ -22,6 +22,7 @@ const PersonaComponent = () => {
   } = user;
 
   useEffect(() => {
+    console.log("numbernumbernumbernumber", number);
     // Initialize the Persona client and store it in state
     const personaClient = new Persona.Client({
       templateId: "itmpl_CZuaAe3eTnfzoQ4qp1Z2yHMJAqeH", // Your template ID
@@ -35,7 +36,7 @@ const PersonaComponent = () => {
         addressCity: city,
         addressPostalCode: zipCode,
         addressCountryCode: "US",
-        phoneNumber: phone,
+        phoneNumber: phoneNum,
         emailAddress: email,
         // customAttribute: "hello",
       },
@@ -54,13 +55,14 @@ const PersonaComponent = () => {
       },
     });
     setClient(personaClient);
-  }, []);
-
+  }, [phoneNum]);
   const handleOpenPersona = () => {
-    if (client) {
-      client.open();
-    } else {
-      console.error("Persona client is not initialized");
+    if (Object.keys(errors).length === 0 && phoneNum.length > 9) {
+      if (client) {
+        client.open();
+      } else {
+        console.error("Persona client is not initialized");
+      }
     }
   };
 
