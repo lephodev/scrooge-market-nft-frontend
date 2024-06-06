@@ -352,11 +352,14 @@
 
 .marketPlace_kycForm .login-button.full-w {
   margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
 
-.marketPlace_kycForm .login-button.full-w button {
-  margin: 0px auto;
-  padding: 13px 30px;
+.marketPlace_kycForm .login-button button {
+  
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -364,8 +367,7 @@
   background-size: 200% auto;
   color: white;
   border-radius: 10px;
-  display: grid;
-  place-content: center;
+  padding: 0;
   border: 0px;
   font-weight: 700;
   box-shadow: 0px 0px 14px -7px #f09819;
@@ -376,10 +378,19 @@
     #f09819 51%,
     #ff512f 100%
   );
-  width: 160px;
+  max-width: 160px;
+  width: 100%;
   height: 44px;
   font-size: 16px;
   font-weight: 600;
+}
+.persona-btn {
+  max-width: 160px;
+  width: 100%;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .marketPlace_kycForm h1 {

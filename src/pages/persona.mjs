@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext } from "react";
 import Persona from "persona";
-import { Button } from "react-bootstrap";
 import AuthContext from "../context/authContext.ts";
 
 const PersonaComponent = ({ phoneNum, errors }) => {
@@ -98,10 +97,8 @@ const PersonaComponent = ({ phoneNum, errors }) => {
   };
 
   return (
-    <div className="login-button full-w">
-      <Button onClick={handleOpenPersona} className="l-btn ">
-        Verify
-      </Button>
+    <div className="persona-btn" onClick={handleOpenPersona}>
+      Verify
     </div>
   );
 };
