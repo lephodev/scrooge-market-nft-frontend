@@ -389,7 +389,7 @@ export default function App() {
                       element={<ProtectedRoute component={<RedeemPrizes />} />}
                     />
 
-<Route
+                      <Route
                       path='/kycCopy'
                       element={<ProtectedRoute component={<KYCCopy />} />}
                     />

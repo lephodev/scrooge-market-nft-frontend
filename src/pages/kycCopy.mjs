@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Form, Spinner } from "react-bootstrap";
 import LoadingPoker from "../images/scroogeHatLogo.png";
+import PhoneInput from "react-phone-input-2";
 import cross from "../images/close-icon.svg";
 import { userKycDetails, reApply, createKYC } from "../utils/api.mjs"; //
 import { createKYCSchema } from "../utils/validationSchema.mjs";
@@ -19,6 +20,7 @@ import axios from "axios";
 import AuthContext from "../context/authContext.ts";
 import PersonaComponent from "./persona.mjs";
 import { client } from "../config/keys";
+import "react-phone-input-2/lib/style.css";
 
 const KYCCopy = () => {
   const navigate = useNavigate();
@@ -37,6 +39,7 @@ const KYCCopy = () => {
   const [client, setClient] = useState(null);
   const [phoneNum, setPhoneNum] = useState();
   const [activeRatioType, setActiveRatioType] = useState("Male");
+  const [mobileCountryCode, setmobileCountryCode] = useState(1);
 
   const {
     handleSubmit,
@@ -271,7 +274,7 @@ const KYCCopy = () => {
       setValue("country", response?.userDetails?.country);
       setValue("address", response?.userDetails?.address);
       setValue("zipCode", response?.userDetails?.zipCode);
-      setValue("phone", response?.userDetails?.phone);
+      setValue("phone", `+1${response?.userDetails?.phone}`);
 
       setPhoneNum(response?.userDetails?.phone);
       setglobalLoader(false);
@@ -319,12 +322,12 @@ const KYCCopy = () => {
 
   const handlePhoneChange = (e) => {
     let value = e.target.value;
-    const hasPlusSign = value.startsWith("+");
-    value = value.replace(/[^0-9]/g, "");
-    if (hasPlusSign) value = "+" + value;
-    value = value.slice(0, hasPlusSign ? 14 : 13);
-    e.target.value = value;
-    setPhoneNum(value);
+
+    if (value.length < 2) {
+      setValue("phone", "+" + 1);
+    } else {
+      setPhoneNum(value);
+    }
   };
   return (
     <div className="kyc-page">
@@ -376,6 +379,8 @@ const KYCCopy = () => {
                       saveData2={saveData2}
                       phoneNum={phoneNum}
                       handlePhoneChange={handlePhoneChange}
+                      mobileCountryCode={mobileCountryCode}
+                      setmobileCountryCode={setmobileCountryCode}
                     />
                     // <Button onClick={kycRedirection}>Verify KYC</Button>
                   )}
@@ -477,6 +482,9 @@ const OldForm = ({
   saveData2,
   phoneNum,
   handlePhoneChange,
+  handlePhoneNumber,
+  setmobileCountryCode,
+  mobileCountryCode,
 }) => {
   return (
     <div className="login-form">
@@ -649,6 +657,14 @@ const OldForm = ({
 
           <Form.Group className="form-group">
             <Form.Label>Phone Number</Form.Label>
+            {/* <PhoneInput
+              country="us"
+              value={getValues("phone")}
+              onChange={handlePhoneNumber}
+              isValid={(inputNumber, country) => {
+                setmobileCountryCode(country?.countryCode);
+              }}
+            /> */}
             <Form.Control
               type="text"
               name="phone"
@@ -659,6 +675,7 @@ const OldForm = ({
               {...register("phone")}
               onChange={handlePhoneChange}
             />
+
             {errors?.phone ? (
               <p className="error-text">{errors?.phone?.message}</p>
             ) : (
@@ -834,9 +851,7 @@ const OldForm = ({
 
           <div className="login-button full-w">
             <Button type="submit" className="l-btn " disabled={isSaveLoader}>
-              <div className="login-button full-w">
-                <PersonaComponent phoneNum={phoneNum} errors={errors} />
-              </div>{" "}
+              <PersonaComponent phoneNum={phoneNum} errors={errors} />
             </Button>
           </div>
         </Form>
