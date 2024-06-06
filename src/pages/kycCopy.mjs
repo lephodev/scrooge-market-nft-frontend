@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Form, Spinner } from "react-bootstrap";
 import LoadingPoker from "../images/scroogeHatLogo.png";
-import PhoneInput from "react-phone-input-2";
 import cross from "../images/close-icon.svg";
 import { userKycDetails, reApply, createKYC } from "../utils/api.mjs"; //
 import { createKYCSchema } from "../utils/validationSchema.mjs";
@@ -20,7 +19,6 @@ import axios from "axios";
 import AuthContext from "../context/authContext.ts";
 import PersonaComponent from "./persona.mjs";
 import { client } from "../config/keys";
-import "react-phone-input-2/lib/style.css";
 
 const KYCCopy = () => {
   const navigate = useNavigate();
