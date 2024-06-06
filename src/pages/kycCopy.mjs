@@ -318,9 +318,18 @@ const KYCCopy = () => {
     })();
   }, []);
 
-  const handlePhoneChange = (e) => {
-    let value = e.target.value;
+  // const handlePhoneChange = (e) => {
+  //   let value = e.target.value;
+  //   if (value.length < 2) {
+  //     setValue("phone", "+" + 1);
+  //   } else {
+  //     setPhoneNum(value);
+  //   }
+  // };
 
+  const handlePhoneChange = (e) => {
+    e.target.value = e.target.value.replace(/[^\d+]/g, "").slice(0, 13); // Allow only numeric characters and limit to 11 digits
+    let value = e.target.value;
     if (value.length < 2) {
       setValue("phone", "+" + 1);
     } else {
