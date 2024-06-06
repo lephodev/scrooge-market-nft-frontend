@@ -22,37 +22,39 @@ const PersonaComponent = ({ phoneNum, errors }) => {
 
   useEffect(() => {
     // Initialize the Persona client and store it in state
-    const personaClient = new Persona.Client({
-      templateId: "itmpl_CZuaAe3eTnfzoQ4qp1Z2yHMJAqeH", // Your template ID
-      environmentId: "env_qRUUMWexbxJxkuPhq7eRsEZvMgVw",
-      referenceId: _id || id,
-      fields: {
-        nameFirst: firstName,
-        nameLast: lastName,
-        birthdate: birthDate,
-        addressStreet1: address,
-        addressCity: city,
-        addressPostalCode: zipCode,
-        addressCountryCode: "US",
-        phoneNumber: phoneNum,
-        emailAddress: email,
-        // customAttribute: "hello",
-      },
-      onReady: () => {
-        console.log("Persona client is ready");
-      },
-      onComplete: ({ inquiryId, status, fields }) => {
-        console.log("onComplete", inquiryId, status, fields);
-        window.location.href = "/kyc";
-      },
-      onCancel: ({ inquiryId, sessionToken }) => {
-        console.log("onCancel", inquiryId, sessionToken);
-      },
-      onError: (error) => {
-        console.error("onError", error);
-      },
-    });
-    setClient(personaClient);
+    if (Object.keys(errors).length === 0 && phoneNum?.length > 9) {
+      const personaClient = new Persona.Client({
+        templateId: "itmpl_CZuaAe3eTnfzoQ4qp1Z2yHMJAqeH", // Your template ID
+        environmentId: "env_qRUUMWexbxJxkuPhq7eRsEZvMgVw",
+        referenceId: _id || id,
+        fields: {
+          nameFirst: firstName,
+          nameLast: lastName,
+          birthdate: birthDate,
+          addressStreet1: address,
+          addressCity: city,
+          addressPostalCode: zipCode,
+          addressCountryCode: "US",
+          phoneNumber: phoneNum,
+          emailAddress: email,
+          // customAttribute: "hello",
+        },
+        onReady: () => {
+          console.log("Persona client is ready");
+        },
+        onComplete: ({ inquiryId, status, fields }) => {
+          console.log("onComplete", inquiryId, status, fields);
+          window.location.href = "/kyc";
+        },
+        onCancel: ({ inquiryId, sessionToken }) => {
+          console.log("onCancel", inquiryId, sessionToken);
+        },
+        onError: (error) => {
+          console.error("onError", error);
+        },
+      });
+      setClient(personaClient);
+    }
   }, [phoneNum]);
 
   const handleOpenPersona = () => {

@@ -318,7 +318,13 @@ const KYCCopy = () => {
   }, []);
 
   const handlePhoneChange = (e) => {
-    setPhoneNum(e.target.value);
+    let value = e.target.value;
+    const hasPlusSign = value.startsWith("+");
+    value = value.replace(/[^0-9]/g, "");
+    if (hasPlusSign) value = "+" + value;
+    value = value.slice(0, hasPlusSign ? 14 : 13);
+    e.target.value = value;
+    setPhoneNum(value);
   };
   return (
     <div className="kyc-page">

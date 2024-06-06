@@ -34,8 +34,11 @@ export const createKYCSchema = yup.object().shape({
     }),
   zipCode: yup.string().required("Postal / Zip Code is required"),
   address: yup.string().required("Full address is required"),
-  phone: yup.string().required("Phone number is required"),
-  // gender: yup.string().required('Gender is required')
+  phone: yup
+    .string()
+    .required("Phone Number is required")
+    .min(9, "Phone number must be at least 9 characters")
+    .max(13, "Phone number cannot exceed 13 characters"), // gender: yup.string().required('Gender is required')
 });
 
 const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
