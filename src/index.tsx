@@ -44,6 +44,7 @@ import notaccess from "./images/not-access.webp";
 
 import PaymentCustom from "./pages/PaymentCustom.mjs";
 import PageLoader from "./components/pageLoader/loader.mjs";
+import KYCCopy from "./pages/kycCopy.mjs";
 // import { validateToken } from "./utils/dateUtils.mjs";
 
 export default function App() {
@@ -386,6 +387,11 @@ export default function App() {
                     <Route
                       path='/redeem-prizes'
                       element={<ProtectedRoute component={<RedeemPrizes />} />}
+                    />
+
+<Route
+                      path='/kycCopy'
+                      element={<ProtectedRoute component={<KYCCopy />} />}
                     />
                     <Route
                       path='/crypto-to-tokens'
