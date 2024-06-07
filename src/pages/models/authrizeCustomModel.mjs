@@ -435,9 +435,9 @@ const AuthrizeCustomModel = ({
                     autoComplete="off"
                     onInput={(e) => {
                       e.target.value = e.target.value.replace(
-                        /[^A-Za-z]/gi,
-                        ""
-                      ); // Remove non-alphabetical characters
+                        /[^A-Za-z\s]/g,
+                        "" // Remove non-alphabetical characters except spaces
+                      );
                     }}
                     {...register("city")}
                     required
@@ -453,7 +453,7 @@ const AuthrizeCustomModel = ({
                     placeholder="State"
                     autoComplete="off"
                     onKeyPress={(e) => {
-                      const regex = /^[A-Za-z]+$/;
+                      const regex = /^[A-Za-z\s]+$/;
                       if (!regex.test(e.key)) {
                         e.preventDefault();
                       }
