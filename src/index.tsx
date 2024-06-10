@@ -125,7 +125,7 @@ export default function App() {
       );
 
       if (ipAddressss) {
-        const { country, region, city } = ipAddressObject[ipAddressss];
+        const { country } = ipAddressObject[ipAddressss];
         if (
           country.toString() !== "United States" &&
           country.toString() !== "Canada" &&
@@ -134,10 +134,8 @@ export default function App() {
           setStateBlock(true);
         }
         if (
-          city.toString() === "Quebec" ||
           // city.toString() === "Idaho" ||
-          country.toString() === "Brazil" ||
-          region.toString() === "Quebec" 
+          country.toString() === "Brazil"
           // region.toString() === "Idaho" ||
           // region.toString() === "Michigan" ||
           // region.toString() === "Washington"
