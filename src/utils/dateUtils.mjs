@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import CryptoJS from "crypto-js";
 import kountSDK from "@kount/kount-web-client-sdk";
 import { v4 as uuidv4 } from "uuid";
@@ -23,30 +23,32 @@ const Encrypt = (cipher) => {
   }
 };
 
-const getUtcTime = async () => {
-  try {
-    const response = await axios.get(
-      "https://worldtimeapi.org/api/timezone/Etc/UTC"
-    );
-    return response.data.utc_datetime;
-    // const utcDatetimeStr = response.data.utc_datetime;
-    // const utcDatetime = new Date(utcDatetimeStr);
-    // return utcDatetime;
-  } catch (error) {
-    console.error("Error:", error.message);
-    return null;
-  }
-};
+// const getUtcTime = async () => {
+//   try {
+//     const response = await axios.get(
+//       "https://worldtimeapi.org/api/timezone/Etc/UTC"
+//     );
+//     return response.data.utc_datetime;
+//     // const utcDatetimeStr = response.data.utc_datetime;
+//     // const utcDatetime = new Date(utcDatetimeStr);
+//     // return utcDatetime;
+//   } catch (error) {
+//     console.error("Error:", error.message);
+//     return null;
+//   }
+// };
 
 export const validateToken = async () => {
   try {
-    const utcDtTime = await getUtcTime();
-    console.log("utcDtTime=====>", utcDtTime);
-    // const getPass = new Date().toISOString();
-    const newDt = new Date(utcDtTime).getTime();
-    const base64Credentials = btoa(`scr@@ze:${newDt}`);
+    /*     const utcTime = await getUtcTime();
+     */ // const getPass = new Date().toISOString();
+    /* const newDt = new Date(utcTime).getTime();
+        const base64Credentials = btoa(`scr@@ze:${newDt}`); */
+    const base64Credentials = `${
+      process.env.REACT_APP_TOKEN_ENCRYPTION_STRING
+    }/${Math.random().toString(36).substring(2)}`;
     const crd = Encrypt(base64Credentials);
-    const authHeader = `Basic ${crd}`;
+    const authHeader = `Bearer ${crd}`;
     return authHeader;
   } catch (error) {
     console.log("error", error);
