@@ -407,6 +407,9 @@ export default function CryptoToGC() {
     if (parseFloat(price?.priceInBUSD) === parseFloat(filteredArr[0])) {
       return true;
     }
+    if (user.megaOffer.includes(99.99)) {
+      if (parseFloat(price?.priceInBUSD) === parseFloat(arrc[0])) return true;
+    }
   };
 
   const handleCloseFreeST = () => {
