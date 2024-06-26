@@ -574,7 +574,7 @@ const OldForm = ({
             )}
           </Form.Group>
           <Form.Group className="form-group">
-            <Form.Label>State</Form.Label>
+            <Form.Label>State/province</Form.Label>
             <Form.Control
               type="text"
               name="state"
@@ -607,8 +607,25 @@ const OldForm = ({
               ""
             )}
           </Form.Group>
+          <Form.Group className="form-group full-w">
+            <Form.Label>Address</Form.Label>
+            <Form.Control
+              type="text"
+              name="address"
+              placeholder="Enter your full address"
+              autoComplete="off"
+              className={errors.address ? "error-field" : ""}
+              readOnly={getValues("address") ? true : false}
+              {...register("address")}
+            />
+            {errors?.address ? (
+              <p className="error-text">{errors?.address?.message}</p>
+            ) : (
+              ""
+            )}
+          </Form.Group>
           <Form.Group className="form-group">
-            <Form.Label>Postal / Zip code</Form.Label>
+            <Form.Label>Zip/postal</Form.Label>
             <Form.Control
               type="text"
               name="zipCode"
@@ -626,7 +643,7 @@ const OldForm = ({
           </Form.Group>
 
           <Form.Group className="form-group">
-            <Form.Label>Phone Number</Form.Label>
+            <Form.Label>Phone</Form.Label>
             <Form.Control
               type="number"
               name="phone"
@@ -638,23 +655,6 @@ const OldForm = ({
             />
             {errors?.phone ? (
               <p className="error-text">{errors?.phone?.message}</p>
-            ) : (
-              ""
-            )}
-          </Form.Group>
-          <Form.Group className="form-group full-w">
-            <Form.Label>Full Address</Form.Label>
-            <Form.Control
-              type="text"
-              name="address"
-              placeholder="Enter your full address"
-              autoComplete="off"
-              className={errors.address ? "error-field" : ""}
-              readOnly={getValues("address") ? true : false}
-              {...register("address")}
-            />
-            {errors?.address ? (
-              <p className="error-text">{errors?.address?.message}</p>
             ) : (
               ""
             )}
