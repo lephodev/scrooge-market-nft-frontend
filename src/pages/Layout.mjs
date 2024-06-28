@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import {
-  ConnectWallet,
+  // ConnectWallet,
   ThirdwebNftMedia,
   useDisconnect,
   useAddress,
 } from "@thirdweb-dev/react";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import hatLogo from "../images/scroogeHatLogo.png";
-import newLogo from "../images/new-logo.webp";
+// import hatLogo from "../images/scroogeHatLogo.png";
+// import newLogo from "../images/new-logo.webp";
 import { useContext } from "react";
 import playPolicy from "../images/SCROOGE CASINO Game Play Policy.docx";
 
@@ -41,10 +41,11 @@ import {
   scroogeClient,
   slotUrl,
 } from "../config/keys.js";
-import { Button, Container, Nav, Navbar, Spinner } from "react-bootstrap";
+// import { Button, Container, Nav, Navbar, Spinner } from "react-bootstrap";
 import AuthContext from "../context/authContext.ts";
 import ConnectWalletModel from "./models/connectWalletModel.mjs";
-
+import Header from "./Header.mjs";
+import "../styles/header.css"
 export const Tooltip = (id, metadata, message) => (
   <Popup
     trigger={<ThirdwebNftMedia key={id} metadata={metadata} height={200} />}
@@ -194,7 +195,8 @@ const Layout = ({ children }) => {
       />
       <div className="wrapper">
         <div className="header" ref={wrapperRef}>
-          <Navbar
+         <Header />
+          {/* <Navbar
             collapseOnSelect
             expand="lg"
             expanded={navOpen}
@@ -286,17 +288,17 @@ const Layout = ({ children }) => {
                             >
                               Affiliate Program
                             </Link>
-                            {/* <Link
+                            <Link
                               to={`/my-wallet`}
                               className={`nav-link ${isActive("/my-wallet")}`}
                             >
                               Holder Claim Center
-                            </Link> */}
+                            </Link>
                           </>
                         ) : (
                           <a
                             href={`${scroogeClient}/login`}
-                            /* target="_blank" */ rel="noreferrer"
+                           rel="noreferrer"
                             alt="Login to Scrooge Casino"
                           >
                             <button className="submit-btn">
@@ -325,7 +327,7 @@ const Layout = ({ children }) => {
                 </div>
               </div>
             </Container>
-          </Navbar>
+          </Navbar> */}
         </div>
 
         <div className="content">{children}</div>

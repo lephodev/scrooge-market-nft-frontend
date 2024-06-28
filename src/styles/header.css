@@ -1,0 +1,298 @@
+.headerContainer {
+    background-color: red;
+}
+
+.new-logo img{
+    height: 70px;
+    width: 70px;
+}
+
+.header_logo img{
+  margin-left: -13px;
+}
+.header_outer{
+    width:100%;
+}
+
+
+.headerMode-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 5px;
+}
+
+.new_header_container .header-content,.navbar_wd {
+    max-width: 1360px;
+    width: 100%;
+    padding: 30px 12px;
+}
+.header .navItem {
+    max-width: 1360px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+.slotLobby-mode {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 40px;
+	background-color: #000;
+	overflow: hidden;
+	min-width: 240px;
+	border: 1px solid #ffc700;
+	border-radius: 30px;
+	padding: 2px
+}
+
+.slotLobby-mode form {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	position: relative
+}
+
+.slotLobby-mode form .purchase-btn {
+	position: absolute;
+	right: 0;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	transition: .1s ease-in-out;
+	background: #ffc700;
+	border: 1px solid #ffc700
+}
+
+.slotLobby-mode form .purchase-btn a {
+	width: 22px;
+	height: 22px;
+	display: grid;
+	place-content: center
+}
+
+
+.slotLobby-mode form .purchase-btn {
+	position: absolute;
+	right: 0;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	transition: .1s ease-in-out;
+	background: #ffc700;
+	border: 1px solid #ffc700
+}
+
+.slotLobby-mode form .purchase-btn a {
+	width: 28px;
+	height: 28px;
+	display: grid;
+	place-content: center
+}
+
+.slotLobby-mode form .purchase-btn svg {
+	width: 25px;
+	height: 25px;
+	fill: #000
+}
+
+.slotLobby-mode form .form-check-input {
+	background-color: transparent ;
+	border: 1px solid #ffc700
+}
+
+.slotLobby-mode img {
+	width: 25px
+}
+
+.slotLobby-mode .mode-labels {
+	display: flex;
+	flex-direction: row;
+	gap: 6px;
+	overflow: hidden;
+	border-radius: 30px;
+	width: 100%
+}
+
+.slotLobby-mode h6 {
+	display: grid;
+	place-content: center;
+	margin: 0;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: 600;
+	border-radius: 30px;
+	background: #151515;
+	width: 100%;
+	z-index: 0;
+	border: 1px solid #fbff0000;
+	white-space: nowrap
+}
+
+.slotLobby-mode h6.goldLabel {
+	padding: 6px 20px;
+	text-align: right
+}
+
+.slotLobby-mode h6.tokenLabel {
+	padding: 6px 20px;
+	text-align: left
+}
+
+.slotLobby-mode h6.goldCoin,
+.slotLobby-mode h6.token {
+	z-index: 1;
+	border: 1px solid #ffc700
+}
+
+.slotLobby-mode p {
+	font-size: 14px;
+	padding-right: 24px;
+	font-weight: 500;
+	margin: 0
+}
+
+.slotLobby-mode .form-check {
+	margin: 0 !important
+}
+
+.slotLobby-mode .form-check-input {
+	height: 30px
+}
+
+.slotLobby-mode .form-check-input:checked {
+	background-color: #fa0000 !important;
+	border-color: #fa0000
+}
+
+.slotLobby-mode .form-switch .form-check-input {
+	width: 60px;
+	margin-left: 0 !important;
+	margin-top: 0 !important;
+    background-image: url("../images/gold.png");
+}
+
+.slotLobby-mode label.form-check-label {
+	font-size: 16px;
+	text-transform: capitalize;
+	font-weight: 600;
+	min-width: calc(100% - 66px);
+	cursor: pointer;
+	padding-right: 35px;
+    color:white;
+}
+
+.slotLobby-mode .form-switch {
+	padding-left: 0 !important;
+	display: flex;
+	align-items: center;
+	gap: 6px
+}
+
+.slotLobby-mode .form-switch .form-check-input:focus {
+    background-image: url("../images/gold.png");
+	background-color: #ffc700;
+	box-shadow: 0 0 0 .25rem rgba(253, 233, 13, 0)
+}
+
+.slotLobby-mode .form-switch .form-check-input:checked {
+	background-position: right center;
+    background-image: url("../images/token.png");
+}
+
+.notifyProfileheader {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    gap: 20px;
+    /* max-width: 262px;
+    width: 100%; */
+}
+
+.user-profile img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #f7c003;
+    
+}
+.user-profile .btn:active,
+.user-profile .btn:first-child:active,
+.user-profile button,
+.user-profile button:focus,
+.user-profile button:hover {
+    background: 0 0 ;
+    border: none ;
+    padding: 0 ;
+    height: 50px;
+    width: auto;
+    box-shadow: none ;
+    outline: 0 ;
+    display: flex ;
+    align-items: center;
+    color: #fff;
+}
+.user-profile button span {
+    margin-left: 6px;
+    font-weight: 800;
+    font-size: 14px;
+}
+.user-profile button span i {
+    margin-left: 5px;
+}
+.user-profile button span svg {
+    width: 12px;
+}
+
+.user-profile button span svg path {
+  fill: white;
+}
+
+.user-profile .dropdown-toggle::after {
+    display: none;
+}
+
+.user-profile .show.dropdown button {
+    background-color: transparent ;
+    border-color: transparent ;
+    color: #fff ;
+}
+.user-profile .dropdown-menu.show {
+    background: #151515;
+    box-shadow: 0 0 5px 0 #0c0404;
+}
+.user-profile .dropdown-menu.show .dropdown-item,
+.user-profile .dropdown-menu.show a {
+    color: #fff;
+    font-weight: 400;
+    cursor: pointer;
+}
+.user-profile .dropdown-item:focus,
+.user-profile .dropdown-item:hover {
+    background-color: var(--main-bg);
+    color: var(--primary-color) ;
+}
+.new_header_container .main-menu,.new_header_container .navbar-collapse,.new_header_container .navbar-nav{
+width: 100%;
+}
+
+
+.new_header_container .navbar-collapse,.navbar-expand-lg .navbar-nav  {
+    overflow-x: hidden !important;
+    border-width: 1px;
+    border-image-slice: 1 !important;
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    padding: 5px 0;
+}
+.new_header_container .navbar-collapse ,.navbar-expand-lg .navbar-nav {
+    border-image: linear-gradient(90deg, #ffc700 0%, #ffeca8 51%, #ffc700 100%);
+}

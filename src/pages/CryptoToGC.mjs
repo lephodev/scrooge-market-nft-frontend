@@ -522,14 +522,15 @@ export default function CryptoToGC() {
                     <></>
                   )}
                   <div className="scrooge-main-heading">
-                    <div className="pageTitle">
-                      <h1 className="title">Get Gold Coins</h1>
+                    <div className="pageTitle updatePageTitle">
+                      {/* <h1 className="title updated_text_color">Get Gold Coins</h1> */}
+                      <h1 className="title updated_text_color">Purchase Gold Coins</h1>
                     </div>
                   </div>
-                  <div className="purchase-select">
+                  <div className="purchase-select purchase-select_alignment">
                     <div className="purchase-with-content">
                       <h4>Purchase with: </h4>
-                      <div className="purchase-with-grid">
+                      <div className="purchase-with-grid purchase-with-grid_update">
                         <span
                           onClick={() => handlePaymentTypeChange("Credit Card")}
                           className={
@@ -540,6 +541,12 @@ export default function CryptoToGC() {
                         >
                           Credit Card{" "}
                         </span>
+                        {/* <span
+                          onClick={() => handlePaymentTypeChange("Credit Card")}
+                          className="updated_text_color"
+                        >
+                          Paypal{" "}
+                        </span> */}
                         {/* <span
                           onClick={() => handlePaymentTypeChange("Paypal")}
                           className={
@@ -588,7 +595,7 @@ export default function CryptoToGC() {
                       </Dropdown> */}
                     </div>
 
-                    <div className="enter-promo">
+                    <div className="enter-promo new_enter_promo">
                       <Form.Group className="form-group">
                         <Form.Control
                           type="text"
@@ -603,7 +610,7 @@ export default function CryptoToGC() {
                       {Object.keys(promoDetails).length ? (
                         <Button
                           type="button"
-                          className="reject-btn"
+                          className="reject-btn "
                           onClick={handlePromoReject}
                         >
                           Reject
@@ -611,7 +618,7 @@ export default function CryptoToGC() {
                       ) : (
                         <Button
                           type="button"
-                          className="apply-btn"
+                          className="apply-btn active_btn"
                           onClick={handlePromoApply}
                           disabled={!promocode || promoLoader}
                         >
@@ -624,6 +631,10 @@ export default function CryptoToGC() {
                       )}
                     </div>
                   </div>
+
+
+                
+                     
                   {selectedTypeDropdown === "Credit Card" ? (
                     <div className="asterisk-desc cryptoTotoken abc first-grid">
                       <ul>
@@ -651,11 +662,12 @@ export default function CryptoToGC() {
                   )}
 
                   <div className="buy-chips-content">
-                    <div className="buy-chips-grid cryptoToGC">
+                    <div className="buy-chips-grid cryptoToGC buy-chips-grid_update">
                       {isMegaBuyShow /* && user.megaOffer.length !== 3 */ && (
                         <div className="special-offer-grid">
-                          <h5>Special Offer</h5>
+                          {/* <h5>Special Offer</h5> */}
                           <div className="purchasemodal-cards">
+                          
                             {allPrizes.map((prize, i) => (
                               <>
                                 {isMegaBuyShow &&
@@ -663,11 +675,24 @@ export default function CryptoToGC() {
                                     <>
                                       {handleShowMegaBuys(prize) ? (
                                         <Card key={prize._id}>
+                                          <span className="offer_btn">Special Offer</span>
                                           <h3 className="mega-text pulses">
                                             Mega Offer
                                           </h3>
+
+                                          <div className="goldPurchase-offers">
+                                            Free ST:{" "}
+                                            <img
+                                              src={sweep}
+                                              alt="sweep token"
+                                            />{" "}
+                                            {prize?.freeTokenAmount}
+                                          </div>
                                           <Card.Img variant="top" src={coin3} />
                                           <Card.Body>
+                                          <Card.Title className="goldPurchase_heading">
+                                          $12.8
+                                            </Card.Title>
                                             <Card.Title>
                                               GC {prize?.gcAmount}
                                             </Card.Title>
@@ -736,14 +761,14 @@ export default function CryptoToGC() {
                                               </>
                                             )}
                                           </Card.Body>
-                                          <div className="goldPurchase-offers">
+                                          {/* <div className="goldPurchase-offers">
                                             Free ST:{" "}
                                             <img
                                               src={sweep}
                                               alt="sweep token"
                                             />{" "}
                                             {prize?.freeTokenAmount}
-                                          </div>
+                                          </div> */}
                                         </Card>
                                       ) : (
                                         ""
@@ -760,7 +785,28 @@ export default function CryptoToGC() {
                         {allPrizes.map((prize, i) => (
                           <>
                             {prize.offerType !== "MegaOffer" && (
+                              
+                              <>
                               <Card key={prize._id}>
+                                   <div className="goldPurchase-offers">
+                                  Free ST: <img src={sweep} alt="sweep token" />{" "}
+                                  {promoDetails?.couponCode && (
+                                    <>
+                                      {prize.freeTokenAmount !== "25000" && (
+                                        <span className="cross-text">
+                                          {getExactToken(
+                                            prize?.freeTokenAmount,
+                                            {}
+                                          )}
+                                        </span>
+                                      )}
+                                    </>
+                                  )}{" "}
+                                  {getExactToken(
+                                    prize?.freeTokenAmount,
+                                    promoDetails
+                                  )}
+                                </div>
                                 <Card.Img
                                   variant="top"
                                   src={
@@ -777,7 +823,11 @@ export default function CryptoToGC() {
                                       : ""
                                   }
                                 />
+                             
                                 <Card.Body>
+                                <Card.Title className="goldPurchase_heading">
+                                   $50.00                             
+                                  </Card.Title>
                                   <Card.Title>
                                     GC{" "}
                                     {getExactGC(prize?.gcAmount, promoDetails)}
@@ -854,7 +904,7 @@ export default function CryptoToGC() {
                                     </>
                                   )}
                                 </Card.Body>
-                                <div className="goldPurchase-offers">
+                                {/* <div className="goldPurchase-offers">
                                   Free ST: <img src={sweep} alt="sweep token" />{" "}
                                   {promoDetails?.couponCode && (
                                     <>
@@ -872,8 +922,9 @@ export default function CryptoToGC() {
                                     prize?.freeTokenAmount,
                                     promoDetails
                                   )}
-                                </div>
+                                </div> */}
                               </Card>
+                              </>
                             )}
                           </>
                         ))}
@@ -881,7 +932,7 @@ export default function CryptoToGC() {
                     </div>
                   </div>
                   <div className="asterisk-desc cryptoTotoken">
-                    <p className="title-memo">
+                    <p className="title-memo updated_text_color">
                       All Sweep Tokens have a one time play through requirement.
                       In the event of a bonus buy, only the Bonus ST portion may
                       be tied to a higher play through which will be indicated

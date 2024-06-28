@@ -1,13 +1,14 @@
 @import "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap";
-
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 html,
 body {
   padding: 0;
   margin: 0;
   color: #878d93;
   background: #000000;
-  font-family: "Poppins", sans-serif !important;
+  /* font-family: "Poppins", sans-serif !important; */
   overflow-x: hidden;
+  font-family: "Quicksand" !important;
 }
 
 a {
@@ -16,7 +17,7 @@ a {
 }
 
 a:hover {
-  color: #f9ff00;
+  color: #f8d761;
 }
 
 * {
@@ -130,6 +131,10 @@ html {
   border-radius: 30px;
   white-space: nowrap;
   margin: 2px 5px;
+  background: var(--Gold-Stroke, linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%)) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .header .navbar-expand-lg .navbar-nav .nav-link:hover {
@@ -3175,7 +3180,7 @@ ul.footer-support li img {
   font-size: 30px;
   margin: 0;
   font-weight: 600;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 .redeem-icon-grid {
   display: flex;
@@ -3190,7 +3195,7 @@ ul.footer-support li img {
   line-height: 150%;
   margin: 0;
   padding-bottom: 10px;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 .redeem-info-grid h5 span {
   display: block;
@@ -3201,7 +3206,7 @@ ul.footer-support li img {
   font-weight: 600;
   margin: 0;
   line-height: 150%;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 .download-pdf-grid {
@@ -7029,3 +7034,268 @@ body.modal-open {
     padding: 70px 20px;
     /* height: 33vh; */
 }}
+
+/* updated css */
+
+.purchase-select_alignment {
+flex-direction: column;
+align-items: center;
+gap: 35px;
+}
+
+.new_enter_promo {
+  max-width: 437px;
+    width: 100%;
+    display: flex;
+flex-direction: column;
+align-items: unset;
+gap:20px;
+}
+
+.new_enter_promo .form-control {
+  border-radius: 10px;
+  border: 1px solid #FFC700;
+  background: #1F2332;
+  color: #707070;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.new_enter_promo .form-control::placeholder {
+  color: #707070;
+}
+.new_enter_promo button {
+  position: unset;
+}
+
+.purchase-select_alignment .purchase-with-content {
+display: flex;
+align-items: center;
+gap:21px;
+}
+.purchase-select_alignment .purchase-with-content h4{
+  padding: 0;
+  margin: 0;
+}
+.purchase-with-grid_update {
+  gap: 21px;
+}
+
+.purchase-with-grid_update span{
+  display: flex;
+  padding: 10px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 15px;
+  background: transparent;
+  border: 1px solid #FFC700;
+}
+
+.updated_text_color {
+  background:  linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%) !important;
+background-clip: text !important;
+-webkit-background-clip: text !important;
+-webkit-text-fill-color: transparent !important;
+opacity: 1 !important;
+font-family: "Quicksand";
+}
+
+.updated_bg_btn {
+  border-radius: 10px !important;
+background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%) !important ;
+color: #000 !important;
+}
+
+.redemption-history_updated a {
+max-width: 705px ;
+width: 100%;
+text-transform: capitalize;
+font-weight: 700;
+padding:15px !important;
+}
+
+.text_shadow_none {
+  text-shadow: none !important;
+}
+
+.purchase-with-grid_update .active-method {
+  background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
+}
+
+.active_btn {
+  border-radius: 10px !important;
+  background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%) !important;
+  border: none !important;
+}
+
+.updatePageTitle h1 {
+text-shadow: none !important;
+margin-top: 30px !important;
+margin-bottom: 50px !important;
+}
+
+.buy-chips-grid_update .purchasemodal-cards .card {
+  max-width: 310px !important;
+  width: 100%;
+  height: 486px;
+  border-radius: 16px;
+border: 3px solid  #FFC700;
+background: linear-gradient(155deg, rgba(255, 199, 0, 0.20) -6.53%, rgba(255, 199, 0, 0.00) 98.73%)
+}
+
+.buy-chips-grid_update  .purchasemodal-cards .card-body {
+justify-content: flex-end;
+gap:10px;
+}
+
+.buy-chips-grid_update .purchasemodal-cards .card-body button, .buy-chips-grid_update .purchasemodal-cards .card-body button:active, 
+.buy-chips-grid_update .purchasemodal-cards .card-body button:focus,.buy-chips-grid_update .purchasemodal-cards .card-body button:hover,
+.buy-chips-grid_update .special-offer-grid .purchasemodal-cards .offer_btn{
+  border-radius: 15px;
+  background:  linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
+  border: none;
+  max-width: 191px;
+  width: 100%;
+height: 47px;
+}
+
+.buy-chips-grid_update .goldPurchase_heading {
+  font-size: 39px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.buy-chips-grid_update .purchasemodal-cards .goldPurchase-offers {
+  border-radius: 10px;
+  background: #F33;
+  max-width: 211px;
+  margin: 26px auto;
+}
+
+.buy-chips-grid_update .purchasemodal-cards .card-body {
+padding-bottom:26px;
+}
+
+.prizes-chip-count_update {
+display: flex;
+justify-content: center;
+align-items: center;
+gap:60px;
+}
+
+.redeem-prizes-page .prizes-chip-count_update  h3 span {
+  text-transform: capitalize;
+}
+
+.buy-chips-grid_update .special-offer-grid .purchasemodal-cards .offer_btn {
+  position: absolute;
+  top: -15%;
+  left: 18%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  font-weight: 500;
+}
+
+.special-offer-grid .purchasemodal-cards {
+margin-top: 50px;
+}
+
+.box_updated_bg,.box_updated_bgbox-active,.redeem-method-box.box-active {
+  border-radius: 20px;
+/* border: 1px solid #FFC700; */
+border: 1px solid #ffc70029;
+background: linear-gradient(141deg, rgb(56 51 34) -5.45%, rgb(43 44 48) 44.99%, rgb(22 23 27) 99.63%);
+}
+
+.redeem-method-box_updated {
+max-width: 305px;
+}
+
+.redeem_container_gap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.updated_cryto_form {
+  background: linear-gradient(141deg, rgb(38 39 47) -5.45%, rgb(28 30 38) 44.99%, rgb(22 24 32) 99.63%);
+  border: 1px solid #ffffff17;
+  max-width: 1080px;
+  width: 100%;
+}
+
+.updated_cryto_form_data {
+  max-width: 639px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form_updated_input {
+  border-radius: 10px !important;
+    border: 1px solid var(--Gold-Stroke, #FFC700) !important;
+    background: #1F2332 !important;
+    box-shadow: none !important;
+    text-align: center;
+}
+
+
+.updated_cryto_form p{
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.updated_cryto_form p>span{
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.new_btn_wd {
+  max-width:645px;
+  width: 100% !important;
+  min-height: 54px;
+  margin-top: 20px;
+}
+.updated_cryto_form h5 {
+color: #6a6d73;
+}
+
+.withdraw_content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.withdraw_content .fiat-group {
+  flex: 1 1 48%;
+}
+.withdraw_content .fiat-group_first {
+max-width: unset !important;
+width: 100% !important;
+}
+.withdraw_content .fiat-group:nth-child(1){
+  max-width: 165px;
+  width: 100%;
+}
+
+.updated_cryto_form_data .form_heading {
+  font-size: 20px;
+}
+
+.form_top {
+  margin-bottom: 50px;
+}
+
+.withdraw_content  .form-label {
+  width: 100%;
+  text-align: left !important;
+}

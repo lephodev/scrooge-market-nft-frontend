@@ -176,7 +176,7 @@ function RedeemPrizes() {
       <main className="main redeem-prizes-page redeem-page">
         <div className="container">
           {globalLoader && <PageLoader />}
-          <div className="bordered-section">
+          <div className="bordered-section redeem_container_gap">
             {redeemSuccess ? (
               <div className="pageImgContainer">
                 <div className="loading-txt">
@@ -199,7 +199,7 @@ function RedeemPrizes() {
               <>
                 <div className="scrooge-main-heading">
                   <div className="pageTitle">
-                    <h1 className="title">Sweepstakes Redemption</h1>
+                    <h1 className="title updated_text_color text_shadow_none text-capitalize pt-5">Sweepstakes Redemption</h1>
                   </div>
                   {/* <div className="page-sub-title">
                     <h2>
@@ -209,25 +209,27 @@ function RedeemPrizes() {
                     </h2>
                   </div> */}
                 </div>
-                <div className="prizes-chip-count m-0">
+                <div className="prizes-chip-count m-0 prizes-chip-count_update">
                   {user ? (
                     <>
                       <h3>
+                      <span>
                         Redeemable ST Balance :{" "}
-                        <span>
+                        </span>
                           {" "}
                           {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
-                        </span>
+                       
                       </h3>
                       <h3>
+                      <span>
                         USD Value :{" "}
-                        <span>
+                        </span>
                           ${" "}
                           {(
                             user?.wallet / 100 -
                             user?.nonWithdrawableAmt / 100
                           ).toFixed(2)}
-                        </span>
+                       
                       </h3>
                     </>
                   ) : (
@@ -242,7 +244,7 @@ function RedeemPrizes() {
                 </div>
                 <div className="page-nav-header-btns-row">
                   <div
-                    className={`redeem-method-box ${
+                    className={`redeem-method-box redeem-method-box_updated box_updated_bg ${
                       showFastWithdraw ? "box-active" : ""
                     }`}
                     onClick={() => filterPrizes("fast_withdraw")}
@@ -273,7 +275,7 @@ function RedeemPrizes() {
                   </div>
 
                   <div
-                    className={`redeem-method-box ${
+                    className={`redeem-method-box redeem-method-box_updated box_updated_bg${
                       buyWithFiat ? "box-active" : ""
                     }`}
                     onClick={() => filterPrizes("Fiat")}
@@ -330,11 +332,11 @@ function RedeemPrizes() {
                     getUserDataInstant={getUserDataInstant}
                   />
                 )}
-                <div className="redemption-history">
+                <div className="redemption-history redemption-history_updated">
                   <a
                     href={`${scroogeClient}/profile?active=redemption`}
                     target="_blank"
-                    className="pdf-down"
+                    className="pdf-down updated_bg_btn"
                     rel="noreferrer"
                   >
                     Click Here to View Redemption History
@@ -343,7 +345,7 @@ function RedeemPrizes() {
                 <div className="download-pdf-grid">
                   <a href={Pdf} target="blank" className="pdf-down">
                     {" "}
-                    How it works! Click here to download pdf.
+                    How it works! <sapn className="text-decoration-underline">Click here to download pdf.</sapn>
                   </a>
                 </div>
               </>
