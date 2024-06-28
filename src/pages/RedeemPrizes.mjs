@@ -61,6 +61,8 @@ function RedeemPrizes() {
       selectedChain === ChainId.BinanceSmartChainMainnet
     ) {
     }
+
+    
   }, [user, isMismatched, address, signer]);
 
   const redemptionUnderMaintainance = false;

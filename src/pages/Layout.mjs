@@ -44,6 +44,7 @@ import {
 import { Button, Container, Nav, Navbar, Spinner } from "react-bootstrap";
 import AuthContext from "../context/authContext.ts";
 import ConnectWalletModel from "./models/connectWalletModel.mjs";
+import { marketPlaceInstance } from "../config/axios.js";
 
 export const Tooltip = (id, metadata, message) => (
   <Popup
@@ -184,8 +185,22 @@ const Layout = ({ children }) => {
   useEffect(() => {
     if (address) {
       setLoaderAddress(false);
+      saveConnectWallet(address);
     }
   }, [address]);
+
+  const saveConnectWallet = async (walletAddress) => {
+    try {
+      console.log("lasyout address", walletAddress);
+
+      const res = await (
+        await marketPlaceInstance()
+      ).post("/saveUserconnectedWallet", { walletAddress });
+      console.log("resres", res);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   return (
     <>
       <ConnectWalletModel
