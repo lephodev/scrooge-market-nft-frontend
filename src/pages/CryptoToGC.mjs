@@ -756,125 +756,224 @@ export default function CryptoToGC() {
                         </div>
                       )}
 
+                      {isMegaBuyShow /* && user.megaOffer.length !== 3 */ && (
+                        <div className="special-offer-grid">
+                          <h5>free Spin Offer</h5>
+                          <div className="purchasemodal-cards">
+                            {allPrizes.map((prize, i) => (
+                              <>
+                                {prize.offerType === "freeSpin" && (
+                                  <>
+                                    <Card key={prize._id}>
+                                      <h3 className="mega-text pulses">
+                                        Free Spin
+                                      </h3>
+                                      <Card.Img variant="top" src={coin3} />
+                                      <Card.Body>
+                                        <Card.Title>
+                                          GC {prize?.gcAmount}
+                                        </Card.Title>
+
+                                        {selectedTypeDropdown === "Paypal" ? (
+                                          getExactPrice(prize?.priceInBUSD) >
+                                            0 && (
+                                            <Button
+                                              variant="primary"
+                                              onClick={() =>
+                                                handleShowPaypalModel(
+                                                  parseFloat(
+                                                    prize?.priceInBUSD
+                                                  ),
+                                                  prize.gcAmount
+                                                )
+                                              }
+                                            >
+                                              <p>Buy With Paypal</p>{" "}
+                                              <span>
+                                                $
+                                                {getExactPrice(
+                                                  prize?.priceInBUSD,
+                                                  promoDetails
+                                                )}
+                                              </span>
+                                            </Button>
+                                          )
+                                        ) : selectedTypeDropdown ===
+                                          "Credit Card" ? (
+                                          getExactPrice(prize?.priceInBUSD) >
+                                            0 && (
+                                            <PayWithCard
+                                              spendedAmount={spendedAmount}
+                                              prize={prize}
+                                              getExactPrice={getExactPrice}
+                                              getExactGC={getExactGC}
+                                              getExactToken={getExactToken}
+                                              promoDetails={promoDetails}
+                                              index={i}
+                                              setBuyLoading={setBuyLoading}
+                                              selectedTypeDropdown={
+                                                selectedTypeDropdown
+                                              }
+                                              dailyGCPurchaseLimit={
+                                                dailyGCPurchaseLimit
+                                              }
+                                              user={user}
+                                            />
+                                          )
+                                        ) : (
+                                          <>
+                                            {" "}
+                                            <Button variant="primary">
+                                              <p>Buy with Cash App </p>{" "}
+                                              <span>
+                                                $
+                                                {getExactPrice(
+                                                  prize?.priceInBUSD
+                                                )}
+                                              </span>
+                                            </Button>
+                                          </>
+                                        )}
+                                      </Card.Body>
+                                      <div className="goldPurchase-offers">
+                                        Free ST:{" "}
+                                        <img src={sweep} alt="sweep token" />{" "}
+                                        {prize?.freeTokenAmount}
+                                      </div>
+                                    </Card>
+                                  </>
+                                )}
+                              </>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                       <div className="purchasemodal-cards">
                         {allPrizes.map((prize, i) => (
                           <>
-                            {prize.offerType !== "MegaOffer" && (
-                              <Card key={prize._id}>
-                                <Card.Img
-                                  variant="top"
-                                  src={
-                                    prize.priceInBUSD <= 10
-                                      ? coin1
-                                      : 10 < prize.priceInBUSD &&
-                                        prize.priceInBUSD <= 50
-                                      ? coin2
-                                      : 50 < prize.priceInBUSD &&
-                                        prize.priceInBUSD <= 100
-                                      ? coin3
-                                      : 100 < prize.priceInBUSD
-                                      ? coin4
-                                      : ""
-                                  }
-                                />
-                                <Card.Body>
-                                  <Card.Title>
-                                    GC{" "}
-                                    {getExactGC(prize?.gcAmount, promoDetails)}
-                                  </Card.Title>
-                                  {promoDetails?.couponCode && (
-                                    <>
-                                      {prize.freeTokenAmount !== "25000" && (
-                                        <Card.Title className="cross-text">
-                                          GC {getExactGC(prize?.gcAmount, {})}
-                                        </Card.Title>
+                            {prize.offerType !== "MegaOffer" &&
+                              prize.offerType !== "freeSpin" && (
+                                <Card key={prize._id}>
+                                  <Card.Img
+                                    variant="top"
+                                    src={
+                                      prize.priceInBUSD <= 10
+                                        ? coin1
+                                        : 10 < prize.priceInBUSD &&
+                                          prize.priceInBUSD <= 50
+                                        ? coin2
+                                        : 50 < prize.priceInBUSD &&
+                                          prize.priceInBUSD <= 100
+                                        ? coin3
+                                        : 100 < prize.priceInBUSD
+                                        ? coin4
+                                        : ""
+                                    }
+                                  />
+                                  <Card.Body>
+                                    <Card.Title>
+                                      GC{" "}
+                                      {getExactGC(
+                                        prize?.gcAmount,
+                                        promoDetails
                                       )}
-                                    </>
-                                  )}
-                                  {selectedTypeDropdown === "Paypal" ? (
-                                    getExactPrice(
-                                      prize?.priceInBUSD,
+                                    </Card.Title>
+                                    {promoDetails?.couponCode && (
+                                      <>
+                                        {prize.freeTokenAmount !== "25000" && (
+                                          <Card.Title className="cross-text">
+                                            GC {getExactGC(prize?.gcAmount, {})}
+                                          </Card.Title>
+                                        )}
+                                      </>
+                                    )}
+                                    {selectedTypeDropdown === "Paypal" ? (
+                                      getExactPrice(
+                                        prize?.priceInBUSD,
+                                        promoDetails
+                                      ) > 0 && (
+                                        <Button
+                                          variant="primary"
+                                          onClick={() =>
+                                            handleShowPaypalModel(
+                                              parseFloat(prize?.priceInBUSD),
+                                              prize?.gcAmount
+                                            )
+                                          }
+                                        >
+                                          <p>Buy With Paypal</p>{" "}
+                                          <span>
+                                            $
+                                            {getExactPrice(
+                                              prize?.priceInBUSD,
+                                              promoDetails
+                                            )}
+                                          </span>
+                                        </Button>
+                                      )
+                                    ) : selectedTypeDropdown ===
+                                      "Credit Card" ? (
+                                      getExactPrice(
+                                        prize?.priceInBUSD,
+                                        promoDetails
+                                      ) > 0 && (
+                                        <PayWithCard
+                                          spendedAmount={spendedAmount}
+                                          prize={prize}
+                                          getExactPrice={getExactPrice}
+                                          getExactGC={getExactGC}
+                                          getExactToken={getExactToken}
+                                          promoDetails={promoDetails}
+                                          index={i}
+                                          setBuyLoading={setBuyLoading}
+                                          selectedTypeDropdown={
+                                            selectedTypeDropdown
+                                          }
+                                          dailyGCPurchaseLimit={
+                                            dailyGCPurchaseLimit
+                                          }
+                                          user={user}
+                                        />
+                                      )
+                                    ) : (
+                                      <>
+                                        {" "}
+                                        <Button variant="primary">
+                                          <p>Buy with Cash App </p>{" "}
+                                          <span>
+                                            $
+                                            {getExactPrice(
+                                              prize?.priceInBUSD,
+                                              promoDetails
+                                            )}
+                                          </span>
+                                        </Button>
+                                      </>
+                                    )}
+                                  </Card.Body>
+                                  <div className="goldPurchase-offers">
+                                    Free ST:{" "}
+                                    <img src={sweep} alt="sweep token" />{" "}
+                                    {promoDetails?.couponCode && (
+                                      <>
+                                        {prize.freeTokenAmount !== "25000" && (
+                                          <span className="cross-text">
+                                            {getExactToken(
+                                              prize?.freeTokenAmount,
+                                              {}
+                                            )}
+                                          </span>
+                                        )}
+                                      </>
+                                    )}{" "}
+                                    {getExactToken(
+                                      prize?.freeTokenAmount,
                                       promoDetails
-                                    ) > 0 && (
-                                      <Button
-                                        variant="primary"
-                                        onClick={() =>
-                                          handleShowPaypalModel(
-                                            parseFloat(prize?.priceInBUSD),
-                                            prize?.gcAmount
-                                          )
-                                        }
-                                      >
-                                        <p>Buy With Paypal</p>{" "}
-                                        <span>
-                                          $
-                                          {getExactPrice(
-                                            prize?.priceInBUSD,
-                                            promoDetails
-                                          )}
-                                        </span>
-                                      </Button>
-                                    )
-                                  ) : selectedTypeDropdown === "Credit Card" ? (
-                                    getExactPrice(
-                                      prize?.priceInBUSD,
-                                      promoDetails
-                                    ) > 0 && (
-                                      <PayWithCard
-                                        spendedAmount={spendedAmount}
-                                        prize={prize}
-                                        getExactPrice={getExactPrice}
-                                        getExactGC={getExactGC}
-                                        getExactToken={getExactToken}
-                                        promoDetails={promoDetails}
-                                        index={i}
-                                        setBuyLoading={setBuyLoading}
-                                        selectedTypeDropdown={
-                                          selectedTypeDropdown
-                                        }
-                                        dailyGCPurchaseLimit={
-                                          dailyGCPurchaseLimit
-                                        }
-                                        user={user}
-                                      />
-                                    )
-                                  ) : (
-                                    <>
-                                      {" "}
-                                      <Button variant="primary">
-                                        <p>Buy with Cash App </p>{" "}
-                                        <span>
-                                          $
-                                          {getExactPrice(
-                                            prize?.priceInBUSD,
-                                            promoDetails
-                                          )}
-                                        </span>
-                                      </Button>
-                                    </>
-                                  )}
-                                </Card.Body>
-                                <div className="goldPurchase-offers">
-                                  Free ST: <img src={sweep} alt="sweep token" />{" "}
-                                  {promoDetails?.couponCode && (
-                                    <>
-                                      {prize.freeTokenAmount !== "25000" && (
-                                        <span className="cross-text">
-                                          {getExactToken(
-                                            prize?.freeTokenAmount,
-                                            {}
-                                          )}
-                                        </span>
-                                      )}
-                                    </>
-                                  )}{" "}
-                                  {getExactToken(
-                                    prize?.freeTokenAmount,
-                                    promoDetails
-                                  )}
-                                </div>
-                              </Card>
-                            )}
+                                    )}
+                                  </div>
+                                </Card>
+                              )}
                           </>
                         ))}
                       </div>
