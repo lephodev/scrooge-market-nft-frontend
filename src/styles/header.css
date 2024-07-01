@@ -24,6 +24,7 @@
     gap: 5px;
 }
 
+
 .new_header_container .header-content,.navbar_wd {
     max-width: 1360px;
     width: 100%;
@@ -284,7 +285,7 @@ width: 100%;
 }
 
 
-.new_header_container .navbar-collapse,.navbar-expand-lg .navbar-nav  {
+.new_header_container .navbar-collapse, .new_header_container .navbar-nav  {
     overflow-x: hidden !important;
     border-width: 1px;
     border-image-slice: 1 !important;

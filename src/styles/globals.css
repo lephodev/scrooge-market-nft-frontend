@@ -90,7 +90,8 @@ html {
 .header {
   top: 0%;
   z-index: 9999;
-  background: #000;
+  /* background: #000; */
+  background: #10121a;
   position: relative;
 }
 
@@ -186,6 +187,7 @@ html {
 
 .logo-mobile {
   display: none;
+  padding: 20px 0px;
 }
 
 .logo {
@@ -2087,7 +2089,8 @@ select {
 
 .wrapper:before {
   content: "";
-  background: #000000c7;
+  /* background: #000000c7; */
+  background: #10121a;
   position: absolute;
   bottom: 0;
   top: 0;
@@ -2097,6 +2100,7 @@ select {
 
 .wrapper {
   background: url(https://blackwallpaperhd.com/wp-content/uploads/2022/01/texture35.jpg);
+  /* background: #10121a; */
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -2106,6 +2110,7 @@ select {
 
 .content {
   position: relative;
+  background: #10121a;
 }
 
 .mobile-menu {
@@ -2327,7 +2332,7 @@ li#walletConnect {
   font-weight: 600;
 }
 .or-grid {
-  width: 4%;
+  width: 8%;
   text-align: center;
 }
 .or-grid span {
@@ -2364,8 +2369,11 @@ li#walletConnect {
   height: unset !important;
 }
 .spin-button button {
-  background-color: #fbff14;
-  border-radius: 26px;
+  /* background-color: #fbff14; */
+  background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
+  /* -webkit-box-shadow: 0 0 40px rgba(255, 205, 25, 0.50); */
+  /* border-radius: 26px; */
+  border-radius: 15px;
   border: none;
   color: #000;
   cursor: pointer;
@@ -2384,18 +2392,26 @@ li#walletConnect {
 
 @-webkit-keyframes glowing {
   0% {
-    background-color: #fbff14;
-    -webkit-box-shadow: 0 0 3px #fbff14;
+    /* background-color: #fbff14;
+    -webkit-box-shadow: 0 0 3px #fbff14; */
+
+background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
+/* box-shadow: 0px 4px 51.7px 0px rgba(255, 205, 25, 0.50); */
+-webkit-box-shadow: 0 0 3px rgba(255, 205, 25, 0.50);
   }
 
   50% {
-    background-color: #fdff8f;
-    -webkit-box-shadow: 0 0 40px #fdff8f;
+    /* background-color: #fdff8f;
+    -webkit-box-shadow: 0 0 40px #fdff8f; */
+    background: var(--Gold-Stroke, linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%));
+    -webkit-box-shadow: 0 0 40px rgba(255, 205, 25, 0.50);
   }
 
   100% {
     background-color: #fbff14;
     -webkit-box-shadow: 0 0 3px #fbff14;
+    background: var(--Gold-Stroke, linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%));
+    -webkit-box-shadow: 0 0 3px rgba(255, 205, 25, 0.50);
   }
 }
 
@@ -3186,7 +3202,7 @@ ul.footer-support li img {
   display: flex;
   justify-content: center;
   gap: 40px;
-  padding: 20px 0px;
+  padding: 35px 0px;
 }
 .redeem-info-grid h5 {
   color: #f8d761;
@@ -3194,7 +3210,7 @@ ul.footer-support li img {
   font-weight: 500;
   line-height: 150%;
   margin: 0;
-  padding-bottom: 10px;
+  padding-bottom: 25px;
   text-transform: capitalize;
 }
 .redeem-info-grid h5 span {
@@ -5759,7 +5775,7 @@ body.modal-open {
     position: absolute;
     right: 20px;
     border: none;
-    background: #f9ff00;
+    /* background: #f9ff00; */
     top: 50%;
     transform: translateY(-50%);
     width: 40px;
@@ -5769,6 +5785,8 @@ body.modal-open {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
+    /* -webkit-box-shadow: 0 0 40px rgba(255, 205, 25, 0.50);; */
   }
 
   .header-btn {
@@ -5814,6 +5832,33 @@ body.modal-open {
   .logo-mobile {
     display: block;
   }
+
+
+  /* menu design update */
+  .user-profile .dropdown {
+    display: none !important;
+  }
+  .notifyProfileheader {
+    margin-right: 40px;
+  }
+  .new_header_container .navbar-nav{
+   border-bottom: none !important;
+   padding-top: 20px !important;
+  }
+
+  .new_header_container .navItem {
+     flex-direction: column;
+     gap: 30px;
+     border-bottom: none;
+  }
+
+
+  .new_header_container .navbar-collapse {
+    border:none !important;
+  }
+  .new_header_container .header-content {
+	border-bottom: 1px solid #ffcf24;
+}
 }
 
 @media screen and (max-width: 991px) {
@@ -5944,7 +5989,7 @@ body.modal-open {
     position: absolute;
     right: 20px;
     border: none;
-    background: #f9ff00;
+    /* background: #f9ff00; */
     top: 50%;
     transform: translateY(-50%);
     width: 40px;
@@ -5954,6 +5999,7 @@ body.modal-open {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
   }
 
   .header-btn {
@@ -7006,6 +7052,18 @@ body.modal-open {
     opacity: 0.6;
     cursor: not-allowed;
   }
+  .slotLobby-mode {
+    min-width: 180px !important;
+  }
+  .special-offer-grid .purchasemodal-cards {
+    max-width: 100%;
+  }
+  .prizes-chip-count_update {
+    flex-direction: column;
+  }
+  .daily_spin_container .risk-grid { 
+    padding: 20px 15px !important;
+  }
 }
 
 
@@ -7217,6 +7275,7 @@ background: linear-gradient(141deg, rgb(56 51 34) -5.45%, rgb(43 44 48) 44.99%, 
 
 .redeem-method-box_updated {
 max-width: 305px;
+height: 329px;
 }
 
 .redeem_container_gap {
@@ -7298,4 +7357,43 @@ width: 100% !important;
 .withdraw_content  .form-label {
   width: 100%;
   text-align: left !important;
+}
+
+
+/* daily spin upadated css */
+
+.daily_spin_container .spin-button {
+  padding: 0px;
+
+}
+.daily_spin_container .risk-grid {
+  /* max-width: 315px; */
+  width: 42%;
+  border-radius: 20px;
+  padding: 20px 40px;
+  border: 1px solid #ffc70029;
+  background: linear-gradient(141deg, rgb(56 51 34) -5.45%, rgb(43 44 48) 44.99%, rgb(22 23 27) 99.63%);
+}
+
+.daily_spin_container .spin-popup-content .spin-wheel {
+max-width: 910px;
+background: none;
+}
+
+.daily_spin_container .heading_text {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.daily_spin_container .title-memo {
+  color: white;
+  padding-bottom: 30px;
+}
+
+.daily_spin_container .or-grid span {
+  color: white;
+}
+
+.daily_spin_container .risk-grid p {
+  color: white;
 }
