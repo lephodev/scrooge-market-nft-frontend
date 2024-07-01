@@ -37,6 +37,7 @@ export default function Home() {
   };
 
   const handleConnect = () => {
+    console.log("Home address", address);
     setLoaderAddress(true);
 
     setShowConnect(!showConnect);
@@ -44,28 +45,29 @@ export default function Home() {
 
   return (
     <Layout>
-      <main className='main home-page'>
-        <div className='container'>
+      <main className="main home-page">
+        <div className="container">
           {/* <img className="collection-header-img" src={ScroogeCasino} alt="Everything you need for Scrooge Casino" /> */}
-          <div className='title'>NFT MARKETPLACE</div>
+          <div className="title">NFT MARKETPLACE</div>
 
           {isMismatched ? <SwitchNetworkBSC /> : <span></span>}
 
           {!address ? (
             <div>
-              <p className='description'>
+              <p className="description">
                 Get started by connecting your wallet.
               </p>
 
-              <div className='connect-wallet-div'>
+              <div className="connect-wallet-div">
                 <ConnectWalletModel
                   show={showConnect}
                   handleConnectWallet={handleConnectWallet}
                   handleConnect={handleConnect}
                 />
                 <Button
-                  className='home-meta-btn'
-                  onClick={() => handleConnectWallet()}>
+                  className="home-meta-btn"
+                  onClick={() => handleConnectWallet()}
+                >
                   Connect Wallet
                 </Button>
                 {/* <ConnectWallet modalTitle='Wallet supports only MetaMask, Trust Wallet, and SafePal.' /> */}
@@ -81,7 +83,7 @@ export default function Home() {
             <span></span>
           )}
 
-          <div className='grid'>
+          <div className="grid">
             {/* <Link to='/nft-tokens' className='card'>
               <h2>SHOP FOR ALL YOUR CASINO NFTS &rarr;</h2>
               <p>
@@ -95,72 +97,73 @@ export default function Home() {
               />
             </Link> */}
 
-            <Link to='/claim-free-tokens' className='card'>
+            <Link to="/claim-free-tokens" className="card">
               <h2>CLAIM MONTHLY HOLDER TOKENS &rarr;</h2>
               <p>
                 Are you a SCROOGE crypto holder? Come claim your FREE MONTHLY
                 CASINO TOKENS!
               </p>
               <img
-                className='card-img'
+                className="card-img"
                 src={CardsTokens}
-                alt='claim your Scrooge monthly holder casino tokens'
+                alt="claim your Scrooge monthly holder casino tokens"
               />
             </Link>
 
-            <Link to='/redeem-prizes' className='card'>
+            <Link to="/redeem-prizes" className="card">
               <h2>REDEEM TICKETS FOR PRIZES &rarr;</h2>
               <p>
                 Time to cash in your winnings? Browse our huge selection of
                 available prizes.
               </p>
               <img
-                className='card-img'
+                className="card-img"
                 src={TicketsGIF}
-                alt='redeem your casino tickets for prizes'
+                alt="redeem your casino tickets for prizes"
               />
             </Link>
 
-            <Link to='/earn-tokens' className='card'>
+            <Link to="/earn-tokens" className="card">
               <h2>EARN CASINO TOKENS FOR FREE &rarr;</h2>
               <p>
                 Time to cash in your winnings? Browse our huge selection of
                 available prizes.
               </p>
               <img
-                className='card-img'
+                className="card-img"
                 src={MoneyBag}
-                alt='earn free Scrooge Casino tokens'
+                alt="earn free Scrooge Casino tokens"
               />
             </Link>
 
-            <Link to='/ducky-lucks-claim-tokens' className='card'>
+            <Link to="/ducky-lucks-claim-tokens" className="card">
               <h2>COOL MOTHERDUCKERS THIS WAY &rarr;</h2>
               <p>
                 Did you know that you get FREE CASINO TOKENS monthly just for
                 holding a Ducky Lucks NFT?
               </p>
               <img
-                className='card-img'
-                src='https://casino-nft-marketplace.s3.amazonaws.com/DLGif1.gif'
-                alt='duckylucks nfts'
+                className="card-img"
+                src="https://casino-nft-marketplace.s3.amazonaws.com/DLGif1.gif"
+                alt="duckylucks nfts"
               />
             </Link>
 
             <a
               href={scroogeClient}
-              className='card'
+              className="card"
               //
-              rel='noreferrer'>
+              rel="noreferrer"
+            >
               <h2>HEAD OVER TO SCROOGE CASINO &rarr;</h2>
               <p>
                 Time to cash in your winnings? Browse our huge selection of
                 available prizes.
               </p>
               <img
-                className='card-img'
+                className="card-img"
                 src={SlotsGIF}
-                alt='visit Scrooge Casino'
+                alt="visit Scrooge Casino"
               />
             </a>
           </div>
