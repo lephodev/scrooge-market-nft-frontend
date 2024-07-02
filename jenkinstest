@@ -27,8 +27,8 @@ ls'''
     stage('Upload Build') {
           steps {
             sshPublisher(publishers: [sshPublisherDesc(configName: 'scrooge-casino-beta', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''rm -rf /home/ubuntu/Test/beta-marketplace/frontend/build
-tar -xf /home/ubuntu/Test/beta-market-build-test.tar.gz -C /home/ubuntu/Test/beta-marketplace/frontend
-rm -rf /home/ubuntu/Test/beta-market-build-test.tar.gz''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'beta-market-build-test.tar.gz')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
+tar -xf /home/ubuntu/beta-market-build-test.tar.gz -C /home/ubuntu/Test/beta-marketplace/frontend
+rm -rf /home/ubuntu/beta-market-build-test.tar.gz''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'beta-market-build-test.tar.gz')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
          }
         }
 
