@@ -2323,6 +2323,7 @@ li#walletConnect {
 .current-streak {
   position: absolute;
   right: 10px;
+  top:-2px;
 }
 .current-streak p {
   margin: 0;
@@ -6196,6 +6197,8 @@ body.modal-open {
     left: 44%;
     font-size: 28px;
   }
+
+
 }
 
 @media screen and (max-width: 767px) {
@@ -6335,6 +6338,9 @@ body.modal-open {
     font-size: 14px;
     padding: 2px 10px;
   }
+  .daily_spin_container .risk-grid {
+    min-height: 400px !important;
+ }
 }
 
 @media screen and (max-width: 720px) {

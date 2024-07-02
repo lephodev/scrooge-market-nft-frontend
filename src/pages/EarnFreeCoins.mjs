@@ -266,14 +266,14 @@ const EarnFreeCoins = () => {
                 and an expiration of 7 days if not used.
               </p>
             )}
-                    {/* {user?.loyalitySpinCount !== 30 ? (
+                    {user?.loyalitySpinCount !== 30 ? (
                       <div className="current-streak">
-                        <p>
+                        <p className="text-white">
                           Current streak :{" "}
                           <span>{user?.loyalitySpinCount}</span>{" "}
                         </p>
                       </div>
-                    ) : null} */}
+                    ) : null}
                     <div
                       className={`spin-button ${
                         isWeeklyWheelActive && user?.loyalitySpinCount === 30
