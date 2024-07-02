@@ -1,6 +1,6 @@
 import React, {useEffect, useState } from 'react'
 import newLogo from "../images/new-logo.webp";
-import { Button, Container, Dropdown, Form, Nav, Navbar } from 'react-bootstrap';
+import { Button, Dropdown, Form, Nav, Navbar } from 'react-bootstrap';
 import {
   FaPlusCircle,
 } from "react-icons/fa";
@@ -87,6 +87,7 @@ const Header = () => {
                             >
                               <a
                                 // href={`${marketPlaceUrl}/crypto-to-gc`}
+                                href='/'
                                 rel="noreferrer"
                               >
                                 <FaPlusCircle />

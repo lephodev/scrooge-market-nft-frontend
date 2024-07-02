@@ -6,7 +6,7 @@ import {
   useAddress,
 } from "@thirdweb-dev/react";
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 // import hatLogo from "../images/scroogeHatLogo.png";
 // import newLogo from "../images/new-logo.webp";
 import { useContext } from "react";
@@ -59,15 +59,15 @@ export const Tooltip = (id, metadata, message) => (
   </Popup>
 );
 
-const useCurrentPath = () => {
-  const location = useLocation();
-  const [currentPath, setCurrentPath] = useState("");
+// const useCurrentPath = () => {
+//   const location = useLocation();
+//   const [currentPath, setCurrentPath] = useState("");
 
-  useEffect(() => {
-    setCurrentPath(location.pathname);
-  }, [location]);
-  return currentPath;
-};
+//   useEffect(() => {
+//     setCurrentPath(location.pathname);
+//   }, [location]);
+//   return currentPath;
+// };
 
 const Layout = ({ children }) => {
   const { user } = useContext(AuthContext);
@@ -75,15 +75,15 @@ const Layout = ({ children }) => {
   const address = useAddress();
 
   // const { user } = useContext(AuthContext);
-  const [currentPriceOG, setCurrentPriceOG] = useState("");
-  const [priceColor, setPriceColor] = useState("");
-  const [navOpen, setNavOpen] = useState(false);
+  // const [currentPriceOG, setCurrentPriceOG] = useState("");
+  // const [priceColor, setPriceColor] = useState("");
+  // const [navOpen, setNavOpen] = useState(false);
   const [showConnect, setShowConnect] = useState(false);
-  const [loaderaddress, setLoaderAddress] = useState(false);
+  // const [loaderaddress, setLoaderAddress] = useState(false);
   // const [canSpin, setCanSpin] = useState(false);
   // const [spinTimer, setSpinTimer] = useState("");
-  const currentRoute = useCurrentPath();
-  const isActive = (routeName) => (routeName === currentRoute ? "active" : "");
+  // const currentRoute = useCurrentPath();
+  // const isActive = (routeName) => (routeName === currentRoute ? "active" : "");
   const disconnect = useDisconnect();
   const OGPrice = async () => {
     await fetch(`https://api.coinbrain.com/public/coin-info`, {
@@ -96,12 +96,12 @@ const Layout = ({ children }) => {
       .then((data) => {
         const change_pct = data[0].priceUsd24hAgo;
         if (change_pct > 0) {
-          setPriceColor("green");
+          // setPriceColor("green");
         } else if (change_pct < 0) {
-          setPriceColor("red");
+          // setPriceColor("red");
         }
         const current_price = data[0].priceUsd;
-        setCurrentPriceOG(current_price.toFixed(10));
+        // setCurrentPriceOG(current_price.toFixed(10));
         return current_price;
       })
       .catch((e) => {
@@ -162,7 +162,7 @@ const Layout = ({ children }) => {
     useEffect(() => {
       const handleClickOutside = (event) => {
         if (ref.current && !ref.current.contains(event.target)) {
-          setNavOpen(false);
+          // setNavOpen(false);
         }
       };
       document.addEventListener("mousedown", handleClickOutside);
@@ -178,14 +178,14 @@ const Layout = ({ children }) => {
   };
 
   const handleConnect = () => {
-    setLoaderAddress(true);
+    // setLoaderAddress(true);
 
     setShowConnect(!showConnect);
   };
 
   useEffect(() => {
     if (address) {
-      setLoaderAddress(false);
+      // setLoaderAddress(false);
       saveConnectWallet(address);
     }
   }, [address]);

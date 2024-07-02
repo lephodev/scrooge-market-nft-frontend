@@ -231,7 +231,7 @@ console.log("paymentType===>",paymentType?.value,options);
               </div>
           <div className="fiat-content withdraw_content">
         
-            <Form.Group className={` ${paymentType?.value == undefined?"fiat-group_first":""} fiat-group`}>
+            <Form.Group className={` ${paymentType?.value === undefined?"fiat-group_first":""} fiat-group`}>
               <Select
                 options={options}
                 onChange={handleChnagePayout}
