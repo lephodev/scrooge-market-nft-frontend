@@ -18,6 +18,7 @@ const AuthrizeCustomModel = ({
   amount,
   promoCode,
   prize,
+  setPackageData,
 }) => {
   const { user } = useContext(AuthContext);
 
@@ -237,6 +238,7 @@ const AuthrizeCustomModel = ({
       setLoader(false);
       console.log("res", res);
       if (res?.data?.success) {
+        setPackageData(res?.data?.package);
         handleClosePayForm();
         setCardNumber("");
         setExpDate("");

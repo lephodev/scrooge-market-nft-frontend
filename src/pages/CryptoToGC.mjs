@@ -83,6 +83,7 @@ export default function CryptoToGC() {
 
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState("");
+  const [packgaeData, setPackageData] = useState();
 
   useEffect(() => {
     const params = searchParams.get("status");
@@ -507,6 +508,8 @@ export default function CryptoToGC() {
         freeSTDetail={freeSTDetail}
         setPromoCode={setPromoCode}
       />
+
+      {console.log("package---->>>", packgaeData)}
       {(status === "success" || status === "inprogress") && (
         <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
       )}
@@ -700,6 +703,7 @@ export default function CryptoToGC() {
                                                 dailyGCPurchaseLimit
                                               }
                                               user={user}
+                                              setPackageData={setPackageData}
                                             />
                                           </h3>
                                         ) : (
@@ -776,6 +780,9 @@ export default function CryptoToGC() {
                                                     dailyGCPurchaseLimit
                                                   }
                                                   user={user}
+                                                  setPackageData={
+                                                    setPackageData
+                                                  }
                                                 />
                                               )
                                             ) : (
@@ -899,6 +906,7 @@ export default function CryptoToGC() {
                                             dailyGCPurchaseLimit
                                           }
                                           user={user}
+                                          setPackageData={setPackageData}
                                         />
                                       )
                                     ) : (
@@ -1023,6 +1031,7 @@ const PayWithCard = ({
   dailyGCPurchaseLimit,
   spendedAmount,
   user,
+  setPackageData,
 }) => {
   const [showAuthForm, setShowAuthForm] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -1130,6 +1139,7 @@ const PayWithCard = ({
         amount={prize?.priceInBUSD}
         promoCode={promoCode}
         prize={prize}
+        setPackageData={setPackageData}
       />
     </>
   );
