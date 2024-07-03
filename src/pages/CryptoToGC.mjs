@@ -36,6 +36,7 @@ import FreeSTModel from "./models/FreeSTModel.mjs";
 import AuthrizeCustomModel from "./models/authrizeCustomModel.mjs";
 import PaypalModel from "./models/paypalModel.mjs";
 import { userKycDetails } from "../utils/api.mjs";
+import FreeSpinModel from "./models/freeSpinModel.mjs";
 let promoCode;
 let goldcoinAmount;
 
@@ -84,6 +85,7 @@ export default function CryptoToGC() {
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState("");
   const [packgaeData, setPackageData] = useState();
+  const [showFreeSpin, setShowFreeSpin] = useState(true);
 
   useEffect(() => {
     const params = searchParams.get("status");
@@ -429,6 +431,10 @@ export default function CryptoToGC() {
     setShowFreeST(false);
   };
 
+  const handleCloseFreeSpin = () => {
+    setShowFreeSpin(false);
+  };
+
   const handleShowPaypalModel = (amount, gc) => {
     if (dailyGCPurchaseLimit >= 4) {
       return toast.error("Credit card daily purchase limit are reached");
@@ -510,6 +516,13 @@ export default function CryptoToGC() {
       />
 
       {console.log("package---->>>", packgaeData)}
+
+      {packgaeData?.offerType === "freeSpin" && (
+        <FreeSpinModel
+          showFreeSpin={showFreeSpin}
+          handleCloseFreeSpin={handleCloseFreeSpin}
+        />
+      )}
       {(status === "success" || status === "inprogress") && (
         <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
       )}
