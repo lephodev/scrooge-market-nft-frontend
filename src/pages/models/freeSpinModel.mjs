@@ -23,15 +23,9 @@ const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin }) => {
   };
   return (
     <>
-      <Modal
-        className="contest-modal"
-        centered
-        size="lg"
-        show={showFreeSpin}
-        onHide={handleCloseFreeSpin}
-      >
+      <Modal className="contest-modal" centered size="lg" show={showFreeSpin}>
         <div className="contest-banner-slider">
-          <Modal.Header closeButton>
+          <Modal.Header>
             <div className="contest-title-grid">YOU GOT 50 FREE SPINS </div>
           </Modal.Header>
           <Modal.Body>
