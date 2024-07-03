@@ -523,9 +523,14 @@ export default function CryptoToGC() {
           handleCloseFreeSpin={handleCloseFreeSpin}
         />
       )}
-      {(status === "success" || status === "inprogress") && (
-        <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
-      )}
+      {(status === "success" || status === "inprogress") &&
+        packgaeData?.offerType !== "freeSpin" && (
+          <AuthorizeSucessModel
+            show={true}
+            status={status}
+            handleOk={handleOk}
+          />
+        )}
 
       {prizesLoading ? (
         <PageLoader />
