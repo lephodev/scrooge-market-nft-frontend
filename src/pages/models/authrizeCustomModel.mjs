@@ -11,6 +11,7 @@ import Select from "react-select";
 import AuthorizeSucessModel from "./authrizeSucessModel.mjs";
 import AuthContext from "../../context/authContext.ts";
 import { Encrypt } from "../../config/incript.mjs";
+import FreeSpinModel from "./freeSpinModel.mjs";
 
 const AuthrizeCustomModel = ({
   showAuthForm,
@@ -18,7 +19,7 @@ const AuthrizeCustomModel = ({
   amount,
   promoCode,
   prize,
-  setPackageData,
+  getGCPackages,
 }) => {
   const { user } = useContext(AuthContext);
 
@@ -128,6 +129,9 @@ const AuthrizeCustomModel = ({
     value: "US",
     label: "US",
   });
+
+  const [packgaeData, setPackageData] = useState();
+  const [showFreeSpin /* setShowFreeSpin */] = useState(true);
 
   const countries = [
     { value: "US", label: "US" },
@@ -275,17 +279,26 @@ const AuthrizeCustomModel = ({
     }
   };
 
+  const handleCloseFreeSpin = () => {
+    window.location.href = "/crypto-to-gc";
+  };
+
   useEffect(() => {
     setValue("country", "US");
   }, []);
 
   return (
     <>
-      {success ? (
+      {packgaeData?.offerType !== "freeSpin" && success ? (
         <AuthorizeSucessModel
           show={true}
           status={"success"}
           handleOk={handleOk}
+        />
+      ) : packgaeData?.offerType === "freeSpin" ? (
+        <FreeSpinModel
+          showFreeSpin={showFreeSpin}
+          handleCloseFreeSpin={handleCloseFreeSpin}
         />
       ) : (
         <Modal

@@ -83,43 +83,6 @@ export default function CryptoToGC() {
   );
 
   const [searchParams] = useSearchParams();
-  const [status, setStatus] = useState("");
-  const [packgaeData, setPackageData] = useState();
-  const [showFreeSpin, setShowFreeSpin] = useState(true);
-
-  useEffect(() => {
-    const params = searchParams.get("status");
-    if (params) {
-      if (params === "success") {
-        setStatus("inprogress");
-      }
-
-      setTimeout(() => {
-        setStatus(params);
-      }, 20000);
-    }
-  }, [searchParams]);
-  const getUserDataInstant = async () => {
-    let access_token = cookies.token;
-    (await authInstance())
-      .get("/auth", {
-        // headers: {
-        //   Authorization: `Bearer ${access_token}`,
-        //   "Permissions-Policy": "geolocation=*",
-        // },
-      })
-      .then((res) => {
-        if (res.data.user) {
-          setUser({
-            ...res.data.user,
-          });
-          setSpendedAmount(res.data.spended);
-        }
-      })
-      .catch((err) => {
-        console.log("error ", err);
-      });
-  };
 
   const handlePromoReject = () => {
     setPromoDetails({});
@@ -388,17 +351,6 @@ export default function CryptoToGC() {
     return parseInt(Token) + discount;
   };
 
-  const handleOk = async (event) => {
-    try {
-      console.log("handleOk");
-      getGCPurcahseLimitPerDay();
-      setStatus("");
-      window.location.href = "/crypto-to-gc";
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
-
   let arrc = [4.99, 14.99, 49.99, 99.99];
   console.log("avsgggs", avgValue);
   let greaterThanValue = arrc.filter((value) => value > avgValue);
@@ -429,10 +381,6 @@ export default function CryptoToGC() {
 
   const handleCloseFreeST = () => {
     setShowFreeST(false);
-  };
-
-  const handleCloseFreeSpin = () => {
-    setShowFreeSpin(false);
   };
 
   const handleShowPaypalModel = (amount, gc) => {
@@ -514,23 +462,6 @@ export default function CryptoToGC() {
         freeSTDetail={freeSTDetail}
         setPromoCode={setPromoCode}
       />
-
-      {console.log("package---->>>", packgaeData)}
-
-      {packgaeData?.offerType === "freeSpin" && (
-        <FreeSpinModel
-          showFreeSpin={showFreeSpin}
-          handleCloseFreeSpin={handleCloseFreeSpin}
-        />
-      )}
-      {(status === "success" || status === "inprogress") &&
-        packgaeData?.offerType !== "freeSpin" && (
-          <AuthorizeSucessModel
-            show={true}
-            status={status}
-            handleOk={handleOk}
-          />
-        )}
 
       {prizesLoading ? (
         <PageLoader />
@@ -721,7 +652,7 @@ export default function CryptoToGC() {
                                                 dailyGCPurchaseLimit
                                               }
                                               user={user}
-                                              setPackageData={setPackageData}
+                                              getGCPackages={getGCPackages}
                                             />
                                           </h3>
                                         ) : (
@@ -798,9 +729,7 @@ export default function CryptoToGC() {
                                                     dailyGCPurchaseLimit
                                                   }
                                                   user={user}
-                                                  setPackageData={
-                                                    setPackageData
-                                                  }
+                                                  getGCPackages={getGCPackages}
                                                 />
                                               )
                                             ) : (
@@ -924,7 +853,7 @@ export default function CryptoToGC() {
                                             dailyGCPurchaseLimit
                                           }
                                           user={user}
-                                          setPackageData={setPackageData}
+                                          getGCPackages={getGCPackages}
                                         />
                                       )
                                     ) : (
@@ -1050,6 +979,7 @@ const PayWithCard = ({
   spendedAmount,
   user,
   setPackageData,
+  getGCPackages,
 }) => {
   const [showAuthForm, setShowAuthForm] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -1158,203 +1088,8 @@ const PayWithCard = ({
         promoCode={promoCode}
         prize={prize}
         setPackageData={setPackageData}
+        getGCPackages={getGCPackages}
       />
     </>
   );
 };
-
-// const PayWithCard = ({
-// prize,
-// getExactPrice,
-// promoDetails,
-// dailyGCPurchaseLimit,
-// spendedAmount,
-// user,
-// }) => {
-//   const [liveFormToken, setFormToken] = useState(null);
-//   const [loader, setLoading] = useState(false);
-
-//   const getPromoCode = () => {
-//     console.log("prizehgfghgfhfgh", prize.priceInBUSD, promoCode);
-//     if (prize.offerType !== "MegaOffer" && prize?.priceInBUSD !== "250") {
-//       return promoCode ? promoCode : "";
-//     } else {
-//       return "";
-//     }
-//   };
-
-//   const getDDC = () => {
-//     const sessionID = uuidv4().replace(/-/g, "");
-//     console.log("sessionID", sessionID);
-//     // const sessionID = 'ghghghg';
-//     const kountConfig = {
-//       clientID: 10211,
-//       environment: "TEST",
-//       isSinglePageApp: true,
-//     };
-//     const sdk = kountSDK(kountConfig, sessionID);
-//     console.log("sdk", sdk);
-//     console.log("sdk", sdk?.sessionID);
-
-//     if (sdk) {
-//       console.log("Anti-fraud SDK activated!");
-//       return sdk;
-//       // Any non-blocking post-initialization logic can go here
-//     }
-//   };
-
-//   const handleCLick = async (gc, usd) => {
-//     let sessionId = getDDC()?.sessionID;
-//     console.log("dailyGCPurchaseLimit", dailyGCPurchaseLimit);
-// if (dailyGCPurchaseLimit >= 4) {
-//   return toast.error("Credit card daily purchase limit are reached");
-// }
-//     console.log(
-//       "spendedAmount.spended_today + usd",
-//       spendedAmount.spended_today,
-//       usd,
-//       user.dailyGoldCoinSpendingLimit
-//     );
-//     try {
-// goldcoinAmount = gc;
-// if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
-//   return toast.error(
-//     "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
-//     { toastId: "A" }
-//   );
-// }
-
-// if (
-//   spendedAmount.spened_this_week + usd >
-//   user.weeklyGoldCoinSpendingLimit
-// ) {
-//   return toast.error(
-//     "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
-//     { toastId: "B" }
-//   );
-// }
-
-// if (
-//   spendedAmount.spneded_this_month + usd >
-//   user.monthlyGoldCoinSpendingLimit
-// ) {
-//   return toast.error(
-//     "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
-//     { toastId: "C" }
-//   );
-// }
-//       setLoading(true);
-//       const res = await (
-//         await marketPlaceInstance()
-//       ).post(
-//         `/getFormToken`,
-//         {
-//           amount: prize?.priceInBUSD,
-//           promoCode: getPromoCode().trim(),
-//           sessionId,
-//         },
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           withCredentials: true,
-//           credentials: "include",
-//         }
-//       );
-//       const responseData = res?.data?.response;
-//       setFormToken(responseData?.token);
-//     } catch (error) {
-//       console.error("Error fetching form token:", error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     if (liveFormToken) {
-//       setTimeout(() => {
-//         document.getElementsByTagName("form")[0][1].click();
-//       }, 1000);
-//     }
-//   }, [liveFormToken]);
-
-//   const handleLimitCheck = (usd) => {
-//     if (
-//       spendedAmount.spneded_this_month + usd >
-//       user.monthlyGoldCoinSpendingLimit
-//     ) {
-//       console.log(
-//         "spendedAmount.spneded_this_month",
-//         spendedAmount.spneded_this_month,
-//         user.monthlyGoldCoinSpendingLimit,
-//         usd
-//       );
-
-//       return true;
-//     }
-//     if (
-//       spendedAmount.spened_this_week + usd >
-//       user.weeklyGoldCoinSpendingLimit
-//     ) {
-//       console.log(
-//         "spendedAmount.spneded_this_week",
-//         spendedAmount.spened_this_week,
-//         user.weeklyGoldCoinSpendingLimit,
-//         usd
-//       );
-
-//       return true;
-//     }
-//     if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
-//       console.log(
-//         "spendedAmount.spneded_this_day",
-//         spendedAmount.spended_today,
-//         user.dailyGoldCoinSpendingLimit,
-//         usd
-//       );
-//       return true;
-//     }
-
-//     return false;
-//   };
-
-//   return (
-//     <>
-//       {liveFormToken ? (
-//         <button id="payRedirection">
-//           <AcceptHosted
-//             formToken={liveFormToken}
-//             environment="PRODUCTION"
-//             integration="redirect"
-//           >
-//             <Spinner animation="border" />
-//           </AcceptHosted>
-//         </button>
-//       ) : (
-//         <button
-//           className={
-//             handleLimitCheck(parseFloat(prize?.priceInBUSD))
-//               ? "disable-btn-purchase"
-//               : ""
-//           }
-//           // disabled={handleLimitCheck(parseFloat(prize?.priceInBUSD))}
-//           onClick={() =>
-//             handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
-//           }
-//         >
-//           {" "}
-//           {!liveFormToken ? (
-//             !loader ? (
-//               `Buy With Card $${getExactPrice(
-//                 prize?.priceInBUSD,
-//                 promoDetails
-//               )}`
-//             ) : (
-//               <Spinner animation="border" />
-//             )
-//           ) : (
-//             ""
-//           )}
-//         </button>
-//       )}
-//     </>
-//   );
-// };
