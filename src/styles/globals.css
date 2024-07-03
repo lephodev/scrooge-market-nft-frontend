@@ -5606,6 +5606,7 @@ body.modal-open {
   }
   .special-offer-grid .purchasemodal-cards {
     max-width: 80%;
+   
   }
 }
 
@@ -6255,6 +6256,7 @@ body.modal-open {
   }
   .special-offer-grid .purchasemodal-cards {
     max-width: 80%;
+    margin: 10px;
   }
   .page-nav-header-btns-row {
     gap: 30px;

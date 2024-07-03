@@ -624,7 +624,7 @@ export default function CryptoToGC() {
                             margin: "auto",
                             cursor: "pointer",
                           }}
-                          className="special-offer-grid"
+                          className="special-offer-grid offer-grid-new"
                         >
                           <h5>Special Offer</h5>
                           {user.freeSpin.length === 0 && (
