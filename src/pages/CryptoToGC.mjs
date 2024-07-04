@@ -3,7 +3,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useContext, useEffect } from "react";
 import { AcceptHosted } from "react-acceptjs";
-import { Button, Form, Card, Dropdown, Spinner } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  Card,
+  Dropdown,
+  Spinner,
+  Tooltip,
+  OverlayTrigger,
+} from "react-bootstrap";
 import Layout from "./Layout.mjs";
 import { Helmet } from "react-helmet";
 import LoadingPoker from "../images/scroogeHatLogo.png";
@@ -12,10 +20,11 @@ import coin3 from "../images/3.png";
 import coin2 from "../images/2.png";
 import coin1 from "../images/1.png";
 import sweep from "../images/token.png";
-import freeSpin from "../images/Store-Card-promo.png";
+import freeSpin from "../images/Store-Card-promo.jpg";
 import { useSearchParams } from "react-router-dom";
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
+import { FaInfoCircle, FaQuestionCircle } from "react-icons/fa";
 
 import {
   useAddress,
@@ -628,7 +637,7 @@ export default function CryptoToGC() {
                         >
                           <h5>Special Offer</h5>
                           {user.freeSpin.length === 0 && (
-                            <div className="special-offer-grid">
+                            <div className="special-offer-grid payCardoffer">
                               <div className="">
                                 {allPrizes.map((prize, i) => (
                                   <>
@@ -1052,6 +1061,12 @@ const PayWithCard = ({
     document.getElementById("paycard").click();
   };
 
+  const renderWallet = (props) => (
+    <Tooltip className="headerTooltip" id="button-tooltip" {...props}>
+      offer expires at 11:59Pm EST Sunday July 7th.
+    </Tooltip>
+  );
+
   return (
     <>
       {prize.priceInBUSD !== "45" && (
@@ -1068,18 +1083,29 @@ const PayWithCard = ({
           )}
         </button>
       )}
-      {console.log("---->>>", prize.priceInBUSD)}
       {prize.priceInBUSD === "45" && (
-        <img
-          onClick={() =>
-            handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
-          }
-          src={freeSpin}
-          style={{
-            height: "100%",
-            width: "100%",
-          }}
-        />
+        <>
+          <OverlayTrigger
+            placement={window.innerWidth < 767 ? "right" : "left"}
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderWallet}
+          >
+            <Button variant="success" className="tooltip_btn">
+              <FaInfoCircle />
+            </Button>
+          </OverlayTrigger>
+          <img
+            onClick={() =>
+              handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
+            }
+            src={freeSpin}
+            style={{
+              height: "100%",
+              width: "100%",
+              borderRadius: "32px",
+            }}
+          />
+        </>
       )}
       <AuthrizeCustomModel
         showAuthForm={showAuthForm}

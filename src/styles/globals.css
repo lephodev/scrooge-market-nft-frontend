@@ -5457,6 +5457,7 @@ p.title-memo {
 }
 
 
+
 .payment_popup .modal-body{
   padding: 40px !important;
   position: relative !important;
@@ -7031,3 +7032,17 @@ body.modal-open {
     padding: 70px 20px;
     /* height: 33vh; */
 }}
+
+
+.payCardoffer {
+  position: relative;
+}
+
+.tooltip_btn {
+position: absolute;
+    top: -3px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px
+}
