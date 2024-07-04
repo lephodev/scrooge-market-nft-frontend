@@ -1059,7 +1059,8 @@ const PayWithCard = ({
 
   const renderWallet = (props) => (
     <Tooltip className="headerTooltip" id="button-tooltip" {...props}>
-      offer expires at 11:59Pm EST Sunday July 7th.
+      Offer expires July 7th, 11:59 Pm EST 50 free spins @ 10 ST per on The
+      Great Pigsby Limited to one purchase per user.
     </Tooltip>
   );
 
