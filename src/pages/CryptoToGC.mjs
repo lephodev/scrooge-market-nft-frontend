@@ -1,8 +1,17 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useContext, useEffect } from "react";
 import { AcceptHosted } from "react-acceptjs";
-import { Button, Form, Card, Dropdown, Spinner } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  Card,
+  Dropdown,
+  Spinner,
+  Tooltip,
+  OverlayTrigger,
+} from "react-bootstrap";
 import Layout from "./Layout.mjs";
 import { Helmet } from "react-helmet";
 import LoadingPoker from "../images/scroogeHatLogo.png";
@@ -11,9 +20,11 @@ import coin3 from "../images/3.png";
 import coin2 from "../images/2.png";
 import coin1 from "../images/1.png";
 import sweep from "../images/token.png";
+import freeSpin from "../images/Store-Card-promo.jpg";
 import { useSearchParams } from "react-router-dom";
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
+import { FaInfoCircle, FaQuestionCircle } from "react-icons/fa";
 
 import {
   useAddress,
@@ -34,6 +45,7 @@ import FreeSTModel from "./models/FreeSTModel.mjs";
 import AuthrizeCustomModel from "./models/authrizeCustomModel.mjs";
 import PaypalModel from "./models/paypalModel.mjs";
 import { userKycDetails } from "../utils/api.mjs";
+import FreeSpinModel from "./models/freeSpinModel.mjs";
 let promoCode;
 let goldcoinAmount;
 
@@ -80,41 +92,6 @@ export default function CryptoToGC() {
   );
 
   const [searchParams] = useSearchParams();
-  const [status, setStatus] = useState("");
-
-  useEffect(() => {
-    const params = searchParams.get("status");
-    if (params) {
-      if (params === "success") {
-        setStatus("inprogress");
-      }
-
-      setTimeout(() => {
-        setStatus(params);
-      }, 20000);
-    }
-  }, [searchParams]);
-  const getUserDataInstant = async () => {
-    let access_token = cookies.token;
-    (await authInstance())
-      .get("/auth", {
-        // headers: {
-        //   Authorization: `Bearer ${access_token}`,
-        //   "Permissions-Policy": "geolocation=*",
-        // },
-      })
-      .then((res) => {
-        if (res.data.user) {
-          setUser({
-            ...res.data.user,
-          });
-          setSpendedAmount(res.data.spended);
-        }
-      })
-      .catch((err) => {
-        console.log("error ", err);
-      });
-  };
 
   const handlePromoReject = () => {
     setPromoDetails({});
@@ -383,17 +360,6 @@ export default function CryptoToGC() {
     return parseInt(Token) + discount;
   };
 
-  const handleOk = async (event) => {
-    try {
-      console.log("handleOk");
-      getGCPurcahseLimitPerDay();
-      setStatus("");
-      window.location.href = "/crypto-to-gc";
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
-
   let arrc = [4.99, 14.99, 49.99, 99.99];
   console.log("avsgggs", avgValue);
   let greaterThanValue = arrc.filter((value) => value > avgValue);
@@ -411,6 +377,17 @@ export default function CryptoToGC() {
       if (parseFloat(price?.priceInBUSD) === parseFloat(arrc[0])) return true;
     }
   };
+
+  let freeSpins = [45];
+
+  const handleShowFreeSpin = (price) => {
+    let filteredArr = freeSpins.filter((item) => user.freeSpin.includes(item));
+    console.log("filteredArr", filteredArr);
+    if (parseFloat(price?.priceInBUSD) !== parseFloat(filteredArr[0])) {
+      return true;
+    }
+  };
+
   const handleCloseFreeST = () => {
     setShowFreeST(false);
   };
@@ -494,9 +471,6 @@ export default function CryptoToGC() {
         freeSTDetail={freeSTDetail}
         setPromoCode={setPromoCode}
       />
-      {(status === "success" || status === "inprogress") && (
-        <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
-      )}
 
       {prizesLoading ? (
         <PageLoader />
@@ -652,8 +626,54 @@ export default function CryptoToGC() {
                   <div className="buy-chips-content">
                     <div className="buy-chips-grid cryptoToGC">
                       {isMegaBuyShow /* && user.megaOffer.length !== 3 */ && (
-                        <div className="special-offer-grid">
+                        <div
+                          style={{
+                            height: "100%",
+                            width: "60vh",
+                            margin: "auto",
+                            cursor: "pointer",
+                          }}
+                          className="special-offer-grid offer-grid-new"
+                        >
                           <h5>Special Offer</h5>
+                          {user.freeSpin.length === 0 && (
+                            <div className="special-offer-grid payCardoffer">
+                              <div className="">
+                                {allPrizes.map((prize, i) => (
+                                  <>
+                                    {prize.offerType === "freeSpin" && (
+                                      <>
+                                        {handleShowFreeSpin(prize) ? (
+                                          <h3 className="">
+                                            <PayWithCard
+                                              spendedAmount={spendedAmount}
+                                              prize={prize}
+                                              getExactPrice={getExactPrice}
+                                              getExactGC={getExactGC}
+                                              getExactToken={getExactToken}
+                                              promoDetails={promoDetails}
+                                              index={i}
+                                              setBuyLoading={setBuyLoading}
+                                              selectedTypeDropdown={
+                                                selectedTypeDropdown
+                                              }
+                                              dailyGCPurchaseLimit={
+                                                dailyGCPurchaseLimit
+                                              }
+                                              user={user}
+                                              getGCPackages={getGCPackages}
+                                            />
+                                          </h3>
+                                        ) : (
+                                          ""
+                                        )}
+                                      </>
+                                    )}
+                                  </>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                           <div className="purchasemodal-cards">
                             {allPrizes.map((prize, i) => (
                               <>
@@ -718,6 +738,7 @@ export default function CryptoToGC() {
                                                     dailyGCPurchaseLimit
                                                   }
                                                   user={user}
+                                                  getGCPackages={getGCPackages}
                                                 />
                                               )
                                             ) : (
@@ -754,126 +775,134 @@ export default function CryptoToGC() {
                           </div>
                         </div>
                       )}
+                      {console.log("user.freeSpinuser.freeSpin", user)}
 
                       <div className="purchasemodal-cards">
                         {allPrizes.map((prize, i) => (
                           <>
-                            {prize.offerType !== "MegaOffer" && (
-                              <Card key={prize._id}>
-                                <Card.Img
-                                  variant="top"
-                                  src={
-                                    prize.priceInBUSD <= 10
-                                      ? coin1
-                                      : 10 < prize.priceInBUSD &&
-                                        prize.priceInBUSD <= 50
-                                      ? coin2
-                                      : 50 < prize.priceInBUSD &&
-                                        prize.priceInBUSD <= 100
-                                      ? coin3
-                                      : 100 < prize.priceInBUSD
-                                      ? coin4
-                                      : ""
-                                  }
-                                />
-                                <Card.Body>
-                                  <Card.Title>
-                                    GC{" "}
-                                    {getExactGC(prize?.gcAmount, promoDetails)}
-                                  </Card.Title>
-                                  {promoDetails?.couponCode && (
-                                    <>
-                                      {prize.freeTokenAmount !== "25000" && (
-                                        <Card.Title className="cross-text">
-                                          GC {getExactGC(prize?.gcAmount, {})}
-                                        </Card.Title>
+                            {prize.offerType !== "MegaOffer" &&
+                              prize.offerType !== "freeSpin" && (
+                                <Card key={prize._id}>
+                                  <Card.Img
+                                    variant="top"
+                                    src={
+                                      prize.priceInBUSD <= 10
+                                        ? coin1
+                                        : 10 < prize.priceInBUSD &&
+                                          prize.priceInBUSD <= 50
+                                        ? coin2
+                                        : 50 < prize.priceInBUSD &&
+                                          prize.priceInBUSD <= 100
+                                        ? coin3
+                                        : 100 < prize.priceInBUSD
+                                        ? coin4
+                                        : ""
+                                    }
+                                  />
+                                  <Card.Body>
+                                    <Card.Title>
+                                      GC{" "}
+                                      {getExactGC(
+                                        prize?.gcAmount,
+                                        promoDetails
                                       )}
-                                    </>
-                                  )}
-                                  {selectedTypeDropdown === "Paypal" ? (
-                                    getExactPrice(
-                                      prize?.priceInBUSD,
+                                    </Card.Title>
+                                    {promoDetails?.couponCode && (
+                                      <>
+                                        {prize.freeTokenAmount !== "25000" && (
+                                          <Card.Title className="cross-text">
+                                            GC {getExactGC(prize?.gcAmount, {})}
+                                          </Card.Title>
+                                        )}
+                                      </>
+                                    )}
+                                    {selectedTypeDropdown === "Paypal" ? (
+                                      getExactPrice(
+                                        prize?.priceInBUSD,
+                                        promoDetails
+                                      ) > 0 && (
+                                        <Button
+                                          variant="primary"
+                                          onClick={() =>
+                                            handleShowPaypalModel(
+                                              parseFloat(prize?.priceInBUSD),
+                                              prize?.gcAmount
+                                            )
+                                          }
+                                        >
+                                          <p>Buy With Paypal</p>{" "}
+                                          <span>
+                                            $
+                                            {getExactPrice(
+                                              prize?.priceInBUSD,
+                                              promoDetails
+                                            )}
+                                          </span>
+                                        </Button>
+                                      )
+                                    ) : selectedTypeDropdown ===
+                                      "Credit Card" ? (
+                                      getExactPrice(
+                                        prize?.priceInBUSD,
+                                        promoDetails
+                                      ) > 0 && (
+                                        <PayWithCard
+                                          spendedAmount={spendedAmount}
+                                          prize={prize}
+                                          getExactPrice={getExactPrice}
+                                          getExactGC={getExactGC}
+                                          getExactToken={getExactToken}
+                                          promoDetails={promoDetails}
+                                          index={i}
+                                          setBuyLoading={setBuyLoading}
+                                          selectedTypeDropdown={
+                                            selectedTypeDropdown
+                                          }
+                                          dailyGCPurchaseLimit={
+                                            dailyGCPurchaseLimit
+                                          }
+                                          user={user}
+                                          getGCPackages={getGCPackages}
+                                        />
+                                      )
+                                    ) : (
+                                      <>
+                                        {" "}
+                                        <Button variant="primary">
+                                          <p>Buy with Cash App </p>{" "}
+                                          <span>
+                                            $
+                                            {getExactPrice(
+                                              prize?.priceInBUSD,
+                                              promoDetails
+                                            )}
+                                          </span>
+                                        </Button>
+                                      </>
+                                    )}
+                                  </Card.Body>
+                                  <div className="goldPurchase-offers">
+                                    Free ST:{" "}
+                                    <img src={sweep} alt="sweep token" />{" "}
+                                    {promoDetails?.couponCode && (
+                                      <>
+                                        {prize.freeTokenAmount !== "25000" && (
+                                          <span className="cross-text">
+                                            {getExactToken(
+                                              prize?.freeTokenAmount,
+                                              {}
+                                            )}
+                                          </span>
+                                        )}
+                                      </>
+                                    )}{" "}
+                                    {getExactToken(
+                                      prize?.freeTokenAmount,
                                       promoDetails
-                                    ) > 0 && (
-                                      <Button
-                                        variant="primary"
-                                        onClick={() =>
-                                          handleShowPaypalModel(
-                                            parseFloat(prize?.priceInBUSD),
-                                            prize?.gcAmount
-                                          )
-                                        }
-                                      >
-                                        <p>Buy With Paypal</p>{" "}
-                                        <span>
-                                          $
-                                          {getExactPrice(
-                                            prize?.priceInBUSD,
-                                            promoDetails
-                                          )}
-                                        </span>
-                                      </Button>
-                                    )
-                                  ) : selectedTypeDropdown === "Credit Card" ? (
-                                    getExactPrice(
-                                      prize?.priceInBUSD,
-                                      promoDetails
-                                    ) > 0 && (
-                                      <PayWithCard
-                                        spendedAmount={spendedAmount}
-                                        prize={prize}
-                                        getExactPrice={getExactPrice}
-                                        getExactGC={getExactGC}
-                                        getExactToken={getExactToken}
-                                        promoDetails={promoDetails}
-                                        index={i}
-                                        setBuyLoading={setBuyLoading}
-                                        selectedTypeDropdown={
-                                          selectedTypeDropdown
-                                        }
-                                        dailyGCPurchaseLimit={
-                                          dailyGCPurchaseLimit
-                                        }
-                                        user={user}
-                                      />
-                                    )
-                                  ) : (
-                                    <>
-                                      {" "}
-                                      <Button variant="primary">
-                                        <p>Buy with Cash App </p>{" "}
-                                        <span>
-                                          $
-                                          {getExactPrice(
-                                            prize?.priceInBUSD,
-                                            promoDetails
-                                          )}
-                                        </span>
-                                      </Button>
-                                    </>
-                                  )}
-                                </Card.Body>
-                                <div className="goldPurchase-offers">
-                                  Free ST: <img src={sweep} alt="sweep token" />{" "}
-                                  {promoDetails?.couponCode && (
-                                    <>
-                                      {prize.freeTokenAmount !== "25000" && (
-                                        <span className="cross-text">
-                                          {getExactToken(
-                                            prize?.freeTokenAmount,
-                                            {}
-                                          )}
-                                        </span>
-                                      )}
-                                    </>
-                                  )}{" "}
-                                  {getExactToken(
-                                    prize?.freeTokenAmount,
-                                    promoDetails
-                                  )}
-                                </div>
-                              </Card>
-                            )}
+                                    )}
+                                  </div>
+                                </Card>
+                              )}
                           </>
                         ))}
                       </div>
@@ -954,11 +983,14 @@ const PayWithCard = ({
   dailyGCPurchaseLimit,
   spendedAmount,
   user,
+  setPackageData,
+  getGCPackages,
 }) => {
   const [showAuthForm, setShowAuthForm] = useState(false);
   const [loader, setLoader] = useState(false);
   const kycStatus = async () => {
     const response = await userKycDetails();
+
     if (response?.code === 200) {
       return response.message;
     }
@@ -1001,7 +1033,8 @@ const PayWithCard = ({
     }
     console.log("usd", usd);
     let status = await kycStatus();
-    if (usd > 25 && status !== "accept") {
+    console.log("status", status);
+    if (usd >= 50 && status !== "accept") {
       setLoader(false);
 
       return toast.error(
@@ -1024,223 +1057,61 @@ const PayWithCard = ({
     document.getElementById("paycard").click();
   };
 
+  const renderWallet = (props) => (
+    <Tooltip className="headerTooltip" id="button-tooltip" {...props}>
+      offer expires at 11:59Pm EST Sunday July 7th.
+    </Tooltip>
+  );
+
   return (
     <>
-      <button
-        onClick={() =>
-          handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
-        }
-      >
-        {" "}
-        {loader ? (
-          <Spinner animation="border" />
-        ) : (
-          `Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}`
-        )}
-      </button>
+      {prize.priceInBUSD !== "45" && (
+        <button
+          onClick={() =>
+            handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
+          }
+        >
+          {" "}
+          {loader ? (
+            <Spinner animation="border" />
+          ) : (
+            `Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}`
+          )}
+        </button>
+      )}
+      {prize.priceInBUSD === "45" && (
+        <>
+          <OverlayTrigger
+            placement={window.innerWidth < 767 ? "right" : "left"}
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderWallet}
+          >
+            <Button variant="success" className="tooltip_btn">
+              <FaInfoCircle />
+            </Button>
+          </OverlayTrigger>
+          <img
+            onClick={() =>
+              handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
+            }
+            src={freeSpin}
+            style={{
+              height: "100%",
+              width: "100%",
+              borderRadius: "32px",
+            }}
+          />
+        </>
+      )}
       <AuthrizeCustomModel
         showAuthForm={showAuthForm}
         setShowAuthForm={setShowAuthForm}
         amount={prize?.priceInBUSD}
         promoCode={promoCode}
         prize={prize}
+        setPackageData={setPackageData}
+        getGCPackages={getGCPackages}
       />
     </>
   );
 };
-
-// const PayWithCard = ({
-//   prize,
-//   getExactPrice,
-//   promoDetails,
-//   dailyGCPurchaseLimit,
-//   spendedAmount,
-//   user,
-// }) => {
-//   const [liveFormToken, setFormToken] = useState(null);
-//   const [loader, setLoading] = useState(false);
-
-//   const getPromoCode = () => {
-//     console.log("prizehgfghgfhfgh", prize.priceInBUSD, promoCode);
-//     if (prize.offerType !== "MegaOffer" && prize?.priceInBUSD !== "250") {
-//       return promoCode ? promoCode : "";
-//     } else {
-//       return "";
-//     }
-//   };
-
-//   // const getDDC = () => {
-//   //   const sessionID = uuidv4().replace(/-/g, "");
-//   //   console.log("sessionID", sessionID);
-//   //   // const sessionID = 'ghghghg';
-//   //   const kountConfig = {
-//   //     clientID: 10211,
-//   //     environment: "TEST",
-//   //     isSinglePageApp: true,
-//   //   };
-//   //   const sdk = kountSDK(kountConfig, sessionID);
-//   //   console.log("sdk", sdk);
-//   //   console.log("sdk", sdk?.sessionID);
-
-//   //   if (sdk) {
-//   //     console.log("Anti-fraud SDK activated!");
-//   //     return sdk;
-//   //     // Any non-blocking post-initialization logic can go here
-//   //   }
-//   // };
-
-//   const handleCLick = async (gc, usd) => {
-//     // let sessionId = getDDC()?.sessionID;
-//     console.log("dailyGCPurchaseLimit", dailyGCPurchaseLimit);
-//     if (dailyGCPurchaseLimit >= 4) {
-//       return toast.error("Credit card daily purchase limit are reached");
-//     }
-//     console.log(
-//       "spendedAmount.spended_today + usd",
-//       spendedAmount.spended_today,
-//       usd,
-//       user.dailyGoldCoinSpendingLimit
-//     );
-//     try {
-//       goldcoinAmount = gc;
-//       if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
-//         return toast.error(
-//           "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
-//           { toastId: "A" }
-//         );
-//       }
-
-//       if (
-//         spendedAmount.spened_this_week + usd >
-//         user.weeklyGoldCoinSpendingLimit
-//       ) {
-//         return toast.error(
-//           "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
-//           { toastId: "B" }
-//         );
-//       }
-
-//       if (
-//         spendedAmount.spneded_this_month + usd >
-//         user.monthlyGoldCoinSpendingLimit
-//       ) {
-//         return toast.error(
-//           "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
-//           { toastId: "C" }
-//         );
-//       }
-//       setLoading(true);
-//       const res = await (
-//         await marketPlaceInstance()
-//       ).post(
-//         `/getFormToken`,
-//         {
-//           amount: prize?.priceInBUSD,
-//           promoCode: getPromoCode().trim(),
-//           // sessionId,
-//         },
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           withCredentials: true,
-//           credentials: "include",
-//         }
-//       );
-//       const responseData = res?.data?.response;
-//       setFormToken(responseData?.token);
-//     } catch (error) {
-//       console.error("Error fetching form token:", error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     if (liveFormToken) {
-//       setTimeout(() => {
-//         document.getElementsByTagName("form")[0][1].click();
-//       }, 1000);
-//     }
-//   }, [liveFormToken]);
-
-//   const handleLimitCheck = (usd) => {
-//     if (
-//       spendedAmount.spneded_this_month + usd >
-//       user.monthlyGoldCoinSpendingLimit
-//     ) {
-//       console.log(
-//         "spendedAmount.spneded_this_month",
-//         spendedAmount.spneded_this_month,
-//         user.monthlyGoldCoinSpendingLimit,
-//         usd
-//       );
-
-//       return true;
-//     }
-//     if (
-//       spendedAmount.spened_this_week + usd >
-//       user.weeklyGoldCoinSpendingLimit
-//     ) {
-//       console.log(
-//         "spendedAmount.spneded_this_week",
-//         spendedAmount.spened_this_week,
-//         user.weeklyGoldCoinSpendingLimit,
-//         usd
-//       );
-
-//       return true;
-//     }
-//     if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
-//       console.log(
-//         "spendedAmount.spneded_this_day",
-//         spendedAmount.spended_today,
-//         user.dailyGoldCoinSpendingLimit,
-//         usd
-//       );
-//       return true;
-//     }
-
-//     return false;
-//   };
-
-//   return (
-//     <>
-//       {liveFormToken ? (
-//         <button id="payRedirection">
-//           <AcceptHosted
-//             formToken={liveFormToken}
-//             environment="PRODUCTION"
-//             integration="redirect"
-//           >
-//             <Spinner animation="border" />
-//           </AcceptHosted>
-//         </button>
-//       ) : (
-//         <button
-//           className={
-//             handleLimitCheck(parseFloat(prize?.priceInBUSD))
-//               ? "disable-btn-purchase"
-//               : ""
-//           }
-//           // disabled={handleLimitCheck(parseFloat(prize?.priceInBUSD))}
-//           onClick={() =>
-//             handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
-//           }
-//         >
-//           {" "}
-//           {!liveFormToken ? (
-//             !loader ? (
-//               `Buy With Card $${getExactPrice(
-//                 prize?.priceInBUSD,
-//                 promoDetails
-//               )}`
-//             ) : (
-//               <Spinner animation="border" />
-//             )
-//           ) : (
-//             ""
-//           )}
-//         </button>
-//       )}
-//     </>
-//   );
-// };

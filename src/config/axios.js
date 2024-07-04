@@ -1,5 +1,5 @@
 import axios from "axios";
-import { server, scroogeServer } from "./keys.js";
+import { server, scroogeServer, serverSlot } from "./keys.js";
 import Cookies from "js-cookie";
 import { validateToken } from "../utils/dateUtils.mjs";
 
@@ -25,8 +25,7 @@ export const marketPlaceInstance = async () => {
     withCredentials: true,
     credentials: "include",
   });
-}
-
+};
 
 export const kycInstance = async () => {
   const token = await getAuthorizationHeader();
@@ -39,8 +38,7 @@ export const kycInstance = async () => {
     withCredentials: true,
     credentials: "include",
   });
-}
-  
+};
 
 export const authInstance = async () => {
   const token = await getAuthorizationHeader();
@@ -53,5 +51,17 @@ export const authInstance = async () => {
     withCredentials: true,
     credentials: "include",
   });
-}
-  
+};
+
+export const relaxGamingInstance = async () => {
+  const token = await getAuthorizationHeader();
+  return axios.create({
+    baseURL: `${serverSlot}/api/relaxgaming`,
+    headers: {
+      Authorization: token,
+      "Permissions-Policy": "geolocation=*",
+    },
+    withCredentials: true,
+    credentials: "include",
+  });
+};

@@ -1,0 +1,229 @@
+.contest-date h2 span,
+.contest-title-grid a,
+.reminder-title {
+  color: var(--primary-color);
+}
+.contest-modal .modal-content {
+  background-color: initial;
+  border: none;
+  overflow: unset !important;
+  padding: 0;
+  max-width: 800px;
+}
+.contest-modal .modal-header {
+  background-color: #202020 !important;
+  border: none !important;
+  z-index: 999;
+  padding: 14px;
+}
+.contest-title-grid {
+  width: 100%;
+  text-align: center;
+}
+.contest-title-grid h1 {
+  font-weight: 500;
+  font-size: 24px;
+  margin: 0;
+  text-shadow: #fc0 1px 0 10px;
+}
+.contest-title-grid a {
+  font-size: 14px;
+  text-decoration: underline !important;
+}
+.contest-modal .modal-header .btn-close {
+  filter: invert(1);
+  opacity: 1;
+}
+.contest-modal .modal-body {
+  padding: 0;
+  background: 0 0;
+}
+.contest-content img {
+  height: 350px;
+  width: 100%;
+}
+.contest-date-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  width: 100%;
+  margin: 0;
+}
+.contest-date h2 {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0;
+}
+.contest-date h2 span {
+  font-size: 15px;
+}
+.contest-modal .modal-footer {
+  background-color: #202020;
+  border: none;
+}
+.contest-banner-slider .swiper-pagination {
+  bottom: 40px !important;
+}
+.contest-banner-slider .swiper-pagination-bullet {
+  opacity: 1;
+}
+button.slider-button {
+  border: 2px solid #f9ff00;
+  border-radius: 100%;
+  height: 20px;
+  transition: 0.5s;
+  width: 20px;
+  padding: 0;
+  background: rgb(0 0 0 / 80%);
+}
+button.slider-button.next-btn,
+button.slider-button.pre-btn {
+  position: absolute;
+  top: 82%;
+  transform: translateY(-50%);
+  z-index: 9;
+}
+button.slider-button.next-btn {
+  right: 5px;
+}
+button.slider-button.pre-btn {
+  left: 5px;
+}
+button.slider-button svg path {
+  fill: #f9ff00;
+}
+button.slider-button svg {
+  width: 10px;
+  height: 10px;
+}
+button.slider-button:hover {
+  background: #f9ff00;
+  border: 2px solid #f9ff00;
+}
+button.slider-button:hover svg path {
+  fill: #252d43;
+}
+.reminder-setting-title {
+  text-align: center;
+}
+.contest-modal.reminder-time .modal-content {
+  background-color: #202020;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.contest-modal.reminder-setting .modal-body {
+  background-color: #202020;
+}
+.contest-modal.reminder-time .modal-footer {
+  padding: 25px 20px;
+}
+.reminder-time-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 0;
+}
+.reminder-time-grid button {
+  min-width: 200px;
+  height: 44px;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  line-height: 20px !important;
+  text-align: center !important;
+  border: 2px solid var(--primary-color) !important;
+  border-radius: 30px !important;
+  color: var(--primary-color) !important;
+  background: 0 0;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.reminder-time-grid button:hover {
+  background: var(--primary-color);
+  color: var(--main-bg) !important;
+}
+.reminder-time-grid button i {
+  font-size: 16px;
+}
+.contest-modal.reminder-setting .modal-footer {
+  justify-content: center;
+  padding: 25px 0;
+  border-top: 1px solid #25282e;
+}
+.reminder-btn-grid {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.contest-modal.reminder-setting .modal-footer button {
+  max-width: 120px;
+  width: 100% !important;
+  min-width: unset !important;
+}
+.contest-modal.reminder-time .reminder-btn-grid {
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+}
+.contest-modal.reminder-time .modal-body {
+  padding: 35px 10px 10px;
+}
+.contest-modal.reminder-time h5 {
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0;
+  text-shadow: #fc0 1px 0 10px;
+}
+@media screen and (max-width: 991px) {
+  .contest-modal .modal-content {
+    max-width: 92vw;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 767px) {
+  .contest-date h2,
+  .contest-date h2 span {
+    font-size: 13px;
+  }
+  .contest-content img {
+    height: 200px;
+  }
+  .contest-modal .modal-header .btn-close {
+    font-size: 16px;
+  }
+  .contest-title-grid h1 {
+    font-size: 18px;
+    font-weight: 400;
+  }
+  .contest-title-grid a {
+    font-size: 12px;
+  }
+  .contest-modal .modal-content {
+    max-width: 94vw;
+    margin: 0 auto;
+  }
+  .contest-banner-slider .swiper-pagination {
+    display: none;
+  }
+  button.slider-button.next-btn,
+  button.slider-button.pre-btn {
+    top: 50%;
+  }
+  .reminder-setting-title h5 {
+    font-size: 18px;
+  }
+  .reminder-time-grid {
+    gap: 12px;
+    padding: 15px 0;
+  }
+  .contest-modal.reminder-setting .modal-footer {
+    padding: 15px 0;
+  }
+}
