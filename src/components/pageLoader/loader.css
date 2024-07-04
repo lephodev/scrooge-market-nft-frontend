@@ -26,4 +26,22 @@
   .new-pageImgContainer img {
     height: 500px;
   }
+
+  .buy-chips-grid img{
+  /* max-width: 52vh; */
+
+  }
+  .special-offer-grid{
+    /* padding-right: 50px; */
+    padding-right: 0px;
+  }
+
+  .offer-grid-new {
+    padding-right: 0px;
+  }
+}
+
+.offer-grid-new {
+  max-width: 469px !important;
+  width: 100% !important;
 }

@@ -5457,6 +5457,7 @@ p.title-memo {
 }
 
 
+
 .payment_popup .modal-body{
   padding: 40px !important;
   position: relative !important;
@@ -5606,6 +5607,7 @@ body.modal-open {
   }
   .special-offer-grid .purchasemodal-cards {
     max-width: 80%;
+   
   }
 }
 
@@ -6254,7 +6256,8 @@ body.modal-open {
     font-size: 18px;
   }
   .special-offer-grid .purchasemodal-cards {
-    max-width: 80%;
+    max-width: 100%;
+    /* margin: 10px; */
   }
   .page-nav-header-btns-row {
     gap: 30px;
@@ -7029,3 +7032,17 @@ body.modal-open {
     padding: 70px 20px;
     /* height: 33vh; */
 }}
+
+
+.payCardoffer {
+  position: relative;
+}
+
+.tooltip_btn {
+position: absolute;
+    top: -3px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px
+}
