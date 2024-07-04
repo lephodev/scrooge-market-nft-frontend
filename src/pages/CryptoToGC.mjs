@@ -625,55 +625,55 @@ export default function CryptoToGC() {
 
                   <div className="buy-chips-content">
                     <div className="buy-chips-grid cryptoToGC">
-                      {isMegaBuyShow /* && user.megaOffer.length !== 3 */ && (
-                        <div
-                          style={{
-                            height: "100%",
-                            width: "60vh",
-                            margin: "auto",
-                            cursor: "pointer",
-                          }}
-                          className="special-offer-grid offer-grid-new"
-                        >
-                          <h5>Special Offer</h5>
-                          {user.freeSpin.length === 0 && (
-                            <div className="special-offer-grid payCardoffer">
-                              <div className="">
-                                {allPrizes.map((prize, i) => (
-                                  <>
-                                    {prize.offerType === "freeSpin" && (
-                                      <>
-                                        {handleShowFreeSpin(prize) ? (
-                                          <h3 className="">
-                                            <PayWithCard
-                                              spendedAmount={spendedAmount}
-                                              prize={prize}
-                                              getExactPrice={getExactPrice}
-                                              getExactGC={getExactGC}
-                                              getExactToken={getExactToken}
-                                              promoDetails={promoDetails}
-                                              index={i}
-                                              setBuyLoading={setBuyLoading}
-                                              selectedTypeDropdown={
-                                                selectedTypeDropdown
-                                              }
-                                              dailyGCPurchaseLimit={
-                                                dailyGCPurchaseLimit
-                                              }
-                                              user={user}
-                                              getGCPackages={getGCPackages}
-                                            />
-                                          </h3>
-                                        ) : (
-                                          ""
-                                        )}
-                                      </>
-                                    )}
-                                  </>
-                                ))}
-                              </div>
+                      <div
+                        style={{
+                          height: "100%",
+                          width: "60vh",
+                          margin: "auto",
+                          cursor: "pointer",
+                        }}
+                        className="special-offer-grid offer-grid-new"
+                      >
+                        <h5>Special Offer</h5>
+                        {user.freeSpin.length === 0 && (
+                          <div className="special-offer-grid payCardoffer">
+                            <div className="">
+                              {allPrizes.map((prize, i) => (
+                                <>
+                                  {prize.offerType === "freeSpin" && (
+                                    <>
+                                      {handleShowFreeSpin(prize) ? (
+                                        <h3 className="">
+                                          <PayWithCard
+                                            spendedAmount={spendedAmount}
+                                            prize={prize}
+                                            getExactPrice={getExactPrice}
+                                            getExactGC={getExactGC}
+                                            getExactToken={getExactToken}
+                                            promoDetails={promoDetails}
+                                            index={i}
+                                            setBuyLoading={setBuyLoading}
+                                            selectedTypeDropdown={
+                                              selectedTypeDropdown
+                                            }
+                                            dailyGCPurchaseLimit={
+                                              dailyGCPurchaseLimit
+                                            }
+                                            user={user}
+                                            getGCPackages={getGCPackages}
+                                          />
+                                        </h3>
+                                      ) : (
+                                        ""
+                                      )}
+                                    </>
+                                  )}
+                                </>
+                              ))}
                             </div>
-                          )}
+                          </div>
+                        )}
+                        {isMegaBuyShow /* && user.megaOffer.length !== 3 */ && (
                           <div className="purchasemodal-cards">
                             {allPrizes.map((prize, i) => (
                               <>
@@ -773,8 +773,9 @@ export default function CryptoToGC() {
                               </>
                             ))}
                           </div>
-                        </div>
-                      )}
+                        )}
+                      </div>
+
                       {console.log("user.freeSpinuser.freeSpin", user)}
 
                       <div className="purchasemodal-cards">
