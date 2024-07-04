@@ -1082,9 +1082,10 @@ const PayWithCard = ({
       {prize.priceInBUSD === "45" && (
         <>
           <OverlayTrigger
-            placement={window.innerWidth < 767 ? "right" : "left"}
+            // placement={window.innerWidth < 767 ? "right" : "left"}
             delay={{ show: 250, hide: 400 }}
             overlay={renderWallet}
+            placement="left"
           >
             <Button variant="success" className="tooltip_btn">
               <FaInfoCircle />
