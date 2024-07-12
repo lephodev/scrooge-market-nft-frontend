@@ -16,6 +16,7 @@ import profile from "../images/profile.png";
 import { Link, useLocation } from "react-router-dom";
 import hatLogo from "../images/scroogeHatLogo.png";
 import AuthContext from "../context/authContext.ts";
+import { authInstance } from "../config/axios.js";
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false);
   const { mode, user, setMode } = useContext(AuthContext);
@@ -44,6 +45,24 @@ const Header = () => {
 
     setMode(gameMode);
     // setMode(checked);
+  };
+
+  const handleLogout = async () => {
+    if (user?.id) {
+      const tokenData = localStorage.getItem("refreshToken") || "";
+
+      await (
+        await authInstance()
+      ).post(
+        "/auth/logout",
+        { refreshToken: tokenData },
+        { withCredentials: true, credentials: "include" }
+      );
+      localStorage.removeItem("megaBonus");
+      localStorage.removeItem("activeCount");
+    }
+    localStorage.clear();
+    window.location.href = `${scroogeClient}`;
   };
 
   const currentRoute = useCurrentPath();
@@ -174,7 +193,7 @@ const Header = () => {
                       Settings
                     </Link>
                     <div
-                      // onClick={handleLogout}
+                      onClick={handleLogout}
                       role="presentation"
                       className="dropdown-item"
                     >
