@@ -46,7 +46,7 @@ import {
 import AuthContext from "../context/authContext.ts";
 import ConnectWalletModel from "./models/connectWalletModel.mjs";
 import Header from "./Header.mjs";
-import "../styles/header.css"
+import "../styles/header.css";
 import { marketPlaceInstance } from "../config/axios.js";
 
 export const Tooltip = (id, metadata, message) => (
@@ -212,7 +212,7 @@ const Layout = ({ children }) => {
       />
       <div className="wrapper">
         <div className="header" ref={wrapperRef}>
-         <Header />
+          <Header />
           {/* <Navbar
             collapseOnSelect
             expand="lg"
@@ -383,7 +383,7 @@ const Layout = ({ children }) => {
                   </li>
                   <li>
                     <a
-                      href={`${user ? pokerUrl : `${scroogeClient}/login`}`}
+                      href={`${user ? pokerUrl : `${scroogeClient}`}`}
                       rel="noreferrer"
                     >
                       Poker
@@ -391,7 +391,7 @@ const Layout = ({ children }) => {
                   </li>
                   <li>
                     <a
-                      href={`${user ? blackjackUrl : `${scroogeClient}/login`}`}
+                      href={`${user ? blackjackUrl : `${scroogeClient}`}`}
                       rel="noreferrer"
                     >
                       Blackjack
@@ -399,7 +399,7 @@ const Layout = ({ children }) => {
                   </li>
                   <li>
                     <a
-                      href={`${user ? slotUrl : `${scroogeClient}/login`}`}
+                      href={`${user ? slotUrl : `${scroogeClient}`}`}
                       rel="noreferrer"
                     >
                       Slot
@@ -407,7 +407,7 @@ const Layout = ({ children }) => {
                   </li>
                   <li>
                     <a
-                      href={`${user ? rouletteUrl : `${scroogeClient}/login`}`}
+                      href={`${user ? rouletteUrl : `${scroogeClient}`}`}
                       rel="noreferrer"
                     >
                       Roulette
