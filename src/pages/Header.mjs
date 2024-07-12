@@ -255,7 +255,7 @@ const Header = () => {
                   </div>
                 ) : (
                   <a
-                    href={`${scroogeClient}/login`}
+                    href={`${scroogeClient}`}
                     /* target="_blank" */ rel="noreferrer"
                     alt="Login to Scrooge Casino"
                   >
