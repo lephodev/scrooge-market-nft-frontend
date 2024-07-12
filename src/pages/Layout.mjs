@@ -21,6 +21,7 @@ import playPolicy from "../images/SCROOGE CASINO Game Play Policy.docx";
 // import TophatIconBadge from "../images/tophatIconBadge.png";
 // import tokenmobile from "../images/token.svg";
 import logo from "../images/footer/logo.png";
+import icon_18 from "../images/footer/icon_18.png";
 import envelope from "../images/footer/envelope.svg";
 import twitter from "../images/footer/twitter.svg";
 // import discord from "../images/footer/discord.svg";
@@ -359,6 +360,11 @@ const Layout = ({ children }) => {
                   Want to stay ahead of your competition. Subscribe and be the
                   first to know everything happening in the world of SCROOGE.
                 </h6>
+
+                <p className="d-flex align-items-center mb-2">
+              <img src={icon_18} alt="image_icon" height={25} width={25}/>
+              <p className="ms-2 text-white font-weight-bold">Gaming is addictive. Please play responsibly</p>
+            </p>
                 <p>
                   <span>Copyright &copy; Scrooge LLC.</span> All Rights Reserved
                 </p>

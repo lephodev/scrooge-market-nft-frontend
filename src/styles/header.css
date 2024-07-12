@@ -101,7 +101,7 @@
 }
 
 .slotLobby-mode form .form-check-input {
-  background-color: transparent;
+  background-color: transparent !important;
   border: 1px solid #ffc700;
 }
 
@@ -165,8 +165,8 @@
 }
 
 .slotLobby-mode .form-check-input:checked {
-  background-color: #fa0000 !important;
-  border-color: #fa0000;
+  background-color: transparent !important;
+  border-color: #ffc700;
 }
 
 .slotLobby-mode .form-switch .form-check-input {
@@ -212,6 +212,12 @@
   gap: 20px;
   /* max-width: 262px;
     width: 100%; */
+}
+
+.notifyProfileheader img{
+  height: 25px;
+  width: 25px;
+
 }
 
 .user-profile img {
