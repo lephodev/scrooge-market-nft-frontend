@@ -161,10 +161,16 @@ const Header = () => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Link className="dropdown-item" to="/profile">
+                    <Link
+                      className="dropdown-item"
+                      to={`${scroogeClient}/profile`}
+                    >
                       Profile
                     </Link>
-                    <Link className="dropdown-item" to="/setting">
+                    <Link
+                      className="dropdown-item"
+                      to={`${scroogeClient}/setting`}
+                    >
                       Settings
                     </Link>
                     <div
@@ -249,7 +255,7 @@ const Header = () => {
                   </div>
                 ) : (
                   <a
-                    href={`${scroogeClient}/login`}
+                    href={`${scroogeClient}`}
                     /* target="_blank" */ rel="noreferrer"
                     alt="Login to Scrooge Casino"
                   >
