@@ -12,7 +12,7 @@ import coin3 from "../images/3.png";
 import coin2 from "../images/2.png";
 import coin1 from "../images/1.png";
 import sweep from "../images/token.png";
-import freeSpin from "../images/Store-Card-promo.png";
+import freeSpin from "../images/Store-Card-promo.jpg";
 import { useSearchParams } from "react-router-dom";
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";

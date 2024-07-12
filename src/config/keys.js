@@ -13,4 +13,6 @@ export const {
   stripeKey,
   BUSD_ADDRESS,
   paypalClientKey,
+  serverSlot,
+  relaxLaunchUrl,
 } = configData;
