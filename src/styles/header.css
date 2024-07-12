@@ -303,3 +303,10 @@
 .navbar-expand-lg .navbar-nav {
   border-image: linear-gradient(90deg, #ffc700 0%, #ffeca8 51%, #ffc700 100%);
 }
+
+
+@media screen and (max-width: 767px) { 
+  .slotLobby-mode label.form-check-label {
+  font-size: 12px;
+  }
+}
