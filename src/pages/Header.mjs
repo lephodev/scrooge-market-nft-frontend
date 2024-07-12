@@ -1,9 +1,9 @@
-import React, {useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from "react";
 import newLogo from "../images/new-logo.webp";
-import { Button, Dropdown, Form, Nav, Navbar } from 'react-bootstrap';
-import {
-  FaPlusCircle,
-} from "react-icons/fa";
+import { Button, Dropdown, Form, Nav, Navbar } from "react-bootstrap";
+import { FaPlusCircle } from "react-icons/fa";
+import cookie from "js-cookie";
+
 import {
   // blackjackUrl,
   // pokerUrl,
@@ -11,26 +11,43 @@ import {
   scroogeClient,
   // slotUrl,
 } from "../config/keys.js";
-import bell from "../images/bell.svg"
-import profile from "../images/profile.png"
-import { Link, useLocation } from 'react-router-dom';
+import bell from "../images/bell.svg";
+import profile from "../images/profile.png";
+import { Link, useLocation } from "react-router-dom";
 import hatLogo from "../images/scroogeHatLogo.png";
+import AuthContext from "../context/authContext.ts";
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false);
-
+  const { mode, user, setMode } = useContext(AuthContext);
   const useCurrentPath = () => {
     const location = useLocation();
     const [currentPath, setCurrentPath] = useState("");
-  
+
     useEffect(() => {
       setCurrentPath(location.pathname);
     }, [location]);
     return currentPath;
   };
 
+  const handleModeChange = (e) => {
+    const {
+      target: { checked },
+    } = e;
+    const gameMode = checked ? "token" : "goldCoin";
+    // console.log("Modeee", gameMode);
+
+    cookie.set("mode", gameMode, {
+      domain: ".scrooge.casino",
+      path: "/",
+      httpOnly: false,
+    });
+
+    setMode(gameMode);
+    // setMode(checked);
+  };
+
   const currentRoute = useCurrentPath();
   const isActive = (routeName) => (routeName === currentRoute ? "active" : "");
-  let user="ram"
   return (
     // <div className='headerContainer'>
     //   <div className='header_top'>
@@ -40,64 +57,58 @@ const Header = () => {
     //   </div>
     // </div>
     <Navbar
-    collapseOnSelect
-    expand="lg"
-    expanded={navOpen}
-    onToggle={() => {
-      setNavOpen(!navOpen);
-    }}
-  >
-    <div className='header_outer'>
-      <div className="header-Container new_header_container">
-        <div className="header-content ">
-          <div className="header_logo">
-            <Link to={scroogeClient}>
-              {user ? (
-                <img
-                  src={newLogo}
-                  alt="logo"
-                  height={70}
-                  width={70}
-                />
-              ) : (
-                <img src={hatLogo} alt="logo" />
-              )}
-            </Link>
-          </div>
-          <div className="headerMode-container">
-                        <div className={`slotLobby-mode `}>
-                          <Form>
-                            <Form.Check
-                              type="switch"
-                              id="custom-switch"
-                              // label={
-                              //   mode === "token"
-                              //     ? `ST: ${parseInt(user?.wallet)}`
-                              //     : `GC: ${parseInt(user?.goldCoin)}`
-                              // }
-                              label={"ST : 0"}
-                              // defaultChecked={mode === "token"}
-                              // checked={mode === "token"}
-                              // onChange={handleModeChange}
-                              // disabled={disableRedirections}
-                            />
-                            <Button
-                              className="purchase-btn"
-                              // disabled={disableRedirections}
-                            >
-                              <a
-                                // href={`${marketPlaceUrl}/crypto-to-gc`}
-                                href='/'
-                                rel="noreferrer"
-                              >
-                                <FaPlusCircle />
-                              </a>
-                            </Button>
-                          </Form>
-                        </div>
-                        {/* <p>jhgh</p> */}
-                        {/* {mode === "token" ? <p>ST 100:1 USD </p> : null} */}
-                        {/* <div className="tickets-token">
+      collapseOnSelect
+      expand="lg"
+      expanded={navOpen}
+      onToggle={() => {
+        setNavOpen(!navOpen);
+      }}
+    >
+      <div className="header_outer">
+        <div className="header-Container new_header_container">
+          <div className="header-content ">
+            <div className="header_logo">
+              <Link to={scroogeClient}>
+                {user ? (
+                  <img src={newLogo} alt="logo" height={70} width={70} />
+                ) : (
+                  <img src={hatLogo} alt="logo" />
+                )}
+              </Link>
+            </div>
+            <div className="headerMode-container">
+              <div className={`slotLobby-mode `}>
+                <Form>
+                  <Form.Check
+                    type="switch"
+                    id="custom-switch"
+                    label={
+                      mode === "token"
+                        ? `ST: ${parseInt(user?.wallet)}`
+                        : `GC: ${parseInt(user?.goldCoin)}`
+                    }
+                    defaultChecked={mode === "token"}
+                    checked={mode === "token"}
+                    onChange={handleModeChange}
+                    // disabled={disableRedirections}
+                  />
+                  <Button
+                    className="purchase-btn"
+                    // disabled={disableRedirections}
+                  >
+                    <a
+                      // href={`${marketPlaceUrl}/crypto-to-gc`}
+                      href="/"
+                      rel="noreferrer"
+                    >
+                      <FaPlusCircle />
+                    </a>
+                  </Button>
+                </Form>
+              </div>
+              {/* <p>jhgh</p> */}
+              {/* {mode === "token" ? <p>ST 100:1 USD </p> : null} */}
+              {/* <div className="tickets-token">
                         <Button
                           className="btn btn-primary"
                           disabled={user?.ticket < 10}
@@ -114,60 +125,62 @@ const Header = () => {
                           setUser={setUser}
                         />
                       </div> */}
-                      </div>
-          <div className="notifyProfileheader">
-           <div>
-            <img src={bell} height={20} width={20} alt='bell_icon' />
-           </div>
-           <div className="user-profile">
-                      <Dropdown>
-                        <Dropdown.Toggle
-                          variant="success"
-                          id="dropdown-basic"
-                          // disabled={disableRedirections}
-                        >
-                          <img
-                            // src={user?.profile ? user?.profile : profile}
-                            // onError={(e) => {
-                            //   e.target.onerror = null;
-                            //   e.target.src = profile;
-                            // }}
-                            src={profile}
-                            alt="profile"
-                          />
-                          <span>
-                            {/* {localStorage.getItem("name")
+            </div>
+            <div className="notifyProfileheader">
+              <div>
+                <img src={bell} height={20} width={20} alt="bell_icon" />
+              </div>
+              <div className="user-profile">
+                <Dropdown>
+                  <Dropdown.Toggle
+                    variant="success"
+                    id="dropdown-basic"
+                    // disabled={disableRedirections}
+                  >
+                    <img
+                      // src={user?.profile ? user?.profile : profile}
+                      // onError={(e) => {
+                      //   e.target.onerror = null;
+                      //   e.target.src = profile;
+                      // }}
+                      src={profile}
+                      alt="profile"
+                    />
+                    <span>
+                      {/* {localStorage.getItem("name")
                               ? localStorage.getItem("name")
                               : user?.username} */}
-                            {/* <i className="las la-angle-down" /> */}
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                            <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/>
-                            </svg>
-                          </span>
-                        </Dropdown.Toggle>
+                      {/* <i className="las la-angle-down" /> */}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"
+                      >
+                        <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                      </svg>
+                    </span>
+                  </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
-                          <Link className="dropdown-item" to="/profile">
-                            Profile
-                          </Link>
-                          <Link className="dropdown-item" to="/setting">
-                            Settings
-                          </Link>
-                          <div
-                            // onClick={handleLogout}
-                            role="presentation"
-                            className="dropdown-item"
-                          >
-                            Logout
-                          </div>
-                        </Dropdown.Menu>
-                      </Dropdown>
+                  <Dropdown.Menu>
+                    <Link className="dropdown-item" to="/profile">
+                      Profile
+                    </Link>
+                    <Link className="dropdown-item" to="/setting">
+                      Settings
+                    </Link>
+                    <div
+                      // onClick={handleLogout}
+                      role="presentation"
+                      className="dropdown-item"
+                    >
+                      Logout
                     </div>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+            </div>
           </div>
-          
-        </div>
 
-        <div className="main-menu">
+          <div className="main-menu">
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <div className="logo-mobile">
@@ -188,7 +201,7 @@ const Header = () => {
 
               <Nav className="mr-auto ">
                 {user ? (
-                  <div className='navItem'>
+                  <div className="navItem">
                     <Link
                       to={scroogeClient}
                       className={`nav-link ${isActive(scroogeClient)}`}
@@ -205,25 +218,19 @@ const Header = () => {
                     </Link>
                     <Link
                       to={`/crypto-to-gc`}
-                      className={`nav-link ${isActive(
-                        "/crypto-to-gc"
-                      )}`}
+                      className={`nav-link ${isActive("/crypto-to-gc")}`}
                     >
                       Purchase Center{" "}
                     </Link>
                     <Link
                       to={`/redeem-prizes`}
-                      className={`nav-link ${isActive(
-                        "/redeem-prizes"
-                      )}`}
+                      className={`nav-link ${isActive("/redeem-prizes")}`}
                     >
                       Redemption Center
                     </Link>
                     <Link
                       to={`/claim-free-tokens`}
-                      className={`nav-link ${isActive(
-                        "/claim-free-tokens"
-                      )}`}
+                      className={`nav-link ${isActive("/claim-free-tokens")}`}
                     >
                       Daily Wheel Spin
                     </Link>
@@ -254,10 +261,10 @@ const Header = () => {
               </Nav>
             </Navbar.Collapse>
           </div>
+        </div>
       </div>
-    </div>
-  </Navbar>
-  )
-}
+    </Navbar>
+  );
+};
 
-export default Header
+export default Header;
