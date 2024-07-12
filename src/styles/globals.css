@@ -187,7 +187,7 @@ html {
 
 .logo-mobile {
   display: none;
-  padding: 20px 0px;
+  padding: 0px 0px;
 }
 
 .logo {
@@ -5861,6 +5861,7 @@ body.modal-open {
   }
   .new_header_container .header-content {
 	border-bottom: 1px solid #ffcf24;
+  padding: 10px 12px !important;
 }
 }
 
@@ -6199,7 +6200,9 @@ body.modal-open {
     left: 44%;
     font-size: 28px;
   }
-
+  .daily_spin_container .heading_text {
+    font-size: 30px !important;
+  }
 
 }
 
@@ -6221,9 +6224,9 @@ body.modal-open {
   .spin-win-text p {
     font-size: 20px !important;
   }
-  .spin-win-text-content {
+  /* .spin-win-text-content {
     align-items: flex-start;
-  }
+  } */
 
   .spin-wheel-img {
     margin: 0;
@@ -6317,7 +6320,7 @@ body.modal-open {
     gap: 30px;
   }
   .redeem-method-title h4 {
-    font-size: 26px;
+    font-size: 24px;
   }
   .redeem-icon-grid img {
     height: 48px;
@@ -7069,12 +7072,17 @@ body.modal-open {
   }
   .prizes-chip-count_update {
     flex-direction: column;
+    gap:23px !important;
   }
   .daily_spin_container .risk-grid { 
     padding: 20px 15px !important;
   }
   .main .title {
     font-size: 25px;
+  }
+  .redemption-history_updated a {
+    max-width: 300px !important;
+    font-size: 12px !important;
   }
 }
 
