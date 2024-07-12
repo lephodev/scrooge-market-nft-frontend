@@ -18,7 +18,7 @@ pwd
 rm -rf build/
 rm -rf beta-market-build-test.tar.gz
 npm install --force
-npm run build:staging
+npm run build:dev
 tar cvf beta-market-build-test.tar.gz build
 ls'''
       }
