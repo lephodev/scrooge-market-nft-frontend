@@ -536,7 +536,9 @@ export default function CryptoToGC() {
                   <div className="scrooge-main-heading">
                     <div className="pageTitle updatePageTitle">
                       {/* <h1 className="title updated_text_color">Get Gold Coins</h1> */}
-                      <h1 className="title updated_text_color">Purchase Gold Coins</h1>
+                      <h1 className="title updated_text_color">
+                        Purchase Gold Coins
+                      </h1>
                     </div>
                   </div>
                   <div className="purchase-select purchase-select_alignment">
@@ -644,9 +646,6 @@ export default function CryptoToGC() {
                     </div>
                   </div>
 
-
-                
-                     
                   {selectedTypeDropdown === "Credit Card" ? (
                     <div className="asterisk-desc cryptoTotoken abc first-grid">
                       <ul>
@@ -675,56 +674,56 @@ export default function CryptoToGC() {
 
                   <div className="buy-chips-content">
                     <div className="buy-chips-grid cryptoToGC buy-chips-grid_update">
-                      {isMegaBuyShow /* && user.megaOffer.length !== 3 */ && (
-                        <div
-                          style={{
-                            height: "100%",
-                            width: "60vh",
-                            margin: "auto",
-                            cursor: "pointer",
-                          }}
-                          className="special-offer-grid"
-                        >
-                          <h5>Special Offer</h5>
-                          {user.freeSpin.length === 0 && (
-                            <div className="special-offer-grid">
-                              <div className="">
-                                {allPrizes.map((prize, i) => (
-                                  <>
-                                    {prize.offerType === "freeSpin" && (
-                                      <>
-                                        {handleShowFreeSpin(prize) ? (
-                                          <h3 className="">
-                                            <PayWithCard
-                                              spendedAmount={spendedAmount}
-                                              prize={prize}
-                                              getExactPrice={getExactPrice}
-                                              getExactGC={getExactGC}
-                                              getExactToken={getExactToken}
-                                              promoDetails={promoDetails}
-                                              index={i}
-                                              setBuyLoading={setBuyLoading}
-                                              selectedTypeDropdown={
-                                                selectedTypeDropdown
-                                              }
-                                              dailyGCPurchaseLimit={
-                                                dailyGCPurchaseLimit
-                                              }
-                                              user={user}
-                                            />
-                                          </h3>
-                                        ) : (
-                                          ""
-                                        )}
-                                      </>
-                                    )}
-                                  </>
-                                ))}
-                              </div>
+                      <div
+                        style={{
+                          height: "100%",
+                          width: "60vh",
+                          margin: "auto",
+                          cursor: "pointer",
+                        }}
+                        className="special-offer-grid"
+                      >
+                        <h5>Special Offer</h5>
+                        {user.freeSpin.length === 0 && (
+                          <div className="special-offer-grid payCardoffer">
+                            <div className="">
+                              {allPrizes.map((prize, i) => (
+                                <>
+                                  {prize.offerType === "freeSpin" && (
+                                    <>
+                                      {handleShowFreeSpin(prize) ? (
+                                        <h3 className="">
+                                          <PayWithCard
+                                            spendedAmount={spendedAmount}
+                                            prize={prize}
+                                            getExactPrice={getExactPrice}
+                                            getExactGC={getExactGC}
+                                            getExactToken={getExactToken}
+                                            promoDetails={promoDetails}
+                                            index={i}
+                                            setBuyLoading={setBuyLoading}
+                                            selectedTypeDropdown={
+                                              selectedTypeDropdown
+                                            }
+                                            dailyGCPurchaseLimit={
+                                              dailyGCPurchaseLimit
+                                            }
+                                            user={user}
+                                            getGCPackages={getGCPackages}
+                                          />
+                                        </h3>
+                                      ) : (
+                                        ""
+                                      )}
+                                    </>
+                                  )}
+                                </>
+                              ))}
                             </div>
-                          )}
+                          </div>
+                        )}
+                        {isMegaBuyShow /* && user.megaOffer.length !== 3 */ && (
                           <div className="purchasemodal-cards">
-                          
                             {allPrizes.map((prize, i) => (
                               <>
                                 {isMegaBuyShow &&
@@ -732,24 +731,11 @@ export default function CryptoToGC() {
                                     <>
                                       {handleShowMegaBuys(prize) ? (
                                         <Card key={prize._id}>
-                                          <span className="offer_btn">Special Offer</span>
                                           <h3 className="mega-text pulses">
                                             Mega Offer
                                           </h3>
-
-                                          <div className="goldPurchase-offers">
-                                            Free ST:{" "}
-                                            <img
-                                              src={sweep}
-                                              alt="sweep token"
-                                            />{" "}
-                                            {prize?.freeTokenAmount}
-                                          </div>
                                           <Card.Img variant="top" src={coin3} />
                                           <Card.Body>
-                                          <Card.Title className="goldPurchase_heading">
-                                          $12.8
-                                            </Card.Title>
                                             <Card.Title>
                                               GC {prize?.gcAmount}
                                             </Card.Title>
@@ -801,6 +787,7 @@ export default function CryptoToGC() {
                                                     dailyGCPurchaseLimit
                                                   }
                                                   user={user}
+                                                  getGCPackages={getGCPackages}
                                                 />
                                               )
                                             ) : (
@@ -818,14 +805,14 @@ export default function CryptoToGC() {
                                               </>
                                             )}
                                           </Card.Body>
-                                          {/* <div className="goldPurchase-offers">
+                                          <div className="goldPurchase-offers">
                                             Free ST:{" "}
                                             <img
                                               src={sweep}
                                               alt="sweep token"
                                             />{" "}
                                             {prize?.freeTokenAmount}
-                                          </div> */}
+                                          </div>
                                         </Card>
                                       ) : (
                                         ""
@@ -835,16 +822,17 @@ export default function CryptoToGC() {
                               </>
                             ))}
                           </div>
-                        </div>
-                      )}
+                        )}
+                      </div>
+
                       {console.log("user.freeSpinuser.freeSpin", user)}
                       <div className="purchasemodal-cards">
                         {allPrizes.map((prize, i) => (
                           <>
-                            {
+                            {prize.offerType !== "MegaOffer" &&
                               prize.offerType !== "freeSpin" && (
                                 <Card key={prize._id}>
-                                        <div className="goldPurchase-offers">
+                                  <div className="goldPurchase-offers">
                                     Free ST:{" "}
                                     <img src={sweep} alt="sweep token" />{" "}
                                     {promoDetails?.couponCode && (
@@ -881,9 +869,9 @@ export default function CryptoToGC() {
                                     }
                                   />
                                   <Card.Body>
-                                  <Card.Title className="goldPurchase_heading">
-                                          $12.8
-                                            </Card.Title>
+                                    <Card.Title className="goldPurchase_heading">
+                                      ${parseFloat(prize?.priceInBUSD)}
+                                    </Card.Title>
                                     <Card.Title>
                                       GC{" "}
                                       {getExactGC(
@@ -964,7 +952,6 @@ export default function CryptoToGC() {
                                       </>
                                     )}
                                   </Card.Body>
-                            
                                 </Card>
                               )}
                           </>
@@ -1014,21 +1001,6 @@ export default function CryptoToGC() {
                 </div>
               </div>
             )}
-
-            {/* <button
-              style={{ visibility: "hidden" }}
-              type="button"
-              id="paycard"
-              class="AcceptUI"
-              data-billingAddressOptions='{"show":true, "required":false}'
-              data-apiLoginID={process.env.REACT_APP_AUTHORIZE_LOGIN_KEY}
-              data-clientKey={process.env.REACT_APP_AUTHORIZE_PUBLIC_KEY}
-              data-acceptUIFormBtnTxt="Submit"
-              data-acceptUIFormHeaderTxt="Card Information"
-              data-responseHandler={`requestHandler`}
-            >
-              pay
-            </button> */}
           </main>
           <PaypalModel
             showPaypal={showPaypal}
@@ -1162,199 +1134,3 @@ const PayWithCard = ({
     </>
   );
 };
-
-// const PayWithCard = ({
-// prize,
-// getExactPrice,
-// promoDetails,
-// dailyGCPurchaseLimit,
-// spendedAmount,
-// user,
-// }) => {
-//   const [liveFormToken, setFormToken] = useState(null);
-//   const [loader, setLoading] = useState(false);
-
-//   const getPromoCode = () => {
-//     console.log("prizehgfghgfhfgh", prize.priceInBUSD, promoCode);
-//     if (prize.offerType !== "MegaOffer" && prize?.priceInBUSD !== "250") {
-//       return promoCode ? promoCode : "";
-//     } else {
-//       return "";
-//     }
-//   };
-
-//   const getDDC = () => {
-//     const sessionID = uuidv4().replace(/-/g, "");
-//     console.log("sessionID", sessionID);
-//     // const sessionID = 'ghghghg';
-//     const kountConfig = {
-//       clientID: 10211,
-//       environment: "TEST",
-//       isSinglePageApp: true,
-//     };
-//     const sdk = kountSDK(kountConfig, sessionID);
-//     console.log("sdk", sdk);
-//     console.log("sdk", sdk?.sessionID);
-
-//     if (sdk) {
-//       console.log("Anti-fraud SDK activated!");
-//       return sdk;
-//       // Any non-blocking post-initialization logic can go here
-//     }
-//   };
-
-//   const handleCLick = async (gc, usd) => {
-//     let sessionId = getDDC()?.sessionID;
-//     console.log("dailyGCPurchaseLimit", dailyGCPurchaseLimit);
-// if (dailyGCPurchaseLimit >= 4) {
-//   return toast.error("Credit card daily purchase limit are reached");
-// }
-//     console.log(
-//       "spendedAmount.spended_today + usd",
-//       spendedAmount.spended_today,
-//       usd,
-//       user.dailyGoldCoinSpendingLimit
-//     );
-//     try {
-// goldcoinAmount = gc;
-// if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
-//   return toast.error(
-//     "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
-//     { toastId: "A" }
-//   );
-// }
-
-// if (
-//   spendedAmount.spened_this_week + usd >
-//   user.weeklyGoldCoinSpendingLimit
-// ) {
-//   return toast.error(
-//     "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
-//     { toastId: "B" }
-//   );
-// }
-
-// if (
-//   spendedAmount.spneded_this_month + usd >
-//   user.monthlyGoldCoinSpendingLimit
-// ) {
-//   return toast.error(
-//     "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
-//     { toastId: "C" }
-//   );
-// }
-//       setLoading(true);
-//       const res = await (
-//         await marketPlaceInstance()
-//       ).post(
-//         `/getFormToken`,
-//         {
-//           amount: prize?.priceInBUSD,
-//           promoCode: getPromoCode().trim(),
-//           sessionId,
-//         },
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           withCredentials: true,
-//           credentials: "include",
-//         }
-//       );
-//       const responseData = res?.data?.response;
-//       setFormToken(responseData?.token);
-//     } catch (error) {
-//       console.error("Error fetching form token:", error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     if (liveFormToken) {
-//       setTimeout(() => {
-//         document.getElementsByTagName("form")[0][1].click();
-//       }, 1000);
-//     }
-//   }, [liveFormToken]);
-
-//   const handleLimitCheck = (usd) => {
-//     if (
-//       spendedAmount.spneded_this_month + usd >
-//       user.monthlyGoldCoinSpendingLimit
-//     ) {
-//       console.log(
-//         "spendedAmount.spneded_this_month",
-//         spendedAmount.spneded_this_month,
-//         user.monthlyGoldCoinSpendingLimit,
-//         usd
-//       );
-
-//       return true;
-//     }
-//     if (
-//       spendedAmount.spened_this_week + usd >
-//       user.weeklyGoldCoinSpendingLimit
-//     ) {
-//       console.log(
-//         "spendedAmount.spneded_this_week",
-//         spendedAmount.spened_this_week,
-//         user.weeklyGoldCoinSpendingLimit,
-//         usd
-//       );
-
-//       return true;
-//     }
-//     if (spendedAmount.spended_today + usd > user.dailyGoldCoinSpendingLimit) {
-//       console.log(
-//         "spendedAmount.spneded_this_day",
-//         spendedAmount.spended_today,
-//         user.dailyGoldCoinSpendingLimit,
-//         usd
-//       );
-//       return true;
-//     }
-
-//     return false;
-//   };
-
-//   return (
-//     <>
-//       {liveFormToken ? (
-//         <button id="payRedirection">
-//           <AcceptHosted
-//             formToken={liveFormToken}
-//             environment="PRODUCTION"
-//             integration="redirect"
-//           >
-//             <Spinner animation="border" />
-//           </AcceptHosted>
-//         </button>
-//       ) : (
-//         <button
-//           className={
-//             handleLimitCheck(parseFloat(prize?.priceInBUSD))
-//               ? "disable-btn-purchase"
-//               : ""
-//           }
-//           // disabled={handleLimitCheck(parseFloat(prize?.priceInBUSD))}
-//           onClick={() =>
-//             handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
-//           }
-//         >
-//           {" "}
-//           {!liveFormToken ? (
-//             !loader ? (
-//               `Buy With Card $${getExactPrice(
-//                 prize?.priceInBUSD,
-//                 promoDetails
-//               )}`
-//             ) : (
-//               <Spinner animation="border" />
-//             )
-//           ) : (
-//             ""
-//           )}
-//         </button>
-//       )}
-//     </>
-//   );
-// };
