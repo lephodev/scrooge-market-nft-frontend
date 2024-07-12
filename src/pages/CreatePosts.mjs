@@ -15,18 +15,18 @@ function CreatePost() {
   };
 
   return (
-    <div className='CreatePost'>
-      <div className='uploadPost'>
+    <div className="CreatePost">
+      <div className="uploadPost">
         <label>Username: </label>
         <input
-          type='text'
+          type="text"
           onChange={(e) => {
             setUserName(e.target.value);
           }}
         />
         <label>Title: </label>
         <input
-          type='text'
+          type="text"
           onChange={(e) => {
             setTitle(e.target.value);
           }}

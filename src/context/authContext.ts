@@ -9,6 +9,9 @@ const AuthContext = createContext({
   loading: false,
   setLoading: (loading: boolean) => {},
   dateTimeNow: "",
+  mode:"",
+  setMode:(user: any) => {},
+
 });
 
 export default AuthContext;
