@@ -84,7 +84,7 @@ const Header = () => {
       }}
     >
       <div className="header_outer">
-        <div className="header-Container new_header_container">
+        <div className={`${user?"user_header":"non_login"} header-Container new_header_container "`}>
           <div className="header-content ">
             <div className="header_logo">
               <Link to={scroogeClient}>
@@ -134,7 +134,7 @@ const Header = () => {
                           onClick={handleTicketTotoken}
                         >
                           <img src={ticket} alt="" /> <span>Ticket</span>{" "}
-                          <FaArrowsAltH /> <img src={coin} alt="" />{" "}
+                          <FaArrowsAltH /><img src={coin} alt="" />{" "}
                           <span>Token</span>
                         </Button>
                         <TicketTotoken

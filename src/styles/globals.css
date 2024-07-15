@@ -602,9 +602,10 @@ span.wallet-user-name {
   font-size: 20px;
 }
 .asterisk-desc.cryptoTotoken ul li {
-  width: fit-content;
-  text-align: left;
+  /* width: fit-content; */
+  text-align: center;
   font-size: 18px;
+  list-style: none;
 }
 .asterisk-desc.cryptoTotoken.first-grid ul li {
   text-align: center !important;
@@ -2546,13 +2547,12 @@ background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
-  /* identical to box height */
-  color: #fff;
+  color: #daaf13;
   padding-bottom: 20px;
-  /* title_shadow */
   text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
   margin: 0;
 }
+
 
 .footer-menu ul {
   margin: 0;
@@ -2601,13 +2601,17 @@ background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
   font-size: 16px;
   line-height: 20px;
   /* identical to box height */
-  color: #fff;
+  color: #daaf13;
 
   /* title_shadow */
   text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
   margin: 0;
   padding-bottom: 8px;
 }
+
+
+
+
 
 ul.footer-social {
   list-style-type: none;
@@ -7417,4 +7421,14 @@ background: none;
 
 .daily_spin_container .risk-grid p {
   color: white;
+}
+.gaming_footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ .gaming_footer img {
+    width: 35px !important;
+    height: 35px !important;
+    margin: 0px !important;
 }

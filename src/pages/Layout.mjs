@@ -362,8 +362,10 @@ const Layout = ({ children }) => {
                 </h6>
 
                 <p className="d-flex align-items-center mb-2">
+                  <Link to="https://www.gamingaddictsanonymous.org/" target="_blank" className="gaming_footer">
               <img src={icon_18} alt="image_icon" height={25} width={25}/>
               <p className="ms-2 text-white1 font-weight-bold">Gaming is addictive. Please play responsibly</p>
+              </Link>
             </p>
                 <p>
                   <span>Copyright &copy; Scrooge LLC.</span> All Rights Reserved

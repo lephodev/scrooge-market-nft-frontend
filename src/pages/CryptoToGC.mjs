@@ -543,7 +543,7 @@ export default function CryptoToGC() {
                   </div>
                   <div className="purchase-select purchase-select_alignment">
                     <div className="purchase-with-content">
-                      <h4>Purchase with: </h4>
+                      {/* <h4>Purchase with: </h4> */}
                       <div className="purchase-with-grid purchase-with-grid_update">
                         <span
                           onClick={() => handlePaymentTypeChange("Credit Card")}
@@ -734,8 +734,19 @@ export default function CryptoToGC() {
                                           <h3 className="mega-text pulses">
                                             Mega Offer
                                           </h3>
+                                          <div className="goldPurchase-offers">
+                                            Free ST:{" "}
+                                            <img
+                                              src={sweep}
+                                              alt="sweep token"
+                                            />{" "}
+                                            {prize?.freeTokenAmount}
+                                          </div>
                                           <Card.Img variant="top" src={coin3} />
                                           <Card.Body>
+                                          <Card.Title className="goldPurchase_heading">
+                                             ${parseFloat(prize?.priceInBUSD)}
+                                          </Card.Title>
                                             <Card.Title>
                                               GC {prize?.gcAmount}
                                             </Card.Title>
@@ -805,14 +816,7 @@ export default function CryptoToGC() {
                                               </>
                                             )}
                                           </Card.Body>
-                                          <div className="goldPurchase-offers">
-                                            Free ST:{" "}
-                                            <img
-                                              src={sweep}
-                                              alt="sweep token"
-                                            />{" "}
-                                            {prize?.freeTokenAmount}
-                                          </div>
+                                       
                                         </Card>
                                       ) : (
                                         ""
@@ -968,10 +972,10 @@ export default function CryptoToGC() {
                     </p>
                     <ul>
                       Disclaimer :
-                      <li>
+                      {/* <li>
                         +16% Will be added to Scroogecoin Crypto payment method
                         to cover blockchain fees and contract taxes!
-                      </li>
+                      </li> */}
                       <li>
                         All sales are final. SCROOGE LLC has a zero refund
                         policy.
