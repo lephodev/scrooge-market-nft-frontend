@@ -302,7 +302,7 @@ console.log("paymentType===>",paymentType?.value,options);
           </h6> */}
           </div>
           <div className="popupBtn">
-            <button className="yellowBtn updated_bg_btn new_btn_wd" variant="primary" type="submit">
+            <button className="yellowBtn updated_bg_btn new_btn_wd" variant="primary" type="submit" disabled={loading} >
               {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
             </button>
           </div>
