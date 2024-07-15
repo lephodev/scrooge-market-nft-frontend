@@ -19,7 +19,7 @@ const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin }) => {
     );
     window.location.href = `${slotUrl}/#/?game=${encodeURIComponent(
       relaxGameUrl
-    )}`;
+    )}&mode=token`;
   };
   return (
     <>

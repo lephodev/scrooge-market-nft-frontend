@@ -111,7 +111,12 @@ const CryptoWithdrawPopup = ({ getUserDataInstant }) => {
           </Form.Group>
         </div>
         <div className="popupBtn">
-          <button className="yellowBtn" variant="primary" type="submit">
+          <button
+            className="yellowBtn"
+            variant="primary"
+            type="submit"
+            disabled={loading}
+          >
             {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
           </button>
         </div>
