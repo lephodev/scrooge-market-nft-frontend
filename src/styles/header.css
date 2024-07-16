@@ -307,10 +307,22 @@
 .navbar-expand-lg .navbar-nav {
   border-image: linear-gradient(90deg, #ffc700 0%, #ffeca8 51%, #ffc700 100%);
 }
-
+@media screen and (max-width: 991px) { 
+  .header-btn-mobile.user-profile a.dropdown-item, .header-btn-mobile.user-profile a.dropdown-item svg {
+    background: #fbc404 !important;
+    border-radius: 50%;
+    display: grid;
+    height: 40px;
+    place-content: center;
+    width: 40px;
+    padding: 5px;
+}
+}
 
 @media screen and (max-width: 767px) { 
   .slotLobby-mode label.form-check-label {
   font-size: 12px;
   }
+
+ 
 }

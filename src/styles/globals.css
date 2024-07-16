@@ -2537,6 +2537,7 @@ background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
 
 .footer-info a img {
   margin-left: -50px;
+
 }
 
 .footer-info span {
@@ -2685,11 +2686,15 @@ ul.footer-support li img {
   padding-top: 90px;
 }
 
-.footer-info a img,
 .logo-mobile img {
   max-width: 130px;
   width: 100%;
   margin: 10px;
+}
+.footer-info a img {
+  max-width: 130px;
+  width: 100%;
+  margin: 10px -25px;
 }
 
 /*********************** Coockie popup *************************/
@@ -5815,7 +5820,7 @@ body.modal-open {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 20px;
+    padding: 20px 0px;
   }
 
   .header-btn-mobile .btn {
@@ -6027,9 +6032,16 @@ body.modal-open {
 
   .header-btn-mobile {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 20px;
-    padding: 20px;
+    /* padding: 20px; */
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #FFEB3B;
+  }
+
+  .user-profile {
+      padding: 20px 0px 0px;
   }
 
   .header-btn-mobile .btn {
@@ -7432,3 +7444,64 @@ background: none;
     height: 35px !important;
     margin: 0px !important;
 }
+
+.custom-dd {
+  display: flex;
+  flex-direction: column;
+}
+
+.policy-menu {
+  padding: 0px 0px;
+  border: none;
+  justify-content: start;
+}
+
+.policy-menu span {
+width: 100%;
+}
+
+.policy-menu .custom-dropdown-menu {
+  list-style: none;
+  padding: 20px 10px 0px;
+  width: 100%;
+}
+
+.policy-menu .custom-dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.side-logout .btn {
+  /* font-size: 18px; */
+  color: #fbc404;
+}
+
+
+.side-logout .btn svg {
+  padding-left: 5px;
+}
+/* .custom-dropdown-menu {
+  transition: 0.3s linear;
+  position: absolute;
+  top: 50px;
+  max-width: 200px;
+  width: 100%;
+  padding: 10px;
+  background: #191919;
+  box-shadow: 0 14px 50px -6px rgb(104 110 108 / 30%);
+  border-radius: 10px;
+}
+.custom-dropdown-menu ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.custom-dropdown-menu li {
+  transition: 0.3s linear;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+  color: white;
+} */
