@@ -356,10 +356,10 @@ const Layout = ({ children }) => {
                 <Link to={scroogeClient}>
                   <img src={logo} alt="scrooge casino nft token packages" />
                 </Link>
-                <h6>
+                {/* <h6>
                   Want to stay ahead of your competition. Subscribe and be the
                   first to know everything happening in the world of SCROOGE.
-                </h6>
+                </h6> */}
 
                 <p className="d-flex align-items-center mb-2">
                   <Link to="https://www.gamingaddictsanonymous.org/" target="_blank" className="gaming_footer">
@@ -459,7 +459,7 @@ const Layout = ({ children }) => {
                       href="https://twitter.com/Scrooge_Casino"
                       rel="noopener noreferrer"
                     >
-                      <img src={twitter} alt="" />
+                      <img src={twitter} alt="" className="img_twit"/>
                     </a>
                   </li>
                   {/* <li>

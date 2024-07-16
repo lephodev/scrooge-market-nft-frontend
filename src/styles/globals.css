@@ -2488,7 +2488,6 @@ background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
   color: #fbff14;
 }
 /*********************** Footer *************************/
-
 .footer {
   position: relative;
 }
@@ -2503,6 +2502,11 @@ background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
 
 .footer-info {
   position: relative;
+}
+
+.img_twit {
+  height: 12px !important;
+  width: 12px !important;
 }
 
 .footer-info h4 {
