@@ -184,6 +184,11 @@
   cursor: pointer;
   padding-right: 35px;
   color: white;
+  -webkit-text-fill-color: #0000;
+    background: linear-gradient(90deg, #ffc700, #ffeca8 51%, #ffc700);
+    background: var(--Gold-Stroke, linear-gradient(90deg, #ffc700 0, #ffeca8 51%, #ffc700 100%));
+    background-clip: text;
+    -webkit-background-clip: text;
 }
 
 .slotLobby-mode .form-switch {
