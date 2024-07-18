@@ -180,7 +180,6 @@ const Layout = ({ children }) => {
 
   const handleConnect = () => {
     // setLoaderAddress(true);
-
     setShowConnect(!showConnect);
   };
 

@@ -253,14 +253,107 @@ const Header = () => {
                     >
                       Home
                     </Link>
-                    <Link
+                    {/* <Link
                       to={`${scroogeClient}/games`}
                       className={`nav-link ${isActive(
                         `${scroogeClient}/games`
                       )}`}
                     >
                       Games
-                    </Link>
+                    </Link> */}
+
+                    <div
+                                    className={`nav-link custom-dd ${isActive(
+                                      "/games"
+                                    )}`}
+                                    onMouseEnter={handleMouseEnter}
+                                    onMouseLeave={handleMouseLeave}
+                                    onClick={() => {
+                                      handleDropDown("games");
+                                    }}
+                                    role="presentation"
+                                    // ref={subMenuRef1}
+                                  >
+                                    <span
+                                      className={`${
+                                        !isDropdownVisible ? "drop-arrow" : ""
+                                      }`}
+                                    >
+                                      Games <ArrowIcon />
+                                    </span>
+                                    {isDropdownVisible === "games" ? (
+                                      <div className="custom-dropdown-menu">
+                                        <ul>
+                                         <li>
+                                            <Link to={`${scroogeClient}/new-releases`}>
+                                              New Releases
+                                            </Link>
+                                          </li>
+                                          {/* <li>
+                                            <Link to={pokerUrl}>Poker</Link>
+                                          </li> */}
+                                          <li>
+                                            <Link to={`${scroogeClient}/games`}>Slots</Link>
+                                          </li>
+                                          <li>
+                                            <Link to={`${scroogeClient}/table-games`}>
+                                              Table Games
+                                            </Link>
+                                          </li>
+                                          <li>
+                                            <Link to={`${scroogeClient}/casual`}>Casuals</Link>
+                                          </li>
+                                          <li>
+                                            <Link to={`${scroogeClient}/classic-slot`}>
+                                              Classic Slots
+                                            </Link>
+                                          </li>
+                                          <li>
+                                            <Link to={`${scroogeClient}/fish-games`}>
+                                              Fish Games
+                                            </Link>
+                                          </li>
+                                          <li>
+                                            <Link to={`${scroogeClient}/holdAndWin-games`}>
+                                              Hold And Win
+                                            </Link>
+                                          </li>
+                                          <li>
+                                            <Link to={`${scroogeClient}/jackpot-games`}>
+                                              Jackpots
+                                            </Link>
+                                          </li>
+                                          <li>
+                                            <Link to={`${scroogeClient}/keno`}>Keno</Link>
+                                          </li>                                          
+                                          <li>
+                                            <Link to={`${scroogeClient}/megaways`}>Megaways</Link>
+                                          </li>
+                                          <li>
+                                            <Link to={`${scroogeClient}/penny-machine`}>
+                                              Penny Machine
+                                            </Link>
+                                          </li>
+                                          <li>
+                                            <Link to={`${scroogeClient}/scratcher-games`} >
+                                              Scratcher
+                                            </Link>
+                                          </li>
+                                          <li>
+                                            <Link to={`${scroogeClient}/video-poker`}>
+                                              Video Poker
+                                            </Link>
+                                          </li>
+                                         
+                                          {/* <li>
+                                            <Link to="/halloween-games">
+                                              Halloween Games
+                                            </Link>
+                                          </li> */}
+                                        </ul>
+                                      </div>
+                                  ) : null} 
+                                  </div>
                     <Link
                       to={`/crypto-to-gc`}
                       className={`nav-link ${isActive("/crypto-to-gc")}`}
