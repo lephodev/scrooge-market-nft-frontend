@@ -122,8 +122,8 @@ const Header = () => {
                     id="custom-switch"
                     label={
                       mode === "token"
-                        ? `ST: ${parseInt(user?.wallet)}`
-                        : `GC: ${parseInt(user?.goldCoin)}`
+                      ? <p><span>ST:</span> {parseInt(user?.wallet)}</p>
+                      : <p><span>GC:</span> {parseInt(user?.goldCoin)}</p>  
                     }
                     defaultChecked={mode === "token"}
                     checked={mode === "token"}
