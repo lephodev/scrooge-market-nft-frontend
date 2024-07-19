@@ -336,7 +336,7 @@
   padding: 0px 15px;
 }
 .custom-dropdown-menu li {
-  padding: 5px 0px;
+  padding: 0px 0px !important;
 }
 }
 
@@ -353,7 +353,7 @@
   max-width: 200px;
   width: 100%;
   padding: 10px;
-  background: #10121a;
+  background: #212430;
   /* box-shadow: 0px 14px 50px -6px rgb(104 110 108 / 30%); */
   border-radius: 10px;
   border: 1px solid #ffd234;
@@ -362,6 +362,9 @@
   padding: 0;
   margin: 0;
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px
 }
 .header-Container {
   position: relative;
@@ -382,6 +385,7 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-wrap: wrap;
 }
 .custom-dropdown-menu li:hover a {
   color: var(--primary-color);
@@ -395,4 +399,9 @@
   background: var(--Gold-Stroke, linear-gradient(90deg, #ffc700 0, #ffeca8 51%, #ffc700 100%));
   background-clip: text;
   -webkit-background-clip: text;
+}
+.wallet button{
+  border-radius: 10px !important;
+  background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%) !important;
+  color: #000 !important;
 }
