@@ -5056,7 +5056,7 @@ h3.mega-text {
   animation: pulses 2s infinite;
 }
 .free-st-popup .modal-content {
-  background: #171719;
+  background: #2d2d30;
   border-radius: 10px;
 }
 .free-st-popup .modal-body {
@@ -5085,7 +5085,7 @@ h3.mega-text {
 }
 .free-st-content button, .free-st-content button:hover, .free-st-content .btn:focus-visible {
   align-items: center;
-  background: #f9ff00;
+  background: linear-gradient(90deg, #ffc700, #ffeca8 51%, #ffc700) !important;
   border: 1px solid #f9ff00;
   border-radius: 30px;
   color: #000;
