@@ -6,7 +6,6 @@ body {
   margin: 0;
   color: #878d93;
   background: #000000;
-  /* font-family: "Poppins", sans-serif !important; */
   overflow-x: hidden;
   font-family: "Quicksand" !important;
 }
@@ -2371,10 +2370,7 @@ li#walletConnect {
   height: unset !important;
 }
 .spin-button button {
-  /* background-color: #fbff14; */
   background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
-  /* -webkit-box-shadow: 0 0 40px rgba(255, 205, 25, 0.50); */
-  /* border-radius: 26px; */
   border-radius: 15px;
   border: none;
   color: #000;
@@ -2394,17 +2390,11 @@ li#walletConnect {
 
 @-webkit-keyframes glowing {
   0% {
-    /* background-color: #fbff14;
-    -webkit-box-shadow: 0 0 3px #fbff14; */
-
 background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
-/* box-shadow: 0px 4px 51.7px 0px rgba(255, 205, 25, 0.50); */
 -webkit-box-shadow: 0 0 3px rgba(255, 205, 25, 0.50);
   }
 
   50% {
-    /* background-color: #fdff8f;
-    -webkit-box-shadow: 0 0 40px #fdff8f; */
     background: var(--Gold-Stroke, linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%));
     -webkit-box-shadow: 0 0 40px rgba(255, 205, 25, 0.50);
   }
