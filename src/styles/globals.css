@@ -2661,6 +2661,15 @@ ul.footer-support {
   padding: 0;
 }
 
+.address-footer {
+  color: #ffffff80;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration: none;
+  transition: .5s;
+}
+
 ul.footer-support li {
   display: flex;
   align-items: center;

@@ -497,6 +497,8 @@ const Layout = ({ children }) => {
                     </a>
                   </li>
                 </ul>
+                <h3 className="mt-4">Address</h3>
+                <p class="address-footer">805 S Black St. Alexandria, Indiana 46001</p>
               </div>
             </div>
           </div>
