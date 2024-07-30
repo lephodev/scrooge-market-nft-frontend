@@ -66,7 +66,7 @@ export default function CryptoToGC() {
   const isMismatched = useNetworkMismatch();
   const [errors, setErrors] = useState("");
   const [dailyGCPurchaseLimit, setDailyGCPurchaseLimit] = useState(0);
-  const [isMegaBuyShow, setIsMegaBuyShow] = useState(true);
+  const [isMegaBuyShow, setIsMegaBuyShow] = useState(false);
   const [showFreeST, setShowFreeST] = useState(false);
   const [freeSTDetail, setFreeSTDetails] = useState({});
   const [avgValue, setAvgValue] = useState(0);
