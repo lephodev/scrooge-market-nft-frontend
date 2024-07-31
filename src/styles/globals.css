@@ -4578,8 +4578,8 @@ button.yellowBtn {
   font-weight: 500;
   border-radius: 6px;
   height: 38px;
-  border: none !important;
-  background: #f9ff00;
+  background: var(--Gold-Stroke, linear-gradient(90deg, #ffc700 0, #ffeca8 51%, #ffc700 100%)) !important;
+    border: 2px solid #ffc700;
   color: black;
   cursor: pointer;
 }
@@ -5055,8 +5055,9 @@ h3.mega-text {
   animation: pulses 2s infinite;
 }
 .free-st-popup .modal-content {
-  background: #2d2d30;
-  border-radius: 10px;
+  background: #10121a;
+  border-radius: 20px;
+  border: 1px solid #212430;
 }
 .free-st-popup .modal-body {
   padding-top: 40px;
@@ -5481,7 +5482,7 @@ p.title-memo {
   padding-top: 20px;
   padding: 10px 0px !important;
   margin-bottom: 10px !important;
-  color: white !important;
+  color:#bcbcbc !important;
 }
 .payment_popup .select-banner-option {
   padding-bottom: 17px;
@@ -5506,8 +5507,19 @@ p.title-memo {
   background-color:#d7d7d7 !important;
   padding: 0.275rem .75rem !important;
   font-size: 14px !important;
+  background: #1f2332 !important;
+  border: 1px solid #ffc700 !important;
+  border-radius: 10px;
+  color: #bcbcbc !important;
+  height: 54px;
+  padding: 20px;
+  text-align: center;
 }
 
+
+.payment_popup .form-control::placeholder{
+  color: #bcbcbc !important;
+}
 .invalid-feedback {
   position: absolute !important;
 }
