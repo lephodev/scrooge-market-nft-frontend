@@ -683,7 +683,6 @@ export default function CryptoToGC() {
                         }}
                         className="special-offer-grid"
                       >
-                        <h5>Special Offer</h5>
                         {user.freeSpin.length === 0 && (
                           <div className="special-offer-grid payCardoffer">
                             <div className="">
@@ -744,9 +743,9 @@ export default function CryptoToGC() {
                                           </div>
                                           <Card.Img variant="top" src={coin3} />
                                           <Card.Body>
-                                          <Card.Title className="goldPurchase_heading">
-                                             ${parseFloat(prize?.priceInBUSD)}
-                                          </Card.Title>
+                                            <Card.Title className="goldPurchase_heading">
+                                              ${parseFloat(prize?.priceInBUSD)}
+                                            </Card.Title>
                                             <Card.Title>
                                               GC {prize?.gcAmount}
                                             </Card.Title>
@@ -816,7 +815,6 @@ export default function CryptoToGC() {
                                               </>
                                             )}
                                           </Card.Body>
-                                       
                                         </Card>
                                       ) : (
                                         ""
