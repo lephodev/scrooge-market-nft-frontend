@@ -22,7 +22,7 @@ const customStyles = {
   }),
   option: (provided, { data }) => ({
     ...provided,
-    background: "#000",
+    background: "#1F2332",
     color: "#ddd",
     fontWeight: "400",
     fontSize: "16px",
@@ -39,24 +39,27 @@ const customStyles = {
   }),
   menu: (provided) => ({
     ...provided,
-    background: "#000",
+    background: "#1F2332",
     borderRadius: "30px",
     padding: "10px 20px",
     border: "2px solid transparent",
   }),
   control: () => ({
-    borderRadius: "30px",
+    // borderRadius: "30px",
     color: "#fff",
     display: "flex",
     alignItem: "center",
-    background: "#080808",
-    border: "1px solid #25282e",
+    // background: "#080808",
+    // border: "1px solid #25282e",
     height: "43px",
     margin: "2px 0",
-    boxShadow: "0px 20px 20px #00000091",
+    // boxShadow: "0px 20px 20px #00000091",
+    borderRadius: "10px",
+    border: "1px solid  #FFC700",
+    background: "#1F2332",
     cursor: "pointer",
     ":hover": {
-      background: "#141414",
+      background: "#1F2332",
       // border: "2px solid #306CFE",
     },
   }),
@@ -202,28 +205,33 @@ const FiatPopup = ({
     ]);
   }, [fiatActiveInActive]);
 
+console.log("paymentType===>",paymentType?.value,options);
+
   return (
-    <div className="fiat-data" id="fiat-form">
+    <div className="fiat-data updated_cryto_form" id="fiat-form">
+      <div className="updated_cryto_form_data">
       {!fiatActiveInActive?.Cashapp && !fiatActiveInActive?.Paypal ? (
         "Cash Prize is Temporarily Unavailable"
       ) : (
         <Form onSubmit={handleSubmit(WithdrawRequest)}>
-          <div className="fiat-content">
-            <Form.Group className="fiat-group">
-              <Form.Label>Withdraw to</Form.Label>
+              <div className="form_top">
+              <Form.Label className="form_heading">Withdraw to</Form.Label>
               {!fiatActiveInActive.Cashapp && (
                 <Form.Text>
                   Cashapp availability is subject to the apps sending limits.
                   When limits are reached, the option is disabled temporarily.
                 </Form.Text>
-              )}
+               )} 
               {!fiatActiveInActive.Paypal && (
                 <Form.Text>
                   Paypal availability is subject to the apps sending limits.
                   When limits are reached, the option is disabled temporarily.
                 </Form.Text>
               )}
-
+              </div>
+          <div className="fiat-content withdraw_content">
+        
+            <Form.Group className={` ${paymentType?.value === undefined?"fiat-group_first":""} fiat-group`}>
               <Select
                 options={options}
                 onChange={handleChnagePayout}
@@ -236,26 +244,29 @@ const FiatPopup = ({
 
             {paymentType && paymentType.value === "Paypal" ? (
               <Form.Group className="fiat-group">
-                <Form.Label>Email</Form.Label>
+                {/* <Form.Label>Email</Form.Label> */}
                 <Form.Control
                   type="email"
                   name="email"
                   placeholder="Enter email"
                   {...register("email")}
+                  className="form_updated_input"
                 />
                 {errors?.email && (
                   <p className="error-msg">{errors?.email?.message}</p>
                 )}
               </Form.Group>
+            
             ) : paymentType && paymentType.value === "Cashapp" ? (
               <Form.Group className="fiat-group">
-                <Form.Label>$Cashtag </Form.Label>
+                {/* <Form.Label>$Cashtag </Form.Label> */}
                 <Form.Control
                   type="text"
                   name="cashAppid"
                   //   defaultValue={singleTournament?.name}
                   placeholder="Enter $Cashtag"
                   {...register("cashAppid")}
+                  className="form_updated_input"
                 />
                 {errors?.cashAppid && (
                   <p className="error-msg">{errors?.cashAppid?.message}</p>
@@ -274,6 +285,7 @@ const FiatPopup = ({
                   name="amount"
                   placeholder="Enter Withdraw Amount"
                   {...register("amount")}
+                   className="form_updated_input"
                 />
                 {errors?.amount && (
                   <p className="error-msg">{errors?.amount?.message}</p>
@@ -290,17 +302,13 @@ const FiatPopup = ({
           </h6> */}
           </div>
           <div className="popupBtn">
-            <button
-              className="yellowBtn"
-              variant="primary"
-              type="submit"
-              disabled={loading}
-            >
+            <button className="yellowBtn updated_bg_btn new_btn_wd" variant="primary" type="submit" disabled={loading} >
               {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
             </button>
           </div>
         </Form>
       )}
+      </div>
     </div>
   );
 };
