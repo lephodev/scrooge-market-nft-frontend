@@ -71,7 +71,7 @@ const Header = () => {
 
   const currentRoute = useCurrentPath();
   const isActive = (routeName) => (routeName === currentRoute ? "active" : "");
-   
+
   const handleMouseEnter = (value) => {
     setDropdownVisible(value);
   };
@@ -103,7 +103,11 @@ const Header = () => {
       }}
     >
       <div className="header_outer">
-        <div className={`${user?"user_header":"non_login"} header-Container new_header_container "`}>
+        <div
+          className={`${
+            user ? "user_header" : "non_login"
+          } header-Container new_header_container "`}
+        >
           <div className="header-content ">
             <div className="header_logo">
               <Link to={scroogeClient}>
@@ -121,9 +125,15 @@ const Header = () => {
                     type="switch"
                     id="custom-switch"
                     label={
-                      mode === "token"
-                      ? <p><span>ST:</span> {parseInt(user?.wallet)}</p>
-                      : <p><span>GC:</span> {parseInt(user?.goldCoin)}</p>  
+                      mode === "token" ? (
+                        <p>
+                          <span>ST:</span> {parseInt(user?.wallet)}
+                        </p>
+                      ) : (
+                        <p>
+                          <span>GC:</span> {parseInt(user?.goldCoin)}
+                        </p>
+                      )
                     }
                     defaultChecked={mode === "token"}
                     checked={mode === "token"}
@@ -246,14 +256,14 @@ const Header = () => {
               <Nav className="mr-auto ">
                 {user ? (
                   <>
-                  <div className="navItem">
-                    <Link
-                      to={scroogeClient}
-                      className={`nav-link ${isActive(scroogeClient)}`}
-                    >
-                      Home
-                    </Link>
-                    {/* <Link
+                    <div className="navItem">
+                      <Link
+                        to={scroogeClient}
+                        className={`nav-link ${isActive(scroogeClient)}`}
+                      >
+                        Home
+                      </Link>
+                      {/* <Link
                       to={`${scroogeClient}/games`}
                       className={`nav-link ${isActive(
                         `${scroogeClient}/games`
@@ -262,269 +272,267 @@ const Header = () => {
                       Games
                     </Link> */}
 
-                    <div
-                                    className={`nav-link custom-dd ${isActive(
-                                      "/games"
-                                    )}`}
-                                    onMouseEnter={handleMouseEnter}
-                                    onMouseLeave={handleMouseLeave}
-                                    onClick={() => {
-                                      handleDropDown("games");
-                                    }}
-                                    role="presentation"
-                                    // ref={subMenuRef1}
-                                  >
-                                    <span
-                                      className={`${
-                                        !isDropdownVisible ? "drop-arrow" : ""
-                                      }`}
-                                    >
-                                      Games <ArrowIcon />
-                                    </span>
-                                    {isDropdownVisible === "games" ? (
-                                      <div className="custom-dropdown-menu">
-                                        <ul>
-                                         <li>
-                                            <Link to={`${scroogeClient}/new-releases`}>
-                                              New Releases
-                                            </Link>
-                                          </li>
-                                          {/* <li>
+                      <div
+                        className={`nav-link custom-dd ${isActive("/games")}`}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        onClick={() => {
+                          handleDropDown("games");
+                        }}
+                        role="presentation"
+                        // ref={subMenuRef1}
+                      >
+                        <span
+                          className={`${
+                            !isDropdownVisible ? "drop-arrow" : ""
+                          }`}
+                        >
+                          Games <ArrowIcon />
+                        </span>
+                        {isDropdownVisible === "games" ? (
+                          <div className="custom-dropdown-menu">
+                            <ul>
+                              <li>
+                                <Link to={`${scroogeClient}/new-releases`}>
+                                  New Releases
+                                </Link>
+                              </li>
+                              {/* <li>
                                             <Link to={pokerUrl}>Poker</Link>
                                           </li> */}
-                                          <li>
-                                            <Link to={`${scroogeClient}/games`}>Slots</Link>
-                                          </li>
-                                          <li>
-                                            <Link to={`${scroogeClient}/table-games`}>
-                                              Table Games
-                                            </Link>
-                                          </li>
-                                          <li>
-                                            <Link to={`${scroogeClient}/casual`}>Casuals</Link>
-                                          </li>
-                                          <li>
-                                            <Link to={`${scroogeClient}/classic-slot`}>
-                                              Classic Slots
-                                            </Link>
-                                          </li>
-                                          <li>
-                                            <Link to={`${scroogeClient}/fish-games`}>
-                                              Fish Games
-                                            </Link>
-                                          </li>
-                                          <li>
-                                            <Link to={`${scroogeClient}/holdAndWin-games`}>
-                                              Hold And Win
-                                            </Link>
-                                          </li>
-                                          <li>
-                                            <Link to={`${scroogeClient}/jackpot-games`}>
-                                              Jackpots
-                                            </Link>
-                                          </li>
-                                          <li>
-                                            <Link to={`${scroogeClient}/keno`}>Keno</Link>
-                                          </li>                                          
-                                          <li>
-                                            <Link to={`${scroogeClient}/megaways`}>Megaways</Link>
-                                          </li>
-                                          <li>
-                                            <Link to={`${scroogeClient}/penny-machine`}>
-                                              Penny Machine
-                                            </Link>
-                                          </li>
-                                          <li>
-                                            <Link to={`${scroogeClient}/scratcher-games`} >
-                                              Scratcher
-                                            </Link>
-                                          </li>
-                                          <li>
-                                            <Link to={`${scroogeClient}/video-poker`}>
-                                              Video Poker
-                                            </Link>
-                                          </li>
-                                         
-                                          {/* <li>
+                              <li>
+                                <Link to={`${scroogeClient}/games`}>Slots</Link>
+                              </li>
+                              <li>
+                                <Link to={`${scroogeClient}/table-games`}>
+                                  Table Games
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to={`${scroogeClient}/casual`}>
+                                  Casuals
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to={`${scroogeClient}/classic-slot`}>
+                                  Classic Slots
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to={`${scroogeClient}/fish-games`}>
+                                  Fish Games
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to={`${scroogeClient}/holdAndWin-games`}>
+                                  Hold And Win
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to={`${scroogeClient}/jackpot-games`}>
+                                  Jackpots
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to={`${scroogeClient}/keno`}>Keno</Link>
+                              </li>
+                              <li>
+                                <Link to={`${scroogeClient}/megaways`}>
+                                  Megaways
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to={`${scroogeClient}/penny-machine`}>
+                                  Penny Machine
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to={`${scroogeClient}/scratcher-games`}>
+                                  Scratcher
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to={`${scroogeClient}/video-poker`}>
+                                  Video Poker
+                                </Link>
+                              </li>
+
+                              {/* <li>
                                             <Link to="/halloween-games">
                                               Halloween Games
                                             </Link>
                                           </li> */}
-                                        </ul>
-                                      </div>
-                                  ) : null} 
-                                  </div>
-                    <Link
-                      to={`/crypto-to-gc`}
-                      className={`nav-link ${isActive("/crypto-to-gc")}`}
-                    >
-                      Purchase Center{" "}
-                    </Link>
-                    <Link
-                      to={`/redeem-prizes`}
-                      className={`nav-link ${isActive("/redeem-prizes")}`}
-                    >
-                      Redemption Center 
-                    </Link>
-                    <Link
-                      to={`/claim-free-tokens`}
-                      className={`nav-link ${isActive("/claim-free-tokens")}`}
-                    >
-                      Daily Wheel Spin
-                    </Link>
-                    <Link
-                      to={`${scroogeClient}/affiliate`}
-                      className={`nav-link ${isActive("/affiliate")}`}
-                    >
-                      Affiliate Program
-                    </Link>
-                    {/* <Link
+                            </ul>
+                          </div>
+                        ) : null}
+                      </div>
+                      <Link
+                        to={`/crypto-to-gc`}
+                        className={`nav-link ${isActive("/crypto-to-gc")}`}
+                      >
+                        Purchase Center{" "}
+                      </Link>
+                      <Link
+                        to={`/redeem-prizes`}
+                        className={`nav-link ${isActive("/redeem-prizes")}`}
+                      >
+                        Redemption Center
+                      </Link>
+                      <Link
+                        to={`/claim-free-tokens`}
+                        className={`nav-link ${isActive("/claim-free-tokens")}`}
+                      >
+                        Daily Wheel Spin
+                      </Link>
+                      <Link
+                        to={`${scroogeClient}/affiliate`}
+                        className={`nav-link ${isActive("/affiliate")}`}
+                      >
+                        Affiliate Program
+                      </Link>
+                      {/* <Link
                       to={`/my-wallet`}
                       className={`nav-link ${isActive("/my-wallet")}`}
                     >
                       Holder Claim Center
                     </Link> */}
-                  </div>
-                  <div className="header-btn-mobile user-profile">
-                        <a
-                          className="dropdown-item"
-                          href={`${scroogeClient}/profile`}
-                        >
-                          <img
-                            src={user?.profile ? user?.profile : profile}
-                            alt="profile"
-                            onError={(e) => {
-                              e.target.onerror = null;
-                              e.target.src = profile;
-                            }}
-                          />
-                        </a>
-                        <a
-                          className="dropdown-item text-white"
-                          href={`${scroogeClient}/setting`}
-                        >
-                          <SettingSvg /> 
-                        </a>
-                        {/* <div className="header-btn-mobile logout-btn">
+                    </div>
+                    <div className="header-btn-mobile user-profile">
+                      <a
+                        className="dropdown-item"
+                        href={`${scroogeClient}/profile`}
+                      >
+                        <img
+                          src={user?.profile ? user?.profile : profile}
+                          alt="profile"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = profile;
+                          }}
+                        />
+                      </a>
+                      <a
+                        className="dropdown-item text-white"
+                        href={`${scroogeClient}/setting`}
+                      >
+                        <SettingSvg />
+                      </a>
+                      {/* <div className="header-btn-mobile logout-btn">
                         <Button onClick={handleLogout}>
                           <HiOutlineLogout />
                         </Button>
                       </div> */}
+                    </div>
+
+                    <div className="header-btn-mobile user-profile policy-menu">
+                      <div
+                        className={`nav-link custom-dd ${isActive(
+                          "/redeem-prizes"
+                        )}`}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        onClick={() => {
+                          handleDropDown("responsible");
+                        }}
+                        role="presentation"
+                        // ref={subMenuRef}
+                      >
+                        <span
+                          className={`${
+                            isDropdownVisible !== "responsible"
+                              ? "drop-arrow"
+                              : ""
+                          }`}
+                        >
+                          Responsible Gaming Controls{" "}
+                          {/* <i className="las la-angle-down" /> */}
+                          <ArrowIcon />
+                        </span>
+                        {isDropdownVisible === "responsible" ? (
+                          <div className="custom-dropdown-menu">
+                            <ul>
+                              <li>
+                                <Link to="/profile?active=spending">
+                                  {" "}
+                                  Spending Limit
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to="/deactivateAccount">
+                                  {" "}
+                                  Access Restrictions
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to="/profile?active=transaction">
+                                  {" "}
+                                  Account History
+                                </Link>
+                              </li>
+                            </ul>
+                          </div>
+                        ) : null}
                       </div>
+                    </div>
 
-                      <div className="header-btn-mobile user-profile policy-menu">
-                              <div
-                                className={`nav-link custom-dd ${isActive(
-                                  "/redeem-prizes"
-                                )}`}
-                                onMouseEnter={handleMouseEnter}
-                                onMouseLeave={handleMouseLeave}
-                                onClick={() => {
-                                  handleDropDown("responsible");
-                                }}
-                                role="presentation"
-                                // ref={subMenuRef}
-                              >
-                                <span
-                                  className={`${
-                                    isDropdownVisible !== "responsible"
-                                      ? "drop-arrow"
-                                      : ""
-                                  }`}
-                                >
-                                  Responsible Gaming Controls{" "}
-                                  {/* <i className="las la-angle-down" /> */}
-                                  <ArrowIcon />
-                                </span>
-                                {isDropdownVisible === "responsible" ? (
-                                  <div className="custom-dropdown-menu">
-                                    <ul>
-                                      <li>
-                                        <Link to="/profile?active=spending">
-                                          {" "}
-                                          Spending Limit
-                                        </Link>
-                                      </li>
-                                      <li>
-                                        <Link to="/deactivateAccount">
-                                          {" "}
-                                          Access Restrictions
-                                        </Link>
-                                      </li>
-                                      <li>
-                                        <Link to="/profile?active=transaction">
-                                          {" "}
-                                          Account History
-                                        </Link>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                  ): null} 
-                              </div>
-                            </div>
+                    <div className="header-btn-mobile user-profile policy-menu">
+                      <div
+                        className={`nav-link custom-dd ${isActive(
+                          "/redeem-prizes"
+                        )}`}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        onClick={() => {
+                          handleDropDown("terms");
+                        }}
+                        role="presentation"
+                        ref={subMenuRef}
+                      >
+                        <span
+                          className={`${
+                            isDropdownVisible !== "terms" ? "drop-arrow" : ""
+                          }`}
+                        >
+                          Terms and Policies{" "}
+                          {/* <i className="las la-angle-down" /> */}
+                          <ArrowIcon />
+                        </span>
+                        {isDropdownVisible === "terms" ? (
+                          <div className="custom-dropdown-menu">
+                            <ul>
+                              <li>
+                                <Link to="/privacyPolicy">Privacy policy</Link>
+                              </li>
+                              <li>
+                                <Link to="/termsncondition">
+                                  Terms of Services
+                                </Link>
+                              </li>
+                              <li>
+                                {" "}
+                                <a href={"/"} target="blank">
+                                  Responsible Social Gameplay
+                                </a>
+                              </li>
+                              <li>
+                                <Link to="/sweepsrules" target="blank">
+                                  Sweeps Rules
+                                </Link>
+                              </li>
+                            </ul>
+                          </div>
+                        ) : null}
+                      </div>
+                    </div>
 
-                            <div className="header-btn-mobile user-profile policy-menu">
-                              <div
-                                className={`nav-link custom-dd ${isActive(
-                                  "/redeem-prizes"
-                                )}`}
-                                onMouseEnter={handleMouseEnter}
-                                onMouseLeave={handleMouseLeave}
-                                onClick={() => {
-                                  handleDropDown("terms");
-                                }}
-                                role="presentation"
-                                ref={subMenuRef}
-                              >
-                                <span
-                                  className={`${
-                                    isDropdownVisible !== "terms"
-                                      ? "drop-arrow"
-                                      : ""
-                                  }`}
-                                >
-                                  Terms and Policies{" "}
-                                  {/* <i className="las la-angle-down" /> */}
-                                  <ArrowIcon />
-                                </span>
-                                {isDropdownVisible === "terms" ? (
-                                  <div className="custom-dropdown-menu">
-                                    <ul>
-                                      <li>
-                                        <Link to="/privacyPolicy">
-                                          Privacy policy
-                                        </Link>
-                                      </li>
-                                      <li>
-                                        <Link to="/termsncondition">
-                                          Terms of Services
-                                        </Link>
-                                      </li>
-                                      <li>
-                                        {" "}
-                                        <a href={"/"} target="blank">
-                                          Responsible Social Gameplay
-                                        </a>
-                                      </li>
-                                      <li>
-                                        <Link to="/sweepsrules" target="blank">
-                                          Sweeps Rules
-                                        </Link>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                ) : null}
-                              </div>
-                            </div>
-
-                            <div className="header-btn-mobile user-profile side-logout">
-                              <Button
-                                onClick={handleLogout}
-                                // disabled={disableRedirections}
-                              >
-                                Logout <HiOutlineLogout width={100} />
-                              </Button>
-                            </div>
+                    <div className="header-btn-mobile user-profile side-logout">
+                      <Button
+                        onClick={handleLogout}
+                        // disabled={disableRedirections}
+                      >
+                        Logout <HiOutlineLogout width={100} />
+                      </Button>
+                    </div>
                   </>
                 ) : (
                   <a
@@ -563,9 +571,20 @@ function SettingSvg() {
 }
 
 function ArrowIcon() {
-  return(
-    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1 1L5 5L9 1" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
-</svg>
-  )
+  return (
+    <svg
+      width="10"
+      height="6"
+      viewBox="0 0 10 6"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 1L5 5L9 1"
+        stroke="white"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 }
