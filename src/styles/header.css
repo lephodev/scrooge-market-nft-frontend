@@ -217,7 +217,7 @@
 .notifyProfileheader img{
   height: 28px;
   width: 28px;
-
+ cursor: pointer;
 }
 
 .non_login {

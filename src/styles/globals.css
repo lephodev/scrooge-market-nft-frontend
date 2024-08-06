@@ -1732,6 +1732,81 @@ select {
   color: #888888;
 }
 
+
+.notification_Section {
+  position: absolute;
+  background: #1b1e26;
+  border: 1px solid #1b1e26;
+  border-radius: 5px;
+  box-shadow: 0 0 30px #343a4052;
+  padding-top: 10px;
+  right: -15px;
+  top: 40px;
+  width: 320px;
+}
+
+.notification_header {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  padding: 6px 15px;
+  color: #fff;
+  font-family: quicksand;
+}
+
+.notification_header h4{
+  font-size: 18px;
+  margin-bottom: 0 !important;
+}
+
+.notificationMssg {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  flex-direction: column;
+  margin-top: 8px;
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.notificationmssgBox {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  grid-gap: 10px;
+  gap: 10px;
+  align-items: flex-start;
+  border-bottom: 1px solid #1b1e26;
+  position: relative;
+    background-color: #151515;
+    cursor: pointer;
+}
+
+.notificationmssgBox img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ffc700;
+}
+.notificationmssgBox p {
+  color: #ffc700;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 0 !important;
+  padding-right: 4%;
+  width: calc(100% - 40px) !important;
+}
+
+.notificationmssgBox a {
+  color: #ffc700;
+  text-decoration: none;
+}
+
+.noNotification {
+  font-size: 14px;
+  padding: 1rem;
+}
+
 .pulse {
   animation: pulse-animation 2s infinite;
 }
@@ -2480,6 +2555,7 @@ background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
 /*********************** Footer *************************/
 .footer {
   position: relative;
+  background: #1c1f29;
 }
 
 .footer-grid {
@@ -2580,7 +2656,7 @@ background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
 .footer-menu ul li:before {
   content: "";
 
-  background: #f9ff00;
+  background: #ffcd1e;
   border-radius: 5px;
   display: block;
   position: absolute;
@@ -2695,9 +2771,13 @@ ul.footer-support li img {
   margin: 10px;
 }
 .footer-info a img {
-  max-width: 130px;
+  /* max-width: 130px;
   width: 100%;
-  margin: 10px -25px;
+  margin: 10px -25px; */
+  margin-bottom: 20px;
+    max-width: 270px;
+    width: 100%;
+  
 }
 
 /*********************** Coockie popup *************************/
@@ -5904,7 +5984,7 @@ body.modal-open {
   }
 
   .footer-grid {
-    padding: 40px 0px 100px;
+    padding: 20px 0px 0px;
   }
 
   .wallet {
@@ -6126,6 +6206,11 @@ body.modal-open {
 
   .nft-home-sell-title {
     margin-bottom: 30px;
+  }
+
+  .footer-info a img {
+    max-width: 190px;
+    margin-left: -35px;
   }
 
   .CookieConsent {
