@@ -2,8 +2,9 @@
 import { useContext } from "react";
 import Persona from "persona";
 import AuthContext from "../context/authContext.ts";
+import { Button } from "react-bootstrap";
 
-const PersonaComponent = ({ phoneNum, errors }) => {
+const PersonaComponent = ({ phoneNum, errors}) => {
   const { user } = useContext(AuthContext);
   console.log("user", user);
   const {
@@ -54,8 +55,10 @@ const PersonaComponent = ({ phoneNum, errors }) => {
   };
 
   return (
-    <div className="persona-btn" onClick={handleOpenPersona}>
+    <div className="persona-btn" >
+       <Button type="submit" className="l-btn" onClick={handleOpenPersona}>
       Verify
+      </Button>
     </div>
   );
 };
