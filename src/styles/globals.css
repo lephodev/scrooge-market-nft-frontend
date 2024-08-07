@@ -2607,6 +2607,10 @@ background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
   max-width: 530px;
 }
 
+.font_weight_normal {
+  font-weight: 300 !important;
+}
+
 .footer-info .at-scrooge{
   font-size: 14px;
   color: red;

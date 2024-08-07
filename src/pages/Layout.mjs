@@ -372,7 +372,7 @@ const Layout = ({ children }) => {
                   loading="lazy"
                 />{" "}
               </span>{" "}
-              - All Rights Reserved
+              <span className="font_weight_normal">- All Rights Reserved</span>
             </p>
                 <p className="d-flex align-items-center mb-3">
                   <Link to="https://www.gamingaddictsanonymous.org/" target="_blank" className="gaming_footer">
