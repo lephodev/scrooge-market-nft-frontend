@@ -2559,7 +2559,7 @@ background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
 }
 
 .footer-grid {
-  padding-top: 25px;
+  padding-top: 15px;
   padding-bottom: 50px;
   display: flex;
   justify-content: space-between;
@@ -2597,12 +2597,29 @@ background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%);
 }
 
 .footer-info p {
-  font-weight: 300;
+  font-weight: 700;
   font-size: 16px;
   line-height: 20px;
   /* identical to box height */
-  color: #878d93;
+  /* color: #878d93; */
+  color: white;
   margin: 0;
+  max-width: 530px;
+}
+
+.font_weight_normal {
+  font-weight: 300 !important;
+}
+
+.footer-info .at-scrooge{
+  font-size: 14px;
+  color: red;
+  font-weight: 300;
+}
+
+.footer-info .at-scrooge a{ 
+  text-decoration: underline;
+  color: red;
 }
 
 .footer-info a img {
@@ -2762,7 +2779,7 @@ ul.footer-support li img {
 
 .footer-menu,
 .footer-contact {
-  padding-top: 90px;
+  padding-top: 164px;
 }
 
 .logo-mobile img {
@@ -2771,13 +2788,9 @@ ul.footer-support li img {
   margin: 10px;
 }
 .footer-info a img {
-  /* max-width: 130px;
+  margin-bottom: 14px;
+  max-width: 270px;
   width: 100%;
-  margin: 10px -25px; */
-  margin-bottom: 20px;
-    max-width: 270px;
-    width: 100%;
-  
 }
 
 /*********************** Coockie popup *************************/
@@ -7548,6 +7561,8 @@ background: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-decoration: underline;
+  color: white;
 }
  .gaming_footer img {
     width: 35px !important;
