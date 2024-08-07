@@ -855,9 +855,9 @@ const OldForm = ({
           </Form.Group> */}
 
           <div className="login-button full-w">
-            <Button type="submit" className="l-btn " disabled={isSaveLoader}>
-              <PersonaComponent phoneNum={phoneNum} errors={errors} />
-            </Button>
+            {/* <Button type="submit" className="l-btn" disabled={isSaveLoader}> */}
+              <PersonaComponent phoneNum={phoneNum} errors={errors} isSaveLoader={isSaveLoader}/>
+            {/* </Button> */}
           </div>
         </Form>
       </div>

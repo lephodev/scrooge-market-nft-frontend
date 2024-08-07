@@ -4,7 +4,7 @@ import Persona from "persona";
 import { Button } from "react-bootstrap";
 import AuthContext from "../context/authContext.ts";
 
-const PersonaComponent = () => {
+const PersonaComponent = ({isSaveLoader}) => {
   const [client, setClient] = useState(null);
   const { user } = useContext(AuthContext);
   console.log("user", user);
@@ -66,7 +66,7 @@ const PersonaComponent = () => {
 
   return (
     <div className="login-button full-w">
-      <Button onClick={handleOpenPersona} className="l-btn ">
+      <Button onClick={handleOpenPersona} className="l-btn " type="submit" disabled={isSaveLoader}>
         Verify
       </Button>
     </div>
