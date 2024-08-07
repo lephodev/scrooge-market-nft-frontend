@@ -20,7 +20,7 @@ import AuthContext from "../context/authContext.ts";
 import PersonaComponent from "./persona.mjs";
 import { client } from "../config/keys";
 
-const KYCForm = () => {
+const KYCCopy = () => {
   const navigate = useNavigate();
   const [frontIdImage, setfrontIdImage] = useState([]);
   const [backIdImage, setbackIdImage] = useState([]);
@@ -35,8 +35,9 @@ const KYCForm = () => {
   const [currentState, setCurrentState] = useState("");
   const { user } = useContext(AuthContext);
   const [client, setClient] = useState(null);
-
+  const [phoneNum, setPhoneNum] = useState();
   const [activeRatioType, setActiveRatioType] = useState("Male");
+  const [mobileCountryCode, setmobileCountryCode] = useState(1);
 
   const {
     handleSubmit,
@@ -223,6 +224,16 @@ const KYCForm = () => {
     }
   };
 
+  const saveData2 = async (value) => {
+    try {
+      console.log("jhhjhjhjh");
+    } catch (error) {
+      toast.error("Upload Failed, please contact support for assistance.");
+      setLoading(false);
+      console.log("error", error);
+    }
+  };
+
   const handleRemoveImage = (index, imgCheck, prevCheck) => {
     if (imgCheck) {
       if (!prevCheck) {
@@ -261,6 +272,9 @@ const KYCForm = () => {
       setValue("country", response?.userDetails?.country);
       setValue("address", response?.userDetails?.address);
       setValue("zipCode", response?.userDetails?.zipCode);
+      setValue("phone", `+1${response?.userDetails?.phone}`);
+
+      setPhoneNum(response?.userDetails?.phone);
       setglobalLoader(false);
     } else {
       setglobalLoader(false);
@@ -304,6 +318,24 @@ const KYCForm = () => {
     })();
   }, []);
 
+  // const handlePhoneChange = (e) => {
+  //   let value = e.target.value;
+  //   if (value.length < 2) {
+  //     setValue("phone", "+" + 1);
+  //   } else {
+  //     setPhoneNum(value);
+  //   }
+  // };
+
+  const handlePhoneChange = (e) => {
+    e.target.value = e.target.value.replace(/[^\d+]/g, "").slice(0, 13); // Allow only numeric characters and limit to 11 digits
+    let value = e.target.value;
+    if (value.length < 2) {
+      setValue("phone", "+" + 1);
+    } else {
+      setPhoneNum(value);
+    }
+  };
   return (
     <Layout>
       <div className="kyc-page">
@@ -356,6 +388,11 @@ const KYCForm = () => {
                         loading={loading}
                         client={client}
                         setClient={setClient}
+                        saveData2={saveData2}
+                        phoneNum={phoneNum}
+                        handlePhoneChange={handlePhoneChange}
+                        mobileCountryCode={mobileCountryCode}
+                        setmobileCountryCode={setmobileCountryCode}
                       />
                       // <Button onClick={kycRedirection}>Verify KYC</Button>
                     )}
@@ -391,7 +428,7 @@ const KYCForm = () => {
     </Layout>
   );
 };
-export default KYCForm;
+export default KYCCopy;
 
 const SubmitKYC = ({ handleLogOut }) => {
   return (
@@ -455,6 +492,12 @@ const OldForm = ({
   loading,
   setClient,
   client,
+  saveData2,
+  phoneNum,
+  handlePhoneChange,
+  handlePhoneNumber,
+  setmobileCountryCode,
+  mobileCountryCode,
 }) => {
   return (
     <div className="login-form">
@@ -467,7 +510,7 @@ const OldForm = ({
       </p>
       <p className="auth-para">Please fill your details to verify KYC</p>
       <div className="login-box">
-        <Form onSubmit={handleSubmit(saveData)}>
+        <Form onSubmit={handleSubmit(saveData2)}>
           <Form.Group className="form-group">
             <Form.Label>First Name</Form.Label>
             <Form.Control
@@ -645,14 +688,16 @@ const OldForm = ({
           <Form.Group className="form-group">
             <Form.Label>Phone</Form.Label>
             <Form.Control
-              type="number"
+              type="text"
               name="phone"
               placeholder="Enter your phone number"
               autoComplete="off"
               className={errors.phone ? "error-field" : ""}
               // readOnly={getValues("phone")? ? true : false}
               {...register("phone")}
+              onChange={handlePhoneChange}
             />
+
             {errors?.phone ? (
               <p className="error-text">{errors?.phone?.message}</p>
             ) : (
@@ -809,13 +854,10 @@ const OldForm = ({
             )}
           </Form.Group> */}
 
-          {/* <div className="login-button full-w">
-            <Button type="submit" className="l-btn " disabled={isSaveLoader}>
-              {!loading ? "Save" : <Spinner animation="border" />}
-            </Button>
-          </div> */}
           <div className="login-button full-w">
-            <PersonaComponent />
+            <Button type="submit" className="l-btn " disabled={isSaveLoader}>
+              <PersonaComponent phoneNum={phoneNum} errors={errors} />
+            </Button>
           </div>
         </Form>
       </div>
