@@ -41,9 +41,10 @@ import EarnFreeCoins from "./pages/EarnFreeCoins.mjs";
 import scroogelogo from "./images/scroogeCasinoLogo.png";
 import vpnbanner from "./images/vpn-banner.webp";
 import notaccess from "./images/not-access.webp";
-
+import cookie from "js-cookie";
 import PaymentCustom from "./pages/PaymentCustom.mjs";
 import PageLoader from "./components/pageLoader/loader.mjs";
+import { getCookie } from "./utils/dateUtils.mjs";
 // import { validateToken } from "./utils/dateUtils.mjs";
 
 export default function App() {
@@ -59,6 +60,7 @@ export default function App() {
   const [isVPNEnable, setIsVPNEnable] = useState(false);
   const [stateBlock, setStateBlock] = useState(false);
   const [inactiveTime, setInactiveTime] = useState(0);
+  const [mode, setMode] = useState("");
 
   const underMaintainance = false;
 
@@ -255,6 +257,20 @@ export default function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inactiveTime]);
 
+  useEffect(() => {
+    const getMode = getCookie("mode");
+    if (getMode) {
+      setMode(getMode);
+    } else {
+      cookie.set("mode", "goldCoin", {
+        domain: ".scrooge.casino",
+        path: "/",
+        httpOnly: false,
+      });
+      setMode("goldCoin");
+    }
+  }, []);
+
   useEffect(()=>{
     console.log("user ====>", user);
     if(user && localStorage.getItem("lastActive") && localStorage.getItem("isAdmin") !== "admin"){
@@ -297,6 +313,8 @@ export default function App() {
   }
 
 
+  
+
  
 
   return (
@@ -335,6 +353,8 @@ export default function App() {
             setLoading,
             setUser,
             dateTimeNow,
+            mode,
+            setMode
           }}>
           {loading ? (
            <PageLoader />

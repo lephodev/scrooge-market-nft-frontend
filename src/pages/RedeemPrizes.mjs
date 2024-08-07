@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useReward } from "react-rewards";
-
+import { ConnectWallet } from "@thirdweb-dev/react";
 import { userKycDetails } from "../utils/api.mjs";
 import AuthContext from "../context/authContext.ts";
 import Layout from "./Layout.mjs";
@@ -28,6 +28,8 @@ import cashAppIcon from "../images/redemption/cashapp-icon.svg";
 import payPalIcon from "../images/redemption/paypal-icon.svg";
 import { scroogeClient } from "../config/keys.js";
 import PageLoader from "../components/pageLoader/loader.mjs";
+import { Button, Spinner } from "react-bootstrap";
+import ConnectWalletModel from "./models/connectWalletModel.mjs";
 
 function RedeemPrizes() {
   const navigate = useNavigate();
@@ -45,6 +47,8 @@ function RedeemPrizes() {
   const [showFastWithdraw, setShowFastWithdraw] = useState(false);
   const { selectedChain, setSelectedChain } = useContext(ChainContext);
   const [fiatActiveInActive, setFiatActiveInActive] = useState({});
+  const [showConnect, setShowConnect] = useState(false);
+  const [loaderaddress, setLoaderAddress] = useState(false);
 
   const address = useAddress();
   const signer = useSigner();
@@ -61,8 +65,6 @@ function RedeemPrizes() {
       selectedChain === ChainId.BinanceSmartChainMainnet
     ) {
     }
-
-    
   }, [user, isMismatched, address, signer]);
 
   const redemptionUnderMaintainance = false;
@@ -173,12 +175,22 @@ function RedeemPrizes() {
     console.log("element1", element1);
   };
 
+  const handleConnect = () => {
+    setLoaderAddress(true);
+
+    setShowConnect(!showConnect);
+  };
+
+  const handleConnectWallet = () => {
+    setShowConnect(!showConnect);
+  };
+
   return (
     <Layout>
       <main className="main redeem-prizes-page redeem-page">
         <div className="container">
           {globalLoader && <PageLoader />}
-          <div className="bordered-section">
+          <div className="bordered-section redeem_container_gap">
             {redeemSuccess ? (
               <div className="pageImgContainer">
                 <div className="loading-txt">
@@ -201,7 +213,9 @@ function RedeemPrizes() {
               <>
                 <div className="scrooge-main-heading">
                   <div className="pageTitle">
-                    <h1 className="title">Sweepstakes Redemption</h1>
+                    <h1 className="title updated_text_color text_shadow_none text-capitalize pt-5">
+                      Sweepstakes Redemption
+                    </h1>
                   </div>
                   {/* <div className="page-sub-title">
                     <h2>
@@ -211,25 +225,41 @@ function RedeemPrizes() {
                     </h2>
                   </div> */}
                 </div>
-                <div className="prizes-chip-count m-0">
+
+                <ConnectWalletModel
+                  show={showConnect}
+                  handleConnectWallet={handleConnectWallet}
+                  handleConnect={handleConnect}
+                />
+                <div className="wallet">
+                  {address ? (
+                    <ConnectWallet />
+                  ) : (
+                    <Button onClick={() => handleConnectWallet()}>
+                      {!loaderaddress ? (
+                        "Connect Wallet"
+                      ) : (
+                        <Spinner animation="border" />
+                      )}
+                    </Button>
+                  )}
+
+                  {/* <div className={priceColor}>${currentPriceOG}</div> */}
+                </div>
+
+                <div className="prizes-chip-count m-0 prizes-chip-count_update">
                   {user ? (
                     <>
                       <h3>
-                        Redeemable ST Balance :{" "}
-                        <span>
-                          {" "}
-                          {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
-                        </span>
+                        <span>Redeemable ST Balance : </span>{" "}
+                        {(user?.wallet - user?.nonWithdrawableAmt).toFixed(2)}
                       </h3>
                       <h3>
-                        USD Value :{" "}
-                        <span>
-                          ${" "}
-                          {(
-                            user?.wallet / 100 -
-                            user?.nonWithdrawableAmt / 100
-                          ).toFixed(2)}
-                        </span>
+                        <span>USD Value : </span>${" "}
+                        {(
+                          user?.wallet / 100 -
+                          user?.nonWithdrawableAmt / 100
+                        ).toFixed(2)}
                       </h3>
                     </>
                   ) : (
@@ -244,7 +274,7 @@ function RedeemPrizes() {
                 </div>
                 <div className="page-nav-header-btns-row">
                   <div
-                    className={`redeem-method-box ${
+                    className={`redeem-method-box redeem-method-box_updated box_updated_bg ${
                       showFastWithdraw ? "box-active" : ""
                     }`}
                     onClick={() => filterPrizes("fast_withdraw")}
@@ -275,7 +305,7 @@ function RedeemPrizes() {
                   </div>
 
                   <div
-                    className={`redeem-method-box ${
+                    className={`redeem-method-box redeem-method-box_updated box_updated_bg${
                       buyWithFiat ? "box-active" : ""
                     }`}
                     onClick={() => filterPrizes("Fiat")}
@@ -332,11 +362,11 @@ function RedeemPrizes() {
                     getUserDataInstant={getUserDataInstant}
                   />
                 )}
-                <div className="redemption-history">
+                <div className="redemption-history redemption-history_updated">
                   <a
                     href={`${scroogeClient}/profile?active=redemption`}
                     target="_blank"
-                    className="pdf-down"
+                    className="pdf-down updated_bg_btn"
                     rel="noreferrer"
                   >
                     Click Here to View Redemption History
@@ -345,7 +375,10 @@ function RedeemPrizes() {
                 <div className="download-pdf-grid">
                   <a href={Pdf} target="blank" className="pdf-down">
                     {" "}
-                    How it works! Click here to download pdf.
+                    How it works!{" "}
+                    <sapn className="text-decoration-underline">
+                      Click here to download pdf.
+                    </sapn>
                   </a>
                 </div>
               </>

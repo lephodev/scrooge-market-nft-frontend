@@ -184,7 +184,7 @@ const EarnFreeCoins = () => {
   }, []);
   return (
     <Layout>
-      <div className="container free-coin-page">
+      <div className="container free-coin-page daily_spin_container">
         {globalLoader && <PageLoader />}
         <div className="tab-btn">
           <Button
@@ -248,24 +248,27 @@ const EarnFreeCoins = () => {
 
         {key === "dailyClaims" ? (
           <div className="spin-popup-content spin-page-content">
+           
             {!globalLoader && (
+              <>
+                <div className="spin-wheel">
+                  <div className="spin-win-text-content">
+                    {/* {!isWeeklyWheelActive && user?.loyalitySpinCount !== 30 ? (
+                      <div className="spin-win-text">
+                        <p>Pick one</p>
+                        
+                      </div>
+                    ) : null} */}
+                    <p className="heading_text updated_text_color">Daily Wheel Spin</p>
+                     {!globalLoader && (
               <p className="title-memo">
                 Daily wheel spin coins have a one times play through requirement
                 and an expiration of 7 days if not used.
               </p>
             )}
-            {!globalLoader && (
-              <>
-                <div className="spin-wheel">
-                  <div className="spin-win-text-content">
-                    {!isWeeklyWheelActive && user?.loyalitySpinCount !== 30 ? (
-                      <div className="spin-win-text">
-                        <p>Pick one</p>
-                      </div>
-                    ) : null}
                     {user?.loyalitySpinCount !== 30 ? (
                       <div className="current-streak">
-                        <p>
+                        <p className="text-white">
                           Current streak :{" "}
                           <span>{user?.loyalitySpinCount}</span>{" "}
                         </p>
