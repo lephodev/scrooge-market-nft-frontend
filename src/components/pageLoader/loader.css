@@ -32,8 +32,8 @@
 
   }
   .special-offer-grid{
-    /* padding-right: 50px; */
     padding-right: 0px;
+    width: unset !important;
   }
 
   .offer-grid-new {

@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 import {
-  ConnectWallet,
+  // ConnectWallet,
   ThirdwebNftMedia,
   useDisconnect,
   useAddress,
 } from "@thirdweb-dev/react";
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import hatLogo from "../images/scroogeHatLogo.png";
-import newLogo from "../images/new-logo.webp";
-import { useContext } from "react";
+// import { useLocation } from "react-router-dom";
+// import hatLogo from "../images/scroogeHatLogo.png";
+// import newLogo from "../images/new-logo.webp";
+// import { useContext } from "react";
 import playPolicy from "../images/SCROOGE CASINO Game Play Policy.docx";
 
 // import DLBigD from "../images/DLBigD.png";
@@ -21,8 +21,10 @@ import playPolicy from "../images/SCROOGE CASINO Game Play Policy.docx";
 // import TophatIconBadge from "../images/tophatIconBadge.png";
 // import tokenmobile from "../images/token.svg";
 import logo from "../images/footer/logo.png";
+import icon_18 from "../images/footer/icon_18.png";
 import envelope from "../images/footer/envelope.svg";
 import twitter from "../images/footer/twitter.svg";
+import usflag from "../images/US-flag.webp";
 // import discord from "../images/footer/discord.svg";
 // import telegram from "../images/footer/telegram.svg";
 import facebook from "../images/footer/facebook.svg";
@@ -35,15 +37,17 @@ import "reactjs-popup/dist/index.css";
 // import NewRoulette from "../components/roulette/roulette.mjs";
 // import AuthContext from "../context/authContext.ts";
 import {
-  blackjackUrl,
-  pokerUrl,
-  rouletteUrl,
+  // blackjackUrl,
+  // pokerUrl,
+  // rouletteUrl,
   scroogeClient,
-  slotUrl,
+  // slotUrl,
 } from "../config/keys.js";
-import { Button, Container, Nav, Navbar, Spinner } from "react-bootstrap";
-import AuthContext from "../context/authContext.ts";
+// import { Button, Container, Nav, Navbar, Spinner } from "react-bootstrap";
+// import AuthContext from "../context/authContext.ts";
 import ConnectWalletModel from "./models/connectWalletModel.mjs";
+import Header from "./Header.mjs";
+import "../styles/header.css";
 import { marketPlaceInstance } from "../config/axios.js";
 
 export const Tooltip = (id, metadata, message) => (
@@ -57,32 +61,31 @@ export const Tooltip = (id, metadata, message) => (
   </Popup>
 );
 
-const useCurrentPath = () => {
-  const location = useLocation();
-  const [currentPath, setCurrentPath] = useState("");
+// const useCurrentPath = () => {
+//   const location = useLocation();
+//   const [currentPath, setCurrentPath] = useState("");
 
-  useEffect(() => {
-    setCurrentPath(location.pathname);
-  }, [location]);
-  return currentPath;
-};
+//   useEffect(() => {
+//     setCurrentPath(location.pathname);
+//   }, [location]);
+//   return currentPath;
+// };
 
 const Layout = ({ children }) => {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
   const wrapperRef = useRef();
   const address = useAddress();
 
   // const { user } = useContext(AuthContext);
-  const [currentPriceOG, setCurrentPriceOG] = useState("");
-  const [priceColor, setPriceColor] = useState("");
-  const [navOpen, setNavOpen] = useState(false);
+  // const [currentPriceOG, setCurrentPriceOG] = useState("");
+  // const [priceColor, setPriceColor] = useState("");
+  // const [navOpen, setNavOpen] = useState(false);
   const [showConnect, setShowConnect] = useState(false);
-  const [loaderaddress, setLoaderAddress] = useState(false);
+  // const [loaderaddress, setLoaderAddress] = useState(false);
   // const [canSpin, setCanSpin] = useState(false);
   // const [spinTimer, setSpinTimer] = useState("");
-  const currentRoute = useCurrentPath();
-  const location = useLocation();
-  const isActive = (routeName) => (routeName === currentRoute ? "active" : "");
+  // const currentRoute = useCurrentPath();
+  // const isActive = (routeName) => (routeName === currentRoute ? "active" : "");
   const disconnect = useDisconnect();
   const OGPrice = async () => {
     await fetch(`https://api.coinbrain.com/public/coin-info`, {
@@ -95,12 +98,12 @@ const Layout = ({ children }) => {
       .then((data) => {
         const change_pct = data[0].priceUsd24hAgo;
         if (change_pct > 0) {
-          setPriceColor("green");
+          // setPriceColor("green");
         } else if (change_pct < 0) {
-          setPriceColor("red");
+          // setPriceColor("red");
         }
         const current_price = data[0].priceUsd;
-        setCurrentPriceOG(current_price.toFixed(10));
+        // setCurrentPriceOG(current_price.toFixed(10));
         return current_price;
       })
       .catch((e) => {
@@ -161,7 +164,7 @@ const Layout = ({ children }) => {
     useEffect(() => {
       const handleClickOutside = (event) => {
         if (ref.current && !ref.current.contains(event.target)) {
-          setNavOpen(false);
+          // setNavOpen(false);
         }
       };
       document.addEventListener("mousedown", handleClickOutside);
@@ -177,14 +180,13 @@ const Layout = ({ children }) => {
   };
 
   const handleConnect = () => {
-    setLoaderAddress(true);
-
+    // setLoaderAddress(true);
     setShowConnect(!showConnect);
   };
 
   useEffect(() => {
     if (address) {
-      setLoaderAddress(false);
+      // setLoaderAddress(false);
       saveConnectWallet(address);
     }
   }, [address]);
@@ -210,7 +212,8 @@ const Layout = ({ children }) => {
       />
       <div className="wrapper">
         <div className="header" ref={wrapperRef}>
-          <Navbar
+          <Header />
+          {/* <Navbar
             collapseOnSelect
             expand="lg"
             expanded={navOpen}
@@ -302,17 +305,17 @@ const Layout = ({ children }) => {
                             >
                               Affiliate Program
                             </Link>
-                            {/* <Link
+                            <Link
                               to={`/my-wallet`}
                               className={`nav-link ${isActive("/my-wallet")}`}
                             >
                               Holder Claim Center
-                            </Link> */}
+                            </Link>
                           </>
                         ) : (
                           <a
                             href={`${scroogeClient}/login`}
-                            /* target="_blank" */ rel="noreferrer"
+                           rel="noreferrer"
                             alt="Login to Scrooge Casino"
                           >
                             <button className="submit-btn">
@@ -343,7 +346,7 @@ const Layout = ({ children }) => {
                 </div>
               </div>
             </Container>
-          </Navbar>
+          </Navbar> */}
         </div>
 
         <div className="content">{children}</div>
@@ -355,58 +358,88 @@ const Layout = ({ children }) => {
                 <Link to={scroogeClient}>
                   <img src={logo} alt="scrooge casino nft token packages" />
                 </Link>
-                <h6>
+                {/* <h6>
                   Want to stay ahead of your competition. Subscribe and be the
                   first to know everything happening in the world of SCROOGE.
-                </h6>
-                <p>
-                  <span>Copyright &copy; Scrooge LLC.</span> All Rights Reserved
+                </h6> */}
+
+                <p className="mb-3">
+                  <span>
+                    © 2024 - SCROOGE LLC INDIANA, USA{" "}
+                    <img
+                      src={usflag}
+                      alt="flag"
+                      width={40}
+                      height={19}
+                      loading="lazy"
+                    />{" "}
+                  </span>{" "}
+                  <span className="font_weight_normal">
+                    - All Rights Reserved
+                  </span>
                 </p>
+                <p className="d-flex align-items-center mb-3">
+                  <Link
+                    to="https://www.gamingaddictsanonymous.org/"
+                    target="_blank"
+                    className="gaming_footer"
+                  >
+                    <img
+                      src={icon_18}
+                      alt="image_icon"
+                      height={25}
+                      width={25}
+                    />
+                    <p className="ms-2 text-white1 font-weight-bold">
+                      Gaming is addictive. Please play responsibly
+                    </p>
+                  </Link>
+                </p>
+                <p className="at-scrooge">
+                  At Scrooge.casino it is ALWAYS FREE to enter or win our
+                  Sweepstakes games. No Purchase Necessary. Void where
+                  prohibited by law. Find out more in our{" "}
+                  <Link to="/termsncondition">Terms of Services</Link>.
+                </p>
+                {/* <p>
+                  <span>Copyright &copy; Scrooge LLC.</span> All Rights Reserved
+                </p> */}
               </div>
 
               <div className="footer-menu">
-                <h3>Destinations</h3>
+                <h3>Quick Links</h3>
                 <ul>
                   {/* <li>
                   <Link to='/nft-tokens'>NFT Marketplace</Link>
                 </li> */}
                   <li>
                     <a href={scroogeClient} rel="noreferrer">
-                      Scrooge Casino Home
+                      Home
                     </a>
                   </li>
                   <li>
-                    <a
-                      href={`${user ? pokerUrl : `${scroogeClient}/login`}`}
-                      rel="noreferrer"
-                    >
-                      Poker
+                    <a href={`${scroogeClient}/games`} rel="noreferrer">
+                      Games
                     </a>
                   </li>
                   <li>
-                    <a
-                      href={`${user ? blackjackUrl : `${scroogeClient}/login`}`}
-                      rel="noreferrer"
-                    >
-                      Blackjack
+                    <a href={`${scroogeClient}/friends`} rel="noreferrer">
+                      Friends
                     </a>
                   </li>
                   <li>
-                    <a
-                      href={`${user ? slotUrl : `${scroogeClient}/login`}`}
-                      rel="noreferrer"
-                    >
-                      Slot
+                    <a href={`${scroogeClient}/feeds`} rel="noreferrer">
+                      Feeds
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a
-                      href={`${user ? rouletteUrl : `${scroogeClient}/login`}`}
+                      href={`${user ? rouletteUrl : `${scroogeClient}`}`}
                       rel="noreferrer"
                     >
                       Roulette
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
 
@@ -414,10 +447,14 @@ const Layout = ({ children }) => {
                 <h3>Policy</h3>
                 <ul>
                   <li>
-                    <Link to="/privacy">Privacy Policy</Link>
+                    <Link to={`${scroogeClient}/privacyPolicy`}>
+                      Privacy Policy
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/terms">Terms and Conditions</Link>
+                    <Link to={`${scroogeClient}/termsncondition`}>
+                      Terms and Conditions
+                    </Link>
                   </li>
 
                   {/* <li>
@@ -429,6 +466,13 @@ const Layout = ({ children }) => {
                       Responsible Social Gameplay
                     </a>
                   </li>
+                  <li>
+                    {" "}
+                    <a href={scroogeClient} target="blank">
+                      Supports
+                    </a>
+                  </li>
+
                   <li>
                     <a href={`${scroogeClient}/sweepsrules`}> Sweeps Rules</a>
                   </li>
@@ -451,7 +495,7 @@ const Layout = ({ children }) => {
                       href="https://twitter.com/Scrooge_Casino"
                       rel="noopener noreferrer"
                     >
-                      <img src={twitter} alt="" />
+                      <img src={twitter} alt="" className="img_twit" />
                     </a>
                   </li>
                   {/* <li>
@@ -490,6 +534,10 @@ const Layout = ({ children }) => {
                     </a>
                   </li>
                 </ul>
+                <h3 className="mt-4">Address</h3>
+                <p class="address-footer">
+                  5625 N German Church Rd Unit #2105 Indianapolis, IN 46235
+                </p>
               </div>
             </div>
           </div>

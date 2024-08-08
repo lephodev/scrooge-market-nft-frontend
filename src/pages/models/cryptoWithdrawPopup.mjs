@@ -76,13 +76,14 @@ const CryptoWithdrawPopup = ({ getUserDataInstant }) => {
     setSuccessShow(!successShow);
   };
   return (
-    <div className=" fiat-data" id="crypto-form">
+    <div className=" fiat-data updated_cryto_form" id="crypto-form">
+      <div className="updated_cryto_form_data">
       <p>
         Scroogecoin Decentralized Cryptocurrency{" "}
         <span>Please read PDF for details</span>
       </p>
       <div
-        className="token-box"
+        className="token-box form_updated_input"
         onClick={() => {
           handleCopyURL("0x9dfee72aea65dc7e375d50ea2bd90384313a165a");
         }}
@@ -95,13 +96,14 @@ const CryptoWithdrawPopup = ({ getUserDataInstant }) => {
       </div>
       <Form onSubmit={handleSubmit(WithdrawRequest)}>
         <div className="fiat-content">
-          <Form.Group className="fiat-group">
+          <Form.Group className="fiat-group fiat-group-updated">
             <Form.Label>
               Minimum 5,000 ST($50) required for crypto withdrawals.
             </Form.Label>
             <Form.Control
               type="number"
               name="amount"
+              className="form_updated_input"
               placeholder="Enter Withdraw Amount"
               {...register("amount")}
             />
@@ -111,16 +113,12 @@ const CryptoWithdrawPopup = ({ getUserDataInstant }) => {
           </Form.Group>
         </div>
         <div className="popupBtn">
-          <button
-            className="yellowBtn"
-            variant="primary"
-            type="submit"
-            disabled={loading}
-          >
+          <button className="yellowBtn updated_bg_btn new_btn_wd" variant="primary" type="submit" disabled={loading}>
             {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
           </button>
         </div>
       </Form>
+      </div>
       <SuccessModal
         successShow={successShow}
         handleSuccessModal={handleSuccessModal}
