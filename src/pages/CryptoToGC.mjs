@@ -544,7 +544,7 @@ export default function CryptoToGC() {
                   <div className="purchase-select purchase-select_alignment">
                     <div className="purchase-with-content">
                       {/* <h4>Purchase with: </h4> */}
-                      <div className="purchase-with-grid purchase-with-grid_update">
+                      {/* <div className="purchase-with-grid purchase-with-grid_update">
                         <span
                           onClick={() => handlePaymentTypeChange("Credit Card")}
                           className={
@@ -555,58 +555,8 @@ export default function CryptoToGC() {
                         >
                           Credit Card{" "}
                         </span>
-                        {/* <span
-                          onClick={() => handlePaymentTypeChange("Credit Card")}
-                          className="updated_text_color"
-                        >
-                          Paypal{" "}
-                        </span> */}
-                        {/* <span
-                          onClick={() => handlePaymentTypeChange("Paypal")}
-                          className={
-                            selectedTypeDropdown === "Paypal"
-                              ? "active-method"
-                              : ""
-                          }
-                        >
-                          Paypal{" "}
-                        </span> */}
-                        {/* 
                         
-                        ******** CashApp option*******
-                        <span
-                          onClick={() => handlePaymentTypeChange("CashApp")}
-                          className={
-                            selectedTypeDropdown === "CashApp"
-                              ? "active-method"
-                              : ""
-                          }
-                        >
-                          CashApp
-                        </span> */}
-                      </div>
-                      {/* <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                          {!selectedTypeDropdown
-                            ? "Credit Card"
-                            : selectedTypeDropdown}
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                          <Dropdown.Item
-                            onClick={() =>
-                              handlePaymentTypeChange("Credit Card")
-                            }
-                          >
-                            Credit Card
-                          </Dropdown.Item>
-
-                          {/* <Dropdown.Item
-                            onClick={() => handlePaymentTypeChange("Crypto")}
-                          >
-                            Crypto
-                          </Dropdown.Item> */}
-                      {/* </Dropdown.Menu> */}
-                      {/* </Dropdown> */}
+                      </div> */}
                     </div>
 
                     <div className="enter-promo new_enter_promo">
