@@ -86,12 +86,12 @@ const Header = () => {
     setDropdownVisible(value);
   };
 
-  const [notifyOpen,setNotifyOpen]=useState();
+  const [notifyOpen, setNotifyOpen] = useState();
   const notifyRef = useRef();
 
-  const handleClickdropdown=()=>{
+  const handleClickdropdown = () => {
     setNotifyOpen(!notifyOpen);
-  }
+  };
 
   return (
     // <div className='headerContainer'>
@@ -152,8 +152,8 @@ const Header = () => {
                     // disabled={disableRedirections}
                   >
                     <a
-                      // href={`${marketPlaceUrl}/crypto-to-gc`}
-                      href="/"
+                      href={`/crypto-to-gc`}
+                      // href="/"
                       rel="noreferrer"
                     >
                       <FaPlusCircle />
@@ -186,25 +186,41 @@ const Header = () => {
                 <img src={bell} height={20} width={20} alt="bell_icon" />
               </div> */}
               <div className=" position-relative">
-                        <div role="presentation" onClick={handleClickdropdown}><img src={bell} height={20} width={20} alt="bell_icon" /></div>
+                <div role="presentation" onClick={handleClickdropdown}>
+                  <img src={bell} height={20} width={20} alt="bell_icon" />
+                </div>
 
-                        {notifyOpen ? <div className="notification_Section" ref={notifyRef}>
-                          <div className="notification_header"><h4>Notification</h4></div>
-                          <div className="notificationMssg">
-                          {/* <div className="noNotification ">You have no notifications</div> */}
-                          <div className="notificationmssgBox">
-                               <img src="" alt="" />
-                               <p><Link>Your redemption request 5001 ST has been Rejected.</Link></p>
-                               <CancelSvg />
-                          </div>
-                          <div className="notificationmssgBox">
-                               <img src="" alt="" />
-                               <p><Link>Your redemption request 5001 ST has been Rejected.</Link></p>
-                               <CancelSvg />
-                          </div>
-                          </div>
-                        </div>:""}
+                {notifyOpen ? (
+                  <div className="notification_Section" ref={notifyRef}>
+                    <div className="notification_header">
+                      <h4>Notification</h4>
+                    </div>
+                    <div className="notificationMssg">
+                      {/* <div className="noNotification ">You have no notifications</div> */}
+                      <div className="notificationmssgBox">
+                        <img src="" alt="" />
+                        <p>
+                          <Link>
+                            Your redemption request 5001 ST has been Rejected.
+                          </Link>
+                        </p>
+                        <CancelSvg />
                       </div>
+                      <div className="notificationmssgBox">
+                        <img src="" alt="" />
+                        <p>
+                          <Link>
+                            Your redemption request 5001 ST has been Rejected.
+                          </Link>
+                        </p>
+                        <CancelSvg />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
               <div className="user-profile">
                 <Dropdown>
                   <Dropdown.Toggle
@@ -597,13 +613,20 @@ function SettingSvg() {
   );
 }
 
-const CancelSvg=()=>{
-  return(
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
-  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-</svg>
-)
-}
+const CancelSvg = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      className="bi bi-x"
+      viewBox="0 0 16 16"
+    >
+      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+    </svg>
+  );
+};
 
 function ArrowIcon() {
   return (
