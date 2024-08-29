@@ -223,6 +223,7 @@ export default function CryptoToGC() {
 
         setPrizesLoading(false);
         setAllPrizes(sortedAsc || []);
+        // setFreeSpinValue()
       }
     } catch (e) {
       console.log(e);
@@ -414,11 +415,9 @@ export default function CryptoToGC() {
     }
   };
 
-  let freeSpins = [45];
-
   const handleShowFreeSpin = (price) => {
-    let filteredArr = freeSpins.filter((item) => user.freeSpin.includes(item));
-    console.log("filteredArr", filteredArr);
+    console.log("price----------------", price);
+    let filteredArr = user.freeSpin.includes(Number(price?.priceInBUSD));
     if (parseFloat(price?.priceInBUSD) !== parseFloat(filteredArr[0])) {
       return true;
     }
@@ -1099,7 +1098,7 @@ const PayWithCard = ({
 
   return (
     <>
-      {prize.priceInBUSD !== "45" && (
+      {prize?.offerType !== "freeSpin" && (
         <button
           onClick={() =>
             handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
@@ -1113,13 +1112,12 @@ const PayWithCard = ({
           )}
         </button>
       )}
-      {console.log("---->>>", prize.priceInBUSD)}
-      {prize.priceInBUSD === "45" && (
+      {prize?.offerType === "freeSpin" && (
         <img
           onClick={() =>
             handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
           }
-          src={freeSpin}
+          src={prize?.purcahseBannerImage}
           style={{
             height: "100%",
             width: "100%",
