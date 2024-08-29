@@ -3,7 +3,7 @@ import freeSpin from "../../images/The_Great_Pigsby.jpg";
 import "./freeSpin.css";
 import { relaxLaunchUrl, slotUrl } from "../../config/keys.js";
 import { relaxGamingInstance } from "../../config/axios.js";
-const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin }) => {
+const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
   const handleRedirectToGame = async (obj, provider, subprovider) => {
     const tickt = await (await relaxGamingInstance()).get(`/getToken/SC.`);
 
@@ -26,7 +26,9 @@ const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin }) => {
       <Modal className="contest-modal" centered size="lg" show={showFreeSpin}>
         <div className="contest-banner-slider">
           <Modal.Header>
-            <div className="contest-title-grid">YOU GOT 50 FREE SPINS </div>
+            <div className="contest-title-grid">
+              YOU GOT {packgaeData?.numberofSpins} FREE SPINS{" "}
+            </div>
           </Modal.Header>
           <Modal.Body>
             <div className="contest-content">
