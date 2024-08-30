@@ -5643,6 +5643,30 @@ span.tw-connected-wallet__balance {
   color: #4d4d4d !important;
   font-weight: 600 !important;
 }
+
+.special-offer-grid.payCardoffer {
+  position: relative;
+}
+
+.special-offer-grid.payCardoffer .tooltipCard {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  right:12px;
+  top:8px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid #ffd12f;
+}
+
+.special-offer-grid.payCardoffer .tooltipCard svg {
+  position: absolute;
+  top: 18%;
+  left: 10%;
+  height: 12px;
+}
+
+
 /********************************************************************************************/
 /************* Media Query ******************/
 /********************************************************************************************/
@@ -7235,6 +7259,18 @@ span.tw-connected-wallet__balance {
   }
   .spin-button button {
     font-size: 10px;
+  }
+
+  .special-offer-grid.payCardoffer .tooltipCard {
+    height: 17px;
+    width: 17px;
+    right:12px;
+    top:7px;
+  }
+  
+  .special-offer-grid.payCardoffer .tooltipCard svg {
+    top: 1px;
+    left: 0px;
   }
 }
 
