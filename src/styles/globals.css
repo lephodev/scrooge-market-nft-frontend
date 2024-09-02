@@ -5648,6 +5648,14 @@ span.tw-connected-wallet__balance {
   position: relative;
 }
 
+.special-offer-grid.payCardoffer .tooltipCardOuter {
+  position: absolute;
+  height: 100px;
+  width: 140px;
+  right:0px;
+  top:0px;
+}
+
 .special-offer-grid.payCardoffer .tooltipCard {
   position: absolute;
   height: 20px;
@@ -5655,7 +5663,7 @@ span.tw-connected-wallet__balance {
   right:12px;
   top:8px;
   border-radius: 50%;
-  background: transparent;
+  background: #ffd12f;
   border: 1px solid #ffd12f;
 }
 
@@ -5664,6 +5672,7 @@ span.tw-connected-wallet__balance {
   top: 18%;
   left: 10%;
   height: 12px;
+  color: black;
 }
 
 

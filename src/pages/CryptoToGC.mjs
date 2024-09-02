@@ -1138,9 +1138,13 @@ const PayWithCard = ({
         {/* <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
   Tooltip on top
 </button> */}
+  <div className="tooltipCardOuter">
 <OverlayTrigger placement="top" overlay={tooltip}>
-      <div bsStyle="default" className="tooltipCard"><InfoIcon/></div>
+   
+       <div bsStyle="default" className="tooltipCard"><InfoIcon/></div>
+    
     </OverlayTrigger>
+    </div>
         </>
       )}
       <AuthrizeCustomModel
