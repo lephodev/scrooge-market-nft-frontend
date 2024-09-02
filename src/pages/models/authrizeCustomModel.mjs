@@ -75,8 +75,8 @@ const AuthrizeCustomModel = ({
       height: "54px",
       ":hover": {
         border: "1px solid #ffc700 ",
-      borderRadius: "10px",
-      color: "#bcbcbc",
+        borderRadius: "10px",
+        color: "#bcbcbc",
       },
     }),
     singleValue: (provided) => ({
@@ -302,6 +302,7 @@ const AuthrizeCustomModel = ({
         />
       ) : packgaeData?.offerType === "freeSpin" ? (
         <FreeSpinModel
+          packgaeData={packgaeData}
           showFreeSpin={showFreeSpin}
           handleCloseFreeSpin={handleCloseFreeSpin}
         />
