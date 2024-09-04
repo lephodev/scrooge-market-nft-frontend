@@ -3,7 +3,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useContext, useEffect } from "react";
 import { AcceptHosted } from "react-acceptjs";
-import { Button, Form, Card, Dropdown, Spinner, OverlayTrigger, Tooltip } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  Card,
+  Dropdown,
+  Spinner,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import Layout from "./Layout.mjs";
 import { Helmet } from "react-helmet";
 import LoadingPoker from "../images/scroogeHatLogo.png";
@@ -60,6 +68,8 @@ export default function CryptoToGC() {
   const [showFreeST, setShowFreeST] = useState(false);
   const [freeSTDetail, setFreeSTDetails] = useState({});
   const [avgValue, setAvgValue] = useState(0);
+  const [showPromoPackageData, setShowPromoPackageData] = useState({});
+
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
@@ -84,7 +94,23 @@ export default function CryptoToGC() {
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState("");
 
+  const getPromoPackagaeBanner = async () => {
+    try {
+      const res = await (
+        await authInstance()
+      ).get("/users/getPromoPurchaseBanner", {
+        withCredentials: true,
+        credentials: "include",
+      });
+      const { data } = res.data;
+      setShowPromoPackageData(data);
+    } catch (err) {
+      console.log("err", err);
+    }
+  };
+
   useEffect(() => {
+    getPromoPackagaeBanner();
     const params = searchParams.get("status");
     if (params) {
       if (params === "success") {
@@ -682,44 +708,46 @@ export default function CryptoToGC() {
                         }}
                         className="special-offer-grid"
                       >
-                        {user.freeSpin.length === 0 && (
-                          <div className="special-offer-grid payCardoffer">
-                            <div className="">
-                              {allPrizes.map((prize, i) => (
-                                <>
-                                  {prize.offerType === "freeSpin" && (
-                                    <>
-                                      {handleShowFreeSpin(prize) ? (
-                                        <h3 className="">
-                                          <PayWithCard
-                                            spendedAmount={spendedAmount}
-                                            prize={prize}
-                                            getExactPrice={getExactPrice}
-                                            getExactGC={getExactGC}
-                                            getExactToken={getExactToken}
-                                            promoDetails={promoDetails}
-                                            index={i}
-                                            setBuyLoading={setBuyLoading}
-                                            selectedTypeDropdown={
-                                              selectedTypeDropdown
-                                            }
-                                            dailyGCPurchaseLimit={
-                                              dailyGCPurchaseLimit
-                                            }
-                                            user={user}
-                                            getGCPackages={getGCPackages}
-                                          />
-                                        </h3>
-                                      ) : (
-                                        ""
-                                      )}
-                                    </>
-                                  )}
-                                </>
-                              ))}
+                        {user.freeSpin.length === 0 &&
+                          showPromoPackageData &&
+                          Object.keys(showPromoPackageData).length > 0 && (
+                            <div className="special-offer-grid payCardoffer">
+                              <div className="">
+                                {allPrizes.map((prize, i) => (
+                                  <>
+                                    {prize.offerType === "freeSpin" && (
+                                      <>
+                                        {handleShowFreeSpin(prize) ? (
+                                          <h3 className="">
+                                            <PayWithCard
+                                              spendedAmount={spendedAmount}
+                                              prize={prize}
+                                              getExactPrice={getExactPrice}
+                                              getExactGC={getExactGC}
+                                              getExactToken={getExactToken}
+                                              promoDetails={promoDetails}
+                                              index={i}
+                                              setBuyLoading={setBuyLoading}
+                                              selectedTypeDropdown={
+                                                selectedTypeDropdown
+                                              }
+                                              dailyGCPurchaseLimit={
+                                                dailyGCPurchaseLimit
+                                              }
+                                              user={user}
+                                              getGCPackages={getGCPackages}
+                                            />
+                                          </h3>
+                                        ) : (
+                                          ""
+                                        )}
+                                      </>
+                                    )}
+                                  </>
+                                ))}
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          )}
                         {isMegaBuyShow /* && user.megaOffer.length !== 3 */ && (
                           <div className="purchasemodal-cards">
                             {allPrizes.map((prize, i) => (
@@ -1096,13 +1124,9 @@ const PayWithCard = ({
     document.getElementById("paycard").click();
   };
 
-  console.log("prize",prize);
-  
-  const tooltip = (
-    <Tooltip id="tooltip">
-     {prize?.toolTipMsg}
-    </Tooltip>
-  );
+  console.log("prize", prize);
+
+  const tooltip = <Tooltip id="tooltip">{prize?.toolTipMsg}</Tooltip>;
 
   return (
     <>
@@ -1121,30 +1145,29 @@ const PayWithCard = ({
         </button>
       )}
       {prize?.offerType === "freeSpin" && (
-
         <>
-        <img
-          onClick={() =>
-            handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
-          }
-          src={prize?.purcahseBannerImage}
-          style={{
-            height: "100%",
-            width: "100%",
-            border: "2px solid #ffc700",
-            borderRadius: "15px"
-          }}
-        />
-        {/* <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
+          <img
+            onClick={() =>
+              handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
+            }
+            src={prize?.purcahseBannerImage}
+            style={{
+              height: "100%",
+              width: "100%",
+              border: "2px solid #ffc700",
+              borderRadius: "15px",
+            }}
+          />
+          {/* <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
   Tooltip on top
 </button> */}
-  <div className="tooltipCardOuter">
-<OverlayTrigger placement="top" overlay={tooltip}>
-   
-       <div bsStyle="default" className="tooltipCard"><InfoIcon/></div>
-    
-    </OverlayTrigger>
-    </div>
+          <div className="tooltipCardOuter">
+            <OverlayTrigger placement="top" overlay={tooltip}>
+              <div bsStyle="default" className="tooltipCard">
+                <InfoIcon />
+              </div>
+            </OverlayTrigger>
+          </div>
         </>
       )}
       <AuthrizeCustomModel
@@ -1158,10 +1181,17 @@ const PayWithCard = ({
   );
 };
 
-const InfoIcon=()=>{
-  return(
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-lg" viewBox="0 0 16 16">
-  <path d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0"/>
-</svg>
-  )
-}
+const InfoIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-info-lg"
+      viewBox="0 0 16 16"
+    >
+      <path d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0" />
+    </svg>
+  );
+};
