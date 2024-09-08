@@ -8,7 +8,7 @@ const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
     const tickt = await (await relaxGamingInstance()).get(`/getToken/SC.`);
 
     let relaxGameUrl = "";
-    relaxGameUrl = `${relaxLaunchUrl}gameid=thegreatpigsby&ticket=${
+    relaxGameUrl = `${relaxLaunchUrl}gameid=epicjoker&ticket=${
       tickt.data.token
     }&jurisdiction=MT&lang=en_SC&channel=${
       window.innerWidth <= 767 ? "mobile" : "web"
