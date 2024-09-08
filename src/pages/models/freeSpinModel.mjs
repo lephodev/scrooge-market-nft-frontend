@@ -1,5 +1,5 @@
 import { Modal, Button } from "react-bootstrap";
-import freeSpin from "../../images/The_Great_Pigsby.jpg";
+import freeSpin from "../../images/freeSpin.jpg";
 import "./freeSpin.css";
 import { relaxLaunchUrl, slotUrl } from "../../config/keys.js";
 import { relaxGamingInstance } from "../../config/axios.js";
