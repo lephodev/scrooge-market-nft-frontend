@@ -708,7 +708,12 @@ export default function CryptoToGC() {
                         }}
                         className="special-offer-grid"
                       >
-                        {user.freeSpin.length === 0 &&
+                        {/* allPromoPackage[0] &&
+                        !user?.freeSpin.includes(Number(allPromoPackage[0]?.priceInBUSD)) */}
+                        {showPromoPackageData[0] &&
+                          !user?.freeSpin.includes(
+                            Number(showPromoPackageData[0]?.priceInBUSD)
+                          ) &&
                           showPromoPackageData &&
                           Object.keys(showPromoPackageData).length > 0 && (
                             <div className="special-offer-grid payCardoffer">
