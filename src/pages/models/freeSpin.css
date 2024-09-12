@@ -181,6 +181,27 @@ button.slider-button:hover svg path {
   margin: 0;
   text-shadow: #fc0 1px 0 10px;
 }
+
+.rewardHeading {
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rewardHeading p {
+  font-size: 25px;
+  font-weight: 700;
+  /* background: var(
+    --Gold-Stroke,
+    linear-gradient(90deg, #ffc700 0%, #ffeca8 51%, #ffc700 100%)
+  ) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
+  color: red !important;
+}
+
 @media screen and (max-width: 991px) {
   .contest-modal .modal-content {
     max-width: 92vw;
@@ -225,5 +246,8 @@ button.slider-button:hover svg path {
   }
   .contest-modal.reminder-setting .modal-footer {
     padding: 15px 0;
+  }
+  .rewardHeading p {
+    font-size: 19px;
   }
 }
