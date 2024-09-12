@@ -200,8 +200,7 @@ const EarnFreeCoins = () => {
         </div>
         {!isShowWheel && (
           <p className="title-memo">
-            Daily Wheel are temporarily unavailable. Spend now to unlock
-            rewards!
+            Your account is not eligible for Daily Rewards at this time!
           </p>
         )}
         {isShowWheel && (
