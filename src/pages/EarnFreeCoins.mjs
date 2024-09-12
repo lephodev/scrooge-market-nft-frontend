@@ -44,6 +44,8 @@ const EarnFreeCoins = () => {
   const [loyalityWheel, setLoylityWheel] = useState(false);
   const [weeklyWheel, setWeeklyWheel] = useState(false);
   const [isWeeklyWheelActive, setIsWeeklyWheelActive] = useState(false);
+  const [isSignUpWheel] = useState(false);
+  const [isShowWheel, setIsShowWheel] = useState(false);
 
   const [globalLoader, setglobalLoader] = useState(true);
 
@@ -59,14 +61,17 @@ const EarnFreeCoins = () => {
       const response = await (
         await marketPlaceInstance()
       ).get("/getWeeklyWheel");
-      const { success, isWeeklySpin } = response.data;
+      const { success, isWeeklySpin, showWheel } = response.data;
       if (success) {
         setglobalLoader(false);
 
         // console.log("isWeeklySpin", isWeeklySpin);
         setIsWeeklyWheelActive(isWeeklySpin);
+        setIsShowWheel(showWheel);
       } else {
         setIsWeeklyWheelActive(isWeeklySpin);
+        setIsShowWheel(showWheel);
+
         setglobalLoader(false);
 
         // console.log("else isWeeklySpin", isWeeklySpin);
@@ -188,284 +193,310 @@ const EarnFreeCoins = () => {
             Daily Claims
           </Button>
         </div>
-
-        {showRoulette ? (
-          <MainRoulette
-            user={user}
-            show={show}
-            handleOpenRoulette={handleOpenRoulette}
-            regRiskWheel={regRiskWheel}
-          />
-        ) : null}
-
-        {riskWheel ? (
-          <RiskWheel
-            show={show}
-            handleOpenRoulette={handleOpenRoulette}
-            riskWheel={riskWheel}
-          />
-        ) : // <MegaWheel
-        //   show={show}
-        //   handleOpenRoulette={handleOpenRoulette}
-
-        // />
-        null}
-
-        {regRiskWheel ? (
-          <RegRiskWheel
-            user={user}
-            show={show}
-            handleOpenRoulette={handleOpenRoulette}
-            regRiskWheel={regRiskWheel}
-          />
-        ) : null}
-
-        {loyalityWheel ? (
-          <LoyalityWheel
-            show={show}
-            handleOpenRoulette={handleOpenRoulette}
-            loyalityWheel={loyalityWheel}
-          />
-        ) : (
-          ""
+        {!isShowWheel && (
+          <div className="p-5 rewardHeading">
+            <p className="title-memo">
+              Your account is not eligible for Daily Rewards at this time!
+            </p>
+          </div>
         )}
+        {isShowWheel && (
+          <div>
+            {showRoulette ? (
+              <MainRoulette
+                user={user}
+                show={show}
+                handleOpenRoulette={handleOpenRoulette}
+                regRiskWheel={regRiskWheel}
+              />
+            ) : null}
 
-        {weeklyWheel ? (
-          <WeeklyWheel
-            show={show}
-            handleOpenRoulette={handleOpenRoulette}
-            weeklyWheel={weeklyWheel}
-          />
-        ) : (
-          ""
-        )}
+            {riskWheel ? (
+              <RiskWheel
+                show={show}
+                handleOpenRoulette={handleOpenRoulette}
+                riskWheel={riskWheel}
+              />
+            ) : // <MegaWheel
+            //   show={show}
+            //   handleOpenRoulette={handleOpenRoulette}
 
-        {key === "dailyClaims" ? (
-          <div className="spin-popup-content spin-page-content">
-           
-            {!globalLoader && (
-              <>
-                <div className="spin-wheel">
-                  <div className="spin-win-text-content">
-                    {/* {!isWeeklyWheelActive && user?.loyalitySpinCount !== 30 ? (
+            // />
+            null}
+
+            {regRiskWheel ? (
+              <RegRiskWheel
+                user={user}
+                show={show}
+                handleOpenRoulette={handleOpenRoulette}
+                regRiskWheel={regRiskWheel}
+              />
+            ) : null}
+
+            {loyalityWheel ? (
+              <LoyalityWheel
+                show={show}
+                handleOpenRoulette={handleOpenRoulette}
+                loyalityWheel={loyalityWheel}
+              />
+            ) : (
+              ""
+            )}
+
+            {weeklyWheel ? (
+              <WeeklyWheel
+                show={show}
+                handleOpenRoulette={handleOpenRoulette}
+                weeklyWheel={weeklyWheel}
+              />
+            ) : (
+              ""
+            )}
+
+            {key === "dailyClaims" ? (
+              <div className="spin-popup-content spin-page-content">
+                {!globalLoader && (
+                  <>
+                    <div className="spin-wheel">
+                      <div className="spin-win-text-content">
+                        {/* {!isWeeklyWheelActive && user?.loyalitySpinCount !== 30 ? (
                       <div className="spin-win-text">
                         <p>Pick one</p>
                         
                       </div>
                     ) : null} */}
-                    <p className="heading_text updated_text_color">Daily Wheel Spin</p>
-                     {!globalLoader && (
-              <p className="title-memo">
-                Daily wheel spin coins have a one times play through requirement
-                and an expiration of 7 days if not used.
-              </p>
-            )}
-                    {user?.loyalitySpinCount !== 30 ? (
-                      <div className="current-streak">
-                        <p className="text-white">
-                          Current streak :{" "}
-                          <span>{user?.loyalitySpinCount}</span>{" "}
+                        <p className="heading_text updated_text_color">
+                          Daily Wheel Spin
                         </p>
-                      </div>
-                    ) : null}
-                    <div
-                      className={`spin-button ${
-                        isWeeklyWheelActive && user?.loyalitySpinCount === 30
-                          ? "single-wheel"
-                          : user?.loyalitySpinCount === 30
-                          ? "single-wheel"
-                          : ""
-                      }`}
-                    >
-                      {!isWeeklyWheelActive ? (
-                        <>
-                          {user?.loyalitySpinCount !== 30 ? (
-                            <div className="risk-grid">
-                              <img
-                                src={regularThumbnail}
-                                alt="regular-thumbnail"
-                                className="img-fulid"
-                              />
-                              <p>Spin me for guaranteed prizing </p>
-                              <button
-                                disabled={!canSpin}
-                                onClick={() => handleOpenRoulette("normal")}
-                              >
-                                {" "}
-                                {canSpin ? "Regular Wheel" : spinTimer}
-                              </button>
-                            </div>
+                        {!globalLoader && (
+                          <p className="title-memo">
+                            Daily wheel spin coins have a one times play through
+                            requirement and an expiration of 7 days if not used.
+                          </p>
+                        )}
+                        {user?.loyalitySpinCount !== 30 ? (
+                          <div className="current-streak">
+                            <p className="text-white">
+                              Current streak :{" "}
+                              <span>{user?.loyalitySpinCount}</span>{" "}
+                            </p>
+                          </div>
+                        ) : null}
+                        <div
+                          className={`spin-button ${
+                            isWeeklyWheelActive &&
+                            user?.loyalitySpinCount === 30
+                              ? "single-wheel"
+                              : user?.loyalitySpinCount === 30
+                              ? "single-wheel"
+                              : isSignUpWheel
+                              ? "single-wheel"
+                              : ""
+                          }`}
+                        >
+                          {!isSignUpWheel && !isWeeklyWheelActive ? (
+                            <>
+                              {user?.loyalitySpinCount !== 30 ? (
+                                <div className="risk-grid">
+                                  <img
+                                    src={regularThumbnail}
+                                    alt="regular-thumbnail"
+                                    className="img-fulid"
+                                  />
+                                  <p>Spin me for guaranteed prizing </p>
+                                  <button
+                                    disabled={!canSpin}
+                                    onClick={() => handleOpenRoulette("normal")}
+                                  >
+                                    {" "}
+                                    {canSpin ? "Regular Wheel" : spinTimer}
+                                  </button>
+                                </div>
+                              ) : (
+                                ""
+                              )}
+                              {user?.loyalitySpinCount !== 30 ? (
+                                <div className="or-grid">
+                                  <span>or</span>
+                                </div>
+                              ) : null}
+                              {user?.loyalitySpinCount !== 30 ? (
+                                <div className="risk-grid">
+                                  <img
+                                    src={regRiskThumbnail}
+                                    alt="risk-thumbnail"
+                                    className="img-fulid"
+                                  />
+                                  <p>
+                                    Take a risk for higher odds at the big
+                                    wheel. Choose carefully, you may end up with
+                                    no prize.{" "}
+                                  </p>
+                                  <button
+                                    disabled={!canSpin}
+                                    onClick={() =>
+                                      handleOpenRoulette("regRisk")
+                                    }
+                                  >
+                                    {" "}
+                                    {canSpin ? "Take a Risk" : spinTimer}
+                                  </button>
+                                </div>
+                              ) : (
+                                ""
+                              )}
+                            </>
                           ) : (
                             ""
                           )}
-                          {user?.loyalitySpinCount !== 30 ? (
-                            <div className="or-grid">
-                              <span>or</span>
-                            </div>
-                          ) : null}
-                          {user?.loyalitySpinCount !== 30 ? (
+                          {user?.loyalitySpinCount === 30 && (
                             <div className="risk-grid">
                               <img
-                                src={regRiskThumbnail}
-                                alt="risk-thumbnail"
+                                src={loyaltyThumbnail}
+                                alt="loyalty-thumbnail"
                                 className="img-fulid"
                               />
                               <p>
-                                Take a risk for higher odds at the big wheel.
-                                Choose carefully, you may end up with no prize.{" "}
+                                Congrats on 30 straight days of spinning, here
+                                is a Bonus Wheel for today’s spin{" "}
                               </p>
                               <button
                                 disabled={!canSpin}
-                                onClick={() => handleOpenRoulette("regRisk")}
+                                onClick={() => handleOpenRoulette("loyality")}
                               >
                                 {" "}
-                                {canSpin ? "Take a Risk" : spinTimer}
+                                {canSpin ? "Loyality Wheel" : spinTimer}
                               </button>
                             </div>
+                          )}
+
+                          {isWeeklyWheelActive &&
+                          user?.loyalitySpinCount !== 30 ? (
+                            <>
+                              <div className="risk-grid">
+                                <div className="big-wheel-image-grid">
+                                  <div className="big-wheel-label-grid">
+                                    <img
+                                      src={bigText}
+                                      alt="big-wheel-label"
+                                      className="img-fluid"
+                                    />
+                                  </div>
+                                  <img
+                                    src={bigThumbnail}
+                                    alt="big-thumbnail"
+                                    className="img-fulid"
+                                  />
+                                </div>
+                                <p>
+                                  Thank you for being a loyal Scrooge user, you
+                                  have been rewarded 7 days of access to the Big
+                                  Wheel!{" "}
+                                </p>
+                                <button
+                                  disabled={!canSpin}
+                                  onClick={() => handleOpenRoulette("weekly")}
+                                >
+                                  {" "}
+                                  {canSpin ? "Big Wheel " : spinTimer}
+                                </button>
+                              </div>
+                              {user?.loyalitySpinCount !== 30 ? (
+                                <div className="or-grid">
+                                  <span>or</span>
+                                </div>
+                              ) : null}
+                              <div
+                                className={`risk-grid ${
+                                  isWeeklyWheelActive ? "second-wheel-padd" : ""
+                                }`}
+                              >
+                                <img
+                                  src={riskThumbnail}
+                                  alt="risk-thumbnail"
+                                  className="img-fulid"
+                                />
+                                <p>
+                                  Risk it for an even larger Mega Wheel. Choose
+                                  carefully, as you can be left with no daily
+                                  reward.
+                                </p>
+                                <button
+                                  disabled={!canSpin}
+                                  onClick={() => handleOpenRoulette("risk")}
+                                >
+                                  {" "}
+                                  {canSpin ? "Take a Risk" : spinTimer}
+                                </button>
+                              </div>
+                            </>
                           ) : (
                             ""
                           )}
-                        </>
-                      ) : (
-                        ""
-                      )}
-                      {user?.loyalitySpinCount === 30 && (
-                        <div className="risk-grid">
-                          <img
-                            src={loyaltyThumbnail}
-                            alt="loyalty-thumbnail"
-                            className="img-fulid"
-                          />
-                          <p>
-                            Congrats on 30 straight days of spinning, here is a
-                            Bonus Wheel for your next spin.{" "}
-                          </p>
-                          <button
-                            disabled={!canSpin}
-                            onClick={() => handleOpenRoulette("loyality")}
-                          >
-                            {" "}
-                            {canSpin ? "Loyality Wheel" : spinTimer}
-                          </button>
-                        </div>
-                      )}
 
-                      {isWeeklyWheelActive && user?.loyalitySpinCount !== 30 ? (
-                        <>
-                          <div className="risk-grid">
-                            <div className="big-wheel-image-grid">
-                              <div className="big-wheel-label-grid">
+                          {isSignUpWheel && (
+                            <div className="risk-grid">
+                              <div className="big-wheel-image-grid">
+                                <div className="big-wheel-label-grid">
+                                  <img
+                                    src={bigText}
+                                    alt="big-wheel-label"
+                                    className="img-fluid"
+                                  />
+                                </div>
                                 <img
-                                  src={bigText}
-                                  alt="big-wheel-label"
-                                  className="img-fluid"
+                                  src={bigThumbnail}
+                                  alt="big-thumbnail"
+                                  className="img-fulid"
                                 />
                               </div>
-                              <img
-                                src={bigThumbnail}
-                                alt="big-thumbnail"
-                                className="img-fulid"
-                              />
+                              <p>
+                                you have been rewarded 7 days trial of access to
+                                the Big Wheel!{" "}
+                              </p>
+                              <button
+                                disabled={!canSpin}
+                                onClick={() => handleOpenRoulette("weekly")}
+                              >
+                                {" "}
+                                {canSpin ? "Big Wheel " : spinTimer}
+                              </button>
                             </div>
-                            <p>
-                              Thank you for being a loyal Scrooge user, you have
-                              been rewarded 7 days of access to the Big Wheel!{" "}
-                            </p>
-                            <button
-                              disabled={!canSpin}
-                              onClick={() => handleOpenRoulette("weekly")}
-                            >
-                              {" "}
-                              {canSpin ? "Big Wheel " : spinTimer}
-                            </button>
-                          </div>
-                          {user?.loyalitySpinCount !== 30 ? (
-                            <div className="or-grid">
-                              <span>or</span>
-                            </div>
-                          ) : null}
-                          <div
-                            className={`risk-grid ${
-                              isWeeklyWheelActive ? "second-wheel-padd" : ""
-                            }`}
-                          >
-                            <img
-                              src={riskThumbnail}
-                              alt="risk-thumbnail"
-                              className="img-fulid"
-                            />
-                            <p>
-                              Risk it for an even larger Mega Wheel. Choose
-                              carefully, as you can be left with no daily
-                              reward.
-                            </p>
-                            <button
-                              disabled={!canSpin}
-                              onClick={() => handleOpenRoulette("risk")}
-                            >
-                              {" "}
-                              {canSpin ? "Take a Risk" : spinTimer}
-                            </button>
-                          </div>
-                        </>
-                      ) : (
-                        ""
-                      )}
+                          )}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        ) : (
-          ""
-        )}
-        <div className="tabs-claim">
-          {key === "dailyClaims" ? (
-            <div className="tab-claims">
-              <DailyRewards />
-            </div>
-          ) : key === "monthlyClaims" ? (
-            <div className="tab-claims">
-              <HolderClaimChips />
-            </div>
-          ) : key === "duckyLuckClaims" ? (
-            <div>
-              {/* "gghh" */}
-              <DLGate>
-                <DLClaimTokens />
-              </DLGate>
-            </div>
-          ) : (
-            ""
-          )}
-          <div className="tabs-claim">
-            {key === "dailyClaims" ? (
-              <div className="tab-claims">
-                <DailyRewards />
-              </div>
-            ) : key === "monthlyClaims" ? (
-              <div className="tab-claims">
-                <HolderClaimChips />
-              </div>
-            ) : key === "duckyLuckClaims" ? (
-              <div>
-                {/* "gghh" */}
-                <DLGate>
-                  <DLClaimTokens />
-                </DLGate>
+                  </>
+                )}
               </div>
             ) : (
               ""
             )}
+            <div className="tabs-claim">
+              {key === "dailyClaims" ? (
+                <div className="tab-claims">
+                  <DailyRewards />
+                </div>
+              ) : key === "monthlyClaims" ? (
+                <div className="tab-claims">
+                  <HolderClaimChips />
+                </div>
+              ) : key === "duckyLuckClaims" ? (
+                <div>
+                  {/* "gghh" */}
+                  <DLGate>
+                    <DLClaimTokens />
+                  </DLGate>
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+            <div className="flex-row" style={{ margin: "50px auto 0px" }}>
+              <ShowBottomNavCards />
+            </div>
           </div>
-          <div className="flex-row" style={{ margin: "50px auto 0px" }}>
-            <ShowBottomNavCards />
-          </div>
-        </div>
-        <div className="flex-row" style={{ margin: "50px auto 0px" }}>
-          <ShowBottomNavCards />
-        </div>
+        )}
       </div>
     </Layout>
   );
