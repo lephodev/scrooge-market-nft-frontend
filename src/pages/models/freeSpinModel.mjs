@@ -1,5 +1,5 @@
 import { Modal, Button } from "react-bootstrap";
-import freeSpin from "../../images/The_Great_Pigsby.jpg";
+import freeSpin from "../../images/freeSpin.jpg";
 import "./freeSpin.css";
 import { relaxLaunchUrl, slotUrl } from "../../config/keys.js";
 import { relaxGamingInstance } from "../../config/axios.js";
@@ -8,9 +8,9 @@ const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
     const tickt = await (await relaxGamingInstance()).get(`/getToken/SC.`);
 
     let relaxGameUrl = "";
-    relaxGameUrl = `${relaxLaunchUrl}gameid=thegreatpigsby&ticket=${
-      tickt.data.token
-    }&jurisdiction=MT&lang=en_SC&channel=${
+    relaxGameUrl = `${relaxLaunchUrl}gameid=${
+      packgaeData?.freeSpinGame
+    }&ticket=${tickt.data.token}&jurisdiction=MT&lang=en_SC&channel=${
       window.innerWidth <= 767 ? "mobile" : "web"
     }&partner=scrooge&partnerid=2258&moneymode=real`;
     localStorage.setItem(
