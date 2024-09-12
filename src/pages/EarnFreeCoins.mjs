@@ -54,8 +54,6 @@ const EarnFreeCoins = () => {
   //   setActive(value);
   // };
 
-  console.log("isShowWheel", isShowWheel);
-
   const getWeeklyWheel = async () => {
     setglobalLoader(true);
 
@@ -195,14 +193,14 @@ const EarnFreeCoins = () => {
             Daily Claims
           </Button>
         </div>
-        {/* {!isShowWheel && (
+        {!isShowWheel && (
           <div className="p-5 rewardHeading">
             <p className="title-memo">
               Your account is not eligible for Daily Rewards at this time!
             </p>
           </div>
-        )} */}
-        {true && (
+        )}
+        {isShowWheel && (
           <div>
             {showRoulette ? (
               <MainRoulette
