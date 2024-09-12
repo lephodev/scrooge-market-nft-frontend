@@ -198,11 +198,12 @@ const EarnFreeCoins = () => {
             Daily Claims
           </Button>
         </div>
-
-        <p className="title-memo">
-          Daily Wheel are temporarily unavailable. Spend now to unlock rewards!
-        </p>
-
+        {!isShowWheel && (
+          <p className="title-memo">
+            Daily Wheel are temporarily unavailable. Spend now to unlock
+            rewards!
+          </p>
+        )}
         {isShowWheel && (
           <div>
             {showRoulette ? (
