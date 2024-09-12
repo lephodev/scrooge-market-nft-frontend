@@ -196,7 +196,11 @@ const EarnFreeCoins = () => {
         {!isShowWheel && (
           <div className="p-5 rewardHeading">
             <p className="title-memo">
-              Your account is not eligible for Daily Rewards at this time!
+              <p className="title-memo">
+                Our daily wheel VIP rewards program is a tiered level rewards
+                offering. Accounts with 60+ consecutive days without any
+                purchase history become ineligible to access the daily rewards.
+              </p>
             </p>
           </div>
         )}
