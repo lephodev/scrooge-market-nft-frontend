@@ -448,9 +448,9 @@ const FailedKYC = ({ handleLogOut, reapply, rejectionMessage }) => {
         <img src={failed} alt="failed" />
         <p>KYC submission rejected. Please contact support for assistance.</p>
         <p className="reject-reason">
-          <span>Reason </span> : {rejectionMessage}
+          {/* <span>Reason </span> : {rejectionMessage} */}
         </p>
-        <button onClick={reapply}>Re-Apply</button>
+        {/* <button onClick={reapply}>Re-Apply</button> */}
         {/* <Link to="/">Contact Support</Link>
         <span onClick={handleLogOut}>Logout</span> */}
       </div>
@@ -707,7 +707,7 @@ const OldForm = ({
 
           <div className="login-button full-w">
             {/* <Button type="submit" className="l-btn" disabled={isSaveLoader}> */}
-              <PersonaComponent phoneNum={phoneNum} errors={errors} />
+            <PersonaComponent phoneNum={phoneNum} errors={errors} />
             {/* </Button> */}
           </div>
         </Form>
