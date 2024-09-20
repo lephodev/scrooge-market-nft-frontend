@@ -10,11 +10,7 @@
     "slotUrl": "https://devslot.scrooge.casino",
     "rouletteUrl": "https://dev.scrooge.casino/roulette",
     "stripeKey": "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT",
-    "paypalClientKey": "AWhlgQRrgSVnSTYT3LJJFNEf4khB0cBuWdPWIJtkueu-Vh_9cU9y-mwL5x5vaaKPEjdynWo5q6gC7tei",
-    "serverSlot": "https://devslot-api.scrooge.casino",
-    "relaxLaunchUrl": "https://d2drhksbtcqozo.cloudfront.net/casino/launcher.html?"
-
-
+    "paypalClientKey": "AWhlgQRrgSVnSTYT3LJJFNEf4khB0cBuWdPWIJtkueu-Vh_9cU9y-mwL5x5vaaKPEjdynWo5q6gC7tei"
 
   },
   "development": {
@@ -28,10 +24,7 @@
     "slotUrl": "https://devslot.scrooge.casino",
     "rouletteUrl": "https://dev.scrooge.casino/roulette",
     "stripeKey": "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT",
-    "paypalClientKey": "AWhlgQRrgSVnSTYT3LJJFNEf4khB0cBuWdPWIJtkueu-Vh_9cU9y-mwL5x5vaaKPEjdynWo5q6gC7tei",
-    "serverSlot": "https://devslot-api.scrooge.casino",
-    "relaxLaunchUrl": "https://d2drhksbtcqozo.cloudfront.net/casino/launcher.html?"
-
+    "paypalClientKey": "AWhlgQRrgSVnSTYT3LJJFNEf4khB0cBuWdPWIJtkueu-Vh_9cU9y-mwL5x5vaaKPEjdynWo5q6gC7tei"
 
   },
   "staging": {
@@ -45,10 +38,7 @@
     "slotUrl": "https://betaslot.scrooge.casino",
     "rouletteUrl": "https://beta.scrooge.casino/roulette",
     "stripeKey": "pk_test_51Mo3YgIintOuilEoLwYx4fCCGOTI10Ed9yIMGLFCAVOL7WmdJCiWokb3E7wpQYEeIhUYmALBZtKF2AgXwbGGxw0n00WCYA87bT",
-    "paypalClientKey": "ASVq331SjyBbgW1akqdOLs5hJ_VMopNmqI4r_h4cHf6YLDkoEqOQ_YjHxYKvxp8QFLz7E0BRaTqVH-jv",
-    "serverSlot": "https://betaslot-api.scrooge.casino",
-    "relaxLaunchUrl": "https://d2drhksbtcqozo.cloudfront.net/casino/launcher.html?"
-
+    "paypalClientKey": "ASVq331SjyBbgW1akqdOLs5hJ_VMopNmqI4r_h4cHf6YLDkoEqOQ_YjHxYKvxp8QFLz7E0BRaTqVH-jv"
 
   },
   "production": {
@@ -62,10 +52,7 @@
     "slotUrl": "https://slot.scrooge.casino",
     "rouletteUrl": "https://scrooge.casino/roulette",
     "stripeKey": "pk_live_51Mo3YgIintOuilEoqh3MvPlytP8mgx59iCnvobhQqQ3ZO9vM34YxCHuzbyjmkGlIdSsAv5sHoVdIWTtsUPnK5XhD00vbhc88hl",
-    "paypalClientKey": "ASVq331SjyBbgW1akqdOLs5hJ_VMopNmqI4r_h4cHf6YLDkoEqOQ_YjHxYKvxp8QFLz7E0BRaTqVH-jv",
-    "serverSlot": "https://slot-api.scrooge.casino",
-    "relaxLaunchUrl": "https://cf-casino-cdn-kc-eu-brussels-1-prod.relaxg.com/casino/launcher.html?"
-
+    "paypalClientKey": "ASVq331SjyBbgW1akqdOLs5hJ_VMopNmqI4r_h4cHf6YLDkoEqOQ_YjHxYKvxp8QFLz7E0BRaTqVH-jv"
 
   }
 }

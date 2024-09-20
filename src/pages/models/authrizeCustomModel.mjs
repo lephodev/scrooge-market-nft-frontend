@@ -221,20 +221,32 @@ const AuthrizeCustomModel = ({
   const pay = async (values) => {
     setLoader(true);
     console.log("valuesvalues", values);
-    const encryptedCardNumber = Encrypt(cardNumber.replace(/\s/g, ""));
+    const payload = {
+      ...values,
+      cardCode,
+      expDate,
+      cardNumber: cardNumber.replace(/\s/g, ""),
+      amount,
+      sessionId: await getDDC(),
+      promoCode: getPromoCode().trim(),
+      time: new Date(),
+    };
+    const pyldStrng = JSON.stringify(payload);
+    const encData = Encrypt(`${pyldStrng}`);
     try {
       const res = await (
         await marketPlaceInstance()
       ).post(
         `/auth-make-payment`,
         {
-          ...values,
-          cardCode,
-          expDate,
-          cardNumber: encryptedCardNumber,
-          amount,
-          sessionId: await getDDC(),
-          promoCode: getPromoCode().trim(),
+          // ...values,
+          // cardCode,
+          // expDate,
+          // cardNumber: encryptedCardNumber,
+          // amount,
+          // sessionId: await getDDC(),
+          // promoCode: getPromoCode().trim(),
+          data: encData,
         },
         {
           headers: {
