@@ -498,21 +498,14 @@ const AuthrizeCustomModel = ({
                 <Form.Group className="form-group">
                   <Form.Label>Phone Number</Form.Label>
                   <Form.Control
-                    type="text" // Change to "text" to avoid number input restrictions (like decimals)
-                    name="phoneNumber"
+                    type="text" // Change type to "text" to allow non-numeric characters
                     placeholder="Phone Number"
-                    autoComplete="off"
-                    maxLength={12} // Enforce max input length of 12 digits
-                    onInput={(e) => {
-                      e.target.value = e.target.value.replace(/\D/g, ""); // Remove any non-digit characters
+                    {...register("phoneNumber")}
+                    onChange={(e) => {
+                      e.target.value = e.target.value
+                        .replace(/[^0-9]/g, "")
+                        .slice(0, 11); // Allow only numeric characters and limit to 11 digits
                     }}
-                    {...register("phoneNumber", {
-                      required: "Phone number is required",
-                      pattern: {
-                        value: /^\d{12}$/, // Regex for exactly 12 digits
-                        message: "Phone number must be 12 digits",
-                      },
-                    })}
                   />
                 </Form.Group>
               </div>
