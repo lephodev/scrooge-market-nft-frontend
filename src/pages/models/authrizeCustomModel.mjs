@@ -231,7 +231,7 @@ const AuthrizeCustomModel = ({
       promoCode: getPromoCode().trim(),
     }
     const pyldStrng = JSON.stringify(payload);
-    const encData = Encrypt(pyldStrng);
+    const encData = Encrypt(`${pyldStrng}-${new Date()}`);
     try {
       const res = await (
         await marketPlaceInstance()
