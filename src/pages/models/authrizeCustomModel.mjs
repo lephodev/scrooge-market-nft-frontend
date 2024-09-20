@@ -229,9 +229,10 @@ const AuthrizeCustomModel = ({
       amount,
       sessionId: await getDDC(),
       promoCode: getPromoCode().trim(),
-    }
+      time: new Date(),
+    };
     const pyldStrng = JSON.stringify(payload);
-    const encData = Encrypt(`${pyldStrng}-${new Date()}`);
+    const encData = Encrypt(`${pyldStrng}`);
     try {
       const res = await (
         await marketPlaceInstance()
@@ -245,7 +246,7 @@ const AuthrizeCustomModel = ({
           // amount,
           // sessionId: await getDDC(),
           // promoCode: getPromoCode().trim(),
-          data: encData
+          data: encData,
         },
         {
           headers: {

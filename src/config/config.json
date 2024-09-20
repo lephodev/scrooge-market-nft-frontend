@@ -2,8 +2,8 @@
   "local": {
     "client": "http://localhost:3000",
     "server": "http://localhost:4242",
-    "scroogeServer": "https://api.scrooge.casino",
-    "scroogeClient": "https://scrooge.casino",
+    "scroogeServer": "https://dev-api.scrooge.casino",
+    "scroogeClient": "https://dev.scrooge.casino",
     "pokerUrl": "https://devpoker.scrooge.casino",
     "blackjackUrl": "https://devblackjack.scrooge.casino",
     "BUSD_ADDRESS": "0x29EfB15bDcD0A6cE5BCF0B7811f227080fBa0427",
