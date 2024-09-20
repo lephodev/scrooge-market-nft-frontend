@@ -707,7 +707,7 @@ const OldForm = ({
 
           <div className="login-button full-w">
             {/* <Button type="submit" className="l-btn" disabled={isSaveLoader}> */}
-              <PersonaComponent phoneNum={phoneNum} errors={errors} />
+            <PersonaComponent phoneNum={phoneNum} errors={errors} />
             {/* </Button> */}
           </div>
         </Form>

@@ -41,7 +41,8 @@ const EarnFreeCoins = () => {
   const [weeklyWheel, setWeeklyWheel] = useState(false);
   const [isWeeklyWheelActive, setIsWeeklyWheelActive] = useState(false);
   const [isSignUpWheel, setIsSignUpWheel] = useState(false);
-  const [isShowWheel, setIsShowWheel] = useState(true);
+  const [isShowWheel, setIsShowWheel] = useState(false);
+
   const [globalLoader, setglobalLoader] = useState(true);
 
   const navigate = useNavigate();
