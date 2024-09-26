@@ -498,11 +498,14 @@ const AuthrizeCustomModel = ({
                 <Form.Group className="form-group">
                   <Form.Label>Phone Number</Form.Label>
                   <Form.Control
-                    type="number"
-                    name="phoneNumber"
+                    type="text" // Change type to "text" to allow non-numeric characters
                     placeholder="Phone Number"
-                    autoComplete="off"
                     {...register("phoneNumber")}
+                    onChange={(e) => {
+                      e.target.value = e.target.value
+                        .replace(/[^0-9]/g, "")
+                        .slice(0, 11); // Allow only numeric characters and limit to 11 digits
+                    }}
                   />
                 </Form.Group>
               </div>

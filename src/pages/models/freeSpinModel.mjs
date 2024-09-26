@@ -4,6 +4,13 @@ import "./freeSpin.css";
 import { relaxLaunchUrl, slotUrl } from "../../config/keys.js";
 import { relaxGamingInstance } from "../../config/axios.js";
 const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
+  console.log(
+    "showFreeSpin, handleCloseFreeSpin, packgaeData ",
+    showFreeSpin,
+    handleCloseFreeSpin,
+    packgaeData
+  );
+
   const handleRedirectToGame = async (obj, provider, subprovider) => {
     const tickt = await (await relaxGamingInstance()).get(`/getToken/SC.`);
 
