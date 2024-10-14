@@ -17,6 +17,7 @@ const MegaWheel = ({ handleOpenRoulette, show }) => {
   const [winItem, setWinItem] = useState();
   const [volume, setVolume] = useState(false);
   const [bigWheel, setBigWheel] = useState(false);
+  const [closeDisable, setCloseDisable] = useState(false);
 
   const MegaWheelPlaces = [
     { token: 500, chances: 11.11 },
@@ -38,8 +39,18 @@ const MegaWheel = ({ handleOpenRoulette, show }) => {
       className="roulette-wrapper roulette-wheel-game"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      backdrop={closeDisable ? "static" : true }
+      keyboard={!closeDisable}
     >
-      <Modal.Header closeButton></Modal.Header>
+      <Modal.Header> 
+        <button
+          type="button"
+          className="btn-close"
+          disabled={closeDisable}  
+          aria-label="Close"
+          onClick={!closeDisable ? handleOpenRoulette : null}
+        />
+      </Modal.Header>
       <Modal.Body>
         <>
           <MegaSpinWheel
@@ -47,6 +58,7 @@ const MegaWheel = ({ handleOpenRoulette, show }) => {
             setWinPopup={setWinPopup}
             setWinItem={setWinItem}
             setVolume={setVolume}
+            setCloseDisable={setCloseDisable}
           />
         </>
 
