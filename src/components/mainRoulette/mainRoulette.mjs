@@ -52,8 +52,7 @@ const MainRoulette = ({
   const [winItem, setWinItem] = useState();
   const [volume, setVolume] = useState(false);
   const [bigWheel, setBigWheel] = useState(false);
-  const [closeDisable, setCloseDisable] = useState(false);
-
+  console.log("user", user);
   return (
     <Modal
       show={show}
@@ -61,21 +60,11 @@ const MainRoulette = ({
       className="roulette-wrapper roulette-wheel-game"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      backdrop={closeDisable ? "static" : true }
-      keyboard={!closeDisable}
     >
-      <Modal.Header> 
-        <button
-          type="button"
-          className="btn-close"
-          disabled={closeDisable}  
-          aria-label="Close"
-          onClick={!closeDisable ? handleOpenRoulette : null}
-        />
-      </Modal.Header>
+      <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         {user?.wheelType === "Big wheel" && (
-          <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} setCloseDisable={setCloseDisable} />
+          <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} />
         )}
         <>
           {user?.wheelType !== "Big wheel" && !bigWheel && (
@@ -86,7 +75,6 @@ const MainRoulette = ({
               setWinPopup={setWinPopup}
               setVolume={setVolume}
               handleOpenRoulette={handleOpenRoulette}
-              setCloseDisable={setCloseDisable}
             />
           )}
         </>
