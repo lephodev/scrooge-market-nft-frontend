@@ -202,6 +202,20 @@ button.slider-button:hover svg path {
   color: red !important;
 }
 
+.contest-banner-slider .modal-header {
+  margin: 0px;
+  background: #10121a !important;
+  color: #ffd336 !important;
+}
+
+.contest-banner-slider .modal-footer {
+  background: #10121a !important;
+}
+
+.contest-banner-slider .modal-footer button{
+  background: linear-gradient(90deg, #ffc700, #ffeca8 51%, #ffc700) !important;
+}
+
 @media screen and (max-width: 991px) {
   .contest-modal .modal-content {
     max-width: 92vw;

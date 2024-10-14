@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 // import hatLogo from "../images/scroogeHatLogo.png";
 // import newLogo from "../images/new-logo.webp";
 // import { useContext } from "react";
-import playPolicy from "../images/SCROOGE CASINO Game Play Policy.docx";
+import playPolicy from "../images/Game Play Policy.9acc9cd81dbb1c48bdd6 (1).docx";
 
 // import DLBigD from "../images/DLBigD.png";
 // import WalletIcon from "../images/wallet.png";

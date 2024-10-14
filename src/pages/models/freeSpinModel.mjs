@@ -1,5 +1,5 @@
 import { Modal, Button } from "react-bootstrap";
-import freeSpin from "../../images/freeSpin.jpg";
+// import freeSpin from "../../images/freeSpin.jpg";
 import "./freeSpin.css";
 import { relaxLaunchUrl, slotUrl } from "../../config/keys.js";
 import { relaxGamingInstance } from "../../config/axios.js";
@@ -40,7 +40,7 @@ const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
           <Modal.Body>
             <div className="contest-content">
               <img
-                src={freeSpin}
+                src={packgaeData?.spinBannerImage}
                 alt="banner"
                 className="img-fluid"
                 loading="lazy"
