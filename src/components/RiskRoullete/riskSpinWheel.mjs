@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import "../../components/roulette/wheel.css";
 import WinPopup from "../roulette/winPopup.mjs";
 
-function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel, setCloseDisable }) {
+function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
   const [selectItem, setselectItem] = useState(null);
   const [isWinResult, setIsWinResult] = useState(false);
   const [wheelResult, setWheelResult] = useState();
@@ -26,7 +26,6 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel, setCloseDi
         const clientSeed = getClientSeed();
         // console.log({ clientSeed });
         setSpinButtonDisable(true);
-        setCloseDisable(true)
         const response = await (
           await marketPlaceInstance()
         ).get("/gameResultForRiskWheel", {
@@ -61,7 +60,6 @@ function RiskSpinWheel({ items, setWinItem, setWinPopup, setBigWheel, setCloseDi
           toast.error(error?.response?.data?.msg, { toastId: "spin-wheel" });
         }
         setSpinButtonDisable(false);
-        setCloseDisable(false)
       }
     } else {
       setselectItem(null);

@@ -17,7 +17,6 @@ const WeeklyWheel = ({ handleOpenRoulette, show }) => {
   const [winItem, setWinItem] = useState();
   const [volume, setVolume] = useState(false);
   const [bigWheel, setBigWheel] = useState(false);
-  const [closeDisable, setCloseDisable] = useState(false);
 
   const BigWheelPlaces = [
     { token: 100, chances: 12.4875 },
@@ -39,18 +38,8 @@ const WeeklyWheel = ({ handleOpenRoulette, show }) => {
       className="roulette-wrapper roulette-wheel-game"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      backdrop={closeDisable ? "static" : true }
-      keyboard={!closeDisable}
     >
-      <Modal.Header> 
-        <button
-          type="button"
-          className="btn-close"
-          disabled={closeDisable}  
-          aria-label="Close"
-          onClick={!closeDisable ? handleOpenRoulette : null}
-        />
-      </Modal.Header>
+      <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <div className="wheel-wrapper">
           {console.log("LoyaltyWheelPlaces", BigWheelPlaces)}
@@ -60,7 +49,6 @@ const WeeklyWheel = ({ handleOpenRoulette, show }) => {
               setWinPopup={setWinPopup}
               setWinItem={setWinItem}
               setVolume={setVolume}
-              setCloseDisable={setCloseDisable}
             />
           </>
         </div>

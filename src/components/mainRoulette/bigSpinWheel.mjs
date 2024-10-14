@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import "../../components/roulette/wheel.css";
 import WinPopup from "../roulette/winPopup.mjs";
 
-function BigSpinWheel({ items, setWinPopup, setCloseDisable }) {
+function BigSpinWheel({ items, setWinPopup }) {
   const [selectItem, setselectItem] = useState(null);
   const [isWinResult, setIsWinResult] = useState(false);
   const [wheelResult, setWheelResult] = useState();
@@ -24,7 +24,6 @@ function BigSpinWheel({ items, setWinPopup, setCloseDisable }) {
         const clientSeed = getClientSeed();
         // console.log({ clientSeed });
         setSpinButtonDisable(true);
-        setCloseDisable(true)
         const response = await (
           await marketPlaceInstance()
         ).get("/gameResultForBigWheel", {
@@ -55,7 +54,6 @@ function BigSpinWheel({ items, setWinPopup, setCloseDisable }) {
           toast.error(error?.response?.data?.msg, { toastId: "spin-wheel" });
         }
         setSpinButtonDisable(false);
-        setCloseDisable(false)
       }
     } else {
       setselectItem(null);
