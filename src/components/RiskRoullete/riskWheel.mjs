@@ -59,7 +59,15 @@ const RiskWheel = ({ handleOpenRoulette, show }) => {
       backdrop={closeDisable ? "static" : true}
       keyboard={!closeDisable}
     >
-      <Modal.Header closeButton></Modal.Header>
+        <Modal.Header>
+        <button
+          type="button"
+          className="btn-close"
+          disabled={closeDisable}
+          aria-label="Close"
+          onClick={!closeDisable ? handleOpenRoulette : null}
+        />
+      </Modal.Header>
       <Modal.Body>
         <>
           {!bigWheel ? (
@@ -72,7 +80,7 @@ const RiskWheel = ({ handleOpenRoulette, show }) => {
               setCloseDisable={setCloseDisable}
             />
           ) : (
-            <MegaSpinWheel items={MegaWheelPlaces} setWinPopup={setWinPopup} />
+            <MegaSpinWheel items={MegaWheelPlaces} setWinPopup={setWinPopup} setCloseDisable={setCloseDisable} />
           )}
         </>
 

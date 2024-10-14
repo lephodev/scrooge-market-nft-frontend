@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import "../../components/roulette/wheel.css";
 import WinPopup from "../roulette/winPopup.mjs";
 
-function LoyaltySpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
+function LoyaltySpinWheel({ items, onSelectItem, setWinItem, setWinPopup, setCloseDisable }) {
   const [selectItem, setselectItem] = useState(null);
   const [spinButtonDisable, setSpinButtonDisable] = useState(false);
   const [isWinResult, setIsWinResult] = useState(false);
@@ -23,6 +23,7 @@ function LoyaltySpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
         const clientSeed = getClientSeed();
         // console.log({ clientSeed });
         setSpinButtonDisable(true);
+        setCloseDisable(true);
         const response = await (
           await marketPlaceInstance()
         ).get("/loyalitygameResult", {
@@ -56,6 +57,7 @@ function LoyaltySpinWheel({ items, onSelectItem, setWinItem, setWinPopup }) {
           toast.error(error?.response?.data?.msg, { toastId: "spin-wheel" });
         }
         setSpinButtonDisable(false);
+        setCloseDisable(false)
       }
     } else {
       setselectItem(null);
