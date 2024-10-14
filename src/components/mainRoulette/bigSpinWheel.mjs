@@ -24,7 +24,7 @@ function BigSpinWheel({ items, setWinPopup, setCloseDisable }) {
         const clientSeed = getClientSeed();
         // console.log({ clientSeed });
         setSpinButtonDisable(true);
-        setCloseDisable(true)
+        setCloseDisable(true);
         const response = await (
           await marketPlaceInstance()
         ).get("/gameResultForBigWheel", {
@@ -51,11 +51,13 @@ function BigSpinWheel({ items, setWinPopup, setCloseDisable }) {
           }
         }, 3400);
       } catch (error) {
+        console.log("errorerror", error);
+
         if (error?.response?.data?.msg) {
           toast.error(error?.response?.data?.msg, { toastId: "spin-wheel" });
         }
         setSpinButtonDisable(false);
-        setCloseDisable(false)
+        setCloseDisable(false);
       }
     } else {
       setselectItem(null);
