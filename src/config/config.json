@@ -2,8 +2,8 @@
   "local": {
     "client": "http://localhost:3000",
     "server": "http://localhost:4242",
-    "scroogeServer": "https://dev-api.scrooge.casino",
-    "scroogeClient": "https://dev.scrooge.casino",
+    "scroogeServer": "https://api.scrooge.casino",
+    "scroogeClient": "https://scrooge.casino",
     "pokerUrl": "https://devpoker.scrooge.casino",
     "blackjackUrl": "https://devblackjack.scrooge.casino",
     "BUSD_ADDRESS": "0x29EfB15bDcD0A6cE5BCF0B7811f227080fBa0427",
@@ -57,7 +57,7 @@
     "blackjackUrl": "https://blackjack.scrooge.casino",
     "relaxLaunchUrl": "https://cf-casino-cdn-kc-eu-brussels-1-prod.relaxg.com/casino/launcher.html?",
     "serverSlot": "https://slot-api.scrooge.casino",
-    "slotUrl": "https://slot.scrooge.casino",
+    "slotUrl": "https://blackjack.scrooge.casino",
     "rouletteUrl": "https://scrooge.casino/roulette",
     "stripeKey": "pk_live_51Mo3YgIintOuilEoqh3MvPlytP8mgx59iCnvobhQqQ3ZO9vM34YxCHuzbyjmkGlIdSsAv5sHoVdIWTtsUPnK5XhD00vbhc88hl",
     "paypalClientKey": "ASVq331SjyBbgW1akqdOLs5hJ_VMopNmqI4r_h4cHf6YLDkoEqOQ_YjHxYKvxp8QFLz7E0BRaTqVH-jv"

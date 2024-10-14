@@ -61,21 +61,25 @@ const MainRoulette = ({
       className="roulette-wrapper roulette-wheel-game"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      backdrop={closeDisable ? "static" : true }
+      backdrop={closeDisable ? "static" : true}
       keyboard={!closeDisable}
     >
-      <Modal.Header> 
+      <Modal.Header>
         <button
           type="button"
           className="btn-close"
-          disabled={closeDisable}  
+          disabled={closeDisable}
           aria-label="Close"
           onClick={!closeDisable ? handleOpenRoulette : null}
         />
       </Modal.Header>
       <Modal.Body>
         {user?.wheelType === "Big wheel" && (
-          <BigSpinWheel items={BigWheelPlaces} setWinPopup={setWinPopup} setCloseDisable={setCloseDisable} />
+          <BigSpinWheel
+            items={BigWheelPlaces}
+            setWinPopup={setWinPopup}
+            setCloseDisable={setCloseDisable}
+          />
         )}
         <>
           {user?.wheelType !== "Big wheel" && !bigWheel && (

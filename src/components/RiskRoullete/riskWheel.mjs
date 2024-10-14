@@ -47,7 +47,6 @@ const RiskWheel = ({ handleOpenRoulette, show }) => {
   const [winItem, setWinItem] = useState();
   const [volume, setVolume] = useState(false);
   const [bigWheel, setBigWheel] = useState(false);
-  const [closeDisable, setCloseDisable] = useState(false);
 
   return (
     <Modal
@@ -56,28 +55,17 @@ const RiskWheel = ({ handleOpenRoulette, show }) => {
       className="roulette-wrapper roulette-wheel-game"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      backdrop={closeDisable ? "static" : true }
-      keyboard={!closeDisable}
     >
-      <Modal.Header>
-        <button
-          type="button"
-          className="btn-close"
-          disabled={closeDisable}  
-          aria-label="Close"
-          onClick={!closeDisable ? handleOpenRoulette : null}
-        />
-      </Modal.Header>
+      <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <>
-          {bigWheel ? (
+          {!bigWheel ? (
             <RiskSpinWheel
               items={RiskWheelPlaces}
               setWinPopup={setWinPopup}
               setWinItem={setWinItem}
               setVolume={setVolume}
               setBigWheel={setBigWheel}
-              setCloseDisable={setCloseDisable}
             />
           ) : (
             <MegaSpinWheel items={MegaWheelPlaces} setWinPopup={setWinPopup} />

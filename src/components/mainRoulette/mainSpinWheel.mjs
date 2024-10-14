@@ -13,7 +13,7 @@ import "../../components/roulette/wheel.css";
 import WinPopup from "../roulette/winPopup.mjs";
 import AuthContext from "../../context/authContext.ts";
 
-function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel, setCloseDisable }) {
+function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel }) {
   const { setUser } = useContext(AuthContext);
 
   const [selectItem, setselectItem] = useState(null);
@@ -28,7 +28,6 @@ function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel, setCloseDi
         const clientSeed = getClientSeed();
         // console.log({ clientSeed });
         setSpinButtonDisable(true);
-        setCloseDisable(true)
         const response = await (
           await marketPlaceInstance()
         ).get("/gameResult", {
@@ -67,7 +66,6 @@ function MainSpinWheel({ items, setWinItem, setWinPopup, setBigWheel, setCloseDi
           toast.error(error?.response?.data?.msg, { toastId: "spin-wheel" });
         }
         setSpinButtonDisable(false);
-        setCloseDisable(false)
       }
     } else {
       setselectItem(null);
