@@ -27,7 +27,7 @@ import Explore from "./pages/Explore.mjs";
 import CreatePost from "./pages/CreatePosts.mjs";
 import BlogPosts from "./pages/BlogPosts.mjs";
 // import RedeemNFTs from "./pages/RedeemNFTs.mjs";
-// import RedeemPrizes from "./pages/RedeemPrizes.mjs";
+import RedeemPrizes from "./pages/RedeemPrizes.mjs";
 import EarnTokens from "./pages/EarnTokens.mjs";
 import Raffles from "./pages/Raffles.mjs";
 import AuthContext from "./context/authContext";
@@ -403,6 +403,10 @@ export default function App() {
                     <Route
                       path='/crypto-to-gc'
                       element={<ProtectedRoute component={<CryptoToGC />} />}
+                    />
+                    <Route
+                      path='/redeem-prizes'
+                      element={<ProtectedRoute component={<RedeemPrizes />} />}
                     />
                     <Route
                       path='/crypto-to-gc'
