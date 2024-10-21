@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@checkout.com/checkout-web-components": "^0.6.0-beta",
     "@hookform/resolvers": "^3.0.0",
     "@kount/kount-web-client-sdk": "^2.0.0",
     "@paypal/react-paypal-js": "^8.2.0",

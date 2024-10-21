@@ -198,116 +198,125 @@ const FiatPopup = ({
   useEffect(() => {
     const cashappDisabled = !fiatActiveInActive.Cashapp;
     const paypalDisabled = !fiatActiveInActive.Paypal;
+    console.log("cashappDisabled", cashappDisabled);
 
     setOptions([
-      { value: "Cashapp", label: "Cashapp", isDisabled: cashappDisabled },
+      // { value: "Cashapp", label: "Cashapp", isDisabled: cashappDisabled },
       { value: "Paypal", label: "Paypal", isDisabled: paypalDisabled },
     ]);
   }, [fiatActiveInActive]);
 
-console.log("paymentType===>",paymentType?.value,options);
+  console.log("paymentType===>", paymentType?.value, options);
 
   return (
     <div className="fiat-data updated_cryto_form" id="fiat-form">
       <div className="updated_cryto_form_data">
-      {!fiatActiveInActive?.Cashapp && !fiatActiveInActive?.Paypal ? (
-        "Cash Prize is Temporarily Unavailable"
-      ) : (
-        <Form onSubmit={handleSubmit(WithdrawRequest)}>
-              <div className="form_top">
+        {!fiatActiveInActive?.Cashapp && !fiatActiveInActive?.Paypal ? (
+          "Cash Prize is Temporarily Unavailable"
+        ) : (
+          <Form onSubmit={handleSubmit(WithdrawRequest)}>
+            <div className="form_top">
               <Form.Label className="form_heading">Withdraw to</Form.Label>
               {!fiatActiveInActive.Cashapp && (
                 <Form.Text>
-                  Cashapp availability is subject to the apps sending limits.
-                  When limits are reached, the option is disabled temporarily.
+                  {/* Cashapp */} Paypal availability is subject to the apps
+                  sending limits. When limits are reached, the option is
+                  disabled temporarily.
                 </Form.Text>
-               )} 
+              )}
               {!fiatActiveInActive.Paypal && (
                 <Form.Text>
                   Paypal availability is subject to the apps sending limits.
                   When limits are reached, the option is disabled temporarily.
                 </Form.Text>
               )}
-              </div>
-          <div className="fiat-content withdraw_content">
-        
-            <Form.Group className={` ${paymentType?.value === undefined?"fiat-group_first":""} fiat-group`}>
-              <Select
-                options={options}
-                onChange={handleChnagePayout}
-                styles={customStyles}
-              />
-              {errors?.paymentType && (
-                <p className="error-msg">{errors?.paymentType?.message}</p>
-              )}
-            </Form.Group>
+            </div>
+            <div className="fiat-content withdraw_content">
+              <Form.Group
+                className={` ${
+                  paymentType?.value === undefined ? "fiat-group_first" : ""
+                } fiat-group`}
+              >
+                <Select
+                  options={options}
+                  onChange={handleChnagePayout}
+                  styles={customStyles}
+                />
+                {errors?.paymentType && (
+                  <p className="error-msg">{errors?.paymentType?.message}</p>
+                )}
+              </Form.Group>
 
-            {paymentType && paymentType.value === "Paypal" ? (
-              <Form.Group className="fiat-group">
-                {/* <Form.Label>Email</Form.Label> */}
-                <Form.Control
-                  type="email"
-                  name="email"
-                  placeholder="Enter email"
-                  {...register("email")}
-                  className="form_updated_input"
-                />
-                {errors?.email && (
-                  <p className="error-msg">{errors?.email?.message}</p>
-                )}
-              </Form.Group>
-            
-            ) : paymentType && paymentType.value === "Cashapp" ? (
-              <Form.Group className="fiat-group">
-                {/* <Form.Label>$Cashtag </Form.Label> */}
-                <Form.Control
-                  type="text"
-                  name="cashAppid"
-                  //   defaultValue={singleTournament?.name}
-                  placeholder="Enter $Cashtag"
-                  {...register("cashAppid")}
-                  className="form_updated_input"
-                />
-                {errors?.cashAppid && (
-                  <p className="error-msg">{errors?.cashAppid?.message}</p>
-                )}
-              </Form.Group>
-            ) : (
-              ""
-            )}
-            {paymentType && paymentType.value && (
-              <Form.Group className="fiat-group">
-                <Form.Label>
-                  Minimum 10000 ST($100) required for Fiat withdrawals.
-                </Form.Label>
-                <Form.Control
-                  type="number"
-                  name="amount"
-                  placeholder="Enter Withdraw Amount"
-                  {...register("amount")}
-                   className="form_updated_input"
-                />
-                {errors?.amount && (
-                  <p className="error-msg">{errors?.amount?.message}</p>
-                )}
-              </Form.Group>
-            )}
-            <SuccessModal
-              successShow={successShow}
-              handleSuccessModal={handleSuccessModal}
-              purchaseAmount={purchaseAmount}
-            />
-            {/* <h6 className="deducted-heading">
+              {paymentType && paymentType.value === "Paypal" ? (
+                <Form.Group className="fiat-group">
+                  {/* <Form.Label>Email</Form.Label> */}
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    placeholder="Enter email"
+                    {...register("email")}
+                    className="form_updated_input"
+                  />
+                  {errors?.email && (
+                    <p className="error-msg">{errors?.email?.message}</p>
+                  )}
+                </Form.Group>
+              ) : paymentType && paymentType.value === "Cashapp" ? (
+                <Form.Group className="fiat-group">
+                  {/* <Form.Label>$Cashtag </Form.Label> */}
+                  <Form.Control
+                    type="text"
+                    name="cashAppid"
+                    //   defaultValue={singleTournament?.name}
+                    placeholder="Enter $Cashtag"
+                    {...register("cashAppid")}
+                    className="form_updated_input"
+                  />
+                  {errors?.cashAppid && (
+                    <p className="error-msg">{errors?.cashAppid?.message}</p>
+                  )}
+                </Form.Group>
+              ) : (
+                ""
+              )}
+              {paymentType && paymentType.value && (
+                <Form.Group className="fiat-group">
+                  <Form.Label>
+                    Minimum 10000 ST($100) required for Fiat withdrawals.
+                  </Form.Label>
+                  <Form.Control
+                    type="number"
+                    name="amount"
+                    placeholder="Enter Withdraw Amount"
+                    {...register("amount")}
+                    className="form_updated_input"
+                  />
+                  {errors?.amount && (
+                    <p className="error-msg">{errors?.amount?.message}</p>
+                  )}
+                </Form.Group>
+              )}
+              <SuccessModal
+                successShow={successShow}
+                handleSuccessModal={handleSuccessModal}
+                purchaseAmount={purchaseAmount}
+              />
+              {/* <h6 className="deducted-heading">
             10% of the amount will be deducted from your redemption amount
           </h6> */}
-          </div>
-          <div className="popupBtn">
-            <button className="yellowBtn updated_bg_btn new_btn_wd" variant="primary" type="submit" disabled={loading} >
-              {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
-            </button>
-          </div>
-        </Form>
-      )}
+            </div>
+            <div className="popupBtn">
+              <button
+                className="yellowBtn updated_bg_btn new_btn_wd"
+                variant="primary"
+                type="submit"
+                disabled={loading}
+              >
+                {!loading ? "Confirm" : <Spinner animation="border" />}{" "}
+              </button>
+            </div>
+          </Form>
+        )}
       </div>
     </div>
   );

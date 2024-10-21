@@ -45,6 +45,7 @@ import cookie from "js-cookie";
 import PaymentCustom from "./pages/PaymentCustom.mjs";
 import PageLoader from "./components/pageLoader/loader.mjs";
 import { getCookie } from "./utils/dateUtils.mjs";
+import CopyCryptoToGC from "./pages/copyCryptoToGC.mjs";
 // import { validateToken } from "./utils/dateUtils.mjs";
 
 export default function App() {
@@ -406,6 +407,14 @@ export default function App() {
                     <Route
                       path='/redeem-prizes'
                       element={<ProtectedRoute component={<RedeemPrizes />} />}
+                    />
+                    <Route
+                      path='/crypto-to-gc'
+                      element={<ProtectedRoute component={<CryptoToGC />} />}
+                    />
+                    <Route
+                      path='/copy-crypto-to-gc'
+                      element={<ProtectedRoute component={<CopyCryptoToGC />} />}
                     />
                     <Route
                       path='/crypto-to-tokens'
