@@ -219,8 +219,9 @@ const FiatPopup = ({
               <Form.Label className="form_heading">Withdraw to</Form.Label>
               {!fiatActiveInActive.Cashapp && (
                 <Form.Text>
-                  Cashapp availability is subject to the apps sending limits.
-                  When limits are reached, the option is disabled temporarily.
+                  {/* Cashapp */} Paypal availability is subject to the apps
+                  sending limits. When limits are reached, the option is
+                  disabled temporarily.
                 </Form.Text>
               )}
               {!fiatActiveInActive.Paypal && (
