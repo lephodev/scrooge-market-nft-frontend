@@ -94,6 +94,7 @@ export default function CopyCryptoToGC() {
 
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState("");
+  const [removeCheckoutForm, setRemoveCheckoutForm ] = useState(false);
 
   const getPromoPackagaeBanner = async () => {
     try {
@@ -517,6 +518,9 @@ export default function CopyCryptoToGC() {
         },
         onPaymentCompleted: (_component, paymentResponse) => {
           console.log("Create Payment with PaymentId: ", paymentResponse.id);
+          console.log(document.getElementById("checkout-form").innerHTML);
+          document.getElementById("checkout-form").innerHTML = "";
+          setRemoveCheckoutForm(false);
         },
         onChange: (component) => {
           console.log(
@@ -531,12 +535,17 @@ export default function CopyCryptoToGC() {
       });
 
       console.log("checkout ==>", checkout);
+      setRemoveCheckoutForm(true);
 
-      // You can now create and mount a Flow component using 'checkout'
-      const flowComponent = checkout.create("flow");
+      setTimeout(()=>{
+        // You can now create and mount a Flow component using 'checkout'
+        const flowComponent = checkout.create("flow");
 
-      // Mount Flow component to div element with an ID of 'flow-container'
-      flowComponent.mount("#checkout-form");
+        // Mount Flow component to div element with an ID of 'flow-container'
+        flowComponent.mount("#checkout-form");
+      }, 1000);
+
+      
     // } catch (error) {
     //   console.log("error in getCheckout Form ", error);
     // }
@@ -617,7 +626,10 @@ export default function CopyCryptoToGC() {
                     </div>
                   </div>
                   <Button onClick={()=> getCheckoutPaymentForm()}>Checkout</Button>
-                  <div id='checkout-form'></div>
+                  {
+                    removeCheckoutForm ? <div id='checkout-form'></div> : ""
+                  }
+                  
 
                   <div className='purchase-select purchase-select_alignment'>
                     <div className='purchase-with-content'>
