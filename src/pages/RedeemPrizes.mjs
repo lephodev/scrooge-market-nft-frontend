@@ -24,7 +24,7 @@ import {
 import ChainContext from "../context/Chain.ts";
 import CryptoWithdrawPopup from "./models/cryptoWithdrawPopup.mjs";
 import binanceIcon from "../images/redemption/binance-icon.svg";
-import cashAppIcon from "../images/redemption/cashapp-icon.svg";
+// import cashAppIcon from "../images/redemption/cashapp-icon.svg";
 import payPalIcon from "../images/redemption/paypal-icon.svg";
 import { scroogeClient } from "../config/keys.js";
 import PageLoader from "../components/pageLoader/loader.mjs";
@@ -314,12 +314,12 @@ function RedeemPrizes() {
                       <h4> Cash Prize</h4>
                     </div>
                     <div className="redeem-icon-grid">
-                      <img
+                      {/* <img
                         src={cashAppIcon}
                         alt="cashAppIcon"
                         width={64}
                         height={64}
-                      />
+                      /> */}
                       <img
                         src={payPalIcon}
                         alt="payPalIcon"
@@ -329,7 +329,7 @@ function RedeemPrizes() {
                     </div>
                     <div className="redeem-info-grid">
                       <h5>
-                        <span>Redeemable To</span> Cashapp or Paypal
+                        <span>Redeemable To</span> {/* Cashapp or */} Paypal
                       </h5>
                       <h6> 10,000 ST Minimum</h6>
                     </div>
