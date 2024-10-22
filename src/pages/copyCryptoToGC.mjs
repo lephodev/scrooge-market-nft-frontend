@@ -498,7 +498,7 @@ export default function CopyCryptoToGC() {
       const sessionResp = await (
         await marketPlaceInstance()
       ).post("/get-payment-session", {
-        userId: user._id,
+        userId: user._id || user.id,
       });
       const publicKey = process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
       const environment = process.env.REACT_APP_CHECKOUT_ENVIRONMENT;
