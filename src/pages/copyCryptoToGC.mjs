@@ -625,7 +625,7 @@ export default function CopyCryptoToGC() {
                       </h1>
                     </div>
                   </div>
-                  <Button onClick={()=> getCheckoutPaymentForm()}>Checkout</Button>
+                  <Button onClick={()=> getCheckoutPaymentForm()}>Checkout $10</Button>
                   {
                     removeCheckoutForm ? <div id='checkout-form'></div> : ""
                   }
