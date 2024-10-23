@@ -417,7 +417,7 @@ export default function CryptoToGC() {
       console.log("handleOk");
       getGCPurcahseLimitPerDay();
       setStatus("");
-      window.location.href = "/crypto-to-gc";
+      window.location.href = "/copy-crypto-to-gc";
     } catch (error) {
       console.log("error", error);
     }

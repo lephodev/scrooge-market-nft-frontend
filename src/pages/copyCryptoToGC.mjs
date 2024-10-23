@@ -419,7 +419,7 @@ export default function CopyCryptoToGC() {
       console.log("handleOk");
       getGCPurcahseLimitPerDay();
       setStatus("");
-      window.location.href = "/crypto-to-gc";
+      window.location.href = "/copy-crypto-to-gc";
     } catch (error) {
       console.log("error", error);
     }
@@ -495,6 +495,8 @@ export default function CopyCryptoToGC() {
 
   const handleShowCheckoutModel = async (amount, gc, checkoutIndex) => {
     // try {
+    setShowPyapal(!showPaypal);
+
     console.log("amount", amount);
 
     setIndex(checkoutIndex);
