@@ -2,11 +2,8 @@
 /* eslint-disable no-useless-escape */
 import { Modal } from "react-bootstrap";
 
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { marketPlaceInstance } from "../../config/axios.js";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { paypalClientKey } from "../../config/keys.js";
+// import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+// import { paypalClientKey } from "../../config/keys.js";
 import AuthorizeSucessModel from "./authrizeSucessModel.mjs";
 import { useState } from "react";
 
@@ -18,33 +15,6 @@ const PaypalModel = ({
 }) => {
   const [success, setSuccess] = useState(false);
 
-  const onApprove = async (data) => {
-    try {
-      const payload = {
-        orderID: data.orderID,
-        promoCode,
-      };
-      const paypalres = await (
-        await marketPlaceInstance()
-      ).post("/capture-paypal-order", payload);
-      const {
-        status,
-        data: { message },
-      } = paypalres;
-      if (status === 200) {
-        handleShowPaypalModel();
-        setSuccess(true);
-        toast.success(message, { toastId: "login" });
-      }
-    } catch (error) {
-      handleShowPaypalModel()();
-      if (axios.isAxiosError(error) && error?.response) {
-        if (error?.response?.status !== 200) {
-          toast.error(error?.response?.data?.message, { toastId: "login" });
-        }
-      }
-    }
-  };
   const handleOk = async (event) => {
     try {
       setSuccess(false);
@@ -79,29 +49,7 @@ const PaypalModel = ({
               {" "}
               <CrossIconSVG />
             </div>
-            <PayPalScriptProvider
-              options={{
-                clientId: paypalClientKey,
-                disableFunding: "paylater,credit,card",
-                enableFunding: "venmo",
-              }}
-            >
-              <PayPalButtons
-                style={{ layout: "vertical" }}
-                createOrder={(data, actions) => {
-                  return actions.order.create({
-                    purchase_units: [
-                      {
-                        amount: {
-                          value: amount, // Set your payment amount here
-                        },
-                      },
-                    ],
-                  });
-                }}
-                onApprove={onApprove}
-              />{" "}
-            </PayPalScriptProvider>
+            <div id="checkout-form"></div>
           </Modal.Body>
         </Modal>
       )}

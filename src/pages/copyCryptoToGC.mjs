@@ -56,8 +56,7 @@ export default function CopyCryptoToGC() {
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
   const [selectedDropdown, setSelectedDropdown] = useState("Scrooge");
-  const [selectedTypeDropdown, setSelectedTypeDropdown] =
-    useState("Credit Card");
+  const [selectedTypeDropdown, setSelectedTypeDropdown] = useState("Authrize");
   const [promocode, setPromoCode] = useState("");
   const [promoLoader, setPromoLoader] = useState(false);
   const [promoDetails, setPromoDetails] = useState({});
@@ -70,13 +69,14 @@ export default function CopyCryptoToGC() {
   const [freeSTDetail, setFreeSTDetails] = useState({});
   const [avgValue, setAvgValue] = useState(0);
   const [showPromoPackageData, setShowPromoPackageData] = useState({});
-
+  const [checkOutLoader, setCheckOutLoader] = useState(false);
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
   const [cookies] = useCookies(["token"]);
   const [showPaypal, setShowPyapal] = useState(false);
   const [paypalAmount, setPaypalAmount] = useState();
+  const [index, setIndex] = useState();
   const address = useAddress();
   const { contract } = useContract(process.env.REACT_APP_NATIVE_TOKEN_ADDRESS);
   const { contract: scroogeContract } = useContract(
@@ -94,6 +94,7 @@ export default function CopyCryptoToGC() {
 
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState("");
+  const [removeCheckoutForm, setRemoveCheckoutForm] = useState(false);
 
   const getPromoPackagaeBanner = async () => {
     try {
@@ -418,7 +419,7 @@ export default function CopyCryptoToGC() {
       console.log("handleOk");
       getGCPurcahseLimitPerDay();
       setStatus("");
-      window.location.href = "/crypto-to-gc";
+      window.location.href = "/copy-crypto-to-gc";
     } catch (error) {
       console.log("error", error);
     }
@@ -454,89 +455,109 @@ export default function CopyCryptoToGC() {
     setShowFreeST(false);
   };
 
-  const handleShowPaypalModel = (amount, gc) => {
-    if (dailyGCPurchaseLimit >= 4) {
-      return toast.error("Credit card daily purchase limit are reached");
-    }
-    goldcoinAmount = gc;
-    if (
-      spendedAmount.spended_today + amount >
-      user.dailyGoldCoinSpendingLimit
-    ) {
-      return toast.error(
-        "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
-        { toastId: "A" }
-      );
-    }
+  // const handleShowPaypalModel = (amount, gc) => {
+  //   if (dailyGCPurchaseLimit >= 4) {
+  //     return toast.error("Credit card daily purchase limit are reached");
+  //   }
+  //   goldcoinAmount = gc;
+  //   if (
+  //     spendedAmount.spended_today + amount >
+  //     user.dailyGoldCoinSpendingLimit
+  //   ) {
+  //     return toast.error(
+  //       "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
+  //       { toastId: "A" }
+  //     );
+  //   }
 
-    if (
-      spendedAmount.spened_this_week + amount >
-      user.weeklyGoldCoinSpendingLimit
-    ) {
-      return toast.error(
-        "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
-        { toastId: "B" }
-      );
-    }
+  //   if (
+  //     spendedAmount.spened_this_week + amount >
+  //     user.weeklyGoldCoinSpendingLimit
+  //   ) {
+  //     return toast.error(
+  //       "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+  //       { toastId: "B" }
+  //     );
+  //   }
 
-    if (
-      spendedAmount.spneded_this_month + amount >
-      user.monthlyGoldCoinSpendingLimit
-    ) {
-      return toast.error(
-        "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
-        { toastId: "C" }
-      );
-    }
-    setShowPyapal(!showPaypal);
-    setPaypalAmount(amount);
-  };
+  //   if (
+  //     spendedAmount.spneded_this_month + amount >
+  //     user.monthlyGoldCoinSpendingLimit
+  //   ) {
+  //     return toast.error(
+  //       "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+  //       { toastId: "C" }
+  //     );
+  //   }
+  //   setShowPyapal(!showPaypal);
+  //   setPaypalAmount(amount);
+  // };
 
-  const getCheckoutPaymentForm = async () => {
+  const handleShowCheckoutModel = async (amount, gc, checkoutIndex) => {
     // try {
-      const sessionResp = await (
-        await marketPlaceInstance()
-      ).post("/get-payment-session", {
-        userId: user._id,
-      });
-      const publicKey = process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
-      const environment = process.env.REACT_APP_CHECKOUT_ENVIRONMENT;
-      console.log("check out ==>", {
-        paymentSession: sessionResp?.data,
-        publicKey,
-        environment,
-      });
+    setShowPyapal(!showPaypal);
 
-      const checkout = await loadCheckoutWebComponents({
-        publicKey: publicKey,
-        environment: environment,
-        locale: "en-GB",
-        paymentSession: sessionResp?.data,
-        onReady: () => {
-          console.log("onReady");
-        },
-        onPaymentCompleted: (_component, paymentResponse) => {
-          console.log("Create Payment with PaymentId: ", paymentResponse.id);
-        },
-        onChange: (component) => {
-          console.log(
-            `onChange() -> isValid: "${component.isValid()}" for "${
-              component.type
-            }"`,
-          );
-        },
-        onError: (component, error) => {
-          console.log("onError", error, "Component", component.type);
-        },
-      });
+    console.log("amount", amount);
 
-      console.log("checkout ==>", checkout);
+    setIndex(checkoutIndex);
+    setCheckOutLoader(true);
+    const sessionResp = await (
+      await marketPlaceInstance()
+    ).post("/get-payment-session", {
+      userId: user._id || user.id,
+      amount: amount,
+    });
+    const publicKey = process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
+    const environment = process.env.REACT_APP_CHECKOUT_ENVIRONMENT;
+    console.log("check out ==>", {
+      paymentSession: sessionResp?.data,
+      publicKey,
+      environment,
+    });
 
+    const checkout = await loadCheckoutWebComponents({
+      publicKey: publicKey,
+      environment: environment,
+      locale: "en-GB",
+      paymentSession: sessionResp?.data,
+      onReady: () => {
+        console.log("onReady");
+      },
+      onPaymentCompleted: (_component, paymentResponse) => {
+        console.log("Create Payment with PaymentId: ", paymentResponse.id);
+        setStatus("success");
+        setShowPyapal(false);
+        setIndex();
+
+        console.log(document.getElementById("checkout-form").innerHTML);
+        document.getElementById("checkout-form").innerHTML = "";
+        setRemoveCheckoutForm(false);
+      },
+      onChange: (component) => {
+        console.log(
+          `onChange() -> isValid: "${component.isValid()}" for "${
+            component.type
+          }"`
+        );
+      },
+      onError: (component, error) => {
+        console.log("onError", error, "Component", component.type);
+      },
+    });
+
+    console.log("checkout ==>", checkout);
+    setShowPyapal(!showPaypal);
+    setRemoveCheckoutForm(true);
+    setCheckOutLoader(false);
+
+    setTimeout(() => {
       // You can now create and mount a Flow component using 'checkout'
       const flowComponent = checkout.create("flow");
 
       // Mount Flow component to div element with an ID of 'flow-container'
       flowComponent.mount("#checkout-form");
+    }, 1000);
+
     // } catch (error) {
     //   console.log("error in getCheckout Form ", error);
     // }
@@ -545,10 +566,11 @@ export default function CopyCryptoToGC() {
   return (
     <>
       <Helmet>
-        <html className='crypto-to-gc' lang='en' />
+        <html className="crypto-to-gc" lang="en" />
         <script
           async
-          src='https://www.googletagmanager.com/gtag/js?id=AW-11280008930'></script>
+          src="https://www.googletagmanager.com/gtag/js?id=AW-11280008930"
+        ></script>
         <script>
           {`
             window.dataLayer = window.dataLayer || [];
@@ -561,10 +583,11 @@ export default function CopyCryptoToGC() {
         </script>
         <script
           async
-          custom-element='amp-analytics'
-          src='https://cdn.ampproject.org/v0/amp-analytics-0.1.js'></script>
-        <amp-analytics type='gtag' data-credentials='include'>
-          <script type='application/json'>
+          custom-element="amp-analytics"
+          src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
+        ></script>
+        <amp-analytics type="gtag" data-credentials="include">
+          <script type="application/json">
             {`
           "vars": {
             "gtag_id": "AW-11280008930",
@@ -590,48 +613,51 @@ export default function CopyCryptoToGC() {
         <PageLoader />
       ) : (
         <Layout>
-          <main className='main redeem-prizes-page cryptoToGc'>
+          <main className="main redeem-prizes-page cryptoToGc">
             {key === "cryptoToGc" ? (
-              <div className='tab-claims'>
-                <div className='container'>
+              <div className="tab-claims">
+                <div className="container">
                   {buyLoading ? (
-                    <div className='pageImgContainer'>
+                    <div className="pageImgContainer">
                       <img
                         src={LoadingPoker}
-                        alt='game'
-                        className='imageAnimation'
+                        alt="game"
+                        className="imageAnimation"
                       />
-                      <div className='loading-txt pulse'>
+                      <div className="loading-txt pulse">
                         PURCHASING TOKENS...
                       </div>
                     </div>
                   ) : (
                     <></>
                   )}
-                  <div className='scrooge-main-heading'>
-                    <div className='pageTitle updatePageTitle'>
+                  <div className="scrooge-main-heading">
+                    <div className="pageTitle updatePageTitle">
                       {/* <h1 className="title updated_text_color">Get Gold Coins</h1> */}
-                      <h1 className='title updated_text_color'>
+                      <h1 className="title updated_text_color">
                         Purchase Gold Coins
                       </h1>
                     </div>
                   </div>
-                  <Button onClick={()=> getCheckoutPaymentForm()}>Checkout</Button>
-                  <div id='checkout-form'></div>
+                  {/* <Button onClick={() => getCheckoutPaymentForm()}>
+                    Checkout $10
+                  </Button> */}
+                  {/* {removeCheckoutForm ? <div id="checkout-form"></div> : ""} */}
 
-                  <div className='purchase-select purchase-select_alignment'>
-                    <div className='purchase-with-content'>
+                  <div className="purchase-select purchase-select_alignment">
+                    <div className="purchase-with-content">
                       {/* <h4>Purchase with: </h4> */}
-                      <div className='purchase-with-grid purchase-with-grid_update'>
-                        <span
+                      <div className="purchase-with-grid purchase-with-grid_update">
+                        {/* <span
                           onClick={() => handlePaymentTypeChange("Credit Card")}
                           className={
                             selectedTypeDropdown === "Credit Card"
                               ? "active-method"
                               : ""
-                          }>
+                          }
+                        >
                           Credit Card{" "}
-                        </span>
+                        </span> */}
                         {/* <span
                           onClick={() => handlePaymentTypeChange("Credit Card")}
                           className="updated_text_color"
@@ -662,57 +688,57 @@ export default function CopyCryptoToGC() {
                           CashApp
                         </span> */}
                       </div>
-                      {/* <Dropdown>
+                      <Dropdown>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
                           {!selectedTypeDropdown
-                            ? "Credit Card"
+                            ? "Authrize"
                             : selectedTypeDropdown}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                           <Dropdown.Item
-                            onClick={() =>
-                              handlePaymentTypeChange("Credit Card")
-                            }
+                            onClick={() => handlePaymentTypeChange("Authrize")}
                           >
-                            Credit Card
+                            Authrize
                           </Dropdown.Item>
 
                           <Dropdown.Item
-                            onClick={() => handlePaymentTypeChange("Paypal")}
+                            onClick={() => handlePaymentTypeChange("Checkout")}
                           >
-                            Paypal
+                            Checkout
                           </Dropdown.Item>
                         </Dropdown.Menu>
-                      </Dropdown> */}
+                      </Dropdown>
                     </div>
 
-                    <div className='enter-promo new_enter_promo'>
-                      <Form.Group className='form-group'>
+                    <div className="enter-promo new_enter_promo">
+                      <Form.Group className="form-group">
                         <Form.Control
-                          type='text'
-                          name='Promocode'
+                          type="text"
+                          name="Promocode"
                           value={promocode}
-                          placeholder='Enter promo code'
+                          placeholder="Enter promo code"
                           onChange={(e) => handleChangePromo(e)}
                         />
 
-                        {errors ? <p className='error-text'>{errors}</p> : null}
+                        {errors ? <p className="error-text">{errors}</p> : null}
                       </Form.Group>
                       {Object.keys(promoDetails).length ? (
                         <Button
-                          type='button'
-                          className='reject-btn '
-                          onClick={handlePromoReject}>
+                          type="button"
+                          className="reject-btn "
+                          onClick={handlePromoReject}
+                        >
                           Reject
                         </Button>
                       ) : (
                         <Button
-                          type='button'
-                          className='apply-btn active_btn'
+                          type="button"
+                          className="apply-btn active_btn"
                           onClick={handlePromoApply}
-                          disabled={!promocode || promoLoader}>
+                          disabled={!promocode || promoLoader}
+                        >
                           {promoLoader ? (
-                            <Spinner animation='border' />
+                            <Spinner animation="border" />
                           ) : (
                             "Apply"
                           )}
@@ -721,8 +747,8 @@ export default function CopyCryptoToGC() {
                     </div>
                   </div>
 
-                  {selectedTypeDropdown === "Credit Card" ? (
-                    <div className='asterisk-desc cryptoTotoken abc first-grid'>
+                  {selectedTypeDropdown === "Authrize" ? (
+                    <div className="asterisk-desc cryptoTotoken abc first-grid">
                       <ul>
                         <li>
                           <span>Please note:</span> Credit card transactions are
@@ -738,7 +764,7 @@ export default function CopyCryptoToGC() {
                     ""
                   )}
                   {promocode && (
-                    <div className='asterisk-desc cryptoTotoken playthrough '>
+                    <div className="asterisk-desc cryptoTotoken playthrough ">
                       <ul>
                         <li>$25 is 3x playthrough on bonus value only</li>
                         <li>$50 is 6x playthrough on bonus value only</li>
@@ -747,8 +773,8 @@ export default function CopyCryptoToGC() {
                     </div>
                   )}
 
-                  <div className='buy-chips-content'>
-                    <div className='buy-chips-grid cryptoToGC buy-chips-grid_update'>
+                  <div className="buy-chips-content">
+                    <div className="buy-chips-grid cryptoToGC buy-chips-grid_update">
                       <div
                         style={{
                           height: "100%",
@@ -756,7 +782,8 @@ export default function CopyCryptoToGC() {
                           margin: "auto",
                           cursor: "pointer",
                         }}
-                        className='special-offer-grid'>
+                        className="special-offer-grid"
+                      >
                         {/* allPromoPackage[0] &&
                         !user?.freeSpin.includes(Number(allPromoPackage[0]?.priceInBUSD)) */}
 
@@ -766,14 +793,14 @@ export default function CopyCryptoToGC() {
                           ) &&
                           showPromoPackageData &&
                           Object.keys(showPromoPackageData).length > 0 && (
-                            <div className='special-offer-grid payCardoffer'>
-                              <div className=''>
+                            <div className="special-offer-grid payCardoffer">
+                              <div className="">
                                 {allPrizes.map((prize, i) => (
                                   <>
                                     {prize.offerType === "freeSpin" && (
                                       <>
                                         {handleShowFreeSpin(prize) ? (
-                                          <h3 className=''>
+                                          <h3 className="">
                                             <PayWithCard
                                               spendedAmount={spendedAmount}
                                               prize={prize}
@@ -804,7 +831,7 @@ export default function CopyCryptoToGC() {
                             </div>
                           )}
                         {isMegaBuyShow /* && user.megaOffer.length !== 3 */ && (
-                          <div className='purchasemodal-cards'>
+                          <div className="purchasemodal-cards">
                             {allPrizes.map((prize, i) => (
                               <>
                                 {isMegaBuyShow &&
@@ -812,20 +839,20 @@ export default function CopyCryptoToGC() {
                                     <>
                                       {handleShowMegaBuys(prize) ? (
                                         <Card key={prize._id}>
-                                          <h3 className='mega-text pulses'>
+                                          <h3 className="mega-text pulses">
                                             Mega Offer
                                           </h3>
-                                          <div className='goldPurchase-offers'>
+                                          <div className="goldPurchase-offers">
                                             Free ST:{" "}
                                             <img
                                               src={sweep}
-                                              alt='sweep token'
+                                              alt="sweep token"
                                             />{" "}
                                             {prize?.freeTokenAmount}
                                           </div>
-                                          <Card.Img variant='top' src={coin3} />
+                                          <Card.Img variant="top" src={coin3} />
                                           <Card.Body>
-                                            <Card.Title className='goldPurchase_heading'>
+                                            <Card.Title className="goldPurchase_heading">
                                               ${parseFloat(prize?.priceInBUSD)}
                                             </Card.Title>
                                             <Card.Title>
@@ -833,32 +860,40 @@ export default function CopyCryptoToGC() {
                                             </Card.Title>
 
                                             {selectedTypeDropdown ===
-                                            "Paypal" ? (
+                                            "Checkout" ? (
                                               getExactPrice(
                                                 prize?.priceInBUSD
                                               ) > 0 && (
                                                 <Button
-                                                  variant='primary'
+                                                  variant="primary"
                                                   onClick={() =>
-                                                    handleShowPaypalModel(
+                                                    handleShowCheckoutModel(
                                                       parseFloat(
                                                         prize?.priceInBUSD
                                                       ),
-                                                      prize.gcAmount
+                                                      prize.gcAmount,
+                                                      i
                                                     )
-                                                  }>
-                                                  <p>Buy With Paypal</p>{" "}
-                                                  <span>
-                                                    $
-                                                    {getExactPrice(
-                                                      prize?.priceInBUSD,
-                                                      promoDetails
-                                                    )}
-                                                  </span>
+                                                  }
+                                                >
+                                                  {index === i ? (
+                                                    <Spinner animation="border" />
+                                                  ) : (
+                                                    <>
+                                                      <p>Buy With Checkout</p>{" "}
+                                                      <span>
+                                                        $
+                                                        {getExactPrice(
+                                                          prize?.priceInBUSD,
+                                                          promoDetails
+                                                        )}
+                                                      </span>
+                                                    </>
+                                                  )}
                                                 </Button>
                                               )
                                             ) : selectedTypeDropdown ===
-                                              "Credit Card" ? (
+                                              "Authrize" ? (
                                               getExactPrice(
                                                 prize?.priceInBUSD
                                               ) > 0 && (
@@ -884,7 +919,7 @@ export default function CopyCryptoToGC() {
                                             ) : (
                                               <>
                                                 {" "}
-                                                <Button variant='primary'>
+                                                <Button variant="primary">
                                                   <p>Buy with Cash App </p>{" "}
                                                   <span>
                                                     $
@@ -909,19 +944,19 @@ export default function CopyCryptoToGC() {
                       </div>
 
                       {console.log("user.freeSpinuser.freeSpin", user)}
-                      <div className='purchasemodal-cards'>
+                      <div className="purchasemodal-cards">
                         {allPrizes.map((prize, i) => (
                           <>
                             {prize.offerType !== "MegaOffer" &&
                               prize.offerType !== "freeSpin" && (
                                 <Card key={prize._id}>
-                                  <div className='goldPurchase-offers'>
+                                  <div className="goldPurchase-offers">
                                     Free ST:{" "}
-                                    <img src={sweep} alt='sweep token' />{" "}
+                                    <img src={sweep} alt="sweep token" />{" "}
                                     {promoDetails?.couponCode && (
                                       <>
                                         {prize.freeTokenAmount !== "25000" && (
-                                          <span className='cross-text'>
+                                          <span className="cross-text">
                                             {getExactToken(
                                               prize?.freeTokenAmount,
                                               {}
@@ -936,7 +971,7 @@ export default function CopyCryptoToGC() {
                                     )}
                                   </div>
                                   <Card.Img
-                                    variant='top'
+                                    variant="top"
                                     src={
                                       prize.priceInBUSD <= 10
                                         ? coin1
@@ -952,7 +987,7 @@ export default function CopyCryptoToGC() {
                                     }
                                   />
                                   <Card.Body>
-                                    <Card.Title className='goldPurchase_heading'>
+                                    <Card.Title className="goldPurchase_heading">
                                       ${parseFloat(prize?.priceInBUSD)}
                                     </Card.Title>
                                     <Card.Title>
@@ -965,37 +1000,44 @@ export default function CopyCryptoToGC() {
                                     {promoDetails?.couponCode && (
                                       <>
                                         {prize.freeTokenAmount !== "25000" && (
-                                          <Card.Title className='cross-text'>
+                                          <Card.Title className="cross-text">
                                             GC {getExactGC(prize?.gcAmount, {})}
                                           </Card.Title>
                                         )}
                                       </>
                                     )}
-                                    {selectedTypeDropdown === "Paypal" ? (
+                                    {selectedTypeDropdown === "Checkout" ? (
                                       getExactPrice(
                                         prize?.priceInBUSD,
                                         promoDetails
                                       ) > 0 && (
                                         <Button
-                                          variant='primary'
+                                          variant="primary"
                                           onClick={() =>
-                                            handleShowPaypalModel(
+                                            handleShowCheckoutModel(
                                               parseFloat(prize?.priceInBUSD),
-                                              prize?.gcAmount
+                                              prize?.gcAmount,
+                                              i
                                             )
-                                          }>
-                                          <p>Buy With Paypal</p>{" "}
-                                          <span>
-                                            $
-                                            {getExactPrice(
-                                              prize?.priceInBUSD,
-                                              promoDetails
-                                            )}
-                                          </span>
+                                          }
+                                        >
+                                          {index === i ? (
+                                            <Spinner animation="border" />
+                                          ) : (
+                                            <>
+                                              <p>Buy With Checkout</p>{" "}
+                                              <span>
+                                                $
+                                                {getExactPrice(
+                                                  prize?.priceInBUSD,
+                                                  promoDetails
+                                                )}
+                                              </span>
+                                            </>
+                                          )}
                                         </Button>
                                       )
-                                    ) : selectedTypeDropdown ===
-                                      "Credit Card" ? (
+                                    ) : selectedTypeDropdown === "Authrize" ? (
                                       getExactPrice(
                                         prize?.priceInBUSD,
                                         promoDetails
@@ -1021,7 +1063,7 @@ export default function CopyCryptoToGC() {
                                     ) : (
                                       <>
                                         {" "}
-                                        <Button variant='primary'>
+                                        <Button variant="primary">
                                           <p>Buy with Cash App </p>{" "}
                                           <span>
                                             $
@@ -1041,8 +1083,8 @@ export default function CopyCryptoToGC() {
                       </div>
                     </div>
                   </div>
-                  <div className='asterisk-desc cryptoTotoken'>
-                    <p className='title-memo updated_text_color'>
+                  <div className="asterisk-desc cryptoTotoken">
+                    <p className="title-memo updated_text_color">
                       All Sweep Tokens have a one time play through requirement.
                       In the event of a bonus buy, only the Bonus ST portion may
                       be tied to a higher play through which will be indicated
@@ -1063,9 +1105,9 @@ export default function CopyCryptoToGC() {
                 </div>
               </div>
             ) : (
-              <div className='container'>
-                <div className='buy-chips-content'>
-                  <div className='prizes-chip-count'>
+              <div className="container">
+                <div className="buy-chips-content">
+                  <div className="prizes-chip-count">
                     {user ? (
                       <>
                         <h3>USD Equivelant value: {user?.wallet.toFixed(2)}</h3>
@@ -1074,8 +1116,8 @@ export default function CopyCryptoToGC() {
                       <>
                         <img
                           src={LoadingPoker}
-                          alt='game'
-                          className='imageAnimation'
+                          alt="game"
+                          className="imageAnimation"
                         />
                       </>
                     )}
@@ -1086,7 +1128,7 @@ export default function CopyCryptoToGC() {
           </main>
           <PaypalModel
             showPaypal={showPaypal}
-            handleShowPaypalModel={handleShowPaypalModel}
+            handleShowPaypalModel={handleShowCheckoutModel}
             amount={paypalAmount}
             promoCode={promoCode}
           />
@@ -1179,7 +1221,7 @@ const PayWithCard = ({
 
   console.log("prize", prize);
 
-  const tooltip = <Tooltip id='tooltip'>{prize?.toolTipMsg}</Tooltip>;
+  const tooltip = <Tooltip id="tooltip">{prize?.toolTipMsg}</Tooltip>;
 
   return (
     <>
@@ -1187,10 +1229,11 @@ const PayWithCard = ({
         <button
           onClick={() =>
             handleCLick(prize?.gcAmount, parseFloat(prize?.priceInBUSD))
-          }>
+          }
+        >
           {" "}
           {loader ? (
-            <Spinner animation='border' />
+            <Spinner animation="border" />
           ) : (
             `Buy With Card ${getExactPrice(prize?.priceInBUSD, promoDetails)}`
           )}
@@ -1213,9 +1256,9 @@ const PayWithCard = ({
           {/* <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
   Tooltip on top
 </button> */}
-          <div className='tooltipCardOuter'>
-            <OverlayTrigger placement='top' overlay={tooltip}>
-              <div bsStyle='default' className='tooltipCard'>
+          <div className="tooltipCardOuter">
+            <OverlayTrigger placement="top" overlay={tooltip}>
+              <div bsStyle="default" className="tooltipCard">
                 <InfoIcon />
               </div>
             </OverlayTrigger>
@@ -1236,13 +1279,14 @@ const PayWithCard = ({
 const InfoIcon = () => {
   return (
     <svg
-      xmlns='http://www.w3.org/2000/svg'
-      width='16'
-      height='16'
-      fill='currentColor'
-      class='bi bi-info-lg'
-      viewBox='0 0 16 16'>
-      <path d='m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0' />
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-info-lg"
+      viewBox="0 0 16 16"
+    >
+      <path d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0" />
     </svg>
   );
 };
