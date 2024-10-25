@@ -64,16 +64,18 @@ function PopUp2FA({
               </p>
             </div>
 
-            <div className="">
-              <h6 className="">{displayData?.tagLine}</h6>
+            <div className="d-flex justify-content-center flex-column">
+              <div className="otp-redeem">
+                <h6 className="">{displayData?.tagLine}</h6>
 
-              <OTPInput
-                value={otp}
-                onChange={handleChange}
-                numInputs={6}
-                renderSeparator={<span>-</span>}
-                renderInput={(props) => <input {...props} />}
-              />
+                <OTPInput
+                  value={otp}
+                  onChange={handleChange}
+                  numInputs={6}
+                  renderSeparator={<span>-</span>}
+                  renderInput={(props) => <input {...props} />}
+                />
+              </div>
 
               {/* <div className="enable-2fabtn-second">
                 {displayData?.lostline ? (
@@ -83,7 +85,7 @@ function PopUp2FA({
                 ) : null}
               </div> */}
 
-              <div className="enable-2fabtn">
+              <div className="enable-2fabtn d-flex justify-content-center mt-3">
                 <Button onClick={handleClose}>
                   {displayData?.nextBtnText}
                 </Button>

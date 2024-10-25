@@ -1,7 +1,10 @@
 .welcomeModal .modal-content {
   background-color: #2d2d30 !important;
-  padding: 30px 50px;
+  padding: 30px 20px;
+  max-width: 420px;
+  margin: auto;
 }
+
 .welcomeModal .modal-body {
   display: flex;
   flex-direction: column;
@@ -49,6 +52,39 @@
   border: none;
   overflow: hidden;
 }
+
+.twofa-popup-qr-model .modal-content input {
+  background: #606460;
+  border: 0 !important;
+  border-radius: 5px !important;
+  color: #fff !important;
+  font-size: 16px;
+  font-weight: 600;
+  height: 52px;
+  letter-spacing: normal;
+  line-height: 1.375rem;
+  width: 52px !important;
+}
+
+.twofa-popup-qr-model .modal-content .enablebutton button {
+  border-radius: 8px;
+  caret-color: #ddf2b8 !important;
+  color: #000 !important;
+  font-size: 16px;
+  font-weight: 700 !important;
+  height: 44px;
+  margin-top: 25px;
+  max-width: 100% !important;
+  padding: 0 19.5555555556px;
+  width: 100% !important;
+}
+
+.otp-redeem {
+  max-width: 345px;
+  width: 100%;
+  margin: 15px auto;
+}
+
 .PurchasePopup .modal-header {
   border: none !important;
   padding: 0;
@@ -88,6 +124,10 @@
 .welcomeModal.PurchasePopup .modal-body a {
   display: inline-block;
 }
+.otp-redeem h6 {
+  color: #ffd029;
+}
+
 @media screen and (max-width: 767px) {
   .welcomeModal .modal-content {
     background-color: var(--primary-bg);
@@ -113,5 +153,14 @@
   .welcomeModal.PurchasePopup .modal-body img {
     transform: scale(0.9);
     max-width: 480px;
+  }
+
+  .twofa-popup-qr-model .modal-content input {
+    height: 36px;
+    max-width: 36px !important;
+    width: 100% !important;
+  }
+  .otp-redeem {
+    max-width: 250px;
   }
 }
