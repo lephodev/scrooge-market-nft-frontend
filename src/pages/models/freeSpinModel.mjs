@@ -12,7 +12,11 @@ const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
   );
 
   const handleRedirectToGame = async () => {
-    if (packgaeData?.provider === "Relax") {
+    if (
+      packgaeData?.provider === "Relax" ||
+      packgaeData?.provider === "Relax-Kalamba" ||
+      packgaeData?.provider === "Relax-Evoplay"
+    ) {
       const tickt = await (await relaxGamingInstance()).get(`/getToken/SC.`);
 
       let relaxGameUrl = "";
