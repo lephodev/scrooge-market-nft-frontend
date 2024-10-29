@@ -2,7 +2,7 @@ import { Modal, Button } from "react-bootstrap";
 // import freeSpin from "../../images/freeSpin.jpg";
 import "./freeSpin.css";
 import { relaxLaunchUrl, slotUrl } from "../../config/keys.js";
-import { relaxGamingInstance } from "../../config/axios.js";
+import { bGamingInstance, relaxGamingInstance } from "../../config/axios.js";
 const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
   console.log(
     "showFreeSpin, handleCloseFreeSpin, packgaeData ",
@@ -11,22 +11,41 @@ const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
     packgaeData
   );
 
-  const handleRedirectToGame = async (obj, provider, subprovider) => {
-    const tickt = await (await relaxGamingInstance()).get(`/getToken/SC.`);
+  const handleRedirectToGame = async () => {
+    if (packgaeData?.provider === "Relax") {
+      const tickt = await (await relaxGamingInstance()).get(`/getToken/SC.`);
 
-    let relaxGameUrl = "";
-    relaxGameUrl = `${relaxLaunchUrl}gameid=${
-      packgaeData?.freeSpinGame
-    }&ticket=${tickt.data.token}&jurisdiction=MT&lang=en_SC&channel=${
-      window.innerWidth <= 767 ? "mobile" : "web"
-    }&partner=scrooge&partnerid=2258&moneymode=real`;
-    localStorage.setItem(
-      "game",
-      `${slotUrl}/#/?game=${encodeURIComponent(relaxGameUrl)}`
-    );
-    window.location.href = `${slotUrl}/#/?game=${encodeURIComponent(
-      relaxGameUrl
-    )}&mode=token`;
+      let relaxGameUrl = "";
+      relaxGameUrl = `${relaxLaunchUrl}gameid=${
+        packgaeData?.freeSpinGame
+      }&ticket=${tickt.data.token}&jurisdiction=MT&lang=en_SC&channel=${
+        window.innerWidth <= 767 ? "mobile" : "web"
+      }&partner=scrooge&partnerid=2258&moneymode=real`;
+      localStorage.setItem(
+        "game",
+        `${slotUrl}/#/?game=${encodeURIComponent(relaxGameUrl)}`
+      );
+      window.location.href = `${slotUrl}/#/?game=${encodeURIComponent(
+        relaxGameUrl
+      )}&mode=token`;
+    } else if (packgaeData?.provider === "bGaming") {
+      const launchData = await (
+        await bGamingInstance()
+      ).post(`/launch/${packgaeData?.freeSpinGame}/ST`);
+      const {
+        data: {
+          launch_options: { game_url },
+        },
+      } = launchData;
+      localStorage.setItem(
+        "game",
+        `${slotUrl}/#/?game=${encodeURIComponent(game_url)}`
+      );
+      window.location.href = `${slotUrl}/#/?game=${encodeURIComponent(
+        game_url
+      )}`;
+      // window.location.href = game_url;
+    }
   };
   return (
     <>
