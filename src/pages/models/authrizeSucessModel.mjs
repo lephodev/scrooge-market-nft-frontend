@@ -37,9 +37,28 @@ const AuthorizeSucessModel = ({ show, status, handleOk }) => {
                         </div>
                         <div class="check-shadow"></div>
                       </div>
-                    ) : (
+                    ) : status === "failure" ?   (
+                      // <div class="check-container">
+                      //   <div className="check-background">
+                      //     {/* <svg
+                      //       viewBox="0 0 65 51"
+                      //       fill="none"
+                      //       xmlns="http://www.w3.org/2000/svg"
+                      //     >
+                      //       <path
+                      //         d="M7 25L27.3077 44L58.5 7"
+                      //         stroke="white"
+                      //         stroke-width="11"
+                      //         stroke-linecap="round"
+                      //         stroke-linejoin="round"
+                      //       />
+                      //     </svg> */}
+                      //     Payment Failed
+                      //   </div>
+                      //   <div class="check-shadow"></div>
+                      // </div>
                       ""
-                    )}
+                    ) : null}
                   </div>
                   {status === "success" ? (
                     <>
@@ -50,16 +69,21 @@ const AuthorizeSucessModel = ({ show, status, handleOk }) => {
                       </p>
                       <Button onClick={() => handleOk()}>OK</Button>
                     </>
-                  ) : (
+                  )  : status === "failure" ?    (
                     <>
-                      <h1>Inprogress</h1>
+                      <h1>Failed</h1>
                       <p style={{ color: "red" }}>
-                        Your payment is under Process
-                        <br /> Please do not refresh the page and do not press
-                        back!
+                        Payment Failed
                       </p>
                     </>
-                  )}
+                  ) : <>
+                  <h1>Inprogress</h1>
+                  <p style={{ color: "red" }}>
+                    Your payment is under Process
+                    <br /> Please do not refresh the page and do not press
+                    back!
+                  </p>
+                </>}
                 </div>
               </div>
             </div>

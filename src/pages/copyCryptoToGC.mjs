@@ -21,7 +21,7 @@ import coin2 from "../images/2.png";
 import coin1 from "../images/1.png";
 import sweep from "../images/token.png";
 import freeSpin from "../images/Store-Card-promo.jpg";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import AuthContext from "../context/authContext.ts";
 import { useCookies } from "react-cookie";
 
@@ -50,6 +50,8 @@ let goldcoinAmount;
 
 export default function CopyCryptoToGC() {
   const sdk = useSDK();
+  const { search } = useLocation();
+  const paymentStatus = new URLSearchParams(search).get("status");
   const { user, setUser, setSpendedAmount, spendedAmount } =
     useContext(AuthContext);
   const [prizesLoading, setPrizesLoading] = useState(true);
@@ -95,6 +97,20 @@ export default function CopyCryptoToGC() {
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState("");
   const [removeCheckoutForm, setRemoveCheckoutForm] = useState(false);
+
+  useEffect(()=>{
+    console.log("paymentStatus", paymentStatus);
+    if(paymentStatus === "failure"){
+      setStatus("failure");
+      setTimeout(()=>{
+        setStatus("")
+        window.location.href = "/copy-crypto-to-gc"
+      }, 4000);
+    }
+    else setStatus("")
+
+    
+  }, [paymentStatus])
 
   const getPromoPackagaeBanner = async () => {
     try {
@@ -605,7 +621,7 @@ export default function CopyCryptoToGC() {
         freeSTDetail={freeSTDetail}
         setPromoCode={setPromoCode}
       />
-      {(status === "success" || status === "inprogress") && (
+      {(status === "success" || status === "inprogress" || status === "failure") && (
         <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
       )}
 
