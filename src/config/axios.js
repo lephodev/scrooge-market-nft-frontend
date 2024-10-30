@@ -65,3 +65,16 @@ export const relaxGamingInstance = async () => {
     credentials: "include",
   });
 };
+
+export const bGamingInstance = async () => {
+  const token = await getAuthorizationHeader();
+  return axios.create({
+    baseURL: `${serverSlot}/api/bgaming`, /// api/bgaming
+    headers: {
+      Authorization: token,
+      "Permissions-Policy": "geolocation=*",
+    },
+    withCredentials: true,
+    credentials: "include",
+  });
+};
