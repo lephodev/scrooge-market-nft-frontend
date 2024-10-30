@@ -30,7 +30,6 @@ import { scroogeClient } from "../config/keys.js";
 import PageLoader from "../components/pageLoader/loader.mjs";
 import { Button, Spinner } from "react-bootstrap";
 import ConnectWalletModel from "./models/connectWalletModel.mjs";
-import PopUp2FA from "./twofa/PopUp2FA.mjs";
 
 function RedeemPrizes() {
   const navigate = useNavigate();
@@ -50,9 +49,7 @@ function RedeemPrizes() {
   const [fiatActiveInActive, setFiatActiveInActive] = useState({});
   const [showConnect, setShowConnect] = useState(false);
   const [loaderaddress, setLoaderAddress] = useState(false);
-  const [displayData, setDisplayData] = useState(null);
-  const [twoFactorData, setTwoFactorData] = useState({});
-  const [filterOn, setFilterOn] = useState();
+
   const address = useAddress();
   const signer = useSigner();
 
@@ -78,70 +75,14 @@ function RedeemPrizes() {
     prizesReceived = 1;
   }
 
-  const verifyTwoFactorAuthCode = async (code) => {
-    try {
-      const response = await (
-        await authInstance()
-      ).post(
-        "/users/verifyTwoFactorAuthCode",
-        { code },
-        {
-          withCredentials: true,
-          credentials: "include",
-        }
-      );
-      if (response?.data?.code === 200) {
-        setDisplayData(null);
-        setTwoFactorData({
-          twoFactorAuthEnabled: response?.data?.twoFactorAuthEnabled,
-        });
-        localStorage.setItem("scrooge2Fa", true);
-        toast.success("Verified successfully", {
-          toastId: "LoginSucess",
-        });
-        if (filterOn === "Fiat") {
-          setBuyWithFiat(true);
-          setShowFastWithdraw(false);
-        } else if (filterOn === "fast_withdraw") {
-          setShowFastWithdraw(true);
-          setBuyWithFiat(false);
-        }
-      } else {
-        toast.error(response?.data?.message || "Failed to update 2FA status.", {
-          toastId: "A",
-        });
-      }
-    } catch (error) {
-      toast.error(error?.response?.data?.message || "Error updating 2FA.", {
-        toastId: "B",
-      });
-      console.error("Error enabling/disabling 2FA:", error);
-    }
-  };
-
   const filterPrizes = (filterOn) => {
-    console.log("filterOn", filterOn);
-    if (!user.twoFactorAuthEnabled) {
-      toast.error("Please enable 2Fa for redemption", {
-        toastId: "error-enable 2Fa",
-      });
-      return;
+    if (filterOn === "Fiat") {
+      setBuyWithFiat(true);
+      setShowFastWithdraw(false);
+    } else if (filterOn === "fast_withdraw") {
+      setShowFastWithdraw(true);
+      setBuyWithFiat(false);
     }
-
-    setDisplayData({
-      title: "Enter 2FA Code",
-      desc: "This account is protected by Two-Factor Authentication. Please enter the code below to continue.",
-      tagLine: "Enter 2FA Code",
-      btnIcon: "",
-      btnText: "CONTINUE",
-      btnColor: "#66852f",
-      btnTextColor: "#ddf2b8",
-      nextBtnText: "Cancel",
-      lostline: "Lost access to your authenticator?",
-    });
-
-    console.log("displadattatat", displayData);
-    setFilterOn(filterOn);
   };
 
   const getUserDataInstant = async () => {
@@ -244,23 +185,9 @@ function RedeemPrizes() {
     setShowConnect(!showConnect);
   };
 
-  const handleClose = () => {
-    setDisplayData(null);
-  };
-
   return (
     <Layout>
       <main className="main redeem-prizes-page redeem-page">
-        {displayData?.title && (
-          <PopUp2FA
-            displayData={displayData}
-            handleClose={handleClose}
-            handleClick={verifyTwoFactorAuthCode}
-            twoFactorData={twoFactorData}
-            from="header"
-            // handleLostLine={handleLostLine}
-          />
-        )}
         <div className="container">
           {globalLoader && <PageLoader />}
           <div className="bordered-section redeem_container_gap">
