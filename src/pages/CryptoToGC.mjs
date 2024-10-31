@@ -670,9 +670,9 @@ export default function CryptoToGC() {
                               <div className="">
                                 {allPrizes.map((prize, i) => (
                                   <>
-                                    {user?._id === "6426f3ac425823a3d73ca6b7" ||
+                                    {user?._id === "657e4326d37d83e2ae2e9d23" ||
                                       (user?.id ===
-                                        "6426f3ac425823a3d73ca6b7" &&
+                                        "657e4326d37d83e2ae2e9d23" &&
                                         prize.offerType === "freeSpin" && (
                                           <>
                                             {handleShowFreeSpin(prize) ? (
