@@ -670,34 +670,37 @@ export default function CryptoToGC() {
                               <div className="">
                                 {allPrizes.map((prize, i) => (
                                   <>
-                                    {prize.offerType === "freeSpin" && (
-                                      <>
-                                        {handleShowFreeSpin(prize) ? (
-                                          <h3 className="">
-                                            <PayWithCard
-                                              spendedAmount={spendedAmount}
-                                              prize={prize}
-                                              getExactPrice={getExactPrice}
-                                              getExactGC={getExactGC}
-                                              getExactToken={getExactToken}
-                                              promoDetails={promoDetails}
-                                              index={i}
-                                              setBuyLoading={setBuyLoading}
-                                              selectedTypeDropdown={
-                                                selectedTypeDropdown
-                                              }
-                                              dailyGCPurchaseLimit={
-                                                dailyGCPurchaseLimit
-                                              }
-                                              user={user}
-                                              getGCPackages={getGCPackages}
-                                            />
-                                          </h3>
-                                        ) : (
-                                          ""
-                                        )}
-                                      </>
-                                    )}
+                                    {user?._id === "6426f3ac425823a3d73ca6b7" ||
+                                      (user?.id ===
+                                        "6426f3ac425823a3d73ca6b7" &&
+                                        prize.offerType === "freeSpin" && (
+                                          <>
+                                            {handleShowFreeSpin(prize) ? (
+                                              <h3 className="">
+                                                <PayWithCard
+                                                  spendedAmount={spendedAmount}
+                                                  prize={prize}
+                                                  getExactPrice={getExactPrice}
+                                                  getExactGC={getExactGC}
+                                                  getExactToken={getExactToken}
+                                                  promoDetails={promoDetails}
+                                                  index={i}
+                                                  setBuyLoading={setBuyLoading}
+                                                  selectedTypeDropdown={
+                                                    selectedTypeDropdown
+                                                  }
+                                                  dailyGCPurchaseLimit={
+                                                    dailyGCPurchaseLimit
+                                                  }
+                                                  user={user}
+                                                  getGCPackages={getGCPackages}
+                                                />
+                                              </h3>
+                                            ) : (
+                                              ""
+                                            )}
+                                          </>
+                                        ))}
                                   </>
                                 ))}
                               </div>
