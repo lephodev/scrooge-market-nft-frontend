@@ -110,6 +110,8 @@ export default function CryptoToGC() {
   };
 
   useEffect(() => {
+    console.log("avvv");
+
     getPromoPackagaeBanner();
     const params = searchParams.get("status");
     if (params) {
