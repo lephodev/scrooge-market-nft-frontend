@@ -97,6 +97,7 @@ export default function CopyCryptoToGC() {
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState("");
   const [removeCheckoutForm, setRemoveCheckoutForm] = useState(false);
+  const [billingForm, setBillingForm] = useState(false);
 
   useEffect(()=>{
     console.log("paymentStatus", paymentStatus);
@@ -509,10 +510,16 @@ export default function CopyCryptoToGC() {
   //   setPaypalAmount(amount);
   // };
 
-  const handleShowCheckoutModel = async (amount, gc, checkoutIndex) => {
-    // try {
+  const checkoutBillingForm = async (amount, gc, checkoutIndex)=>{
+    setBillingForm(true);
     setShowPyapal(!showPaypal);
+    setIndex(checkoutIndex);
+    setCheckOutLoader(true);
+    setPaypalAmount(amount);
+  }
 
+  const handleShowCheckoutModel = async (amount, gc, checkoutIndex, values) => {
+    // try {
     console.log("amount", amount);
 
     setIndex(checkoutIndex);
@@ -522,6 +529,7 @@ export default function CopyCryptoToGC() {
     ).post("/get-payment-session", {
       userId: user._id || user.id,
       amount: amount,
+      ...values
     });
     const publicKey = process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
     const environment = process.env.REACT_APP_CHECKOUT_ENVIRONMENT;
@@ -530,6 +538,7 @@ export default function CopyCryptoToGC() {
       publicKey,
       environment,
     });
+    setBillingForm(false);
 
     const checkout = await loadCheckoutWebComponents({
       publicKey: publicKey,
@@ -562,7 +571,8 @@ export default function CopyCryptoToGC() {
     });
 
     console.log("checkout ==>", checkout);
-    setShowPyapal(!showPaypal);
+    
+    // setShowPyapal(!showPaypal);
     setRemoveCheckoutForm(true);
     setCheckOutLoader(false);
 
@@ -578,6 +588,8 @@ export default function CopyCryptoToGC() {
     //   console.log("error in getCheckout Form ", error);
     // }
   };
+
+  
 
   return (
     <>
@@ -1030,7 +1042,7 @@ export default function CopyCryptoToGC() {
                                         <Button
                                           variant="primary"
                                           onClick={() =>
-                                            handleShowCheckoutModel(
+                                            checkoutBillingForm(
                                               parseFloat(prize?.priceInBUSD),
                                               prize?.gcAmount,
                                               i
@@ -1147,6 +1159,8 @@ export default function CopyCryptoToGC() {
             handleShowPaypalModel={handleShowCheckoutModel}
             amount={paypalAmount}
             promoCode={promoCode}
+            billingForm={billingForm}
+            index={index}
           />
         </Layout>
       )}
