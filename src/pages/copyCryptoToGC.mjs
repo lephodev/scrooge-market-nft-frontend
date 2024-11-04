@@ -529,6 +529,7 @@ export default function CopyCryptoToGC() {
     ).post("/get-payment-session", {
       userId: user._id || user.id,
       amount: amount,
+      email: user.email,
       ...values
     });
     const publicKey = process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
