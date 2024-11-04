@@ -417,7 +417,7 @@ export default function App() {
                       element={<ProtectedRoute component={<CryptoToGC />} />}
                     />
                     <Route
-                      path='/copy-crypto-to-gc'
+                      path='/copy-enc-crypto-to-gc'
                       element={<ProtectedRoute component={<CopyCryptoToGC />} />}
                     />
                     <Route
