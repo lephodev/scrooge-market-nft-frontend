@@ -16,7 +16,8 @@ const PaypalModel = ({
   amount,
   promoCode,
   billingForm,
-  index
+  index,
+  closePaypalModel
 }) => {
   const customStyles = {
     container: (provided) => ({
@@ -146,8 +147,13 @@ const PaypalModel = ({
 
   const handleProceedToPay = (values)=>{
     console.log("values =>", values, amount);
-    handleShowPaypalModel(amount, "", index, values)
+    handleShowPaypalModel(amount, "", index, {
+      ...values,
+      country: country.value
+    })
   }
+
+  
 
   return (
     <>
@@ -160,15 +166,23 @@ const PaypalModel = ({
       ) : (
         <Modal
           show={showPaypal}
-          onHide={handleShowPaypalModel}
+          onHide={()=>closePaypalModel()}
           centered
           size='lg'
           backdrop='static'
-          className='free-st-popup payment_popup'>
+          className='free-st-popup payment_popup'
+        >
+            
           <Modal.Body>
             {billingForm ? (
               <>
                 <Form onSubmit={handleSubmit(handleProceedToPay)}>
+                  <div
+                    className='paymentCrossIcon'
+                    onClick={() =>closePaypalModel()}>
+                    {" "}
+                    <CrossIconSVG/>
+                  </div>
                   <Modal.Header className='payment-header'>
                     Billing Address
                   </Modal.Header>
@@ -328,9 +342,9 @@ const PaypalModel = ({
                 </Modal.Header>
                 <div
                   className='paymentCrossIcon'
-                  onClick={() => handleShowPaypalModel()}>
+                  onClick={() =>closePaypalModel()}>
                   {" "}
-                  <CrossIconSVG />
+                  <CrossIconSVG/>
                 </div>
                 <div id='checkout-form'></div>
               </>

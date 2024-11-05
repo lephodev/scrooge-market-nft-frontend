@@ -530,6 +530,7 @@ export default function CopyCryptoToGC() {
       userId: user._id || user.id,
       amount: amount,
       email: user.email,
+      address: address,
       ...values
     });
     const publicKey = process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
@@ -590,6 +591,13 @@ export default function CopyCryptoToGC() {
     // }
   };
 
+  const closePaypalModel = () =>{
+    setShowPyapal(false);
+    setCheckOutLoader(false);
+    setBillingForm(false);
+    setPaypalAmount(0);
+    setIndex();
+  }
   
 
   return (
@@ -1162,6 +1170,7 @@ export default function CopyCryptoToGC() {
             promoCode={promoCode}
             billingForm={billingForm}
             index={index}
+            closePaypalModel={closePaypalModel}
           />
         </Layout>
       )}
