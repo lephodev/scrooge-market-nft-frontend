@@ -530,7 +530,7 @@ export default function CopyCryptoToGC() {
       userId: user._id || user.id,
       amount: amount,
       email: user.email,
-      address: address,
+      address: user.address,
       ...values
     });
     const publicKey = process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
