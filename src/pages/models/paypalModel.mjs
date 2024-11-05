@@ -108,7 +108,7 @@ const PaypalModel = ({
       },
     }),
   };
-  const [loader, setLoader] = useState(false);
+  const [loader, ] = useState(false);
 
   const [success, setSuccess] = useState(false);
   const { user } = useContext(AuthContext);
@@ -122,7 +122,7 @@ const PaypalModel = ({
     { value: "CA", label: "CA" },
   ];
 
-  const { handleSubmit, register, reset, setValue } = useForm({
+  const { handleSubmit, register,  setValue } = useForm({
     defaultValues: {
       firstName: user?.firstName,
       lastName: user?.lastName,
@@ -130,7 +130,7 @@ const PaypalModel = ({
       // phone: user?.phone,
     },
     mode: "onBlur",
-  });
+  });//reset,
 
   const handleOk = async (event) => {
     try {
