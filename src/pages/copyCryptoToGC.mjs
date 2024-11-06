@@ -960,11 +960,9 @@ export default function CopyCryptoToGC() {
                                                 <Button
                                                   variant="primary"
                                                   onClick={() =>
-                                                    handleShowCheckoutModel(
-                                                      parseFloat(
-                                                        prize?.priceInBUSD
-                                                      ),
-                                                      prize.gcAmount,
+                                                    checkoutBillingForm(
+                                                      parseFloat(prize?.priceInBUSD),
+                                                      prize?.gcAmount,
                                                       i
                                                     )
                                                   }
