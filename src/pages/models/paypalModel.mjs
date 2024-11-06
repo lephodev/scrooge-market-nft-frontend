@@ -17,7 +17,7 @@ const PaypalModel = ({
   promoCode,
   billingForm,
   index,
-  closePaypalModel
+  closePaypalModel,
 }) => {
   const customStyles = {
     container: (provided) => ({
@@ -108,7 +108,7 @@ const PaypalModel = ({
       },
     }),
   };
-  const [loader, ] = useState(false);
+  const [loader] = useState(false);
 
   const [success, setSuccess] = useState(false);
   const { user } = useContext(AuthContext);
@@ -122,7 +122,7 @@ const PaypalModel = ({
     { value: "CA", label: "CA" },
   ];
 
-  const { handleSubmit, register,  setValue } = useForm({
+  const { handleSubmit, register, setValue } = useForm({
     defaultValues: {
       firstName: user?.firstName,
       lastName: user?.lastName,
@@ -130,7 +130,7 @@ const PaypalModel = ({
       // phone: user?.phone,
     },
     mode: "onBlur",
-  });//reset,
+  }); //reset,
 
   const handleOk = async (event) => {
     try {
@@ -145,15 +145,13 @@ const PaypalModel = ({
     setCountry(selectedOption);
   };
 
-  const handleProceedToPay = (values)=>{
+  const handleProceedToPay = (values) => {
     console.log("values =>", values, amount);
     handleShowPaypalModel(amount, "", index, {
       ...values,
-      country: country.value
-    })
-  }
-
-  
+      country: country.value,
+    });
+  };
 
   return (
     <>
@@ -166,36 +164,36 @@ const PaypalModel = ({
       ) : (
         <Modal
           show={showPaypal}
-          onHide={()=>closePaypalModel()}
+          onHide={() => closePaypalModel()}
           centered
-          size='lg'
-          backdrop='static'
-          className='free-st-popup payment_popup'
+          size="lg"
+          backdrop="static"
+          className="free-st-popup payment_popup"
         >
-            
           <Modal.Body>
             {billingForm ? (
               <>
                 <Form onSubmit={handleSubmit(handleProceedToPay)}>
                   <div
-                    className='paymentCrossIcon'
-                    onClick={() =>closePaypalModel()}>
+                    className="paymentCrossIcon"
+                    onClick={() => closePaypalModel()}
+                  >
                     {" "}
-                    <CrossIconSVG/>
+                    <CrossIconSVG />
                   </div>
-                  <Modal.Header className='payment-header'>
+                  <Modal.Header className="payment-header">
                     Billing Address
                   </Modal.Header>
-                  <div className='select-banner-option'>
-                    <Form.Group className='form-group'>
+                  <div className="select-banner-option">
+                    <Form.Group className="form-group">
                       <Form.Label>First Name*</Form.Label>
                       <Form.Control
-                        type='text'
+                        type="text"
                         readOnly
                         disabled
-                        name='firstName'
-                        placeholder='Ex. John'
-                        autoComplete='off'
+                        name="firstName"
+                        placeholder="Ex. John"
+                        autoComplete="off"
                         onInput={(e) => {
                           e.target.value = e.target.value.replace(
                             /[^A-Za-z]/gi,
@@ -206,15 +204,15 @@ const PaypalModel = ({
                         required
                       />
                     </Form.Group>
-                    <Form.Group className='form-group'>
+                    <Form.Group className="form-group">
                       <Form.Label>Last Name*</Form.Label>
                       <Form.Control
-                        type='text'
+                        type="text"
                         readOnly
                         disabled
-                        name='lastName'
-                        placeholder='Ex. Smith'
-                        autoComplete='off'
+                        name="lastName"
+                        placeholder="Ex. Smith"
+                        autoComplete="off"
                         onInput={(e) => {
                           e.target.value = e.target.value.replace(
                             /[^A-Za-z]/gi,
@@ -225,11 +223,11 @@ const PaypalModel = ({
                         required
                       />
                     </Form.Group>
-                    <Form.Group className='form-group'>
+                    <Form.Group className="form-group">
                       <Form.Label>Country*</Form.Label>
                       <Select
-                        id='country'
-                        className='country_select'
+                        id="country"
+                        className="country_select"
                         value={country}
                         onChange={handleCountryChange}
                         options={countries}
@@ -237,37 +235,37 @@ const PaypalModel = ({
                       />
                     </Form.Group>
                   </div>
-                  <div className='select-banner-option'>
-                    <Form.Group className='form-group'>
+                  <div className="select-banner-option">
+                    <Form.Group className="form-group">
                       <Form.Label>Zip Code*</Form.Label>
                       <Form.Control
-                        type='text'
-                        name='zipCode'
-                        placeholder='Ex. 898989ee'
-                        autoComplete='off'
+                        type="text"
+                        name="zipCode"
+                        placeholder="Ex. 898989ee"
+                        autoComplete="off"
                         maxLength={20}
                         {...register("zipCode")}
                         required
                       />
                     </Form.Group>
-                    <Form.Group className='form-group'>
+                    <Form.Group className="form-group">
                       <Form.Label>Street Address*</Form.Label>
                       <Form.Control
-                        type='text'
-                        name='streetAddress'
-                        placeholder='Street Address'
-                        autoComplete='off'
+                        type="text"
+                        name="streetAddress"
+                        placeholder="Street Address"
+                        autoComplete="off"
                         {...register("streetAddress")}
                         required
                       />
                     </Form.Group>
-                    <Form.Group className='form-group'>
+                    <Form.Group className="form-group">
                       <Form.Label>City*</Form.Label>
                       <Form.Control
-                        type='text'
-                        name='city'
-                        placeholder='City'
-                        autoComplete='off'
+                        type="text"
+                        name="city"
+                        placeholder="City"
+                        autoComplete="off"
                         onInput={(e) => {
                           e.target.value = e.target.value.replace(
                             /[^A-Za-z\s]/g,
@@ -279,14 +277,14 @@ const PaypalModel = ({
                       />
                     </Form.Group>
                   </div>
-                  <div className='select-banner-option'>
-                    <Form.Group className='form-group'>
+                  <div className="select-banner-option">
+                    <Form.Group className="form-group">
                       <Form.Label>State*</Form.Label>
                       <Form.Control
-                        type='text'
-                        name='state'
-                        placeholder='State'
-                        autoComplete='off'
+                        type="text"
+                        name="state"
+                        placeholder="State"
+                        autoComplete="off"
                         onKeyPress={(e) => {
                           const regex = /^[A-Za-z\s]+$/;
                           if (!regex.test(e.key)) {
@@ -297,11 +295,11 @@ const PaypalModel = ({
                         required
                       />
                     </Form.Group>
-                    <Form.Group className='form-group'>
+                    <Form.Group className="form-group">
                       <Form.Label>Phone Number</Form.Label>
                       <Form.Control
-                        type='text' // Change type to "text" to allow non-numeric characters
-                        placeholder='Phone Number'
+                        type="text" // Change type to "text" to allow non-numeric characters
+                        placeholder="Phone Number"
                         {...register("phoneNumber")}
                         onChange={(e) => {
                           e.target.value = e.target.value
@@ -316,13 +314,14 @@ const PaypalModel = ({
                       {error}
                     </div>
                   )} */}
-                  <div className='popupBtn'>
+                  <div className="popupBtn">
                     <button
                       disabled={loader}
-                      className='yellowBtn greenBtn'
-                      variant='primary'
-                      type='submit'>
-                      {loader ? <Spinner animation='border' /> : "Submit"}
+                      className="yellowBtn greenBtn"
+                      variant="primary"
+                      type="submit"
+                    >
+                      {loader ? <Spinner animation="border" /> : "Submit"}
                     </button>
 
                     {/* <Button
@@ -337,16 +336,17 @@ const PaypalModel = ({
               </>
             ) : (
               <>
-                <Modal.Header className='payment-header'>
+                <Modal.Header className="payment-header">
                   Payment Form
                 </Modal.Header>
                 <div
-                  className='paymentCrossIcon'
-                  onClick={() =>closePaypalModel()}>
+                  className="paymentCrossIcon"
+                  onClick={() => closePaypalModel()}
+                >
                   {" "}
-                  <CrossIconSVG/>
+                  <CrossIconSVG />
                 </div>
-                <div id='checkout-form'></div>
+                <div id="checkout-form"></div>
               </>
             )}
           </Modal.Body>
@@ -360,13 +360,14 @@ export default PaypalModel;
 export const CrossIconSVG = () => {
   return (
     <svg
-      xmlns='http://www.w3.org/2000/svg'
-      width='16'
-      height='16'
-      fill='currentColor'
-      class='bi bi-x'
-      viewBox='0 0 16 16'>
-      <path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708' />
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-x"
+      viewBox="0 0 16 16"
+    >
+      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
     </svg>
   );
 };

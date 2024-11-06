@@ -99,19 +99,16 @@ export default function CopyCryptoToGC() {
   const [removeCheckoutForm, setRemoveCheckoutForm] = useState(false);
   const [billingForm, setBillingForm] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log("paymentStatus", paymentStatus);
-    if(paymentStatus === "failure"){
+    if (paymentStatus === "failure") {
       setStatus("failure");
-      setTimeout(()=>{
-        setStatus("")
-        window.location.href = "/copy-crypto-to-gc"
+      setTimeout(() => {
+        setStatus("");
+        window.location.href = "/copy-crypto-to-gc";
       }, 4000);
-    }
-    else setStatus("")
-
-    
-  }, [paymentStatus])
+    } else setStatus("");
+  }, [paymentStatus]);
 
   const getPromoPackagaeBanner = async () => {
     try {
@@ -510,13 +507,71 @@ export default function CopyCryptoToGC() {
   //   setPaypalAmount(amount);
   // };
 
-  const checkoutBillingForm = async (amount, gc, checkoutIndex)=>{
+  const kycStatus = async () => {
+    const response = await userKycDetails();
+
+    if (response?.code === 200) {
+      return response.message;
+    }
+  };
+
+  const checkoutBillingForm = async (amount, gc, checkoutIndex) => {
+    console.log(
+      "dailyGCPurchaseLimitdailyGCPurchaseLimit",
+      dailyGCPurchaseLimit,
+      "amount",
+      amount
+    );
+
+    if (dailyGCPurchaseLimit >= 4) {
+      // setLoader(false);
+      return toast.error("Credit card daily purchase limit are reached");
+    }
+
+    if (
+      spendedAmount.spended_today + amount >
+      user.dailyGoldCoinSpendingLimit
+    ) {
+      return toast.error(
+        "Your daily limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "A" }
+      );
+    }
+
+    if (
+      spendedAmount.spened_this_week + amount >
+      user.weeklyGoldCoinSpendingLimit
+    ) {
+      return toast.error(
+        "Your weekly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "B" }
+      );
+    }
+
+    if (
+      spendedAmount.spneded_this_month + amount >
+      user.monthlyGoldCoinSpendingLimit
+    ) {
+      return toast.error(
+        "Your monthly limits are exceeded, visit your profile under spending limits to set your desired controls.",
+        { toastId: "C" }
+      );
+    }
+    console.log("amount", amount);
+    let status = await kycStatus();
+    console.log("status", status);
+    if (amount >= 50 && status !== "accept") {
+      return toast.error(
+        "KYC must be approved to access full purchase center.",
+        { toastId: "D" }
+      );
+    }
     setBillingForm(true);
     setShowPyapal(!showPaypal);
     setIndex(checkoutIndex);
     setCheckOutLoader(true);
     setPaypalAmount(amount);
-  }
+  };
 
   const handleShowCheckoutModel = async (amount, gc, checkoutIndex, values) => {
     // try {
@@ -531,7 +586,7 @@ export default function CopyCryptoToGC() {
       amount: amount,
       email: user.email,
       address: user.address,
-      ...values
+      ...values,
     });
     const publicKey = process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
     const environment = process.env.REACT_APP_CHECKOUT_ENVIRONMENT;
@@ -573,7 +628,7 @@ export default function CopyCryptoToGC() {
     });
 
     console.log("checkout ==>", checkout);
-    
+
     // setShowPyapal(!showPaypal);
     setRemoveCheckoutForm(true);
     setCheckOutLoader(false);
@@ -591,14 +646,13 @@ export default function CopyCryptoToGC() {
     // }
   };
 
-  const closePaypalModel = () =>{
+  const closePaypalModel = () => {
     setShowPyapal(false);
     setCheckOutLoader(false);
     setBillingForm(false);
     setPaypalAmount(0);
     setIndex();
-  }
-  
+  };
 
   return (
     <>
@@ -642,7 +696,9 @@ export default function CopyCryptoToGC() {
         freeSTDetail={freeSTDetail}
         setPromoCode={setPromoCode}
       />
-      {(status === "success" || status === "inprogress" || status === "failure") && (
+      {(status === "success" ||
+        status === "inprogress" ||
+        status === "failure") && (
         <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
       )}
 
