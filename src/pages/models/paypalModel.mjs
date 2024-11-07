@@ -296,7 +296,7 @@ const PaypalModel = ({
                       />
                     </Form.Group>
                     <Form.Group className="form-group">
-                      <Form.Label>Phone Number</Form.Label>
+                      <Form.Label>Phone Number*</Form.Label>
                       <Form.Control
                         type="text" // Change type to "text" to allow non-numeric characters
                         placeholder="Phone Number"
@@ -306,6 +306,7 @@ const PaypalModel = ({
                             .replace(/[^0-9]/g, "")
                             .slice(0, 11); // Allow only numeric characters and limit to 11 digits
                         }}
+                        required
                       />
                     </Form.Group>
                   </div>
