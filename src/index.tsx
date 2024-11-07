@@ -413,7 +413,7 @@ export default function App() {
                       element={<ProtectedRoute component={<KYCCopy />} />}
                     />
                     <Route
-                      path='/copy-enc-crypto-to-gc'
+                      path='/copy-enc2-crypto-to-gc'
                       element={<ProtectedRoute component={<CryptoToGC />} />}
                     />
                     <Route
