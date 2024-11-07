@@ -912,6 +912,13 @@ export default function CopyCryptoToGC() {
                                               }
                                               user={user}
                                               getGCPackages={getGCPackages}
+                                              setShowPyapal={setShowPyapal}
+                                              setBillingForm={setBillingForm}
+                                              setIndex={setIndex}
+                                              setCheckOutLoader={
+                                                setCheckOutLoader
+                                              }
+                                              setPaypalAmount={setPaypalAmount}
                                             />
                                           </h3>
                                         ) : (
@@ -962,7 +969,9 @@ export default function CopyCryptoToGC() {
                                                   variant="primary"
                                                   onClick={() =>
                                                     checkoutBillingForm(
-                                                      parseFloat(prize?.priceInBUSD),
+                                                      parseFloat(
+                                                        prize?.priceInBUSD
+                                                      ),
                                                       prize?.gcAmount,
                                                       i
                                                     )
@@ -1242,6 +1251,10 @@ const PayWithCard = ({
   dailyGCPurchaseLimit,
   spendedAmount,
   user,
+  setShowPyapal,
+  setBillingForm,
+  selectedTypeDropdown,
+  setPaypalAmount,
 }) => {
   const [showAuthForm, setShowAuthForm] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -1300,7 +1313,18 @@ const PayWithCard = ({
       );
     }
     setLoader(false);
-    setShowAuthForm(true);
+
+    if (selectedTypeDropdown === "Checkout") {
+      setShowPyapal(true);
+      setBillingForm(true);
+      setPaypalAmount(usd);
+    } else {
+      setShowAuthForm(true);
+    }
+
+    // setIndex(checkoutIndex);
+    // setCheckOutLoader(true);
+    // setPaypalAmount(amount);
 
     let payload = {
       freeTokenAmount: getExactToken(prize.freeTokenAmount, promoDetails),
