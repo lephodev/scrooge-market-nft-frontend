@@ -112,16 +112,16 @@ export default function CopyCryptoToGC() {
         setStatus("");
         window.location.href = "/crypto-to-gc";
       }, 4000);
-    } else if(paymentStatus === "freespin"){
+    } else if (paymentStatus === "freespin") {
       setStatus("inprogress");
-      
-      (async ()=>{
+
+      (async () => {
         const resp = await (
           await marketPlaceInstance()
         ).get("/getPackage", {
           params: {
-            packageId: "672b0b51c0a3ad858ed53aa5"
-          }
+            packageId: "672b0b51c0a3ad858ed53aa5",
+          },
         });
         setStatus("freespin");
         setPackageData(resp.data.package);
@@ -129,16 +129,15 @@ export default function CopyCryptoToGC() {
           setStatus("");
           window.location.href = "/crypto-to-gc";
         }, 20000);
-      })()
-
-    } else if(paymentStatus === "success"){
+      })();
+    } else if (paymentStatus === "success") {
       setStatus("success");
       // setTimeout(() => {
       //   setStatus("");
       //   window.location.href = "/crypto-to-gc";
       // }, 10000);
     }
-    
+
     //setStatus("");
   }, [paymentStatus]);
 
@@ -736,11 +735,13 @@ export default function CopyCryptoToGC() {
         <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
       )}
 
-        {status === "freespin" ? <FreeSpinModel
+      {status === "freespin" ? (
+        <FreeSpinModel
           packgaeData={packgaeData}
           showFreeSpin={true}
-          handleCloseFreeSpin={()=> setStatus("")}
-        /> : null}
+          handleCloseFreeSpin={() => setStatus("")}
+        />
+      ) : null}
 
       {prizesLoading ? (
         <PageLoader />
@@ -821,18 +822,18 @@ export default function CopyCryptoToGC() {
                           CashApp
                         </span> */}
                       </div>
-                      <Dropdown>
+                      {/* <Dropdown>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
                           {!selectedTypeDropdown
                             ? "Authrize"
                             : selectedTypeDropdown}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                          {/* <Dropdown.Item
+                          <Dropdown.Item
                             onClick={() => handlePaymentTypeChange("Authrize")}
                           >
                             Authrize
-                          </Dropdown.Item> */}
+                          </Dropdown.Item>
 
                           <Dropdown.Item
                             onClick={() => handlePaymentTypeChange("Checkout")}
@@ -840,7 +841,7 @@ export default function CopyCryptoToGC() {
                             Checkout
                           </Dropdown.Item>
                         </Dropdown.Menu>
-                      </Dropdown>
+                      </Dropdown> */}
                     </div>
 
                     <div className="enter-promo new_enter_promo">
@@ -880,7 +881,7 @@ export default function CopyCryptoToGC() {
                     </div>
                   </div>
 
-                  {selectedTypeDropdown === "Authrize" ? (
+                  {selectedTypeDropdown === "Checkout" ? (
                     <div className="asterisk-desc cryptoTotoken abc first-grid">
                       <ul>
                         <li>
@@ -1297,7 +1298,7 @@ const PayWithCard = ({
   setBillingForm,
   selectedTypeDropdown,
   setPaypalAmount,
-  setPackageId
+  setPackageId,
 }) => {
   const [showAuthForm, setShowAuthForm] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -1381,8 +1382,8 @@ const PayWithCard = ({
     document.getElementById("paycard").click();
   };
 
-  if(prize?._id || prize?.id){
-    setPackageId(prize?._id || prize?.id)
+  if (prize?._id || prize?.id) {
+    setPackageId(prize?._id || prize?.id);
   }
 
   console.log("prize", prize);
