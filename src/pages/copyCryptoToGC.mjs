@@ -45,6 +45,7 @@ import AuthrizeCustomModel from "./models/authrizeCustomModel.mjs";
 import PaypalModel from "./models/paypalModel.mjs";
 import { userKycDetails } from "../utils/api.mjs";
 import { loadCheckoutWebComponents } from "@checkout.com/checkout-web-components";
+import FreeSpinModel from "./models/freeSpinModel.mjs";
 let promoCode;
 let goldcoinAmount;
 
@@ -52,6 +53,7 @@ export default function CopyCryptoToGC() {
   const sdk = useSDK();
   const { search } = useLocation();
   const paymentStatus = new URLSearchParams(search).get("status");
+  const freespinId = new URLSearchParams(search).get("freespin");
   const { user, setUser, setSpendedAmount, spendedAmount } =
     useContext(AuthContext);
   const [prizesLoading, setPrizesLoading] = useState(true);
@@ -69,6 +71,7 @@ export default function CopyCryptoToGC() {
   const [isMegaBuyShow, setIsMegaBuyShow] = useState(true);
   const [showFreeST, setShowFreeST] = useState(false);
   const [freeSTDetail, setFreeSTDetails] = useState({});
+  const [freeSpinSuccess, setFreeSpinSuccess] = useState({});
   const [avgValue, setAvgValue] = useState(0);
   const [showPromoPackageData, setShowPromoPackageData] = useState({});
   const [checkOutLoader, setCheckOutLoader] = useState(false);
@@ -79,6 +82,7 @@ export default function CopyCryptoToGC() {
   const [showPaypal, setShowPyapal] = useState(false);
   const [paypalAmount, setPaypalAmount] = useState();
   const [index, setIndex] = useState();
+  const [packgaeData, setPackageData] = useState();
   const address = useAddress();
   const { contract } = useContract(process.env.REACT_APP_NATIVE_TOKEN_ADDRESS);
   const { contract: scroogeContract } = useContract(
@@ -105,9 +109,36 @@ export default function CopyCryptoToGC() {
       setStatus("failure");
       setTimeout(() => {
         setStatus("");
-        window.location.href = "/copy-crypto-to-gc";
+        window.location.href = "/crypto-to-gc";
       }, 4000);
-    } else setStatus("");
+    } else if(paymentStatus === "freespin"){
+      setStatus("inprogress");
+      
+      (async ()=>{
+        const resp = await (
+          await marketPlaceInstance()
+        ).get("/getPackage", {
+          params: {
+            packageId: "672b0b51c0a3ad858ed53aa5"
+          }
+        });
+        setStatus("freespin");
+        setPackageData(resp.data.package);
+        setTimeout(() => {
+          setStatus("");
+          window.location.href = "/crypto-to-gc";
+        }, 20000);
+      })()
+
+    } else if(paymentStatus === "success"){
+      setStatus("success");
+      setTimeout(() => {
+        setStatus("");
+        window.location.href = "/crypto-to-gc";
+      }, 5000);
+    }
+    
+    //setStatus("");
   }, [paymentStatus]);
 
   const getPromoPackagaeBanner = async () => {
@@ -433,7 +464,7 @@ export default function CopyCryptoToGC() {
       console.log("handleOk");
       getGCPurcahseLimitPerDay();
       setStatus("");
-      window.location.href = "/copy-crypto-to-gc";
+      window.location.href = "/crypto-to-gc";
     } catch (error) {
       console.log("error", error);
     }
@@ -702,6 +733,12 @@ export default function CopyCryptoToGC() {
         status === "failure") && (
         <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
       )}
+
+        {status === "freespin" ? <FreeSpinModel
+          packgaeData={packgaeData}
+          showFreeSpin={true}
+          handleCloseFreeSpin={()=> setStatus("")}
+        /> : null}
 
       {prizesLoading ? (
         <PageLoader />
