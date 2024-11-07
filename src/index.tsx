@@ -12,7 +12,6 @@ import {
 import ChainContext from "./context/Chain";
 import "./styles/globals.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home.mjs";
 import NoPage from "./pages/NoPage.mjs";
@@ -417,8 +416,10 @@ export default function App() {
                       path='/copy-enc2-crypto-to-gc'
                       element={<ProtectedRoute component={<CryptoToGC />} />}
                     />
-                    <Route path="/crypto-to-gc" element={<CopyCryptoToGC />} />
-                    <Route path="/crypto-to-gc/" element={<Navigate to="/crypto-to-gc" replace />} />
+                    <Route
+                      path='/crypto-to-gc'
+                      element={<ProtectedRoute component={<CopyCryptoToGC />} />}
+                    />
                     <Route
                       path='/crypto-to-tokens'
                       element={
