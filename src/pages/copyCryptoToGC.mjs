@@ -132,10 +132,10 @@ export default function CopyCryptoToGC() {
 
     } else if(paymentStatus === "success"){
       setStatus("success");
-      setTimeout(() => {
-        setStatus("");
-        window.location.href = "/crypto-to-gc";
-      }, 5000);
+      // setTimeout(() => {
+      //   setStatus("");
+      //   window.location.href = "/crypto-to-gc";
+      // }, 10000);
     }
     
     //setStatus("");
@@ -161,12 +161,12 @@ export default function CopyCryptoToGC() {
     const params = searchParams.get("status");
     if (params) {
       if (params === "success") {
-        setStatus("inprogress");
+        setStatus("success");
       }
 
-      setTimeout(() => {
-        setStatus(params);
-      }, 20000);
+      // setTimeout(() => {
+      //   setStatus(params);
+      // }, 20000);
     }
   }, [searchParams]);
   const getUserDataInstant = async () => {
