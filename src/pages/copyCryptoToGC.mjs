@@ -60,7 +60,7 @@ export default function CopyCryptoToGC() {
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
   const [selectedDropdown, setSelectedDropdown] = useState("Scrooge");
-  const [selectedTypeDropdown, setSelectedTypeDropdown] = useState("Authrize");
+  const [selectedTypeDropdown, setSelectedTypeDropdown] = useState("Checkout");
   const [promocode, setPromoCode] = useState("");
   const [promoLoader, setPromoLoader] = useState(false);
   const [promoDetails, setPromoDetails] = useState({});
@@ -826,11 +826,11 @@ export default function CopyCryptoToGC() {
                             : selectedTypeDropdown}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                          <Dropdown.Item
+                          {/* <Dropdown.Item
                             onClick={() => handlePaymentTypeChange("Authrize")}
                           >
                             Authrize
-                          </Dropdown.Item>
+                          </Dropdown.Item> */}
 
                           <Dropdown.Item
                             onClick={() => handlePaymentTypeChange("Checkout")}
