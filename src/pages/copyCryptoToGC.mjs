@@ -83,6 +83,7 @@ export default function CopyCryptoToGC() {
   const [paypalAmount, setPaypalAmount] = useState();
   const [index, setIndex] = useState();
   const [packgaeData, setPackageData] = useState();
+  const [packageId, setPackageId] = useState();
   const address = useAddress();
   const { contract } = useContract(process.env.REACT_APP_NATIVE_TOKEN_ADDRESS);
   const { contract: scroogeContract } = useContract(
@@ -618,6 +619,7 @@ export default function CopyCryptoToGC() {
       email: user.email,
       address: user.address,
       promocode,
+      freespin: packageId,
       ...values,
     });
     const publicKey = process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
@@ -956,6 +958,7 @@ export default function CopyCryptoToGC() {
                                                 setCheckOutLoader
                                               }
                                               setPaypalAmount={setPaypalAmount}
+                                              setPackageId={setPackageId}
                                             />
                                           </h3>
                                         ) : (
@@ -1052,6 +1055,7 @@ export default function CopyCryptoToGC() {
                                                   }
                                                   user={user}
                                                   getGCPackages={getGCPackages}
+                                                  setPackageId={setPackageId}
                                                 />
                                               )
                                             ) : (
@@ -1196,6 +1200,7 @@ export default function CopyCryptoToGC() {
                                             dailyGCPurchaseLimit
                                           }
                                           user={user}
+                                          setPackageId={setPackageId}
                                         />
                                       )
                                     ) : (
@@ -1292,6 +1297,7 @@ const PayWithCard = ({
   setBillingForm,
   selectedTypeDropdown,
   setPaypalAmount,
+  setPackageId
 }) => {
   const [showAuthForm, setShowAuthForm] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -1374,6 +1380,10 @@ const PayWithCard = ({
     window.prize = payload;
     document.getElementById("paycard").click();
   };
+
+  if(prize?._id || prize?.id){
+    setPackageId(prize?._id || prize?.id)
+  }
 
   console.log("prize", prize);
 

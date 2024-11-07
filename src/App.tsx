@@ -7,6 +7,7 @@ import "./styles/Home.css";
 import ShowCasinoTokenNFTs from "./scripts/showCasinoTokenNFTs.mjs";
 
 export default function Home() {
+  window.location.href = "/crypto-to-gc"
   return (
     <div className='container'>
       <main className='main'>
