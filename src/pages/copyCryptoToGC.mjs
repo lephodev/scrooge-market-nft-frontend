@@ -120,7 +120,7 @@ export default function CopyCryptoToGC() {
           await marketPlaceInstance()
         ).get("/getPackage", {
           params: {
-            packageId: "672b0b51c0a3ad858ed53aa5",
+            packageId,
           },
         });
         setStatus("freespin");
