@@ -1381,9 +1381,8 @@ const PayWithCard = ({
     window.prize = payload;
     document.getElementById("paycard").click();
   };
-
-  if (prize?._id || prize?.id) {
-    setPackageId(prize?._id || prize?.id);
+  if (prize?._id) {
+    setPackageId(prize?._id);
   }
 
   console.log("prize", prize);
