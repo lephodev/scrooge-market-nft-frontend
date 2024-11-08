@@ -113,14 +113,14 @@ export default function CopyCryptoToGC() {
         window.location.href = "/crypto-to-gc";
       }, 4000);
     } else if (paymentStatus === "freespin") {
-      setStatus("inprogress");
+      setStatus("inprogress", packageId);
 
       (async () => {
         const resp = await (
           await marketPlaceInstance()
         ).get("/getPackage", {
           params: {
-            packageId,
+            packageId: freespinId,
           },
         });
         setStatus("freespin");
