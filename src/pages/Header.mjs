@@ -66,7 +66,7 @@ const Header = () => {
       localStorage.removeItem("activeCount");
     }
     localStorage.clear();
-    window.location.href = `${scroogeClient}`;
+    window.location.href = `${scroogeClient}/en`;
   };
 
   const currentRoute = useCurrentPath();
@@ -254,13 +254,13 @@ const Header = () => {
                   <Dropdown.Menu>
                     <Link
                       className="dropdown-item"
-                      to={`${scroogeClient}/profile`}
+                      to={`${scroogeClient}/en/profile`}
                     >
                       Profile
                     </Link>
                     <Link
                       className="dropdown-item"
-                      to={`${scroogeClient}/setting`}
+                      to={`${scroogeClient}/en/setting`}
                     >
                       Settings
                     </Link>
@@ -336,7 +336,7 @@ const Header = () => {
                           <div className="custom-dropdown-menu">
                             <ul>
                               <li>
-                                <Link to={`${scroogeClient}/new-releases`}>
+                                <Link to={`${scroogeClient}/en/new-releases`}>
                                   New Releases
                                 </Link>
                               </li>
@@ -344,7 +344,9 @@ const Header = () => {
                                             <Link to={pokerUrl}>Poker</Link>
                                           </li> */}
                               <li>
-                                <Link to={`${scroogeClient}/games`}>Slots</Link>
+                                <Link to={`${scroogeClient}/en/games`}>
+                                  Slots
+                                </Link>
                               </li>
                               <li>
                                 <Link to={`${scroogeClient}/table-games`}>
@@ -380,22 +382,24 @@ const Header = () => {
                                 <Link to={`${scroogeClient}/keno`}>Keno</Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/megaways`}>
+                                <Link to={`${scroogeClient}/en/megaways`}>
                                   Megaways
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/penny-machine`}>
+                                <Link to={`${scroogeClient}/en/penny-machine`}>
                                   Penny Machine
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/scratcher-games`}>
+                                <Link
+                                  to={`${scroogeClient}/en/scratcher-games`}
+                                >
                                   Scratcher
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/video-poker`}>
+                                <Link to={`${scroogeClient}/en/video-poker`}>
                                   Video Poker
                                 </Link>
                               </li>
@@ -428,7 +432,7 @@ const Header = () => {
                         Daily Wheel Spin
                       </Link>
                       <Link
-                        to={`${scroogeClient}/affiliate`}
+                        to={`${scroogeClient}/en/affiliate`}
                         className={`nav-link ${isActive("/affiliate")}`}
                       >
                         Affiliate Program
@@ -443,7 +447,7 @@ const Header = () => {
                     <div className="header-btn-mobile user-profile">
                       <a
                         className="dropdown-item"
-                        href={`${scroogeClient}/profile`}
+                        href={`${scroogeClient}/en/profile`}
                       >
                         <img
                           src={user?.profile ? user?.profile : profile}
@@ -456,7 +460,7 @@ const Header = () => {
                       </a>
                       <a
                         className="dropdown-item text-white"
-                        href={`${scroogeClient}/setting`}
+                        href={`${scroogeClient}/en/setting`}
                       >
                         <SettingSvg />
                       </a>
