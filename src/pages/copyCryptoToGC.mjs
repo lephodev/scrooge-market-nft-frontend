@@ -113,14 +113,14 @@ export default function CopyCryptoToGC() {
         window.location.href = "/crypto-to-gc";
       }, 4000);
     } else if (paymentStatus === "freespin") {
-      setStatus("inprogress");
+      setStatus("inprogress", packageId);
 
       (async () => {
         const resp = await (
           await marketPlaceInstance()
         ).get("/getPackage", {
           params: {
-            packageId: "672b0b51c0a3ad858ed53aa5",
+            packageId: freespinId,
           },
         });
         setStatus("freespin");
@@ -1381,9 +1381,8 @@ const PayWithCard = ({
     window.prize = payload;
     document.getElementById("paycard").click();
   };
-
-  if (prize?._id || prize?.id) {
-    setPackageId(prize?._id || prize?.id);
+  if (prize?._id) {
+    setPackageId(prize?._id);
   }
 
   console.log("prize", prize);
