@@ -932,7 +932,7 @@ export default function CopyCryptoToGC() {
                                 {allPrizes.map((prize, i) => (
                                   <>
                                     {prize.offerType === "freeSpin" &&
-                                      user?._id ===
+                                      user?.id ===
                                         "6729daa88364d3fc987690ff" && (
                                         <>
                                           {handleShowFreeSpin(prize) ? (
