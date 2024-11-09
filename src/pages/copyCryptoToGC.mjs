@@ -606,7 +606,7 @@ export default function CopyCryptoToGC() {
 
   const handleShowCheckoutModel = async (amount, gc, checkoutIndex, values) => {
     // try {
-    console.log("amount", amount);
+    console.log("amount", amount, "packageId", packageId);
 
     setIndex(checkoutIndex);
     setCheckOutLoader(true);
@@ -932,8 +932,10 @@ export default function CopyCryptoToGC() {
                                 {allPrizes.map((prize, i) => (
                                   <>
                                     {prize.offerType === "freeSpin" &&
-                                      user?.id ===
-                                        "6729daa88364d3fc987690ff" && (
+                                      (user?.id ===
+                                        "6729daa88364d3fc987690ff" ||
+                                        user?.id ===
+                                          "6430192f8b97aa0ae3c91355") && (
                                         <>
                                           {handleShowFreeSpin(prize) ? (
                                             <h3 className="">
@@ -1060,7 +1062,6 @@ export default function CopyCryptoToGC() {
                                                   }
                                                   user={user}
                                                   getGCPackages={getGCPackages}
-                                                  setPackageId={setPackageId}
                                                 />
                                               )
                                             ) : (
@@ -1205,7 +1206,6 @@ export default function CopyCryptoToGC() {
                                             dailyGCPurchaseLimit
                                           }
                                           user={user}
-                                          setPackageId={setPackageId}
                                         />
                                       )
                                     ) : (
@@ -1370,6 +1370,10 @@ const PayWithCard = ({
       setShowAuthForm(true);
     }
 
+    if (prize?._id && prize?.offerType === "freeSpin") {
+      setPackageId(prize?._id);
+    }
+
     // setIndex(checkoutIndex);
     // setCheckOutLoader(true);
     // setPaypalAmount(amount);
@@ -1385,9 +1389,6 @@ const PayWithCard = ({
     window.prize = payload;
     document.getElementById("paycard").click();
   };
-  if (prize?._id) {
-    setPackageId(prize?._id);
-  }
 
   console.log("prize", prize);
 
