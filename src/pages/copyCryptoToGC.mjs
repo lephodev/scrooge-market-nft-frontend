@@ -546,7 +546,12 @@ export default function CopyCryptoToGC() {
     }
   };
 
-  const checkoutBillingForm = async (amount, gc, checkoutIndex) => {
+  const checkoutBillingForm = async (
+    amount,
+    gc,
+    checkoutIndex,
+    holePackageData
+  ) => {
     console.log(
       "dailyGCPurchaseLimitdailyGCPurchaseLimit",
       dailyGCPurchaseLimit,
@@ -602,11 +607,13 @@ export default function CopyCryptoToGC() {
     setIndex(checkoutIndex);
     setCheckOutLoader(true);
     setPaypalAmount(amount);
+
+    setPackageId("");
   };
 
   const handleShowCheckoutModel = async (amount, gc, checkoutIndex, values) => {
     // try {
-    console.log("amount", amount, "packageId", packageId);
+    console.log("amount", amount, "packageId", packageId, values);
 
     setIndex(checkoutIndex);
     setCheckOutLoader(true);
@@ -1020,7 +1027,8 @@ export default function CopyCryptoToGC() {
                                                         prize?.priceInBUSD
                                                       ),
                                                       prize?.gcAmount,
-                                                      i
+                                                      i,
+                                                      prize
                                                     )
                                                   }
                                                 >
@@ -1062,6 +1070,7 @@ export default function CopyCryptoToGC() {
                                                   }
                                                   user={user}
                                                   getGCPackages={getGCPackages}
+                                                  setPackageId={setPackageId}
                                                 />
                                               )
                                             ) : (
@@ -1165,7 +1174,8 @@ export default function CopyCryptoToGC() {
                                             checkoutBillingForm(
                                               parseFloat(prize?.priceInBUSD),
                                               prize?.gcAmount,
-                                              i
+                                              i,
+                                              prize
                                             )
                                           }
                                         >
@@ -1206,6 +1216,7 @@ export default function CopyCryptoToGC() {
                                             dailyGCPurchaseLimit
                                           }
                                           user={user}
+                                          setPackageId={setPackageId}
                                         />
                                       )
                                     ) : (
