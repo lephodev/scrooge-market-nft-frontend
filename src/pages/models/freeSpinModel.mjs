@@ -1,6 +1,8 @@
 import { Modal, Button } from "react-bootstrap";
 // import freeSpin from "../../images/freeSpin.jpg";
 import "./freeSpin.css";
+import cookie from "js-cookie";
+
 import { relaxLaunchUrl, slotUrl } from "../../config/keys.js";
 import { bGamingInstance, relaxGamingInstance } from "../../config/axios.js";
 const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
@@ -12,6 +14,11 @@ const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
   );
 
   const handleRedirectToGame = async () => {
+    cookie.set("mode", "token", {
+      domain: ".scrooge.casino",
+      path: "/",
+      httpOnly: false,
+    });
     if (
       packgaeData?.provider === "Relax" ||
       packgaeData?.provider === "Relax-Kalamba" ||
