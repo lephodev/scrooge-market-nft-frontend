@@ -938,48 +938,42 @@ export default function CopyCryptoToGC() {
                               <div className="">
                                 {allPrizes.map((prize, i) => (
                                   <>
-                                    {prize.offerType === "freeSpin" &&
-                                      (user?.id ===
-                                        "6729daa88364d3fc987690ff" ||
-                                        user?.id ===
-                                          "65b3accffb994c6afeabdd02") && (
-                                        <>
-                                          {handleShowFreeSpin(prize) ? (
-                                            <h3 className="">
-                                              <PayWithCard
-                                                spendedAmount={spendedAmount}
-                                                prize={prize}
-                                                getExactPrice={getExactPrice}
-                                                getExactGC={getExactGC}
-                                                getExactToken={getExactToken}
-                                                promoDetails={promoDetails}
-                                                index={i}
-                                                setBuyLoading={setBuyLoading}
-                                                selectedTypeDropdown={
-                                                  selectedTypeDropdown
-                                                }
-                                                dailyGCPurchaseLimit={
-                                                  dailyGCPurchaseLimit
-                                                }
-                                                user={user}
-                                                getGCPackages={getGCPackages}
-                                                setShowPyapal={setShowPyapal}
-                                                setBillingForm={setBillingForm}
-                                                setIndex={setIndex}
-                                                setCheckOutLoader={
-                                                  setCheckOutLoader
-                                                }
-                                                setPaypalAmount={
-                                                  setPaypalAmount
-                                                }
-                                                setPackageId={setPackageId}
-                                              />
-                                            </h3>
-                                          ) : (
-                                            ""
-                                          )}
-                                        </>
-                                      )}
+                                    {prize.offerType === "freeSpin" && (
+                                      <>
+                                        {handleShowFreeSpin(prize) ? (
+                                          <h3 className="">
+                                            <PayWithCard
+                                              spendedAmount={spendedAmount}
+                                              prize={prize}
+                                              getExactPrice={getExactPrice}
+                                              getExactGC={getExactGC}
+                                              getExactToken={getExactToken}
+                                              promoDetails={promoDetails}
+                                              index={i}
+                                              setBuyLoading={setBuyLoading}
+                                              selectedTypeDropdown={
+                                                selectedTypeDropdown
+                                              }
+                                              dailyGCPurchaseLimit={
+                                                dailyGCPurchaseLimit
+                                              }
+                                              user={user}
+                                              getGCPackages={getGCPackages}
+                                              setShowPyapal={setShowPyapal}
+                                              setBillingForm={setBillingForm}
+                                              setIndex={setIndex}
+                                              setCheckOutLoader={
+                                                setCheckOutLoader
+                                              }
+                                              setPaypalAmount={setPaypalAmount}
+                                              setPackageId={setPackageId}
+                                            />
+                                          </h3>
+                                        ) : (
+                                          ""
+                                        )}
+                                      </>
+                                    )}
                                   </>
                                 ))}
                               </div>
