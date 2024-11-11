@@ -408,6 +408,8 @@ export default function App() {
                       path='/redeem-prizes'
                       element={<ProtectedRoute component={<RedeemPrizes />} />}
                     />
+
+                    
                     <Route
                       path='/copy-crypto-to-gc'
                       element={<ProtectedRoute component={<CryptoToGC />} />}
