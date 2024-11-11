@@ -66,7 +66,7 @@ const Header = () => {
       localStorage.removeItem("activeCount");
     }
     localStorage.clear();
-    window.location.href = `${scroogeClient}`;
+    window.location.href = `${scroogeClient}/en/`;
   };
 
   const currentRoute = useCurrentPath();
@@ -117,7 +117,7 @@ const Header = () => {
         >
           <div className="header-content ">
             <div className="header_logo">
-              <Link to={scroogeClient}>
+              <Link to={`${scroogeClient}/en/`}>
                 {user ? (
                   <img src={newLogo} alt="logo" height={70} width={70} />
                 ) : (
@@ -451,7 +451,7 @@ const Header = () => {
                     <div className="header-btn-mobile user-profile">
                       <a
                         className="dropdown-item"
-                        href={`${scroogeClient}/en//profile`}
+                        href={`${scroogeClient}/en/profile`}
                       >
                         <img
                           src={user?.profile ? user?.profile : profile}
@@ -464,7 +464,7 @@ const Header = () => {
                       </a>
                       <a
                         className="dropdown-item text-white"
-                        href={`${scroogeClient}/en//setting`}
+                        href={`${scroogeClient}/en/setting`}
                       >
                         <SettingSvg />
                       </a>
@@ -509,7 +509,7 @@ const Header = () => {
                                 </Link>
                               </li>
                               <li>
-                                <Link to=".en/deactivateAccount">
+                                <Link to="/en/deactivateAccount">
                                   {" "}
                                   Access Restrictions
                                 </Link>
@@ -552,12 +552,12 @@ const Header = () => {
                           <div className="custom-dropdown-menu">
                             <ul>
                               <li>
-                                <Link to="/en//privacyPolicy">
+                                <Link to="/en/privacyPolicy">
                                   Privacy policy
                                 </Link>
                               </li>
                               <li>
-                                <Link to="/en//termsncondition">
+                                <Link to="/en/termsncondition">
                                   Terms of Services
                                 </Link>
                               </li>
@@ -589,7 +589,7 @@ const Header = () => {
                   </>
                 ) : (
                   <a
-                    href={`${scroogeClient}`}
+                    href={`${scroogeClient}/en/`}
                     /* target="_blank" */ rel="noreferrer"
                     alt="Login to Scrooge Casino"
                   >
