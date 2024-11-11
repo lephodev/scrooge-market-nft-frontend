@@ -66,7 +66,7 @@ const Header = () => {
       localStorage.removeItem("activeCount");
     }
     localStorage.clear();
-    window.location.href = `${scroogeClient}/en`;
+    window.location.href = `${scroogeClient}/en/`;
   };
 
   const currentRoute = useCurrentPath();
@@ -117,7 +117,7 @@ const Header = () => {
         >
           <div className="header-content ">
             <div className="header_logo">
-              <Link to={scroogeClient}>
+              <Link to={`${scroogeClient}/en/`}>
                 {user ? (
                   <img src={newLogo} alt="logo" height={70} width={70} />
                 ) : (
@@ -281,7 +281,7 @@ const Header = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <div className="logo-mobile">
-                <Link to={scroogeClient}>
+                <Link to={`${scroogeClient}/en/`}>
                   {user ? (
                     <img
                       src={newLogo}
@@ -301,7 +301,7 @@ const Header = () => {
                   <>
                     <div className="navItem">
                       <Link
-                        to={scroogeClient}
+                        to={`${scroogeClient}/en/`}
                         className={`nav-link ${isActive(scroogeClient)}`}
                       >
                         Home
@@ -349,37 +349,41 @@ const Header = () => {
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/table-games`}>
+                                <Link to={`${scroogeClient}/en/table-games`}>
                                   Table Games
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/casual`}>
+                                <Link to={`${scroogeClient}/en/casual`}>
                                   Casuals
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/classic-slot`}>
+                                <Link to={`${scroogeClient}/en/classic-slot`}>
                                   Classic Slots
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/fish-games`}>
+                                <Link to={`${scroogeClient}/en/fish-games`}>
                                   Fish Games
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/holdAndWin-games`}>
+                                <Link
+                                  to={`${scroogeClient}/en/holdAndWin-games`}
+                                >
                                   Hold And Win
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/jackpot-games`}>
+                                <Link to={`${scroogeClient}/en/jackpot-games`}>
                                   Jackpots
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/keno`}>Keno</Link>
+                                <Link to={`${scroogeClient}/en/keno`}>
+                                  Keno
+                                </Link>
                               </li>
                               <li>
                                 <Link to={`${scroogeClient}/en/megaways`}>
@@ -499,19 +503,19 @@ const Header = () => {
                           <div className="custom-dropdown-menu">
                             <ul>
                               <li>
-                                <Link to="/profile?active=spending">
+                                <Link to="/en/profile?active=spending">
                                   {" "}
                                   Spending Limit
                                 </Link>
                               </li>
                               <li>
-                                <Link to="/deactivateAccount">
+                                <Link to="/en/deactivateAccount">
                                   {" "}
                                   Access Restrictions
                                 </Link>
                               </li>
                               <li>
-                                <Link to="/profile?active=transaction">
+                                <Link to="/en/profile?active=transaction">
                                   {" "}
                                   Account History
                                 </Link>
@@ -548,10 +552,12 @@ const Header = () => {
                           <div className="custom-dropdown-menu">
                             <ul>
                               <li>
-                                <Link to="/privacyPolicy">Privacy policy</Link>
+                                <Link to="/en/privacyPolicy">
+                                  Privacy policy
+                                </Link>
                               </li>
                               <li>
-                                <Link to="/termsncondition">
+                                <Link to="/en/termsncondition">
                                   Terms of Services
                                 </Link>
                               </li>
@@ -583,7 +589,7 @@ const Header = () => {
                   </>
                 ) : (
                   <a
-                    href={`${scroogeClient}`}
+                    href={`${scroogeClient}/en/`}
                     /* target="_blank" */ rel="noreferrer"
                     alt="Login to Scrooge Casino"
                   >
