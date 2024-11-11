@@ -45,6 +45,7 @@ import AuthrizeCustomModel from "./models/authrizeCustomModel.mjs";
 import PaypalModel from "./models/paypalModel.mjs";
 import { userKycDetails } from "../utils/api.mjs";
 import { loadCheckoutWebComponents } from "@checkout.com/checkout-web-components";
+import FreeSpinModel from "./models/freeSpinModel.mjs";
 let promoCode;
 let goldcoinAmount;
 
@@ -52,13 +53,14 @@ export default function CopyCryptoToGC() {
   const sdk = useSDK();
   const { search } = useLocation();
   const paymentStatus = new URLSearchParams(search).get("status");
+  const freespinId = new URLSearchParams(search).get("freespin");
   const { user, setUser, setSpendedAmount, spendedAmount } =
     useContext(AuthContext);
   const [prizesLoading, setPrizesLoading] = useState(true);
   const [allPrizes, setAllPrizes] = useState([]);
   const [buyLoading, setBuyLoading] = useState(false);
   const [selectedDropdown, setSelectedDropdown] = useState("Scrooge");
-  const [selectedTypeDropdown, setSelectedTypeDropdown] = useState("Authrize");
+  const [selectedTypeDropdown, setSelectedTypeDropdown] = useState("Checkout");
   const [promocode, setPromoCode] = useState("");
   const [promoLoader, setPromoLoader] = useState(false);
   const [promoDetails, setPromoDetails] = useState({});
@@ -69,6 +71,7 @@ export default function CopyCryptoToGC() {
   const [isMegaBuyShow, setIsMegaBuyShow] = useState(true);
   const [showFreeST, setShowFreeST] = useState(false);
   const [freeSTDetail, setFreeSTDetails] = useState({});
+  const [freeSpinSuccess, setFreeSpinSuccess] = useState({});
   const [avgValue, setAvgValue] = useState(0);
   const [showPromoPackageData, setShowPromoPackageData] = useState({});
   const [checkOutLoader, setCheckOutLoader] = useState(false);
@@ -79,6 +82,8 @@ export default function CopyCryptoToGC() {
   const [showPaypal, setShowPyapal] = useState(false);
   const [paypalAmount, setPaypalAmount] = useState();
   const [index, setIndex] = useState();
+  const [packgaeData, setPackageData] = useState();
+  const [packageId, setPackageId] = useState();
   const address = useAddress();
   const { contract } = useContract(process.env.REACT_APP_NATIVE_TOKEN_ADDRESS);
   const { contract: scroogeContract } = useContract(
@@ -105,9 +110,35 @@ export default function CopyCryptoToGC() {
       setStatus("failure");
       setTimeout(() => {
         setStatus("");
-        window.location.href = "/copy-crypto-to-gc";
+        window.location.href = "/crypto-to-gc";
       }, 4000);
-    } else setStatus("");
+    } else if (paymentStatus === "freespin") {
+      setStatus("inprogress", packageId);
+
+      (async () => {
+        const resp = await (
+          await marketPlaceInstance()
+        ).get("/getPackage", {
+          params: {
+            packageId: freespinId,
+          },
+        });
+        setStatus("freespin");
+        setPackageData(resp.data.package);
+        setTimeout(() => {
+          setStatus("");
+          window.location.href = "/crypto-to-gc";
+        }, 20000);
+      })();
+    } else if (paymentStatus === "success") {
+      setStatus("success");
+      // setTimeout(() => {
+      //   setStatus("");
+      //   window.location.href = "/crypto-to-gc";
+      // }, 10000);
+    }
+
+    //setStatus("");
   }, [paymentStatus]);
 
   const getPromoPackagaeBanner = async () => {
@@ -130,12 +161,12 @@ export default function CopyCryptoToGC() {
     const params = searchParams.get("status");
     if (params) {
       if (params === "success") {
-        setStatus("inprogress");
+        setStatus("success");
       }
 
-      setTimeout(() => {
-        setStatus(params);
-      }, 20000);
+      // setTimeout(() => {
+      //   setStatus(params);
+      // }, 20000);
     }
   }, [searchParams]);
   const getUserDataInstant = async () => {
@@ -433,7 +464,7 @@ export default function CopyCryptoToGC() {
       console.log("handleOk");
       getGCPurcahseLimitPerDay();
       setStatus("");
-      window.location.href = "/copy-crypto-to-gc";
+      window.location.href = "/crypto-to-gc";
     } catch (error) {
       console.log("error", error);
     }
@@ -515,7 +546,12 @@ export default function CopyCryptoToGC() {
     }
   };
 
-  const checkoutBillingForm = async (amount, gc, checkoutIndex) => {
+  const checkoutBillingForm = async (
+    amount,
+    gc,
+    checkoutIndex,
+    holePackageData
+  ) => {
     console.log(
       "dailyGCPurchaseLimitdailyGCPurchaseLimit",
       dailyGCPurchaseLimit,
@@ -571,11 +607,13 @@ export default function CopyCryptoToGC() {
     setIndex(checkoutIndex);
     setCheckOutLoader(true);
     setPaypalAmount(amount);
+
+    setPackageId("");
   };
 
   const handleShowCheckoutModel = async (amount, gc, checkoutIndex, values) => {
     // try {
-    console.log("amount", amount);
+    console.log("amount", amount, "packageId", packageId, values);
 
     setIndex(checkoutIndex);
     setCheckOutLoader(true);
@@ -586,6 +624,8 @@ export default function CopyCryptoToGC() {
       amount: amount,
       email: user.email,
       address: user.address,
+      promocode,
+      freespin: packageId,
       ...values,
     });
     const publicKey = process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
@@ -602,6 +642,7 @@ export default function CopyCryptoToGC() {
       environment: environment,
       locale: "en-GB",
       paymentSession: sessionResp?.data,
+      expandFirstPayment: false,
       onReady: () => {
         console.log("onReady");
       },
@@ -702,6 +743,14 @@ export default function CopyCryptoToGC() {
         <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
       )}
 
+      {status === "freespin" ? (
+        <FreeSpinModel
+          packgaeData={packgaeData}
+          showFreeSpin={true}
+          handleCloseFreeSpin={() => setStatus("")}
+        />
+      ) : null}
+
       {prizesLoading ? (
         <PageLoader />
       ) : (
@@ -781,7 +830,7 @@ export default function CopyCryptoToGC() {
                           CashApp
                         </span> */}
                       </div>
-                      <Dropdown>
+                      {/* <Dropdown>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
                           {!selectedTypeDropdown
                             ? "Authrize"
@@ -800,7 +849,7 @@ export default function CopyCryptoToGC() {
                             Checkout
                           </Dropdown.Item>
                         </Dropdown.Menu>
-                      </Dropdown>
+                      </Dropdown> */}
                     </div>
 
                     <div className="enter-promo new_enter_promo">
@@ -840,7 +889,7 @@ export default function CopyCryptoToGC() {
                     </div>
                   </div>
 
-                  {selectedTypeDropdown === "Authrize" ? (
+                  {selectedTypeDropdown === "Checkout" ? (
                     <div className="asterisk-desc cryptoTotoken abc first-grid">
                       <ul>
                         <li>
@@ -890,34 +939,48 @@ export default function CopyCryptoToGC() {
                               <div className="">
                                 {allPrizes.map((prize, i) => (
                                   <>
-                                    {prize.offerType === "freeSpin" && (
-                                      <>
-                                        {handleShowFreeSpin(prize) ? (
-                                          <h3 className="">
-                                            <PayWithCard
-                                              spendedAmount={spendedAmount}
-                                              prize={prize}
-                                              getExactPrice={getExactPrice}
-                                              getExactGC={getExactGC}
-                                              getExactToken={getExactToken}
-                                              promoDetails={promoDetails}
-                                              index={i}
-                                              setBuyLoading={setBuyLoading}
-                                              selectedTypeDropdown={
-                                                selectedTypeDropdown
-                                              }
-                                              dailyGCPurchaseLimit={
-                                                dailyGCPurchaseLimit
-                                              }
-                                              user={user}
-                                              getGCPackages={getGCPackages}
-                                            />
-                                          </h3>
-                                        ) : (
-                                          ""
-                                        )}
-                                      </>
-                                    )}
+                                    {prize.offerType === "freeSpin" &&
+                                      (user?.id ===
+                                        "6729daa88364d3fc987690ff" ||
+                                        user?.id ===
+                                          "65b3accffb994c6afeabdd02") && (
+                                        <>
+                                          {handleShowFreeSpin(prize) ? (
+                                            <h3 className="">
+                                              <PayWithCard
+                                                spendedAmount={spendedAmount}
+                                                prize={prize}
+                                                getExactPrice={getExactPrice}
+                                                getExactGC={getExactGC}
+                                                getExactToken={getExactToken}
+                                                promoDetails={promoDetails}
+                                                index={i}
+                                                setBuyLoading={setBuyLoading}
+                                                selectedTypeDropdown={
+                                                  selectedTypeDropdown
+                                                }
+                                                dailyGCPurchaseLimit={
+                                                  dailyGCPurchaseLimit
+                                                }
+                                                user={user}
+                                                getGCPackages={getGCPackages}
+                                                setShowPyapal={setShowPyapal}
+                                                setBillingForm={setBillingForm}
+                                                setIndex={setIndex}
+                                                setCheckOutLoader={
+                                                  setCheckOutLoader
+                                                }
+                                                setPaypalAmount={
+                                                  setPaypalAmount
+                                                }
+                                                setPackageId={setPackageId}
+                                              />
+                                            </h3>
+                                          ) : (
+                                            ""
+                                          )}
+                                        </>
+                                      )}
                                   </>
                                 ))}
                               </div>
@@ -960,12 +1023,13 @@ export default function CopyCryptoToGC() {
                                                 <Button
                                                   variant="primary"
                                                   onClick={() =>
-                                                    handleShowCheckoutModel(
+                                                    checkoutBillingForm(
                                                       parseFloat(
                                                         prize?.priceInBUSD
                                                       ),
-                                                      prize.gcAmount,
-                                                      i
+                                                      prize?.gcAmount,
+                                                      i,
+                                                      prize
                                                     )
                                                   }
                                                 >
@@ -1007,6 +1071,7 @@ export default function CopyCryptoToGC() {
                                                   }
                                                   user={user}
                                                   getGCPackages={getGCPackages}
+                                                  setPackageId={setPackageId}
                                                 />
                                               )
                                             ) : (
@@ -1110,7 +1175,8 @@ export default function CopyCryptoToGC() {
                                             checkoutBillingForm(
                                               parseFloat(prize?.priceInBUSD),
                                               prize?.gcAmount,
-                                              i
+                                              i,
+                                              prize
                                             )
                                           }
                                         >
@@ -1151,6 +1217,7 @@ export default function CopyCryptoToGC() {
                                             dailyGCPurchaseLimit
                                           }
                                           user={user}
+                                          setPackageId={setPackageId}
                                         />
                                       )
                                     ) : (
@@ -1243,6 +1310,11 @@ const PayWithCard = ({
   dailyGCPurchaseLimit,
   spendedAmount,
   user,
+  setShowPyapal,
+  setBillingForm,
+  selectedTypeDropdown,
+  setPaypalAmount,
+  setPackageId,
 }) => {
   const [showAuthForm, setShowAuthForm] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -1301,7 +1373,22 @@ const PayWithCard = ({
       );
     }
     setLoader(false);
-    setShowAuthForm(true);
+
+    if (selectedTypeDropdown === "Checkout") {
+      setShowPyapal(true);
+      setBillingForm(true);
+      setPaypalAmount(usd);
+    } else {
+      setShowAuthForm(true);
+    }
+
+    if (prize?._id && prize?.offerType === "freeSpin") {
+      setPackageId(prize?._id);
+    }
+
+    // setIndex(checkoutIndex);
+    // setCheckOutLoader(true);
+    // setPaypalAmount(amount);
 
     let payload = {
       freeTokenAmount: getExactToken(prize.freeTokenAmount, promoDetails),

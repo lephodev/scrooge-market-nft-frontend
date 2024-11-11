@@ -400,20 +400,20 @@ export default function App() {
                     path='/redeem-nfts'
                     element={<ProtectedRoute component={<RedeemNFTs />} />}
                   /> */}
-                    <Route
+                    {/* <Route
                       path='/crypto-to-gc'
                       element={<ProtectedRoute component={<CryptoToGC />} />}
-                    />
+                    /> */}
                     <Route
                       path='/redeem-prizes'
                       element={<ProtectedRoute component={<RedeemPrizes />} />}
                     />
                     <Route
-                      path='/crypto-to-gc'
+                      path='/copy-crypto-to-gc'
                       element={<ProtectedRoute component={<CryptoToGC />} />}
                     />
                     <Route
-                      path='/copy-crypto-to-gc'
+                      path='/crypto-to-gc'
                       element={<ProtectedRoute component={<CopyCryptoToGC />} />}
                     />
                     <Route
