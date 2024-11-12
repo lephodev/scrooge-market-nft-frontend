@@ -1030,7 +1030,7 @@ export default function CopyCryptoToGC() {
                                                     <Spinner animation="border" />
                                                   ) : (
                                                     <>
-                                                      <p>Buy With Checkout</p>{" "}
+                                                      <p>Buy Now</p>{" "}
                                                       <span>
                                                         $
                                                         {getExactPrice(
@@ -1177,7 +1177,7 @@ export default function CopyCryptoToGC() {
                                             <Spinner animation="border" />
                                           ) : (
                                             <>
-                                              <p>Buy With Checkout</p>{" "}
+                                              <p>Buy Now</p>{" "}
                                               <span>
                                                 $
                                                 {getExactPrice(
