@@ -82,13 +82,13 @@ export default function CopyCryptoToGC() {
   const appearance = {
     colorAction: "#FFC700",
     colorBackground: "#0A0A0C",
-    colorBorder: "#68686C",
+    colorBorder: "#292929",
     colorDisabled: "#64646E",
     colorError: "#FF3300",
     colorFormBackground: "#1F1F1F",
     colorFormBorder: "#1F1F1F",
-    colorInverse: "#F9F9FB",
-    colorOutline: "#ADA4EC",
+    colorInverse: "#000000",
+    colorOutline: "#2e2e2e",
     colorPrimary: "#F9F9FB",
     colorSecondary: "#828388",
     colorSuccess: "#2ECC71",
@@ -99,6 +99,14 @@ export default function CopyCryptoToGC() {
       fontWeight: 700,
       letterSpacing: 0,
       lineHeight: "24px",
+      colorInverse: "#000000",
+      background: "linear-gradient(90deg, #FFC700, #FFECA8 51%, #FFC700)",
+      span: {
+        background: "none",
+      },
+    },  
+    span: {
+      background:"none"
     },
     footnote: {
       fontFamily:
