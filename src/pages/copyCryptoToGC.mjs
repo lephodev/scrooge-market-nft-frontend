@@ -78,6 +78,54 @@ export default function CopyCryptoToGC() {
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
+
+  const appearance = {
+    colorAction: "#FFC700",
+    colorBackground: "#0A0A0C",
+    colorBorder: "#68686C",
+    colorDisabled: "#64646E",
+    colorError: "#FF3300",
+    colorFormBackground: "#1F1F1F",
+    colorFormBorder: "#1F1F1F",
+    colorInverse: "#F9F9FB",
+    colorOutline: "#ADA4EC",
+    colorPrimary: "#F9F9FB",
+    colorSecondary: "#828388",
+    colorSuccess: "#2ECC71",
+    button: {
+      fontFamily:
+        '"Roboto Mono", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif',
+      fontSize: "16px",
+      fontWeight: 700,
+      letterSpacing: 0,
+      lineHeight: "24px",
+    },
+    footnote: {
+      fontFamily:
+        '"PT Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif',
+      fontSize: "14px",
+      fontWeight: 400,
+      letterSpacing: 0,
+      lineHeight: "20px",
+    },
+    label: {
+      fontFamily:
+        '"Roboto Mono", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif',
+      fontSize: "14px",
+      fontWeight: 400,
+      letterSpacing: 0,
+      lineHeight: "20px",
+    },
+    subheading: {
+      fontFamily:
+        '"Roboto Mono", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif',
+      fontSize: "16px",
+      fontWeight: 700,
+      letterSpacing: 0,
+      lineHeight: "24px",
+    },
+    borderRadius: ["8px", "8px"],
+  };
   const [cookies] = useCookies(["token"]);
   const [showPaypal, setShowPyapal] = useState(false);
   const [paypalAmount, setPaypalAmount] = useState();
@@ -640,9 +688,9 @@ export default function CopyCryptoToGC() {
     const checkout = await loadCheckoutWebComponents({
       publicKey: publicKey,
       environment: environment,
+      appearance,
       locale: "en-GB",
       paymentSession: sessionResp?.data,
-      expandFirstPayment: false,
       onReady: () => {
         console.log("onReady");
       },
@@ -939,48 +987,42 @@ export default function CopyCryptoToGC() {
                               <div className="">
                                 {allPrizes.map((prize, i) => (
                                   <>
-                                    {prize.offerType === "freeSpin" &&
-                                      (user?.id ===
-                                        "6729daa88364d3fc987690ff" ||
-                                        user?.id ===
-                                          "65b3accffb994c6afeabdd02") && (
-                                        <>
-                                          {handleShowFreeSpin(prize) ? (
-                                            <h3 className="">
-                                              <PayWithCard
-                                                spendedAmount={spendedAmount}
-                                                prize={prize}
-                                                getExactPrice={getExactPrice}
-                                                getExactGC={getExactGC}
-                                                getExactToken={getExactToken}
-                                                promoDetails={promoDetails}
-                                                index={i}
-                                                setBuyLoading={setBuyLoading}
-                                                selectedTypeDropdown={
-                                                  selectedTypeDropdown
-                                                }
-                                                dailyGCPurchaseLimit={
-                                                  dailyGCPurchaseLimit
-                                                }
-                                                user={user}
-                                                getGCPackages={getGCPackages}
-                                                setShowPyapal={setShowPyapal}
-                                                setBillingForm={setBillingForm}
-                                                setIndex={setIndex}
-                                                setCheckOutLoader={
-                                                  setCheckOutLoader
-                                                }
-                                                setPaypalAmount={
-                                                  setPaypalAmount
-                                                }
-                                                setPackageId={setPackageId}
-                                              />
-                                            </h3>
-                                          ) : (
-                                            ""
-                                          )}
-                                        </>
-                                      )}
+                                    {prize.offerType === "freeSpin" && (
+                                      <>
+                                        {handleShowFreeSpin(prize) ? (
+                                          <h3 className="">
+                                            <PayWithCard
+                                              spendedAmount={spendedAmount}
+                                              prize={prize}
+                                              getExactPrice={getExactPrice}
+                                              getExactGC={getExactGC}
+                                              getExactToken={getExactToken}
+                                              promoDetails={promoDetails}
+                                              index={i}
+                                              setBuyLoading={setBuyLoading}
+                                              selectedTypeDropdown={
+                                                selectedTypeDropdown
+                                              }
+                                              dailyGCPurchaseLimit={
+                                                dailyGCPurchaseLimit
+                                              }
+                                              user={user}
+                                              getGCPackages={getGCPackages}
+                                              setShowPyapal={setShowPyapal}
+                                              setBillingForm={setBillingForm}
+                                              setIndex={setIndex}
+                                              setCheckOutLoader={
+                                                setCheckOutLoader
+                                              }
+                                              setPaypalAmount={setPaypalAmount}
+                                              setPackageId={setPackageId}
+                                            />
+                                          </h3>
+                                        ) : (
+                                          ""
+                                        )}
+                                      </>
+                                    )}
                                   </>
                                 ))}
                               </div>
@@ -1037,14 +1079,7 @@ export default function CopyCryptoToGC() {
                                                     <Spinner animation="border" />
                                                   ) : (
                                                     <>
-                                                      <p>Buy With Checkout</p>{" "}
-                                                      <span>
-                                                        $
-                                                        {getExactPrice(
-                                                          prize?.priceInBUSD,
-                                                          promoDetails
-                                                        )}
-                                                      </span>
+                                                      <p>Buy Now</p>{" "}
                                                     </>
                                                   )}
                                                 </Button>
@@ -1184,14 +1219,7 @@ export default function CopyCryptoToGC() {
                                             <Spinner animation="border" />
                                           ) : (
                                             <>
-                                              <p>Buy With Checkout</p>{" "}
-                                              <span>
-                                                $
-                                                {getExactPrice(
-                                                  prize?.priceInBUSD,
-                                                  promoDetails
-                                                )}
-                                              </span>
+                                              <p>Buy Now</p>{" "}
                                             </>
                                           )}
                                         </Button>
