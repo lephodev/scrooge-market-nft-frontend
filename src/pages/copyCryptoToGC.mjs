@@ -1031,13 +1031,6 @@ export default function CopyCryptoToGC() {
                                                   ) : (
                                                     <>
                                                       <p>Buy Now</p>{" "}
-                                                      <span>
-                                                        $
-                                                        {getExactPrice(
-                                                          prize?.priceInBUSD,
-                                                          promoDetails
-                                                        )}
-                                                      </span>
                                                     </>
                                                   )}
                                                 </Button>
@@ -1178,13 +1171,6 @@ export default function CopyCryptoToGC() {
                                           ) : (
                                             <>
                                               <p>Buy Now</p>{" "}
-                                              <span>
-                                                $
-                                                {getExactPrice(
-                                                  prize?.priceInBUSD,
-                                                  promoDetails
-                                                )}
-                                              </span>
                                             </>
                                           )}
                                         </Button>
