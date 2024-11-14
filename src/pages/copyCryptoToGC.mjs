@@ -78,6 +78,62 @@ export default function CopyCryptoToGC() {
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
+
+  const appearance = {
+    colorAction: "#FFC700",
+    colorBackground: "#0A0A0C",
+    colorBorder: "#292929",
+    colorDisabled: "#64646E",
+    colorError: "#FF3300",
+    colorFormBackground: "#1F1F1F",
+    colorFormBorder: "#1F1F1F",
+    colorInverse: "#000000",
+    colorOutline: "#2e2e2e",
+    colorPrimary: "#F9F9FB",
+    colorSecondary: "#828388",
+    colorSuccess: "#2ECC71",
+    button: {
+      fontFamily:
+        '"Roboto Mono", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif',
+      fontSize: "16px",
+      fontWeight: 700,
+      letterSpacing: 0,
+      lineHeight: "24px",
+      colorInverse: "#000000",
+      background: "linear-gradient(90deg, #FFC700, #FFECA8 51%, #FFC700)",
+      span: {
+        background: "none",
+      },
+    },  
+    span: {
+      background:"none"
+    },
+    footnote: {
+      fontFamily:
+        '"PT Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif',
+      fontSize: "14px",
+      fontWeight: 400,
+      letterSpacing: 0,
+      lineHeight: "20px",
+    },
+    label: {
+      fontFamily:
+        '"Roboto Mono", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif',
+      fontSize: "14px",
+      fontWeight: 400,
+      letterSpacing: 0,
+      lineHeight: "20px",
+    },
+    subheading: {
+      fontFamily:
+        '"Roboto Mono", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif',
+      fontSize: "16px",
+      fontWeight: 700,
+      letterSpacing: 0,
+      lineHeight: "24px",
+    },
+    borderRadius: ["8px", "8px"],
+  };
   const [cookies] = useCookies(["token"]);
   const [showPaypal, setShowPyapal] = useState(false);
   const [paypalAmount, setPaypalAmount] = useState();
@@ -640,6 +696,7 @@ export default function CopyCryptoToGC() {
     const checkout = await loadCheckoutWebComponents({
       publicKey: publicKey,
       environment: environment,
+      appearance,
       locale: "en-GB",
       paymentSession: sessionResp?.data,
       onReady: () => {
