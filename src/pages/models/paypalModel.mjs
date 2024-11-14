@@ -301,11 +301,19 @@ const PaypalModel = ({
                         type="text" // Change type to "text" to allow non-numeric characters
                         placeholder="Phone Number"
                         {...register("phoneNumber")}
-                        onChange={(e) => {
-                          e.target.value = e.target.value
-                            .replace(/[^0-9]/g, "")
-                            .slice(0, 11); // Allow only numeric characters and limit to 11 digits
+                        onKeyDown={(e) => {
+                          if (
+                            !/^[0-9]$/.test(e.key) &&
+                            e.key !== "Backspace" &&
+                            e.key !== "Delete" &&
+                            e.key !== "ArrowLeft" &&
+                            e.key !== "ArrowRight" &&
+                            e.key !== "."
+                          ) {
+                            e.preventDefault();
+                          }
                         }}
+                        maxLength={11}
                       />
                     </Form.Group>
                   </div>
