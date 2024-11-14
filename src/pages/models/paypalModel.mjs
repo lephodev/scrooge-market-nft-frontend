@@ -298,10 +298,22 @@ const PaypalModel = ({
                     <Form.Group className="form-group">
                       <Form.Label>Phone Number*</Form.Label>
                       <Form.Control
-                        type="number" // Change type to "text" to allow non-numeric characters
+                        type="text" // Change type to "text" to allow non-numeric characters
                         placeholder="Phone Number"
                         {...register("phoneNumber")}
-                        required
+                        onKeyDown={(e) => {
+                          if (
+                            !/^[0-9]$/.test(e.key) &&
+                            e.key !== "Backspace" &&
+                            e.key !== "Delete" &&
+                            e.key !== "ArrowLeft" &&
+                            e.key !== "ArrowRight" &&
+                            e.key !== "."
+                          ) {
+                            e.preventDefault();
+                          }
+                        }}
+                        maxLength={11}
                       />
                     </Form.Group>
                   </div>
