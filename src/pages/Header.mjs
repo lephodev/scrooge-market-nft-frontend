@@ -66,7 +66,7 @@ const Header = () => {
       localStorage.removeItem("activeCount");
     }
     localStorage.clear();
-    window.location.href = `${scroogeClient}`;
+    window.location.href = `${scroogeClient}/en/`;
   };
 
   const currentRoute = useCurrentPath();
@@ -86,12 +86,12 @@ const Header = () => {
     setDropdownVisible(value);
   };
 
-  const [notifyOpen,setNotifyOpen]=useState();
+  const [notifyOpen, setNotifyOpen] = useState();
   const notifyRef = useRef();
 
-  const handleClickdropdown=()=>{
+  const handleClickdropdown = () => {
     setNotifyOpen(!notifyOpen);
-  }
+  };
 
   return (
     // <div className='headerContainer'>
@@ -117,7 +117,7 @@ const Header = () => {
         >
           <div className="header-content ">
             <div className="header_logo">
-              <Link to={scroogeClient}>
+              <Link to={`${scroogeClient}/en/`}>
                 {user ? (
                   <img src={newLogo} alt="logo" height={70} width={70} />
                 ) : (
@@ -153,7 +153,7 @@ const Header = () => {
                   >
                     <a
                       // href={`${marketPlaceUrl}/crypto-to-gc`}
-                      href="/"
+                      href="/en/"
                       rel="noreferrer"
                     >
                       <FaPlusCircle />
@@ -186,25 +186,41 @@ const Header = () => {
                 <img src={bell} height={20} width={20} alt="bell_icon" />
               </div> */}
               <div className=" position-relative">
-                        <div role="presentation" onClick={handleClickdropdown}><img src={bell} height={20} width={20} alt="bell_icon" /></div>
+                <div role="presentation" onClick={handleClickdropdown}>
+                  <img src={bell} height={20} width={20} alt="bell_icon" />
+                </div>
 
-                        {notifyOpen ? <div className="notification_Section" ref={notifyRef}>
-                          <div className="notification_header"><h4>Notification</h4></div>
-                          <div className="notificationMssg">
-                          {/* <div className="noNotification ">You have no notifications</div> */}
-                          <div className="notificationmssgBox">
-                               <img src="" alt="" />
-                               <p><Link>Your redemption request 5001 ST has been Rejected.</Link></p>
-                               <CancelSvg />
-                          </div>
-                          <div className="notificationmssgBox">
-                               <img src="" alt="" />
-                               <p><Link>Your redemption request 5001 ST has been Rejected.</Link></p>
-                               <CancelSvg />
-                          </div>
-                          </div>
-                        </div>:""}
+                {notifyOpen ? (
+                  <div className="notification_Section" ref={notifyRef}>
+                    <div className="notification_header">
+                      <h4>Notification</h4>
+                    </div>
+                    <div className="notificationMssg">
+                      {/* <div className="noNotification ">You have no notifications</div> */}
+                      <div className="notificationmssgBox">
+                        <img src="" alt="" />
+                        <p>
+                          <Link>
+                            Your redemption request 5001 ST has been Rejected.
+                          </Link>
+                        </p>
+                        <CancelSvg />
                       </div>
+                      <div className="notificationmssgBox">
+                        <img src="" alt="" />
+                        <p>
+                          <Link>
+                            Your redemption request 5001 ST has been Rejected.
+                          </Link>
+                        </p>
+                        <CancelSvg />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
               <div className="user-profile">
                 <Dropdown>
                   <Dropdown.Toggle
@@ -238,13 +254,13 @@ const Header = () => {
                   <Dropdown.Menu>
                     <Link
                       className="dropdown-item"
-                      to={`${scroogeClient}/profile`}
+                      to={`${scroogeClient}/en/profile`}
                     >
                       Profile
                     </Link>
                     <Link
                       className="dropdown-item"
-                      to={`${scroogeClient}/setting`}
+                      to={`${scroogeClient}/en/setting`}
                     >
                       Settings
                     </Link>
@@ -265,7 +281,7 @@ const Header = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <div className="logo-mobile">
-                <Link to={scroogeClient}>
+                <Link to={`${scroogeClient}/en/`}>
                   {user ? (
                     <img
                       src={newLogo}
@@ -285,7 +301,7 @@ const Header = () => {
                   <>
                     <div className="navItem">
                       <Link
-                        to={scroogeClient}
+                        to={`${scroogeClient}/en/`}
                         className={`nav-link ${isActive(scroogeClient)}`}
                       >
                         Home
@@ -320,7 +336,7 @@ const Header = () => {
                           <div className="custom-dropdown-menu">
                             <ul>
                               <li>
-                                <Link to={`${scroogeClient}/new-releases`}>
+                                <Link to={`${scroogeClient}/en/new-releases`}>
                                   New Releases
                                 </Link>
                               </li>
@@ -328,58 +344,66 @@ const Header = () => {
                                             <Link to={pokerUrl}>Poker</Link>
                                           </li> */}
                               <li>
-                                <Link to={`${scroogeClient}/games`}>Slots</Link>
+                                <Link to={`${scroogeClient}/en/games`}>
+                                  Slots
+                                </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/table-games`}>
+                                <Link to={`${scroogeClient}/en/table-games`}>
                                   Table Games
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/casual`}>
+                                <Link to={`${scroogeClient}/en/casual`}>
                                   Casuals
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/classic-slot`}>
+                                <Link to={`${scroogeClient}/en/classic-slot`}>
                                   Classic Slots
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/fish-games`}>
+                                <Link to={`${scroogeClient}/en/fish-games`}>
                                   Fish Games
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/holdAndWin-games`}>
+                                <Link
+                                  to={`${scroogeClient}/en/holdAndWin-games`}
+                                >
                                   Hold And Win
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/jackpot-games`}>
+                                <Link to={`${scroogeClient}/en/jackpot-games`}>
                                   Jackpots
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/keno`}>Keno</Link>
+                                <Link to={`${scroogeClient}/en/keno`}>
+                                  Keno
+                                </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/megaways`}>
+                                <Link to={`${scroogeClient}/en/megaways`}>
                                   Megaways
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/penny-machine`}>
+                                <Link to={`${scroogeClient}/en/penny-machine`}>
                                   Penny Machine
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/scratcher-games`}>
+                                <Link
+                                  to={`${scroogeClient}/en/scratcher-games`}
+                                >
                                   Scratcher
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`${scroogeClient}/video-poker`}>
+                                <Link to={`${scroogeClient}/en/video-poker`}>
                                   Video Poker
                                 </Link>
                               </li>
@@ -412,7 +436,7 @@ const Header = () => {
                         Daily Wheel Spin
                       </Link>
                       <Link
-                        to={`${scroogeClient}/affiliate`}
+                        to={`${scroogeClient}/en/affiliate`}
                         className={`nav-link ${isActive("/affiliate")}`}
                       >
                         Affiliate Program
@@ -427,7 +451,7 @@ const Header = () => {
                     <div className="header-btn-mobile user-profile">
                       <a
                         className="dropdown-item"
-                        href={`${scroogeClient}/profile`}
+                        href={`${scroogeClient}/en/profile`}
                       >
                         <img
                           src={user?.profile ? user?.profile : profile}
@@ -440,7 +464,7 @@ const Header = () => {
                       </a>
                       <a
                         className="dropdown-item text-white"
-                        href={`${scroogeClient}/setting`}
+                        href={`${scroogeClient}/en/setting`}
                       >
                         <SettingSvg />
                       </a>
@@ -479,19 +503,19 @@ const Header = () => {
                           <div className="custom-dropdown-menu">
                             <ul>
                               <li>
-                                <Link to="/profile?active=spending">
+                                <Link to="/en/profile?active=spending">
                                   {" "}
                                   Spending Limit
                                 </Link>
                               </li>
                               <li>
-                                <Link to="/deactivateAccount">
+                                <Link to="/en/deactivateAccount">
                                   {" "}
                                   Access Restrictions
                                 </Link>
                               </li>
                               <li>
-                                <Link to="/profile?active=transaction">
+                                <Link to="/en/profile?active=transaction">
                                   {" "}
                                   Account History
                                 </Link>
@@ -528,10 +552,12 @@ const Header = () => {
                           <div className="custom-dropdown-menu">
                             <ul>
                               <li>
-                                <Link to="/privacyPolicy">Privacy policy</Link>
+                                <Link to="/en/privacyPolicy">
+                                  Privacy policy
+                                </Link>
                               </li>
                               <li>
-                                <Link to="/termsncondition">
+                                <Link to="/en/termsncondition">
                                   Terms of Services
                                 </Link>
                               </li>
@@ -563,7 +589,7 @@ const Header = () => {
                   </>
                 ) : (
                   <a
-                    href={`${scroogeClient}`}
+                    href={`${scroogeClient}/en/`}
                     /* target="_blank" */ rel="noreferrer"
                     alt="Login to Scrooge Casino"
                   >
@@ -597,13 +623,20 @@ function SettingSvg() {
   );
 }
 
-const CancelSvg=()=>{
-  return(
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
-  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-</svg>
-)
-}
+const CancelSvg = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      className="bi bi-x"
+      viewBox="0 0 16 16"
+    >
+      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+    </svg>
+  );
+};
 
 function ArrowIcon() {
   return (
