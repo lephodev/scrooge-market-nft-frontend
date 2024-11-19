@@ -714,8 +714,7 @@ export default function CopyCryptoToGC() {
       },
       onChange: (component) => {
         console.log(
-          `onChange() -> isValid: "${component.isValid()}" for "${
-            component.type
+          `onChange() -> isValid: "${component.isValid()}" for "${component.type
           }"`
         );
       },
@@ -750,6 +749,18 @@ export default function CopyCryptoToGC() {
     setPaypalAmount(0);
     setIndex();
   };
+
+
+  const tooltip = <Tooltip id="tooltip" style={{ textAlign: "left" }} className="read-tip">
+    <div className="w-100">
+    <p>1: Max 4 successful Purchases per user account each calendar day (EST)</p>
+<p>2: Cards used must be in account owners name</p>
+<p>Exceeding the following will result in a 30 day restriction on purchasing:</p>
+<p>1: Attempts with  &gt;5 card #’s in a 30 D timeframe.</p>
+<p>2: Attempts with the same card on multiple accounts.</p>
+<p>3: Using &gt;2 accounts on a single device.</p>
+</div>
+  </Tooltip>;
 
   return (
     <>
@@ -796,8 +807,8 @@ export default function CopyCryptoToGC() {
       {(status === "success" ||
         status === "inprogress" ||
         status === "failure") && (
-        <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
-      )}
+          <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
+        )}
 
       {status === "freespin" ? (
         <FreeSpinModel
@@ -948,9 +959,21 @@ export default function CopyCryptoToGC() {
                   {selectedTypeDropdown === "Checkout" ? (
                     <div className="asterisk-desc cryptoTotoken abc first-grid">
                       <ul>
-                        <li>
-                          <span>Please note:</span> Credit card transactions are
-                          limited to four purchases per day.
+                        <li className="d-flex justify-content-center align-items-center">
+                          {/* <span>Please note:</span> Credit card transactions are
+                          limited to four purchases per day. */}
+
+
+                          Important Purchase tips, 
+                          {/* <span> Read Here</span> */}
+
+                          <OverlayTrigger placement="bottom"
+                          delay={{ show: 250, hide: 50000000 }}
+                          overlay={tooltip}>
+              <div bsStyle="default" className="tooltipCard">
+                {/* <InfoIcon /> */} <span className="tool-read">Read Here</span>
+              </div>
+            </OverlayTrigger>
                         </li>
                       </ul>
                     </div>
@@ -1066,7 +1089,7 @@ export default function CopyCryptoToGC() {
                                             </Card.Title>
 
                                             {selectedTypeDropdown ===
-                                            "Checkout" ? (
+                                              "Checkout" ? (
                                               getExactPrice(
                                                 prize?.priceInBUSD
                                               ) > 0 && (
@@ -1178,13 +1201,13 @@ export default function CopyCryptoToGC() {
                                         ? coin1
                                         : 10 < prize.priceInBUSD &&
                                           prize.priceInBUSD <= 50
-                                        ? coin2
-                                        : 50 < prize.priceInBUSD &&
-                                          prize.priceInBUSD <= 100
-                                        ? coin3
-                                        : 100 < prize.priceInBUSD
-                                        ? coin4
-                                        : ""
+                                          ? coin2
+                                          : 50 < prize.priceInBUSD &&
+                                            prize.priceInBUSD <= 100
+                                            ? coin3
+                                            : 100 < prize.priceInBUSD
+                                              ? coin4
+                                              : ""
                                     }
                                   />
                                   <Card.Body>
