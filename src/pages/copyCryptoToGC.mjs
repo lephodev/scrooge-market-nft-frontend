@@ -968,7 +968,7 @@ export default function CopyCryptoToGC() {
                           {/* <span> Read Here</span> */}
 
                           <OverlayTrigger placement="bottom"
-                          delay={{ show: 250, hide: 50000000 }}
+                          delay={{ show: 250, hide: 2000 }}
                           overlay={tooltip}>
               <div bsStyle="default" className="tooltipCard">
                 {/* <InfoIcon /> */} <span className="tool-read">Read Here</span>
