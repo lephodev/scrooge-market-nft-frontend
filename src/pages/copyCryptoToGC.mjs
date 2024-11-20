@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { AcceptHosted } from "react-acceptjs";
 import {
   Button,
@@ -78,6 +78,9 @@ export default function CopyCryptoToGC() {
   const { reward } = useReward("rewardId", "confetti", {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
+
+  const [showTooltip, setShowTooltip] = useState(false);
+  const tooltipRef = useRef(null);
 
   const appearance = {
     colorAction: "#FFC700",
@@ -751,7 +754,28 @@ export default function CopyCryptoToGC() {
   };
 
 
-  const tooltip = <Tooltip id="tooltip" style={{ textAlign: "left" }} className="read-tip">
+const handleToggle = () => {
+  setShowTooltip((prev) => !prev);
+};
+
+  const handleClickOutside = (event) => {
+    if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
+      setShowTooltip(false); // Close tooltip when clicking outside
+    }
+  };
+
+  useEffect(() => {
+    if (showTooltip) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showTooltip]);
+
+  const tooltip = <Tooltip id="tooltip" style={{ textAlign: "left" }} className="read-tip" ref={tooltipRef}>
     <div className="w-100">
     <p>1: Max 4 successful Purchases per user account each calendar day (EST)</p>
 <p>2: Cards used must be in account owners name</p>
@@ -968,9 +992,11 @@ export default function CopyCryptoToGC() {
                           {/* <span> Read Here</span> */}
 
                           <OverlayTrigger placement="bottom"
-                          delay={{ show: 250, hide: 2000 }}
+                          //  placement="bottom"
+                           show={showTooltip}
+                          // delay={{ show: 250, hide: 2000 }}
                           overlay={tooltip}>
-              <div bsStyle="default" className="tooltipCard">
+              <div bsStyle="default" className="tooltipCard" onClick={handleToggle}>
                 {/* <InfoIcon /> */} <span className="tool-read">Read Here</span>
               </div>
             </OverlayTrigger>
