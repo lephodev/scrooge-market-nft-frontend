@@ -226,8 +226,8 @@ const FiatPopup = ({
               )}
               {!fiatActiveInActive.Paypal && (
                 <Form.Text>
-                  <i><b>Note: </b>Paypal availability is subject to the apps sending limits.
-                  When limits are reached, the option is disabled temporarily.</i>
+                  <span style={{fontWeight: "800"}}>Note:</span> <span style={{fontStyle: "italic"}}>Paypal availability is subject to the apps sending limits.
+                  When limits are reached, the option is disabled temporarily.</span>
                 </Form.Text>
               )}
             </div>
