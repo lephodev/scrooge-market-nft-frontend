@@ -138,7 +138,7 @@ const FiatPopup = ({
       paymentType?.value === "Paypal" ? purchaseWithPaypal : purchaseWithCashApp
     ),
   });
-  setValue("paymentType", "Paypal");
+  
   const WithdrawRequest = async (values) => {
     try {
       setPurchaseAmount(values?.amount);
@@ -187,6 +187,10 @@ const FiatPopup = ({
     setValue("cashAppid", "");
     setPaymentType(selectedOptions);
   };
+
+  useEffect(()=>{
+    setValue("paymentType", "Paypal");
+  })
 
   // const handleChnagePrice = (selectedOptions) => {
   //   console.log("selectedOptions", selectedOptions);
