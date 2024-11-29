@@ -117,7 +117,9 @@ const FiatPopup = ({
 }) => {
   const { user } = useContext(AuthContext);
 
-  const [paymentType, setPaymentType] = useState();
+  const [paymentType, setPaymentType] = useState({
+    value: "Paypal"
+  });
   const [loading, setLoading] = useState(false);
   const [successShow, setSuccessShow] = useState(false);
   const [purchaseAmount, setPurchaseAmount] = useState();
