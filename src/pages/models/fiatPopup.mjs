@@ -217,19 +217,19 @@ const FiatPopup = ({
           <Form onSubmit={handleSubmit(WithdrawRequest)}>
             <div className="form_top">
               <Form.Label className="form_heading">Withdraw to</Form.Label>
-              {!fiatActiveInActive.Cashapp && (
+              {/* {!fiatActiveInActive.Cashapp && (
                 <Form.Text>
-                  {/* Cashapp */} Paypal availability is subject to the apps
+                  Paypal availability is subject to the apps
                   sending limits. When limits are reached, the option is
                   disabled temporarily.
                 </Form.Text>
-              )}
-              {!fiatActiveInActive.Paypal && (
+              )} */}
+              {/* {!fiatActiveInActive.Paypal && (
                 <Form.Text>
                   <span style={{fontWeight: "800"}}>Note:</span> <span style={{fontStyle: "italic"}}>Paypal availability is subject to the apps sending limits.
                   When limits are reached, the option is disabled temporarily.</span>
                 </Form.Text>
-              )}
+              )} */}
             </div>
             <div className="fiat-content withdraw_content">
               <Form.Group
@@ -241,7 +241,7 @@ const FiatPopup = ({
                   options={options}
                   onChange={handleChnagePayout}
                   styles={customStyles}
-                  defaultValue={options[1]}
+                  defaultValue={options[0]}
                 />
                 {errors?.paymentType && (
                   <p className="error-msg">{errors?.paymentType?.message}</p>
