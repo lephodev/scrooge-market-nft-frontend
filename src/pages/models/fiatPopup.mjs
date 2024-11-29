@@ -138,7 +138,7 @@ const FiatPopup = ({
       paymentType?.value === "Paypal" ? purchaseWithPaypal : purchaseWithCashApp
     ),
   });
-
+  setValue("paymentType", "Paypal");
   const WithdrawRequest = async (values) => {
     try {
       setPurchaseAmount(values?.amount);
