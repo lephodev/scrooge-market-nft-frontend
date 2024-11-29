@@ -241,7 +241,7 @@ const FiatPopup = ({
                   options={options}
                   onChange={handleChnagePayout}
                   styles={customStyles}
-                  defaultValue={options[0]}
+                  value={options[0]}
                 />
                 {errors?.paymentType && (
                   <p className="error-msg">{errors?.paymentType?.message}</p>
