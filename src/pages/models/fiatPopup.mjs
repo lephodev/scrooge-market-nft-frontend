@@ -226,8 +226,8 @@ const FiatPopup = ({
               )}
               {!fiatActiveInActive.Paypal && (
                 <Form.Text>
-                  Paypal availability is subject to the apps sending limits.
-                  When limits are reached, the option is disabled temporarily.
+                  <i><b>Note: </b>Paypal availability is subject to the apps sending limits.
+                  When limits are reached, the option is disabled temporarily.</i>
                 </Form.Text>
               )}
             </div>
@@ -241,6 +241,7 @@ const FiatPopup = ({
                   options={options}
                   onChange={handleChnagePayout}
                   styles={customStyles}
+                  defaultValue={options[1]}
                 />
                 {errors?.paymentType && (
                   <p className="error-msg">{errors?.paymentType?.message}</p>
