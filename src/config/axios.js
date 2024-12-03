@@ -53,6 +53,17 @@ export const authInstance = async () => {
   });
 };
 
+export const notificationInstance = async () => {
+  const token = await getAuthorizationHeader();
+  return axios.create({
+    baseURL: `${scroogeServer}/v1/notification`,
+    headers: {
+      Authorization: token,
+      "Permissions-Policy": "geolocation=*",
+    },
+  });
+};
+
 export const relaxGamingInstance = async () => {
   const token = await getAuthorizationHeader();
   return axios.create({

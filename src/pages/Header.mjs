@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useRef, useState } from "react";
 import newLogo from "../images/new-logo.webp";
 import { Button, Dropdown, Form, Nav, Navbar } from "react-bootstrap";
@@ -18,9 +19,12 @@ import profile from "../images/profile.png";
 import { Link, useLocation } from "react-router-dom";
 import hatLogo from "../images/scroogeHatLogo.png";
 import AuthContext from "../context/authContext.ts";
-import { authInstance } from "../config/axios.js";
+import { authInstance, notificationInstance } from "../config/axios.js";
+import Notification from "./Notification.mjs";
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
+
   const [isDropdownVisible, setDropdownVisible] = useState("");
   const subMenuRef = useRef();
   const { mode, user, setMode } = useContext(AuthContext);
@@ -87,12 +91,31 @@ const Header = () => {
   };
 
   const [notifyOpen, setNotifyOpen] = useState();
-  const notifyRef = useRef();
 
   const handleClickdropdown = () => {
     setNotifyOpen(!notifyOpen);
   };
 
+  const getNotificationsCount = async () => {
+    try {
+      if (user?.id) {
+        const res = await (
+          await notificationInstance()
+        ).get(`/notificationsCount?id=${user?.id}`, {
+          withCredentials: true,
+          credentials: "include",
+        });
+        const count = res?.data?.resData;
+        setNotificationCount(count);
+      }
+    } catch (err) {
+      console.log("errr", err);
+    }
+  };
+
+  useEffect(() => {
+    getNotificationsCount();
+  }, [user?.id]);
   return (
     // <div className='headerContainer'>
     //   <div className='header_top'>
@@ -191,31 +214,26 @@ const Header = () => {
                 </div>
 
                 {notifyOpen ? (
-                  <div className="notification_Section" ref={notifyRef}>
-                    <div className="notification_header">
-                      <h4>Notification</h4>
-                    </div>
-                    <div className="notificationMssg">
-                      {/* <div className="noNotification ">You have no notifications</div> */}
-                      <div className="notificationmssgBox">
-                        <img src="" alt="" />
-                        <p>
-                          <Link>
-                            Your redemption request 5001 ST has been Rejected.
-                          </Link>
-                        </p>
-                        <CancelSvg />
-                      </div>
-                      <div className="notificationmssgBox">
-                        <img src="" alt="" />
-                        <p>
-                          <Link>
-                            Your redemption request 5001 ST has been Rejected.
-                          </Link>
-                        </p>
-                        <CancelSvg />
+                  <div className="notificationDiv">
+                    <div
+                      className="notificationIcon"
+                      //  onClick={handleNotification}
+                      role="presentation"
+                    >
+                      <div
+                        className={
+                          notificationCount === 0
+                            ? "notificationCount-hidden"
+                            : "notificationCount"
+                        }
+                      >
+                        {notificationCount}
                       </div>
                     </div>
+                    <Notification
+                    //  show={handleNotification}
+                    //  setNotificationCount={setNotificationCount}
+                    />
                   </div>
                 ) : (
                   ""
@@ -622,21 +640,6 @@ function SettingSvg() {
     </svg>
   );
 }
-
-const CancelSvg = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
-      fill="currentColor"
-      className="bi bi-x"
-      viewBox="0 0 16 16"
-    >
-      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-    </svg>
-  );
-};
 
 function ArrowIcon() {
   return (
