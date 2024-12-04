@@ -5718,9 +5718,18 @@ span.tw-connected-wallet__balance {
   border-radius: 5px;
   box-shadow: 0 0 30px #343a4052;
   padding-top: 10px;
-  right: -30px;
+  right: -50px;
   top: 10px;
   width: 320px;
+}
+
+.notificationPage:before {
+  content: " ";
+  height: 20px;
+  right: 15px;
+  top: -10px;
+  transform: rotate(45deg);
+  width: 20px;
 }
 
 .notificationPage, .notificationPage:before {
