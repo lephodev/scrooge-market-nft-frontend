@@ -89,3 +89,16 @@ export const bGamingInstance = async () => {
     credentials: "include",
   });
 };
+
+export const hacksawInstance = async () => {
+  const token = await getAuthorizationHeader();
+  return axios.create({
+    baseURL: `${serverSlot}/api/hacksaw`, /// api/fantasma
+    headers: {
+      Authorization: token,
+      "Permissions-Policy": "geolocation=*",
+    },
+    withCredentials: true,
+    credentials: "include",
+  });
+};

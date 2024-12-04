@@ -2,8 +2,17 @@ import { Modal, Button } from "react-bootstrap";
 // import freeSpin from "../../images/freeSpin.jpg";
 import "./freeSpin.css";
 import { relaxLaunchUrl, slotUrl } from "../../config/keys.js";
-import { bGamingInstance, relaxGamingInstance } from "../../config/axios.js";
-const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
+import {
+  bGamingInstance,
+  hacksawInstance,
+  relaxGamingInstance,
+} from "../../config/axios.js";
+const FreeSpinModel = ({
+  showFreeSpin,
+  handleCloseFreeSpin,
+  packgaeData,
+  user,
+}) => {
   console.log(
     "showFreeSpin, handleCloseFreeSpin, packgaeData ",
     showFreeSpin,
@@ -49,6 +58,26 @@ const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
       window.location.href = `${slotUrl}/#/?game=${encodeURIComponent(
         game_url
       )}`;
+      // window.location.href = game_url;
+    } else if (packgaeData?.provider === "Hacksaw") {
+      const resp = await (
+        await hacksawInstance()
+      ).post("/launchGame", {
+        userId: user?.id || user?._id,
+        mode: "token",
+        gameId: packgaeData?.freeSpinGame,
+        device: window.innerWidth <= 767 ? "mobile" : "desktop",
+      });
+      localStorage.setItem(
+        "game",
+        `${slotUrl}/#/?game=${encodeURIComponent(resp.data.url)}`
+      );
+      window.location.href = `${slotUrl}/#/?game=${encodeURIComponent(
+        resp.data.url
+      )}`;
+      // window.location.href = resp.data.url;
+      return;
+
       // window.location.href = game_url;
     }
   };
