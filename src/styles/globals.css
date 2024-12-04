@@ -5700,6 +5700,73 @@ span.tw-connected-wallet__balance {
   color: black;
 }
 
+.notificationHeader {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  padding: 6px 15px;
+}
+
+.notificationHeader h4 {
+  font-size: 14px;
+  margin-bottom: 0px !important;
+  color: white;
+}
+
+.notificationPage {
+  border: 1px solid #1b1e26;
+  border-radius: 5px;
+  box-shadow: 0 0 30px #343a4052;
+  padding-top: 10px;
+  right: -50px;
+  top: 10px;
+  width: 320px;
+}
+
+.notificationPage:before {
+  content: " ";
+  height: 20px;
+  right: 15px;
+  top: -10px;
+  transform: rotate(45deg);
+  width: 20px;
+}
+
+.notificationPage, .notificationPage:before {
+  background-color: #1b1e26;
+  position: absolute;
+  z-index: 9;
+}
+
+.notificationIcon {
+  position: absolute;
+  top: -35px;
+  left: 45px;
+  background: #f5c005;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  font-size: 12px;
+}
+
+.notificationMssg::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+.notificationMssg::-webkit-scrollbar-track {
+  background:#1b1e26; 
+}
+ 
+/* Handle */
+.notificationMssg::-webkit-scrollbar-thumb {
+  background: #d2bc07; 
+}
 
 /********************************************************************************************/
 /************* Media Query ******************/
