@@ -107,9 +107,9 @@ export default function CopyCryptoToGC() {
       span: {
         background: "none",
       },
-    },  
+    },
     span: {
-      background:"none"
+      background: "none",
     },
     footnote: {
       fontFamily:
@@ -717,7 +717,8 @@ export default function CopyCryptoToGC() {
       },
       onChange: (component) => {
         console.log(
-          `onChange() -> isValid: "${component.isValid()}" for "${component.type
+          `onChange() -> isValid: "${component.isValid()}" for "${
+            component.type
           }"`
         );
       },
@@ -753,10 +754,9 @@ export default function CopyCryptoToGC() {
     setIndex();
   };
 
-
-const handleToggle = () => {
-  setShowTooltip((prev) => !prev);
-};
+  const handleToggle = () => {
+    setShowTooltip((prev) => !prev);
+  };
 
   const handleClickOutside = (event) => {
     if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
@@ -775,16 +775,28 @@ const handleToggle = () => {
     };
   }, [showTooltip]);
 
-  const tooltip = <Tooltip id="tooltip" style={{ textAlign: "left" }} className="read-tip" ref={tooltipRef}>
-    <div className="w-100">
-    <p>1: Max 4 successful Purchases per user account each calendar day (EST)</p>
-<p>2: Cards used must be in account owners name</p>
-<p>Exceeding the following will result in a 30 day restriction on purchasing:</p>
-<p>1: Attempts with  &gt;5 card #’s in a 30 D timeframe.</p>
-<p>2: Attempts with the same card on multiple accounts.</p>
-<p>3: Using &gt;2 accounts on a single device.</p>
-</div>
-  </Tooltip>;
+  const tooltip = (
+    <Tooltip
+      id="tooltip"
+      style={{ textAlign: "left" }}
+      className="read-tip"
+      ref={tooltipRef}
+    >
+      <div className="w-100">
+        <p>
+          1: Max 4 successful Purchases per user account each calendar day (EST)
+        </p>
+        <p>2: Cards used must be in account owners name</p>
+        <p>
+          Exceeding the following will result in a 30 day restriction on
+          purchasing:
+        </p>
+        <p>1: Attempts with &gt;5 card #’s in a 30 D timeframe.</p>
+        <p>2: Attempts with the same card on multiple accounts.</p>
+        <p>3: Using &gt;2 accounts on a single device.</p>
+      </div>
+    </Tooltip>
+  );
 
   return (
     <>
@@ -831,14 +843,15 @@ const handleToggle = () => {
       {(status === "success" ||
         status === "inprogress" ||
         status === "failure") && (
-          <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
-        )}
+        <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
+      )}
 
       {status === "freespin" ? (
         <FreeSpinModel
           packgaeData={packgaeData}
           showFreeSpin={true}
           handleCloseFreeSpin={() => setStatus("")}
+          user={user}
         />
       ) : null}
 
@@ -986,20 +999,24 @@ const handleToggle = () => {
                         <li className="d-flex justify-content-center align-items-center">
                           {/* <span>Please note:</span> Credit card transactions are
                           limited to four purchases per day. */}
-
-
-                          Important Purchase tips, 
+                          Important Purchase tips,
                           {/* <span> Read Here</span> */}
-
-                          <OverlayTrigger placement="bottom"
-                          //  placement="bottom"
-                           show={showTooltip}
-                          // delay={{ show: 250, hide: 2000 }}
-                          overlay={tooltip}>
-              <div bsStyle="default" className="tooltipCard" onClick={handleToggle}>
-                {/* <InfoIcon /> */} <span className="tool-read">Read Here</span>
-              </div>
-            </OverlayTrigger>
+                          <OverlayTrigger
+                            placement="bottom"
+                            //  placement="bottom"
+                            show={showTooltip}
+                            // delay={{ show: 250, hide: 2000 }}
+                            overlay={tooltip}
+                          >
+                            <div
+                              bsStyle="default"
+                              className="tooltipCard"
+                              onClick={handleToggle}
+                            >
+                              {/* <InfoIcon /> */}{" "}
+                              <span className="tool-read">Read Here</span>
+                            </div>
+                          </OverlayTrigger>
                         </li>
                       </ul>
                     </div>
@@ -1115,7 +1132,7 @@ const handleToggle = () => {
                                             </Card.Title>
 
                                             {selectedTypeDropdown ===
-                                              "Checkout" ? (
+                                            "Checkout" ? (
                                               getExactPrice(
                                                 prize?.priceInBUSD
                                               ) > 0 && (
@@ -1227,13 +1244,13 @@ const handleToggle = () => {
                                         ? coin1
                                         : 10 < prize.priceInBUSD &&
                                           prize.priceInBUSD <= 50
-                                          ? coin2
-                                          : 50 < prize.priceInBUSD &&
-                                            prize.priceInBUSD <= 100
-                                            ? coin3
-                                            : 100 < prize.priceInBUSD
-                                              ? coin4
-                                              : ""
+                                        ? coin2
+                                        : 50 < prize.priceInBUSD &&
+                                          prize.priceInBUSD <= 100
+                                        ? coin3
+                                        : 100 < prize.priceInBUSD
+                                        ? coin4
+                                        : ""
                                     }
                                   />
                                   <Card.Body>

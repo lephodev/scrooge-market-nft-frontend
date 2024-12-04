@@ -2,8 +2,17 @@ import { Modal, Button } from "react-bootstrap";
 // import freeSpin from "../../images/freeSpin.jpg";
 import "./freeSpin.css";
 import { relaxLaunchUrl, slotUrl } from "../../config/keys.js";
-import { bGamingInstance, relaxGamingInstance } from "../../config/axios.js";
-const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
+import {
+  bGamingInstance,
+  hacksawInstance,
+  relaxGamingInstance,
+} from "../../config/axios.js";
+const FreeSpinModel = ({
+  showFreeSpin,
+  handleCloseFreeSpin,
+  packgaeData,
+  user,
+}) => {
   console.log(
     "showFreeSpin, handleCloseFreeSpin, packgaeData ",
     showFreeSpin,
@@ -12,43 +21,70 @@ const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
   );
 
   const handleRedirectToGame = async () => {
-    if (
-      packgaeData?.provider === "Relax" ||
-      packgaeData?.provider === "Relax-Kalamba" ||
-      packgaeData?.provider === "Relax-Evoplay"
-    ) {
-      const tickt = await (await relaxGamingInstance()).get(`/getToken/SC.`);
+    console.log("handleRedirectToGame");
 
-      let relaxGameUrl = "";
-      relaxGameUrl = `${relaxLaunchUrl}gameid=${
-        packgaeData?.freeSpinGame
-      }&ticket=${tickt.data.token}&jurisdiction=MT&lang=en_SC&channel=${
-        window.innerWidth <= 767 ? "mobile" : "web"
-      }&partner=scrooge&partnerid=2258&moneymode=real`;
-      localStorage.setItem(
-        "game",
-        `${slotUrl}/#/?game=${encodeURIComponent(relaxGameUrl)}`
-      );
-      window.location.href = `${slotUrl}/#/?game=${encodeURIComponent(
-        relaxGameUrl
-      )}&mode=token`;
-    } else if (packgaeData?.provider === "bGaming") {
-      const launchData = await (
-        await bGamingInstance()
-      ).post(`/launch/${packgaeData?.freeSpinGame}/ST`);
-      const {
-        data: {
-          launch_options: { game_url },
-        },
-      } = launchData;
-      localStorage.setItem(
-        "game",
-        `${slotUrl}/#/?game=${encodeURIComponent(game_url)}`
-      );
-      window.location.href = `${slotUrl}/#/?game=${encodeURIComponent(
-        game_url
-      )}`;
-      // window.location.href = game_url;
+    try {
+      console.log("hhgh");
+
+      if (
+        packgaeData?.provider === "Relax" ||
+        packgaeData?.provider === "Relax-Kalamba" ||
+        packgaeData?.provider === "Relax-Evoplay" ||
+        packgaeData?.provider === "Relax-Playson"
+      ) {
+        const tickt = await (await relaxGamingInstance()).get(`/getToken/SC.`);
+
+        let relaxGameUrl = "";
+        relaxGameUrl = `${relaxLaunchUrl}gameid=${
+          packgaeData?.freeSpinGame
+        }&ticket=${tickt.data.token}&jurisdiction=MT&lang=en_SC&channel=${
+          window.innerWidth <= 767 ? "mobile" : "web"
+        }&partner=scrooge&partnerid=2258&moneymode=real`;
+        localStorage.setItem(
+          "game",
+          `${slotUrl}/#/?game=${encodeURIComponent(relaxGameUrl)}`
+        );
+        window.location.href = `${slotUrl}/#/?game=${encodeURIComponent(
+          relaxGameUrl
+        )}&mode=token`;
+      } else if (packgaeData?.provider === "bGaming") {
+        const launchData = await (
+          await bGamingInstance()
+        ).post(`/launch/${packgaeData?.freeSpinGame}/ST`);
+        const {
+          data: {
+            launch_options: { game_url },
+          },
+        } = launchData;
+        localStorage.setItem(
+          "game",
+          `${slotUrl}/#/?game=${encodeURIComponent(game_url)}`
+        );
+        window.location.href = `${slotUrl}/#/?game=${encodeURIComponent(
+          game_url
+        )}`;
+        // window.location.href = game_url;
+      } else if (packgaeData?.provider === "Hacksaw") {
+        console.log("hckkkkSHOWWW", user);
+
+        const resp = await (
+          await hacksawInstance()
+        ).post("/launchGame", {
+          userId: user?.id || user?._id,
+          mode: "token",
+          gameId: packgaeData?.freeSpinGame,
+          device: window.innerWidth <= 767 ? "mobile" : "desktop",
+        });
+        localStorage.setItem(
+          "game",
+          `${slotUrl}/#/?game=${encodeURIComponent(resp.data.url)}`
+        );
+        window.location.href = `${slotUrl}/#/?game=${encodeURIComponent(
+          resp.data.url
+        )}`;
+      }
+    } catch (error) {
+      console.log("errrr", error);
     }
   };
   return (
