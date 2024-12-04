@@ -15,7 +15,8 @@ const FreeSpinModel = ({ showFreeSpin, handleCloseFreeSpin, packgaeData }) => {
     if (
       packgaeData?.provider === "Relax" ||
       packgaeData?.provider === "Relax-Kalamba" ||
-      packgaeData?.provider === "Relax-Evoplay"
+      packgaeData?.provider === "Relax-Evoplay" ||
+      packgaeData?.provider === "Relax-Playson"
     ) {
       const tickt = await (await relaxGamingInstance()).get(`/getToken/SC.`);
 
