@@ -5754,6 +5754,10 @@ span.tw-connected-wallet__balance {
   font-size: 12px;
 }
 
+.notificationCount-hidden {
+display: none;
+}
+
 .notificationMssg::-webkit-scrollbar {
   width: 2px;
 }

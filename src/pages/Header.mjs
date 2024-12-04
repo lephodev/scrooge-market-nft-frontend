@@ -216,16 +216,16 @@ const Header = () => {
                 {notifyOpen ? (
                   <div className="notificationDiv">
                     <div
-                      className="notificationIcon"
+                      className="notificationIcon1"
                       //  onClick={handleNotification}
                       role="presentation"
                     >
                       <div
-                        className={
+                        className={ ` notificationIcon ${
                           notificationCount === 0
                             ? "notificationCount-hidden"
-                            : "notificationCount"
-                        }
+                            : "notificationCount"}
+                        `}
                       >
                         {notificationCount}
                       </div>
