@@ -31,7 +31,7 @@ import PageLoader from "../components/pageLoader/loader.mjs";
 import { Button, Spinner } from "react-bootstrap";
 import ConnectWalletModel from "./models/connectWalletModel.mjs";
 import PopUp2FA from "./twofa/PopUp2FA.mjs";
-import encryptPayload from "../utils/eencryptPayload";
+import encryptPayload from "../utils/eencryptPayload.js";
 
 function RedeemPrizes() {
   const navigate = useNavigate();

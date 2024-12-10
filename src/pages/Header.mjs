@@ -21,7 +21,7 @@ import hatLogo from "../images/scroogeHatLogo.png";
 import AuthContext from "../context/authContext.ts";
 import { authInstance, notificationInstance } from "../config/axios.js";
 import Notification from "./Notification.mjs";
-import encryptPayload from "../utils/eencryptPayload";
+import encryptPayload from "../utils/eencryptPayload.js";
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
