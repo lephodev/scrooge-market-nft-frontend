@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 // import { loadStripe } from "@stripe/stripe-js";
 import { scroogeClient /* stripeKey */ } from "../config/keys.js";
 import { marketPlaceInstance } from "../config/axios.js";
-import encryptPayload from "../utils/eencryptPayload";
+import encryptPayload from "../utils/eencryptPayload.js";
 
 // const stripePromise = loadStripe(stripeKey);
 

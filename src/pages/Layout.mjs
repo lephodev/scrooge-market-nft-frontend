@@ -49,7 +49,7 @@ import ConnectWalletModel from "./models/connectWalletModel.mjs";
 import Header from "./Header.mjs";
 import "../styles/header.css";
 import { marketPlaceInstance } from "../config/axios.js";
-import encryptPayload from "../utils/eencryptPayload";
+import encryptPayload from "../utils/eencryptPayload.js";
 
 export const Tooltip = (id, metadata, message) => (
   <Popup

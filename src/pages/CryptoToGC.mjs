@@ -44,7 +44,7 @@ import FreeSTModel from "./models/FreeSTModel.mjs";
 import AuthrizeCustomModel from "./models/authrizeCustomModel.mjs";
 import PaypalModel from "./models/paypalModel.mjs";
 import { userKycDetails } from "../utils/api.mjs";
-import encryptPayload from "../utils/eencryptPayload";
+import encryptPayload from "../utils/eencryptPayload.js";
 let promoCode;
 let goldcoinAmount;
 
