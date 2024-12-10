@@ -31,6 +31,7 @@ import PageLoader from "../components/pageLoader/loader.mjs";
 import { Button, Spinner } from "react-bootstrap";
 import ConnectWalletModel from "./models/connectWalletModel.mjs";
 import PopUp2FA from "./twofa/PopUp2FA.mjs";
+import encryptPayload from "../utils/eencryptPayload";
 
 function RedeemPrizes() {
   const navigate = useNavigate();
@@ -84,7 +85,7 @@ function RedeemPrizes() {
         await authInstance()
       ).post(
         "/users/verifyTwoFactorAuthCode",
-        { code },
+        encryptPayload({ code }),
         {
           withCredentials: true,
           credentials: "include",

@@ -21,6 +21,7 @@ import hatLogo from "../images/scroogeHatLogo.png";
 import AuthContext from "../context/authContext.ts";
 import { authInstance, notificationInstance } from "../config/axios.js";
 import Notification from "./Notification.mjs";
+import encryptPayload from "../utils/eencryptPayload";
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
@@ -63,7 +64,7 @@ const Header = () => {
         await authInstance()
       ).post(
         "/auth/logout",
-        { refreshToken: tokenData },
+        encryptPayload({ refreshToken: tokenData }),
         { withCredentials: true, credentials: "include" }
       );
       localStorage.removeItem("megaBonus");
