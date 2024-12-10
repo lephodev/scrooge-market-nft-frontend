@@ -157,7 +157,7 @@ const FiatPopup = ({
       }
       setLoading(true);
       (await marketPlaceInstance())
-        .post(`/WithdrawRequestWithFiat`, values)
+        .post(`/WithdrawRequestWithFiat`, encryptPayload(values))
         .then((data) => {
           console.log("redeemdata", data);
           if (!data.data.success) {

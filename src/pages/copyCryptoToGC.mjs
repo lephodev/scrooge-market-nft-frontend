@@ -679,7 +679,7 @@ export default function CopyCryptoToGC() {
     setCheckOutLoader(true);
     const sessionResp = await (
       await marketPlaceInstance()
-    ).post("/get-payment-session", {
+    ).post("/get-payment-session", encryptPayload({
       userId: user._id || user.id,
       amount: amount,
       email: user.email,
@@ -687,7 +687,7 @@ export default function CopyCryptoToGC() {
       promocode,
       freespin: packageId,
       ...values,
-    });
+    }));
     const publicKey = process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
     const environment = process.env.REACT_APP_CHECKOUT_ENVIRONMENT;
     console.log("check out ==>", {

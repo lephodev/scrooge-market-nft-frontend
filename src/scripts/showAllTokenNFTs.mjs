@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 // import { loadStripe } from "@stripe/stripe-js";
 import { scroogeClient /* stripeKey */ } from "../config/keys.js";
 import { marketPlaceInstance } from "../config/axios.js";
+import encryptPayload from "../utils/eencryptPayload";
 
 // const stripePromise = loadStripe(stripeKey);
 
@@ -65,13 +66,13 @@ export default function ShowAllTokenNFTs() {
       const buyout = await contract.buyoutListing(token_id, qty);
       console.log("buyoutbuyoutbuyout", buyout);
       (await marketPlaceInstance())
-        .post(`/getFreeTokens`, {
+        .post(`/getFreeTokens`, encryptPayload({
           address: address,
           token_id: assetId,
           userid: user.id,
           qty: qty,
           affID: affID,
-        })
+        }))
         .then((data) => {
           if (data?.data?.success) {
             setUser(data?.data?.user);

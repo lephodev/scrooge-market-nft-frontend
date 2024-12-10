@@ -3,6 +3,7 @@ import { marketPlaceInstance } from "../../config/axios.js";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import axios from "axios";
+import encryptPayload from "../../utils/eencryptPayload.js";
 
 const FreeSTModel = ({
   showFreeST,
@@ -21,7 +22,7 @@ const FreeSTModel = ({
       };
       const res = await (
         await marketPlaceInstance()
-      ).post("/redeemFreePromoST", payload);
+      ).post("/redeemFreePromoST", encryptPayload(payload));
       const { code, message, getPromo } = res.data;
       console.log("getPromo", getPromo);
 
