@@ -46,6 +46,7 @@ import PaypalModel from "./models/paypalModel.mjs";
 import { userKycDetails } from "../utils/api.mjs";
 import { loadCheckoutWebComponents } from "@checkout.com/checkout-web-components";
 import FreeSpinModel from "./models/freeSpinModel.mjs";
+import encryptPayload from "../utils/eencryptPayload";
 let promoCode;
 let goldcoinAmount;
 
@@ -450,7 +451,7 @@ export default function CopyCryptoToGC() {
       };
       const res = await (
         await marketPlaceInstance()
-      ).post("/applyPromoCode", payload);
+      ).post("/applyPromoCode", encryptPayload(payload));
       const { code, message, getPromo } = res.data;
       console.log("getPromo", getPromo);
       if (getPromo?.coupanType === "Free ST") {
