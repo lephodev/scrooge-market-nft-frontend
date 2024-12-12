@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { AcceptHosted } from "react-acceptjs";
 import {
   Button,
@@ -46,6 +46,7 @@ import PaypalModel from "./models/paypalModel.mjs";
 import { userKycDetails } from "../utils/api.mjs";
 import { loadCheckoutWebComponents } from "@checkout.com/checkout-web-components";
 import FreeSpinModel from "./models/freeSpinModel.mjs";
+import encryptPayload from "../utils/eencryptPayload.js";
 let promoCode;
 let goldcoinAmount;
 
@@ -79,6 +80,9 @@ export default function CopyCryptoToGC() {
     colors: ["#D2042D", "#FBFF12", "#AD1927", "#E7C975", "#FF0000"],
   });
 
+  const [showTooltip, setShowTooltip] = useState(false);
+  const tooltipRef = useRef(null);
+
   const appearance = {
     colorAction: "#FFC700",
     colorBackground: "#0A0A0C",
@@ -104,9 +108,9 @@ export default function CopyCryptoToGC() {
       span: {
         background: "none",
       },
-    },  
+    },
     span: {
-      background:"none"
+      background: "none",
     },
     footnote: {
       fontFamily:
@@ -447,7 +451,7 @@ export default function CopyCryptoToGC() {
       };
       const res = await (
         await marketPlaceInstance()
-      ).post("/applyPromoCode", payload);
+      ).post("/applyPromoCode", encryptPayload(payload));
       const { code, message, getPromo } = res.data;
       console.log("getPromo", getPromo);
       if (getPromo?.coupanType === "Free ST") {
@@ -675,7 +679,7 @@ export default function CopyCryptoToGC() {
     setCheckOutLoader(true);
     const sessionResp = await (
       await marketPlaceInstance()
-    ).post("/get-payment-session", {
+    ).post("/get-payment-session", encryptPayload({
       userId: user._id || user.id,
       amount: amount,
       email: user.email,
@@ -683,7 +687,7 @@ export default function CopyCryptoToGC() {
       promocode,
       freespin: packageId,
       ...values,
-    });
+    }));
     const publicKey = process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
     const environment = process.env.REACT_APP_CHECKOUT_ENVIRONMENT;
     console.log("check out ==>", {
@@ -714,7 +718,8 @@ export default function CopyCryptoToGC() {
       },
       onChange: (component) => {
         console.log(
-          `onChange() -> isValid: "${component.isValid()}" for "${component.type
+          `onChange() -> isValid: "${component.isValid()}" for "${
+            component.type
           }"`
         );
       },
@@ -750,17 +755,49 @@ export default function CopyCryptoToGC() {
     setIndex();
   };
 
+  const handleToggle = () => {
+    setShowTooltip((prev) => !prev);
+  };
 
-  const tooltip = <Tooltip id="tooltip" style={{ textAlign: "left" }} className="read-tip">
-    <div className="w-100">
-    <p>1: Max 4 successful Purchases per user account each calendar day (EST)</p>
-<p>2: Cards used must be in account owners name</p>
-<p>Exceeding the following will result in a 30 day restriction on purchasing:</p>
-<p>1: Attempts with  &gt;5 card #’s in a 30 D timeframe.</p>
-<p>2: Attempts with the same card on multiple accounts.</p>
-<p>3: Using &gt;2 accounts on a single device.</p>
-</div>
-  </Tooltip>;
+  const handleClickOutside = (event) => {
+    if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
+      setShowTooltip(false); // Close tooltip when clicking outside
+    }
+  };
+
+  useEffect(() => {
+    if (showTooltip) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showTooltip]);
+
+  const tooltip = (
+    <Tooltip
+      id="tooltip"
+      style={{ textAlign: "left" }}
+      className="read-tip"
+      ref={tooltipRef}
+    >
+      <div className="w-100">
+        <p>
+          1: Max 4 successful Purchases per user account each calendar day (EST)
+        </p>
+        <p>2: Cards used must be in account owners name</p>
+        <p>
+          Exceeding the following will result in a 30 day restriction on
+          purchasing:
+        </p>
+        <p>1: Attempts with &gt;5 card #’s in a 30 D timeframe.</p>
+        <p>2: Attempts with the same card on multiple accounts.</p>
+        <p>3: Using &gt;2 accounts on a single device.</p>
+      </div>
+    </Tooltip>
+  );
 
   return (
     <>
@@ -807,14 +844,15 @@ export default function CopyCryptoToGC() {
       {(status === "success" ||
         status === "inprogress" ||
         status === "failure") && (
-          <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
-        )}
+        <AuthorizeSucessModel show={true} status={status} handleOk={handleOk} />
+      )}
 
       {status === "freespin" ? (
         <FreeSpinModel
           packgaeData={packgaeData}
           showFreeSpin={true}
           handleCloseFreeSpin={() => setStatus("")}
+          user={user}
         />
       ) : null}
 
@@ -962,18 +1000,24 @@ export default function CopyCryptoToGC() {
                         <li className="d-flex justify-content-center align-items-center">
                           {/* <span>Please note:</span> Credit card transactions are
                           limited to four purchases per day. */}
-
-
-                          Important Purchase tips, 
+                          Important Purchase tips,
                           {/* <span> Read Here</span> */}
-
-                          <OverlayTrigger placement="bottom"
-                          delay={{ show: 250, hide: 2000 }}
-                          overlay={tooltip}>
-              <div bsStyle="default" className="tooltipCard">
-                {/* <InfoIcon /> */} <span className="tool-read">Read Here</span>
-              </div>
-            </OverlayTrigger>
+                          <OverlayTrigger
+                            placement="bottom"
+                            //  placement="bottom"
+                            show={showTooltip}
+                            // delay={{ show: 250, hide: 2000 }}
+                            overlay={tooltip}
+                          >
+                            <div
+                              bsStyle="default"
+                              className="tooltipCard"
+                              onClick={handleToggle}
+                            >
+                              {/* <InfoIcon /> */}{" "}
+                              <span className="tool-read">Read Here</span>
+                            </div>
+                          </OverlayTrigger>
                         </li>
                       </ul>
                     </div>
@@ -1089,7 +1133,7 @@ export default function CopyCryptoToGC() {
                                             </Card.Title>
 
                                             {selectedTypeDropdown ===
-                                              "Checkout" ? (
+                                            "Checkout" ? (
                                               getExactPrice(
                                                 prize?.priceInBUSD
                                               ) > 0 && (
@@ -1201,13 +1245,13 @@ export default function CopyCryptoToGC() {
                                         ? coin1
                                         : 10 < prize.priceInBUSD &&
                                           prize.priceInBUSD <= 50
-                                          ? coin2
-                                          : 50 < prize.priceInBUSD &&
-                                            prize.priceInBUSD <= 100
-                                            ? coin3
-                                            : 100 < prize.priceInBUSD
-                                              ? coin4
-                                              : ""
+                                        ? coin2
+                                        : 50 < prize.priceInBUSD &&
+                                          prize.priceInBUSD <= 100
+                                        ? coin3
+                                        : 100 < prize.priceInBUSD
+                                        ? coin4
+                                        : ""
                                     }
                                   />
                                   <Card.Body>

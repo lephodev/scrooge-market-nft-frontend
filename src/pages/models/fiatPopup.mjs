@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { marketPlaceInstance } from "../../config/axios.js";
 import "../../styles/globals.css";
 import SuccessModal from "./SuccessModal.mjs";
+import encryptPayload from "../../utils/eencryptPayload.js";
 
 const customStyles = {
   container: (provided) => ({
@@ -117,7 +118,9 @@ const FiatPopup = ({
 }) => {
   const { user } = useContext(AuthContext);
 
-  const [paymentType, setPaymentType] = useState();
+  const [paymentType, setPaymentType] = useState({
+    value: "Paypal"
+  });
   const [loading, setLoading] = useState(false);
   const [successShow, setSuccessShow] = useState(false);
   const [purchaseAmount, setPurchaseAmount] = useState();
@@ -136,7 +139,7 @@ const FiatPopup = ({
       paymentType?.value === "Paypal" ? purchaseWithPaypal : purchaseWithCashApp
     ),
   });
-
+  
   const WithdrawRequest = async (values) => {
     try {
       setPurchaseAmount(values?.amount);
@@ -155,7 +158,7 @@ const FiatPopup = ({
       }
       setLoading(true);
       (await marketPlaceInstance())
-        .post(`/WithdrawRequestWithFiat`, values)
+        .post(`/WithdrawRequestWithFiat`, encryptPayload(values))
         .then((data) => {
           console.log("redeemdata", data);
           if (!data.data.success) {
@@ -185,6 +188,10 @@ const FiatPopup = ({
     setValue("cashAppid", "");
     setPaymentType(selectedOptions);
   };
+
+  useEffect(()=>{
+    setValue("paymentType", "Paypal");
+  })
 
   // const handleChnagePrice = (selectedOptions) => {
   //   console.log("selectedOptions", selectedOptions);
@@ -217,19 +224,19 @@ const FiatPopup = ({
           <Form onSubmit={handleSubmit(WithdrawRequest)}>
             <div className="form_top">
               <Form.Label className="form_heading">Withdraw to</Form.Label>
-              {!fiatActiveInActive.Cashapp && (
+              {/* {!fiatActiveInActive.Cashapp && (
                 <Form.Text>
-                  {/* Cashapp */} Paypal availability is subject to the apps
+                  Paypal availability is subject to the apps
                   sending limits. When limits are reached, the option is
                   disabled temporarily.
                 </Form.Text>
-              )}
-              {!fiatActiveInActive.Paypal && (
+              )} */}
+              {/* {!fiatActiveInActive.Paypal && (
                 <Form.Text>
-                  Paypal availability is subject to the apps sending limits.
-                  When limits are reached, the option is disabled temporarily.
+                  <span style={{fontWeight: "800"}}>Note:</span> <span style={{fontStyle: "italic"}}>Paypal availability is subject to the apps sending limits.
+                  When limits are reached, the option is disabled temporarily.</span>
                 </Form.Text>
-              )}
+              )} */}
             </div>
             <div className="fiat-content withdraw_content">
               <Form.Group
@@ -241,6 +248,7 @@ const FiatPopup = ({
                   options={options}
                   onChange={handleChnagePayout}
                   styles={customStyles}
+                  value={options[0]}
                 />
                 {errors?.paymentType && (
                   <p className="error-msg">{errors?.paymentType?.message}</p>

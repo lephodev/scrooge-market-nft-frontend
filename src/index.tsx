@@ -46,6 +46,7 @@ import PaymentCustom from "./pages/PaymentCustom.mjs";
 import PageLoader from "./components/pageLoader/loader.mjs";
 import { getCookie } from "./utils/dateUtils.mjs";
 import CopyCryptoToGC from "./pages/copyCryptoToGC.mjs";
+import encryptPayload from "./utils/eencryptPayload";
 // import { validateToken } from "./utils/dateUtils.mjs";
 
 export default function App() {
@@ -207,7 +208,7 @@ export default function App() {
         await authInstance()
       ).post(
         "/auth/logout",
-        { refreshToken: tokenData },
+        encryptPayload(({ refreshToken: tokenData })),
       );
      
     }
