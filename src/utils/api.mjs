@@ -1,10 +1,11 @@
 import { kycInstance } from "../config/axios.js";
+import encryptPayload from "./eencryptPayload.js";
 
 export const createKYC = async (requestData) => {
   try {
     const res = await (
       await kycInstance()
-    ).post(`users/createKyc`, requestData);
+    ).post(`users/createKyc`, encryptPayload(requestData));
     return res;
   } catch (error) {
     console.log("Error in KYC brands api =>", error);
@@ -49,7 +50,7 @@ export const UpdateKycImage = async (requestData) => {
   try {
     const res = await (
       await kycInstance()
-    ).post(`users/UpdateKycProofImage`, requestData);
+    ).post(`users/UpdateKycProofImage`, encryptPayload(requestData));
     return res;
   } catch (error) {
     console.log("Error in KYC brands api =>", error);

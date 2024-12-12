@@ -49,6 +49,7 @@ import ConnectWalletModel from "./models/connectWalletModel.mjs";
 import Header from "./Header.mjs";
 import "../styles/header.css";
 import { marketPlaceInstance } from "../config/axios.js";
+import encryptPayload from "../utils/eencryptPayload.js";
 
 export const Tooltip = (id, metadata, message) => (
   <Popup
@@ -197,7 +198,7 @@ const Layout = ({ children }) => {
 
       const res = await (
         await marketPlaceInstance()
-      ).post("/saveUserconnectedWallet", { walletAddress });
+      ).post("/saveUserconnectedWallet", encryptPayload({ walletAddress }));
       console.log("resres", res);
     } catch (error) {
       console.log("error", error);

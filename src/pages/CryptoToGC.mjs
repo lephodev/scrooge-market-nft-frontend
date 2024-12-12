@@ -44,6 +44,7 @@ import FreeSTModel from "./models/FreeSTModel.mjs";
 import AuthrizeCustomModel from "./models/authrizeCustomModel.mjs";
 import PaypalModel from "./models/paypalModel.mjs";
 import { userKycDetails } from "../utils/api.mjs";
+import encryptPayload from "../utils/eencryptPayload.js";
 let promoCode;
 let goldcoinAmount;
 
@@ -346,7 +347,7 @@ export default function CryptoToGC() {
       };
       const res = await (
         await marketPlaceInstance()
-      ).post("/applyPromoCode", payload);
+      ).post("/applyPromoCode", encryptPayload(payload));
       const { code, message, getPromo } = res.data;
       console.log("getPromo", getPromo);
       if (getPromo?.coupanType === "Free ST") {

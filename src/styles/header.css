@@ -214,10 +214,10 @@
     width: 100%; */
 }
 
-.notifyProfileheader img{
+.notifyProfileheader img {
   height: 28px;
   width: 28px;
- cursor: pointer;
+  cursor: pointer;
 }
 
 .non_login {
@@ -311,8 +311,9 @@
   cursor: pointer !important;
 }
 
-@media screen and (max-width: 991px) { 
-  .header-btn-mobile.user-profile a.dropdown-item, .header-btn-mobile.user-profile a.dropdown-item svg {
+@media screen and (max-width: 991px) {
+  .header-btn-mobile.user-profile a.dropdown-item,
+  .header-btn-mobile.user-profile a.dropdown-item svg {
     background: #fbc404 !important;
     border-radius: 50%;
     display: grid;
@@ -320,29 +321,29 @@
     place-content: center;
     width: 40px;
     padding: 5px;
-}
-.custom-dropdown-menu {
-  position: unset !important;
-  background: transparent;
-  box-shadow: unset;
-}
-.nav-link.custom-dd {
-  cursor: pointer !important;
-  flex-direction: column;
-  align-items: flex-start !important;
-  gap: 15px;
-}
-.custom-dropdown-menu {
-  padding: 0px 15px;
-}
-.custom-dropdown-menu li {
-  padding: 0px 0px !important;
-}
+  }
+  .custom-dropdown-menu {
+    position: unset !important;
+    background: transparent;
+    box-shadow: unset;
+  }
+  .nav-link.custom-dd {
+    cursor: pointer !important;
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 15px;
+  }
+  .custom-dropdown-menu {
+    padding: 0px 15px;
+  }
+  .custom-dropdown-menu li {
+    padding: 0px 0px !important;
+  }
 }
 
-@media screen and (max-width: 767px) { 
+@media screen and (max-width: 767px) {
   .slotLobby-mode label.form-check-label {
-  font-size: 12px;
+    font-size: 12px;
   }
 }
 
@@ -363,7 +364,7 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px
+  gap: 10px;
 }
 .header-Container {
   position: relative;
@@ -379,7 +380,10 @@
 .custom-dropdown-menu li a {
   font-family: "Quicksand" !important;
   text-decoration: none;
-  background: var(--Gold-Stroke, linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%));
+  background: var(
+    --Gold-Stroke,
+    linear-gradient(90deg, #ffc700 0%, #ffeca8 51%, #ffc700 100%)
+  );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -394,12 +398,25 @@
 .slotLobby-mode label.form-check-label p span {
   -webkit-text-fill-color: #0000;
   background: linear-gradient(90deg, #ffc700, #ffeca8 51%, #ffc700);
-  background: var(--Gold-Stroke, linear-gradient(90deg, #ffc700 0, #ffeca8 51%, #ffc700 100%));
+  background: var(
+    --Gold-Stroke,
+    linear-gradient(90deg, #ffc700 0, #ffeca8 51%, #ffc700 100%)
+  );
   background-clip: text;
   -webkit-background-clip: text;
 }
-.wallet button{
+.wallet button {
   border-radius: 10px !important;
-  background: linear-gradient(90deg, #FFC700 0%, #FFECA8 51%, #FFC700 100%) !important;
+  background: linear-gradient(
+    90deg,
+    #ffc700 0%,
+    #ffeca8 51%,
+    #ffc700 100%
+  ) !important;
   color: #000 !important;
+}
+
+.notificationDiv {
+  position: relative;
+  right: 30px;
 }

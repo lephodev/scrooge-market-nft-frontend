@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useRef, useState } from "react";
 import newLogo from "../images/new-logo.webp";
 import { Button, Dropdown, Form, Nav, Navbar } from "react-bootstrap";
@@ -18,9 +19,12 @@ import profile from "../images/profile.png";
 import { Link, useLocation } from "react-router-dom";
 import hatLogo from "../images/scroogeHatLogo.png";
 import AuthContext from "../context/authContext.ts";
-import { authInstance } from "../config/axios.js";
+import { authInstance, notificationInstance } from "../config/axios.js";
+import encryptPayload from "../utils/eencryptPayload.js";
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false);
+  const [setNotificationCount] = useState(0);
+
   const [isDropdownVisible, setDropdownVisible] = useState("");
   const subMenuRef = useRef();
   const { mode, user, setMode } = useContext(AuthContext);
@@ -57,11 +61,10 @@ const Header = () => {
 
       await (
         await authInstance()
-      ).post(
-        "/auth/logout",
-        { refreshToken: tokenData },
-        { withCredentials: true, credentials: "include" }
-      );
+      ).post("/auth/logout", encryptPayload({ refreshToken: tokenData }), {
+        withCredentials: true,
+        credentials: "include",
+      });
       localStorage.removeItem("megaBonus");
       localStorage.removeItem("activeCount");
     }
@@ -93,6 +96,26 @@ const Header = () => {
   //   setNotifyOpen(!notifyOpen);
   // };
 
+  const getNotificationsCount = async () => {
+    try {
+      if (user?.id) {
+        const res = await (
+          await notificationInstance()
+        ).get(`/notificationsCount?id=${user?.id}`, {
+          withCredentials: true,
+          credentials: "include",
+        });
+        const count = res?.data?.resData;
+        setNotificationCount(count);
+      }
+    } catch (err) {
+      console.log("errr", err);
+    }
+  };
+
+  useEffect(() => {
+    getNotificationsCount();
+  }, [user?.id]);
   return (
     // <div className='headerContainer'>
     //   <div className='header_top'>
@@ -215,6 +238,10 @@ const Header = () => {
                         <CancelSvg />
                       </div>
                     </div>
+                    <Notification
+                    //  show={handleNotification}
+                    //  setNotificationCount={setNotificationCount}
+                    />
                   </div>
                 ) : (
                   ""

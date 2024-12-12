@@ -53,6 +53,17 @@ export const authInstance = async () => {
   });
 };
 
+export const notificationInstance = async () => {
+  const token = await getAuthorizationHeader();
+  return axios.create({
+    baseURL: `${scroogeServer}/v1/notification`,
+    headers: {
+      Authorization: token,
+      "Permissions-Policy": "geolocation=*",
+    },
+  });
+};
+
 export const relaxGamingInstance = async () => {
   const token = await getAuthorizationHeader();
   return axios.create({
@@ -70,6 +81,19 @@ export const bGamingInstance = async () => {
   const token = await getAuthorizationHeader();
   return axios.create({
     baseURL: `${serverSlot}/api/bgaming`, /// api/bgaming
+    headers: {
+      Authorization: token,
+      "Permissions-Policy": "geolocation=*",
+    },
+    withCredentials: true,
+    credentials: "include",
+  });
+};
+
+export const hacksawInstance = async () => {
+  const token = await getAuthorizationHeader();
+  return axios.create({
+    baseURL: `${serverSlot}/api/hacksaw`, /// api/fantasma
     headers: {
       Authorization: token,
       "Permissions-Policy": "geolocation=*",

@@ -317,6 +317,7 @@ const AuthrizeCustomModel = ({
           packgaeData={packgaeData}
           showFreeSpin={showFreeSpin}
           handleCloseFreeSpin={handleCloseFreeSpin}
+          user={user}
         />
       ) : (
         <Modal
