@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@checkout.com/checkout-web-components": "^0.6.0-beta",
+    "@datadog/browser-rum": "^5.34.0",
     "@hookform/resolvers": "^3.0.0",
     "@kount/kount-web-client-sdk": "^2.0.0",
     "@paypal/react-paypal-js": "^8.2.0",

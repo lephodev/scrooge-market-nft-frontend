@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import App from "./App";
+import { datadogRum } from "@datadog/browser-rum";
+
 import reportWebVitals from "./reportWebVitals";
 import {
   ChainId,
@@ -48,6 +50,7 @@ import KYCCopy from "./pages/kycCopy.mjs";
 import { getCookie } from "./utils/dateUtils.mjs";
 import CopyCryptoToGC from "./pages/copyCryptoToGC.mjs";
 import encryptPayload from "./utils/eencryptPayload";
+import { server } from "./config/keys.js";
 // import { validateToken } from "./utils/dateUtils.mjs";
 
 export default function App() {
@@ -314,7 +317,42 @@ export default function App() {
   }
 
 
-  
+  const handleDataDogRUM = () => {
+    datadogRum.init({
+      applicationId: "1f133214-5fde-4e92-814a-07adb090c9c4",
+      clientToken: "pubb242301634f196fc1901a52c385c616f",
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: "datadoghq.com",
+      service: "prod-web",
+      env: "prod-web",
+      // Specify a version number to identify the deployed version of your application in Datadog
+      // version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 20,
+      trackUserInteractions: true,
+      trackResources: true,
+      trackLongTasks: true,
+      defaultPrivacyLevel: "mask-user-input",
+      allowedTracingUrls: [(url) => url.startsWith(server)],
+    });
+  };
+  if (true) {
+    handleDataDogRUM();
+    const DDUser = datadogRum.getUser();
+    console.log("DDUser", DDUser);
+    console.log("User", user);
+
+    handleDataDogRUM();
+    if (user && !DDUser.name) {
+      datadogRum.setUser({
+        id: (user as any).id || (user as any)._id,
+        name: (user as any).username,
+        email: (user as any).email,
+        role: (user as any).role,
+      });
+    }
+  }
 
  
 
