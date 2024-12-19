@@ -345,8 +345,6 @@ export default function App() {
     const DDUser = datadogRum.getUser();
     console.log("DDUser", DDUser);
     console.log("User", user);
-
-    handleDataDogRUM();
     if (user && !DDUser.name) {
       datadogRum.setUser({
         id: (user as any).id || (user as any)._id,
